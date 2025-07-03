@@ -24,7 +24,7 @@ This template provides a minimal setup to get React working in Vite with HMR and
 
 # 👤 Key Features Based on Roles
 
-🧑‍🎓 Student / Guardian Panel
+### 🧑‍🎓 Student / Guardian Panel
  - 🔐 Phone/Email Registration & Verification
 
  - 📝 Tutor Request Form (Detailed Requirements)
@@ -58,7 +58,7 @@ This template provides a minimal setup to get React working in Vite with HMR and
 
 
 
-👨‍🏫 Tutor Panel
+### 👨‍🏫 Tutor Panel
  - 🔐 Phone/Email Registration & Verification
 
  - 🧾 Request Profile Verification
@@ -95,7 +95,7 @@ This template provides a minimal setup to get React working in Vite with HMR and
 
  
 
-🛠️ Admin Panel
+### 🛠️ Admin Panel
  - 📊 Comprehensive Dashboard with Analytics
 
  - 👥 Student & Guardian Management
@@ -125,17 +125,17 @@ This template provides a minimal setup to get React working in Vite with HMR and
  - 🔔 Auto Notification Configuration
 
 # 📦 Technology Stack & Packages
-✨ Frontend
+### ✨ Frontend
  - React
  - Redux
  - Tailwind CSS
  - RTK Query
 
-⚙️ Backend
+### ⚙️ Backend
  - NojeJS
  - ExpressJS
 
-🧩 Database
+### 🧩 Database
  - MySQL
 
 # 📝 License
