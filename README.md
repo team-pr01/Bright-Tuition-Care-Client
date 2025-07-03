@@ -1,69 +1,170 @@
-# React + TypeScript + Vite
+# 🌟 Bright Tuition Care – Online Learning Platform
 
+An advanced online tutoring platform designed to connect students/guardians with qualified tutors, streamline tutoring job requests, enable community engagement, and offer a secure backend for payments, communication, and management.
+
+# 🚀 Live Deployment
+
+🌐 Frontend URL: https://brighttuitioncare.com
+
+🔧 Admin Panel: https://admin.brighttuitioncare.com
+
+📦 API Base URL: https://api.brighttuitioncare.com
+
+# 📚 Project Overview
+Bright Tuition Care is a full-featured online learning platform that allows:
+
+   - Students/Guardians to request tutors, post jobs, and track progress.
+
+   - Tutors to register, apply for jobs, manage profiles, and receive payments.
+
+  - Admins to manage users, jobs, payments, and communications across the platform.
+
+This system includes dedicated dashboards and role-based access for students, tutors, and admins with real-time alerts, SMS support, and community features.
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-Currently, two official plugins are available:
+# 👤 Key Features Based on Roles
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+🧑‍🎓 Student / Guardian Panel
+ - 🔐 Phone/Email Registration & Verification
 
-## Expanding the ESLint configuration
+ - 📝 Tutor Request Form (Detailed Requirements)
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+ - 🧾 Post Tutoring Job Requests
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+ - 📂 Profile Management
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+ - 📊 Dashboard (Track Tutor Requests)
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+ - 📬 Real-time SMS & Notifications
+
+ - ⭐ Rate & Review Tutors
+
+ - 📢 Notice Board for Announcements
+
+ - 👥 Join Tutor Community
+
+ - ❓ Help & Support Access
+
+ - 🔄 Settings & Confirmation Letter Download
+
+ - 🧭 How It Works Guide
+
+ - 📌 Posted Jobs Overview
+
+ - 🧾 Important Notes Section
+
+ - 📤 Share App
+   
+
+
+
+👨‍🏫 Tutor Panel
+ - 🔐 Phone/Email Registration & Verification
+
+ - 🧾 Request Profile Verification
+
+ - 🧍 Profile Management (After Unlock)
+
+ - 💼 Apply for Tutoring Jobs
+
+ - 📬 Dashboard (Job Applications)
+
+ - 💸 Secure Payment Integration
+
+ - 🧾 Invoice Management
+
+ - 📢 Real-time Alerts (SMS & Notifications)
+
+ - 🧭 How It Works Guide
+
+ - 📢 Notice Board
+
+ - 📤 Share App
+
+ - 💰 Refer & Earn Feature
+
+ - 📤 Job Sharing Functionality
+
+ - 👥 Join Tutor Community
+
+ - ⚙️ Settings & Confirmation Letter
+
+ - 📃 Terms & Conditions
+
+ - ❓ Help & Support
+
+ 
+
+🛠️ Admin Panel
+ - 📊 Comprehensive Dashboard with Analytics
+
+ - 👥 Student & Guardian Management
+
+ - ✅ Tutor Verification & Job Approval Workflows
+
+ - 💳 Payment Tracking & Management
+
+ - 📂 Tutor Profile Oversight
+
+ - 📋 Manage Job Board Listings
+
+ - 📢 Manage Notices & Notifications
+
+ - 👤 Admin & Staff Profiles
+
+ - 📬 Notification & Alerts Module
+
+ - ⚙️ System Settings
+
+ - 📜 Confirmation Letter Management
+
+ - 📈 Lead Offer Management
+
+ - 📞 Help & Support
+
+ - 🔔 Auto Notification Configuration
+
+# 📦 Technology Stack & Packages
+✨ Frontend
+ - React
+ - Redux
+ - Tailwind CSS
+ - RTK Query
+
+⚙️ Backend
+ - NojeJS
+ - ExpressJS
+
+🧩 Database
+ - MySQL
+
+# 📝 License
+This project is proprietary and governed by the Bright Tuition Care development agreement. Redistribution or reuse of source code is prohibited
+
+
+
+## 🚀 Installation
+
+Follow these steps to get the project up and running locally:
+
+### 1. Clone the Repository
+
+```bash
+git clone https://github.com/team-pr01/Bright-Tuition-Care-Client.git
+cd Bright-Tuition-Care-Client
 ```
+### 2. Install Dependencies
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+Make sure you have Node.js installed (preferably v18 or above).
+```bash
+npm install
 ```
+### 3. Run the Development Server
+
+
+```bash
+npm run dev
+```
+Your application will be available at: http://localhost:5173
+
+
