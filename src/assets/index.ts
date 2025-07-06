@@ -2,6 +2,7 @@ import phone from "../assets/Icons/phone.svg";
 import plus from "../assets/Icons/plus.svg";
 import topRightArrow from "../assets/Icons/top-right-arrow.svg";
 import topRightArrowWhite from "../assets/Icons/top-right-arrow-white.svg";
+import testimonials from "../assets/Icons/testimonials.svg";
 
 // counter icons
 import user from "../assets/Icons/Counter/users.svg";
@@ -39,6 +40,7 @@ export const ICONS = {
   plus,
   topRightArrow,
   topRightArrowWhite,
+  testimonials,
 
   user,
   trophy,

@@ -1,26 +1,24 @@
-
 @import "tailwindcss";
 /* @import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Rethink+Sans:ital,wght@0,400..800;1,400..800&display=swap");
 @import "tailwindcss"; */
-@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap');
-
+@import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap");
 
 @theme {
   /* Fonts */
   /* --font-Inter: Inter, sans-serif;
   --font-Rethink: "Rethink Sans", sans-serif; */
-   --font-Nunito: "Nunito Sans", sans-serif;
+  --font-Nunito: "Nunito Sans", sans-serif;
 
   /* Colors */
 
   /* Primary */
 
-  --color-primary-10: #0D99FF;
-  --color-primary-20: #E7F5FF;
-  --color-primary-30: #B4DFFF;
-  --color-primary-40: #0C8BE8;
-  --color-primary-50: #05406B;
+  --color-primary-10: #0d99ff;
+  --color-primary-20: #e7f5ff;
+  --color-primary-30: #b4dfff;
+  --color-primary-40: #0c8be8;
+  --color-primary-50: #05406b;
 
   /* secondary */
   --color-secondary-10: #1a1f2c;
@@ -29,12 +27,12 @@
 
   --color-neutral-10: #333;
   --color-neutral-20: #545454;
-  --color-neutral-30: #6B7280;
-  --color-neutral-40:#05160B;
+  --color-neutral-30: #6b7280;
+  --color-neutral-40: #05160b;
 
   /* accent */
-  --color-accent-10: #F17556;
-  --color-accent-20: #D61349;
+  --color-accent-10: #f17556;
+  --color-accent-20: #d61349;
 
   /* Shadows */
   /* --shadow-custom: 0px 4px 28px -4px rgba(0, 0, 0, 0.10);
@@ -49,12 +47,8 @@
     #020817 0%,
     rgba(2, 8, 23, 0) 100%
   );
-  --bg-about-bg-gradient: linear-gradient(
-    180deg,
-    #06a0ed 0%,
-    rgba(3, 91, 135, 0) 100%
-  );
-  --bg-about-bg-gradient2: linear-gradient(
+  --bg-about-bg-gradient: linear-gradient(101deg, #E8F3FF -6.83%, #FFF 85.15%);
+  --bg-testimonials-bg-gradient2: linear-gradient(
     180deg,
     #06a0ed 0%,
     rgba(3, 91, 135, 0) 100%
@@ -65,7 +59,7 @@
     #0a1222 100%
   );
 
-  --bg-text-gradient: linear-gradient(267deg, #F17556 2.65%, #D61349 97.47%);
+  --bg-text-gradient: linear-gradient(267deg, #f17556 2.65%, #d61349 97.47%);
   --bg-faq-gradient: linear-gradient(
     180deg,
     rgba(255, 255, 255, 0.05) 0%,
@@ -191,7 +185,6 @@
   scrollbar-width: thin;
   scrollbar-color: gray transparent;
 }
-
 
 /* Swiper Pagination Dots Custom Styles */
 .swiper-pagination-bullet {

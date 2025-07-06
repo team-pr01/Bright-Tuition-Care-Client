@@ -5,8 +5,11 @@ import IconButton from "../../Reusable/Button/IconButton";
 
 const DownloadApp = () => {
   return (
-    <Container>
-      <div className="flex flex-row font-Nunito h-fit items-center justify-between gap-[44px] my-[50px] ">
+    <div className="py-[50px] w-full"style={{
+        background: "linear-gradient(101deg, #FFF -7.84%, #E8F3FF 74.03%)",
+      }}>
+          <Container>
+      <div className="flex flex-row font-Nunito h-fit items-center justify-between gap-[44px]" >
         <div className="w-[40%] flex flex-col justify-start">
           <img
             src={IMAGES.appDownload}
@@ -22,6 +25,7 @@ const DownloadApp = () => {
               {
                 text: "Download the App for Seamless Learning and Teaching Experience",
               },
+              
             ]}
           />
 
@@ -47,6 +51,8 @@ const DownloadApp = () => {
 
       {/* Left Content */}
     </Container>
+      </div>
+  
   );
 };
 

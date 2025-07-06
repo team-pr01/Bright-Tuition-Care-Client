@@ -40,7 +40,13 @@ const Heading: React.FC<HeadingProps> = ({
           </span>
         ))}
       </h1>
-      {description && <p className={`mt-4 text-neutral-20 text-lg leading-[24px] ${descriptionClassName}`}>{description}</p>}
+      {description && (
+        <p
+          className={`mt-4 text-neutral-20 text-lg leading-[24px] ${descriptionClassName}`}
+        >
+          {description}
+        </p>
+      )}
     </div>
   );
 };
