@@ -1,32 +1,33 @@
 
 @import "tailwindcss";
-@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
+/* @import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Rethink+Sans:ital,wght@0,400..800;1,400..800&display=swap");
-@import "tailwindcss";
+@import "tailwindcss"; */
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap');
+
 
 @theme {
   /* Fonts */
-  --font-Inter: Inter, sans-serif;
-  --font-Rethink: "Rethink Sans", sans-serif;
+  /* --font-Inter: Inter, sans-serif;
+  --font-Rethink: "Rethink Sans", sans-serif; */
+   --font-Nunito: "Nunito Sans", sans-serif;
 
   /* Colors */
 
   /* Primary */
 
-  --color-primary-10: #61dafb;
+  --color-primary-10: #0D99FF;
 
   /* secondary */
   --color-secondary-10: #1a1f2c;
 
   /* neutral */
 
-  --color-neutral-10: #fcfcfc;
+  --color-neutral-10: #333;
+  --color-neutral-20: #545454;
 
   /* accent */
   --color-accent-10: #000000;
-
-  /* whites */
-  --color-whites-05: #ffffff0d;
 
   /* Shadows */
   /* --shadow-custom: 0px 4px 28px -4px rgba(0, 0, 0, 0.10);
