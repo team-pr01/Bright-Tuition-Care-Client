@@ -6,7 +6,7 @@ import Button from "../../Reusable/Button/Button";
 const AboutUs = () => {
   return (
     <Container>
-      <div className="flex flex-row font-Nunito h-fit justify-between gap-[44px] my-[50px] ">
+      <div className="flex flex-row font-Nunito h-fit justify-between items-center gap-[44px] my-[50px] ">
         <div className="w-[40%] flex flex-col justify-start">
           <img
             src={IMAGES.aboutUs}

@@ -9,6 +9,12 @@ import trophy from "../assets/Icons/Counter/trophy.svg";
 import smiley from "../assets/Icons/Counter/smiley.svg";
 import briefcase from "../assets/Icons/Counter/briefcase.svg";
 
+// tuition methods icons
+import homeTutoring from "../assets/Icons/TuitionMethods/home.svg";
+import onlineTutoring from "../assets/Icons/TuitionMethods/online-tutoring.svg";
+import batchTutoring from "../assets/Icons/TuitionMethods/batch-tutoring.svg";
+import packageTutoring from "../assets/Icons/TuitionMethods/package-tutoring.svg";
+
 import engagedStudents from "../assets/Images/engaged-students.svg";
 import heroSection from "../assets/Images/hero-section.png";
 import aboutUs from "../assets/Images/about-us.svg";
@@ -29,4 +35,9 @@ export const ICONS = {
   trophy,
   smiley,
   briefcase,
+
+  homeTutoring,
+  onlineTutoring, 
+  batchTutoring,
+  packageTutoring,
 };

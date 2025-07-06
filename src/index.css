@@ -17,6 +17,9 @@
   /* Primary */
 
   --color-primary-10: #0D99FF;
+  --color-primary-20: #E7F5FF;
+  --color-primary-30: #B4DFFF;
+  --color-primary-40: #0C8BE8;
   --color-primary-50: #05406B;
 
   /* secondary */
@@ -26,6 +29,7 @@
 
   --color-neutral-10: #333;
   --color-neutral-20: #545454;
+  --color-neutral-30: #6B7280;
 
   /* accent */
   --color-accent-10: #F17556;
