@@ -1,7 +1,7 @@
 import Container from "../../Reusable/Container/Container";
 import { ICONS, IMAGES } from "../../../assets";
 import Heading from "../../Reusable/Heading/Heading";
-import Button from "../../Reusable/Button/Button";
+import IconButton from "../../Reusable/Button/IconButton";
 
 const DownloadApp = () => {
   return (
@@ -9,9 +9,9 @@ const DownloadApp = () => {
       <div className="flex flex-row font-Nunito h-fit items-center justify-between gap-[44px] my-[50px] ">
         <div className="w-[40%] flex flex-col justify-start">
           <img
-            src={IMAGES.aboutUs}
+            src={IMAGES.appDownload}
             alt="Hero Section"
-            className="w-auto h-[402px]"
+            className="w-auto h-[548px]"
           />
         </div>
 
@@ -32,16 +32,14 @@ const DownloadApp = () => {
             tuition care is dedicated to bridging the educational
           </p>
           <div className="flex flex-row gap-4 items-center">
-            <Button
-              label="Hire A Tutor "
+            <IconButton
               variant="primary"
-              icon={ICONS.topRightArrow}
+              icon={ICONS.appStore}
             />
-            <Button
-              label="Become A Tutor "
-              variant="secondary"
-              icon={ICONS.topRightArrowWhite}
-              iconBg="#0D99FF"
+            <IconButton
+              variant="primary"
+              icon={ICONS.playStore}
+              
             />
           </div>
         </div>

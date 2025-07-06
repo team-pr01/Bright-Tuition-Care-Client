@@ -9,21 +9,18 @@ interface ButtonProps {
 }
 
 const variantClasses: Record<string, string> = {
-  primary: "bg-primary-10 py-3 text-white ",
-    secondary: "bg-white py-[11px] text-black border border-black ",
+  primary: "bg-neutral-40 py-2 px-5",
 };
 
-const Button: React.FC<ButtonProps> = ({
-  label,
+const IconButton: React.FC<ButtonProps> = ({
   variant = "primary",
   onClick,
   icon,
-  iconBg = "white",
 }) => {
   const variantClass = variantClasses[variant] || variantClasses["primary"];
 
   const baseClasses =
-    "flex items-center gap-4 px-6 text-lg leading-[24px]  w-fit rounded-lg font-semibold";
+    "flex items-center gap-4 px-5  text-lg leading-[24px]  w-fit rounded-lg font-semibold";
 
   const combinedClasses = `${baseClasses} ${variantClass}`;
 
@@ -31,23 +28,17 @@ const Button: React.FC<ButtonProps> = ({
     <div className={`${variant?"relative":""}`}>
         
       <button onClick={onClick} className={combinedClasses}>
-        {label}
-        {icon &&  (
-          <span
-            className="rounded-full p-1 size-6 flex items-center justify-center"
-            style={{ backgroundColor: iconBg }}
-          >
-            <img
+        
+        {
+          <img
               src={typeof icon === "string" ? icon : undefined}
               alt="Button Icon"
-              className="w-4 h-4"
+              className="w-[100px] h-[24px]"
             />
-          </span>
-        )}
-       
+        }
       </button>
     </div>
   );
 };
 
-export default Button;
+export default IconButton;

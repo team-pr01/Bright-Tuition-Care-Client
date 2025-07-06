@@ -15,14 +15,23 @@ import onlineTutoring from "../assets/Icons/TuitionMethods/online-tutoring.svg";
 import batchTutoring from "../assets/Icons/TuitionMethods/batch-tutoring.svg";
 import packageTutoring from "../assets/Icons/TuitionMethods/package-tutoring.svg";
 
+// stores
+import appStore from "../assets/DownloadStore/app-store.svg"
+import playStore from "../assets/DownloadStore/play-store.svg"
+
+
+
 import engagedStudents from "../assets/Images/engaged-students.svg";
 import heroSection from "../assets/Images/hero-section.png";
 import aboutUs from "../assets/Images/about-us.svg";
+import appDownload from "../assets/Images/app-download.svg"
+
 
 export const IMAGES = {
   engagedStudents,
   heroSection,
   aboutUs,
+  appDownload
 };
 
 export const ICONS = {
@@ -35,6 +44,9 @@ export const ICONS = {
   trophy,
   smiley,
   briefcase,
+
+  appStore,
+  playStore,
 
   homeTutoring,
   onlineTutoring, 
