@@ -13,7 +13,7 @@ const CounterCard: React.FC<CounterCardProps> = ({ icon, value, label }) => {
         src={typeof icon === "string" ? icon : undefined}
         className="size-[56px]"
       />
-      <div className="flex flex-col gap-2">
+      <div className="flex flex-col gap-2 justify-between items-start">
         <p className="text-2xl font-semibold text-primary-50 leading-[32px]">
           {value}
         </p>

@@ -2,14 +2,15 @@ import React from "react";
 
 interface ButtonProps {
   label: string;
-  variant?: "primary" | string;
+  variant?: "primary"|"secondary" | string;
   onClick?: () => void;
   icon?: React.ReactNode;
   iconBg?: string;
 }
 
 const variantClasses: Record<string, string> = {
-  primary: "bg-primary-10 text-white ",
+  primary: "bg-primary-10 py-3 text-white ",
+    secondary: "bg-white py-[11px] text-black border border-black ",
 };
 
 const Button: React.FC<ButtonProps> = ({
@@ -22,7 +23,7 @@ const Button: React.FC<ButtonProps> = ({
   const variantClass = variantClasses[variant] || variantClasses["primary"];
 
   const baseClasses =
-    "flex items-center gap-2 px-6 py-3 w-fit rounded-lg font-semibold";
+    "flex items-center gap-4 px-6 text-lg leading-[24px]  w-fit rounded-lg font-semibold";
 
   const combinedClasses = `${baseClasses} ${variantClass}`;
 

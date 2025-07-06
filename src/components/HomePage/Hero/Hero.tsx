@@ -59,7 +59,7 @@ const Hero = () => {
         </div>
 
         {/* Right Image Content */}
-        <div className="w-[45%]">
+        <div className="w-[45%] flex items-center justify-end">
           <img
             src={IMAGES.heroSection}
             alt="Hero Section"
