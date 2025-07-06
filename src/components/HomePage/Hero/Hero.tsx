@@ -6,7 +6,7 @@ import Heading from "../../Reusable/Heading/Heading";
 const Hero = () => {
   return (
     <Container>
-      <div className="flex flex-row font-Nunito h-fit justify-between gap-[44px] ">
+      <div className="flex flex-row font-Nunito h-fit justify-between gap-[44px] my-[84px] ">
         <div className="w-[60%] flex flex-col justify-start">
           <div className="flex flex-row gap-3 mb-4 ">
             <p className="text-lg text-neutral-10 font-semibold leading-[24px]">
