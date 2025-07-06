@@ -27,7 +27,8 @@
   --color-neutral-20: #545454;
 
   /* accent */
-  --color-accent-10: #000000;
+  --color-accent-10: #F17556;
+  --color-accent-20: #D61349;
 
   /* Shadows */
   /* --shadow-custom: 0px 4px 28px -4px rgba(0, 0, 0, 0.10);
@@ -58,7 +59,7 @@
     #0a1222 100%
   );
 
-  --bg-service-gradient: linear-gradient(180deg, #284888 0%, #0a1222 100%);
+  --bg-text-gradient: linear-gradient(267deg, #F17556 2.65%, #D61349 97.47%);
   --bg-faq-gradient: linear-gradient(
     180deg,
     rgba(255, 255, 255, 0.05) 0%,
