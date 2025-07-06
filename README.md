@@ -167,4 +167,88 @@ npm run dev
 ```
 Your application will be available at: http://localhost:5173
 
+# 🧾 Git Branch Naming & Commit Message Guidelines
+To maintain a clean and scalable Git history, follow these conventions for branch names and commit messages.
+
+## 🚀 Branch Naming Convention
+Use the format:
+
+```
+<branch-type>/<ticket-id>-<short-kebab-case-description>
+```
+### 🔹 Allowed Branch Types:
+Type	Purpose
+- feat	-New feature
+- fix	Bug -fixes
+- refactor	-Code refactoring without behavior change
+- chore	-Misc tasks (e.g., updating config, scripts)
+- docs	-Documentation only
+- test	-Adding/updating tests
+- hotfix	-Emergency production fix
+- ui	-UI-only changes (pages, components, styles)
+
+#### 🔸 Examples:
+feat/101-user-authentication
+
+fix/234-navbar-overlap-mobile
+
+refactor/119-reorganize-form-hooks
+
+ui/198-profile-page-redesign
+
+## 📝 Commit Message Convention
+Follow the Conventional Commits format:
+
+```
+<type>(scope): <short summary>
+
+[optional body]
+
+[optional footer, e.g. closes #issue]
+```
+### 🔹 Types
+- Type	-Description
+- feat	-Introduces a new feature
+- fix	-Fixes a bug
+- style	-UI/UX or styling only (no logic changes)
+- refactor	-Code change that doesn’t fix a bug or add feature
+- chore	-Maintenance tasks (e.g., deps, config)
+- docs	-Adds or improves documentation
+- test	-Adds or improves tests
+- perf	-Performance improvements
+
+### 🔸 Common Scopes
+Scope	When to Use
+- component	-For reusable components
+- page	-For entire screen or route-based pages
+- layout-	Headers, footers, or layout wrappers
+- style	-Styling or theme changes
+- auth, api, db, utils, etc.	-Based on modules
+
+#### 🔸 Commit Examples
+feat(auth): add JWT-based login system
+
+fix(component): resolve button alignment issue on mobile
+
+style(layout): update sidebar color scheme for dark mode
+
+refactor(page): extract profile logic into reusable hook
+
+chore(deps): bump axios to v1.6.2
+
+docs(readme): add setup instructions
+
+#### ✅ Summary
+Use Case	Convention Example
+
+Create a feature	feat/123-add-tutor-registration
+
+Fix a UI bug	ui/456-fix-header-overlap
+
+Commit new UI page	feat(page): implement tutor profile page
+
+Commit reusable button	feat(component): create primary button component
+
+Update colors	style(ui): update brand color palette
+
 
