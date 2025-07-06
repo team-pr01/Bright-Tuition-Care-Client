@@ -7,7 +7,7 @@ const Hero = () => {
   return (
     <Container>
       <div className="flex flex-row font-Nunito h-fit justify-between gap-[44px] my-[84px] ">
-        <div className="w-[60%] flex flex-col justify-start">
+        <div className="w-[55%] flex flex-col justify-start">
           <div className="flex flex-row gap-3 mb-4 ">
             <p className="text-lg text-neutral-10 font-semibold leading-[24px]">
               0177296232
@@ -44,7 +44,11 @@ const Hero = () => {
             </div>
           </div>
           <div className="flex flex-row gap-5 mt-12 items-center">
-            <Button label="Hire A Tutor (it's free)" variant="primary" icon={ICONS.topRightArrow} />
+            <Button
+              label="Hire A Tutor (it's free)"
+              variant="primary"
+              icon={ICONS.topRightArrow}
+            />
             <p className="font-lg leading-[24px] text-neutral-20">
               Want to become a Tutor?{" "}
               <span className="font-semibold bg-gradient-to-l from-accent-10 to-accent-20 bg-clip-text text-transparent">
@@ -55,11 +59,11 @@ const Hero = () => {
         </div>
 
         {/* Right Image Content */}
-        <div className="w-[40%]">
+        <div className="w-[45%]">
           <img
             src={IMAGES.heroSection}
             alt="Hero Section"
-            className="w-full h-auto"
+            className="w-auto h-full"
           />
         </div>
       </div>
