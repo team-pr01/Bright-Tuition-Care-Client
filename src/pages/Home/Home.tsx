@@ -20,6 +20,7 @@ const Home = () => {
       <Testimonials
         title="What Tutors Say About Us"
         description="Real stories from real tutors who found success through our platform."
+        variant="primary"
       />
     </div>
   );

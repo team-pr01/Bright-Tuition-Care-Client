@@ -6,7 +6,8 @@ interface TestimonialCardProps {
   name: string;
   role: string;
   review: string;
-  rating: number; // out of 5
+  rating: number; 
+  variant?: "default" | "primary"; // Optional variant prop for future use
 }
 
 const TestimonialCard: React.FC<TestimonialCardProps> = ({
@@ -15,12 +16,13 @@ const TestimonialCard: React.FC<TestimonialCardProps> = ({
   role,
   review,
   rating,
+  variant = "default", // Default variant
 }) => {
   return (
-    <div className="flex flex-col md:flex-row items-center justify-between gap-10 p-6 rounded-xl w-[80%] mx-auto">
+    <div className={`flex flex-col ${variant=="default" ?"md:flex-row": "md:flex-row-reverse"}  items-center justify-between gap-10 p-6 rounded-xl w-[80%] mx-auto`}>
       {/* Profile Image */}
       <div className="relative min-w-[286px]">
-        <div className="absolute top-[26px] right-[26px] w-[286px] h-[348px] bg-blue-500 rounded-xl z-0"></div>
+        <div className="absolute top-[26px] right-[26px] w-[286px] h-[348px] bg-primary-10 rounded-xl z-0"></div>
         <img
           src={image}
           alt={name}
@@ -34,7 +36,7 @@ const TestimonialCard: React.FC<TestimonialCardProps> = ({
         <div className="flex flex-col items-start gap-7 ">
           <div className="flex flex-col items-start gap-3 ">
             <img className="size-[50px]" src={ICONS.testimonials} alt="testimonials" />
-            <p className="text-neutral-30 ">
+            <p className="text-neutral-10 text-xl font-medium">
               {review}
             </p>
           </div>
@@ -56,8 +58,8 @@ const TestimonialCard: React.FC<TestimonialCardProps> = ({
 
           {/* Name and Role */}
           <div>
-            <p className="font-semibold text-neutral-10">{name}</p>
-            <p className="text-sm text-neutral-10">{role}</p>
+            <p className="font-bold text-neutral-10 mb-1 text-xl leading-[24px]">{name}</p>
+            <p className="text-lg text-neutral-10 leading-[24px]">{role}</p>
           </div>
         </div>
       </div>
