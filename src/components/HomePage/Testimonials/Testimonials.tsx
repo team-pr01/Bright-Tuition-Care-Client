@@ -16,7 +16,7 @@ interface TestimonialsProps {
 }
 const Testimonials: React.FC<TestimonialsProps> = ({ title,description,variant }) => {
   return (
-    <div className="py-12 w-full bg-gradient-to-r from-[#E8F3FF] to-white">
+    <div className="py-12 w-full ">
       <Container>
         <div className="text-center mb-12">
           <Heading

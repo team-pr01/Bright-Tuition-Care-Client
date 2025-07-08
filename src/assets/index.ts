@@ -20,7 +20,10 @@ import packageTutoring from "../assets/Icons/TuitionMethods/package-tutoring.svg
 import appStore from "../assets/DownloadStore/app-store.svg"
 import playStore from "../assets/DownloadStore/play-store.svg"
 
-
+// service categories
+import service2 from "../assets/Images/serviceCatagories/service2.png";
+import service1 from "../assets/Images/serviceCatagories/service1.png";
+import service3 from "../assets/Images/serviceCatagories/service3.png";
 
 import engagedStudents from "../assets/Images/engaged-students.svg";
 import heroSection from "../assets/Images/hero-section.png";
@@ -32,7 +35,11 @@ export const IMAGES = {
   engagedStudents,
   heroSection,
   aboutUs,
-  appDownload
+  appDownload,
+
+  service1,
+  service2,
+  service3,
 };
 
 export const ICONS = {

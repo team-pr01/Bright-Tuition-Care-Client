@@ -2,6 +2,7 @@ import AboutUs from "../../components/HomePage/AboutUS/AboutUs";
 import Counter from "../../components/HomePage/Counter/Counter";
 import DownloadApp from "../../components/HomePage/DownloadApp/DownloadApp";
 import Hero from "../../components/HomePage/Hero/Hero";
+import Services from "../../components/HomePage/Services/Services";
 import Testimonials from "../../components/HomePage/Testimonials/Testimonials";
 import TuitionMethods from "../../components/HomePage/TuitionMethods/TuitionMethods";
 
@@ -11,6 +12,7 @@ const Home = () => {
       <Hero />
       <Counter />
       <AboutUs />
+      <Services />
       <TuitionMethods />
       <Testimonials
         title="What Students / Guardian Say About Us"
