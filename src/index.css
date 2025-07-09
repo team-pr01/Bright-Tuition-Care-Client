@@ -1,63 +1,38 @@
-
 @import "tailwindcss";
-@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
+/* @import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Rethink+Sans:ital,wght@0,400..800;1,400..800&display=swap");
-@import "tailwindcss";
+@import "tailwindcss"; */
+@import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap");
 
 @theme {
   /* Fonts */
-  --font-Inter: Inter, sans-serif;
-  --font-Rethink: "Rethink Sans", sans-serif;
+  /* --font-Inter: Inter, sans-serif;
+  --font-Rethink: "Rethink Sans", sans-serif; */
+  --font-Nunito: "Nunito Sans", sans-serif;
 
   /* Colors */
 
   /* Primary */
 
-  --color-primary-10: #61dafb;
-  --color-primary-15: #6ecaf8;
-  --color-primary-20: #06a0ed;
-  --color-primary-30: #0696e7;
-  --color-primary-40: #06a0ed33;
-  --color-primary-50: #91a0b5;
-  --color-primary-60: #101742;
-  --color-primary-70: #2c5970;
+  --color-primary-10: #0d99ff;
+  --color-primary-20: #e7f5ff;
+  --color-primary-30: #b4dfff;
+  --color-primary-40: #0c8be8;
+  --color-primary-50: #05406b;
 
   /* secondary */
   --color-secondary-10: #1a1f2c;
-  --color-secondary-20: #262b35;
-  --color-secondary-30: #232323;
-  --color-secondary-40: #313642;
-  --color-secondary-50: #020817;
-  --color-secondary-60: #0a1222;
 
   /* neutral */
 
-  --color-neutral-10: #fcfcfc;
-  --color-neutral-15: #fafcfd;
-  --color-neutral-20: #f5f5f5;
-  --color-neutral-30: #d8d8d8;
-  --color-neutral-40: #bababa;
-  --color-neutral-50: #b3b3b3;
-  --color-neutral-60: #aaaaaa;
-  --color-neutral-65: #979797;
-  --color-neutral-70: #616161;
-  --color-neutral-80: #272727;
-  --color-neutral-85: #c7c7c726;
-  --color-neutral-90: #727272;
+  --color-neutral-10: #333;
+  --color-neutral-20: #545454;
+  --color-neutral-30: #6b7280;
+  --color-neutral-40: #05160b;
 
   /* accent */
-  --color-accent-10: #000000;
-  --color-accent-20: #00000033;
-  --color-accent-30: #00000066;
-
-  /* whites */
-  --color-whites-05: #ffffff0d;
-  --color-whites-10: #ffffff1a;
-  --color-whites-20: #ffffff26;
-  --color-whites-30: #ffffff8c;
-  --color-whites-40: #ffffff0d;
-  --color-whites-50: #ffffff33;
-  --color-whites-60: #ffffff66;
+  --color-accent-10: #f17556;
+  --color-accent-20: #d61349;
 
   /* Shadows */
   /* --shadow-custom: 0px 4px 28px -4px rgba(0, 0, 0, 0.10);
@@ -72,12 +47,8 @@
     #020817 0%,
     rgba(2, 8, 23, 0) 100%
   );
-  --bg-about-bg-gradient: linear-gradient(
-    180deg,
-    #06a0ed 0%,
-    rgba(3, 91, 135, 0) 100%
-  );
-  --bg-about-bg-gradient2: linear-gradient(
+  --bg-about-bg-gradient: linear-gradient(101deg, #E8F3FF -6.83%, #FFF 85.15%);
+  --bg-testimonials-bg-gradient2: linear-gradient(
     180deg,
     #06a0ed 0%,
     rgba(3, 91, 135, 0) 100%
@@ -88,7 +59,7 @@
     #0a1222 100%
   );
 
-  --bg-service-gradient: linear-gradient(180deg, #284888 0%, #0a1222 100%);
+  --bg-text-gradient: linear-gradient(267deg, #f17556 2.65%, #d61349 97.47%);
   --bg-faq-gradient: linear-gradient(
     180deg,
     rgba(255, 255, 255, 0.05) 0%,
@@ -214,7 +185,6 @@
   scrollbar-width: thin;
   scrollbar-color: gray transparent;
 }
-
 
 /* Swiper Pagination Dots Custom Styles */
 .swiper-pagination-bullet {
