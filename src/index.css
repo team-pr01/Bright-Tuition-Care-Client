@@ -1,8 +1,5 @@
-@import "tailwindcss";
-/* @import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Rethink+Sans:ital,wght@0,400..800;1,400..800&display=swap");
-@import "tailwindcss"; */
 @import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap");
+@import "tailwindcss";
 
 @theme {
   /* Fonts */
@@ -188,7 +185,7 @@
 
 /* Swiper Pagination Dots Custom Styles */
 .swiper-pagination-bullet {
-  background-color: #888888 !important; /* Unselected: gray */
+  background-color: #888888 !important;
   opacity: 1 !important;
   width: 8px;
   height: 8px;
@@ -198,26 +195,8 @@
 }
 
 .swiper-pagination-bullet-active {
-  background-color: #06a0ed !important; /* Selected: blue */
+  background-color: #06a0ed !important;
   width: 12px;
   height: 12px;
   transform: translateY(-2px);
 }
-
-/* 
-@keyframes gradient-border {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
-}
-
-.animate-gradient-border {
-  background-size: 200% 200%;
-  animation: gradient-border 3s ease infinite;
-} */

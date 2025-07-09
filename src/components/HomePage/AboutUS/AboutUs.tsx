@@ -17,37 +17,39 @@ const AboutUs = () => {
 
         {/* Right Image Content */}
         <div className="w-[60%]  ">
-            <div className="w-[75%]"><Heading titleParts={[{ text: "About Bright Tuition Care" }]} />
-          <div className="flex flex-col gap-5 mt-4">
-            <p className="text-neutral-20 text-lg leading-[24px]">
-              At Bright Tutor Care, we are passionate about connecting students
-              with the perfect tutors to support their learning journey. Whether
-              you are a student, guardian, or tutor, our mission is to make
-              tutoring simple, effective, and accessible for everyone.
-            </p>
-            <p className="text-neutral-20 text-lg leading-[24px]">
-              We believe that every student deserves quality education tailored
-              to their unique needs. That's why we have built a trusted platform
-              where finding the right tutor is quick, reliable, and hassle-free.
-              From academic subjects to special skills, our network of
-              experienced tutors is here to help students reach their full
-              potential.
-            </p>
-          </div>
-          <div className="flex flex-row gap-4 mt-12 items-center">
-            <Button
-              label="Hire A Tutor "
-              variant="primary"
-              icon={ICONS.topRightArrow}
-            />
-            <Button
-              label="Become A Tutor "
-              variant="secondary"
-              icon={ICONS.topRightArrowWhite}
+          <div className="w-[75%]">
+            <Heading titleParts={[{ text: "About Bright Tuition Care" }]} />
+            <div className="flex flex-col gap-5 mt-4 text-neutral-20 text-lg leading-[24px]">
+              <p className="font-Nunito">
+                At Bright Tutor Care, we are passionate about connecting
+                students with the perfect tutors to support their learning
+                journey. Whether you are a student, guardian, or tutor, our
+                mission is to make tutoring simple, effective, and accessible
+                for everyone.
+              </p>
+              <p>
+                We believe that every student deserves quality education
+                tailored to their unique needs. That's why we have built a
+                trusted platform where finding the right tutor is quick,
+                reliable, and hassle-free. From academic subjects to special
+                skills, our network of experienced tutors is here to help
+                students reach their full potential.
+              </p>
+            </div>
+            <div className="flex flex-row gap-4 mt-12 items-center">
+              <Button
+                label="Hire A Tutor"
+                variant="primary"
+                icon={ICONS.topRightArrow}
+              />
+              <Button
+                label="Become A Tutor "
+                variant="secondary"
+                icon={ICONS.topRightArrowWhite}
                 iconBg="#0D99FF"
-            />
-          </div></div>
-          
+              />
+            </div>
+          </div>
         </div>
       </div>
       {/* Left Content */}

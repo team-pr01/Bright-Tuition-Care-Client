@@ -23,7 +23,7 @@ const Button: React.FC<ButtonProps> = ({
   const variantClass = variantClasses[variant] || variantClasses["primary"];
 
   const baseClasses =
-    "flex items-center gap-4 px-6 text-lg leading-[24px]  w-fit rounded-lg font-semibold";
+    "flex items-center gap-4 px-6 text-lg leading-[24px] w-fit rounded-lg font-semibold font-Nunito";
 
   const combinedClasses = `${baseClasses} ${variantClass}`;
 
