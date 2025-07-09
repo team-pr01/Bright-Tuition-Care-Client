@@ -1,4 +1,3 @@
-import React, { useRef } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
@@ -9,6 +8,7 @@ import { IMAGES } from "../../../assets";
 import Container from "../../Reusable/Container/Container";
 import Heading from "../../Reusable/Heading/Heading";
 import ServiceCard from "./ServiceCard";
+import { useRef } from "react";
 
 const categories = [
   {
