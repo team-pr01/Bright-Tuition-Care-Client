@@ -59,7 +59,7 @@ const Testimonials: React.FC<TestimonialsProps> = ({
     delay: 3000, // 3 seconds
     disableOnInteraction: false,
   }}
-          // pagination={{ clickable: true }}
+          pagination={{ clickable: true }}
           navigation={{
             prevEl: prevRef.current,
             nextEl: nextRef.current,
