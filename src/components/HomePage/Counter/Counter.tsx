@@ -5,7 +5,7 @@ import CounterCard from "./CounterCard";
 const Counter = () => {
   return (
     <Container>
-      <div className="flex flex-wrap justify-center items-center gap-25 py-[50px]  ">
+      <div className="flex flex-wrap justify-center font-Nunito items-center gap-25 py-[50px]  ">
         {stats.map((stat, index) => (
           <CounterCard
             key={index}

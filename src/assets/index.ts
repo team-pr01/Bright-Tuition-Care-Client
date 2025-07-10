@@ -4,6 +4,7 @@ import topRightArrow from "../assets/Icons/top-right-arrow.svg";
 import topRightArrowWhite from "../assets/Icons/top-right-arrow-white.svg";
 import testimonials from "../assets/Icons/testimonials.svg";
 import stepLine from "../assets/Images/steps-line.png"
+import logo from "../assets/Icons/logo.png"
 
 // counter icons
 import user from "../assets/Icons/Counter/users.svg";
@@ -57,6 +58,7 @@ export const ICONS = {
   topRightArrow,
   topRightArrowWhite,
   testimonials,
+  logo,
 
   user,
   trophy,
