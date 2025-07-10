@@ -12,7 +12,7 @@ const navLinks = [
 const Navbar = () => {
   return (
     <Container>
-      <nav className="flex items-center justify-between  bg-white mt-7">
+      <nav className="flex items-center font-Nunito justify-between  bg-white mt-7">
         {/* Logo and Brand */}
         <div className="flex items-center space-x-2">
           <img src={ICONS.logo} alt="Logo" className="size-13" />
