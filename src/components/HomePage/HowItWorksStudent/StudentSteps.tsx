@@ -1,6 +1,3 @@
-// components/StudentSteps/StudentSteps.tsx
-
-import React from "react";
 import StepCard from "./StepCard";
 import Container from "../../Reusable/Container/Container";
 import { ICONS, IMAGES } from "../../../assets";
