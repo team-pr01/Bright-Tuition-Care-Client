@@ -19,7 +19,7 @@ const TestimonialCard: React.FC<TestimonialCardProps> = ({
   variant = "default", // Default variant
 }) => {
   return (
-    <div className={`flex flex-col ${variant=="default" ?"md:flex-row": "md:flex-row-reverse"}  items-center justify-between gap-10 p-6 rounded-xl w-[80%] mx-auto`}>
+    <div className={`flex flex-col ${variant=="default" ?"md:flex-row": "md:flex-row-reverse"} font-Nunito items-center justify-between gap-10 p-6 rounded-xl w-[80%] mx-auto`}>
       {/* Profile Image */}
       <div className="relative min-w-[286px]">
         <div className="absolute top-[26px] right-[26px] w-[286px] h-[348px] bg-primary-10 rounded-xl z-0"></div>
