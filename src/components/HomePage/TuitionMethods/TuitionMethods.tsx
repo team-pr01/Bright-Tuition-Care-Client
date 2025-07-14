@@ -7,7 +7,7 @@ import Container from "../../Reusable/Container/Container";
 
 const TuitionMethods: React.FC = () => {
   return (
-    <div className="w-full py-[50px]"
+    <div className="w-full py-[50px] font-Nunito"
     //  style={{
     //     background: "linear-gradient(101deg, #E8F3FF -6.83%, #FFF 85.15%)",
     //   }}

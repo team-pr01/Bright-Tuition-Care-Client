@@ -42,7 +42,7 @@ const steps: TutorStepCardProps[] = [
 
 const TutorSteps: React.FC = () => {
   return (
-    <section className="py-[50px] w-full "
+    <section className="py-[50px] w-full font-Nunito"
              style={{ background: "linear-gradient(101deg, #FFF -7.84%, #E8F3FF 74.03%)" }}>
       <div className="mx-auto px-4">
         <div className="text-center mb-12">

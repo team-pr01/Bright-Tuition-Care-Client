@@ -24,7 +24,7 @@ const Testimonials: React.FC<TestimonialsProps> = ({
   const nextRef = useRef<HTMLButtonElement | null>(null);
 
   return (
-    <div className="py-12 w-full ">
+    <div className="py-12 w-full font-Nunito">
       <Container>
         <div className="text-center mb-12">
           <Heading
