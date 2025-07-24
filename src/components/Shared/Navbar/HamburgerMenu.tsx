@@ -2,70 +2,102 @@ import { Link, useLocation } from "react-router-dom";
 import { ICONS } from "../../../assets";
 import { navLinks } from "./navlinks";
 import { RxCross2 } from "react-icons/rx";
+import { useEffect, useState } from "react";
 
-interface HamburgerMenuProps {
-  isOpen: boolean;
-  onClose: () => void;
-}
-
-const HamburgerMenu = ({ isOpen, onClose }: HamburgerMenuProps) => {
+const HamburgerMenu = () => {
   const location = useLocation();
+  const [isHamburgerOpen, setIsHamburgerOpen] = useState(false);
+
+  const toggleHamburgerMenu = () => {
+    setIsHamburgerOpen(!isHamburgerOpen);
+  };
+
+  useEffect(() => {
+    const handleOutsideClick = (event: MouseEvent) => {
+      const target = event.target as HTMLElement;
+      const closestDropdown = target.closest(".hamburgerMenu");
+      if (isHamburgerOpen && closestDropdown === null) {
+        setIsHamburgerOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleOutsideClick);
+
+    return () => {
+      document.removeEventListener("mousedown", handleOutsideClick);
+    };
+  }, [isHamburgerOpen]);
 
   return (
     <>
-      {/* Overlay */}
-      <div
-        className={`fixed inset-0 bg-black/40 z-40 transition-opacity duration-300 ${
-          isOpen ? "opacity-100 visible" : "opacity-0 invisible"
-        }`}
-        onClick={onClose}
-      />
+      <div className="relative hamburgerMenu block lg:hidden">
+        <button
+          onClick={toggleHamburgerMenu}
+          className="bg-white py-2 px-3 border border-primary-10 cursor-pointer w-fit rounded-lg flex items-center justify-center"
+        >
+          <img src={ICONS.menu} alt="menu-icon" />
+        </button>
 
-      {/* Menu Drawer */}
-      <div
-        className={`fixed top-0 right-0 w-[80%] max-w-sm h-full bg-white z-50 transform transition-transform duration-300 shadow-lg ${
-          isOpen ? "translate-x-0" : "translate-x-full"
-        }`}
-      >
-        {/* Header */}
-        <div className="flex justify-between items-center p-5 border-b border-neutral-30/50">
-          <Link to="/" className="flex items-center gap-2" onClick={onClose}>
-            <img src={ICONS.logo} alt="Logo" className="size-10" />
-            <span className="text-lg font-bold text-primary-40">
-              Bright Tuition Care
-            </span>
-          </Link>
-          <button onClick={onClose}>
-            <RxCross2 className="text-neutral-10 text-2xl" />
-          </button>
-        </div>
+        {/* Background Overlay */}
+        <div
+          onClick={toggleHamburgerMenu}
+          className={`fixed inset-0 bg-black z-50 transition-opacity duration-300 ${
+            isHamburgerOpen ? "opacity-50" : "opacity-0 pointer-events-none"
+          }`}
+        ></div>
 
-        {/* Nav Links */}
-        <div className="flex flex-col gap-5 p-6">
-          {navLinks.map((link) => (
-            <Link
-              key={link.path}
-              to={link.path}
-              onClick={onClose}
-              className={`text-lg font-semibold transition ${
-                location.pathname === link.path
-                  ? "text-primary-40 font-bold"
-                  : "text-neutral-10"
-              }`}
-            >
-              {link.label}
-            </Link>
-          ))}
-        </div>
+        {/* Side Menu */}
+        <div
+          className={`fixed inset-y-0 right-0 z-50 bg-white py-8 p-6 w-[300px] overflow-y-auto transition-all duration-300 transform flex flex-col items-start justify-between ${
+            isHamburgerOpen ? "translate-x-0" : "translate-x-full"
+          }`}
+        >
+          <div className="flex flex-col gap-10">
+            {/* Header */}
+            <div className="flex justify-between items-center gap-5 w-full border-b border-neutral-30/50 pb-4">
+              <Link
+                to="/"
+                className="flex items-center gap-2"
+                onClick={toggleHamburgerMenu}
+              >
+                <img src={ICONS.logo} alt="Logo" className="size-10" />
+                <span className="text-lg font-bold text-primary-40">
+                  Bright Tuition Care
+                </span>
+              </Link>
+              <button onClick={toggleHamburgerMenu}>
+                <RxCross2 className="text-neutral-10 text-2xl" />
+              </button>
+            </div>
 
-        {/* Auth Buttons */}
-        <div className="p-6 flex flex-col gap-3">
-          <button className="py-2 px-4 border border-primary-10 rounded-md text-primary-40 font-medium">
-            Sign Up
-          </button>
-          <button className="py-2 px-4 bg-primary-10 text-white rounded-md font-medium">
-            Become A Tutor
-          </button>
+            {/* Nav Links */}
+            <div className="flex flex-col gap-5">
+              {navLinks.map((link) => (
+                <Link
+                  key={link.path}
+                  to={link.path}
+                  onClick={toggleHamburgerMenu}
+                  className={`text-lg font-semibold transition ${
+                    location.pathname === link.path
+                      ? "text-primary-40 font-bold"
+                      : "text-neutral-10"
+                  }`}
+                >
+                  {link.label}
+                </Link>
+              ))}
+            </div>
+          </div>
+
+          {/* Auth Buttons */}
+          <div className="flex flex-col gap-3 w-full">
+            <button className="py-2 px-4 border border-primary-10 rounded-md text-primary-40 font-medium">
+              Sign Up
+            </button>
+            <button className="py-2 px-4 bg-primary-10 text-white rounded-md font-medium">
+              Become A Tutor
+            </button>
+          </div>
         </div>
       </div>
     </>

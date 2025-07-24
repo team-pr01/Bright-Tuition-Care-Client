@@ -9,12 +9,11 @@ import HamburgerMenu from "./HamburgerMenu";
 const Navbar = () => {
   const location = useLocation();
   const [isScrolled, setIsScrolled] = useState(false);
-  const [menuOpen, setMenuOpen] = useState(false);
 
   // Detect scroll
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 10); // Adjust threshold if needed
+      setIsScrolled(window.scrollY > 10);
     };
 
     window.addEventListener("scroll", handleScroll);
@@ -22,7 +21,7 @@ const Navbar = () => {
   }, []);
 
   return (
-    <div
+   <div
       className={`py-7 sticky top-0 z-10 transition-all duration-300 ${
         isScrolled ? "backdrop-blur-md bg-white/70 shadow-sm" : "bg-white"
       }`}
@@ -65,18 +64,10 @@ const Navbar = () => {
           </div>
           <div className="flex lg:hidden items-center gap-3">
             <Button label="Sign Up" variant="primary" className="text-sm" />
-            <button
-              onClick={() => setMenuOpen(true)}
-              className="bg-white py-2 px-3 border border-primary-10 cursor-pointer w-fit rounded-lg flex items-center justify-center"
-            >
-              <img src={ICONS.menu} alt="menu-icon" />
-            </button>
+            <HamburgerMenu/>
           </div>
         </nav>
       </Container>
-
-      {/* HamburgerMenu Overlay */}
-      <HamburgerMenu isOpen={menuOpen} onClose={() => setMenuOpen(false)} />
     </div>
   );
 };

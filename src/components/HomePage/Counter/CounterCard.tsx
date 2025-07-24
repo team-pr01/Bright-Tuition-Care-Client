@@ -8,7 +8,7 @@ interface CounterCardProps {
 
 const CounterCard: React.FC<CounterCardProps> = ({ icon, value, label }) => {
   return (
-    <div className="flex flex-row font-Nunito items-center gap-5 text-center">
+    <div className="flex flex-row font-Nunito items-center gap-5 text-center min-w-[200px]">
       <img
         src={typeof icon === "string" ? icon : undefined}
         className="size-[56px]"
