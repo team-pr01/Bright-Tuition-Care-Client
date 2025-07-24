@@ -1,57 +1,31 @@
 import { ICONS, IMAGES } from "../../../assets";
-import Button from "../../Reusable/Button/Button";
+import AnimatedButton from "../../Reusable/AnimatedButton/AnimatedButton";
 import Container from "../../Reusable/Container/Container";
-import Heading from "../../Reusable/Heading/Heading";
 
 const Hero = () => {
   return (
     <Container>
-      <div className="flex flex-row font-Nunito h-fit justify-between gap-[44px] my-[84px] ">
-        <div className="w-[55%] flex flex-col justify-start">
-          <div className="flex flex-row gap-3 mb-4 ">
+      <div className="flex flex-col gap-8 lg:gap-[44px] lg:flex-row font-Nunito h-fit justify-between py-5 lg:py-[84px]">
+        <div className="w-full lg:w-[55%] flex flex-col justify-start mt-5 lg:mt-16">
+          <div className="flex flex-row gap-3">
             <p className="text-lg text-neutral-10 font-semibold leading-[24px]">
               0177296232
             </p>
             <img src={ICONS.phone} alt="WhatsApp Icon" className="w-6 h-6" />
           </div>
-          <Heading
-            titleParts={[
-              { text: "Perfect" },
-              { text: "Tutor", highlight: true },
-              { text: "or Dream" },
-              { text: "Tutoring", highlight: true },
-              { text: "Job – All in One Place!" },
-            ]}
-            description="Whether you're a student seeking expert guidance or a tutor looking for new opportunities — our platform connects you in just a few clicks. Learn smarter. Teach better."
-            headingClassName="text-[56px] leading-[64px] tracking-[-1.68px]"
-          />
-          <div className="flex flex-col gap-2 mt-11">
-            <h3 className="text-lg leading-[24px] text-neutral-20">Student</h3>
-            <div className="flex flex-row items-center justify-start gap-2">
-              <div>
-                <img
-                  src={IMAGES.engagedStudents}
-                  alt="Student Image"
-                  className="H-10 w-[90px]"
-                />
-              </div>
-              <div className="flex flex-row items-center justify-start gap-1">
-                <p className="text-neutral-20 text-xl font-bold leading-[24px] ">
-                  1250
-                </p>
-                <img src={ICONS.plus} alt="Student Image" className="size-5" />
-              </div>
-            </div>
-          </div>
-          <div className="flex flex-row gap-5 mt-12 items-center">
-            <Button
-              label="Hire A Tutor (it's free)"
-              variant="primary"
-              icon={ICONS.topRightArrow}
-            />
+          <h1 className="text-neutral-10 text-2xl lg:text-[56px] font-bold leading-8 lg:leading-[68px] mt-4">
+            Find The Best <span className="text-primary-40">Tutor</span> Today
+          </h1>
+          <p className="text-neutral-10 text-sm lg:text-lg leading-normal lg:leading-6 max-w-full lg:max-w-[600px] mt-4">
+            Whether you're a student seeking expert guidance or a tutor looking
+            for new opportunities — our platform connects you in just a few
+            clicks. Learn smarter. Teach better.
+          </p>
+          <div className="flex flex-col md:flex-row gap-5 mt-7 lg:mt-12 items-start md:items-center">
+            <AnimatedButton />
             <p className="font-lg leading-[24px] text-neutral-20">
               Want to become a Tutor?{" "}
-              <span className="font-semibold bg-gradient-to-l from-accent-10 to-accent-20 bg-clip-text text-transparent">
+              <span className="font-semibold bg-gradient-to-r from-primary-10 to-primary-40/60 bg-clip-text text-transparent">
                 Sign Up
               </span>
             </p>
@@ -59,12 +33,27 @@ const Hero = () => {
         </div>
 
         {/* Right Image Content */}
-        <div className="w-[45%] flex items-center justify-end">
-          <img
-            src={IMAGES.heroSection}
+        {/* <div className="w-full lg:w-[35%] flex flex-col items-center ">
+          <div className="flex gap-0 md:gap-5 relative">
+            <img
+            src={IMAGES.heroImg1}
             alt="Hero Section"
-            className="w-auto h-full"
+            className="size-[150px]"
           />
+          <img
+            src={IMAGES.heroImg1}
+            alt="Hero Section"
+            className="size-[150px]"
+          />
+          </div>
+          <img
+            src={IMAGES.heroImg1}
+            alt="Hero Section"
+            className="absolute bottom-[80px] md:-bottom-[65px] right-0 left-[139px] md:left-[124px] size-[150px]"
+          />
+        </div> */}
+        <div className="w-full lg:w-[35%]">
+          <img src={IMAGES.heroImg} alt="Hero Section" className="" />
         </div>
       </div>
       {/* Left Content */}

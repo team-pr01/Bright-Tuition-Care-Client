@@ -10,9 +10,9 @@ import TuitionMethods from "../../components/HomePage/TuitionMethods/TuitionMeth
 
 const Home = () => {
   return (
-    <div className="flex flex-col h-full w-full items-center justify-center ">
-      {/* <Hero />
-      <Counter />
+    <div>
+      <Hero />
+      {/* <Counter />
       <AboutUs />
       <Services />
       <TuitionMethods />

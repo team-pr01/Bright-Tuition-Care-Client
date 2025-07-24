@@ -10,7 +10,7 @@ interface ButtonProps {
 }
 
 const variantClasses: Record<string, string> = {
-  primary: "bg-primary-10 py-2 lg:py-3 px-3 lg:px-6 text-white",
+  primary: "bg-primary-10 py-2 lg:py-3 px-3 lg:px-6 text-white text-sm md:text-base",
   secondary: "bg-white py-[11px] px-6 text-black border border-black",
   tertiary: "bg-white py-2 px-4 text-primary-10 border border-primary-10 hover:bg-primary-10 hover:text-white",
   quaternary:"bg-primary-10 py-2 px-4 text-white border border-primary-10 hover:bg-white hover:text-primary-10",
