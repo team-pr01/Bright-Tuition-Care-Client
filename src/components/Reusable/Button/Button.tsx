@@ -10,10 +10,10 @@ interface ButtonProps {
 }
 
 const variantClasses: Record<string, string> = {
-  primary: "bg-primary-10 py-3 px-6 text-white ",
-  secondary: "bg-white py-[11px] px-6 text-black border border-black ",
-  tertiary: "bg-white py-[7px] px-4 text-primary-10 border border-primary-10 ",
-  quaternary:"bg-primary-10 py-2 px-4 text-white ",
+  primary: "bg-primary-10 py-2 lg:py-3 px-3 lg:px-6 text-white",
+  secondary: "bg-white py-[11px] px-6 text-black border border-black",
+  tertiary: "bg-white py-2 px-4 text-primary-10 border border-primary-10 hover:bg-primary-10 hover:text-white",
+  quaternary:"bg-primary-10 py-2 px-4 text-white border border-primary-10 hover:bg-white hover:text-primary-10",
 };
 
 const Button: React.FC<ButtonProps> = ({
@@ -27,7 +27,7 @@ const Button: React.FC<ButtonProps> = ({
   const variantClass = variantClasses[variant] || variantClasses["primary"];
 
   const baseClasses =
-    "flex items-center gap-4 text-lg leading-[24px] w-fit rounded-lg font-semibold font-Nunito";
+    "flex items-center gap-4 text-lg leading-[24px] w-fit rounded-lg font-semibold font-Nunito cursor-pointer transition-all duration-300";
 
   const combinedClasses = `${baseClasses} ${variantClass} ${className}`;
 

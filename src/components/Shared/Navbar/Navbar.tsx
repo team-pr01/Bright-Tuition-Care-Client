@@ -1,51 +1,83 @@
+import { useEffect, useState } from "react";
+import { Link, useLocation } from "react-router-dom";
 import { ICONS } from "../../../assets";
 import Button from "../../Reusable/Button/Button";
 import Container from "../../Reusable/Container/Container";
-import NavLinkItem from "./NavLinksItems";
-
-const navLinks = [
-  { to: "/job-board", label: "Job Board" },
-  { to: "/tutorial", label: "Tutorial" },
-  { to: "/contact-us", label: "Contact Us" },
-];
+import { navLinks } from "./navlinks";
+import HamburgerMenu from "./HamburgerMenu";
 
 const Navbar = () => {
+  const location = useLocation();
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  // Detect scroll
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 10); // Adjust threshold if needed
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
-    <Container>
-      <nav className="flex items-center font-Nunito justify-between  bg-white mt-7">
-        {/* Logo and Brand */}
-        <div className="flex items-center space-x-2">
-          <img src={ICONS.logo} alt="Logo" className="size-13" />
-          <span className="text-xl leading-[24px] font-bold text-primary-40">
-            Bright Tuition Care
-          </span>
-        </div>
+    <div
+      className={`py-7 sticky top-0 z-10 transition-all duration-300 ${
+        isScrolled ? "backdrop-blur-md bg-white/70 shadow-sm" : "bg-white"
+      }`}
+    >
+      <Container>
+        <nav className="flex items-center font-Nunito justify-between">
+          {/* Logo and Brand */}
+          <Link to="/" className="flex items-center space-x-2">
+            <img src={ICONS.logo} alt="Logo" className="size-10 md:size-13" />
+            <span className="text-sm md:text-xl leading-[24px] font-bold text-primary-40">
+              Bright Tuition Care
+            </span>
+          </Link>
 
-        {/* Nav Links - Loop here */}
-        <div className="hidden md:flex space-x-6">
-          {navLinks.map((link) => (
-            <NavLinkItem key={link.to} to={link.to} label={link.label} />
-          ))}
-        </div>
+          {/* Nav Links */}
+          <div className="hidden lg:flex gap-6">
+            {navLinks.map((link) => (
+              <Link
+                key={link.path}
+                to={link.path}
+                className={`text-lg font-Nunito hover:text-primary-40 transition-all duration-300 ${
+                  location.pathname === link.path
+                    ? "text-primary-40 font-bold"
+                    : "text-neutral-10 font-semibold"
+                }`}
+              >
+                {link.label}
+              </Link>
+            ))}
+          </div>
 
-        {/* Auth Buttons */}
-        <div className="flex items-center space-x-3">
-       
-          <Button
-                label="Sign Up"
-                variant="tertiary"
-                className="text-sm"
-              />
+          {/* Auth Buttons */}
+          <div className="hidden lg:flex items-center gap-5">
+            <Button label="Sign Up" variant="tertiary" className="text-sm" />
+            <Button
+              label="Become A Tutor"
+              variant="quaternary"
+              className="text-sm"
+            />
+          </div>
+          <div className="flex lg:hidden items-center gap-3">
+            <Button label="Sign Up" variant="primary" className="text-sm" />
+            <button
+              onClick={() => setMenuOpen(true)}
+              className="bg-white py-2 px-3 border border-primary-10 cursor-pointer w-fit rounded-lg flex items-center justify-center"
+            >
+              <img src={ICONS.menu} alt="menu-icon" />
+            </button>
+          </div>
+        </nav>
+      </Container>
 
-          <Button
-                label="Become A Tutor"
-                variant="quaternary"
-                className="text-sm"
-                
-              />
-        </div>
-      </nav>
-    </Container>
+      {/* HamburgerMenu Overlay */}
+      <HamburgerMenu isOpen={menuOpen} onClose={() => setMenuOpen(false)} />
+    </div>
   );
 };
 

@@ -4,7 +4,8 @@ import topRightArrow from "../assets/Icons/top-right-arrow.svg";
 import topRightArrowWhite from "../assets/Icons/top-right-arrow-white.svg";
 import testimonials from "../assets/Icons/testimonials.svg";
 import stepLine from "../assets/Images/steps-line.png"
-import logo from "../assets/Icons/logo.png"
+import logo from "../assets/Icons/logo.png";
+import menu from "../assets/Icons/menu.svg";
 
 // counter icons
 import user from "../assets/Icons/Counter/users.svg";
@@ -38,9 +39,15 @@ import engagedStudents from "../assets/Images/engaged-students.svg";
 import heroSection from "../assets/Images/hero-section.png";
 import aboutUs from "../assets/Images/about-us.svg";
 import appDownload from "../assets/Images/app-download.svg"
+import heroImg1 from "../assets/Images/hero-img1.svg";
+import heroImg2 from "../assets/Images/hero-img2.svg";
+import heroImg3 from "../assets/Images/hero-img3.svg";
 
 
 export const IMAGES = {
+  heroImg1,
+  heroImg2,
+  heroImg3,
   engagedStudents,
   heroSection,
   aboutUs,
@@ -59,6 +66,7 @@ export const ICONS = {
   topRightArrowWhite,
   testimonials,
   logo,
+  menu,
 
   user,
   trophy,
