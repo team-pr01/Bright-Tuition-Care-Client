@@ -17,11 +17,11 @@ const Home = () => {
       <Services />
       <TuitionMethods />
       <StudentSteps/>
-      {/* <Testimonials
+      <Testimonials
         title="What Students / Guardian Say About Us"
         description="Real stories from real tutors who found success through our platform."
       />
-      <DownloadApp />
+      {/* <DownloadApp />
       <TutorSteps/>
       <Testimonials
         title="What Tutors Say About Us"
