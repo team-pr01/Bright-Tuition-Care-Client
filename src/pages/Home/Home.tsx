@@ -16,8 +16,8 @@ const Home = () => {
       <AboutUs />
       <Services />
       <TuitionMethods />
-      {/* <StudentSteps/>
-      <Testimonials
+      <StudentSteps/>
+      {/* <Testimonials
         title="What Students / Guardian Say About Us"
         description="Real stories from real tutors who found success through our platform."
       />

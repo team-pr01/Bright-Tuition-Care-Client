@@ -17,7 +17,7 @@ const steps = [
       "Browse tutor profiles, compare experience, read reviews, and choose the best fit for your child.",
   },
   {
-    icon:ICONS.receive,
+    icon: ICONS.receive,
     title: "Receive the Best Tutors",
     description:
       "Top-rated and verified tutors will respond to your request. We filter based on quality, reviews, and availability.",
@@ -39,7 +39,7 @@ const StudentSteps = () => {
       }}
     >
       <Container>
-        <div className=" mx-auto px-4">
+        <div>
           <Heading
             titleParts={[
               { text: "How The System Works For Students / Guardian" },
@@ -48,7 +48,6 @@ const StudentSteps = () => {
               "Finding the right tutor is easier than ever. Follow these simple steps to connect with the best educators for your child."
             }
             align="center"
-            className="w-full max-w-2xl mx-auto"
           />
           <div className="relative mt-9">
             {/* dotted line */}
@@ -58,25 +57,24 @@ const StudentSteps = () => {
               className="hidden md:block absolute top-7 left-0 right-0 mx-auto z-0 w-[80%] max-w-[90%] object-contain"
             />
 
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-12 relative z-10">
-  {steps.map((step, index) => (
-    <div
-      key={index}
-      className={`relative ${
-        index === 1
-          ? "mt-17"
-          : index === 2
-          ? "mt-3"
-          : index === 3
-          ? "mt-19"
-          : "mt-5"
-      }`}
-    >
-      <StepCard {...step} />
-    </div>
-  ))}
-</div>
-
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-4 lg:gap-12 relative z-10">
+              {steps.map((step, index) => (
+                <div
+                  key={index}
+                  className={`relative ${
+                    index === 1
+                      ? "mt-0 lg:mt-17"
+                      : index === 2
+                      ? "mt-0 lg:mt-3"
+                      : index === 3
+                      ? "mt-0 lg:mt-19"
+                      : "mt-0 lg:mt-5"
+                  }`}
+                >
+                  <StepCard {...step} />
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </Container>
