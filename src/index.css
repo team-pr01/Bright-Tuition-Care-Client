@@ -22,10 +22,12 @@
 
   /* neutral */
 
+  --color-neutral-5: #000;
   --color-neutral-10: #333;
   --color-neutral-20: #545454;
   --color-neutral-30: #6b7280;
   --color-neutral-40: #05160b;
+  --color-neutral-45: #696767;
 
   /* accent */
   --color-accent-10: #f17556;

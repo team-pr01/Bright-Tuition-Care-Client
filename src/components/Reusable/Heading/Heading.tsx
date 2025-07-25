@@ -32,7 +32,7 @@ const Heading: React.FC<HeadingProps> = ({
   return (
     <div className={`${alignment} ${className} font-Nunito`}>
       <h1
-        className={`text-[44px] font-Nunito font-bold text-neutral-10 leading-[48px] ${headingClassName}`}
+        className={`text-2xl lg:text-[44px] font-Nunito font-bold text-neutral-10 leading-8 lg:leading-12 text-center lg:text-start ${headingClassName}`}
       >
         {titleParts.map((part, index) => (
           <span key={index} className={part.highlight ? "text-blue-600" : ""}>

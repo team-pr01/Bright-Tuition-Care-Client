@@ -64,7 +64,7 @@ const Navbar = () => {
           </div>
           <div className="flex lg:hidden items-center gap-3">
             <Button label="Sign Up" variant="primary" className="text-sm" />
-            <HamburgerMenu/>
+            {/* <HamburgerMenu/> */}
           </div>
         </nav>
       </Container>
