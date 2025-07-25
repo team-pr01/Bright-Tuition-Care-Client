@@ -10,24 +10,25 @@ import TuitionMethods from "../../components/HomePage/TuitionMethods/TuitionMeth
 
 const Home = () => {
   return (
-    <div className="flex flex-col h-full w-full items-center justify-center ">
+    <div>
       <Hero />
       <Counter />
       <AboutUs />
       <Services />
       <TuitionMethods />
-      <StudentSteps/>
+      <StudentSteps />
       <Testimonials
         title="What Students / Guardian Say About Us"
         description="Real stories from real tutors who found success through our platform."
       />
-      <DownloadApp />
-      <TutorSteps/>
+      <TutorSteps />
+
       <Testimonials
         title="What Tutors Say About Us"
         description="Real stories from real tutors who found success through our platform."
         variant="primary"
       />
+      <DownloadApp />
     </div>
   );
 };

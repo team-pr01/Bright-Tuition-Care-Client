@@ -22,10 +22,12 @@
 
   /* neutral */
 
+  --color-neutral-5: #000;
   --color-neutral-10: #333;
   --color-neutral-20: #545454;
   --color-neutral-30: #6b7280;
   --color-neutral-40: #05160b;
+  --color-neutral-45: #696767;
 
   /* accent */
   --color-accent-10: #f17556;
@@ -127,78 +129,19 @@
   /* Dark background for non-scrolled area */
 }
 
-@keyframes rotate {
-  from {
-    transform: translate(-50%, -50%) scale(1.4) rotate(0turn);
-  }
-  to {
-    transform: translate(-50%, -50%) scale(1.4) rotate(1turn);
-  }
-}
+/* Add this to your index.css file */
 
-@keyframes scroll-up {
-  0% {
-    transform: translateY(0);
+@keyframes pulse-animation {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(0, 123, 255, 0.7);
   }
-  100% {
-    transform: translateY(-50%);
+  50% {
+    transform: scale(1.05);
+    box-shadow: 0 0 10px 5px rgba(0, 123, 255, 0);
   }
 }
 
-@keyframes scroll-down {
-  0% {
-    transform: translateY(-50%);
-  }
-  100% {
-    transform: translateY(0);
-  }
-}
-
-.animate-scroll-up {
-  animation: scroll-up linear infinite;
-}
-
-.animate-scroll-down {
-  animation: scroll-down linear infinite;
-}
-
-/* Only apply to divs with custom-scrollbar class */
-.custom-scrollbar::-webkit-scrollbar {
-  width: 3px;
-  height: 3px; /* for horizontal scrolling */
-}
-
-.custom-scrollbar::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-.custom-scrollbar::-webkit-scrollbar-thumb {
-  background-color: gray;
-  border-radius: 5px;
-}
-
-/* Firefox support */
-.custom-scrollbar {
-  scrollbar-width: thin;
-  scrollbar-color: gray transparent;
-}
-
-
-.swiper-pagination-bullet {
-  background-color: #888888 !important;
-  opacity: 1;
-  width: 0px;
-  height: 8px;
-  margin: 0 0px;
-  border-radius: 9999px;
-  transition: all 0.3s ease;
-  border: none;
-}
-
-.swiper-pagination-bullet-active {
-  background-color: #070723 !important;
-  width: 80px !important;
-  height: 2px;
-  border-radius: 15px !important;
-  transform: translateY(0px);
+.animate-pulse-button {
+  animation: pulse-animation 2.5s infinite;
 }

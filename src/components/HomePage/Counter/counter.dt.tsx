@@ -14,7 +14,7 @@ export const stats = [
   {
     icon:   ICONS.smiley,
     value: "183+",
-    label: "Happy Clients",
+    label: "Happy Guardians",
   },
   {
     icon:ICONS.briefcase,

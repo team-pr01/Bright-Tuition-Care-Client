@@ -2,7 +2,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
-import {  Pagination, Autoplay } from "swiper/modules";
+import { Pagination, Autoplay } from "swiper/modules";
 
 import { IMAGES } from "../../../assets";
 import Container from "../../Reusable/Container/Container";
@@ -14,32 +14,38 @@ const categories = [
   {
     image: IMAGES.service1,
     title: "Admission Test",
-    description: "Get expert tutors for Dakhil, Alim, and academic Islamic studies.",
+    description:
+      "Get expert tutors for Dakhil, Alim, and academic Islamic studies.",
   },
   {
     image: IMAGES.service2,
     title: "Madrasa Medium",
-    description: "Get expert tutors for Dakhil, Alim, and academic Islamic studies.",
+    description:
+      "Get expert tutors for Dakhil, Alim, and academic Islamic studies.",
   },
   {
     image: IMAGES.service3,
     title: "English Medium",
-    description: "Tutors for Edexcel, Cambridge (O/A Levels), and IB curriculum.",
+    description:
+      "Tutors for Edexcel, Cambridge (O/A Levels), and IB curriculum.",
   },
   {
     image: IMAGES.service3,
     title: "English Medium",
-    description: "Tutors for Edexcel, Cambridge (O/A Levels), and IB curriculum.",
+    description:
+      "Tutors for Edexcel, Cambridge (O/A Levels), and IB curriculum.",
   },
   {
     image: IMAGES.service3,
     title: "English Medium",
-    description: "Tutors for Edexcel, Cambridge (O/A Levels), and IB curriculum.",
+    description:
+      "Tutors for Edexcel, Cambridge (O/A Levels), and IB curriculum.",
   },
   {
     image: IMAGES.service3,
     title: "English Medium",
-    description: "Tutors for Edexcel, Cambridge (O/A Levels), and IB curriculum.",
+    description:
+      "Tutors for Edexcel, Cambridge (O/A Levels), and IB curriculum.",
   },
 ];
 
@@ -49,7 +55,7 @@ const Services = () => {
 
   return (
     <div
-      className="w-full py-[50px] font-Nunito"
+      className="w-full py-9 lg:py-[50px] font-Nunito"
       style={{
         background: "linear-gradient(101deg, #FFF -7.84%, #E8F3FF 74.03%)",
       }}
@@ -60,14 +66,12 @@ const Services = () => {
             titleParts={[{ text: "Education Service Categories" }]}
             description="We provide expert tutors across all major education systems — whether you're in Bangla, English, Madrasa medium, or preparing for admission tests."
             align="center"
-            className="w-[60%] mx-auto"
+            headingClassName="text-center"
           />
         </div>
 
-        
-
         <Swiper
-          modules={[ Pagination, Autoplay]}
+          modules={[Pagination, Autoplay]}
           slidesPerView={1}
           spaceBetween={20}
           loop={true}
@@ -91,6 +95,7 @@ const Services = () => {
           }}
           className="w-full !pb-[60px]"
           breakpoints={{
+            375: { slidesPerView: 1 },
             768: { slidesPerView: 2 },
             1024: { slidesPerView: 3 },
           }}
@@ -105,8 +110,7 @@ const Services = () => {
             </SwiperSlide>
           ))}
         </Swiper>
-          <div className="custom-swiper-pagination mt-6 flex justify-center items-center gap-2" />
-
+        <div className="custom-swiper-pagination mt-6 flex justify-center items-center gap-2" />
       </Container>
     </div>
   );
