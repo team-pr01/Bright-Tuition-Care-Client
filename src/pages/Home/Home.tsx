@@ -14,9 +14,9 @@ const Home = () => {
       <Hero />
       <Counter />
       <AboutUs />
-      {/* <Services />
+      <Services />
       <TuitionMethods />
-      <StudentSteps/>
+      {/* <StudentSteps/>
       <Testimonials
         title="What Students / Guardian Say About Us"
         description="Real stories from real tutors who found success through our platform."

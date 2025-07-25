@@ -14,7 +14,7 @@ const MethodCard: React.FC<MethodCardProps> = ({
   description,
 }) => {
   return (
-    <div className="border-2 relative font-Nunito border-primary-30 rounded-xl py-8 px-4 flex flex-col items-center text-center mb-3 bg-white w-[260px] gap-2">
+    <div className="border-2 relative font-Nunito border-primary-30 rounded-xl py-8 px-4 flex flex-col items-center text-center bg-white w-full gap-2">
       <div className="absolute top-0 left-0 text-sm bg-primary-20 rounded-tl-xl text-primary-40 font-semibold mb-2 py-2 pr-3 pl-[10px]">
         <p>{number}</p>
       </div>
