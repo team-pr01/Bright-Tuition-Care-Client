@@ -4,7 +4,7 @@ import { ICONS } from "../../../assets";
 import Button from "../../Reusable/Button/Button";
 import Container from "../../Reusable/Container/Container";
 import { navLinks } from "./navlinks";
-import HamburgerMenu from "./HamburgerMenu";
+// import HamburgerMenu from "./HamburgerMenu";
 
 const Navbar = () => {
   const location = useLocation();
