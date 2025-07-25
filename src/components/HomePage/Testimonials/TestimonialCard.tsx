@@ -37,26 +37,25 @@ const TestimonialCard: React.FC<TestimonialCardProps> = ({
       {/* Name and Role */}
       <div className="flex md:hidden flex-col gap-3 mt-5 lg:mt-0">
         <div>
-        <p className="font-bold text-neutral-10 mb-1 text-xl leading-[24px]">
-          {name}
-        </p>
-        <p className="text-lg text-neutral-10 leading-[24px]">{role}</p>
-      </div>
+          <p className="font-bold text-neutral-10 mb-1 text-xl leading-[24px]">
+            {name}
+          </p>
+          <p className="text-lg text-neutral-10 leading-[24px]">{role}</p>
+        </div>
 
-      <div className="flex items-center gap-1 ">
-        {[...Array(5)].map((_, i) => (
-          <svg
-            key={i}
-            xmlns="http://www.w3.org/2000/svg"
-            fill={i < rating ? "#FACC15" : "#E5E7EB"} // yellow-400 or gray-200
-            viewBox="0 0 24 24"
-            className="w-5 h-5"
-          >
-            <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
-          </svg>
-        ))}
-      </div>
-
+        <div className="flex items-center gap-1 ">
+          {[...Array(5)].map((_, i) => (
+            <svg
+              key={i}
+              xmlns="http://www.w3.org/2000/svg"
+              fill={i < rating ? "#FACC15" : "#E5E7EB"} // yellow-400 or gray-200
+              viewBox="0 0 24 24"
+              className="w-5 h-5"
+            >
+              <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+            </svg>
+          ))}
+        </div>
       </div>
       {/* Text Section */}
 
@@ -68,7 +67,9 @@ const TestimonialCard: React.FC<TestimonialCardProps> = ({
               src={ICONS.testimonials}
               alt="testimonials"
             />
-            <p className="text-neutral-10 text-xl font-medium text-center md:text-start">{review}</p>
+            <p className="text-neutral-10 text-xl font-medium text-center md:text-start">
+              {review}
+            </p>
           </div>
 
           {/* Rating */}

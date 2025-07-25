@@ -21,8 +21,8 @@ const Home = () => {
         title="What Students / Guardian Say About Us"
         description="Real stories from real tutors who found success through our platform."
       />
-      {/* <DownloadApp />
-      <TutorSteps/>
+      <DownloadApp />
+      {/* <TutorSteps/>
       <Testimonials
         title="What Tutors Say About Us"
         description="Real stories from real tutors who found success through our platform."
