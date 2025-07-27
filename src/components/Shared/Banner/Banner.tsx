@@ -2,23 +2,29 @@ import { RxArrowTopRight } from "react-icons/rx";
 import Container from "../../Reusable/Container/Container";
 
 const Banner = () => {
+  const buttonCommonClassNames =
+    "flex items-center justify-center gap-2 leading-[24px] min-w-[200px] sm:min-w-fit w-fit rounded-lg font-semibold font-Nunito cursor-pointer transition-all duration-300 py-2 lg:py-3 px-3 lg:px-6 text-sm md:text-lg";
   return (
     <Container>
-      <div className="bg-primary-10 rounded-3xl p-4 md:p-12 font-Nunito relative">
-        <h1 className="text-2xl md:text-4xl lg:text-[44px] leading-5 md:leading-10 lg:leading-12 text-center font-bold text-white max-w-[800px] mx-auto">
+      <div className="bg-primary-10 rounded-3xl px-4 py-7 md:px-12 md:py-12 font-Nunito relative">
+        <h1 className="text-xl md:text-4xl lg:text-[44px] leading-7 md:leading-10 lg:leading-12 text-center font-bold text-white max-w-[800px] mx-auto">
           Unlock Smarter Education With One Simple Registration Step
         </h1>
-        <p className="text-sm lg:text-base leading-5 lg:leading-6 text-center font-medium mt-4 text-white max-w-[655px] mx-auto">
+        <p className="text-xs md:text-base leading-5 lg:leading-6 text-center font-medium mt-4 text-white max-w-[655px] mx-auto">
           Join our trusted platform connecting students, guardians, and tutors.
           Simplify the way you learn or teach with easy registration, verified
           profiles, and smart tools—anytime, anywhere, on mobile.
         </p>
 
-        <div className="flex items-center gap-4 justify-center mt-8">
-          <button className="bg-white hover:bg-transparent border border-white hover:text-white text-primary-10 flex items-center gap-2 leading-[24px] w-fit rounded-lg font-semibold font-Nunito cursor-pointer transition-all duration-300 py-2 lg:py-3 px-3 lg:px-6 text-sm md:text-lg">
+        <div className="flex flex-col sm:flex-row items-center gap-4 justify-center mt-8">
+          <button
+            className={`bg-white hover:bg-transparent border border-white hover:text-white text-primary-10 ${buttonCommonClassNames}`}
+          >
             Hire A Tutor <RxArrowTopRight className="text-2xl font-black" />
           </button>
-          <button className="hover:bg-white border border-white hover:text-primary-10 text-white flex items-center gap-2 leading-[24px] w-fit rounded-lg font-semibold font-Nunito cursor-pointer transition-all duration-300 py-2 lg:py-3 px-3 lg:px-6 text-sm md:text-lg">
+          <button
+            className={`hover:bg-white border border-white hover:text-primary-10 text-white ${buttonCommonClassNames}`}
+          >
             Become A Tutor <RxArrowTopRight className="text-2xl font-black" />
           </button>
         </div>
@@ -27,10 +33,9 @@ const Banner = () => {
         <div className="absolute top-0 right-0 h-full">
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            width="457"
-            height="364"
             viewBox="0 0 457 364"
             fill="none"
+            className="w-full lg:w-[455px] h-full lg:h-[364px]"
           >
             <path
               opacity="0.07"
@@ -40,13 +45,13 @@ const Banner = () => {
             />
           </svg>
         </div>
+
         <div className="absolute top-0 left-0 h-full">
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            width="455"
-            height="364"
             viewBox="0 0 455 364"
             fill="none"
+            className="w-full lg:w-[455px] h-full lg:h-[364px]"
           >
             <path
               opacity="0.07"
