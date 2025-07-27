@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import Container from "../../Reusable/Container/Container";
@@ -9,7 +10,7 @@ const AboutUs = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
-  const containerVariants = {
+  const containerVariants:any = {
     hidden: { opacity: 0, y: 30 },
     visible: {
       opacity: 1,
@@ -25,7 +26,7 @@ const AboutUs = () => {
     },
   };
 
-const itemVariants = {
+const itemVariants:any = {
   hidden: { y: 50, opacity: 0 },
   visible: {
     y: 0,
