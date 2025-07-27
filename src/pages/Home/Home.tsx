@@ -7,6 +7,7 @@ import TutorSteps from "../../components/HomePage/HowItWorksTutor/TutorSteps";
 import Services from "../../components/HomePage/Services/Services";
 import Testimonials from "../../components/HomePage/Testimonials/Testimonials";
 import TuitionMethods from "../../components/HomePage/TuitionMethods/TuitionMethods";
+import Banner from "../../components/Shared/Banner/Banner";
 
 const Home = () => {
   return (
@@ -29,6 +30,7 @@ const Home = () => {
         variant="primary"
       />
       <DownloadApp />
+      <Banner/>
     </div>
   );
 };
