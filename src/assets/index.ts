@@ -9,9 +9,9 @@ import menu from "../assets/Icons/menu.svg";
 
 // counter icons
 import user from "../assets/Icons/counter/users.svg";
-import trophy from "../assets/Icons/Counter/trophy.svg";
-import smiley from "../assets/Icons/Counter/smiley.svg";
-import briefcase from "../assets/Icons/Counter/briefcase.svg";
+import trophy from "../assets/Icons/counter/trophy.svg";
+import smiley from "../assets/Icons/counter/smiley.svg";
+import briefcase from "../assets/Icons/counter/briefcase.svg";
 
 // tuition methods icons
 import homeTutoring from "../assets/Icons/TuitionMethods/home.svg";
