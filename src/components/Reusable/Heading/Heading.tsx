@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React from "react";
 import { motion } from "framer-motion";
 
@@ -30,17 +31,17 @@ const Heading: React.FC<HeadingProps> = ({
       ? "text-right"
       : "text-left";
 
-  const containerVariants = {
+  const containerVariants:any = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.2, // Time delay between children animations
+        staggerChildren: 0.2,
       },
     },
   };
 
-  const itemVariants = {
+  const itemVariants:any = {
     hidden: { y: 20, opacity: 0 },
     visible: {
       y: 0,

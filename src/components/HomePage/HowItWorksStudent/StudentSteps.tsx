@@ -1,4 +1,4 @@
-import React from "react";
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import StepCard from "./StepCard";
@@ -37,7 +37,7 @@ const StudentSteps = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-150px" });
 
-  const lineVariants = {
+  const lineVariants:any = {
     hidden: { opacity: 0, scaleX: 0.5 },
     visible: {
       opacity: 1,
@@ -54,12 +54,12 @@ const StudentSteps = () => {
     visible: {
       transition: {
         staggerChildren: 0.3,
-        delayChildren: 0.4, // Delay children to let the line draw first
+        delayChildren: 0.4,
       },
     },
   };
 
-  const stepItemVariants = {
+  const stepItemVariants:any = {
     hidden: { opacity: 0, y: 50 },
     visible: {
       opacity: 1,
