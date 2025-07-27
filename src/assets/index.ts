@@ -34,6 +34,11 @@ import getStarted from "../assets/Icons/StudentSteps/get-started.svg"
 import choose from "../assets/Icons/StudentSteps/choose.svg"
 import receive from "../assets/Icons/StudentSteps/receive.svg"
 
+import tutorCommunity from "../assets/Icons/tutor-community.svg";
+import guardianCommunity from "../assets/Icons/guardians-community.svg";
+import playStoreCard from "../assets/Icons/play-store.svg";
+import appStoreCard from "../assets/Icons/app-store.svg";
+
 import aboutUs from "../assets/Images/about-us.svg";
 import appDownload from "../assets/Images/app-download.svg"
 import heroImg from "../assets/Images/hero-img.svg";
@@ -82,4 +87,9 @@ export const ICONS = {
   getStarted,
   choose,
   receive,
+
+  tutorCommunity,
+  guardianCommunity,
+  playStoreCard,
+  appStoreCard
 };
