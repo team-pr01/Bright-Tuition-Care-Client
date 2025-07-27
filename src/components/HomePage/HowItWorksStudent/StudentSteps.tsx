@@ -1,3 +1,6 @@
+import React from "react";
+import { motion, useInView } from "framer-motion";
+import { useRef } from "react";
 import StepCard from "./StepCard";
 import Container from "../../Reusable/Container/Container";
 import { ICONS, IMAGES } from "../../../assets";
@@ -31,8 +34,47 @@ const steps = [
 ];
 
 const StudentSteps = () => {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-150px" });
+
+  const lineVariants = {
+    hidden: { opacity: 0, scaleX: 0.5 },
+    visible: {
+      opacity: 1,
+      scaleX: 1,
+      transition: {
+        duration: 1.2,
+        ease: "easeInOut",
+      },
+    },
+  };
+
+  const stepsContainerVariants = {
+    hidden: {},
+    visible: {
+      transition: {
+        staggerChildren: 0.3,
+        delayChildren: 0.4, // Delay children to let the line draw first
+      },
+    },
+  };
+
+  const stepItemVariants = {
+    hidden: { opacity: 0, y: 50 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        type: "spring",
+        stiffness: 100,
+        damping: 12,
+      },
+    },
+  };
+
   return (
     <section
+      ref={ref}
       className="py-[50px] w-full "
       style={{
         background: "linear-gradient(101deg, #FFF -7.84%, #E8F3FF 74.03%)",
@@ -49,18 +91,27 @@ const StudentSteps = () => {
             }
             align="center"
           />
-          <div className="relative mt-9">
+          <motion.div
+            className="relative mt-9"
+            initial="hidden"
+            animate={isInView ? "visible" : "hidden"}
+          >
             {/* dotted line */}
-            <img
+            <motion.img
               src={IMAGES.stepLine}
               alt="Connector line"
               className="hidden md:block absolute top-7 left-0 right-0 mx-auto z-0 w-[80%] max-w-[90%] object-contain"
+              variants={lineVariants}
             />
 
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-4 lg:gap-12 relative z-10">
+            <motion.div
+              variants={stepsContainerVariants}
+              className="grid grid-cols-1 md:grid-cols-4 gap-4 lg:gap-12 relative z-10"
+            >
               {steps.map((step, index) => (
-                <div
+                <motion.div
                   key={index}
+                  variants={stepItemVariants}
                   className={`relative ${
                     index === 1
                       ? "mt-0 lg:mt-17"
@@ -72,10 +123,10 @@ const StudentSteps = () => {
                   }`}
                 >
                   <StepCard {...step} />
-                </div>
+                </motion.div>
               ))}
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
         </div>
       </Container>
     </section>
