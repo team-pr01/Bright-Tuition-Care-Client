@@ -10,6 +10,7 @@ import {
 import { FiPhone } from "react-icons/fi";
 import { HiOutlineMail } from "react-icons/hi";
 import { IoLocationOutline } from "react-icons/io5";
+import Banner from "../Banner/Banner";
 
 const Footer = () => {
   const socialLinks = [
@@ -76,10 +77,13 @@ const Footer = () => {
 
   const linkHeadingClassNames = "text-xl leading-7 font-medium text-white";
   return (
-    <div className="bg-primary-50 pb-12 pt-12 font-Nunito relative">
+    <div className="bg-primary-50 pb-12 pt-[180px] xl:pt-[250px] font-Nunito relative">
+      <div className="absolute -top-56 left-0 right-0">
+        <Banner />
+      </div>
       <Container>
         <div className="z-10 relative">
-          <div className="flex gap-10 justify-between">
+          <div className="flex flex-col xl:flex-row gap-10 justify-between">
             {/* Left side details */}
             <div className="max-w-[350px]">
               <div className="flex items-center gap-4">
@@ -157,7 +161,7 @@ const Footer = () => {
             </div>
           </div>
 
-          <div className="flex items-center gap-54 mt-12">
+          <div className="flex flex-col-reverse xl:flex-row items-center gap-8 xl:gap-54 mt-12">
             <div className="flex items-center gap-5">
               {socialLinks?.map((item, index) => (
                 <a
@@ -169,16 +173,24 @@ const Footer = () => {
                 </a>
               ))}
             </div>
-            <div className="flex items-center gap-9">
+            <div className="flex flex-col md:flex-row items-center gap-5 md:gap-9">
               <div>
-                <h1 className={linkHeadingClassNames}>Join Our Community</h1>
+                <h1
+                  className={`text-center lg:text-start ${linkHeadingClassNames}`}
+                >
+                  Join Our Community
+                </h1>
                 <div className="flex items-center gap-5 lg:gap-8 mt-5">
                   <img src={ICONS.tutorCommunity} alt="" />
                   <img src={ICONS.guardianCommunity} alt="" />
                 </div>
               </div>
               <div>
-                <h1 className={linkHeadingClassNames}>Download Our App</h1>
+                <h1
+                  className={`text-center lg:text-start ${linkHeadingClassNames}`}
+                >
+                  Download Our App
+                </h1>
                 <div className="flex items-center gap-5 lg:gap-8 mt-5">
                   <img src={ICONS.playStoreCard} alt="" />
                   <img src={ICONS.appStoreCard} alt="" />
@@ -189,7 +201,7 @@ const Footer = () => {
 
           <hr className="border border-neutral-30/50 my-6" />
 
-          <p className="font-medium text-white text-center">
+          <p className="font-medium text-white text-center text-sm md:text-base">
             All Rights Reserved by Bright Tuition Care © 2025
           </p>
         </div>

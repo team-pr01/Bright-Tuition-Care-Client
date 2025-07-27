@@ -7,7 +7,6 @@ import TutorSteps from "../../components/HomePage/HowItWorksTutor/TutorSteps";
 import Services from "../../components/HomePage/Services/Services";
 import Testimonials from "../../components/HomePage/Testimonials/Testimonials";
 import TuitionMethods from "../../components/HomePage/TuitionMethods/TuitionMethods";
-import Banner from "../../components/Shared/Banner/Banner";
 
 const Home = () => {
   return (
@@ -29,8 +28,9 @@ const Home = () => {
         description="Real stories from real tutors who found success through our platform."
         variant="primary"
       />
-      <DownloadApp />
-      <Banner/>
+     <div className="mb-72">
+       <DownloadApp />
+     </div>
     </div>
   );
 };
