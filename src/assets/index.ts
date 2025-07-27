@@ -14,10 +14,10 @@ import smiley from "../assets/Icons/counter/smiley.svg";
 import briefcase from "../assets/Icons/counter/briefcase.svg";
 
 // tuition methods icons
-import homeTutoring from "../assets/Icons/tuitionMethods/home.svg";
-import onlineTutoring from "../assets/Icons/tuitionMethods/online-tutoring.svg";
-import batchTutoring from "../assets/Icons/tuitionMethods/batch-tutoring.svg";
-import packageTutoring from "../assets/Icons/tuitionMethods/package-tutoring.svg";
+import homeTutoring from "../assets/Icons/home.svg";
+import onlineTutoring from "../assets/Icons/online-tutoring.svg";
+import batchTutoring from "../assets/Icons/batch-tutoring.svg";
+import packageTutoring from "../assets/Icons/package-tutoring.svg";
 
 // stores
 import appStore from "../assets/DownloadStore/app-store.svg"
