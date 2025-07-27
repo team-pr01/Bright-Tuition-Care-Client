@@ -1,91 +1,57 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import React, { useRef } from "react";
+import { motion, useInView } from "framer-motion";
 import { Link } from "react-router-dom";
 import Container from "../../Reusable/Container/Container";
 import { ICONS } from "../../../assets";
-import {
-  FaFacebookF,
-  FaInstagram,
-  FaLinkedinIn,
-  FaYoutube,
-} from "react-icons/fa";
-import { FiPhone } from "react-icons/fi";
-import { HiOutlineMail } from "react-icons/hi";
-import { IoLocationOutline } from "react-icons/io5";
+
 import Banner from "../Banner/Banner";
+import {
+  companyDetails,
+  contactInfo,
+  quickLinks,
+  socialLinks,
+} from "./footer.data";
 
-const Footer = () => {
-  const socialLinks = [
-    {
-      icon: <FaFacebookF className="text-xl" />,
-      href: "https://www.facebook.com/",
-    },
-    {
-      icon: <FaInstagram className="text-xl" />,
-      href: "https://www.facebook.com/",
-    },
-    {
-      icon: <FaLinkedinIn className="text-xl" />,
-      href: "https://www.facebook.com/",
-    },
-    {
-      icon: <FaYoutube className="text-xl" />,
-      href: "https://www.facebook.com/",
-    },
-  ];
-
-  const quickLinks = [
-    {
-      label: "Home",
-      path: "/",
-    },
-    {
-      label: "Job Board",
-      path: "/job-board",
-    },
-    {
-      label: "Contact Us",
-      path: "/contact-us",
-    },
-    {
-      label: "Become A Tutor",
-      path: "/become-a-tutor",
-    },
-  ];
-
-  const contactInfo = [
-    {
-      icon: <FiPhone className="text-xl" />,
-      label: "+880 1616-012365",
-      href: "tel:+8801616012365",
-    },
-    {
-      icon: <HiOutlineMail className="text-xl" />,
-      label: "brighttuitioncare@gmail.com",
-      href: "mailto:brighttuitioncare@gmail.com",
-    },
-    {
-      icon: <IoLocationOutline className="text-xl" />,
-      label: "7 temasek boulevard #12-07 suntec tower one singapore (038987)",
-    },
-  ];
-
-  const companyDetails = [
-    "Trade License No :",
-    "TRAD/DNCC/095492/2022",
-    "E-TIN Number : 435024284395",
-    "BIN Number : 003669024-0102",
-  ];
+const Footer: React.FC = () => {
+  const ref = useRef<HTMLDivElement>(null);
+  const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   const linkHeadingClassNames = "text-xl leading-7 font-medium text-white";
+
+  const containerVariants: any = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: { staggerChildren: 0.15, ease: "easeOut" },
+    },
+  };
+
+  const itemVariants: any = {
+    hidden: { y: 30, opacity: 0 },
+    visible: {
+      y: 0,
+      opacity: 1,
+      transition: { duration: 0.5, ease: "easeInOut" },
+    },
+  };
+
   return (
     <div className="bg-primary-50 pb-12 pt-[180px] xl:pt-[250px] font-Nunito relative">
       <div className="absolute -top-56 left-0 right-0">
         <Banner />
       </div>
       <Container>
-        <div className="z-10 relative">
+        <motion.div
+          ref={ref}
+          variants={containerVariants}
+          initial="hidden"
+          animate={isInView ? "visible" : "hidden"}
+          className="z-10 relative"
+        >
           <div className="flex flex-col xl:flex-row gap-10 justify-between">
             {/* Left side details */}
-            <div className="max-w-[350px]">
+            <motion.div variants={itemVariants} className="max-w-[350px]">
               <div className="flex items-center gap-4">
                 <Link to="/" className="size-15 p-[1px] bg-white rounded-xl">
                   <img src={ICONS.logo} alt="Logo" className="w-full" />
@@ -103,12 +69,11 @@ const Footer = () => {
                 Bright Tuition Care connects students with verified tutors
                 online. We offer a trusted space for connections.
               </p>
-            </div>
+            </motion.div>
 
             {/* Quick Links */}
-            <div>
+            <motion.div variants={itemVariants}>
               <h1 className={linkHeadingClassNames}>Quick Links</h1>
-
               <div className="flex flex-col gap-4 mt-5">
                 {quickLinks?.map((item) => (
                   <a
@@ -120,12 +85,11 @@ const Footer = () => {
                   </a>
                 ))}
               </div>
-            </div>
+            </motion.div>
 
             {/* Company info */}
-            <div>
+            <motion.div variants={itemVariants}>
               <h1 className={linkHeadingClassNames}>Company Details</h1>
-
               <div className="flex flex-col gap-4 mt-5">
                 {companyDetails?.map((item) => (
                   <p
@@ -136,12 +100,11 @@ const Footer = () => {
                   </p>
                 ))}
               </div>
-            </div>
+            </motion.div>
 
             {/* Contact info */}
-            <div className="">
+            <motion.div variants={itemVariants}>
               <h1 className={linkHeadingClassNames}>Contact Info</h1>
-
               <div className="flex flex-col gap-4 mt-5">
                 {contactInfo?.map((item) => (
                   <a
@@ -158,10 +121,13 @@ const Footer = () => {
                   </a>
                 ))}
               </div>
-            </div>
+            </motion.div>
           </div>
 
-          <div className="flex flex-col-reverse xl:flex-row items-center gap-8 xl:gap-54 mt-12">
+          <motion.div
+            variants={itemVariants}
+            className="flex flex-col-reverse xl:flex-row items-center gap-8 xl:gap-54 mt-12"
+          >
             <div className="flex items-center gap-5">
               {socialLinks?.map((item, index) => (
                 <a
@@ -181,8 +147,8 @@ const Footer = () => {
                   Join Our Community
                 </h1>
                 <div className="flex items-center gap-5 lg:gap-8 mt-5">
-                  <img src={ICONS.tutorCommunity} alt="" />
-                  <img src={ICONS.guardianCommunity} alt="" />
+                  <img src={ICONS.tutorCommunity} alt="Tutor Community" />
+                  <img src={ICONS.guardianCommunity} alt="Guardian Community" />
                 </div>
               </div>
               <div>
@@ -192,19 +158,20 @@ const Footer = () => {
                   Download Our App
                 </h1>
                 <div className="flex items-center gap-5 lg:gap-8 mt-5">
-                  <img src={ICONS.playStoreCard} alt="" />
-                  <img src={ICONS.appStoreCard} alt="" />
+                  <img src={ICONS.playStoreCard} alt="Play Store" />
+                  <img src={ICONS.appStoreCard} alt="App Store" />
                 </div>
               </div>
             </div>
-          </div>
+          </motion.div>
 
-          <hr className="border border-neutral-30/50 my-6" />
-
-          <p className="font-medium text-white text-center text-sm md:text-base">
-            All Rights Reserved by Bright Tuition Care © 2025
-          </p>
-        </div>
+          <motion.div variants={itemVariants}>
+            <hr className="border border-neutral-30/50 my-6" />
+            <p className="font-medium text-white text-center text-sm md:text-base">
+              All Rights Reserved by Bright Tuition Care © 2025
+            </p>
+          </motion.div>
+        </motion.div>
       </Container>
 
       <div className="bg-primary-60/30 w-full rounded-[1300px] h-[200px] blur-[125px] absolute bottom-0"></div>
