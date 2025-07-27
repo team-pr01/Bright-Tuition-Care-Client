@@ -9,6 +9,7 @@ import menu from "../assets/Icons/menu.svg";
 
 // counter icons
 import user from "../assets/Icons/counter/users.svg";
+// import user from "../assets/Icons/counter/users.svg";
 import trophy from "../assets/Icons/counter/trophy.svg";
 import smiley from "../assets/Icons/counter/smiley.svg";
 import briefcase from "../assets/Icons/counter/briefcase.svg";
