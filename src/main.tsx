@@ -4,11 +4,14 @@ import "./index.css";
 import { RouterProvider } from "react-router-dom";
 import { router } from "./routes/routes";
 import { HelmetProvider } from "react-helmet-async";
+import SmoothScroll from "./components/SmoothScroll";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <HelmetProvider>
-      <RouterProvider router={router} />
+      <SmoothScroll>
+        <RouterProvider router={router} />
+      </SmoothScroll>
     </HelmetProvider>
   </React.StrictMode>
 );
