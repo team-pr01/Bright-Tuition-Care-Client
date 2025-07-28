@@ -35,7 +35,7 @@ const JobCard = () => {
     },
   ];
   return (
-    <div className="px-3 py-5 md:px-5 md:py-10 border border-primary-30 bg-white shadow-job-card rounded-xl font-Nunito">
+    <div className="px-3 py-5 md:px-5 md:py-10 border border-primary-30 bg-white shadow-job-card rounded-xl font-Nunito transform transition-transform duration-300 hover:-translate-y-2">
       <h1 className="text-neutral-10 text-lg md:text-xl font-bold leading-6">
         Advanced Mathematics Tutor
       </h1>
