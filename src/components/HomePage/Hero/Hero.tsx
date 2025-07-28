@@ -87,6 +87,14 @@ const Hero = () => {
             for new opportunities — our platform connects you in just a few
             clicks. Learn smarter. Teach better.
           </motion.p>
+
+          {/* <div className="relative inline-flex items-center justify-center">
+            <div className="absolute h-[80%] w-[20%] rounded-lg bg-blue-400 opacity-70 animate-ping z-0" />
+            <button className="relative z-10 bg-primary-10 py-2 lg:py-3 px-4 lg:px-6 text-white text-sm md:text-base leading-[24px] w-fit rounded-lg font-semibold font-Nunito cursor-pointer transition-colors duration-300 ease-linear hover:bg-blue-700">
+              Hire A Tutor (It's Free)
+            </button>
+          </div> */}
+
           <motion.div
             variants={itemVariants}
             className="flex flex-col md:flex-row gap-5 mt-7 lg:mt-12 items-start md:items-center"
@@ -94,6 +102,7 @@ const Hero = () => {
             <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
               <AnimatedButton />
             </motion.div>
+
             <p className="font-lg leading-[24px] text-neutral-20">
               Want to become a Tutor?{" "}
               <motion.span

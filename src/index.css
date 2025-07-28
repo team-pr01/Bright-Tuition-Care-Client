@@ -136,14 +136,15 @@
 @keyframes pulse-animation {
   0%, 100% {
     transform: scale(1);
-    box-shadow: 0 0 0 0 rgba(0, 123, 255, 0.7);
+    box-shadow: 0 0 0px 0px #60A5FA33; /* 20% opacity */
   }
   50% {
     transform: scale(1.05);
-    box-shadow: 0 0 10px 5px rgba(0, 123, 255, 0);
+    box-shadow: 0 0 15px 8px #60A5FA66; /* 40% opacity */
   }
 }
 
+
 .animate-pulse-button {
-  animation: pulse-animation 2.5s infinite;
+  animation: pulse-animation 1.8s ease-in-out infinite;
 }
