@@ -28,9 +28,9 @@ const Home = () => {
         description="Real stories from real tutors who found success through our platform."
         variant="primary"
       />
-     <div className="mb-72">
-       <DownloadApp />
-     </div>
+      <div className="mb-72">
+        <DownloadApp />
+      </div>
     </div>
   );
 };

@@ -38,6 +38,20 @@ import tutorCommunity from "../assets/Icons/tutor-community.svg";
 import guardianCommunity from "../assets/Icons/guardians-community.svg";
 import playStoreCard from "../assets/Icons/play-store.svg";
 import appStoreCard from "../assets/Icons/app-store.svg";
+import liveJobs from "../assets/Icons/live-jobs.svg";
+import filter from "../assets/Icons/filter.svg";
+import postedDate from "../assets/Icons/posted-date.svg";
+import jobId from "../assets/Icons/job-id.svg";
+import share from "../assets/Icons/share.svg";
+import jobDetails from "../assets/Icons/job-details.svg";
+import location from "../assets/Icons/location.svg";
+import preferredTutor from "../assets/Icons/prefered-tutor.svg";
+import subject from "../assets/Icons/subject.svg";
+import tuitionType from "../assets/Icons/tuition-type.svg";
+import tutoringDays from "../assets/Icons/tutroing-days.svg";
+import salary from "../assets/Icons/sallary.svg";
+import jobCategoryDummyIcon from "../assets/Icons/job-category-dummy-icon.svg";
+
 
 import aboutUs from "../assets/Images/about-us.svg";
 import appDownload from "../assets/Images/app-download.svg"
@@ -91,5 +105,18 @@ export const ICONS = {
   tutorCommunity,
   guardianCommunity,
   playStoreCard,
-  appStoreCard
+  appStoreCard,
+  liveJobs,
+  filter,
+   postedDate,
+  jobId,
+  share,
+  jobDetails,
+  location,
+  preferredTutor,
+  subject,
+  tuitionType,
+  tutoringDays,
+  salary,
+  jobCategoryDummyIcon,
 };

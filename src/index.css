@@ -36,10 +36,7 @@
   --color-accent-20: #d61349;
 
   /* Shadows */
-  /* --shadow-custom: 0px 4px 28px -4px rgba(0, 0, 0, 0.10);
-   --shadow-custom-joinus: 0px 0px 56px 24px rgba(255, 255, 255, 0.10);
-   --shadow-custom-hero: 0px 4px 250px 16px #A276FA;
-   --shadow-custom-button: 0px -2px 2px 0px rgba(255, 255, 255, 0.05) inset, 0px 12px 45px 0px rgba(137, 81, 246, 0.35); */
+   --shadow-job-card: 0 4px 12px 0 rgba(2, 45, 80, 0.08);
 
   /* Gradients */
   --bg-gradient-primary: linear-gradient(180deg, #06a0ed 100%, #6ecaf8 100%);
