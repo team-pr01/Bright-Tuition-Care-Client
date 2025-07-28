@@ -35,23 +35,27 @@ const JobCard = () => {
     },
   ];
   return (
-    <div className="px-5 py-10 border border-primary-30 bg-white shadow-job-card rounded-xl font-Nunito">
-      <h1 className="text-neutral-10 text-xl font-semibold leading-6">
+    <div className="px-3 py-5 md:px-5 md:py-10 border border-primary-30 bg-white shadow-job-card rounded-xl font-Nunito">
+      <h1 className="text-neutral-10 text-lg md:text-xl font-bold leading-6">
         Advanced Mathematics Tutor
       </h1>
 
       <div className="flex items-center gap-5 mt-3">
         <div className="flex items-center gap-[10px]">
           <img src={ICONS.jobId} alt="Posted-Date" className="size-5" />
-          <p className="text-neutral-10 leading-6">Jod Id#12345</p>
+          <p className="text-neutral-10 text-sm md:text-base leading-6">
+            Jod Id#12345
+          </p>
         </div>
         <div className="flex items-center gap-[10px]">
           <img src={ICONS.postedDate} alt="Posted-Date" className="size-5" />
-          <p className="text-neutral-10 leading-6">Posted: January 15, 2024</p>
+          <p className="text-neutral-10 text-sm md:text-base leading-6">
+            January 15, 2024
+          </p>
         </div>
       </div>
 
-      <div className="flex items-center justify-between mt-12">
+      <div className="flex flex-col-reverse md:flex-row items-center justify-between mt-9 md:mt-12">
         <div className="grid grid-cols-2 gap-8">
           {jobDetails?.map((details, index) => (
             <div key={index} className="flex items-center gap-2">
@@ -68,18 +72,22 @@ const JobCard = () => {
           ))}
         </div>
 
-        <img src={ICONS.jobCategoryDummyIcon} alt="" className="size-[90px]" />
+        <img
+          src={ICONS.jobCategoryDummyIcon}
+          alt=""
+          className="size-20 md:size-[90px]"
+        />
       </div>
 
-      <div className="flex flex-row gap-4 mt-12 items-center justify-between">
+      <div className="flex gap-4 mt-12 items-center justify-between">
         <div className="flex items-center gap-4">
-          <button className="bg-white hover:bg-primary-10/10 text-neutral-10 border border-primary-10 flex items-center gap-4 leading-[24px] w-fit rounded-lg font-semibold font-Nunito cursor-pointer transition-all duration-300 py-2 lg:py-3 px-3 lg:px-6 text-sm md:text-base">
+          <button className="bg-white hover:bg-primary-10/10 text-neutral-10 border border-primary-10 flex items-center gap-1 xl:gap-4 leading-[24px] w-fit rounded-lg font-semibold font-Nunito cursor-pointer transition-all duration-300 py-2 lg:py-3 px-3 xl:px-6 text-sm md:text-base">
             <img src={ICONS.jobDetails} alt="" className="size-5" />
-            Details
+            <p className="hidden md:block">Details</p>
           </button>
-          <button className="bg-white hover:bg-primary-10/10 text-neutral-10 border border-primary-10 flex items-center gap-4 leading-[24px] w-fit rounded-lg font-semibold font-Nunito cursor-pointer transition-all duration-300 py-2 lg:py-3 px-3 lg:px-6 text-sm md:text-base">
+          <button className="bg-white hover:bg-primary-10/10 text-neutral-10 border border-primary-10 flex items-center gap-1 xl:gap-4 leading-[24px] w-fit rounded-lg font-semibold font-Nunito cursor-pointer transition-all duration-300 py-2 lg:py-3 px-3 xl:px-6 text-sm md:text-base">
             <img src={ICONS.share} alt="" className="size-5" />
-            Share
+            <p className="hidden md:block">Share</p>
           </button>
         </div>
         <Button
