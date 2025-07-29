@@ -45,12 +45,17 @@ import jobId from "../assets/Icons/job-id.svg";
 import share from "../assets/Icons/share.svg";
 import jobDetails from "../assets/Icons/job-details.svg";
 import location from "../assets/Icons/location.svg";
+import location2 from "../assets/Icons/location2.svg";
 import preferredTutor from "../assets/Icons/prefered-tutor.svg";
 import subject from "../assets/Icons/subject.svg";
 import tuitionType from "../assets/Icons/tuition-type.svg";
 import tutoringDays from "../assets/Icons/tutroing-days.svg";
 import salary from "../assets/Icons/sallary.svg";
 import jobCategoryDummyIcon from "../assets/Icons/job-category-dummy-icon.svg";
+import time from "../assets/Icons/time.svg";
+import numberOfStudents from "../assets/Icons/number-of-students.svg";
+import preferedClass from "../assets/Icons/class.svg";
+import category from "../assets/Icons/category.svg";
 
 
 import aboutUs from "../assets/Images/about-us.svg";
@@ -113,10 +118,15 @@ export const ICONS = {
   share,
   jobDetails,
   location,
+  location2,
   preferredTutor,
   subject,
   tuitionType,
   tutoringDays,
   salary,
   jobCategoryDummyIcon,
+  time,
+  numberOfStudents,
+  preferedClass,
+  category
 };

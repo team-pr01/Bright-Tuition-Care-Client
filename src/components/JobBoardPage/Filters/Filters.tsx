@@ -47,10 +47,10 @@ const Filters = () => {
 
   return (
     <Container>
-      <div className="flex items-center justify-between mt-16">
+      <div className="flex items-center justify-between mt-10 md:mt-16">
         <div className="flex items-center gap-3">
           <img src={ICONS.liveJobs} alt="" className="size-8" />
-          <h1 className="text-xl md:text-4xl font-semibold leading-11 text-primary-50">
+          <h1 className="text-xl md:text-2xl lg:text-4xl font-semibold leading-11 text-primary-50">
             1024 Live Jobs
           </h1>
         </div>

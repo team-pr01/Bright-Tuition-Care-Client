@@ -10,7 +10,7 @@ const Jobs = () => {
 
   return (
     <Container>
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mt-9">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         {jobData.map((_, index) => (
           <AnimatedJobCard key={index}>
             <JobCard />
