@@ -1,13 +1,16 @@
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 import Navbar from "../components/Shared/Navbar/Navbar";
 import Footer from "../components/Shared/Footer/Footer";
 
 const MainLayout = () => {
+    const location = useLocation();
     return (
         <div> 
             <Navbar/>
             <Outlet/>
-            <Footer/>
+            {
+                location?.pathname !== "/job-board" && <Footer/>
+            }
         </div>
     );
 };

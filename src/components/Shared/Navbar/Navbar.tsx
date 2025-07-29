@@ -22,7 +22,7 @@ const Navbar = () => {
 
   return (
     <div
-      className={`py-7 sticky top-0 z-50 transition-all duration-300 ${
+      className={`py-4 lg:py-7 sticky top-0 z-50 transition-all duration-300 ${
         isScrolled ? "backdrop-blur-md bg-white/70 shadow-sm" : "bg-white"
       }`}
     >
@@ -31,9 +31,14 @@ const Navbar = () => {
           {/* Logo and Brand */}
           <Link to="/" className="flex items-center space-x-2">
             <img src={ICONS.logo} alt="Logo" className="size-10 md:size-13" />
-            <span className="text-sm md:text-xl leading-[24px] font-bold text-primary-40">
+           <div>
+             <h1 className="text-sm md:text-xl leading-[24px] font-bold text-primary-40">
               Bright Tuition Care
-            </span>
+            </h1>
+            <p className="text-xs md:text-sm leading-6 text-neutral-20">
+              Join, Learn, Teach
+            </p>
+           </div>
           </Link>
 
           {/* Nav Links */}
