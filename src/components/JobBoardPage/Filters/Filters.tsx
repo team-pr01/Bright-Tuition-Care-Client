@@ -7,6 +7,7 @@ const Filters = () => {
   const [isAccordingOpen, setIsAccordingOpen] = useState<boolean>(false);
 
   const [selectedArts, setSelectedArts] = useState<string[]>([]);
+
   return (
     <Container>
       <div className="flex items-center justify-between mt-16">
@@ -35,8 +36,8 @@ const Filters = () => {
         } `}
       >
         <MultiSelectDropdown
-          label="Arts"
-          name="arts"
+          label="Tuition Type"
+          name="tuitionType"
           options={[
             "Painting",
             "Sculpture",
