@@ -74,8 +74,7 @@ const MultiSelectDropdown = forwardRef<
       <div className="flex flex-col gap-2 font-Nunito" ref={dropdownRef}>
         <label
           htmlFor={name}
-          className="flex flex-row items-center w-full justify-between text-neutral-65"
-        >
+          className="flex flex-row items-center w-full justify-between text-neutral-65">
           <p className="text-neutral-10 leading-[18px] text-[15px] font-medium tracking-[-0.16] ">
             {label}{" "}
             <span className="text-primary-10">{isRequired ? "*" : ""}</span>

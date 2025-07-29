@@ -50,7 +50,7 @@ const Filters = () => {
       <div className="flex items-center justify-between mt-16">
         <div className="flex items-center gap-3">
           <img src={ICONS.liveJobs} alt="" className="size-8" />
-          <h1 className="text-4xl font-semibold leading-11 text-primary-50">
+          <h1 className="text-xl md:text-4xl font-semibold leading-11 text-primary-50">
             1024 Live Jobs
           </h1>
         </div>
@@ -70,7 +70,7 @@ const Filters = () => {
             : "grid-rows-[0fr] opacity-0 h-0"
         }`}
       >
-        <div className="grid grid-cols-2 gap-5">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
           {/* City Dropdown */}
           <MultiSelectDropdown
             label="City"
