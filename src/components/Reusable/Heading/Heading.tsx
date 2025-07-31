@@ -31,7 +31,7 @@ const Heading: React.FC<HeadingProps> = ({
       ? "text-right"
       : "text-left";
 
-  const containerVariants:any = {
+  const containerVariants: any = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
@@ -41,7 +41,7 @@ const Heading: React.FC<HeadingProps> = ({
     },
   };
 
-  const itemVariants:any = {
+  const itemVariants: any = {
     hidden: { y: 20, opacity: 0 },
     visible: {
       y: 0,
@@ -55,22 +55,24 @@ const Heading: React.FC<HeadingProps> = ({
 
   return (
     <motion.div
-      className={`${alignment} ${className} font-Nunito`}
-      variants={containerVariants}
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: true, amount: 0.5 }} // Trigger animation when 50% of the element is in view
+      viewport={{ once: false, amount: 0.3 }}
+      variants={containerVariants}
+      className={`${alignment} ${className} font-Nunito`}
     >
-      <motion.h1
-        variants={itemVariants}
-        className={`text-2xl lg:text-[44px] font-Nunito font-semibold lg:font-bold text-neutral-10 leading-8 lg:leading-12 ${headingClassName}`}
-      >
-        {titleParts.map((part, index) => (
-          <span key={index} className={part.highlight ? "text-blue-600" : ""}>
-            {part.text}{" "}
-          </span>
-        ))}
-      </motion.h1>
+      <motion.div variants={itemVariants}>
+        <h1
+          className={`text-2xl lg:text-[44px] font-Nunito font-semibold lg:font-bold text-neutral-10 leading-8 lg:leading-12 ${headingClassName}`}
+        >
+          {titleParts.map((part, index) => (
+            <span key={index} className={part.highlight ? "text-blue-600" : ""}>
+              {part.text}{" "}
+            </span>
+          ))}
+        </h1>
+      </motion.div>
+
       {description && (
         <motion.p
           variants={itemVariants}

@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React, { useEffect } from 'react';
-import { motion, useAnimation } from 'framer-motion';
-import { useInView } from 'react-intersection-observer';
-import Container from '../../Reusable/Container/Container';
-import JobCard from './JobCard';
+import React, { useEffect } from "react";
+import { motion, useAnimation } from "framer-motion";
+import { useInView } from "react-intersection-observer";
+import Container from "../../Reusable/Container/Container";
+import JobCard from "./JobCard";
 
 const Jobs = () => {
   const jobData = Array.from({ length: 10 });
@@ -30,7 +30,7 @@ const AnimatedJobCard = ({ children }: { children: React.ReactNode }) => {
 
   useEffect(() => {
     if (inView) {
-      controls.start('visible');
+      controls.start("visible");
     }
   }, [inView, controls]);
 
@@ -39,7 +39,7 @@ const AnimatedJobCard = ({ children }: { children: React.ReactNode }) => {
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.6, ease: 'easeOut' },
+      transition: { duration: 0.6, ease: "easeOut" },
     },
   };
 

@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { motion, useInView } from "framer-motion";
+import { motion } from "framer-motion";
 import { useRef } from "react";
 import StepCard from "./StepCard";
 import Container from "../../Reusable/Container/Container";
@@ -35,9 +35,8 @@ const steps = [
 
 const StudentSteps = () => {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-150px" });
 
-  const lineVariants:any = {
+  const lineVariants: any = {
     hidden: { opacity: 0, scaleX: 0.5 },
     visible: {
       opacity: 1,
@@ -59,7 +58,7 @@ const StudentSteps = () => {
     },
   };
 
-  const stepItemVariants:any = {
+  const stepItemVariants: any = {
     hidden: { opacity: 0, y: 50 },
     visible: {
       opacity: 1,
@@ -94,7 +93,7 @@ const StudentSteps = () => {
           <motion.div
             className="relative mt-9"
             initial="hidden"
-            animate={isInView ? "visible" : "hidden"}
+            whileInView="visible"
           >
             {/* dotted line */}
             <motion.img

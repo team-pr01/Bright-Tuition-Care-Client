@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useRef } from "react";
-import { motion, useInView } from "framer-motion";
+import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import Container from "../../Reusable/Container/Container";
 import { ICONS } from "../../../assets";
@@ -15,7 +15,6 @@ import {
 
 const Footer: React.FC = () => {
   const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   const linkHeadingClassNames = "text-xl leading-7 font-medium text-white";
 
@@ -46,7 +45,7 @@ const Footer: React.FC = () => {
           ref={ref}
           variants={containerVariants}
           initial="hidden"
-          animate={isInView ? "visible" : "hidden"}
+          whileInView="visible"
           className="z-10 relative"
         >
           <div className="flex flex-col xl:flex-row gap-10 justify-between">

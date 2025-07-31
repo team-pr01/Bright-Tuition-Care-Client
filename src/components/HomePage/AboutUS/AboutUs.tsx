@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { motion, useInView } from "framer-motion";
+import { motion } from "framer-motion";
 import { useRef } from "react";
 import Container from "../../Reusable/Container/Container";
 import { ICONS, IMAGES } from "../../../assets";
@@ -8,9 +8,8 @@ import Button from "../../Reusable/Button/Button";
 
 const AboutUs = () => {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
 
-  const containerVariants:any = {
+  const containerVariants: any = {
     hidden: { opacity: 0, y: 30 },
     visible: {
       opacity: 1,
@@ -26,18 +25,17 @@ const AboutUs = () => {
     },
   };
 
-const itemVariants:any = {
-  hidden: { y: 50, opacity: 0 },
-  visible: {
-    y: 0,
-    opacity: 1,
-    transition: {
-      ease: "easeInOut",
-      duration: 0.8,
+  const itemVariants: any = {
+    hidden: { y: 50, opacity: 0 },
+    visible: {
+      y: 0,
+      opacity: 1,
+      transition: {
+        ease: "easeInOut",
+        duration: 0.8,
+      },
     },
-  },
-};
-
+  };
 
   return (
     <Container>
@@ -45,7 +43,7 @@ const itemVariants:any = {
         ref={ref}
         variants={containerVariants}
         initial="hidden"
-        animate={isInView ? "visible" : "hidden"}
+        whileInView="visible"
         className="flex flex-col-reverse lg:flex-row font-Nunito h-fit justify-between items-center gap-[44px] my-[50px] overflow-hidden"
       >
         {/* Left Image */}
@@ -61,7 +59,11 @@ const itemVariants:any = {
         </motion.div>
 
         {/* Right Content */}
-        <motion.div variants={itemVariants} className="w-full lg:w-[60%]">
+        <motion.div
+          variants={itemVariants}
+          whileInView="visible"
+          className="w-full lg:w-[60%]"
+        >
           <div>
             <Heading titleParts={[{ text: "About Bright Tuition Care" }]} />
             <div className="flex flex-col gap-5 mt-2 lg:mt-4 text-neutral-45 text-lg leading-6 text-center lg:text-start">

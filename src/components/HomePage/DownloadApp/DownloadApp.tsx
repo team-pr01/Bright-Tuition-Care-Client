@@ -1,5 +1,5 @@
 import React, { useRef } from "react";
-import { motion, useInView } from "framer-motion";
+import { motion } from "framer-motion";
 import Container from "../../Reusable/Container/Container";
 import { ICONS, IMAGES } from "../../../assets";
 import Heading from "../../Reusable/Heading/Heading";
@@ -8,8 +8,6 @@ import type { Variants } from "framer-motion";
 
 const DownloadApp: React.FC = () => {
   const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
-
 
   const imageVariants: Variants = {
     hidden: { x: -100, opacity: 0 },
@@ -35,14 +33,14 @@ const DownloadApp: React.FC = () => {
         stiffness: 50,
         damping: 20,
         duration: 0.8,
-        delay: 0.2, // A slight delay to make the entrance feel more dynamic
+        delay: 0.2,
       },
     },
   };
 
   return (
     <div
-      className="py-6 lg:py-[50px] w-full overflow-x-hidden" // Added overflow-x-hidden to prevent horizontal scrollbars during animation
+      className="py-6 lg:py-[50px] w-full overflow-x-hidden"
       style={{
         background: "linear-gradient(101deg, #FFF -7.84%, #E8F3FF 74.03%)",
       }}
@@ -58,7 +56,7 @@ const DownloadApp: React.FC = () => {
             className="w-auto h-[548px]"
             variants={imageVariants}
             initial="hidden"
-            animate={isInView ? "visible" : "hidden"}
+            whileInView="visible"
           />
 
           {/* Right Image Content */}
@@ -66,7 +64,7 @@ const DownloadApp: React.FC = () => {
             className="w-full lg:w-[60%] flex flex-col gap-4 lg:gap-8"
             variants={contentVariants}
             initial="hidden"
-            animate={isInView ? "visible" : "hidden"}
+            whileInView="visible"
           >
             <Heading
               titleParts={[

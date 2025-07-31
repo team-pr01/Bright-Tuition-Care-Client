@@ -59,7 +59,8 @@ const Hero = () => {
           className="w-full lg:w-[55%] flex flex-col justify-start mt-5 lg:mt-16"
           variants={containerVariants}
           initial="hidden"
-          animate="visible"
+          whileInView="visible"
+          viewport={{ once: false, amount: 0.3 }}
         >
           <motion.div
             variants={itemVariants}
@@ -88,13 +89,6 @@ const Hero = () => {
             clicks. Learn smarter. Teach better.
           </motion.p>
 
-          {/* <div className="relative inline-flex items-center justify-center">
-            <div className="absolute h-[80%] w-[20%] rounded-lg bg-blue-400 opacity-70 animate-ping z-0" />
-            <button className="relative z-10 bg-primary-10 py-2 lg:py-3 px-4 lg:px-6 text-white text-sm md:text-base leading-[24px] w-fit rounded-lg font-semibold font-Nunito cursor-pointer transition-colors duration-300 ease-linear hover:bg-blue-700">
-              Hire A Tutor (It's Free)
-            </button>
-          </div> */}
-
           <motion.div
             variants={itemVariants}
             className="flex flex-col md:flex-row gap-5 mt-7 lg:mt-12 items-start md:items-center"
@@ -110,39 +104,18 @@ const Hero = () => {
                 whileTap={{ scale: 0.9 }}
                 className="font-semibold bg-gradient-to-r from-primary-10 to-primary-40/60 bg-clip-text text-transparent cursor-pointer"
               >
-                Sign Up
+                Sign Up <span className="text-neutral-20 font-normal">Now</span>
               </motion.span>
             </p>
           </motion.div>
         </motion.div>
-
-        {/* Right Image Content */}
-        {/* <div className="w-full lg:w-[35%] flex flex-col items-center ">
-          <div className="flex gap-0 md:gap-5 relative">
-            <img
-            src={IMAGES.heroImg1}
-            alt="Hero Section"
-            className="size-[150px]"
-          />
-          <img
-            src={IMAGES.heroImg1}
-            alt="Hero Section"
-            className="size-[150px]"
-          />
-          </div>
-          <img
-            src={IMAGES.heroImg1}
-            alt="Hero Section"
-            className="absolute bottom-[80px] md:-bottom-[65px] right-0 left-[139px] md:left-[124px] size-[150px]"
-          />
-        </div> */}
-
         {/* Right Image Content */}
         <motion.div
           className="w-full lg:w-[35%]"
           variants={imageVariants}
           initial="hidden"
-          animate="visible"
+          whileInView="visible"
+          viewport={{ once: false, amount: 0.3 }}
         >
           <img src={IMAGES.heroImg} alt="Hero Section" className="" />
         </motion.div>

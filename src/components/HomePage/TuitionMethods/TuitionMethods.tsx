@@ -1,5 +1,5 @@
 import React from "react";
-import { motion, useInView } from "framer-motion";
+import { motion } from "framer-motion";
 import { useRef } from "react";
 import { methods } from "./TuitionMethods.dt";
 import MethodCard from "./MethodCard";
@@ -8,7 +8,6 @@ import Container from "../../Reusable/Container/Container";
 
 const TuitionMethods: React.FC = () => {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -48,7 +47,7 @@ const TuitionMethods: React.FC = () => {
             ref={ref}
             variants={containerVariants}
             initial="hidden"
-            animate={isInView ? "visible" : "hidden"}
+            whileInView="visible"
             className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 justify-center gap-4 xl:gap-8 mt-6 lg:mt-8"
           >
             {methods.map((method, index) => (

@@ -1,17 +1,16 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useRef } from "react";
-import { motion, useInView } from "framer-motion";
+import { motion } from "framer-motion";
 import { RxArrowTopRight } from "react-icons/rx";
 import Container from "../../Reusable/Container/Container";
 
 const Banner: React.FC = () => {
   const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   const buttonCommonClassNames =
     "flex items-center justify-center gap-2 leading-[24px] min-w-[200px] sm:min-w-fit w-fit rounded-lg font-semibold font-Nunito cursor-pointer transition-all duration-300 py-2 lg:py-3 px-3 lg:px-6 text-sm md:text-lg";
 
-  const containerVariants:any = {
+  const containerVariants: any = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
@@ -40,7 +39,7 @@ const Banner: React.FC = () => {
         ref={ref}
         variants={containerVariants}
         initial="hidden"
-        animate={isInView ? "visible" : "hidden"}
+        whileInView="visible"
         className="bg-primary-10 rounded-3xl px-4 py-7 md:px-12 md:py-12 font-Nunito relative overflow-hidden"
       >
         <motion.h1
