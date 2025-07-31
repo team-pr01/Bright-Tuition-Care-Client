@@ -56,6 +56,7 @@ import time from "../assets/Icons/time.svg";
 import numberOfStudents from "../assets/Icons/number-of-students.svg";
 import preferedClass from "../assets/Icons/class.svg";
 import category from "../assets/Icons/category.svg";
+import search from "../assets/Icons/search.svg";
 
 
 import aboutUs from "../assets/Images/about-us.svg";
@@ -128,5 +129,6 @@ export const ICONS = {
   time,
   numberOfStudents,
   preferedClass,
-  category
+  category,
+  search
 };

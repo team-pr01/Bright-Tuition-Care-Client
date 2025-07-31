@@ -1111,5 +1111,4 @@ export const filterData = {
   ],
   studentGender: ["Male", "Female", "Any"],
   tutorGender: ["Male", "Female", "Any"],
-  status: ["All", "Live", "Closed"],
 };
