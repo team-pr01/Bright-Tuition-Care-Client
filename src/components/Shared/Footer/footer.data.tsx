@@ -2,27 +2,41 @@ import {
   FaFacebookF,
   FaInstagram,
   FaLinkedinIn,
+  FaTwitter,
   FaYoutube,
 } from "react-icons/fa";
 import { FiPhone } from "react-icons/fi";
 import { HiOutlineMail } from "react-icons/hi";
-import { IoLocationOutline } from "react-icons/io5";
+import { IoLocationOutline, IoLogoTiktok } from "react-icons/io5";
+import { SiWhatsapp } from "react-icons/si";
 
 export const socialLinks = [
   {
-    icon: <FaFacebookF className="text-xl" />,
+    icon: <FaFacebookF className="text-2xl" />,
     href: "https://www.facebook.com/",
   },
   {
-    icon: <FaInstagram className="text-xl" />,
+    icon: <FaInstagram className="text-2xl" />,
     href: "https://www.facebook.com/",
   },
   {
-    icon: <FaLinkedinIn className="text-xl" />,
+    icon: <FaLinkedinIn className="text-2xl" />,
     href: "https://www.facebook.com/",
   },
   {
-    icon: <FaYoutube className="text-xl" />,
+    icon: <FaYoutube className="text-2xl" />,
+    href: "https://www.facebook.com/",
+  },
+  {
+    icon: <FaTwitter className="text-2xl" />,
+    href: "https://www.facebook.com/",
+  },
+  {
+    icon: <IoLogoTiktok className="text-2xl" />,
+    href: "https://www.facebook.com/",
+  },
+  {
+    icon: <SiWhatsapp className="text-[22px]" />,
     href: "https://www.facebook.com/",
   },
 ];
@@ -37,8 +51,8 @@ export const quickLinks = [
     path: "/job-board",
   },
   {
-    label: "Contact Us",
-    path: "/contact-us",
+    label: "Hire A Tutor",
+    path: "/hire-a-tutor",
   },
   {
     label: "Become A Tutor",

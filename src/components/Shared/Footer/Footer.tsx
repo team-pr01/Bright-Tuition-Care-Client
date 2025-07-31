@@ -126,14 +126,14 @@ const Footer: React.FC = () => {
 
           <motion.div
             variants={itemVariants}
-            className="flex flex-col-reverse xl:flex-row items-center gap-8 xl:gap-54 mt-12"
+            className="flex flex-col-reverse xl:flex-row items-center gap-8 xl:gap-[150px] mt-12"
           >
             <div className="flex items-center gap-5">
               {socialLinks?.map((item, index) => (
                 <a
                   key={index}
                   href={item?.href}
-                  className="size-10 bg-white hover:bg-primary-10 text-primary-10 hover:text-white transition duration-300 rounded-xl flex items-center justify-center cursor-pointer"
+                  className="hover:text-primary-10 text-neutral-100 transition duration-300 cursor-pointer"
                 >
                   {item?.icon}
                 </a>
@@ -167,9 +167,26 @@ const Footer: React.FC = () => {
 
           <motion.div variants={itemVariants}>
             <hr className="border border-neutral-30/50 my-6" />
-            <p className="font-medium text-white text-center text-sm md:text-base">
-              All Rights Reserved by Bright Tuition Care © 2025
-            </p>
+            <div className="flex items-center justify-between">
+              <p className="font-medium text-white text-center text-sm md:text-base">
+                All Rights Reserved by Bright Tuition Care © 2025
+              </p>
+
+              <div className="flex items-center gap-4">
+                <a
+                  href="/terms-and-conditions"
+                  className={`text-sm md:text-base text-neutral-50 leading-6 w-fit flex gap-2 cursor-pointer hover:underline`}
+                >
+                  <span className="max-w-[290px]">Terms & Conditions</span>
+                </a>
+                <a
+                  href="/terms-and-conditions"
+                  className={`text-sm md:text-base text-neutral-50 leading-6 w-fit flex gap-2 cursor-pointer hover:underline`}
+                >
+                  <span className="max-w-[290px]">FAQs</span>
+                </a>
+              </div>
+            </div>
           </motion.div>
         </motion.div>
       </Container>
