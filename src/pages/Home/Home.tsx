@@ -20,6 +20,8 @@ const Home = () => {
       <Testimonials
         title="What Students / Guardian Say About Us"
         description="Real stories from real tutors who found success through our platform."
+        buttonText="Hire A Tutor"
+        navigatePath="/tutors"
       />
       <TutorSteps />
 
@@ -27,6 +29,8 @@ const Home = () => {
         title="What Tutors Say About Us"
         description="Real stories from real tutors who found success through our platform."
         variant="primary"
+        buttonText="Become A Tutor"
+        navigatePath="/tutors"
       />
       <div className="mb-72">
         <DownloadApp />

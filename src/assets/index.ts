@@ -57,6 +57,8 @@ import numberOfStudents from "../assets/Icons/number-of-students.svg";
 import preferedClass from "../assets/Icons/class.svg";
 import category from "../assets/Icons/category.svg";
 import search from "../assets/Icons/search.svg";
+import requirements from "../assets/Icons/requirements.svg";
+import gender from "../assets/Icons/gender.svg";
 
 
 import aboutUs from "../assets/Images/about-us.svg";
@@ -65,6 +67,7 @@ import heroImg from "../assets/Images/hero-img.svg";
 import heroImg1 from "../assets/Images/hero-img1.svg";
 import heroImg2 from "../assets/Images/hero-img2.svg";
 import heroImg3 from "../assets/Images/hero-img3.svg";
+import dummyAvatar from "../assets/Images/dummy-avatar.jpg";
 
 
 export const IMAGES = {
@@ -79,6 +82,7 @@ export const IMAGES = {
   service1,
   service2,
   service3,
+  dummyAvatar,
 };
 
 export const ICONS = {
@@ -130,5 +134,7 @@ export const ICONS = {
   numberOfStudents,
   preferedClass,
   category,
-  search
+  search,
+  requirements,
+  gender,
 };
