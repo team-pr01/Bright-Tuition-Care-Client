@@ -1,5 +1,6 @@
 import { useState } from "react";
 import TutorialCard from "../TutorialCard/TutorialCard";
+import { motion } from "framer-motion";
 
 const Tutorials = () => {
   const tutorialVideos = [
@@ -42,10 +43,22 @@ const Tutorials = () => {
 
   const [activeTab, setActiveTab] = useState("All");
   const tabButtons = ["All", "For Tutors", "For Students/Guardians"];
+
+  const cardVariants = {
+    hidden: { y: 20, opacity: 0 },
+    visible: {
+      y: 0,
+      opacity: 1,
+      transition: {
+        duration: 0.5,
+      },
+    },
+  };
+
   return (
     <div className="mt-16 md:mt-20">
       <div className="overflow-x-auto whitespace-nowrap flex items-center gap-5 scrollbar-hide">
-        {tabButtons?.map((button: string) => (
+        {tabButtons?.map((button) => (
           <button
             key={button}
             onClick={() => setActiveTab(button)}
@@ -61,8 +74,17 @@ const Tutorials = () => {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
-        {tutorialVideos?.map((item) => (
-          <TutorialCard key={item?._id} {...item} />
+        {tutorialVideos?.map((item, index) => (
+          <motion.div
+            key={item?._id}
+            variants={cardVariants}
+            initial="hidden"
+            animate="visible"
+            custom={index}
+            transition={{ delay: index * 0.2 }}
+          >
+            <TutorialCard {...item} />
+          </motion.div>
         ))}
       </div>
     </div>

@@ -24,7 +24,7 @@ const ContactUsForm = () => {
   return (
     <form
       onSubmit={handleSubmit(handleSubmitRequest)}
-      className="flex flex-col gap-6 w-full lg:w-[60%] bg-neutral-50/20 rounded-2xl p-5"
+      className="flex flex-col gap-6 bg-neutral-50/20 rounded-2xl p-5"
     >
       <TextInput
         label="Name"
