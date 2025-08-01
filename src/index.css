@@ -39,6 +39,7 @@
 
   /* Shadows */
    --shadow-job-card: 0 4px 12px 0 rgba(2, 45, 80, 0.08);
+   --shadow-tutorial-card: 0 4px 10px 0 rgba(0, 0, 0, 0.12);
 
   /* Gradients */
   --bg-gradient-primary: linear-gradient(180deg, #06a0ed 100%, #6ecaf8 100%);
