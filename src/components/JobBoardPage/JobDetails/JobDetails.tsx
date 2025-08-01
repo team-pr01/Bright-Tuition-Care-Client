@@ -4,8 +4,10 @@ import Button from "../../Reusable/Button/Button";
 
 const JobDetails = ({
   setShowDrawer,
+  setIsJobApplyConfirmationModalOpen,
 }: {
   setShowDrawer: React.Dispatch<React.SetStateAction<boolean>>;
+  setIsJobApplyConfirmationModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
   const jobDetail2 = [
     { icon: ICONS.preferredTutor, title: "Prefer Tutor", value: "Female" },
@@ -131,7 +133,7 @@ const JobDetails = ({
               iconBg="#0D99FF"
               className="border border-neutral-55"
             />
-            <Button label="Apply Now" variant="primary" iconBg="#0D99FF" />
+            <Button label="Apply Now" variant="primary" iconBg="#0D99FF" onClick={() => setIsJobApplyConfirmationModalOpen(true)} />
           </div>
           </div>
           <button

@@ -2,9 +2,11 @@ import { useState } from "react";
 import { ICONS } from "../../../assets";
 import Button from "../../Reusable/Button/Button";
 import JobDetails from "../JobDetails/JobDetails";
-
+import JobApplyConfirmationModal from "./JobApplyConfirmationModal";
 
 const JobCard = () => {
+  const [isJobApplyConfirmationModalOpen, setIsJobApplyConfirmationModalOpen] =
+    useState(false);
   const [showDrawer, setShowDrawer] = useState<boolean>(false);
 
   const jobDetails = [
@@ -20,15 +22,10 @@ const JobCard = () => {
     { icon: ICONS.location, title: "Location", value: "Mohammodpur" },
   ];
 
-  
-
   return (
     <>
       {/* Smooth Overlay & Drawer */}
-      {
-        showDrawer &&
-        <JobDetails setShowDrawer={setShowDrawer} />
-      }
+      {showDrawer && <JobDetails setShowDrawer={setShowDrawer} setIsJobApplyConfirmationModalOpen={setIsJobApplyConfirmationModalOpen} />}
 
       {/* Job Card */}
       <div className="px-3 py-5 md:px-5 md:py-10 border border-primary-30 bg-white shadow-job-card rounded-xl font-Nunito transform transition-transform duration-300 hover:-translate-y-2 z-20 relative">
@@ -94,9 +91,18 @@ const JobCard = () => {
             variant="primary"
             icon={ICONS.topRightArrowWhite}
             iconBg="#0D99FF"
+            onClick={() => setIsJobApplyConfirmationModalOpen(true)}
           />
         </div>
+
+      
       </div>
+        <JobApplyConfirmationModal
+          isJobApplyConfirmationModalOpen={isJobApplyConfirmationModalOpen}
+          setIsJobApplyConfirmationModalOpen={
+            setIsJobApplyConfirmationModalOpen
+          }
+        />
     </>
   );
 };
