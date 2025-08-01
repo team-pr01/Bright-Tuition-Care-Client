@@ -4,7 +4,7 @@ import { ICONS } from "../../../assets";
 import Button from "../../Reusable/Button/Button";
 import Container from "../../Reusable/Container/Container";
 import { navLinks } from "./navlinks";
-// import HamburgerMenu from "./HamburgerMenu";
+import HamburgerMenu from "./HamburgerMenu";
 
 const Navbar = () => {
   const location = useLocation();
@@ -68,8 +68,8 @@ const Navbar = () => {
             />
           </div>
           <div className="flex lg:hidden items-center gap-3">
-            <Button label="Sign Up" variant="primary" className="text-sm" />
-            {/* <HamburgerMenu/> */}
+            <Button label="Sign In" variant="primary" className="text-sm" />
+            <HamburgerMenu/>
           </div>
         </nav>
       </Container>

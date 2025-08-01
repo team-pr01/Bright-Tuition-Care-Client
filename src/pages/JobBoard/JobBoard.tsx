@@ -6,7 +6,7 @@ import Heading from "../../components/Reusable/Heading/Heading";
 const JobBoard = () => {
   return (
     <Container>
-      <div className="relative mt-20 mb-72">
+      <div className="relative mt-10 mb-72">
         <Heading
           titleParts={[{ text: "Available Tuition Job" }]}
           description="Find perfect tutoring opportunity that matches your Expertise and Scheduled"
