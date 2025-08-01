@@ -67,7 +67,8 @@ import heroImg from "../assets/Images/hero-img.svg";
 import heroImg1 from "../assets/Images/hero-img1.svg";
 import heroImg2 from "../assets/Images/hero-img2.svg";
 import heroImg3 from "../assets/Images/hero-img3.svg";
-import dummyAvatar from "../assets/Images/dummy-avatar.jpg";
+import dummyAvatar from "../assets/Images/dummy-avatar.jpg";  //dummy, please remove after integrating api
+import contactUs from "../assets/Images/contact-us.webp";
 
 
 export const IMAGES = {
@@ -83,6 +84,7 @@ export const IMAGES = {
   service2,
   service3,
   dummyAvatar,
+  contactUs
 };
 
 export const ICONS = {

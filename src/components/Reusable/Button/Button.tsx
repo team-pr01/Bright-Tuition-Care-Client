@@ -7,6 +7,7 @@ interface ButtonProps {
   icon?: React.ReactNode;
   iconBg?: string;
   className?: string;
+  type? : "submit" | "reset" | "button" | undefined;
 }
 
 const variantClasses: Record<string, string> = {
@@ -23,6 +24,7 @@ const Button: React.FC<ButtonProps> = ({
   icon,
   iconBg = "white",
   className = "",
+  type="button",
 }) => {
   const variantClass = variantClasses[variant] || variantClasses["primary"];
 
@@ -33,7 +35,7 @@ const Button: React.FC<ButtonProps> = ({
 
   return (
     <div className={`${variant ? "relative" : ""}`}>
-      <button onClick={onClick} className={combinedClasses}>
+      <button type={type} onClick={onClick} className={combinedClasses}>
         {label}
         {icon && (
           <span

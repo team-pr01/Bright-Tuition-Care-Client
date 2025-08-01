@@ -5,6 +5,7 @@ import Home from "../pages/Home/Home";
 import Login from "../pages/Login/Login";
 import JobBoard from "../pages/JobBoard/JobBoard";
 import Tutorial from "../pages/Tutorial/Tutorial";
+import ContactUs from "../pages/ContactUs/ContactUs";
 
 export const router = createBrowserRouter([
   {
@@ -27,6 +28,10 @@ export const router = createBrowserRouter([
       {
         path: "/tutorial",
         element: <Tutorial/>,
+      },
+      {
+        path: "/contact-us",
+        element: <ContactUs/>,
       },
     ],
   },
