@@ -2,14 +2,12 @@
 import React, { useEffect } from "react";
 import { motion, useAnimation } from "framer-motion";
 import { useInView } from "react-intersection-observer";
-import Container from "../../Reusable/Container/Container";
 import JobCard from "./JobCard";
 
 const Jobs = () => {
   const jobData = Array.from({ length: 10 });
 
   return (
-    <Container>
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         {jobData.map((_, index) => (
           <AnimatedJobCard key={index}>
@@ -17,7 +15,6 @@ const Jobs = () => {
           </AnimatedJobCard>
         ))}
       </div>
-    </Container>
   );
 };
 

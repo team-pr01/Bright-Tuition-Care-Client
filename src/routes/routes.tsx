@@ -4,6 +4,7 @@ import NotFound from "../pages/NotFound/NotFound";
 import Home from "../pages/Home/Home";
 import Login from "../pages/Login/Login";
 import JobBoard from "../pages/JobBoard/JobBoard";
+import Tutorial from "../pages/Tutorial/Tutorial";
 
 export const router = createBrowserRouter([
   {
@@ -22,6 +23,10 @@ export const router = createBrowserRouter([
       {
         path: "/job-board",
         element: <JobBoard/>,
+      },
+      {
+        path: "/tutorial",
+        element: <Tutorial/>,
       },
     ],
   },

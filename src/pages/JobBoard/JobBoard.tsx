@@ -1,10 +1,11 @@
 import Filters from "../../components/JobBoardPage/Filters/Filters";
 import Jobs from "../../components/JobBoardPage/Jobs/Jobs";
+import Container from "../../components/Reusable/Container/Container";
 import Heading from "../../components/Reusable/Heading/Heading";
 
 const JobBoard = () => {
   return (
-    <div>
+    <Container>
       <div className="relative mt-20 mb-72">
         <Heading
           titleParts={[{ text: "Available Tuition Job" }]}
@@ -15,7 +16,7 @@ const JobBoard = () => {
         <Filters />
         <Jobs />
       </div>
-    </div>
+    </Container>
   );
 };
 

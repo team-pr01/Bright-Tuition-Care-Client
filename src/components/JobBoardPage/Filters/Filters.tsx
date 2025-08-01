@@ -1,4 +1,3 @@
-import Container from "../../Reusable/Container/Container";
 import { ICONS } from "../../../assets";
 import { useState, useEffect } from "react";
 import MultiSelectDropdown from "../../Reusable/MultiSelectDropdown/MultiSelectDropdown";
@@ -46,7 +45,7 @@ const Filters = () => {
     "flex items-center justify-center gap-2 leading-[24px] w-fit w-fit rounded-lg font-semibold font-Nunito cursor-pointer transition-all duration-300 py-2 px-3 lg:px-6 text-sm md:text-lg";
 
   return (
-    <Container>
+    <>
       <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-3 md:gap-0 mt-10 md:mt-16">
         <div className="flex items-center gap-3">
           <img src={ICONS.liveJobs} alt="" className="size-8" />
@@ -179,7 +178,7 @@ const Filters = () => {
           </button>
         </div>
       </div>
-    </Container>
+    </>
   );
 };
 
