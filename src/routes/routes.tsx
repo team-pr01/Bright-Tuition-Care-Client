@@ -2,10 +2,11 @@ import { createBrowserRouter } from "react-router-dom";
 import MainLayout from "../layouts/MainLayout";
 import NotFound from "../pages/NotFound/NotFound";
 import Home from "../pages/Home/Home";
-import Login from "../pages/Login/Login";
 import JobBoard from "../pages/JobBoard/JobBoard";
 import Tutorial from "../pages/Tutorial/Tutorial";
 import ContactUs from "../pages/ContactUs/ContactUs";
+import Signup from "../pages/Signup/Signup";
+import SignIn from "../pages/Auth/SignIn/SignIn";
 
 export const router = createBrowserRouter([
   {
@@ -18,20 +19,24 @@ export const router = createBrowserRouter([
         element: <Home />,
       },
       {
-        path: "/login",
-        element: <Login/>,
-      },
-      {
         path: "/job-board",
-        element: <JobBoard/>,
+        element: <JobBoard />,
       },
       {
         path: "/tutorial",
-        element: <Tutorial/>,
+        element: <Tutorial />,
       },
       {
         path: "/contact-us",
-        element: <ContactUs/>,
+        element: <ContactUs />,
+      },
+      {
+        path: "signup",
+        element: <Signup />,
+      },
+      {
+        path: "signin",
+        element: <SignIn />,
       },
     ],
   },

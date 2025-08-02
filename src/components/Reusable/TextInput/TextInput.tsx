@@ -51,13 +51,13 @@ const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
           defaultValue={defaultValue}
           ref={ref}
           disabled={isDisabled}
-          className={`w-full px-4 py-[14px] rounded-lg bg-white border-2 leading-[18px] focus:outline-none focus:border-primary-10 transition duration-300 ${
+          className={`w-full px-4 py-[14px] rounded-lg bg-white border leading-[18px] focus:outline-none focus:border-primary-10 transition duration-300 ${
             error ? "border-red-500" : "border-neutral-45/20"
           }`}
           {...rest}
         />
         {error?.message && (
-          <span className="text-red-500 text-sm">{String(error.message)}</span>
+          <span className="text-red-500 text-sm mt-1">{String(error.message)}</span>
         )}
       </div>
     );

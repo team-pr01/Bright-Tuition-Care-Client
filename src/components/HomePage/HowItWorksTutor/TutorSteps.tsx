@@ -6,58 +6,10 @@ import {
   VerticalTimelineElement,
 } from "react-vertical-timeline-component";
 import "react-vertical-timeline-component/style.min.css";
-import {
-  FaUserPlus,
-  FaUserCheck,
-  FaBriefcase,
-  FaUsers,
-  FaPlayCircle,
-} from "react-icons/fa";
+
 import Heading from "../../Reusable/Heading/Heading";
 import Container from "../../Reusable/Container/Container";
-
-const timelineData = [
-  {
-    step: 1,
-    title: "Create Your Free Account",
-    description:
-      "Register quickly using your email or social account. It's 100% free for tutors.",
-    icon: <FaUserPlus />,
-    iconBg: "#007bff",
-  },
-  {
-    step: 2,
-    title: "Complete Your Profile Setup",
-    description:
-      "Add your educational background, subjects, location, experience, and availability to build trust and visibility.",
-    icon: <FaUserCheck />,
-    iconBg: "#007bff",
-  },
-  {
-    step: 3,
-    title: "Apply To Your Preferred Jobs",
-    description:
-      "Browse tuition requests that match your expertise. Apply to jobs that suit your timing and location.",
-    icon: <FaBriefcase />,
-    iconBg: "#007bff",
-  },
-  {
-    step: 4,
-    title: "Get Shortlisted by Students / Guardian",
-    description:
-      "If selected, your profile will be shared with the student/guardian for review and confirmation.",
-    icon: <FaUsers />,
-    iconBg: "#007bff",
-  },
-  {
-    step: 5,
-    title: "Start Your Tutoring Journey",
-    description:
-      "Once confirmed, begin tutoring sessions and make a positive impact. Teach online or at home — your choice.",
-    icon: <FaPlayCircle />,
-    iconBg: "#007bff",
-  },
-];
+import { tutorSteps } from "../../../constants/stepsData";
 
 const TutorSteps: React.FC = () => {
   return (
@@ -77,7 +29,7 @@ const TutorSteps: React.FC = () => {
         </div>
 
         <VerticalTimeline lineColor={"#e5e7eb"}>
-          {timelineData.map((item, index) => (
+          {tutorSteps.map((item, index) => (
             <VerticalTimelineElement
               key={index}
               className="vertical-timeline-element--work"

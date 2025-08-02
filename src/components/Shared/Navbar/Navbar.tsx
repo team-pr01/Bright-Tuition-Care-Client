@@ -31,14 +31,14 @@ const Navbar = () => {
           {/* Logo and Brand */}
           <Link to="/" className="flex items-center space-x-2">
             <img src={ICONS.logo} alt="Logo" className="size-10 md:size-13" />
-           <div>
-             <h1 className="text-sm md:text-xl leading-[24px] font-bold text-primary-40">
-              Bright Tuition Care
-            </h1>
-            <p className="text-xs md:text-sm leading-6 text-neutral-20">
-              Join, Learn, Teach
-            </p>
-           </div>
+            <div>
+              <h1 className="text-sm md:text-xl leading-[24px] font-bold text-primary-40">
+                Bright Tuition Care
+              </h1>
+              <p className="text-xs md:text-sm leading-6 text-neutral-20">
+                Join, Learn, Teach
+              </p>
+            </div>
           </Link>
 
           {/* Nav Links */}
@@ -60,16 +60,20 @@ const Navbar = () => {
 
           {/* Auth Buttons */}
           <div className="hidden lg:flex items-center gap-5">
-            <Button label="Sign Up" variant="tertiary" className="text-sm" />
-            <Button
-              label="Become A Tutor"
-              variant="quaternary"
-              className="text-sm"
-            />
+            <Link to={"/signup"}>
+              <Button label="Sign Up" variant="tertiary" className="text-sm" />
+            </Link>
+            <Link to={"/tutor-register"}>
+              <Button
+                label="Become A Tutor"
+                variant="quaternary"
+                className="text-sm"
+              />
+            </Link>
           </div>
           <div className="flex lg:hidden items-center gap-3">
             <Button label="Sign In" variant="primary" className="text-sm" />
-            <HamburgerMenu/>
+            <HamburgerMenu />
           </div>
         </nav>
       </Container>

@@ -3,35 +3,9 @@ import { motion } from "framer-motion";
 import { useRef } from "react";
 import StepCard from "./StepCard";
 import Container from "../../Reusable/Container/Container";
-import { ICONS, IMAGES } from "../../../assets";
+import { IMAGES } from "../../../assets";
 import Heading from "../../Reusable/Heading/Heading";
-
-const steps = [
-  {
-    icon: ICONS.send,
-    title: "Request A Tutor",
-    description:
-      "Fill out a simple form with your subject, class, location, and preferred tutoring method. It takes less than 2 minutes!",
-  },
-  {
-    icon: ICONS.choose,
-    title: "Chose The Right One",
-    description:
-      "Browse tutor profiles, compare experience, read reviews, and choose the best fit for your child.",
-  },
-  {
-    icon: ICONS.receive,
-    title: "Receive the Best Tutors",
-    description:
-      "Top-rated and verified tutors will respond to your request. We filter based on quality, reviews, and availability.",
-  },
-  {
-    icon: ICONS.getStarted,
-    title: "Get Started Learning",
-    description:
-      "Schedule your first session and begin a productive learning journey — at home or online, as you prefer.",
-  },
-];
+import { studentOrGuardianSteps } from "../../../constants/stepsData";
 
 const StudentSteps = () => {
   const ref = useRef(null);
@@ -107,7 +81,7 @@ const StudentSteps = () => {
               variants={stepsContainerVariants}
               className="grid grid-cols-1 md:grid-cols-4 gap-4 lg:gap-12 relative z-10"
             >
-              {steps.map((step, index) => (
+              {studentOrGuardianSteps.map((step, index) => (
                 <motion.div
                   key={index}
                   variants={stepItemVariants}
