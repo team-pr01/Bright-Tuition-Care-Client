@@ -7,6 +7,7 @@ import Tutorial from "../pages/Tutorial/Tutorial";
 import ContactUs from "../pages/ContactUs/ContactUs";
 import Signup from "../pages/Signup/Signup";
 import SignIn from "../pages/Auth/SignIn/SignIn";
+import TermsAndConditions from "../pages/TermsAndConditions/TermsAndConditions";
 
 export const router = createBrowserRouter([
   {
@@ -37,6 +38,10 @@ export const router = createBrowserRouter([
       {
         path: "signin",
         element: <SignIn />,
+      },
+      {
+        path: "terms-and-conditions",
+        element: <TermsAndConditions />,
       },
     ],
   },

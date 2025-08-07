@@ -26,7 +26,8 @@ import playStore from "../assets/DownloadStore/play-store.svg"
 // service categories
 import service2 from "../assets/Images/serviceCatagories/service2.png";
 import service1 from "../assets/Images/serviceCatagories/service1.png";
-import service3 from "../assets/Images/serviceCatagories/service3.png";
+import service3 from "../assets/Images/serviceCatagories/service3.png"; 
+import termsAndConditionHero from "../assets/Images/terms-and-condition-hero.webp"; 
 
 // students steps
 import send from "../assets/Icons/StudentSteps/send.svg"
@@ -89,6 +90,7 @@ export const IMAGES = {
   contactUs,
   teacher,
   guardian,
+  termsAndConditionHero
   
 };
 
