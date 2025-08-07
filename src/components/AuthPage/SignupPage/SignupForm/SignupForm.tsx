@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import AuthHeading from "../../../Reusable/AuthHeading/AuthHeading";
 import RoleTab from "./RoleTab";
@@ -65,16 +65,60 @@ const SignupForm = ({
     console.log(data);
   };
 
+  const roles = ["Guardian/Student", "Tutor"];
+
+  const [indicatorStyle, setIndicatorStyle] = useState({ left: 0, width: 0 });
+  const buttonRefs = useRef<(HTMLButtonElement | null)[]>([]);
+
+  useEffect(() => {
+    const index = roles.findIndex((r) => r === activeTab);
+    const button = buttonRefs.current[index];
+
+    if (button) {
+      const { offsetLeft, offsetWidth } = button;
+      setIndicatorStyle({ left: offsetLeft, width: offsetWidth });
+    }
+  }, [activeTab]);
+
   return (
     <form
       onSubmit={handleSubmit(handleSignup)}
       className="flex flex-col gap-6 font-Nunito"
     >
-        <AuthHeading title=" Choose role and get started" description="Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis animi nisi totam magnam itaque consequatur facilis laboriosam fuga in reprehenderit." />
+      <AuthHeading
+        title=" Choose role and get started"
+        description="Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis animi nisi totam magnam itaque consequatur facilis laboriosam fuga in reprehenderit."
+      />
 
       <RoleTab activeTab={activeTab} setActiveTab={setActiveTab} />
-      <div className="bg-neutral-50/20 rounded-2xl p-5 flex flex-col gap-6">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div className="bg-neutral-50/10 rounded-2xl p-5 lg:p-7 flex flex-col gap-6">
+       {/* <div className="relative flex items-center gap-5">
+        {roles.map((role, idx) => (
+          <button
+            key={role}
+            ref={(el) => (buttonRefs.current[idx] = el)}
+            type="button"
+            onClick={() => setActiveTab(role)}
+            className={`relative z-10 text-lg pb-2 transition-colors duration-300 cursor-pointer ${
+              activeTab === role
+                ? "text-primary-10 font-bold"
+                : "text-neutral-10 font-medium"
+            }`}
+          >
+            Join as {role}
+          </button>
+        ))}
+
+        <div
+          className="absolute bottom-0 h-[2px] bg-primary-10 transition-all duration-300 ease-in-out"
+          style={{
+            left: indicatorStyle.left,
+            width: indicatorStyle.width,
+          }}
+        />
+      </div> */}
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-3">
           {/* Name */}
           <TextInput
             label="Name"

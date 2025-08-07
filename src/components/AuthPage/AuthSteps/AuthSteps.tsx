@@ -10,7 +10,7 @@ import {
 
 const AuthSteps = ({ activeTab }: { activeTab: string }) => {
   return activeTab === "Guardian/Student" ? (
-    <div className="">
+    <div className="w-full">
       <Swiper
         modules={[Navigation, Pagination, Autoplay]}
         slidesPerView={1}
@@ -27,11 +27,11 @@ const AuthSteps = ({ activeTab }: { activeTab: string }) => {
         pagination={{
           clickable: true,
         }}
-        className="w-full mx-auto pb-10!"
+        className="pb-10!"
       >
         {studentOrGuardianSteps.map((step, i) => (
           <SwiperSlide key={i}>
-            <div className="text-center flex flex-col font-Nunito items-center max-w-xs mx-auto relative">
+            <div className="text-center flex flex-col font-Nunito items-center justify-center mx-auto">
               <div className="bg-primary-10 rounded-full flex items-center justify-center size-24 p-5">
                 <img src={step?.icon} alt={step?.title} className="size-20" />
               </div>
@@ -47,7 +47,7 @@ const AuthSteps = ({ activeTab }: { activeTab: string }) => {
       </Swiper>
     </div>
   ) : (
-    <div className="">
+    <div className="w-full">
       <Swiper
         modules={[Navigation, Pagination, Autoplay]}
         slidesPerView={1}
@@ -68,7 +68,7 @@ const AuthSteps = ({ activeTab }: { activeTab: string }) => {
       >
         {tutorSteps.map((step, i) => (
           <SwiperSlide key={i}>
-            <div className="text-center flex flex-col font-Nunito items-center max-w-xs mx-auto relative">
+            <div className="text-center flex flex-col font-Nunito items-center mx-auto">
               <div className="bg-primary-10 rounded-full flex items-center justify-center size-24 p-5 text-5xl text-white">
                 {step?.icon}
               </div>

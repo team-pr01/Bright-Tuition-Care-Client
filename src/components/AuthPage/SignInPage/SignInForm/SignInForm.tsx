@@ -73,8 +73,8 @@ const SignInForm = ({
             setIsPasswordVisible={setIsPasswordVisible}
           />
         </div>
-<div className="flex items-center justify-between">
-    <p className="font-lg leading-[24px] text-neutral-20">
+        <div className="flex items-center justify-between">
+          <p className="font-lg leading-[24px] text-neutral-20">
             Don't have an account?{" "}
             <Link
               to="/signup"
@@ -89,8 +89,7 @@ const SignInForm = ({
           >
             Forgot Password?
           </Link>
-</div>
-          
+        </div>
 
         <div className="flex md:gap-0 items-center justify-between">
           <Button
@@ -98,8 +97,6 @@ const SignInForm = ({
             variant="primary"
             icon={ICONS.topRightArrow}
           />
-
-          
         </div>
       </div>
     </form>

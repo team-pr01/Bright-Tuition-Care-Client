@@ -8,6 +8,7 @@ import ContactUs from "../pages/ContactUs/ContactUs";
 import Signup from "../pages/Signup/Signup";
 import SignIn from "../pages/Auth/SignIn/SignIn";
 import TermsAndConditions from "../pages/TermsAndConditions/TermsAndConditions";
+import Faq from "../pages/Faq/Faq";
 
 export const router = createBrowserRouter([
   {
@@ -42,6 +43,10 @@ export const router = createBrowserRouter([
       {
         path: "terms-and-conditions",
         element: <TermsAndConditions />,
+      },
+      {
+        path: "faqs",
+        element: <Faq/>,
       },
     ],
   },

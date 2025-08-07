@@ -179,7 +179,7 @@ const Footer: React.FC = () => {
                   <span className="max-w-[290px]">Terms & Conditions</span>
                 </a>
                 <a
-                  href="/terms-and-conditions"
+                  href="/faqs"
                   className={`text-sm md:text-base text-neutral-50 leading-6 w-fit flex gap-2 cursor-pointer hover:underline`}
                 >
                   <span className="max-w-[290px]">FAQs</span>
