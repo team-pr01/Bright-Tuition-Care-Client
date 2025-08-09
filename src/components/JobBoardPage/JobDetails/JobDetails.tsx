@@ -1,13 +1,22 @@
 import { ICONS } from "../../../assets";
 import { motion, AnimatePresence } from "framer-motion";
 import Button from "../../Reusable/Button/Button";
+import ShareJobModal from "../ShareJobModal";
 
 const JobDetails = ({
+  link,
   setShowDrawer,
   setIsJobApplyConfirmationModalOpen,
+  isShareJobModalOpen,
+  setIsShareJobModalOpen,
 }: {
+  link: string;
   setShowDrawer: React.Dispatch<React.SetStateAction<boolean>>;
-  setIsJobApplyConfirmationModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  setIsJobApplyConfirmationModalOpen: React.Dispatch<
+    React.SetStateAction<boolean>
+  >;
+  isShareJobModalOpen: boolean;
+  setIsShareJobModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
   const jobDetail2 = [
     { icon: ICONS.preferredTutor, title: "Prefer Tutor", value: "Female" },
@@ -20,7 +29,7 @@ const JobDetails = ({
     { icon: ICONS.numberOfStudents, title: "No. Of Students", value: "2" },
     { icon: ICONS.salary, title: "Salary", value: "5000" },
     // { icon: ICONS.subject, title: "Subject", value: "All" },
-    
+
     { icon: ICONS.tuitionType, title: "Tuition Type", value: "Home Tutoring" },
     // { icon: ICONS.location, title: "Location", value: "Mohammodpur" },
     { icon: ICONS.preferedClass, title: "Class", value: "10" },
@@ -48,13 +57,15 @@ const JobDetails = ({
           exit={{ y: "-100%" }}
           transition={{ duration: 0.4, ease: "easeInOut" }}
         >
-            
           <div className="bg-white border-0 md:border md:border-neutral-55 rounded-xl lg:rounded-3xl p-0 md:p-8 max-w-[895px] mx-auto font-Nunito relative overflow-visible md:overflow-hidden">
             <div className="bg-primary-10/40 blur-[150px] size-32 rounded-full absolute top-0 right-0"></div>
             <h1 className="text-neutral-10 text-lg md:text-2xl lg:text-3xl font-bold leading-6 text-start md:text-center grid-cols-2">
               Advanced Mathematics Tutor
             </h1>
-            <button className="text-neutral-10 hidden md:flex items-center gap-2 leading-[24px] w-fit font-semibold transition-all duration-300 text-sm md:text-base absolute bottom-5 md:bottom-8 xl:bottom-12  right-5 md:right-8 xl:right-8">
+            <button
+              onClick={() => setIsShareJobModalOpen(true)}
+              className="text-neutral-10 hidden md:flex items-center gap-2 leading-[24px] w-fit font-semibold transition-all duration-300 text-sm md:text-base absolute bottom-5 md:bottom-8 xl:bottom-12  right-5 md:right-8 xl:right-8 cursor-pointer"
+            >
               <img src={ICONS.share} alt="" className="size-5" />
               <p className="hidden md:block">Share</p>
             </button>
@@ -90,11 +101,13 @@ const JobDetails = ({
             />
 
             <div className="flex flex-col gap-6 items-start justify-center max-w-full lg:max-w-[70%] mx-0 lg:mx-auto">
-                <div className="flex items-center gap-3 mt-11">
+              <div className="flex items-center gap-3 mt-11">
                 <img src={ICONS.subject} alt="" className="size-5" />
                 <div>
                   <p className="text-neutral-45 text-sm">Subjects</p>
-                  <p className="text-neutral-10 font-medium">Physics, Chemistry, Math</p>
+                  <p className="text-neutral-10 font-medium">
+                    Physics, Chemistry, Math
+                  </p>
                 </div>
               </div>
               <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 w-full gap-6">
@@ -114,27 +127,37 @@ const JobDetails = ({
                 <img src={ICONS.location} alt="" className="size-5" />
                 <div>
                   <p className="text-neutral-45 text-sm">Location</p>
-                  <p className="text-neutral-10 font-medium">Mohammodpur, Dhaka</p>
+                  <p className="text-neutral-10 font-medium">
+                    Mohammodpur, Dhaka
+                  </p>
                 </div>
               </div>
               <div className="flex gap-3">
                 <img src={ICONS.requirements} alt="" className="size-5" />
                 <div>
                   <p className="text-neutral-45 text-sm">Other Requirements</p>
-                  <p className="text-neutral-10 font-medium">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ullam nam.</p>
+                  <p className="text-neutral-10 font-medium">
+                    Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+                    Ullam nam.
+                  </p>
                 </div>
               </div>
             </div>
 
             <div className="mt-8 flex justify-center gap-5">
-            <Button
-              label="Direction"
-              variant="secondary"
-              iconBg="#0D99FF"
-              className="border border-neutral-55"
-            />
-            <Button label="Apply Now" variant="primary" iconBg="#0D99FF" onClick={() => setIsJobApplyConfirmationModalOpen(true)} />
-          </div>
+              <Button
+                label="Direction"
+                variant="secondary"
+                iconBg="#0D99FF"
+                className="border border-neutral-55"
+              />
+              <Button
+                label="Apply Now"
+                variant="primary"
+                iconBg="#0D99FF"
+                onClick={() => setIsJobApplyConfirmationModalOpen(true)}
+              />
+            </div>
           </div>
           <button
             onClick={() => setShowDrawer(false)}
@@ -142,10 +165,14 @@ const JobDetails = ({
           >
             ×
           </button>
-
-          
         </motion.div>
       </>
+
+      <ShareJobModal
+        isShareJobModalOpen={isShareJobModalOpen}
+        setIsShareJobModalOpen={setIsShareJobModalOpen}
+        link={link}
+      />
     </AnimatePresence>
   );
 };

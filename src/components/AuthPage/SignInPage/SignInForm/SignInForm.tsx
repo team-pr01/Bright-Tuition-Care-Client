@@ -42,7 +42,7 @@ const SignInForm = ({
       />
 
       <RoleTab activeTab={activeTab} setActiveTab={setActiveTab} />
-      <div className="bg-neutral-50/20 rounded-2xl p-5 flex flex-col gap-6">
+      <div className="bg-neutral-50/10 rounded-2xl p-5 lg:p-7 flex flex-col gap-6">
         <div className="flex flex-col gap-6">
           {/* Email */}
           <TextInput

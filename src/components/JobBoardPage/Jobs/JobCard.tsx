@@ -3,8 +3,11 @@ import { ICONS } from "../../../assets";
 import Button from "../../Reusable/Button/Button";
 import JobDetails from "../JobDetails/JobDetails";
 import JobApplyConfirmationModal from "./JobApplyConfirmationModal";
+import ShareJobModal from "../ShareJobModal";
 
 const JobCard = () => {
+  const [isShareJobModalOpen, setIsShareJobModalOpen] =
+    useState<boolean>(false);
   const [isJobApplyConfirmationModalOpen, setIsJobApplyConfirmationModalOpen] =
     useState(false);
   const [showDrawer, setShowDrawer] = useState<boolean>(false);
@@ -22,10 +25,22 @@ const JobCard = () => {
     { icon: ICONS.location, title: "Location", value: "Mohammodpur" },
   ];
 
+  const shareUrl = "https://yourwebsite.com/job/123"; // Replace with actual job URL
+
   return (
     <>
       {/* Smooth Overlay & Drawer */}
-      {showDrawer && <JobDetails setShowDrawer={setShowDrawer} setIsJobApplyConfirmationModalOpen={setIsJobApplyConfirmationModalOpen} />}
+      {showDrawer && (
+        <JobDetails
+          setShowDrawer={setShowDrawer}
+          setIsJobApplyConfirmationModalOpen={
+            setIsJobApplyConfirmationModalOpen
+          }
+          isShareJobModalOpen={isShareJobModalOpen}
+          setIsShareJobModalOpen={setIsShareJobModalOpen}
+          link={shareUrl}
+        />
+      )}
 
       {/* Job Card */}
       <div className="px-3 py-5 md:px-5 md:py-10 border border-primary-30 bg-white shadow-job-card rounded-xl font-Nunito transform transition-transform duration-300 hover:-translate-y-2 z-20 relative">
@@ -81,7 +96,10 @@ const JobCard = () => {
               <img src={ICONS.jobDetails} alt="" className="size-5" />
               <p className="hidden md:block">Details</p>
             </button>
-            <button className="bg-white hover:bg-primary-10/10 text-neutral-10 border border-primary-10 flex items-center gap-1 xl:gap-4 leading-[24px] w-fit rounded-lg font-semibold transition-all duration-300 py-2 lg:py-3 px-3 xl:px-6 text-sm md:text-base cursor-pointer">
+            <button
+              onClick={() => setIsShareJobModalOpen(true)}
+              className="bg-white hover:bg-primary-10/10 text-neutral-10 border border-primary-10 flex items-center gap-1 xl:gap-4 leading-[24px] w-fit rounded-lg font-semibold transition-all duration-300 py-2 lg:py-3 px-3 xl:px-6 text-sm md:text-base cursor-pointer"
+            >
               <img src={ICONS.share} alt="" className="size-5" />
               <p className="hidden md:block">Share</p>
             </button>
@@ -94,15 +112,17 @@ const JobCard = () => {
             onClick={() => setIsJobApplyConfirmationModalOpen(true)}
           />
         </div>
-
-      
       </div>
-        <JobApplyConfirmationModal
-          isJobApplyConfirmationModalOpen={isJobApplyConfirmationModalOpen}
-          setIsJobApplyConfirmationModalOpen={
-            setIsJobApplyConfirmationModalOpen
-          }
-        />
+      <JobApplyConfirmationModal
+        isJobApplyConfirmationModalOpen={isJobApplyConfirmationModalOpen}
+        setIsJobApplyConfirmationModalOpen={setIsJobApplyConfirmationModalOpen}
+      />
+
+      <ShareJobModal
+        isShareJobModalOpen={isShareJobModalOpen}
+        setIsShareJobModalOpen={setIsShareJobModalOpen}
+        link={shareUrl}
+      />
     </>
   );
 };

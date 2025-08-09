@@ -92,7 +92,7 @@ const SignupForm = ({
 
       <RoleTab activeTab={activeTab} setActiveTab={setActiveTab} />
       <div className="bg-neutral-50/10 rounded-2xl p-5 lg:p-7 flex flex-col gap-6">
-       {/* <div className="relative flex items-center gap-5">
+        {/* <div className="relative flex items-center gap-5">
         {roles.map((role, idx) => (
           <button
             key={role}
@@ -118,7 +118,7 @@ const SignupForm = ({
         />
       </div> */}
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-3">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {/* Name */}
           <TextInput
             label="Name"
