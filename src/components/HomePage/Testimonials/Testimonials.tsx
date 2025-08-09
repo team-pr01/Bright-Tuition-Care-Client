@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import Container from "../../Reusable/Container/Container";
 import Heading from "../../Reusable/Heading/Heading";
 import TestimonialCard from "./TestimonialCard";
