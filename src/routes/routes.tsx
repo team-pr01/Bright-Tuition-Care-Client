@@ -9,6 +9,7 @@ import Signup from "../pages/Signup/Signup";
 import SignIn from "../pages/Auth/SignIn/SignIn";
 import TermsAndConditions from "../pages/TermsAndConditions/TermsAndConditions";
 import Faq from "../pages/Faq/Faq";
+import ForgotPassword from "../pages/Auth/ForgotPassword/ForgotPassword";
 
 export const router = createBrowserRouter([
   {
@@ -39,6 +40,10 @@ export const router = createBrowserRouter([
       {
         path: "signin",
         element: <SignIn />,
+      },
+      {
+        path: "forgot-password",
+        element: <ForgotPassword />,
       },
       {
         path: "terms-and-conditions",

@@ -28,12 +28,12 @@ const SignInForm = ({
     formState: { errors },
   } = useForm<TFormData>();
 
-  const handleSignup = (data: TFormData) => {
+  const handleSigIn = (data: TFormData) => {
     console.log(data);
   };
   return (
     <form
-      onSubmit={handleSubmit(handleSignup)}
+      onSubmit={handleSubmit(handleSigIn)}
       className="flex flex-col gap-6 font-Nunito"
     >
       <AuthHeading
@@ -48,6 +48,7 @@ const SignInForm = ({
           <TextInput
             label="Email"
             placeholder="Enter your email"
+            type="email"
             error={errors.email}
             {...register("email", {
               required: "Email is required",
@@ -84,7 +85,7 @@ const SignInForm = ({
             </Link>
           </p>
           <Link
-            to="/terms-and-conditions"
+            to="/forgot-password"
             className="text-primary-10 font-semibold underline text-end"
           >
             Forgot Password?

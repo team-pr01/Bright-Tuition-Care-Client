@@ -72,6 +72,8 @@ import dummyAvatar from "../assets/Images/dummy-avatar.jpg";  //dummy, please re
 import contactUs from "../assets/Images/contact-us.webp";
 import teacher from "../assets/Images/teacher.png";
 import guardian from "../assets/Images/guardian.svg";
+import forgotPassword from "../assets/Images/forgot-password.webp";
+import resetPassword from "../assets/Images/reset-password.webp";
 
 
 export const IMAGES = {
@@ -90,7 +92,9 @@ export const IMAGES = {
   contactUs,
   teacher,
   guardian,
-  termsAndConditionHero
+  termsAndConditionHero,
+  forgotPassword,
+  resetPassword
   
 };
 

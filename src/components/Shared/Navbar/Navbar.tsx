@@ -22,7 +22,7 @@ const Navbar = () => {
 
   return (
     <div
-      className={`py-4 lg:py-7 sticky top-0 z-50 transition-all duration-300 ${
+      className={`py-4 lg:py-7 sticky top-0 z-50 transition-all duration-300 border-b border-neutral-45/15 ${
         isScrolled ? "backdrop-blur-md bg-white/70 shadow-sm" : "bg-white"
       }`}
     >
