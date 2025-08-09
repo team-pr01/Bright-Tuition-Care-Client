@@ -11,6 +11,7 @@ import TermsAndConditions from "../pages/TermsAndConditions/TermsAndConditions";
 import Faq from "../pages/Faq/Faq";
 import ForgotPassword from "../pages/Auth/ForgotPassword/ForgotPassword";
 import ResetPassword from "../pages/Auth/ResetPassword/ResetPassword";
+import VerifyOtp from "../pages/Auth/VerifyOtp/VerifyOtp";
 
 export const router = createBrowserRouter([
   {
@@ -49,6 +50,10 @@ export const router = createBrowserRouter([
       {
         path: "reset-password",
         element: <ResetPassword />,
+      },
+      {
+        path: "verify-otp",
+        element: <VerifyOtp />,
       },
       {
         path: "terms-and-conditions",

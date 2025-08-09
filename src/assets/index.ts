@@ -74,6 +74,7 @@ import teacher from "../assets/Images/teacher.png";
 import guardian from "../assets/Images/guardian.svg";
 import forgotPassword from "../assets/Images/forgot-password.webp";
 import resetPassword from "../assets/Images/reset-password.webp";
+import verifyOtp from "../assets/Images/verify-otp.png";
 
 
 export const IMAGES = {
@@ -94,8 +95,8 @@ export const IMAGES = {
   guardian,
   termsAndConditionHero,
   forgotPassword,
-  resetPassword
-  
+  resetPassword,
+  verifyOtp,  
 };
 
 export const ICONS = {
