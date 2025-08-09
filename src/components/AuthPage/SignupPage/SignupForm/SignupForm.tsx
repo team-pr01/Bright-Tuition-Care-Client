@@ -78,7 +78,7 @@ const SignupForm = ({
       const { offsetLeft, offsetWidth } = button;
       setIndicatorStyle({ left: offsetLeft, width: offsetWidth });
     }
-  }, [activeTab]);
+  }, [activeTab, roles]);
 
   return (
     <form
@@ -87,7 +87,7 @@ const SignupForm = ({
     >
       <AuthHeading
         title=" Choose role and get started"
-        description="Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis animi nisi totam magnam itaque consequatur facilis laboriosam fuga in reprehenderit."
+        description="Sign up to get started. Select the role that fits you best and join our community."
       />
 
       <RoleTab activeTab={activeTab} setActiveTab={setActiveTab} />
@@ -228,6 +228,7 @@ const SignupForm = ({
 
         <div className="flex flex-col md:flex-row gap-5 md:gap-0 items-center justify-between">
           <Button
+            type="submit"
             label="Sign Up"
             variant="primary"
             icon={ICONS.topRightArrow}

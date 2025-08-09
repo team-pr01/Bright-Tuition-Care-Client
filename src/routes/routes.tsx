@@ -10,6 +10,7 @@ import SignIn from "../pages/Auth/SignIn/SignIn";
 import TermsAndConditions from "../pages/TermsAndConditions/TermsAndConditions";
 import Faq from "../pages/Faq/Faq";
 import ForgotPassword from "../pages/Auth/ForgotPassword/ForgotPassword";
+import ResetPassword from "../pages/Auth/ResetPassword/ResetPassword";
 
 export const router = createBrowserRouter([
   {
@@ -44,6 +45,10 @@ export const router = createBrowserRouter([
       {
         path: "forgot-password",
         element: <ForgotPassword />,
+      },
+      {
+        path: "reset-password",
+        element: <ResetPassword />,
       },
       {
         path: "terms-and-conditions",

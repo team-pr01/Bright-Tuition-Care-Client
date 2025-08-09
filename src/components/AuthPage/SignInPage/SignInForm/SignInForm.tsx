@@ -37,8 +37,8 @@ const SignInForm = ({
       className="flex flex-col gap-6 font-Nunito"
     >
       <AuthHeading
-        title=" Choose role and get started"
-        description="Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis animi nisi totam magnam itaque consequatur facilis laboriosam fuga in reprehenderit."
+        title="Welcome Back!"
+        description="Choose your role and enter your credentials below to access your personalized dashboard and resources."
       />
 
       <RoleTab activeTab={activeTab} setActiveTab={setActiveTab} />
@@ -94,6 +94,7 @@ const SignInForm = ({
 
         <div className="flex md:gap-0 items-center justify-between">
           <Button
+            type="submit"
             label="Sign In"
             variant="primary"
             icon={ICONS.topRightArrow}

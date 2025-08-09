@@ -47,6 +47,7 @@ const ForgotPasswordForm = () => {
 
         <div className="flex md:gap-0 items-center justify-between">
           <Button
+            type="submit"
             label="Sign In"
             variant="primary"
             icon={ICONS.topRightArrow}
