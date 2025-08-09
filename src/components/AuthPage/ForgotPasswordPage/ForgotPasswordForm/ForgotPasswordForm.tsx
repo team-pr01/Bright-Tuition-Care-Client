@@ -4,9 +4,14 @@ import TextInput from "../../../Reusable/TextInput/TextInput";
 import { Link } from "react-router-dom";
 import Button from "../../../Reusable/Button/Button";
 import { ICONS } from "../../../../assets";
+import { MdEmail } from "react-icons/md";
+import { useState } from "react";
+import { RiPhoneFill } from "react-icons/ri";
 
 type TFormData = {
-  email: string;
+  method: string;
+  email?: string;
+  phoneNumber?: string;
 };
 
 const ForgotPasswordForm = () => {
@@ -19,6 +24,20 @@ const ForgotPasswordForm = () => {
   const handleForgotPassword = (data: TFormData) => {
     console.log(data);
   };
+
+  const [activeTab, setActiveTab] = useState<string>("email");
+
+  const tabButtons = [
+    {
+      label: "email",
+      icon: <MdEmail />,
+    },
+    {
+      label: "phone",
+      icon: <RiPhoneFill />,
+    },
+  ];
+
   return (
     <form
       onSubmit={handleSubmit(handleForgotPassword)}
@@ -29,28 +48,67 @@ const ForgotPasswordForm = () => {
         description="Please enter your email address to receive a link to reset your password."
       />
       <div className="bg-neutral-50/10 rounded-2xl p-5 lg:p-7 flex flex-col gap-6">
-        <div></div>
+        {/* Tab buttons */}
+        <div className="flex items-center justify-center gap-4 mb-2">
+          {tabButtons?.map((button) => (
+            <button
+              key={button?.label}
+              onClick={() => setActiveTab(button?.label)}
+              type="button"
+              className={` rounded-3xl px-3 py-2 flex items-center gap-3 border cursor-pointer ${
+                button?.label === activeTab
+                  ? "bg-primary-10/5 text-primary-10 border-primary-10/20"
+                  : "bg-white text-neutral-20 border-neutral-45/20"
+              }`}
+            >
+              <div
+                className={` size-7 rounded-full flex items-center justify-center  ${
+                  button?.label === activeTab
+                    ? "bg-primary-10/20 "
+                    : "bg-neutral-50/60"
+                }`}
+              >
+                {button?.icon}
+              </div>
+              Get OTP on {button?.label}
+            </button>
+          ))}
+        </div>
+
         {/* Email */}
-        <TextInput
-          label="Email"
-          placeholder="Enter your registered email address"
-          type="email"
-          error={errors.email}
-          {...register("email", {
-            required: "Email is required",
-            pattern: {
-              value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-              message: "Invalid email address",
-            },
-          })}
-        />
+        {activeTab === "email" ? (
+          <TextInput
+            label="Email"
+            placeholder="Enter your registered email address"
+            type="email"
+            error={errors.email}
+            {...register("email", {
+              required: "Email is required",
+              pattern: {
+                value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                message: "Invalid email address",
+              },
+            })}
+          />
+        ) : (
+          <TextInput
+            label="Phone Number"
+            placeholder="Enter your registered phone number"
+            type="number"
+            error={errors.phoneNumber}
+            {...register("phoneNumber", {
+              required: "Phone number is required",
+            })}
+          />
+        )}
 
         <div className="flex md:gap-0 items-center justify-between">
           <Button
             type="submit"
-            label="Sign In"
+            label="Submit"
             variant="primary"
             icon={ICONS.topRightArrow}
+            className="py-2 lg:py-2"
           />
           <p className="font-lg leading-[24px] text-neutral-20">
             Back to{" "}

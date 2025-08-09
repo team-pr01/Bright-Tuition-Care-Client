@@ -232,6 +232,7 @@ const SignupForm = ({
             label="Sign Up"
             variant="primary"
             icon={ICONS.topRightArrow}
+            className="py-2 lg:py-2"
           />
 
           <p className="font-lg leading-[24px] text-neutral-20">

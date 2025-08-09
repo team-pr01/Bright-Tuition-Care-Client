@@ -1,20 +1,23 @@
 import React from "react";
+import { twMerge } from "tailwind-merge";
 
 interface ButtonProps {
   label?: string;
-  variant?: "primary" | "secondary" | "tertiary" | "quaternary " |string;
+  variant?: "primary" | "secondary" | "tertiary" | "quaternary" | string;
   onClick?: () => void;
   icon?: React.ReactNode;
   iconBg?: string;
   className?: string;
-  type? : "submit" | "reset" | "button" | undefined;
+  type?: "submit" | "reset" | "button";
 }
 
 const variantClasses: Record<string, string> = {
   primary: "bg-primary-10 border border-primary-10 text-white",
   secondary: "bg-white text-black border border-black",
-  tertiary: "bg-white text-primary-10 border border-primary-10 hover:bg-primary-10 hover:text-white",
-  quaternary:"bg-primary-10 text-white border border-primary-10 hover:bg-white hover:text-primary-10",
+  tertiary:
+    "bg-white text-primary-10 border border-primary-10 hover:bg-primary-10 hover:text-white",
+  quaternary:
+    "bg-primary-10 text-white border border-primary-10 hover:bg-white hover:text-primary-10",
 };
 
 const Button: React.FC<ButtonProps> = ({
@@ -24,17 +27,17 @@ const Button: React.FC<ButtonProps> = ({
   icon,
   iconBg = "white",
   className = "",
-  type="button",
+  type = "button",
 }) => {
   const variantClass = variantClasses[variant] || variantClasses["primary"];
 
   const baseClasses =
     "flex items-center gap-4 text-lg leading-[24px] w-fit rounded-lg font-semibold font-Nunito cursor-pointer transition-all duration-300 py-2 lg:py-3 px-3 lg:px-6 text-sm md:text-base";
 
-  const combinedClasses = `${baseClasses} ${variantClass} ${className}`;
+  const combinedClasses = twMerge(baseClasses, variantClass, className);
 
   return (
-    <div className={`${variant ? "relative" : ""}`}>
+    <div className={variant ? "relative" : ""}>
       <button type={type} onClick={onClick} className={combinedClasses}>
         {label}
         {icon && (

@@ -75,6 +75,7 @@ const ResetPasswordForm = () => {
             label="Sign In"
             variant="primary"
             icon={ICONS.topRightArrow}
+            className="py-2 lg:py-2"
           />
           <p className="font-lg leading-[24px] text-neutral-20">
             Back to{" "}

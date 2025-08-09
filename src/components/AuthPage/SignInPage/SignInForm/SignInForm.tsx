@@ -98,6 +98,7 @@ const SignInForm = ({
             label="Sign In"
             variant="primary"
             icon={ICONS.topRightArrow}
+            className="py-2 lg:py-2"
           />
         </div>
       </div>
