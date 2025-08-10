@@ -4,6 +4,7 @@ import { ImWhatsapp } from "react-icons/im";
 import { IMAGES } from "../../../assets";
 import AnimatedButton from "../../Reusable/AnimatedButton/AnimatedButton";
 import Container from "../../Reusable/Container/Container";
+import { Link } from "react-router-dom";
 
 const Hero = () => {
   const containerVariants = {
@@ -97,15 +98,16 @@ const Hero = () => {
               <AnimatedButton />
             </motion.div>
 
-            <p className="font-lg leading-[24px] text-neutral-20">
+            <p
+              className="font-lg leading-[24px] text-neutral-20"
+            >
               Want to become a Tutor?{" "}
-              <motion.span
-                whileHover={{ scale: 1.1, color: "#ff7e5f" }}
-                whileTap={{ scale: 0.9 }}
+              <Link
+                to="/signup"
                 className="font-semibold bg-gradient-to-r from-primary-10 to-primary-40/60 bg-clip-text text-transparent cursor-pointer"
               >
                 Sign Up <span className="text-neutral-20 font-normal">Now</span>
-              </motion.span>
+              </Link>
             </p>
           </motion.div>
         </motion.div>

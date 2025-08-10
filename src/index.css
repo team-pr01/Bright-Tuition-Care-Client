@@ -105,6 +105,15 @@
   background: var(--bg-our-projects-bg-gradient);
 }
 
+/* In your global CSS file */
+.swiper-slide {
+  pointer-events: auto !important;
+}
+
+.swiper-slide .testimonial-content {
+  pointer-events: auto !important;
+}
+
 /* Custom scrollbar for a specific section */
 .custom-scrollbar {
   overflow-y: auto;

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { ICONS } from "../../../assets";
 
 interface TestimonialCardProps {
@@ -17,11 +17,17 @@ const TestimonialCard: React.FC<TestimonialCardProps> = ({
   review,
   variant = "default",
 }) => {
+  const [showFull, setShowFull] = useState(false);
+
+  const isLong = review.length > 100;
+  const displayText = showFull
+    ? review
+    : review.slice(0, 100) + (isLong ? "..." : "");
   return (
     <div
       className={`flex flex-col ${
         variant == "default" ? "" : ""
-      } flex-col font-Nunito items-center justify-between gap-3 rounded-xl w-full lg:w-[80%] mx-auto overflow-y-visible pt-32`}
+      } flex-col font-Nunito items-center justify-between gap-3 rounded-xl w-full lg:w-[80%] mx-auto overflow-y-visible pt-32 relative z-50`}
     >
       {/* Rating */}
       {/* <div className="flex items-center gap-1">
@@ -63,14 +69,23 @@ const TestimonialCard: React.FC<TestimonialCardProps> = ({
           </div>
         </div>
 
-        <div className="mt-32 ">
+        <div className="mt-32 relative z-10">
           <img
             className="size-[50px]"
             src={ICONS.testimonials}
             alt="testimonials"
           />
           <p className="text-neutral-10 text-base md:text-xl font-medium text-center">
-            "{review}"
+            "{displayText}"
+            {isLong && (
+              <button
+                onClick={() => setShowFull(!showFull)}
+                className="text-primary-10 text-sm underline cursor-pointer pointer-events-auto relative z-[60]"
+                type="button"
+              >
+                {showFull ? "See Less" : "See More"}
+              </button>
+            )}
           </p>
         </div>
       </div>

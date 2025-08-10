@@ -62,7 +62,7 @@ const Testimonials: React.FC<TestimonialsProps> = ({
             className="w-full mx-auto"
           >
             {[1, 2, 3, 4].map((_, i) => (
-              <SwiperSlide key={i}>
+              <SwiperSlide key={i} className="overflow-visible">
                 <TestimonialCard
                   image={IMAGES.dummyAvatar}
                   name="Tanvir Rahman"

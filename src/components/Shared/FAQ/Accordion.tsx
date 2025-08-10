@@ -3,40 +3,7 @@ import { IoChevronDownSharp } from "react-icons/io5";
 import { motion, AnimatePresence } from "framer-motion";
 import type { Variants } from "framer-motion";
 
-const accordingData = [
-  {
-    title: "Are you SEBI-registered?",
-    description:
-      "Yes. Amandeep Singh Juneja is a SEBI-Registered Investment Adviser (RIA). Registration number will appear on every invoice and email once issued.",
-  },
-  {
-    title: "Do you give stock tips?",
-    description:
-      "No. We teach frameworks and offer goal-based advice. No intraday or speculative calls in any paid or free channel.",
-  },
-  {
-    title: "How are you compensated?",
-    description:
-      "100% fee-only. We do not accept commissions, referral fees, or brokerage kick-backs.",
-  },
-  {
-    title: "Can I get a refund on a digital course?",
-    description:
-      "Digital products are non-refundable once access is granted (see Refund Policy).",
-  },
-  {
-    title: "How is my data protected?",
-    description:
-      "We follow industry-standard encryption, store data on secure servers, and never sell personal info. Full details in our Privacy Policy.",
-  },
-  {
-    title: "Is NPS / PPF / ELSS right for me?",
-    description:
-      "It depends on your goals, horizon, and risk profile. Book a 1-on-1 session or complete our risk-profiling questionnaire for personalised advice.",
-  },
-];
-
-const Accordion = () => {
+const Accordion = ({ activeTab }: { activeTab: string }) => {
   const [isAccordingOpen, setIsAccordingOpen] = useState<number | null>(0);
 
   const handleClick = (index: number) =>
@@ -64,15 +31,69 @@ const Accordion = () => {
     },
   };
 
+  const faqForTutor = [
+    {
+      title: "Are you SEBI-registered?",
+      description:
+        "Yes. Amandeep Singh Juneja is a SEBI-Registered Investment Adviser (RIA). Registration number will appear on every invoice and email once issued.",
+    },
+    {
+      title: "Do you give stock tips?",
+      description:
+        "No. We teach frameworks and offer goal-based advice. No intraday or speculative calls in any paid or free channel.",
+    },
+    {
+      title: "How are you compensated?",
+      description:
+        "100% fee-only. We do not accept commissions, referral fees, or brokerage kick-backs.",
+    },
+    {
+      title: "Can I get a refund on a digital course?",
+      description:
+        "Digital products are non-refundable once access is granted (see Refund Policy).",
+    },
+    {
+      title: "How is my data protected?",
+      description:
+        "We follow industry-standard encryption, store data on secure servers, and never sell personal info. Full details in our Privacy Policy.",
+    },
+    {
+      title: "Is NPS / PPF / ELSS right for me?",
+      description:
+        "It depends on your goals, horizon, and risk profile. Book a 1-on-1 session or complete our risk-profiling questionnaire for personalised advice.",
+    },
+  ];
+
+  const faqForGuardianOrStudents = [
+    {
+      title: "Can I get a refund on a digital course?",
+      description:
+        "Digital products are non-refundable once access is granted (see Refund Policy).",
+    },
+    {
+      title: "How is my data protected?",
+      description:
+        "We follow industry-standard encryption, store data on secure servers, and never sell personal info. Full details in our Privacy Policy.",
+    },
+    {
+      title: "Is NPS / PPF / ELSS right for me?",
+      description:
+        "It depends on your goals, horizon, and risk profile. Book a 1-on-1 session or complete our risk-profiling questionnaire for personalised advice.",
+    },
+  ];
+
+  const accordionData =
+    activeTab === "For Tutors" ? faqForTutor : faqForGuardianOrStudents;
+
   return (
     <motion.div
-      className="flex gap-3 flex-col w-full mt-12"
+      className="flex gap-3 flex-col w-full mt-16"
       variants={listVariants}
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, amount: 0.4 }}
     >
-      {accordingData?.map((according, index) => (
+      {accordionData?.map((according, index) => (
         <motion.article
           key={index}
           className="border-b border-neutral-45/30 py-5 hover:border-primary-10 transform duration-300"

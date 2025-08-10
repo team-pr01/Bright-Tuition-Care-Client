@@ -58,6 +58,15 @@ export const quickLinks = [
     label: "Become A Tutor",
     path: "/become-a-tutor",
   },
+  {
+    label: "Terms & Conditions",
+    path: "/terms-and-conditions",
+  },
+  {
+    label: "FAQs",
+    path: "/faqs",
+  },
+
 ];
 
 export const contactInfo = [
