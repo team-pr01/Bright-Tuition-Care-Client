@@ -12,6 +12,8 @@ import Faq from "../pages/Faq/Faq";
 import ForgotPassword from "../pages/Auth/ForgotPassword/ForgotPassword";
 import ResetPassword from "../pages/Auth/ResetPassword/ResetPassword";
 import VerifyOtp from "../pages/Auth/VerifyOtp/VerifyOtp";
+import DashboardLayout from "../layouts/DashboardLayout";
+import TutorDashboardHome from "../pages/Dashboard/Tutor/TutorDashboardHome/TutorDashboardHome";
 
 export const router = createBrowserRouter([
   {
@@ -62,6 +64,17 @@ export const router = createBrowserRouter([
       {
         path: "faqs",
         element: <Faq/>,
+      },
+    ],
+  },
+  {
+    path: "dashboard/tutor",
+    element: <DashboardLayout />,
+    errorElement: <NotFound />,
+    children: [
+      {
+        path: "home",
+        element: <TutorDashboardHome />,
       },
     ],
   },
