@@ -73,7 +73,7 @@
     rgba(11, 19, 36, 0) 100%
   );
 
-  /* --bg-gradient-dark: linear-gradient(180deg, rgba(124, 67, 215, 0.00) 0%, rgba(124, 67, 215, 0.05) 23.44%, rgba(124, 67, 215, 0.05) 100%); */
+  --bg-gradient-notice-board: linear-gradient(267deg, rgba(241, 117, 86, 0.16) 2.65%, rgba(214, 19, 73, 0.16) 97.47%);
 }
 
 .bg-gradient-primary {
@@ -103,6 +103,9 @@
 }
 .bg-our-projects-bg-gradient {
   background: var(--bg-our-projects-bg-gradient);
+}
+.bg-gradient-notice-board {
+  background: var(--bg-gradient-notice-board);
 }
 
 /* In your global CSS file */
