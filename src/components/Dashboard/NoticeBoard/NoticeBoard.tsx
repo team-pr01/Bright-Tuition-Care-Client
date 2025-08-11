@@ -6,7 +6,7 @@ const NoticeBoard = () => {
       <img src={ICONS.notice} alt="" className="size-16" />
 
       <div className="bg-white shadow p-4 rounded-2xl w-full">
-        <div className="rounded-lg bg-gradient-to-r from-cyan-500 to-primary-10 text-white p-2 w-fit">
+        <div className="rounded-lg bg-gradient-to-r from-cyan-500 to-primary-10 text-white p-2 w-fit text-xs">
           Notice Board
         </div>
         <p className={`text-neutral-20 text-lg leading-6 mt-2`}>

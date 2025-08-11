@@ -63,6 +63,11 @@ import gender from "../assets/Icons/gender.svg";
 import notification from "../assets/Icons/notification.svg";
 import tickMark from "../assets/Icons/tick-mark.svg";
 import notice from "../assets/Icons/notice.gif";
+import animatedLocation from "../assets/Icons/animated-location.gif";
+import confirmationLetter from "../assets/Icons/confirmation-letter.svg";
+import invoice from "../assets/Icons/invoice.svg";
+import profileVerified from "../assets/Icons/profile-verified.svg";
+import profileUnverified from "../assets/Icons/profile-unverified.svg";
 
 
 import aboutUs from "../assets/Images/about-us.svg";
@@ -157,4 +162,9 @@ export const ICONS = {
   notification,
   tickMark,
   notice,
+  animatedLocation,
+  confirmationLetter,
+  invoice,
+  profileVerified,
+  profileUnverified,
 };
