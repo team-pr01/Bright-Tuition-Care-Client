@@ -15,6 +15,7 @@ import VerifyOtp from "../pages/Auth/VerifyOtp/VerifyOtp";
 import DashboardLayout from "../layouts/DashboardLayout";
 import TutorDashboardHome from "../pages/Dashboard/Tutor/TutorDashboardHome/TutorDashboardHome";
 import HowItWorks from "../pages/Dashboard/Tutor/HowItWorks/HowItWorks";
+import JoinCommunity from "../pages/Dashboard/Shared/JoinCommunity/JoinCommunity";
 
 export const router = createBrowserRouter([
   {
@@ -80,6 +81,10 @@ export const router = createBrowserRouter([
       {
         path: "how-it-works",
         element: <HowItWorks />,
+      },
+      {
+        path: "community",
+        element: <JoinCommunity />,
       },
     ],
   },

@@ -85,6 +85,7 @@ import guardian from "../assets/Images/guardian.svg";
 import forgotPassword from "../assets/Images/forgot-password.webp";
 import resetPassword from "../assets/Images/reset-password.webp";
 import verifyOtp from "../assets/Images/verify-otp.png";
+import community from "../assets/Images/community.webp";
 
 
 export const IMAGES = {
@@ -106,7 +107,8 @@ export const IMAGES = {
   termsAndConditionHero,
   forgotPassword,
   resetPassword,
-  verifyOtp,  
+  verifyOtp,
+  community,
 };
 
 export const ICONS = {

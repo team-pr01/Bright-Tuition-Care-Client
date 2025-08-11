@@ -51,12 +51,12 @@ export const tutorDashboardLinks: DashboardLink[] = [
   },
   {
     label: "Join Community",
-    path: "dashboard/tutor/community",
+    path: "/dashboard/tutor/community",
     icon: <RiFacebookFill />,
   },
   {
     label: "Refer And Earn",
-    path: "dashboard/tutor/refer-and-earn",
+    path: "/dashboard/tutor/refer-and-earn",
     icon: <LuAward />,
   },
 ];
