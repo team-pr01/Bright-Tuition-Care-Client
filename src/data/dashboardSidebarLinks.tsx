@@ -36,7 +36,7 @@ export const tutorDashboardLinks: DashboardLink[] = [
   },
   {
     label: "How It Works",
-    path: "/how-it-works",
+    path: "/dashboard/tutor/how-it-works",
     icon: <TbSettingsQuestion />,
   },
   {
@@ -51,12 +51,12 @@ export const tutorDashboardLinks: DashboardLink[] = [
   },
   {
     label: "Join Community",
-    path: "/community",
+    path: "dashboard/tutor/community",
     icon: <RiFacebookFill />,
   },
   {
     label: "Refer And Earn",
-    path: "/refer-and-earn",
+    path: "dashboard/tutor/refer-and-earn",
     icon: <LuAward />,
   },
 ];

@@ -68,6 +68,8 @@ import confirmationLetter from "../assets/Icons/confirmation-letter.svg";
 import invoice from "../assets/Icons/invoice.svg";
 import profileVerified from "../assets/Icons/profile-verified.svg";
 import profileUnverified from "../assets/Icons/profile-unverified.svg";
+import support from "../assets/Icons/support.svg";
+import sendWhite from "../assets/Icons/send.svg";
 
 
 import aboutUs from "../assets/Images/about-us.svg";
@@ -167,4 +169,6 @@ export const ICONS = {
   invoice,
   profileVerified,
   profileUnverified,
+  support,
+  sendWhite,
 };

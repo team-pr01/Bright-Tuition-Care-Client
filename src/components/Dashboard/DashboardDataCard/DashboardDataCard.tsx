@@ -22,11 +22,7 @@ const DashboardDataCard: React.FC<TDashboardDataCardProps> = ({
 }) => {
   return (
     <div className="bg-gradient-to-r from-slate-50 to-sky-50 rounded-2xl border border-primary-40/10 p-5 flex items-center gap-8">
-        <img
-          src={icon}
-          alt=""
-          className="w-24"
-        />
+      <img src={icon} alt="" className="w-24" />
       <div>
         <h1 className={`text-[28px] font-semibold ${titleColor}`}>
           {title}{" "}

@@ -14,6 +14,7 @@ import ResetPassword from "../pages/Auth/ResetPassword/ResetPassword";
 import VerifyOtp from "../pages/Auth/VerifyOtp/VerifyOtp";
 import DashboardLayout from "../layouts/DashboardLayout";
 import TutorDashboardHome from "../pages/Dashboard/Tutor/TutorDashboardHome/TutorDashboardHome";
+import HowItWorks from "../pages/Dashboard/Tutor/HowItWorks/HowItWorks";
 
 export const router = createBrowserRouter([
   {
@@ -75,6 +76,10 @@ export const router = createBrowserRouter([
       {
         path: "home",
         element: <TutorDashboardHome />,
+      },
+      {
+        path: "how-it-works",
+        element: <HowItWorks />,
       },
     ],
   },

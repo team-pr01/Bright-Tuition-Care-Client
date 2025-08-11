@@ -1,12 +1,9 @@
 // components/TutorSteps/TutorSteps.tsx
-
-import React from "react";
 import {
   VerticalTimeline,
   VerticalTimelineElement,
 } from "react-vertical-timeline-component";
 import "react-vertical-timeline-component/style.min.css";
-
 import Heading from "../../Reusable/Heading/Heading";
 import Container from "../../Reusable/Container/Container";
 import { tutorSteps } from "../../../constants/stepsData";

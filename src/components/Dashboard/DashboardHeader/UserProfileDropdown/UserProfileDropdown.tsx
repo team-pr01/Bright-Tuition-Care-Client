@@ -79,7 +79,7 @@ const UserProfileDropdown = () => {
               {/* User Info Header */}
               <motion.div
                 variants={itemVariants}
-                className="px-4 py-3 border-b border-neutral-20 flex items-center gap-3"
+                className="px-4 py-3 border-b border-neutral-20/10 flex items-center gap-3"
               >
                 <img
                   src={IMAGES.dummyAvatar}
@@ -119,7 +119,7 @@ const UserProfileDropdown = () => {
               {/* Divider */}
               <motion.div
                 variants={itemVariants}
-                className="h-px bg-neutral-20"
+                className="h-px bg-neutral-20/20"
               ></motion.div>
 
               <div>

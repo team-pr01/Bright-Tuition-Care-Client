@@ -3,7 +3,7 @@ import UserProfileDropdown from "./UserProfileDropdown/UserProfileDropdown";
 
 const DashboardHeader = () => {
   return (
-    <div className="px-6 py-3 font-Nunito flex items-center justify-between">
+    <div className="px-6 py-3 font-Nunito flex items-center justify-between sticky top-0 bg-white z-10 border-b border-neutral-50/40">
       <div>
         <h1
           className={`text-2xl lg:text-[28px] 2xl:text-[36px] font-semibold lg:font-bold text-neutral-10 leading-8 lg:leading-12`}
