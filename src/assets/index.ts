@@ -61,6 +61,7 @@ import search from "../assets/Icons/search.svg";
 import requirements from "../assets/Icons/requirements.svg";
 import gender from "../assets/Icons/gender.svg";
 import notification from "../assets/Icons/notification.svg";
+import tickMark from "../assets/Icons/tick-mark.svg";
 
 
 import aboutUs from "../assets/Images/about-us.svg";
@@ -153,4 +154,5 @@ export const ICONS = {
   requirements,
   gender,
   notification,
+  tickMark,
 };

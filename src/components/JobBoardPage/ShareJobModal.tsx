@@ -20,7 +20,6 @@ const ShareJobModal: React.FC<TShareJobModalProps> = ({
   isShareJobModalOpen,
   setIsShareJobModalOpen,
 }) => {
-  
   const [copied, setCopied] = useState(false);
 
   const handleCopy = () => {
@@ -104,9 +103,7 @@ const ShareJobModal: React.FC<TShareJobModalProps> = ({
                 href={social.shareLink}
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`${social.bgColor} size-8 md:size-12 rounded-full text-white flex items-center justify-center
-        transform transition-transform duration-500
-        hover:-translate-y-2 hover:opacity-90`}
+                className={`${social.bgColor} size-8 md:size-12 rounded-full text-white flex items-center justify-center transform transition-transform duration-500 hover:-translate-y-2 hover:opacity-90`}
                 title={`Share on ${social.name}`}
               >
                 {social.icon}
