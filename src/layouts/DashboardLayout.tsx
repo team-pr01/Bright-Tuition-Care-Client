@@ -4,7 +4,7 @@ import DashboardHeader from "../components/Dashboard/DashboardHeader/DashboardHe
 
 const DashboardLayout = () => {
   return (
-    <div className="flex w-full min-h-screen">
+    <div className="flex w-full">
       <Sidebar />
       <div className="flex flex-col w-full">
         <DashboardHeader />

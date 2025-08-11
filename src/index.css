@@ -140,7 +140,26 @@
   /* Dark background for non-scrolled area */
 }
 
-/* Add this to your index.css file */
+/* Custom scrollbar for sidebar only */
+.custom-scrollbar-sidebar::-webkit-scrollbar {
+  width: 5px; /* Scrollbar width */
+}
+
+.custom-scrollbar-sidebar::-webkit-scrollbar-track {
+  background: rgb(245, 245, 245); /* Light gray track */
+  border-radius: 10px;
+}
+
+.custom-scrollbar-sidebar::-webkit-scrollbar-thumb {
+  background-color: rgb(200, 200, 208); /* Scrollbar thumb color */
+  border-radius: 10px;
+}
+
+.custom-scrollbar-sidebar::-webkit-scrollbar-thumb:hover {
+  background-color: rgb(140, 140, 145); /* Slightly darker on hover */
+}
+
+
 
 @keyframes pulse-animation {
   0%, 100% {
