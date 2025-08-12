@@ -64,7 +64,7 @@ export const tutorDashboardLinks: DashboardLink[] = [
 export const otherLinks: DashboardLink[] = [
   {
     label: "Share The App",
-    path: "/share",
+    path: "/dashboard/tutor/share-app",
     icon: <LuShare2 />,
   },
   {
