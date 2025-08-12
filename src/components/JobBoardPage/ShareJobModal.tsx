@@ -33,7 +33,7 @@ const ShareJobModal: React.FC<TShareJobModalProps> = ({
     {
       name: "Facebook",
       icon: <FaFacebookF className="text-xl md:text-2xl" />,
-      bgColor: "bg-[#3b5998]",
+      bgColor: "bg-[#1877F2]",
       shareLink: `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(
         link
       )}`,
@@ -55,7 +55,7 @@ const ShareJobModal: React.FC<TShareJobModalProps> = ({
     {
       name: "LinkedIn",
       icon: <FaLinkedinIn className="text-xl md:text-2xl" />,
-      bgColor: "bg-[#0077b5]",
+      bgColor: "bg-[#0077B5]",
       shareLink: `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(
         link
       )}`,
