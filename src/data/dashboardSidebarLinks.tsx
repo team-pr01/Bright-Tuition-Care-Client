@@ -68,8 +68,8 @@ export const otherLinks: DashboardLink[] = [
     icon: <LuShare2 />,
   },
   {
-    label: "Terms Snd Conditions",
-    path: "/terms-and-conditions",
+    label: "Terms And Conditions",
+    path: "/dashboard/tutor/terms-and-conditions",
     icon: <LuFileText />,
   },
 ];

@@ -18,6 +18,7 @@ import HowItWorks from "../pages/Dashboard/Tutor/HowItWorks/HowItWorks";
 import JoinCommunity from "../pages/Dashboard/Shared/JoinCommunity/JoinCommunity";
 import TutorJobBoard from "../pages/Dashboard/Tutor/TutorJobBoard/TutorJobBoard";
 import ShareThisApp from "../pages/Dashboard/Shared/ShareThisApp/ShareThisApp";
+import TermsAndConditionsDashboard from "../pages/Dashboard/Shared/TermsAndConditionsDashboard/TermsAndConditionsDashboard";
 
 export const router = createBrowserRouter([
   {
@@ -95,6 +96,14 @@ export const router = createBrowserRouter([
       {
         path: "share-app",
         element: <ShareThisApp />,
+      },
+      {
+        path: "share-app",
+        element: <ShareThisApp />,
+      },
+      {
+        path: "terms-and-conditions",
+        element: <TermsAndConditionsDashboard />,
       },
     ],
   },
