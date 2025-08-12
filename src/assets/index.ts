@@ -62,7 +62,7 @@ import requirements from "../assets/Icons/requirements.svg";
 import gender from "../assets/Icons/gender.svg";
 import notification from "../assets/Icons/notification.svg";
 import tickMark from "../assets/Icons/tick-mark.svg";
-import notice from "../assets/Icons/notice.gif";
+import notice from "../assets/Icons/disclaimer.gif";
 import animatedLocation from "../assets/Icons/animated-location.gif";
 import confirmationLetter from "../assets/Icons/confirmation-letter.svg";
 import invoice from "../assets/Icons/invoice.svg";

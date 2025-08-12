@@ -11,7 +11,7 @@ const UserProfilePhoto = () => {
             className="size-full object-cover rounded-full"
           />
         </div>
-        <div className="bg-primary-10 border border-primary-50/30 shadow-2xl size-7 rounded-full flex items-center justify-center absolute right-3 bottom-1">
+        <div className="bg-green-500 shadow-2xl size-7 rounded-full flex items-center justify-center absolute right-3 bottom-1">
           <img src={ICONS.tickMark} alt="" className="" />
         </div>
       </div>

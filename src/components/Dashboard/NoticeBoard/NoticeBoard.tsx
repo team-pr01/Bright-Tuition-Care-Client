@@ -2,8 +2,8 @@ import { ICONS } from "../../../assets";
 
 const NoticeBoard = () => {
   return (
-    <div className="bg-gradient-to-r from-slate-50 to-sky-50 border border-primary-40/10 rounded-2xl p-4 flex items-center gap-6 font-Nunito">
-      <img src={ICONS.notice} alt="" className="size-16" />
+    <div className="bg-gradient-to-r from-primary-10 to-cyan-500 border border-primary-40/10 rounded-2xl p-4 flex items-center gap-6 font-Nunito">
+      <img src={ICONS.notice} alt="" className="size-24" />
 
       <div className="bg-white shadow p-4 rounded-2xl w-full">
         <div className="rounded-lg bg-gradient-to-r from-cyan-500 to-primary-10 text-white p-2 w-fit text-xs">

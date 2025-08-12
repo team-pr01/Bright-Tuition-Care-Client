@@ -46,7 +46,7 @@ const Filters = () => {
 
   return (
     <>
-      <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-3 md:gap-0 mt-10 md:mt-16">
+      <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-3 md:gap-0">
         <div className="flex items-center gap-3">
           <img src={ICONS.liveJobs} alt="" className="size-8" />
           <h1 className="text-xl md:text-2xl lg:text-4xl font-semibold leading-11 text-primary-50">

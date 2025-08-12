@@ -13,7 +13,9 @@ const JobBoard = () => {
           align="center"
           headingClassName="text-center"
         />
-        <Filters />
+        <div className="mt-10 md:mt-16">
+          <Filters />
+        </div>
         <Jobs />
       </div>
     </Container>

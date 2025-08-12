@@ -16,6 +16,7 @@ import DashboardLayout from "../layouts/DashboardLayout";
 import TutorDashboardHome from "../pages/Dashboard/Tutor/TutorDashboardHome/TutorDashboardHome";
 import HowItWorks from "../pages/Dashboard/Tutor/HowItWorks/HowItWorks";
 import JoinCommunity from "../pages/Dashboard/Shared/JoinCommunity/JoinCommunity";
+import TutorJobBoard from "../pages/Dashboard/Tutor/TutorJobBoard/TutorJobBoard";
 
 export const router = createBrowserRouter([
   {
@@ -77,6 +78,10 @@ export const router = createBrowserRouter([
       {
         path: "home",
         element: <TutorDashboardHome />,
+      },
+      {
+        path: "job-board",
+        element: <TutorJobBoard />,
       },
       {
         path: "how-it-works",
