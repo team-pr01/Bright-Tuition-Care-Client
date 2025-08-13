@@ -10,6 +10,7 @@ interface ButtonProps {
   className?: string;
   type?: "submit" | "reset" | "button";
   iconWithoutBg?: React.ReactNode;
+  isDisabled?: boolean;
 }
 
 const variantClasses: Record<string, string> = {
@@ -30,17 +31,18 @@ const Button: React.FC<ButtonProps> = ({
   className = "",
   type = "button",
   iconWithoutBg,
+  isDisabled,
 }) => {
   const variantClass = variantClasses[variant] || variantClasses["primary"];
 
   const baseClasses =
-    "flex items-center gap-2 text-lg leading-[24px] w-fit rounded-lg font-semibold font-Nunito cursor-pointer transition-all duration-300 py-2 lg:py-3 px-3 lg:px-6 text-sm md:text-base";
+    `flex items-center gap-2 text-lg leading-[24px] w-fit rounded-lg font-semibold font-Nunito transition-all duration-300 py-2 lg:py-3 px-3 lg:px-6 text-sm md:text-base ${isDisabled ? "opacity-50 cursor-not-allowed" : "cursor-pointer"}`;
 
   const combinedClasses = twMerge(baseClasses, variantClass, className);
 
   return (
     <div className={variant ? "relative" : ""}>
-      <button type={type} onClick={onClick} className={combinedClasses}>
+      <button type={type} disabled={isDisabled} onClick={onClick} className={combinedClasses}>
         {label}
         {icon && (
           <span

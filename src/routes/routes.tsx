@@ -20,6 +20,7 @@ import TutorJobBoard from "../pages/Dashboard/Tutor/TutorJobBoard/TutorJobBoard"
 import ShareThisApp from "../pages/Dashboard/Shared/ShareThisApp/ShareThisApp";
 import TermsAndConditionsDashboard from "../pages/Dashboard/Shared/TermsAndConditionsDashboard/TermsAndConditionsDashboard";
 import Settings from "../pages/Dashboard/Shared/Settings/Settings";
+import Payment from "../pages/Dashboard/Tutor/Payment/Payment";
 
 export const router = createBrowserRouter([
   {
@@ -105,6 +106,10 @@ export const router = createBrowserRouter([
       {
         path: "terms-and-conditions",
         element: <TermsAndConditionsDashboard />,
+      },
+      {
+        path: "payment",
+        element: <Payment />,
       },
       {
         path: "settings",
