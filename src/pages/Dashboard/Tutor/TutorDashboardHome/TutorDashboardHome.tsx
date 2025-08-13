@@ -40,9 +40,9 @@ const TutorDashboardHome = () => {
         />
       </div>
       <NoticeBoard />
-
+{/* bg-gradient-to-r from-slate-50 to-sky-50 */}
       <div className="grid grid-cols-2 gap-6">
-        <div className="bg-gradient-to-r from-slate-50 to-sky-50 rounded-2xl border border-primary-40/10 p-5 flex gap-6">
+        <div className="bg-white rounded-2xl border border-primary-40/10 p-5 flex gap-6">
           <div className="size-32 bg-white/40 rounded-full p-[2px]">
             <img
               src={IMAGES.dummyAvatar}

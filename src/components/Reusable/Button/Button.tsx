@@ -9,6 +9,7 @@ interface ButtonProps {
   iconBg?: string;
   className?: string;
   type?: "submit" | "reset" | "button";
+  iconWithoutBg?: React.ReactNode;
 }
 
 const variantClasses: Record<string, string> = {
@@ -28,11 +29,12 @@ const Button: React.FC<ButtonProps> = ({
   iconBg = "white",
   className = "",
   type = "button",
+  iconWithoutBg,
 }) => {
   const variantClass = variantClasses[variant] || variantClasses["primary"];
 
   const baseClasses =
-    "flex items-center gap-4 text-lg leading-[24px] w-fit rounded-lg font-semibold font-Nunito cursor-pointer transition-all duration-300 py-2 lg:py-3 px-3 lg:px-6 text-sm md:text-base";
+    "flex items-center gap-2 text-lg leading-[24px] w-fit rounded-lg font-semibold font-Nunito cursor-pointer transition-all duration-300 py-2 lg:py-3 px-3 lg:px-6 text-sm md:text-base";
 
   const combinedClasses = twMerge(baseClasses, variantClass, className);
 
@@ -51,6 +53,13 @@ const Button: React.FC<ButtonProps> = ({
               className="size-3 lg:size-4"
             />
           </span>
+        )}
+        {iconWithoutBg && (
+          <img
+            src={iconWithoutBg}
+            alt="Button Icon"
+            className="size-3 lg:size-4"
+          />
         )}
       </button>
     </div>

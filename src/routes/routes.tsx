@@ -19,6 +19,7 @@ import JoinCommunity from "../pages/Dashboard/Shared/JoinCommunity/JoinCommunity
 import TutorJobBoard from "../pages/Dashboard/Tutor/TutorJobBoard/TutorJobBoard";
 import ShareThisApp from "../pages/Dashboard/Shared/ShareThisApp/ShareThisApp";
 import TermsAndConditionsDashboard from "../pages/Dashboard/Shared/TermsAndConditionsDashboard/TermsAndConditionsDashboard";
+import Settings from "../pages/Dashboard/Shared/Settings/Settings";
 
 export const router = createBrowserRouter([
   {
@@ -104,6 +105,10 @@ export const router = createBrowserRouter([
       {
         path: "terms-and-conditions",
         element: <TermsAndConditionsDashboard />,
+      },
+      {
+        path: "settings",
+        element: <Settings />,
       },
     ],
   },

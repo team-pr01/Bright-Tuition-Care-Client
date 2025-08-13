@@ -5,7 +5,7 @@ import DashboardHeader from "../components/Dashboard/DashboardHeader/DashboardHe
 
 const DashboardLayout = () => {
   return (
-    <div className="flex w-full h-screen overflow-hidden"> {/* Full height + hide page scroll */}
+    <div className="flex w-full h-screen overflow-hidden bg-[#F2F5FC]"> {/* Full height + hide page scroll */}
       <Sidebar />
       <div className="flex flex-col w-full">
         <DashboardHeader />
