@@ -4,10 +4,9 @@ import { FaCheck } from "react-icons/fa";
 import UpdateContactInfoForm from "../../../../components/Dashboard/Settings/UpdateContactInfoForm/UpdateContactInfoForm";
 import ChangePasswordForm from "../../../../components/Dashboard/Settings/ChangePasswordForm/ChangePasswordForm";
 import ProfileVerificationForm from "../../../../components/Dashboard/Settings/ProfileVerificationForm/ProfileVerificationForm";
-
+import ProfileStatusForm from "../../../../components/Dashboard/Settings/ProfileStatusForm/ProfileStatusForm";
 
 const Settings = () => {
-  
   const [activeTab, setActiveTab] = useState<string>("Contact Info");
   const settingsTabs = [
     {
@@ -31,8 +30,6 @@ const Settings = () => {
       icon: IMAGES.teacher,
     },
   ];
-
-  
 
   return (
     <div className="font-Nunito">
@@ -74,15 +71,10 @@ const Settings = () => {
       </div>
 
       <div className="bg-white rounded-2xl border border-primary-40/10 mt-10 py-7 px-5">
-        {
-            activeTab === "Contact Info" && <UpdateContactInfoForm />
-        }
-        {
-            activeTab === "Change Password" && <ChangePasswordForm />
-        }
-        {
-            activeTab === "Profile Verification" && <ProfileVerificationForm />
-        }
+        {activeTab === "Contact Info" && <UpdateContactInfoForm />}
+        {activeTab === "Change Password" && <ChangePasswordForm />}
+        {activeTab === "Profile Verification" && <ProfileVerificationForm />}
+        {activeTab === "Profile Lock/Unlock" && <ProfileStatusForm />}
       </div>
     </div>
   );
