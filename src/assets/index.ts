@@ -70,6 +70,7 @@ import profileVerified from "../assets/Icons/profile-verified.svg";
 import profileUnverified from "../assets/Icons/profile-unverified.svg";
 import support from "../assets/Icons/support.svg";
 import sendWhite from "../assets/Icons/send.svg";
+import warning from "../assets/Icons/warning.svg";
 
 
 import aboutUs from "../assets/Images/about-us.svg";
@@ -173,4 +174,5 @@ export const ICONS = {
   profileUnverified,
   support,
   sendWhite,
+  warning,
 };

@@ -3,6 +3,7 @@ import { IMAGES } from "../../../../assets";
 import { FaCheck } from "react-icons/fa";
 import UpdateContactInfoForm from "../../../../components/Dashboard/Settings/UpdateContactInfoForm/UpdateContactInfoForm";
 import ChangePasswordForm from "../../../../components/Dashboard/Settings/ChangePasswordForm/ChangePasswordForm";
+import ProfileVerificationForm from "../../../../components/Dashboard/Settings/ProfileVerificationForm/ProfileVerificationForm";
 
 
 const Settings = () => {
@@ -78,6 +79,9 @@ const Settings = () => {
         }
         {
             activeTab === "Change Password" && <ChangePasswordForm />
+        }
+        {
+            activeTab === "Profile Verification" && <ProfileVerificationForm />
         }
       </div>
     </div>
