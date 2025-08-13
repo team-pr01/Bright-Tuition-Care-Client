@@ -33,7 +33,7 @@ const ChangePasswordForm = () => {
   return (
     <form
       onSubmit={handleSubmit(handleChangePassword)}
-      className="flex flex-col gap-6"
+      className="flex flex-col gap-6 max-w-full lg:max-w-xl"
     >
       <h1 className="font-semibold text-lg text-neutral-10/90">
         Change Your Password
