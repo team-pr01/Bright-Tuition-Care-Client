@@ -65,7 +65,7 @@ const ShareThisApp = () => {
   };
   return (
     <div
-      className={`bg-gradient-to-r from-slate-50 to-sky-50 rounded-2xl border border-primary-40/10 py-8 px-5`}
+      className={`bg-white border border-primary-40/10 rounded-2xl shadow-xs py-8 px-5`}
     >
       <div className="w-full flex flex-col items-center gap-10">
         <div>

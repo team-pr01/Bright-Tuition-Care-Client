@@ -1,10 +1,12 @@
 import { useState } from "react";
-import { IMAGES } from "../../../../assets";
 import { FaCheck } from "react-icons/fa";
 import UpdateContactInfoForm from "../../../../components/Dashboard/Settings/UpdateContactInfoForm/UpdateContactInfoForm";
 import ChangePasswordForm from "../../../../components/Dashboard/Settings/ChangePasswordForm/ChangePasswordForm";
 import ProfileVerificationForm from "../../../../components/Dashboard/Settings/ProfileVerificationForm/ProfileVerificationForm";
 import ProfileStatusForm from "../../../../components/Dashboard/Settings/ProfileStatusForm/ProfileStatusForm";
+import { RiContactsBook3Line, RiLockPasswordLine } from "react-icons/ri";
+import { PiIdentificationBadge } from "react-icons/pi";
+import { FiUnlock } from "react-icons/fi";
 
 const Settings = () => {
   const [activeTab, setActiveTab] = useState<string>("Contact Info");
@@ -12,22 +14,22 @@ const Settings = () => {
     {
       title: "Contact Info",
       description: "Manage your contact details.",
-      icon: IMAGES.guardian,
+      icon: <RiContactsBook3Line />,
     },
     {
       title: "Change Password",
-      description: "Update your password to keep account secure.",
-      icon: IMAGES.teacher,
+      description: "Update your password to be secure.",
+      icon: <RiLockPasswordLine />,
     },
     {
       title: "Profile Verification",
       description: "Verify your profile to gain full access.",
-      icon: IMAGES.teacher,
+      icon: <PiIdentificationBadge />,
     },
     {
       title: "Profile Lock/Unlock",
       description: "Lock or unlock your profile for privacy.",
-      icon: IMAGES.teacher,
+      icon: <FiUnlock />,
     },
   ];
 
@@ -62,8 +64,8 @@ const Settings = () => {
                 <h1 className="font-semibold text-lg">{role?.title}</h1>
                 <p className="text-sm mt-[6px]">{role?.description}</p>
               </div>
-              <div className="size-16 rounded-full bg-neutral-20/10 flex items-center justify-center">
-                <img src={role?.icon} alt="" className="size-11" />
+              <div className="size-16 text-2xl rounded-full bg-neutral-20/10 flex items-center justify-center">
+                {role?.icon}
               </div>
             </button>
           );
