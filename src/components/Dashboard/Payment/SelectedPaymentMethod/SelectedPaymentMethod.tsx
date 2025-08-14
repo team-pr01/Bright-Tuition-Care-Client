@@ -72,36 +72,34 @@ const SelectedPaymentMethod: React.FC<TSelectedPaymentMethodProps> = ({
         )}
       </div>
 
-        <article className="bg-white border-primary-40/10 p-5 rounded-2xl">
-          <div
-            className="flex gap-2 cursor-pointer items-center justify-between w-full"
-            onClick={() => setIsAccordingOpen(!isAccordingOpen)}
-          >
-            <h2 className="font-semibold text-center">
-              Submit Payment Proof
-            </h2>
-            <p>
-              <FaChevronDown
-                className={`text-[1.2rem] dark:text-slate-600 text-text transition-all duration-300 ${
-                  isAccordingOpen && "rotate-[180deg] !text-[#3B9DF8]"
-                }`}
-              />
-            </p>
-          </div>
-          <div
-            className={`grid transition-all duration-300 overflow-hidden ease-in-out ${
-              isAccordingOpen
-                ? "grid-rows-[1fr] opacity-100 mt-4"
-                : "grid-rows-[0fr] opacity-0"
-            }`}
-          >
-            <SubmitProofForm
-              amount={amount}
-              selectedPaymentMethod={selectedPaymentMethod}
-              setPaymentModalType={setPaymentModalType}
+      <div className="bg-white border-primary-40/10 p-5 rounded-2xl">
+        <div
+          className="flex gap-2 cursor-pointer items-center justify-between w-full"
+          onClick={() => setIsAccordingOpen(!isAccordingOpen)}
+        >
+          <h2 className="font-semibold text-center">Submit Payment Proof</h2>
+          <p>
+            <FaChevronDown
+              className={`text-[1.2rem] dark:text-slate-600 text-text transition-all duration-300 ${
+                isAccordingOpen && "rotate-[180deg] !text-[#3B9DF8]"
+              }`}
             />
-          </div>
-        </article>
+          </p>
+        </div>
+        <div
+          className={`grid transition-all duration-300 overflow-hidden ease-in-out ${
+            isAccordingOpen
+              ? "grid-rows-[1fr] opacity-100 mt-4"
+              : "grid-rows-[0fr] opacity-0 h-0"
+          }`}
+        >
+          <SubmitProofForm
+            amount={amount}
+            selectedPaymentMethod={selectedPaymentMethod}
+            setPaymentModalType={setPaymentModalType}
+          />
+        </div>
+      </div>
     </div>
   );
 };
