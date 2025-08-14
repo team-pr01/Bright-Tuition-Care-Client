@@ -5,7 +5,16 @@ import JobDetails from "../JobDetails/JobDetails";
 import JobApplyConfirmationModal from "./JobApplyConfirmationModal";
 import ShareJobModal from "../ShareJobModal";
 
-const JobCard = () => {
+type TJobCardProps = {
+  variant?: string;
+  status?: string;
+  detailsWidth?: string;
+};
+const JobCard: React.FC<TJobCardProps> = ({
+  variant,
+  status,
+  detailsWidth = "max-w-full 2xl:max-w-[70%]",
+}) => {
   const [isShareJobModalOpen, setIsShareJobModalOpen] =
     useState<boolean>(false);
   const [isJobApplyConfirmationModalOpen, setIsJobApplyConfirmationModalOpen] =
@@ -13,19 +22,30 @@ const JobCard = () => {
   const [showDrawer, setShowDrawer] = useState<boolean>(false);
 
   const jobDetails = [
-    { icon: ICONS.salary, title: "Salary", value: "5000" },
-    { icon: ICONS.subject, title: "Subject", value: "All" },
-    {
-      icon: ICONS.tutoringDays,
-      title: "Tutoring Days",
-      value: "3 Days / Week",
-    },
-    { icon: ICONS.preferredTutor, title: "Prefer Tutor", value: "Female" },
     { icon: ICONS.tuitionType, title: "Tuition Type", value: "Home Tutoring" },
-    { icon: ICONS.location, title: "Location", value: "Mohammodpur" },
+    { icon: ICONS.salary, title: "Salary", value: "5000 BDT" },
+    { icon: ICONS.preferredTutor, title: "Prefer Tutor", value: "Female" },
+    // { icon: ICONS.subject, title: "Subjects", value: "Physics, Chemistry, Math" },
+    // { icon: ICONS.location, title: "Location", value: "Mohammodpur" },
+    // {
+    //   icon: ICONS.tutoringDays,
+    //   title: "Tutoring Days",
+    //   value: "3 Days / Week",
+    // },
   ];
 
   const shareUrl = "https://yourwebsite.com/job/123"; // Replace with actual job URL
+
+  const statusTextColor =
+    status === "applied"
+      ? "text-neutral-10"
+      : status === "shortlisted"
+      ? "text-primary-10"
+      : status === "appointed"
+      ? "text-[#9C9700]"
+      : status === "confirmed"
+      ? "text-green-500"
+      : "text-rose-500";
 
   return (
     <>
@@ -43,75 +63,109 @@ const JobCard = () => {
       )}
 
       {/* Job Card */}
-      <div className="px-3 py-5 md:px-5 md:py-10 border border-primary-30 bg-white shadow-job-card rounded-xl font-Nunito transform transition-transform duration-300 hover:-translate-y-2 z-20 relative">
-        <h1 className="text-neutral-10 text-lg md:text-xl font-bold leading-6">
-          Advanced Mathematics Tutor
-        </h1>
-
-        <div className="flex items-center gap-5 mt-3">
-          <div className="flex items-center gap-[10px]">
-            <img src={ICONS.jobId} alt="Job ID" className="size-5" />
-            <p className="text-neutral-10 text-sm md:text-base leading-6">
-              Job Id#12345
-            </p>
-          </div>
-          <div className="flex items-center gap-[10px]">
-            <img src={ICONS.postedDate} alt="Posted Date" className="size-5" />
-            <p className="text-neutral-10 text-sm md:text-base leading-6">
-              January 15, 2024
-            </p>
-          </div>
-        </div>
-
-        <div className="flex flex-col-reverse md:flex-row items-center justify-between mt-9 md:mt-12">
-          <div className="grid grid-cols-2 gap-8">
-            {jobDetails.map((details, index) => (
-              <div key={index} className="flex items-center gap-2">
-                <img src={details.icon} alt="" className="size-5" />
-                <div>
-                  <p className="text-neutral-45 text-sm leading-normal">
-                    {details.title}
-                  </p>
-                  <p className="text-neutral-10 font-medium leading-6 mt-1">
-                    {details.value}
-                  </p>
-                </div>
-              </div>
-            ))}
-          </div>
+      <div className="px-3 py-3 md:px-5 border border-primary-30 bg-white shadow-job-card rounded-xl font-Nunito transform transition-transform duration-300 hover:-translate-y-2 z-0 relative">
+        <div className="flex justify-between gap-3">
+          <button
+            onClick={() => setShowDrawer(true)}
+            className="text-neutral-10 text-lg md:text-xl font-bold leading-6 hover:underline cursor-pointer"
+          >
+            Advanced Mathematics Tutor
+          </button>
 
           <img
             src={ICONS.jobCategoryDummyIcon}
             alt="Category Icon"
-            className="size-20 md:size-[90px]"
+            className="size-16 lg:size-20 opacity-50"
           />
         </div>
 
-        <div className="flex gap-4 mt-12 items-center justify-between">
-          <div className="flex items-center gap-4">
-            <button
-              onClick={() => setShowDrawer(true)}
-              className="bg-white hover:bg-primary-10/10 text-neutral-10 border border-primary-10 flex items-center gap-1 xl:gap-4 leading-[24px] w-fit rounded-lg font-semibold transition-all duration-300 py-2 lg:py-3 px-3 xl:px-6 text-sm md:text-base cursor-pointer"
-            >
-              <img src={ICONS.jobDetails} alt="" className="size-5" />
-              <p className="hidden md:block">Details</p>
-            </button>
-            <button
-              onClick={() => setIsShareJobModalOpen(true)}
-              className="bg-white hover:bg-primary-10/10 text-neutral-10 border border-primary-10 flex items-center gap-1 xl:gap-4 leading-[24px] w-fit rounded-lg font-semibold transition-all duration-300 py-2 lg:py-3 px-3 xl:px-6 text-sm md:text-base cursor-pointer"
-            >
-              <img src={ICONS.share} alt="" className="size-5" />
-              <p className="hidden md:block">Share</p>
-            </button>
-          </div>
-          <Button
-            label="Apply Now"
-            variant="primary"
-            icon={ICONS.topRightArrowWhite}
-            iconBg="#0D99FF"
-            onClick={() => setIsJobApplyConfirmationModalOpen(true)}
-          />
+        <div className="flex items-center gap-5 text-neutral-10 text-xs sm:text-sm md:text-base leading-6">
+          <p>
+            Job Id : <span className="font-semibold">#12345</span>
+          </p>
+          <p>
+            Posted Date : <span className="font-semibold">August 15, 2025</span>
+          </p>
         </div>
+
+        <div
+          className={`grid grid-cols-2 md:grid-cols-3 gap-2 2xl:gap-4 mt-7 ${detailsWidth}`}
+        >
+          {jobDetails.map((details, index) => (
+            <div key={index} className="flex gap-2">
+              <img src={details.icon} alt="" className="size-5" />
+              <div>
+                <p className="text-neutral-45 text-sm leading-normal">
+                  {details.title}
+                </p>
+                <p className="text-neutral-10 font-medium leading-6 mt-1">
+                  {details.value}
+                </p>
+              </div>
+            </div>
+          ))}
+        </div>
+        <div className="flex gap-2 mt-4">
+          <img src={ICONS.subject} alt="" className="size-5" />
+          <div>
+            <p className="text-neutral-45 text-sm leading-normal">Subjects</p>
+            <p className="text-neutral-10 font-medium leading-6 mt-1">
+              Physics, Chemistry, Math
+            </p>
+          </div>
+        </div>
+        <div className="flex gap-2 mt-4">
+          <img src={ICONS.location} alt="" className="size-5" />
+          <div>
+            <p className="text-neutral-45 text-sm leading-normal">Location</p>
+            <p className="text-neutral-10 font-medium leading-6 mt-1">
+              Mohammodpur, Dhaka
+            </p>
+          </div>
+        </div>
+
+        {variant === "status" && (
+          <div className="flex items-center gap-5 text-neutral-10">
+            <div className="flex items-center gap-2 mt-4">
+              <img src={ICONS.jobStatus} alt="" className="size-5" />
+              <p className="font-bold text-sm">Applied On:</p>
+              <p className="text-primary-10">15 Aug, 2025</p>
+            </div>
+            <div className="flex items-center gap-2 mt-4">
+              <img src={ICONS.jobStatus} alt="" className="size-5" />
+              <p className="font-bold text-sm">Status:</p>
+              <p className={`capitalize ${statusTextColor}`}>{status}</p>
+            </div>
+          </div>
+        )}
+
+        {variant !== "status" && (
+          <div className="flex gap-4 mt-5 items-center justify-between">
+            <div className="flex items-center gap-4">
+              <button
+                onClick={() => setShowDrawer(true)}
+                className="text-neutral-10 flex items-center gap-2 w-fit font-semibold transition-all duration-300 text-sm md:text-base cursor-pointer"
+              >
+                <img src={ICONS.jobDetails} alt="" className="size-5" />
+                <p className="hidden md:block">Details</p>
+              </button>
+              <button
+                onClick={() => setIsShareJobModalOpen(true)}
+                className="text-neutral-10 flex items-center gap-2 w-fit font-semibold transition-all duration-300 text-sm md:text-base cursor-pointer"
+              >
+                <img src={ICONS.share} alt="" className="size-4" />
+                <p className="hidden md:block">Share</p>
+              </button>
+            </div>
+            <Button
+              label="Apply Now"
+              variant="primary"
+              icon={ICONS.topRightArrowWhite}
+              iconBg="#0D99FF"
+              onClick={() => setIsJobApplyConfirmationModalOpen(true)}
+            />
+          </div>
+        )}
       </div>
       <JobApplyConfirmationModal
         isJobApplyConfirmationModalOpen={isJobApplyConfirmationModalOpen}

@@ -21,6 +21,7 @@ import ShareThisApp from "../pages/Dashboard/Shared/ShareThisApp/ShareThisApp";
 import TermsAndConditionsDashboard from "../pages/Dashboard/Shared/TermsAndConditionsDashboard/TermsAndConditionsDashboard";
 import Settings from "../pages/Dashboard/Shared/Settings/Settings";
 import Payment from "../pages/Dashboard/Tutor/Payment/Payment";
+import JobApplicationsSummary from "../pages/Dashboard/Tutor/JobApplicationsSummary/JobApplicationsSummary";
 
 export const router = createBrowserRouter([
   {
@@ -86,6 +87,10 @@ export const router = createBrowserRouter([
       {
         path: "job-board",
         element: <TutorJobBoard />,
+      },
+      {
+        path: "job-applications/:status",
+        element: <JobApplicationsSummary />,
       },
       {
         path: "how-it-works",

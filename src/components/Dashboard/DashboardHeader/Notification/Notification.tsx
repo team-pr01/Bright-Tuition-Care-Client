@@ -57,7 +57,7 @@ const Notification = () => {
     },
   };
   return (
-    <div className="relative" ref={notificationRef}>
+    <div className="relative " ref={notificationRef}>
       <button
         onClick={() => setIsNotificationOpen((prev) => !prev)}
         className="relative cursor-pointer"
@@ -72,7 +72,7 @@ const Notification = () => {
         </div>
       </button>
 
-      <div style={{ perspective: "1000px" }}>
+      <div style={{ perspective: "1000px" }} className="z-[999]">
         <AnimatePresence>
           {isNotificationOpen && (
             <motion.div

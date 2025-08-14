@@ -77,6 +77,7 @@ import bkash from "../assets/Icons/bkash.svg";
 import nagad from "../assets/Icons/nagad.svg";
 import bank from "../assets/Icons/bank.svg";
 import rightArrow from "../assets/Icons/right-arrow.svg";
+import jobStatus from "../assets/Icons/status.svg";
 
 
 import aboutUs from "../assets/Images/about-us.svg";
@@ -187,4 +188,5 @@ export const ICONS = {
   nagad,
   bank,
   rightArrow,
+  jobStatus,
 };

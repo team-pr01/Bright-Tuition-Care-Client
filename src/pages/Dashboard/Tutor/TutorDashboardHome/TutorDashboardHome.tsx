@@ -11,33 +11,33 @@ const TutorDashboardHome = () => {
       <div className="grid grid-cols-5 gap-6">
         <DashboardOverviewCard
           title="Applied Jobs"
-          value="5"
-          textColor="text-primary-10"
-          path="/dashboard/tutor/tutor-requests"
+          value="7"
+          textColor="text-neutral-10"
+          path="/dashboard/tutor/job-applications/applied"
         />
         <DashboardOverviewCard
-          title="Applied Jobs"
+          title="Shortlisted Jobs"
           value="5"
           textColor="text-primary-10"
-          path="/dashboard/tutor/tutor-requests"
+          path="/dashboard/tutor/job-applications/shortlisted"
         />
         <DashboardOverviewCard
-          title="Applied Jobs"
-          value="5"
-          textColor="text-primary-10"
-          path="/dashboard/tutor/tutor-requests"
+          title="Appointed"
+          value="2"
+          textColor="text-[#9C9700]"
+          path="/dashboard/tutor/job-applications/appointed"
         />
         <DashboardOverviewCard
-          title="Applied Jobs"
-          value="5"
-          textColor="text-primary-10"
-          path="/dashboard/tutor/tutor-requests"
+          title="Confirmed"
+          value="1"
+          textColor="text-green-500"
+          path="/dashboard/tutor/job-applications/confirmed"
         />
         <DashboardOverviewCard
-          title="Applied Jobs"
-          value="5"
-          textColor="text-primary-10"
-          path="/dashboard/tutor/tutor-requests"
+          title="Cancelled"
+          value="6"
+          textColor="text-rose-500"
+          path="/dashboard/tutor/job-applications/cancelled"
         />
       </div>
       <NoticeBoard />

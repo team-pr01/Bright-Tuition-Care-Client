@@ -10,7 +10,7 @@ const Sidebar = () => {
   const location = useLocation();
   return (
     <div className="sticky top-0 left-0">
-      <div className="w-[300px] bg-primary-10 p-5 font-Nunito flex flex-col gap-10 justify-between">
+      <div className="w-[270px] 2xl:w-[300px] bg-primary-10 p-5 font-Nunito flex flex-col gap-10 justify-between">
         <UserProfilePhoto />
 
         <div className="flex flex-col gap-4 h-full xl:h-[380px] 2xl:h-[600px] overflow-y-auto custom-scrollbar-sidebar">
