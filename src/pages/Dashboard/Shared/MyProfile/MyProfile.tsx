@@ -1,13 +1,14 @@
-import { RiContactsBook3Line, RiLockPasswordLine } from "react-icons/ri";
 import PersonalInfo from "../../../../components/Dashboard/MyProfilePage/PersonalInfo/PersonalInfo";
 import ProfileDetails from "../../../../components/Dashboard/MyProfilePage/ProfileDetails/ProfileDetails";
 import TuitionRelatedInfo from "../../../../components/Dashboard/MyProfilePage/TuitionRelatedInfo/TuitionRelatedInfo";
+import { RiContactsBook3Line } from "react-icons/ri";
 import { PiIdentificationBadge } from "react-icons/pi";
-import { FiUnlock } from "react-icons/fi";
+import { FiAlertCircle, FiFileText } from "react-icons/fi";
 import { useState } from "react";
-import { FaCheck } from "react-icons/fa";
+import { FaChalkboardTeacher, FaCheck } from "react-icons/fa";
 import EducationalInfo from "../../../../components/Dashboard/MyProfilePage/EducationalInfo/EducationalInfo";
 import EmergencyInfo from "../../../../components/Dashboard/MyProfilePage/EmergencyInfo/EmergencyInfo";
+import CredentialsInfo from "../../../../components/Dashboard/MyProfilePage/CredentialsInfo/CredentialsInfo";
 
 const MyProfile = () => {
   const profile = {
@@ -95,9 +96,22 @@ const MyProfile = () => {
       number: "",
       address: "",
     },
+
+    identityProofsInfo: [
+      {
+        documentType: "SSC Certificate",
+        imageUrl: "https://i.ibb.co.com/391Jr7r4/cloud-security3.pngE",
+      },
+      {
+        documentType: "NID Card",
+        imageUrl:
+          "https://i.ibb.co.com/JWyDbXS9/thanks-popup-screen-login-sign-260nw-2237153683.webp",
+      },
+    ],
   };
 
   const [activeTab, setActiveTab] = useState<string>("personalInfo");
+
   const profileTabs = [
     {
       title: "Personal",
@@ -107,7 +121,7 @@ const MyProfile = () => {
     {
       title: "Tuition Related",
       key: "tuitionRelatedInfo",
-      icon: <RiLockPasswordLine />,
+      icon: <FaChalkboardTeacher />,
     },
     {
       title: "Educational",
@@ -117,12 +131,12 @@ const MyProfile = () => {
     {
       title: "Emergency",
       key: "emergencyInfo",
-      icon: <FiUnlock />,
+      icon: <FiAlertCircle />,
     },
     {
       title: "Credential",
       key: "credentialInfo",
-      icon: <FiUnlock />,
+      icon: <FiFileText />,
     },
   ];
 
@@ -198,9 +212,12 @@ const MyProfile = () => {
           {activeTab === "educationalInfo" && (
             <EducationalInfo educationalInfo={profile.educationalInfo} />
           )}
-          {
-            activeTab === "emergencyInfo" && <EmergencyInfo emergencyInfo={profile.emergencyInfo} />
-          }
+          {activeTab === "emergencyInfo" && (
+            <EmergencyInfo emergencyInfo={profile.emergencyInfo} />
+          )}
+          {activeTab === "credentialInfo" && (
+            <CredentialsInfo credentialInfo={profile.identityProofsInfo} />
+          )}
         </div>
       </div>
     </div>

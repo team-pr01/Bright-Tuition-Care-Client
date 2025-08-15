@@ -68,7 +68,7 @@ const TuitionRelatedInfo = ({
   };
 
   return (
-    <div className="font-Nunito border-b border-neutral-30/20 pb-5">
+    <div className="font-Nunito">
       <h1 className="text-neutral-5 font-semibold text-2xl">
         Tuition Related Information
       </h1>
