@@ -6,6 +6,7 @@ import { PiIdentificationBadge } from "react-icons/pi";
 import { FiUnlock } from "react-icons/fi";
 import { useState } from "react";
 import { FaCheck } from "react-icons/fa";
+import EducationalInfo from "../../../../components/Dashboard/MyProfilePage/EducationalInfo/EducationalInfo";
 
 const MyProfile = () => {
   const profile = {
@@ -53,6 +54,39 @@ const MyProfile = () => {
         motherNumber: "",
       },
     },
+
+    educationalInfo: [
+      {
+        degree: "BSC in Computer Science and Engineering",
+        info: {
+          institute: "CCN Polytechnic Institute",
+          examDegreeTitle: "Diploma in Computer Engineering",
+          majorGroup: "Computer Science and Engineering (CSE)",
+          idCardNo: "582693",
+          result: "3.81",
+          curriculum: "Bangla Version",
+          fromDate: "2020-08-01",
+          toDate: "2024-08-01",
+          yearOfPassing: 2024,
+          currentInstitute: "No",
+        },
+      },
+      {
+        degree: "Secondary Education",
+        info: {
+          institute: "ABC High School",
+          examDegreeTitle: "SSC",
+          majorGroup: "Science",
+          idCardNo: "123456",
+          result: "4.75",
+          curriculum: "Bangla Version",
+          fromDate: "2014-01-01",
+          toDate: "2020-06-30",
+          yearOfPassing: 2020,
+          currentInstitute: "No",
+        },
+      },
+    ],
   };
 
   const [activeTab, setActiveTab] = useState<string>("personalInfo");
@@ -129,7 +163,7 @@ const MyProfile = () => {
         <div className="bg-white border border-primary-40/10 p-5 rounded-2xl mt-5">
           {activeTab === "personalInfo" && (
             <>
-              <div className="border-b border-neutral-30/20 pb-5">
+              <div className="border-b border-neutral-30/20 pb-5 mb-4">
                 <h1 className="text-neutral-5 font-semibold text-2xl">
                   Overview
                 </h1>
@@ -152,6 +186,11 @@ const MyProfile = () => {
               tuitionRelatedInfo={profile.tuitionRelatedInfo}
             />
           )}
+
+          {
+            activeTab === "educationalInfo" && 
+            <EducationalInfo educationalInfo={profile.educationalInfo} />
+          }
         </div>
       </div>
     </div>

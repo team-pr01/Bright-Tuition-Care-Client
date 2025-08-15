@@ -50,14 +50,15 @@ const PersonalInfo: React.FC<TPersonalInfoProps> = ({ personalInfo }) => {
   ];
 
   const isProvided = (val: unknown): boolean => {
-    if (Array.isArray(val)) return val.length > 0 && val.some(v => String(v).trim() !== "");
+    if (Array.isArray(val))
+      return val.length > 0 && val.some((v) => String(v).trim() !== "");
     if (typeof val === "string") return val.trim() !== "";
     return val !== null && val !== undefined;
   };
 
   return (
     <div className="font-Nunito">
-      <h1 className="text-neutral-5 font-semibold text-2xl mt-5">
+      <h1 className="text-neutral-5 font-semibold text-2xl">
         Personal Information
       </h1>
 
@@ -67,10 +68,10 @@ const PersonalInfo: React.FC<TPersonalInfoProps> = ({ personalInfo }) => {
 
           return (
             <div key={index} className="flex">
-              <span className="text-neutral-5 font-semibold min-w-[200px]">
+              <span className="text-neutral-5 font-medium min-w-[200px]">
                 {item.label}
               </span>
-              <span className="text-neutral-5 font-semibold">:</span>
+              <span className="text-neutral-5 font-medium">:</span>
               <span
                 className={`ml-2 ${
                   provided ? "text-neutral-45" : "text-red-500"

@@ -79,10 +79,10 @@ const TuitionRelatedInfo = ({
 
           return (
             <div key={index} className="flex">
-              <span className="text-neutral-5 font-semibold min-w-[200px]">
+              <span className="text-neutral-5 font-medium min-w-[200px]">
                 {item.label}
               </span>
-              <span className="text-neutral-5 font-semibold">:</span>
+              <span className="text-neutral-5 font-medium">:</span>
               <span
                 className={`ml-2 ${
                   provided ? "text-neutral-45" : "text-red-500"

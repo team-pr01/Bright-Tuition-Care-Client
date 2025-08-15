@@ -25,7 +25,7 @@ const Sidebar = () => {
                     : "font-medium  text-white  bg-none"
                 }`}
               >
-                {link?.icon}
+                <div className="size-6 rounded-full flex items-center justify-center bg-primary-10 text-white">{link?.icon}</div>
                 {link?.label}
               </Link>
             ))}
