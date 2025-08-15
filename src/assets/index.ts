@@ -83,6 +83,8 @@ import email from "../assets/Icons/email.svg";
 import phoneGray from "../assets/Icons/phone-gray.svg";
 import address from "../assets/Icons/address.svg";
 import pen from "../assets/Icons/pen.svg";
+import plusBlue from "../assets/Icons/plus-blue.svg";
+import copy from "../assets/Icons/copy.svg";
 
 
 import aboutUs from "../assets/Images/about-us.svg";
@@ -199,4 +201,6 @@ export const ICONS = {
   phoneGray,
   address,
   pen,
+  plusBlue,
+  copy,
 };

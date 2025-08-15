@@ -27,7 +27,9 @@ const Payment = () => {
           />
 
           <div className="text-neutral-10 text-center">
-            <h1 className="font-bold text-xl">Platform Charge <span className="text-primary-10">500 BDT</span></h1>
+            <h1 className="font-bold text-xl">
+              Platform Charge <span className="text-primary-10">500 BDT</span>
+            </h1>
             <p className="text-sm mt-[6px]">
               After finalizing a job to a tutor, we ask for (55%-Home Tutoring;
               55%-Online Tutoring; 35%-Package Tutoring; 55%-Group Tutoring)
@@ -63,7 +65,11 @@ const Payment = () => {
             setPaymentModalType={setPaymentModalType}
           />
         ) : (
-          <SelectedPaymentMethod selectedPaymentMethod={selectedPaymentMethod} setPaymentModalType={setPaymentModalType} amount={500} />
+          <SelectedPaymentMethod
+            selectedPaymentMethod={selectedPaymentMethod}
+            setPaymentModalType={setPaymentModalType}
+            amount={500}
+          />
         )}
       </Modal>
     </div>
