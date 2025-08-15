@@ -22,6 +22,7 @@ import TermsAndConditionsDashboard from "../pages/Dashboard/Shared/TermsAndCondi
 import Settings from "../pages/Dashboard/Shared/Settings/Settings";
 import Payment from "../pages/Dashboard/Tutor/Payment/Payment";
 import JobApplicationsSummary from "../pages/Dashboard/Tutor/JobApplicationsSummary/JobApplicationsSummary";
+import MyProfile from "../pages/Dashboard/Shared/MyProfile/MyProfile";
 
 export const router = createBrowserRouter([
   {
@@ -91,6 +92,10 @@ export const router = createBrowserRouter([
       {
         path: "job-applications/:status",
         element: <JobApplicationsSummary />,
+      },
+      {
+        path: "my-profile",
+        element: <MyProfile />,
       },
       {
         path: "how-it-works",

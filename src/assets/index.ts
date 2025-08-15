@@ -78,6 +78,7 @@ import nagad from "../assets/Icons/nagad.svg";
 import bank from "../assets/Icons/bank.svg";
 import rightArrow from "../assets/Icons/right-arrow.svg";
 import jobStatus from "../assets/Icons/status.svg";
+import reset from "../assets/Icons/reset.svg";
 
 
 import aboutUs from "../assets/Images/about-us.svg";
@@ -189,4 +190,5 @@ export const ICONS = {
   bank,
   rightArrow,
   jobStatus,
+  reset,
 };

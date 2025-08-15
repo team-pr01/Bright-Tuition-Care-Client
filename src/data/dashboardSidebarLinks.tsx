@@ -31,7 +31,7 @@ export const tutorDashboardLinks: DashboardLink[] = [
   },
   {
     label: "Profile",
-    path: "/dashboard/tutor/profile",
+    path: "/dashboard/tutor/my-profile",
     icon: <LuUser />,
   },
   {

@@ -15,10 +15,19 @@ const Filters = () => {
   const [selectedDays, setSelectedDays] = useState<string[]>([]);
   const [selectedClass, setSelectedClass] = useState<string[]>([]);
   const [selectedTutorGender, setSelectedTutorGender] = useState<string[]>([]);
-  const [selectedStudentGender, setSelectedStudentGender] = useState<string[]>(
-    []
-  );
+  const [selectedStudentGender, setSelectedStudentGender] = useState<string[]>([]);
   const [selectedTuitionType, setSelectedTuitionType] = useState<string[]>([]);
+
+  const handleResetFilters = () => {
+    setSelectedCities([]);
+    setSelectedAreas([]);
+    setSelectedCategory([]);
+    setSelectedDays([]);
+    setSelectedClass([]);
+    setSelectedTutorGender([]);
+    setSelectedStudentGender([]);
+    setSelectedTuitionType([]);
+  }
 
   // Update area options when city changes
   useEffect(() => {
@@ -164,18 +173,28 @@ const Filters = () => {
             isRequired={false}
           />
         </div>
-        <div className="flex items-center gap-5 justify-end mt-10">
+        <div className="mt-10 flex items-center justify-between">
           <button
-            onClick={() => setIsAccordingOpen(!isAccordingOpen)}
-            className={`border border-primary-10 text-primary-10 hover:bg-primary-10 hover:text-white w-fit ${buttonCommonClassNames}`}
+            onClick={handleResetFilters}
+            className="flex items-center gap-2 cursor-pointer hover:underline"
           >
-            Close
+            <img src={ICONS.reset} alt="" className="size-4" />
+            <h1 className="font-medium leading-6 text-primary-10">Reset</h1>
           </button>
-          <button
-            className={`bg-primary-10 hover:bg-transparent border border-primary-10 text-white hover:text-primary-10 w-fit ${buttonCommonClassNames}`}
-          >
-            Apply
-          </button>
+
+          <div className="flex items-center gap-5 justify-end">
+            <button
+              onClick={() => setIsAccordingOpen(!isAccordingOpen)}
+              className={`border border-primary-10 text-primary-10 hover:bg-primary-10 hover:text-white w-fit ${buttonCommonClassNames}`}
+            >
+              Close
+            </button>
+            <button
+              className={`bg-primary-10 hover:bg-transparent border border-primary-10 text-white hover:text-primary-10 w-fit ${buttonCommonClassNames}`}
+            >
+              Apply
+            </button>
+          </div>
         </div>
       </div>
     </>

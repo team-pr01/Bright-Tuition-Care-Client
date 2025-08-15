@@ -1,7 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-
-
-
 import { useState, useRef, useEffect, forwardRef } from "react";
 import type { FieldError } from "react-hook-form";
 import { FiChevronDown } from "react-icons/fi";
@@ -101,38 +97,43 @@ const SelectDropdownWithSearch = forwardRef<
           </button>
 
           {isOpen && (
-            <div className="absolute z-30 mt-1 w-full rounded-lg bg-white shadow-lg border border-neutral-45/30 max-h-60 overflow-auto">
-              {/* Search input */}
-              <div className="sticky top-0 bg-white p-2 border-b border-neutral-45/20">
-                <input
-                  type="text"
-                  placeholder="Search..."
-                  className="w-full px-3 py-2 text-sm border border-neutral-45/20 rounded-md focus:outline-none focus:border-primary-10"
-                  value={searchTerm}
-                  onChange={(e) => setSearchTerm(e.target.value)}
-                  onClick={(e) => e.stopPropagation()}
-                />
-              </div>
+  <div className="absolute z-30 mt-1 w-full rounded-lg bg-white shadow-lg border border-neutral-45/30 max-h-60 overflow-auto">
+    {/* Search input */}
+    <div className="sticky top-0 bg-white p-2 border-b border-neutral-45/20">
+      <input
+        type="text"
+        placeholder="Search..."
+        className="w-full px-3 py-2 text-sm border border-neutral-45/20 rounded-md focus:outline-none focus:border-primary-10"
+        value={searchTerm}
+        onChange={(e) => setSearchTerm(e.target.value)}
+        onClick={(e) => e.stopPropagation()}
+      />
+    </div>
 
-              {filteredOptions.length > 0 ? (
-                filteredOptions.map((option) => (
-                  <div
-                    key={option}
-                    className={`px-4 py-2 cursor-pointer hover:bg-neutral-98 ${
-                      selectedValue === option ? "bg-neutral-98 font-medium" : ""
-                    }`}
-                    onClick={() => handleSelect(option)}
-                  >
-                    {option}
-                  </div>
-                ))
-              ) : (
-                <div className="px-4 py-2 text-neutral-65 text-sm">
-                  No options found
-                </div>
-              )}
-            </div>
-          )}
+    {filteredOptions.length > 0 ? (
+      filteredOptions.map((option) => (
+        <div
+          key={option}
+          className={`px-4 py-2 cursor-pointer hover:bg-neutral-98 ${
+            selectedValue === option ? "bg-neutral-98 font-medium" : ""
+          }`}
+          onClick={() => handleSelect(option)}
+        >
+          {option}
+        </div>
+      ))
+    ) : searchTerm.trim() === "" && !selectedValue ? (
+      <div className="px-4 py-2 text-neutral-65 text-sm">
+        Please select city first
+      </div>
+    ) : (
+      <div className="px-4 py-2 text-neutral-65 text-sm">
+        No location found
+      </div>
+    )}
+  </div>
+)}
+
         </div>
 
         {error && <span className="text-red-500 text-sm">{error.message}</span>}

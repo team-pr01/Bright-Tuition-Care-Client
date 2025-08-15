@@ -1,6 +1,5 @@
 import { useState, useRef, useEffect } from "react";
 import AuthHeading from "../../../Reusable/AuthHeading/AuthHeading";
-import Button from "../../../Reusable/Button/Button";
 import { useForm } from "react-hook-form";
 
 type TFormData = {
@@ -10,7 +9,7 @@ type TFormData = {
 const VerifyOtpForm = () => {
   const {
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isSubmitting },
     setValue,
     trigger,
   } = useForm<TFormData>();
@@ -19,7 +18,7 @@ const VerifyOtpForm = () => {
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
 
   // Timer state
-  const [timeLeft, setTimeLeft] = useState(60);
+  const [timeLeft, setTimeLeft] = useState(120);
   const [canResend, setCanResend] = useState(false);
 
   useEffect(() => {
@@ -50,6 +49,11 @@ const VerifyOtpForm = () => {
     if (val && idx < inputRefs.current.length - 1) {
       inputRefs.current[idx + 1]?.focus();
     }
+
+    // Auto submit when all digits are filled
+    if (newOtpValues.every((digit) => digit !== "")) {
+      handleSubmit(handleVerifyOtp)();
+    }
   };
 
   const handleKeyDown = (
@@ -61,15 +65,24 @@ const VerifyOtpForm = () => {
     }
   };
 
-  const handleVerifyOtp = (data: TFormData) => {
+  const handleVerifyOtp = async (data: TFormData) => {
     console.log("OTP entered:", data.otp);
+    // Simulate API delay
+    await new Promise((resolve) => setTimeout(resolve, 1500));
   };
 
   const handleResend = () => {
     console.log("Resend OTP triggered");
-    setTimeLeft(60);
+    setTimeLeft(120);
     setCanResend(false);
     setOtpValues(["", "", "", ""]);
+  };
+
+  // Convert timeLeft to mm:ss format
+  const formatTime = (seconds: number) => {
+    const m = Math.floor(seconds / 60);
+    const s = seconds % 60;
+    return `${m}:${s.toString().padStart(2, "0")}`;
   };
 
   return (
@@ -109,9 +122,14 @@ const VerifyOtpForm = () => {
               />
             ))}
           </div>
-
-          <Button type="submit" label="Verify" variant="primary" />
         </div>
+
+        {/* Loader below inputs while submitting */}
+        {isSubmitting && (
+          <div className="flex justify-center">
+            <div className="w-6 h-6 border-2 border-primary-10 border-t-transparent rounded-full animate-spin"></div>
+          </div>
+        )}
 
         <div className="flex md:gap-0 items-center justify-center">
           {canResend ? (
@@ -126,7 +144,7 @@ const VerifyOtpForm = () => {
             <p className="text-sm md:text-base leading-[24px] text-neutral-20">
               Didn't receive OTP? Resend in{" "}
               <span className="font-semibold bg-gradient-to-r from-primary-10 to-primary-40/60 bg-clip-text text-transparent">
-                {`0:${timeLeft.toString().padStart(2, "0")}`}
+                {formatTime(timeLeft)}
               </span>
             </p>
           )}

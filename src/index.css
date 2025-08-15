@@ -36,6 +36,8 @@
   /* accent */
   --color-accent-10: #f17556;
   --color-accent-20: #d61349;
+  --color-accent-25: #FFCECE;
+  --color-accent-30: #AE0000;
 
   /* Shadows */
    --shadow-job-card: 0 4px 12px 0 rgba(2, 45, 80, 0.08);

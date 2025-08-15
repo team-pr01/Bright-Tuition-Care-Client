@@ -1,10 +1,14 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useForm } from "react-hook-form";
 import TextInput from "../../Reusable/TextInput/TextInput";
 import Textarea from "../../Reusable/TextArea/TextArea";
 import Button from "../../Reusable/Button/Button";
 import { ICONS } from "../../../assets";
+import MultiSelectDropdown from "../../Reusable/MultiSelectDropdown/MultiSelectDropdown";
+import { useState } from "react";
 
 type TFormData = {
+  role: string;
   name: string;
   phoneNumber: string;
   email: string;
@@ -12,6 +16,7 @@ type TFormData = {
 };
 
 const ContactUsForm = () => {
+  const [selectedRole, setSelectedRole] = useState<any>("");
   const {
     register,
     handleSubmit,
@@ -26,6 +31,17 @@ const ContactUsForm = () => {
       onSubmit={handleSubmit(handleSubmitRequest)}
       className="flex flex-col gap-6 bg-neutral-50/20 rounded-2xl p-5"
     >
+      <MultiSelectDropdown
+        label="I am a"
+        name="role"
+        options={["Tutor", "Guardian/Student"]}
+        value={selectedRole ? [selectedRole] : []}
+        onChange={(selected) => {
+          setSelectedRole(selected.length > 0 ? selected.slice(-1)[0] : "");
+        }}
+        isRequired
+      />
+
       <TextInput
         label="Name"
         placeholder="Enter your full name"
