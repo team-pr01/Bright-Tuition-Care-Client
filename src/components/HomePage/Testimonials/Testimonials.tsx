@@ -27,7 +27,7 @@ const Testimonials: React.FC<TestimonialsProps> = ({
   navigatePath,
 }) => {
   return (
-    <div className="py-12 w-full font-Nunito">
+    <div className="py-12 w-full font-Nunito overflow-hidden">
       <Container>
         <div className="text-center flex flex-col items-center justify-center gap-5 mb-16">
           <Heading

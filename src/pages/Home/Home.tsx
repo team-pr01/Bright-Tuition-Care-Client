@@ -10,7 +10,7 @@ import TuitionMethods from "../../components/HomePage/TuitionMethods/TuitionMeth
 
 const Home = () => {
   return (
-    <div>
+    <div className="overflow-hidden">
       <Hero />
       <Counter />
       <AboutUs />
@@ -32,7 +32,7 @@ const Home = () => {
         buttonText="Become A Tutor"
         navigatePath="/tutors"
       />
-      <div className="mb-72">
+      <div className="mb-72 overflow-hidden">
         <DownloadApp />
       </div>
     </div>

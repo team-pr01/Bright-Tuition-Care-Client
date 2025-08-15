@@ -9,33 +9,31 @@ import Button from "../../Reusable/Button/Button";
 const AboutUs = () => {
   const ref = useRef(null);
 
-  const containerVariants: any = {
-    hidden: { opacity: 0, y: 30 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        type: "spring" as const,
-        stiffness: 60,
-        damping: 14,
-        mass: 0.8,
-        staggerChildren: 0.2,
-        delayChildren: 0.2,
-      },
+ const containerVariants: any = {
+  hidden: { opacity: 0, y: "5%" },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      type: "spring" as const,
+      stiffness: 60,
+      damping: 14,
+      mass: 0.8,
+      staggerChildren: 0.2,
+      delayChildren: 0.2,
     },
-  };
+  },
+};
 
-  const itemVariants: any = {
-    hidden: { y: 50, opacity: 0 },
-    visible: {
-      y: 0,
-      opacity: 1,
-      transition: {
-        ease: "easeInOut",
-        duration: 0.8,
-      },
-    },
-  };
+const itemVariants: any = {
+  hidden: { y: "10%", opacity: 0 },
+  visible: {
+    y: 0,
+    opacity: 1,
+    transition: { ease: "easeInOut", duration: 0.8 },
+  },
+};
+
 
   return (
     <Container>

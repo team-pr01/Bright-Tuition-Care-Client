@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { ICONS } from "../../../assets";
 import Button from "../../Reusable/Button/Button";
@@ -8,23 +7,10 @@ import HamburgerMenu from "./HamburgerMenu";
 
 const Navbar = () => {
   const location = useLocation();
-  const [isScrolled, setIsScrolled] = useState(false);
-
-  // Detect scroll
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 10);
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
 
   return (
     <div
-      className={`py-4 lg:py-5 sticky top-0 z-50 transition-all duration-300 border-b border-neutral-45/15 ${
-        isScrolled ? "backdrop-blur-md bg-white/70 shadow-sm" : "bg-white"
-      }`}
+      className={`py-4 lg:py-5 sticky top-0 z-50 transition-all duration-300 border-b border-neutral-45/15 backdrop-blur-none lg:backdrop-blur-md bg-white shadow-sm`}
     >
       <Container>
         <nav className="flex items-center font-Nunito justify-between">

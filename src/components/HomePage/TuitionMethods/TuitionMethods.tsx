@@ -34,7 +34,7 @@ const TuitionMethods: React.FC = () => {
   };
 
   return (
-    <div className="w-full py-[50px] font-Nunito">
+    <div className="w-full py-[50px] font-Nunito overflow-hidden">
       <Container>
         <div className="text-center">
           <Heading

@@ -11,7 +11,7 @@ import { tutorSteps } from "../../../constants/stepsData";
 const TutorSteps: React.FC = () => {
   return (
     <section
-      className="py-[50px] w-full font-Nunito"
+      className="py-[50px] w-full font-Nunito overflow-hidden"
       style={{
         background: "linear-gradient(101deg, #FFF -7.84%, #E8F3FF 74.03%)",
       }}

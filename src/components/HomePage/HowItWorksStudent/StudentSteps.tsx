@@ -48,7 +48,7 @@ const StudentSteps = () => {
   return (
     <section
       ref={ref}
-      className="py-[50px] w-full "
+      className="py-[50px] w-full overflow-hidden"
       style={{
         background: "linear-gradient(101deg, #FFF -7.84%, #E8F3FF 74.03%)",
       }}

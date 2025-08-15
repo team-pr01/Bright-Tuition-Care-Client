@@ -23,6 +23,7 @@ import Settings from "../pages/Dashboard/Shared/Settings/Settings";
 import Payment from "../pages/Dashboard/Tutor/Payment/Payment";
 import JobApplicationsSummary from "../pages/Dashboard/Tutor/JobApplicationsSummary/JobApplicationsSummary";
 import MyProfile from "../pages/Dashboard/Shared/MyProfile/MyProfile";
+import ReferAndEarn from "../pages/Dashboard/Tutor/ReferAndEarn/ReferAndEarn";
 
 export const router = createBrowserRouter([
   {
@@ -112,6 +113,10 @@ export const router = createBrowserRouter([
       {
         path: "share-app",
         element: <ShareThisApp />,
+      },
+      {
+        path: "refer-and-earn",
+        element: <ReferAndEarn />,
       },
       {
         path: "terms-and-conditions",

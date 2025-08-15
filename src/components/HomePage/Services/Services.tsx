@@ -55,7 +55,7 @@ const Services = () => {
 
   return (
     <div
-      className="w-full py-9 lg:py-[50px] font-Nunito"
+      className="w-full py-9 lg:py-[50px] font-Nunito overflow-hidden"
       style={{
         background: "linear-gradient(101deg, #FFF -7.84%, #E8F3FF 74.03%)",
       }}

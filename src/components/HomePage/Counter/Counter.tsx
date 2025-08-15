@@ -11,7 +11,7 @@ import { Navigation, Pagination, Autoplay } from "swiper/modules";
 const Counter = () => {
   return (
     <Container>
-      <div className="flex flex-col gap-10 font-Nunito py-[50px] bg-primary-30/40 p-5 lg:p-10 xl:p-16 rounded-2xl">
+      <div className="flex flex-col gap-10 font-Nunito py-[50px] bg-primary-30/40 p-5 lg:p-10 xl:p-16 rounded-2xl overflow-hidden">
         <div className="flex flex-col lg:flex-row justify-center lg:items-center gap-10 items-start lg:gap-5 xl:gap-20 ">
           {stats.map((stat, index) => (
             <CounterCard

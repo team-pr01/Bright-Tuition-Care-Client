@@ -37,7 +37,7 @@ const Sidebar = () => {
               <Link
                 key={link?.label}
                 to={link?.path}
-                className={`text-lg flex items-center gap-2 rounded-lg p-2 transform transition-transform duration-500 hover:-translate-y-1 ${
+                className={`flex items-center gap-2 rounded-lg p-2 transform transition-transform duration-500 hover:-translate-y-1 ${
                   location?.pathname === link?.path
                     ? "bg-white text-primary-10 font-semibold"
                     : "font-medium  text-white  bg-none"

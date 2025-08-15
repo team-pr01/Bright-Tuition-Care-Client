@@ -29,8 +29,7 @@ const HamburgerMenu = () => {
   }, [isHamburgerOpen]);
 
   return (
-    <>
-      <div className="relative hamburgerMenu block lg:hidden">
+      <div className="relative hamburgerMenu flex lg:hidden">
         <button
           onClick={toggleHamburgerMenu}
           className="bg-white py-2 px-3 border border-primary-10 cursor-pointer w-fit rounded-lg flex items-center justify-center"
@@ -100,7 +99,6 @@ const HamburgerMenu = () => {
           </div>
         </div>
       </div>
-    </>
   );
 };
 
