@@ -2,9 +2,26 @@ import { ICONS, IMAGES } from "../../../../assets";
 import Button from "../../../../components/Reusable/Button/Button";
 
 const MyProfile = () => {
+  const contactInfo = [
+    {
+      icon: ICONS.email,
+      label: "Email",
+      value: "w4V5o@example.com",
+    },
+    {
+      icon: ICONS.phoneGray,
+      label: "Phone Number",
+      value: "124326547890",
+    },
+    {
+      icon: ICONS.address,
+      label: "Address",
+      value: "Rampura, Bonosre",
+    },
+  ];
   return (
     <div className="flex gap-5">
-      <div className="bg-white border border-primary-40/10 p-5 rounded-2xl w-[25%]">
+      <div className="bg-white border border-primary-40/10 p-5 rounded-2xl w-[25%] flex flex-col gap-6">
         <div className="font-Nunito flex flex-col items-center justify-center">
           <div className="size-32 rounded-full relative">
             <div className="bg-white/40 rounded-full p-[2px] size-full">
@@ -26,15 +43,46 @@ const MyProfile = () => {
           </h2>
         </div>
 
-        <div className="bg-accent-25 py-2 px-5 text-accent-30 rounded-lg text-center mt-5">
-          Profile Complated 30%
+        <div>
+          <div className="bg-accent-25 py-2 px-5 text-accent-30 rounded-lg text-center">
+            Profile Complated 30%
+          </div>
+          <Button
+            type="button"
+            label="Edit Information"
+            variant="quaternary"
+            className="py-2 lg:py-2 w-full flex items-center justify-center mt-3"
+          />
         </div>
-        <Button
-          type="button"
-          label="Edit Information"
-          variant="quaternary"
-          className="py-2 lg:py-2 w-full flex items-center justify-center mt-3"
-        />
+
+        <div className="flex flex-col gap-3">
+          {contactInfo?.map((info) => (
+            <div key={info?.label} className="flex flex-col gap-1">
+              <div className="flex items-center gap-[6px]">
+                <img src={info?.icon} alt="" className="size-5 mt-1" />
+                <p className="text-neutral-10 text-lg font-semibold">
+                  {info?.label}
+                </p>
+              </div>
+              <p className="text-neutral-20 ml-6">{info?.value}</p>
+            </div>
+          ))}
+        </div>
+
+        <div>
+          <Button
+            type="button"
+            label="Download CV"
+            variant="quaternary"
+            className="py-2 lg:py-2 w-full flex items-center justify-center"
+          />
+          <Button
+            type="button"
+            label="View as Guardian or Student"
+            variant="tertiary"
+            className="py-2 lg:py-2 w-full flex items-center justify-center mt-3"
+          />
+        </div>
       </div>
 
       <div className="bg-white border border-primary-40/10 p-5 rounded-2xl w-[75%]">

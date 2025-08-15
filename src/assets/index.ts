@@ -79,6 +79,9 @@ import bank from "../assets/Icons/bank.svg";
 import rightArrow from "../assets/Icons/right-arrow.svg";
 import jobStatus from "../assets/Icons/status.svg";
 import reset from "../assets/Icons/reset.svg";
+import email from "../assets/Icons/email.svg";
+import phoneGray from "../assets/Icons/phone-gray.svg";
+import address from "../assets/Icons/address.svg";
 
 
 import aboutUs from "../assets/Images/about-us.svg";
@@ -191,4 +194,7 @@ export const ICONS = {
   rightArrow,
   jobStatus,
   reset,
+  email,
+  phoneGray,
+  address,
 };
