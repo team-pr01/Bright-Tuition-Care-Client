@@ -1,86 +1,90 @@
-import { ICONS, IMAGES } from "../../../../assets";
-import Button from "../../../Reusable/Button/Button";
+import React from "react";
 
-const PersonalInfo = () => {
-  const contactInfo = [
+type TPersonalInfo = {
+  email?: string;
+  additionalNumber?: string;
+  address?: string;
+  gender?: string;
+  dateOfBirth?: string;
+  religion?: string;
+  identityType?: string;
+  nationality?: string;
+  socialLinks?: {
+    facebook?: string;
+    linkedIn?: string;
+  };
+  family?: {
+    fatherName?: string;
+    fatherNumber?: string;
+    motherName?: string;
+    motherNumber?: string;
+  };
+};
+
+type TPersonalInfoProps = {
+  personalInfo: TPersonalInfo;
+};
+
+const PersonalInfo: React.FC<TPersonalInfoProps> = ({ personalInfo }) => {
+  const details = [
+    { label: "Email", value: personalInfo?.email },
+    { label: "Additional Number", value: personalInfo?.additionalNumber },
+    { label: "Address", value: personalInfo?.address },
+    { label: "Gender", value: personalInfo?.gender },
+    { label: "Date of Birth", value: personalInfo?.dateOfBirth },
+    { label: "Religion", value: personalInfo?.religion },
+    { label: "Identity Type", value: personalInfo?.identityType },
+    { label: "Nationality", value: personalInfo?.nationality },
     {
-      icon: ICONS.email,
-      label: "Email",
-      value: "hello@example.com",
+      label: "Facebook Profile Link",
+      value: personalInfo?.socialLinks?.facebook,
     },
     {
-      icon: ICONS.phoneGray,
-      label: "Phone Number",
-      value: "124326547890",
+      label: "LinkedIn Profile Link",
+      value: personalInfo?.socialLinks?.linkedIn,
     },
-    {
-      icon: ICONS.address,
-      label: "Address",
-      value: "Rampura, Bonosre",
-    },
+    { label: "Father's Name", value: personalInfo?.family?.fatherName },
+    { label: "Father's Number", value: personalInfo?.family?.fatherNumber },
+    { label: "Mother's Name", value: personalInfo?.family?.motherName },
+    { label: "Mother's Number", value: personalInfo?.family?.motherNumber },
   ];
+
+  const isProvided = (val: unknown): boolean => {
+    if (Array.isArray(val)) return val.length > 0 && val.some(v => String(v).trim() !== "");
+    if (typeof val === "string") return val.trim() !== "";
+    return val !== null && val !== undefined;
+  };
+
   return (
-    <div className="bg-white border border-primary-40/10 p-5 rounded-2xl w-[25%] flex flex-col gap-6 font-Nunito">
-      <div className="font-Nunito flex flex-col items-center justify-center">
-        <div className="size-32 rounded-full relative">
-          <div className="bg-white/40 rounded-full p-[2px] size-full">
-            <img
-              src={IMAGES.dummyAvatar}
-              alt=""
-              className="size-full object-cover rounded-full"
-            />
-          </div>
-          <div className="bg-green-500 shadow-2xl size-7 rounded-full flex items-center justify-center absolute right-3 bottom-1">
-            <img src={ICONS.tickMark} alt="" className="" />
-          </div>
-        </div>
-        <h1 className="text-neutral-5e font-semibold text-center text-xl mt-2">
-          John Smith
-        </h1>
-        <h2 className="text-neutral-5e text-sm text-center mt-2">
-          Tutor Id : 0001
-        </h2>
-      </div>
+    <div className="font-Nunito">
+      <h1 className="text-neutral-5 font-semibold text-2xl mt-5">
+        Personal Information
+      </h1>
 
-      <div>
-        <div className="bg-accent-25 py-2 px-5 text-accent-30 rounded-lg text-center text-sm">
-          Profile Complated 30%
-        </div>
-        <Button
-          type="button"
-          label="Edit Information"
-          variant="quaternary"
-          className="py-2 lg:py-2 w-full flex items-center justify-center mt-3"
-        />
-      </div>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-2 mt-4">
+        {details.map((item, index) => {
+          const provided = isProvided(item.value);
 
-      <div className="flex flex-col gap-3">
-        {contactInfo?.map((info) => (
-          <div key={info?.label} className="flex flex-col gap-1">
-            <div className="flex items-center gap-[6px]">
-              <img src={info?.icon} alt="" className="size-5 mt-1" />
-              <p className="text-neutral-10 text-lg font-semibold">
-                {info?.label}
-              </p>
+          return (
+            <div key={index} className="flex">
+              <span className="text-neutral-5 font-semibold min-w-[200px]">
+                {item.label}
+              </span>
+              <span className="text-neutral-5 font-semibold">:</span>
+              <span
+                className={`ml-2 ${
+                  provided ? "text-neutral-45" : "text-red-500"
+                }`}
+              >
+                {provided
+                  ? Array.isArray(item.value)
+                    ? (item.value as string[]).join(", ")
+                    : item.value
+                  : "Not Provided"}
+              </span>
             </div>
-            <p className="text-neutral-20 ml-6">{info?.value}</p>
-          </div>
-        ))}
-      </div>
-
-      <div>
-        <Button
-          type="button"
-          label="Download CV"
-          variant="quaternary"
-          className="py-2 lg:py-2 w-full flex items-center justify-center"
-        />
-        <Button
-          type="button"
-          label="View as Guardian or Student"
-          variant="tertiary"
-          className="py-2 lg:py-2 w-full flex items-center justify-center mt-3"
-        />
+          );
+        })}
       </div>
     </div>
   );
