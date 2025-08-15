@@ -35,14 +35,20 @@ const Button: React.FC<ButtonProps> = ({
 }) => {
   const variantClass = variantClasses[variant] || variantClasses["primary"];
 
-  const baseClasses =
-    `flex items-center gap-2 text-lg leading-[24px] w-fit rounded-lg font-semibold font-Nunito transition-all duration-300 py-2 lg:py-3 px-3 lg:px-6 text-sm md:text-base ${isDisabled ? "opacity-50 cursor-not-allowed" : "cursor-pointer"}`;
+  const baseClasses = `flex items-center gap-2 text-lg leading-[24px] w-fit rounded-lg font-semibold font-Nunito transition-all duration-300 py-2 lg:py-3 px-3 lg:px-6 text-sm md:text-base ${
+    isDisabled ? "opacity-50 cursor-not-allowed" : "cursor-pointer"
+  }`;
 
   const combinedClasses = twMerge(baseClasses, variantClass, className);
 
   return (
     <div className={variant ? "relative" : ""}>
-      <button type={type} disabled={isDisabled} onClick={onClick} className={combinedClasses}>
+      <button
+        type={type}
+        disabled={isDisabled}
+        onClick={onClick}
+        className={combinedClasses}
+      >
         {label}
         {icon && (
           <span
@@ -58,7 +64,7 @@ const Button: React.FC<ButtonProps> = ({
         )}
         {iconWithoutBg && (
           <img
-            src={iconWithoutBg}
+            src={typeof icon === "string" ? icon : undefined}
             alt="Button Icon"
             className="size-3 lg:size-4"
           />
