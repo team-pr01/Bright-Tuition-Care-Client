@@ -7,6 +7,7 @@ import { FiUnlock } from "react-icons/fi";
 import { useState } from "react";
 import { FaCheck } from "react-icons/fa";
 import EducationalInfo from "../../../../components/Dashboard/MyProfilePage/EducationalInfo/EducationalInfo";
+import EmergencyInfo from "../../../../components/Dashboard/MyProfilePage/EmergencyInfo/EmergencyInfo";
 
 const MyProfile = () => {
   const profile = {
@@ -87,6 +88,13 @@ const MyProfile = () => {
         },
       },
     ],
+
+    emergencyInfo: {
+      name: "",
+      relation: "",
+      number: "",
+      address: "",
+    },
   };
 
   const [activeTab, setActiveTab] = useState<string>("personalInfo");
@@ -187,9 +195,11 @@ const MyProfile = () => {
             />
           )}
 
-          {
-            activeTab === "educationalInfo" && 
+          {activeTab === "educationalInfo" && (
             <EducationalInfo educationalInfo={profile.educationalInfo} />
+          )}
+          {
+            activeTab === "emergencyInfo" && <EmergencyInfo emergencyInfo={profile.emergencyInfo} />
           }
         </div>
       </div>
