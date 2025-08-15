@@ -19,22 +19,23 @@ const JobDetails = ({
   setIsShareJobModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
   const jobDetail2 = [
-    { icon: ICONS.preferredTutor, title: "Prefer Tutor", value: "Female" },
-    { icon: ICONS.time, title: "Tutoring Time", value: "6:00 - 7:00 PM" },
-    {
+     {
       icon: ICONS.tutoringDays,
       title: "Tutoring Days",
       value: "3 Days / Week",
     },
-    { icon: ICONS.numberOfStudents, title: "No. Of Students", value: "2" },
     { icon: ICONS.salary, title: "Salary", value: "5000" },
+    { icon: ICONS.gender, title: "Student Gender", value: "Bangla Media" },
+    { icon: ICONS.preferredTutor, title: "Prefer Tutor", value: "Female" },
+    { icon: ICONS.numberOfStudents, title: "No. Of Students", value: "2" },
+    { icon: ICONS.time, title: "Tutoring Time", value: "6:00 - 7:00 PM" },
+    { icon: ICONS.tuitionType, title: "Tuition Type", value: "Home Tutoring" },
+   
     // { icon: ICONS.subject, title: "Subject", value: "All" },
 
-    { icon: ICONS.tuitionType, title: "Tuition Type", value: "Home Tutoring" },
     // { icon: ICONS.location, title: "Location", value: "Mohammodpur" },
     { icon: ICONS.preferedClass, title: "Class", value: "10" },
     { icon: ICONS.category, title: "Category", value: "Bangla Media" },
-    { icon: ICONS.gender, title: "Student Gender", value: "Bangla Media" },
   ];
   return (
     <AnimatePresence>
@@ -59,8 +60,11 @@ const JobDetails = ({
         >
           <div className="bg-white border-0 md:border md:border-neutral-55 rounded-xl lg:rounded-3xl p-0 md:p-8 max-w-[895px] mx-auto font-Nunito relative overflow-visible md:overflow-hidden">
             <div className="bg-primary-10/40 blur-[150px] size-32 rounded-full absolute top-0 right-0"></div>
-            <h1 className="text-neutral-10 text-lg md:text-2xl lg:text-3xl font-bold leading-6 text-start md:text-center grid-cols-2">
-              Advanced Mathematics Tutor
+            <h1 className="text-neutral-10 text-lg md:text-2xl lg:text-3xl font-bold leading-6 text-start md:text-center">
+              Advanced Mathematics Tutor{" "}
+              {/* <span className="text-primary-10 font-normal text-sm leading-0">
+                Home Tutoring
+              </span> */}
             </h1>
             <button
               onClick={() => setIsShareJobModalOpen(true)}
@@ -71,37 +75,29 @@ const JobDetails = ({
             </button>
 
             {/* Date and job id */}
-            <div className="flex flex-wrap items-center justify-start md:justify-center gap-5 mt-5">
-              <div className="flex items-center gap-[10px]">
-                <img src={ICONS.jobId} alt="Job ID" className="size-5" />
-                <p className="text-neutral-10 text-sm md:text-base leading-6">
-                  Job Id#12345
-                </p>
-              </div>
-              <div className="flex items-center gap-[10px]">
-                <img
-                  src={ICONS.postedDate}
-                  alt="Posted Date"
-                  className="size-5"
-                />
-                <p className="text-neutral-10 text-sm md:text-base leading-6">
-                  Jan 15, 2024
-                </p>
-              </div>
-              <button className="text-neutral-10 md:hidden flex items-center gap-2 leading-[24px] w-fit font-semibold transition-all duration-300 text-sm md:text-base">
+            <div className="flex flex-wrap items-center justify-start md:justify-center gap-2 mt-3 lg:mt-5 text-xs md:text-base">
+              <p>
+                Job Id : <span className="font-semibold">#12345</span>
+              </p>
+              <p>|</p>
+              <p>
+                Posted Date :{" "}
+                <span className="font-semibold">August 15, 2025</span>
+              </p>
+              {/* <button className="text-neutral-10 md:hidden flex items-center gap-2 leading-[24px] w-fit font-semibold transition-all duration-300 text-xs md:text-base">
                 <img src={ICONS.share} alt="" className="size-4" />
                 Share
-              </button>
+              </button> */}
             </div>
 
             <img
               src={ICONS.jobCategoryDummyIcon}
               alt="Category Icon"
-              className="size-20 md:size-[100px] lg:size-[130px] mx-auto mt-11"
+              className="size-20 md:size-[100px] lg:size-[130px] mx-auto mt-5 lg:mt-11"
             />
 
             <div className="flex flex-col gap-6 items-start justify-center max-w-full lg:max-w-[70%] mx-0 lg:mx-auto">
-              <div className="flex items-center gap-3 mt-11">
+              <div className="flex gap-2 mt-6 lg:mt-11">
                 <img src={ICONS.subject} alt="" className="size-5" />
                 <div>
                   <p className="text-neutral-45 text-sm">Subjects</p>
@@ -110,9 +106,9 @@ const JobDetails = ({
                   </p>
                 </div>
               </div>
-              <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 w-full gap-6">
+              <div className="grid grid-cols-2 md:grid-cols-3 w-full gap-6">
                 {jobDetail2.map((details, index) => (
-                  <div key={index} className="flex items-center gap-3">
+                  <div key={index} className="flex gap-2">
                     <img src={details.icon} alt="" className="size-5" />
                     <div>
                       <p className="text-neutral-45 text-sm">{details.title}</p>
@@ -123,7 +119,7 @@ const JobDetails = ({
                   </div>
                 ))}
               </div>
-              <div className="flex items-center gap-3">
+              <div className="flex gap-2">
                 <img src={ICONS.location} alt="" className="size-5" />
                 <div>
                   <p className="text-neutral-45 text-sm">Location</p>
@@ -161,7 +157,7 @@ const JobDetails = ({
           </div>
           <button
             onClick={() => setShowDrawer(false)}
-            className="absolute top-[13px] md:top-4 right-3 md:right-6 text-neutral-45 text-2xl font-bold cursor-pointer"
+            className="absolute top-[13px] md:top-8 right-3 md:right-10 text-neutral-45 text-2xl font-bold cursor-pointer"
           >
             ×
           </button>
