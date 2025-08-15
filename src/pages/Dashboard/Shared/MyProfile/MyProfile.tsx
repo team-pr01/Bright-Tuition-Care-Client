@@ -1,92 +1,50 @@
-import { ICONS, IMAGES } from "../../../../assets";
-import Button from "../../../../components/Reusable/Button/Button";
+import PersonalInfo from "../../../../components/Dashboard/MyProfilePage/PersonalInfo/PersonalInfo";
+import TuitionRelatedInfo from "../../../../components/Dashboard/MyProfilePage/TuitionRelatedInfo/TuitionRelatedInfo";
 
 const MyProfile = () => {
-  const contactInfo = [
-    {
-      icon: ICONS.email,
-      label: "Email",
-      value: "w4V5o@example.com",
+  const profile = {
+    tuitionRelatedInfo: {
+      tutoringMethod: "I take tuition in such a way so that the student whom I am teaching understands what I am teaching.",
+      tutoringStyles: ["One to One", "Online Tutoring"],
+      availableDays: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday"],
+      time: "5:00 PM - 8:50 PM",
+      location: {
+        city: "Cumilla",
+        area: "Cumilla Cantonment",
+      },
+      expectedSalary: 5000,
+      preferences: {
+        preferredCategories: "",
+        preferredClasses: "",
+        preferredSubjects: "",
+        placeOfTutoring: "",
+        preferredLocations: ["Cumilla Cantonment"],
+      },
+      experience: {
+        total: "",
+        details: "",
+      },
     },
-    {
-      icon: ICONS.phoneGray,
-      label: "Phone Number",
-      value: "124326547890",
-    },
-    {
-      icon: ICONS.address,
-      label: "Address",
-      value: "Rampura, Bonosre",
-    },
-  ];
+  };
+
   return (
-    <div className="flex gap-5">
-      <div className="bg-white border border-primary-40/10 p-5 rounded-2xl w-[25%] flex flex-col gap-6">
-        <div className="font-Nunito flex flex-col items-center justify-center">
-          <div className="size-32 rounded-full relative">
-            <div className="bg-white/40 rounded-full p-[2px] size-full">
-              <img
-                src={IMAGES.dummyAvatar}
-                alt=""
-                className="size-full object-cover rounded-full"
-              />
-            </div>
-            <div className="bg-green-500 shadow-2xl size-7 rounded-full flex items-center justify-center absolute right-3 bottom-1">
-              <img src={ICONS.tickMark} alt="" className="" />
-            </div>
-          </div>
-          <h1 className="text-neutral-5e font-semibold text-center text-xl mt-2">
-            John Smith
-          </h1>
-          <h2 className="text-neutral-5e text-sm text-center mt-2">
-            Tutor Id : 0001
-          </h2>
-        </div>
-
-        <div>
-          <div className="bg-accent-25 py-2 px-5 text-accent-30 rounded-lg text-center">
-            Profile Complated 30%
-          </div>
-          <Button
-            type="button"
-            label="Edit Information"
-            variant="quaternary"
-            className="py-2 lg:py-2 w-full flex items-center justify-center mt-3"
-          />
-        </div>
-
-        <div className="flex flex-col gap-3">
-          {contactInfo?.map((info) => (
-            <div key={info?.label} className="flex flex-col gap-1">
-              <div className="flex items-center gap-[6px]">
-                <img src={info?.icon} alt="" className="size-5 mt-1" />
-                <p className="text-neutral-10 text-lg font-semibold">
-                  {info?.label}
-                </p>
-              </div>
-              <p className="text-neutral-20 ml-6">{info?.value}</p>
-            </div>
-          ))}
-        </div>
-
-        <div>
-          <Button
-            type="button"
-            label="Download CV"
-            variant="quaternary"
-            className="py-2 lg:py-2 w-full flex items-center justify-center"
-          />
-          <Button
-            type="button"
-            label="View as Guardian or Student"
-            variant="tertiary"
-            className="py-2 lg:py-2 w-full flex items-center justify-center mt-3"
-          />
-        </div>
-      </div>
+    <div className="flex gap-5 font-Nunito">
+      <PersonalInfo />
 
       <div className="bg-white border border-primary-40/10 p-5 rounded-2xl w-[75%]">
-        Hi
+        <div className="border-b border-neutral-30/20 pb-5">
+          <h1 className="text-neutral-5 font-semibold text-2xl">Overview</h1>
+          <p className="text-neutral-45 mt-3">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore
+            modi ad consequuntur ea. Distinctio velit atque corporis labore quis
+            commodi est necessitatibus fugiat adipisci dicta consequatur cum
+            dignissimos quasi debitis laboriosam doloremque laborum eos
+            consequuntur, hic quidem? Mollitia blanditiis, assumenda voluptatem
+            velit dolores aut, cumque numquam alias maxime itaque ipsa?
+          </p>
+        </div>
+
+        <TuitionRelatedInfo tuitionRelatedInfo={profile.tuitionRelatedInfo}/>
       </div>
     </div>
   );
