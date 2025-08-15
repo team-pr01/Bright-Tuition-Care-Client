@@ -13,7 +13,7 @@ type TJobCardProps = {
 const JobCard: React.FC<TJobCardProps> = ({
   variant,
   status,
-  detailsWidth = "max-w-full 2xl:max-w-[70%]",
+  detailsWidth = "max-w-full 2xl:max-w-[80%]",
 }) => {
   const [isShareJobModalOpen, setIsShareJobModalOpen] =
     useState<boolean>(false);
@@ -22,16 +22,16 @@ const JobCard: React.FC<TJobCardProps> = ({
   const [showDrawer, setShowDrawer] = useState<boolean>(false);
 
   const jobDetails = [
-    { icon: ICONS.tuitionType, title: "Tuition Type", value: "Home Tutoring" },
+    // { icon: ICONS.tuitionType, title: "Tuition Type", value: "Home Tutoring" },
+    {
+      icon: ICONS.tutoringDays,
+      title: "Tutoring Days",
+      value: "3 Days / Week",
+    },
     { icon: ICONS.salary, title: "Salary", value: "5000 BDT" },
     { icon: ICONS.preferredTutor, title: "Prefer Tutor", value: "Female" },
     // { icon: ICONS.subject, title: "Subjects", value: "Physics, Chemistry, Math" },
     // { icon: ICONS.location, title: "Location", value: "Mohammodpur" },
-    // {
-    //   icon: ICONS.tutoringDays,
-    //   title: "Tutoring Days",
-    //   value: "3 Days / Week",
-    // },
   ];
 
   const shareUrl = "https://yourwebsite.com/job/123"; // Replace with actual job URL
@@ -67,9 +67,12 @@ const JobCard: React.FC<TJobCardProps> = ({
         <div className="flex justify-between gap-3">
           <button
             onClick={() => setShowDrawer(true)}
-            className="text-neutral-10 text-lg md:text-xl font-bold leading-6 hover:underline cursor-pointer"
+            className="text-neutral-10 text-lg md:text-xl font-bold leading-6 hover:underline cursor-pointer text-start"
           >
-            Advanced Mathematics Tutor
+            Advanced Mathematics Tutor -{" "}
+            <span className="text-primary-10 font-normal text-sm">
+              Home Tutoring
+            </span>
           </button>
 
           <img
@@ -79,7 +82,7 @@ const JobCard: React.FC<TJobCardProps> = ({
           />
         </div>
 
-        <div className="flex items-center gap-5 text-neutral-10 text-xs sm:text-sm md:text-base leading-6">
+        <div className="flex items-center gap-5 text-neutral-10 text-xs sm:text-sm md:text-base mt-3 md:mt-0">
           <p>
             Job Id : <span className="font-semibold">#12345</span>
           </p>
@@ -88,9 +91,16 @@ const JobCard: React.FC<TJobCardProps> = ({
           </p>
         </div>
 
-        <div
-          className={`grid grid-cols-2 md:grid-cols-3 gap-2 2xl:gap-4 mt-7 ${detailsWidth}`}
-        >
+        <div className="flex gap-2 mt-4">
+          <img src={ICONS.subject} alt="" className="size-5" />
+          <div>
+            <p className="text-neutral-45 text-sm leading-normal">Subjects</p>
+            <p className="text-neutral-10 font-medium leading-6 mt-1">
+              Physics, Chemistry, Math
+            </p>
+          </div>
+        </div>
+        <div className={`grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-0 mt-4 ${detailsWidth}`}>
           {jobDetails.map((details, index) => (
             <div key={index} className="flex gap-2">
               <img src={details.icon} alt="" className="size-5" />
@@ -105,15 +115,7 @@ const JobCard: React.FC<TJobCardProps> = ({
             </div>
           ))}
         </div>
-        <div className="flex gap-2 mt-4">
-          <img src={ICONS.subject} alt="" className="size-5" />
-          <div>
-            <p className="text-neutral-45 text-sm leading-normal">Subjects</p>
-            <p className="text-neutral-10 font-medium leading-6 mt-1">
-              Physics, Chemistry, Math
-            </p>
-          </div>
-        </div>
+
         <div className="flex gap-2 mt-4">
           <img src={ICONS.location} alt="" className="size-5" />
           <div>
