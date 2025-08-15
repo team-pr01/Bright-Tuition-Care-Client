@@ -9,8 +9,10 @@ import { FaChalkboardTeacher, FaCheck } from "react-icons/fa";
 import EducationalInfo from "../../../../components/Dashboard/MyProfilePage/EducationalInfo/EducationalInfo";
 import EmergencyInfo from "../../../../components/Dashboard/MyProfilePage/EmergencyInfo/EmergencyInfo";
 import CredentialsInfo from "../../../../components/Dashboard/MyProfilePage/CredentialsInfo/CredentialsInfo";
+import ProfileTabHeading from "../../../../components/Reusable/ProfileTabHeading/ProfileTabHeading";
 
 const MyProfile = () => {
+  const [editPersonalInfo, setEditPersonalInfo] = useState<boolean>(false);
   const profile = {
     tuitionRelatedInfo: {
       tutoringMethod:
@@ -146,7 +148,7 @@ const MyProfile = () => {
 
       <div className="w-[75%]">
         {/* Tabs */}
-        <div className="grid grid-cols-1 md:grid-cols-5 gap-2">
+        <div className="flex items-center w-full text-nowrap gap-2">
           {profileTabs?.map((tab) => {
             const isActive = tab?.key === activeTab;
             return (
@@ -154,7 +156,7 @@ const MyProfile = () => {
                 key={tab?.title}
                 onClick={() => setActiveTab(tab?.key)}
                 type="button"
-                className={`relative border py-4 px-5 rounded-xl text-start flex items-center justify-between gap-6 cursor-pointer transform duration-300 shadow-xs ${
+                className={`w-[224px] relative border py-4 px-5 rounded-xl text-start flex items-center justify-between gap-6 cursor-pointer transform duration-300 shadow-xs ${
                   isActive
                     ? "bg-gradient-to-r from-blue-500 to-primary-10 border-primary-10 text-white"
                     : "bg-white border border-primary-40/10 text-neutral-10 hover:bg-neutral-50/20"
@@ -186,9 +188,7 @@ const MyProfile = () => {
           {activeTab === "personalInfo" && (
             <>
               <div className="border-b border-neutral-30/20 pb-5 mb-4">
-                <h1 className="text-neutral-5 font-semibold text-2xl">
-                  Overview
-                </h1>
+               <ProfileTabHeading heading="Overview" onClick={() => setEditPersonalInfo(!editPersonalInfo)} />
                 <p className="text-neutral-45 mt-3">
                   Lorem ipsum dolor sit amet consectetur adipisicing elit.
                   Tempore modi ad consequuntur ea. Distinctio velit atque

@@ -1,4 +1,5 @@
 import React from "react";
+import { FaFacebook, FaFemale, FaLinkedin, FaMale } from "react-icons/fa";
 
 type TPersonalInfo = {
   email?: string;
@@ -35,14 +36,14 @@ const PersonalInfo: React.FC<TPersonalInfoProps> = ({ personalInfo }) => {
     { label: "Religion", value: personalInfo?.religion },
     { label: "Identity Type", value: personalInfo?.identityType },
     { label: "Nationality", value: personalInfo?.nationality },
-    {
-      label: "Facebook Profile Link",
-      value: personalInfo?.socialLinks?.facebook,
-    },
-    {
-      label: "LinkedIn Profile Link",
-      value: personalInfo?.socialLinks?.linkedIn,
-    },
+    // {
+    //   label: "Facebook Profile Link",
+    //   value: personalInfo?.socialLinks?.facebook,
+    // },
+    // {
+    //   label: "LinkedIn Profile Link",
+    //   value: personalInfo?.socialLinks?.linkedIn,
+    // },
     { label: "Father's Name", value: personalInfo?.family?.fatherName },
     { label: "Father's Number", value: personalInfo?.family?.fatherNumber },
     { label: "Mother's Name", value: personalInfo?.family?.motherName },
@@ -58,9 +59,37 @@ const PersonalInfo: React.FC<TPersonalInfoProps> = ({ personalInfo }) => {
 
   return (
     <div className="font-Nunito">
-      <h1 className="text-neutral-5 font-semibold text-2xl">
-        Personal Information
-      </h1>
+      <div className="flex items-center justify-between">
+        <div className="flex items-center gap-2 text-neutral-5 font-semibold text-2xl">
+          <h1 className="">Personal Information</h1>
+          <div className="bg-primary-10 text-white rounded-full size-7 flex items-center justify-center">
+            {personalInfo?.gender === "Male" ? (
+              <FaMale className="text-xl" />
+            ) : (
+              <FaFemale className="text-xl" />
+            )}
+          </div>
+        </div>
+
+        <div className="flex items-center gap-3">
+          <a
+            href=""
+            target="_blank"
+            className="text-primary-10 font-semibold flex items-center gap-1 w-fit hover:-translate-y-1 transition duration-500"
+          >
+            <FaFacebook />
+            rahulsd380
+          </a>
+          <a
+            href=""
+            target="_blank"
+            className="text-primary-10 font-semibold flex items-center gap-1 w-fit hover:-translate-y-1 transition duration-500"
+          >
+            <FaLinkedin />
+            rahulsd380
+          </a>
+        </div>
+      </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-2 mt-4">
         {details.map((item, index) => {

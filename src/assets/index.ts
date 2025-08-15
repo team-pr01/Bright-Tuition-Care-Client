@@ -82,6 +82,7 @@ import reset from "../assets/Icons/reset.svg";
 import email from "../assets/Icons/email.svg";
 import phoneGray from "../assets/Icons/phone-gray.svg";
 import address from "../assets/Icons/address.svg";
+import pen from "../assets/Icons/pen.svg";
 
 
 import aboutUs from "../assets/Images/about-us.svg";
@@ -197,4 +198,5 @@ export const ICONS = {
   email,
   phoneGray,
   address,
+  pen,
 };

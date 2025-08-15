@@ -1,3 +1,6 @@
+import { useState } from "react";
+import ProfileTabHeading from "../../../Reusable/ProfileTabHeading/ProfileTabHeading";
+
 type TCredential = {
   documentType: string;
   imageUrl: string;
@@ -9,11 +12,10 @@ type TCredentialsInfoProps = {
 };
 
 const CredentialsInfo: React.FC<TCredentialsInfoProps> = ({ credentialInfo }) => {
+    const [editCredentialsInfo, setEditCredentialsInfo] = useState<boolean>(false);
   return (
     <div className="font-Nunito">
-      <h1 className="text-neutral-5 font-semibold text-2xl">
-        Credentials Information
-      </h1>
+      <ProfileTabHeading heading="Credentials Information" onClick={() => setEditCredentialsInfo(!editCredentialsInfo)} />
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mt-4">
         {

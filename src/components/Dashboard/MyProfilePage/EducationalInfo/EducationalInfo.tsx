@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
+import ProfileTabHeading from "../../../Reusable/ProfileTabHeading/ProfileTabHeading";
 
 // Type for each educational record
 type TEducationInfoItem = {
@@ -32,11 +33,10 @@ const isProvided = (val: unknown): boolean => {
 const EducationalInfo: React.FC<TEducationalInfoProps> = ({
   educationalInfo,
 }) => {
+  const [editEducationalInfo, setEditEducationalInfo] = useState<boolean>(false);
   return (
     <div className="font-Nunito">
-      <h1 className="text-neutral-5 font-semibold text-2xl">
-        Educational Information
-      </h1>
+      <ProfileTabHeading heading="Educational Information" onClick={() => setEditEducationalInfo(!editEducationalInfo)} />
 
       <div className="flex flex-col gap-4 mt-4">
         {educationalInfo.map((edu, eduIndex) => (

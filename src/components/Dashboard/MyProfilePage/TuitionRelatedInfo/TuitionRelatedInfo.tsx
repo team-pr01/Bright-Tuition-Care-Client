@@ -1,3 +1,6 @@
+import { useState } from "react";
+import ProfileTabHeading from "../../../Reusable/ProfileTabHeading/ProfileTabHeading";
+
 type TTuitionRelatedInfoProps = {
   tuitionRelatedInfo: {
     tutoringMethod: string;
@@ -26,6 +29,7 @@ type TTuitionRelatedInfoProps = {
 const TuitionRelatedInfo = ({
   tuitionRelatedInfo,
 }: TTuitionRelatedInfoProps) => {
+    const [editTuitionRelatedInfo, setEditTuitionRelatedInfo] = useState<boolean>(false);
   const details = [
     { label: "Tutoring Method", value: tuitionRelatedInfo?.tutoringMethod },
     { label: "Tutoring Styles", value: tuitionRelatedInfo?.tutoringStyles },
@@ -69,9 +73,7 @@ const TuitionRelatedInfo = ({
 
   return (
     <div className="font-Nunito">
-      <h1 className="text-neutral-5 font-semibold text-2xl">
-        Tuition Related Information
-      </h1>
+      <ProfileTabHeading heading="Tuition Related Information" onClick={() => setEditTuitionRelatedInfo(!editTuitionRelatedInfo)} />
 
       <div className="flex flex-col gap-2 mt-4">
         {details.map((item, index) => {

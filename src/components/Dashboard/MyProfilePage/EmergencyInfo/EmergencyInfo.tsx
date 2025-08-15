@@ -1,3 +1,6 @@
+import { useState } from "react";
+import ProfileTabHeading from "../../../Reusable/ProfileTabHeading/ProfileTabHeading";
+
 type TEmergencyInfo = {
   name?: string;
   relation?: string;
@@ -17,6 +20,7 @@ const isProvided = (val: unknown): boolean => {
 };
 
 const EmergencyInfo: React.FC<TEmergencyInfoProps> = ({ emergencyInfo }) => {
+  const [editEmergencyInfo, setEditEmergencyInfo] = useState<boolean>(false);
   const details = [
     { label: "Name", value: emergencyInfo?.name },
     { label: "Relation", value: emergencyInfo?.relation },
@@ -26,9 +30,7 @@ const EmergencyInfo: React.FC<TEmergencyInfoProps> = ({ emergencyInfo }) => {
 
   return (
     <div className="font-Nunito">
-      <h1 className="text-neutral-5 font-semibold text-2xl">
-        Emergency Information
-      </h1>
+      <ProfileTabHeading heading="Emergency Information" onClick={() => setEditEmergencyInfo(!editEmergencyInfo)} />
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-2 mt-4">
         {details.map((item, index) => {
