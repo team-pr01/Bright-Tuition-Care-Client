@@ -9,8 +9,8 @@ const ProfileTabHeading: React.FC<TProfileTabHeadingProps> = ({
   onClick,
 }) => {
   return (
-    <div className="flex items-center justify-between">
-      <h1 className="text-neutral-5 font-semibold text-2xl">{heading}</h1>
+    <div className="flex items-center justify-between w-full">
+      <h1 className="text-neutral-5 font-semibold text-lg md:text-xl lg:text-2xl">{heading}</h1>
       <button
         type="button"
         onClick={onClick}

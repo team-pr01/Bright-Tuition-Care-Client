@@ -41,7 +41,7 @@ const EducationalInfo: React.FC<TEducationalInfoProps> = ({
       <div className="flex flex-col gap-4 mt-4">
         {educationalInfo.map((edu, eduIndex) => (
           <div key={eduIndex} className="border-b border-neutral-30/20 pb-4">
-            <h2 className="text-neutral-5 font-bold text-lg mb-2">
+            <h2 className="text-neutral-5 font-bold text-sm lg:text-lg mb-2">
               {edu.degree}
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
@@ -53,8 +53,8 @@ const EducationalInfo: React.FC<TEducationalInfoProps> = ({
                   .replace(/^./, (str) => str.toUpperCase());
 
                 return (
-                  <div key={index} className="flex">
-                    <span className="text-neutral-5 font-medium min-w-[200px]">
+                  <div key={index} className="flex text-[13px] md:text-sm lg:text-base">
+                    <span className="text-neutral-5 font-medium min-w-[140px] lg:min-w-[200px]">
                       {label}
                     </span>
                     <span className="text-neutral-5 font-medium">:</span>

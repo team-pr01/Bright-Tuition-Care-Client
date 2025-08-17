@@ -147,12 +147,12 @@ const MyProfile = () => {
   ];
 
   return (
-    <div className="flex gap-5 font-Nunito">
+    <div className="flex flex-col lg:flex-row gap-5 font-Nunito w-full">
       <ProfileDetails />
 
-      <div className="w-[75%]">
+      <div className="w-full lg:w-[75%]">
         {/* Tabs */}
-        <div className="flex items-center w-full text-nowrap gap-2">
+        <div className="flex overflow-x-auto pt-3 text-nowrap gap-2">
           {profileTabs?.map((tab) => {
             const isActive = tab?.key === activeTab;
             return (
@@ -160,7 +160,7 @@ const MyProfile = () => {
                 key={tab?.title}
                 onClick={() => setActiveTab(tab?.key)}
                 type="button"
-                className={`w-[224px] relative border py-4 px-5 rounded-xl text-start flex items-center justify-between gap-6 cursor-pointer transform duration-300 shadow-xs ${
+                className={`min-w-[224px] relative border py-4 px-5 rounded-xl text-start flex items-center justify-between gap-6 cursor-pointer transform duration-300 shadow-xs ${
                   isActive
                     ? "bg-gradient-to-r from-blue-500 to-primary-10 border-primary-10 text-white"
                     : "bg-white border border-primary-40/10 text-neutral-10 hover:bg-neutral-50/20"
@@ -177,8 +177,8 @@ const MyProfile = () => {
                 )}
 
                 <div>
-                  <h1 className="font-semibold text-lg">{tab?.title}</h1>
-                  <p className="text-sm">Information</p>
+                  <h1 className="font-semibold text-base mdLtext-lg">{tab?.title}</h1>
+                  <p className="text-xs md:text-sm">Information</p>
                 </div>
                 <div className="size-8 rounded-full bg-neutral-20/10 flex items-center justify-center">
                   {tab?.icon}
@@ -232,7 +232,7 @@ const MyProfile = () => {
         heading="Update Personal Information"
         isModalOpen={isFormModalOpen}
         setIsModalOpen={setIsFormModalOpen}
-        width="w-full md:w-[35%] max-h-[600px] overflow-y-auto"
+        width="w-[90%] md:w-[35%] max-h-[600px] overflow-y-auto"
       >
         <UpdatePersonalInfoModal setIsFormModalOpen={setIsFormModalOpen} />
       </Modal>

@@ -20,7 +20,7 @@ const ProfileDetails = () => {
     },
   ];
   return (
-    <div className="bg-white border border-primary-40/10 p-5 rounded-2xl w-[25%] flex flex-col gap-6 font-Nunito">
+    <div className="bg-white border border-primary-40/10 p-5 rounded-2xl w-full lg:w-[25%] flex flex-col gap-6 font-Nunito">
       <div className="font-Nunito flex flex-col items-center justify-center">
         <div className="size-32 rounded-full relative">
           <div className="bg-white/40 rounded-full p-[2px] size-full">
@@ -58,12 +58,12 @@ const ProfileDetails = () => {
         {contactInfo?.map((info) => (
           <div key={info?.label} className="flex flex-col gap-1">
             <div className="flex items-center gap-[6px]">
-              <img src={info?.icon} alt="" className="size-5 mt-1" />
-              <p className="text-neutral-10 text-lg font-semibold">
+              <img src={info?.icon} alt="" className="size-5 mt-0 md:mt-1" />
+              <p className="text-neutral-10 text-base md:text-lg font-semibold">
                 {info?.label}
               </p>
             </div>
-            <p className="text-neutral-20 ml-6">{info?.value}</p>
+            <p className="text-neutral-20 text-sm md:text-base ml-6">{info?.value}</p>
           </div>
         ))}
       </div>

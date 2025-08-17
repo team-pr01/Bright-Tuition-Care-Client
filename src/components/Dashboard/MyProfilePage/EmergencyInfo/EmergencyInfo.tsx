@@ -42,8 +42,8 @@ const EmergencyInfo: React.FC<TEmergencyInfoProps> = ({ emergencyInfo }) => {
           const provided = isProvided(item.value);
 
           return (
-            <div key={index} className="flex">
-              <span className="text-neutral-5 font-medium min-w-[200px]">
+            <div key={index} className="flex text-[13px] md:text-sm lg:text-base">
+              <span className="text-neutral-5 font-medium min-w-[140px] lg:min-w-[200px]">
                 {item.label}
               </span>
               <span className="text-neutral-5 font-medium">:</span>
@@ -66,7 +66,7 @@ const EmergencyInfo: React.FC<TEmergencyInfoProps> = ({ emergencyInfo }) => {
         heading="Update Emergency Information"
         isModalOpen={isFormModalOpen}
         setIsModalOpen={setIsFormModalOpen}
-        width="w-full md:w-[35%] max-h-[600px] overflow-y-auto"
+        width="w-[90%] md:w-[35%] max-h-[600px] overflow-y-auto"
       >
         <UpdateEmergencyInfoModal setIsFormModalOpen={setIsFormModalOpen} />
       </Modal>

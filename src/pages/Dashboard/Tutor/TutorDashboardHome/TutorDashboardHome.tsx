@@ -8,7 +8,7 @@ import SupportBar from "../../../../components/Dashboard/SupportBar/SupportBar";
 const TutorDashboardHome = () => {
   return (
     <div className="flex flex-col gap-4 lg:gap-9 font-Nunito">
-      <div className="flex items-center overflow-x-auto w-full gap-6">
+      <div className="flex items-center overflow-x-auto w-full gap-3 md:gap-6">
         <DashboardOverviewCard
           title="Applied Jobs"
           value="7"

@@ -75,15 +75,18 @@ const TuitionRelatedInfo = ({
 
   return (
     <div className="font-Nunito">
-      <ProfileTabHeading heading="Tuition Related Information" onClick={() => setIsFormModalOpen(!isFormModalOpen)} />
+      <ProfileTabHeading
+        heading="Tuition Related Information"
+        onClick={() => setIsFormModalOpen(!isFormModalOpen)}
+      />
 
       <div className="flex flex-col gap-2 mt-4">
         {details.map((item, index) => {
           const provided = isProvided(item.value);
 
           return (
-            <div key={index} className="flex">
-              <span className="text-neutral-5 font-medium min-w-[200px]">
+            <div key={index} className="flex text-[13px] md:text-sm lg:text-base">
+              <span className="text-neutral-5 font-medium min-w-[140px] md:max-w-[160px] lg:min-w-[200px]">
                 {item.label}
               </span>
               <span className="text-neutral-5 font-medium">:</span>
@@ -106,9 +109,11 @@ const TuitionRelatedInfo = ({
         heading="Update Tuition Information"
         isModalOpen={isFormModalOpen}
         setIsModalOpen={setIsFormModalOpen}
-        width="w-full md:w-[35%] max-h-[600px] overflow-y-auto"
+        width="w-[90%] md:w-[35%] max-h-[600px] overflow-y-auto"
       >
-        <UpdateTuitionRelatedInfoModal setIsFormModalOpen={setIsFormModalOpen} />
+        <UpdateTuitionRelatedInfoModal
+          setIsFormModalOpen={setIsFormModalOpen}
+        />
       </Modal>
     </div>
   );

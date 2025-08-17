@@ -28,7 +28,6 @@ type TPersonalInfoProps = {
 };
 
 const PersonalInfo: React.FC<TPersonalInfoProps> = ({ personalInfo }) => {
-
   const details = [
     { label: "Email", value: personalInfo?.email },
     { label: "Gender", value: personalInfo?.gender },
@@ -64,9 +63,9 @@ const PersonalInfo: React.FC<TPersonalInfoProps> = ({ personalInfo }) => {
   return (
     <div className="font-Nunito">
       <div className="flex items-center justify-between">
-        <div className="flex items-center gap-2 text-neutral-5 font-semibold text-2xl">
-          <h1 className="">Personal Information</h1>
-          <div className="bg-primary-10 text-white rounded-full size-7 flex items-center justify-center">
+        <div className="flex items-center gap-2 text-neutral-5 font-semibold">
+          <h1 className="text-xl md:2xl">Personal Information</h1>
+          <div className="bg-primary-10 text-white rounded-full size-7 hidden md:flex items-center justify-center">
             {personalInfo?.gender === "Male" ? (
               <FaMale className="text-xl" />
             ) : (
@@ -75,6 +74,7 @@ const PersonalInfo: React.FC<TPersonalInfoProps> = ({ personalInfo }) => {
           </div>
         </div>
 
+          {/* Social media icons */}
         <div className="flex items-center gap-3">
           <a
             href=""
@@ -82,7 +82,7 @@ const PersonalInfo: React.FC<TPersonalInfoProps> = ({ personalInfo }) => {
             className="text-primary-10 font-semibold flex items-center gap-1 w-fit hover:-translate-y-1 transition duration-500"
           >
             <FaFacebook />
-            rahulsd380
+            <span className="hidden md:block">rahulsd380</span>
           </a>
           <a
             href=""
@@ -90,7 +90,7 @@ const PersonalInfo: React.FC<TPersonalInfoProps> = ({ personalInfo }) => {
             className="text-primary-10 font-semibold flex items-center gap-1 w-fit hover:-translate-y-1 transition duration-500"
           >
             <FaLinkedin />
-            rahulsd380
+            <span className="hidden md:block">rahulsd380</span>
           </a>
         </div>
       </div>
@@ -100,8 +100,8 @@ const PersonalInfo: React.FC<TPersonalInfoProps> = ({ personalInfo }) => {
           const provided = isProvided(item.value);
 
           return (
-            <div key={index} className="flex">
-              <span className="text-neutral-5 font-medium min-w-[200px]">
+            <div key={index} className="flex text-[13px] md:text-sm lg:text-base">
+              <span className="text-neutral-5 font-medium min-w-[140px] lg:min-w-[200px]">
                 {item.label}
               </span>
               <span className="text-neutral-5 font-medium">:</span>
@@ -120,8 +120,6 @@ const PersonalInfo: React.FC<TPersonalInfoProps> = ({ personalInfo }) => {
           );
         })}
       </div>
-
-      
     </div>
   );
 };

@@ -1,8 +1,12 @@
 import { Link, useLocation } from "react-router-dom";
 import { ICONS } from "../../../assets";
 import { useEffect, useState } from "react";
-import { RxCross2 } from "react-icons/rx";
-import { tutorDashboardLinks } from "../../../data/dashboardSidebarLinks";
+import {
+  otherLinks,
+  tutorDashboardLinks,
+} from "../../../data/dashboardSidebarLinks";
+import UserProfilePhoto from "../Sidebar/UserProfilePhoto/UserProfilePhoto";
+import { TbLogout2 } from "react-icons/tb";
 
 const DashboardHamburgerMenu = () => {
   const location = useLocation();
@@ -46,56 +50,57 @@ const DashboardHamburgerMenu = () => {
 
       {/* Side Menu */}
       <div
-        className={`fixed inset-y-0 left-0 z-50 bg-white py-8 p-6 w-[300px] overflow-y-auto transition-all duration-300 transform flex flex-col items-start justify-between ${
+        className={`fixed inset-y-0 left-0 z-50 bg-primary-10 py-8 p-6 w-[250px] overflow-y-auto transition-all duration-300 transform flex flex-col items-start justify-between ${
           isHamburgerOpen ? "translate-x-0" : "-translate-x-full"
         }`}
       >
-        <div className="flex flex-col gap-10">
-          {/* Header */}
-          <div className="flex justify-between items-center gap-5 w-full border-b border-neutral-30/50 pb-4">
-            <Link
-              to="/"
-              className="flex items-center gap-2"
-              onClick={toggleHamburgerMenu}
-            >
-              <img src={ICONS.logo} alt="Logo" className="size-10" />
-              <span className="text-lg font-bold text-primary-40">
-                Bright Tuition Care
-              </span>
-            </Link>
-            <button onClick={toggleHamburgerMenu}>
-              <RxCross2 className="text-neutral-10 text-2xl" />
-            </button>
-          </div>
+        <UserProfilePhoto />
 
-          {/* Nav Links */}
-          <div className="flex flex-col gap-5">
-            {tutorDashboardLinks.map((link) => (
+        <div className="flex flex-col gap-4 h-full xl:h-[380px] 2xl:h-[600px] overflow-y-auto custom-scrollbar-sidebar mt-5">
+          <div className="flex flex-col gap-2">
+            {tutorDashboardLinks?.map((link) => (
               <Link
-                key={link.path}
-                to={link.path}
-                onClick={toggleHamburgerMenu}
-                className={`text-lg font-semibold transition ${
-                  location.pathname === link.path
-                    ? "text-primary-40 font-bold"
-                    : "text-neutral-10"
+                key={link?.label}
+                to={link?.path}
+                className={`flex items-center gap-2 rounded-lg p-2 transform transition-transform duration-500 hover:-translate-y-1 ${
+                  location?.pathname === link?.path
+                    ? "bg-white text-primary-10 font-semibold"
+                    : "font-medium  text-white  bg-none"
                 }`}
               >
-                {link.label}
+                <div className="size-6 rounded-full flex items-center justify-center bg-primary-10 text-white">
+                  {link?.icon}
+                </div>
+                {link?.label}
+              </Link>
+            ))}
+          </div>
+
+          <hr className="border border-neutral-50/30" />
+          <div className="flex flex-col gap-2">
+            {otherLinks?.map((link) => (
+              <Link
+                key={link?.label}
+                to={link?.path}
+                className={`flex items-center gap-2 rounded-lg p-2 transform transition-transform duration-500 hover:-translate-y-1 ${
+                  location?.pathname === link?.path
+                    ? "bg-white text-primary-10 font-semibold"
+                    : "font-medium  text-white  bg-none"
+                }`}
+              >
+                {link?.icon}
+                {link?.label}
               </Link>
             ))}
           </div>
         </div>
 
-        {/* Auth Buttons */}
-        <div className="flex flex-col gap-3 w-full">
-          <button className="py-2 px-4 border border-primary-10 rounded-md text-primary-40 font-medium">
-            Sign Up
-          </button>
-          <button className="py-2 px-4 bg-primary-10 text-white rounded-md font-medium">
-            Become A Tutor
-          </button>
-        </div>
+        <button
+          className={`text-lg flex items-center gap-2 rounded-lg p-2 transform transition-transform duration-500 hover:-translate-y-1 text-white font-semibold cursor-pointer`}
+        >
+          <TbLogout2 className="text-xl" />
+          Sign Out
+        </button>
       </div>
     </div>
   );
