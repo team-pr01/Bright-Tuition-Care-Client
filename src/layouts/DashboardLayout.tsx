@@ -9,7 +9,7 @@ const DashboardLayout = () => {
       <Sidebar />
       <div className="flex flex-col w-full">
         <DashboardHeader />
-        <div className="flex-1 px-6 py-8 overflow-y-auto"> {/* Only outlet scrolls */}
+        <div className="flex-1 px-3 lg:px-6 py-8 overflow-y-auto">
           <Outlet />
         </div>
       </div>
