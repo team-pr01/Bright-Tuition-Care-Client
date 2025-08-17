@@ -15,7 +15,7 @@ const DashboardOverviewCard: React.FC<TDashboardOverviewCardProps> = ({
   return (
     <Link
       to={path}
-      className={`w-full min-w-[180px] md:min-w-[248px] bg-white rounded-2xl border border-primary-40/10 py-[22px] px-5 font-Nunito ${textColor}`}
+      className={`w-full min-w-[160px] md:min-w-[248px] bg-white rounded-2xl border border-primary-40/10 py-[22px] px-5 font-Nunito ${textColor}`}
     >
       <h1 className="text-2xl md:text-4xl font-bold text-center">
         {value}
