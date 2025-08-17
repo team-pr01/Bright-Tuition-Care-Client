@@ -36,7 +36,7 @@ const ReferAndEarn = () => {
   ];
 
   return (
-    <div className="flex flex-col items-center justify-center gap-10 font-Nunito">
+    <div className="flex flex-col items-center justify-center gap-5 lg:gap-10 font-Nunito">
       <Heading
         titleParts={[{ text: "Earn Money by Referring Tutors" }]}
         description="Share your unique referral link with students or guardians. When a tutor is hired and completes enrollment, you earn 10% commission — simple, fast, and rewarding!"
@@ -77,7 +77,7 @@ const ReferAndEarn = () => {
       <Modal
         isModalOpen={isFormModalOpen}
         setIsModalOpen={setIsFormModalOpen}
-        width="w-[25%] h-fit overflow-y-auto"
+        width="w-[95%] md:w-[80%] lg:w-[60%] xl:w-[40%] 2xl:w-[25%] h-fit overflow-y-auto"
       >
         <AddLeadFormModal />
       </Modal>
