@@ -9,8 +9,8 @@ import { TbLogout2 } from "react-icons/tb";
 const Sidebar = () => {
   const location = useLocation();
   return (
-    <div className="sticky top-0 left-0">
-      <div className="w-[270px] 2xl:w-[300px] bg-primary-10 p-5 font-Nunito flex flex-col gap-10 justify-between">
+    <div className="sticky top-0 left-0 hidden lg:block">
+      <div className="w-[270px] h-full bg-primary-10 p-5 font-Nunito flex flex-col gap-10 justify-between">
         <UserProfilePhoto />
 
         <div className="flex flex-col gap-4 h-full xl:h-[380px] 2xl:h-[600px] overflow-y-auto custom-scrollbar-sidebar">
@@ -25,7 +25,9 @@ const Sidebar = () => {
                     : "font-medium  text-white  bg-none"
                 }`}
               >
-                <div className="size-6 rounded-full flex items-center justify-center bg-primary-10 text-white">{link?.icon}</div>
+                <div className="size-6 rounded-full flex items-center justify-center bg-primary-10 text-white">
+                  {link?.icon}
+                </div>
                 {link?.label}
               </Link>
             ))}

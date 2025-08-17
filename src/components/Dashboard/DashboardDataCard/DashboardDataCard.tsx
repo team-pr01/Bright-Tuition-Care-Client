@@ -21,14 +21,14 @@ const DashboardDataCard: React.FC<TDashboardDataCardProps> = ({
   valueColor,
 }) => {
   return (
-    <div className="bg-white rounded-2xl border border-primary-40/10 p-5 flex items-center gap-8">
+    <div className="bg-white rounded-2xl border border-primary-40/10 p-5 flex flex-col md:flex-row items-center md:items-start gap-3 md:gap-6">
       <img src={icon} alt="" className="w-24" />
       <div>
-        <h1 className={`text-[28px] font-semibold ${titleColor}`}>
+        <h1 className={`text-xl lg:text-[28px] font-semibold ${titleColor}`}>
           {title}{" "}
-          <span className={`text-[33px] font-bold ${valueColor}`}>{value}</span>
+          <span className={`text-2xl md:text-[33px] font-bold ${valueColor}`}>{value}</span>
         </h1>
-        <p className="mb-8">{description}</p>
+        <p className="mb-5 md:mb-8 text-sm md:text-base mt-2 md:mt-0">{description}</p>
 
         <Link
           to={path}

@@ -60,7 +60,7 @@ const Notification = () => {
     <div className="relative " ref={notificationRef}>
       <button
         onClick={() => setIsNotificationOpen((prev) => !prev)}
-        className="relative cursor-pointer"
+        className="relative cursor-pointer mt-1"
       >
         <img
           src={ICONS.notification}

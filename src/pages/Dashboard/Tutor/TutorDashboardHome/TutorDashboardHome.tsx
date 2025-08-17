@@ -7,8 +7,8 @@ import SupportBar from "../../../../components/Dashboard/SupportBar/SupportBar";
 
 const TutorDashboardHome = () => {
   return (
-    <div className="flex flex-col gap-9 font-Nunito">
-      <div className="grid grid-cols-5 gap-6">
+    <div className="flex flex-col gap-4 lg:gap-9 font-Nunito">
+      <div className="flex items-center overflow-x-auto w-full gap-6">
         <DashboardOverviewCard
           title="Applied Jobs"
           value="7"
@@ -41,9 +41,9 @@ const TutorDashboardHome = () => {
         />
       </div>
       <NoticeBoard />
-{/* bg-gradient-to-r from-slate-50 to-sky-50 */}
-      <div className="grid grid-cols-2 gap-6">
-        <div className="bg-white rounded-2xl border border-primary-40/10 p-5 flex gap-6">
+      {/* bg-gradient-to-r from-slate-50 to-sky-50 */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <div className="bg-white rounded-2xl border border-primary-40/10 p-5 flex flex-col md:flex-row items-center md:items-start gap-3 md:gap-6">
           <div className="size-32 bg-white/40 rounded-full p-[2px]">
             <img
               src={IMAGES.dummyAvatar}
@@ -52,13 +52,13 @@ const TutorDashboardHome = () => {
             />
           </div>
           <div>
-            <h1 className={`text-[28px] font-semibold text-primary-10`}>
+            <h1 className={`text-xl lg:text-[28px] font-semibold text-primary-10`}>
               Profile Completed{" "}
-              <span className={`text-[33px] font-bold text-primary-10`}>
+              <span className={`text-2xl md:text-[33px] font-bold text-primary-10`}>
                 50%
               </span>
             </h1>
-            <p className="mb-8">
+            <p className="mb-5 md:mb-8 text-sm md:text-base mt-2 md:mt-0">
               A complete and well organized profile can help you to get better
               response.
             </p>
@@ -84,7 +84,7 @@ const TutorDashboardHome = () => {
         />
       </div>
 
-      <div className="grid grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         <DashboardDataCard
           title={"Profile Status"}
           description={"Get better response by verifying your profile."}
@@ -117,7 +117,7 @@ const TutorDashboardHome = () => {
         />
       </div>
 
-      <SupportBar/>
+      <SupportBar />
     </div>
   );
 };
