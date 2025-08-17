@@ -23,10 +23,10 @@ const Modal: React.FC<TModalProps> = ({
       <div
         className={`${
           isModalOpen ? "scale-100 opacity-100" : "scale-0 opacity-0"
-        } ${width} bg-gradient-to-r from-slate-50 to-sky-50 rounded-lg p-6 transition-all duration-300 relative`}
+        } ${width} bg-gradient-to-r from-slate-50 to-sky-50 rounded-lg p-3 md:p-6 transition-all duration-300 relative`}
       >
         <div className="flex items-center justify-between w-full">
-          <h1 className="text-xl font-semibold ">{heading}</h1>
+          <h1 className="text-base md:text-xl font-semibold ">{heading}</h1>
           <RxCross1
             className="text-lg dark:text-[#abc2d3]/70 cursor-pointer"
             onClick={() => setIsModalOpen(false)}

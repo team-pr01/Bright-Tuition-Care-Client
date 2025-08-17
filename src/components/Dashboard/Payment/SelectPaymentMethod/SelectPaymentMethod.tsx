@@ -4,7 +4,12 @@ import Button from "../../../Reusable/Button/Button";
 type TSelectPaymentMethodProps = {
   selectedPaymentMethod: string;
   setSelectedPaymentMethod: (paymentMethod: string) => void;
-  setPaymentModalType: (paymentModalType: "selectPaymentMethod" | "addPaymentDetails" | "paymentSuccess") => void;
+  setPaymentModalType: (
+    paymentModalType:
+      | "selectPaymentMethod"
+      | "addPaymentDetails"
+      | "paymentSuccess"
+  ) => void;
 };
 const SelectPaymentMethod: React.FC<TSelectPaymentMethodProps> = ({
   selectedPaymentMethod,
@@ -32,10 +37,12 @@ const SelectPaymentMethod: React.FC<TSelectPaymentMethodProps> = ({
     },
   ];
   return (
-    <div className="w-full flex flex-col items-center gap-6 mt-5 px-10">
-      <h1 className="text-xl font-semibold ">Please select a payment method</h1>
+    <div className="w-full flex flex-col items-center gap-6 mt-2 md:mt-5 px-0 md:px-10">
+      <h1 className="text-base md:text-xl font-semibold">
+        Please select a payment method
+      </h1>
 
-      <div className="grid grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-2 md:gap-6 w-full">
         {paymentMethods?.map((paymentMethod) => (
           <button
             key={paymentMethod?.key}
@@ -46,8 +53,12 @@ const SelectPaymentMethod: React.FC<TSelectPaymentMethodProps> = ({
                 : "bg-white hover:bg-neutral-50/5 border-primary-40/10"
             }`}
           >
-            <div className="size-20 rounded-full bg-primary-20 flex items-center justify-center">
-              <img src={paymentMethod?.icon} alt="" className="size-11" />
+            <div className="size-12 md:size-20 rounded-full bg-primary-20 flex items-center justify-center">
+              <img
+                src={paymentMethod?.icon}
+                alt=""
+                className="size-8 md:size-11"
+              />
             </div>
 
             <div>

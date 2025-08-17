@@ -56,7 +56,7 @@ const Payment = () => {
       <Modal
         isModalOpen={isPaymentModalOpen}
         setIsModalOpen={setIsPaymentModalOpen}
-        width="w-auto max-h-[600px] overflow-y-auto"
+        width="w-[90%] md:w-auto max-h-[600px] overflow-y-auto"
       >
         {paymentModalType === "selectPaymentMethod" ? (
           <SelectPaymentMethod

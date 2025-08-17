@@ -5,7 +5,7 @@ import TextInput from "../../../Reusable/TextInput/TextInput";
 
 type TFormData = {
   senderNumber: string;
-  bankName? : string
+  bankName?: string;
   file?: string;
   amount?: string;
 };
@@ -90,7 +90,7 @@ const SubmitProofForm: React.FC<TSubmitProofFormProps> = ({
         />
       </div>
 
-      <p className="text-neutral-20 mt-2 max-w-[400px] mx-auto text-center">
+      <p className="text-sm md:text-base text-neutral-20 mt-4 md:mt-2 max-w-[400px] mx-auto text-center">
         Having any problem with payment?{" "}
         <a
           href="tel:01720000000"
