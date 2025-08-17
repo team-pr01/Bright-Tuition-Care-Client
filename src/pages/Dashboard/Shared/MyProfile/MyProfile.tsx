@@ -232,9 +232,9 @@ const MyProfile = () => {
         heading="Update Personal Information"
         isModalOpen={isFormModalOpen}
         setIsModalOpen={setIsFormModalOpen}
-        width="w-full md:w-[40%] max-h-[600px] overflow-y-auto"
+        width="w-full md:w-[35%] max-h-[600px] overflow-y-auto"
       >
-        <UpdatePersonalInfoModal />
+        <UpdatePersonalInfoModal setIsFormModalOpen={setIsFormModalOpen} />
       </Modal>
     </div>
   );

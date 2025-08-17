@@ -24,7 +24,11 @@ type TFormData = {
   linkedin: string;
 };
 
-const UpdatePersonalInfoModal = () => {
+const UpdatePersonalInfoModal = ({
+  setIsFormModalOpen,
+}: {
+  setIsFormModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
+}) => {
   const {
     register,
     handleSubmit,
@@ -36,8 +40,8 @@ const UpdatePersonalInfoModal = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit(handleUpdateInfo)} className="space-y-4 mt-6">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+    <form onSubmit={handleSubmit(handleUpdateInfo)} className="space-y-5 mt-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
         {/* Full Name */}
         <TextInput
           label="Full Name"
@@ -206,10 +210,11 @@ const UpdatePersonalInfoModal = () => {
 
       <div className="flex items-center gap-4 justify-end">
         <Button
-          type="submit"
+          type="button"
           label="Cancel"
           variant="tertiary"
           className="py-2 lg:py-2 w-full flex items-center justify-center"
+          onClick={() => setIsFormModalOpen(false)}
         />
         <Button
           type="submit"

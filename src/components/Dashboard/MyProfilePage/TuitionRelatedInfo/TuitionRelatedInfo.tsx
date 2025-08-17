@@ -1,5 +1,7 @@
 import { useState } from "react";
 import ProfileTabHeading from "../../../Reusable/ProfileTabHeading/ProfileTabHeading";
+import Modal from "../../../Reusable/Modal/Modal";
+import UpdateTuitionRelatedInfoModal from "./UpdateTuitionRelatedInfoModal";
 
 type TTuitionRelatedInfoProps = {
   tuitionRelatedInfo: {
@@ -29,7 +31,7 @@ type TTuitionRelatedInfoProps = {
 const TuitionRelatedInfo = ({
   tuitionRelatedInfo,
 }: TTuitionRelatedInfoProps) => {
-    const [editTuitionRelatedInfo, setEditTuitionRelatedInfo] = useState<boolean>(false);
+  const [isFormModalOpen, setIsFormModalOpen] = useState<boolean>(false);
   const details = [
     { label: "Tutoring Method", value: tuitionRelatedInfo?.tutoringMethod },
     { label: "Tutoring Styles", value: tuitionRelatedInfo?.tutoringStyles },
@@ -73,7 +75,7 @@ const TuitionRelatedInfo = ({
 
   return (
     <div className="font-Nunito">
-      <ProfileTabHeading heading="Tuition Related Information" onClick={() => setEditTuitionRelatedInfo(!editTuitionRelatedInfo)} />
+      <ProfileTabHeading heading="Tuition Related Information" onClick={() => setIsFormModalOpen(!isFormModalOpen)} />
 
       <div className="flex flex-col gap-2 mt-4">
         {details.map((item, index) => {
@@ -100,6 +102,14 @@ const TuitionRelatedInfo = ({
           );
         })}
       </div>
+      <Modal
+        heading="Update Tuition Information"
+        isModalOpen={isFormModalOpen}
+        setIsModalOpen={setIsFormModalOpen}
+        width="w-full md:w-[35%] max-h-[600px] overflow-y-auto"
+      >
+        <UpdateTuitionRelatedInfoModal setIsFormModalOpen={setIsFormModalOpen} />
+      </Modal>
     </div>
   );
 };

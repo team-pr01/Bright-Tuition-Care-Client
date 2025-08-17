@@ -1,4 +1,10 @@
 export const filterData = {
+  tutoringStyles : [
+    "One to One",
+    "One to many",
+    "Online Tutoring",
+    "Shadow Tutoring "
+  ],
   tuitionType: [
     "Home Tutoring",
     "Online Tutoring",
@@ -1111,4 +1117,5 @@ export const filterData = {
   ],
   studentGender: ["Male", "Female", "Any"],
   tutorGender: ["Male", "Female", "Any"],
+  placeOfTuition: ["Student's Home", "My Home", "Online"],
 };
