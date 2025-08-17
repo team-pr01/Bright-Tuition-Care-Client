@@ -6,7 +6,7 @@ import Modal from "../../../../components/Reusable/Modal/Modal";
 import AddLeadFormModal from "../../../../components/Dashboard/Tutor/AddLeadFormModal/AddLeadFormModal";
 
 const ReferAndEarn = () => {
-    const [isFormModalOpen, setIsFormModalOpen] = useState<boolean>(false);
+  const [isFormModalOpen, setIsFormModalOpen] = useState<boolean>(false);
   const earnSteps = [
     {
       title: "Get Your Referral Link",
@@ -79,7 +79,7 @@ const ReferAndEarn = () => {
         setIsModalOpen={setIsFormModalOpen}
         width="w-[25%] h-fit overflow-y-auto"
       >
-        <AddLeadFormModal/>
+        <AddLeadFormModal />
       </Modal>
     </div>
   );

@@ -64,7 +64,7 @@ const Button: React.FC<ButtonProps> = ({
         )}
         {iconWithoutBg && (
           <img
-            src={typeof icon === "string" ? icon : undefined}
+            src={typeof iconWithoutBg === "string" ? iconWithoutBg : undefined}
             alt="Button Icon"
             className="size-3 lg:size-4"
           />

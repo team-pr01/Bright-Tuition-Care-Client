@@ -10,6 +10,7 @@ interface TextareaProps {
   value?: string;
   onChange?: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
   isRequired?: boolean;
+  isDisabled?: boolean;
 }
 
 const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
@@ -21,6 +22,7 @@ const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
       rows = 4,
       error,
       isRequired = true,
+      isDisabled = false,
       ...rest
     },
     ref
@@ -29,8 +31,9 @@ const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
       <div className="flex flex-col gap-2 font-Nunito">
         <label className="flex flex-row items-center w-full justify-between text-neutral-65">
           <span className="text-neutral-10 leading-[18px] text-[15px] font-medium tracking-[-0.16] ">
-              {label} <span className="text-primary-10">{isRequired ? "*" : ""}</span>
-            </span>
+            {label}{" "}
+            <span className="text-primary-10">{isRequired ? "*" : ""}</span>
+          </span>
         </label>
         <textarea
           id={name}
@@ -38,9 +41,9 @@ const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
           placeholder={placeholder}
           rows={rows}
           ref={ref}
-           className={`w-full px-4 py-[14px] rounded-lg bg-white border-2 leading-[18px] focus:outline-none focus:border-neutral-25 transition duration-300 ${
-            error ? "border-red-500" : "border-neutral-45/20"
-          }`}
+          className={`w-full px-4 py-[14px] rounded-lg  border leading-[18px] focus:outline-none focus:border-primary-10 transition duration-300 ${
+            isDisabled ? "cursor-not-allowed bg-neutral-50/20" : "bg-white"
+          } ${error ? "border-red-500" : "border-neutral-45/20"}`}
           {...rest}
         ></textarea>
         {error && <span className="text-red-500 text-sm">{error.message}</span>}

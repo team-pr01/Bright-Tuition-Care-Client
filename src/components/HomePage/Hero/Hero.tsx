@@ -55,7 +55,7 @@ const Hero = () => {
 
   return (
     <Container>
-  <div className="flex flex-col gap-8 lg:gap-[44px] lg:flex-row font-Nunito h-fit justify-between py-5 lg:py-[84px] overflow-hidden">
+  <div className="flex flex-col gap-8 lg:gap-[44px] lg:flex-row font-Nunito h-fit justify-between py-5 lg:py-[84px]">
     {/* Left Content */}
     <motion.div
       className="w-full lg:w-[55%] flex flex-col justify-start mt-5 lg:mt-16 overflow-hidden" // add overflow-hidden here

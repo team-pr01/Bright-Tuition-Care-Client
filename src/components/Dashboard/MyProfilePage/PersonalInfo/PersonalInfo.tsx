@@ -1,9 +1,10 @@
-import React from "react";
 import { FaFacebook, FaFemale, FaLinkedin, FaMale } from "react-icons/fa";
 
 type TPersonalInfo = {
   email?: string;
+  phoneNumber?: string;
   additionalNumber?: string;
+  city?: string;
   address?: string;
   gender?: string;
   dateOfBirth?: string;
@@ -27,11 +28,14 @@ type TPersonalInfoProps = {
 };
 
 const PersonalInfo: React.FC<TPersonalInfoProps> = ({ personalInfo }) => {
+
   const details = [
     { label: "Email", value: personalInfo?.email },
-    { label: "Additional Number", value: personalInfo?.additionalNumber },
-    { label: "Address", value: personalInfo?.address },
     { label: "Gender", value: personalInfo?.gender },
+    { label: "Phone Number", value: personalInfo?.phoneNumber },
+    { label: "Additional Number", value: personalInfo?.additionalNumber },
+    { label: "City", value: personalInfo?.city },
+    { label: "Address", value: personalInfo?.address },
     { label: "Date of Birth", value: personalInfo?.dateOfBirth },
     { label: "Religion", value: personalInfo?.religion },
     { label: "Identity Type", value: personalInfo?.identityType },
@@ -116,6 +120,8 @@ const PersonalInfo: React.FC<TPersonalInfoProps> = ({ personalInfo }) => {
           );
         })}
       </div>
+
+      
     </div>
   );
 };

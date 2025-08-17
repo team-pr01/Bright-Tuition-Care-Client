@@ -10,9 +10,11 @@ import EducationalInfo from "../../../../components/Dashboard/MyProfilePage/Educ
 import EmergencyInfo from "../../../../components/Dashboard/MyProfilePage/EmergencyInfo/EmergencyInfo";
 import CredentialsInfo from "../../../../components/Dashboard/MyProfilePage/CredentialsInfo/CredentialsInfo";
 import ProfileTabHeading from "../../../../components/Reusable/ProfileTabHeading/ProfileTabHeading";
+import Modal from "../../../../components/Reusable/Modal/Modal";
+import UpdatePersonalInfoModal from "../../../../components/Dashboard/MyProfilePage/PersonalInfo/UpdatePersonalInfoModal";
 
 const MyProfile = () => {
-  const [editPersonalInfo, setEditPersonalInfo] = useState<boolean>(false);
+  const [isFormModalOpen, setIsFormModalOpen] = useState<boolean>(false);
   const profile = {
     tuitionRelatedInfo: {
       tutoringMethod:
@@ -40,7 +42,9 @@ const MyProfile = () => {
 
     personalInfo: {
       email: "rahulsd380@gmail.com",
+      phoneNumber : "",
       additionalNumber: "",
+      city : "",
       address: "",
       gender: "Male",
       dateOfBirth: "",
@@ -188,7 +192,10 @@ const MyProfile = () => {
           {activeTab === "personalInfo" && (
             <>
               <div className="border-b border-neutral-30/20 pb-5 mb-4">
-               <ProfileTabHeading heading="Overview" onClick={() => setEditPersonalInfo(!editPersonalInfo)} />
+                <ProfileTabHeading
+                  heading="Overview"
+                  onClick={() => setIsFormModalOpen(!isFormModalOpen)}
+                />
                 <p className="text-neutral-45 mt-3">
                   Lorem ipsum dolor sit amet consectetur adipisicing elit.
                   Tempore modi ad consequuntur ea. Distinctio velit atque
@@ -220,6 +227,15 @@ const MyProfile = () => {
           )}
         </div>
       </div>
+
+      <Modal
+        heading="Update Personal Information"
+        isModalOpen={isFormModalOpen}
+        setIsModalOpen={setIsFormModalOpen}
+        width="w-full md:w-[40%] max-h-[600px] overflow-y-auto"
+      >
+        <UpdatePersonalInfoModal />
+      </Modal>
     </div>
   );
 };

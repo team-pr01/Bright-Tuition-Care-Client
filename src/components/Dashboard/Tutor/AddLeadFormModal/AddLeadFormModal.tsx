@@ -21,7 +21,7 @@ const AddLeadFormModal = () => {
     console.log(data);
   };
   return (
-    <div className="w-full flex flex-col items-center gap-6 mt-5">
+    <div className="w-full flex flex-col items-center gap-6">
       <h1 className="text-xl font-semibold ">Fill the details to add lead</h1>
 
       <form
