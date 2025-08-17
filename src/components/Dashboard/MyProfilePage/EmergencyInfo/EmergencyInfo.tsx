@@ -1,5 +1,7 @@
 import { useState } from "react";
 import ProfileTabHeading from "../../../Reusable/ProfileTabHeading/ProfileTabHeading";
+import Modal from "../../../Reusable/Modal/Modal";
+import UpdateEmergencyInfoModal from "./UpdateEmergencyInfoModal";
 
 type TEmergencyInfo = {
   name?: string;
@@ -20,7 +22,7 @@ const isProvided = (val: unknown): boolean => {
 };
 
 const EmergencyInfo: React.FC<TEmergencyInfoProps> = ({ emergencyInfo }) => {
-  const [editEmergencyInfo, setEditEmergencyInfo] = useState<boolean>(false);
+  const [isFormModalOpen, setIsFormModalOpen] = useState<boolean>(false);
   const details = [
     { label: "Name", value: emergencyInfo?.name },
     { label: "Relation", value: emergencyInfo?.relation },
@@ -30,7 +32,10 @@ const EmergencyInfo: React.FC<TEmergencyInfoProps> = ({ emergencyInfo }) => {
 
   return (
     <div className="font-Nunito">
-      <ProfileTabHeading heading="Emergency Information" onClick={() => setEditEmergencyInfo(!editEmergencyInfo)} />
+      <ProfileTabHeading
+        heading="Emergency Information"
+        onClick={() => setIsFormModalOpen(!isFormModalOpen)}
+      />
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-2 mt-4">
         {details.map((item, index) => {
@@ -57,6 +62,14 @@ const EmergencyInfo: React.FC<TEmergencyInfoProps> = ({ emergencyInfo }) => {
           );
         })}
       </div>
+      <Modal
+        heading="Update Emergency Information"
+        isModalOpen={isFormModalOpen}
+        setIsModalOpen={setIsFormModalOpen}
+        width="w-full md:w-[35%] max-h-[600px] overflow-y-auto"
+      >
+        <UpdateEmergencyInfoModal setIsFormModalOpen={setIsFormModalOpen} />
+      </Modal>
     </div>
   );
 };
