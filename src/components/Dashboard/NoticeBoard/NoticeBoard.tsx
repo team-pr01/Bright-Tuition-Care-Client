@@ -7,7 +7,7 @@ const NoticeBoard = () => {
 
       <div className="bg-white shadow p-2 md:p-4 rounded-xl md:rounded-2xl w-full">
         <div className="flex items-center gap-3">
-          <img src={ICONS.notice2} alt="" className="size-9" />
+          <img src={ICONS.notice2} alt="" className="size-9 block lg:hidden" />
         <div className="rounded-lg bg-gradient-to-r from-cyan-500 to-primary-10 text-white p-2 w-fit text-xs">
           Notice Board
         </div>
