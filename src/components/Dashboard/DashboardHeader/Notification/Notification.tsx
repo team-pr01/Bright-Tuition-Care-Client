@@ -80,7 +80,7 @@ const Notification = () => {
               animate="visible"
               exit="exit"
               variants={dropdownVariants}
-              className="absolute top-full right-0 mt-2 w-80 bg-white rounded-lg shadow-lg z-10"
+              className="absolute top-full -right-10 md:right-0 mt-2 w-80 bg-white rounded-lg shadow-lg z-10"
             >
               <div className="p-4">
                 <h3 className="text-lg font-semibold text-gray-800 mb-2">
