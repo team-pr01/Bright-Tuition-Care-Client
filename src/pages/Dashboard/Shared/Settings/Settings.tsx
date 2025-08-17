@@ -36,7 +36,7 @@ const Settings = () => {
   return (
     <div className="font-Nunito">
       {/* Tabs */}
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-3 md:gap-6">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-6">
         {settingsTabs?.map((role) => {
           const isActive = role?.title === activeTab;
           return (
@@ -44,7 +44,7 @@ const Settings = () => {
               key={role?.title}
               onClick={() => setActiveTab(role?.title)}
               type="button"
-              className={`relative border py-4 px-5 rounded-xl text-start flex items-center justify-between gap-6 cursor-pointer transform duration-300 shadow-xs ${
+              className={`relative border py-2 md:py-4 px-3 md:px-5 rounded-xl text-start flex flex-col-reverse xl:flex-row items-center justify-between gap-3 xl:gap-6 cursor-pointer transform duration-300 shadow-xs ${
                 isActive
                   ? "bg-gradient-to-r from-blue-500 to-primary-10 border-primary-10 text-white"
                   : "bg-white border border-primary-40/10 text-neutral-10 hover:bg-neutral-50/20"
@@ -61,10 +61,14 @@ const Settings = () => {
               )}
 
               <div>
-                <h1 className="font-semibold text-lg">{role?.title}</h1>
-                <p className="text-sm mt-[6px]">{role?.description}</p>
+                <h1 className="font-semibold text-sm lg:text-lg">
+                  {role?.title}
+                </h1>
+                <p className="text-xs lg:text-sm mt-1 lg:mt-[6px]">
+                  {role?.description}
+                </p>
               </div>
-              <div className="size-16 text-2xl rounded-full bg-neutral-20/10 flex items-center justify-center">
+              <div className="size-12 md:size-16 text-2xl rounded-full bg-neutral-20/10 flex items-center justify-center">
                 {role?.icon}
               </div>
             </button>

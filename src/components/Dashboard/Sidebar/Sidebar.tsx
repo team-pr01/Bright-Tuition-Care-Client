@@ -9,7 +9,7 @@ import { TbLogout2 } from "react-icons/tb";
 const Sidebar = () => {
   const location = useLocation();
   return (
-    <div className="sticky top-0 left-0 hidden lg:block">
+    <div className="sticky top-0 left-0 hidden xl:block">
       <div className="w-[270px] h-full bg-primary-10 p-5 font-Nunito flex flex-col gap-10 justify-between">
         <UserProfilePhoto />
 
