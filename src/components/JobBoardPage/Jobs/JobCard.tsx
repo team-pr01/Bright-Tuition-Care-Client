@@ -127,15 +127,15 @@ const JobCard: React.FC<TJobCardProps> = ({
         </div>
 
         {variant === "status" && (
-          <div className="flex items-center gap-5 text-neutral-10">
-            <div className="flex items-center gap-2 mt-4">
-              <img src={ICONS.jobStatus} alt="" className="size-5" />
-              <p className="font-bold text-sm">Applied On:</p>
+          <div className="flex items-center gap-5 text-neutral-10 text-xs md:text-sm">
+            <div className="flex items-center gap-1 md:gap-2 mt-4">
+              <img src={ICONS.jobStatus} alt="" className="size-4 md:size-5" />
+              <p className="font-bold">Applied On:</p>
               <p className="text-primary-10">15 Aug, 2025</p>
             </div>
-            <div className="flex items-center gap-2 mt-4">
-              <img src={ICONS.jobStatus} alt="" className="size-5" />
-              <p className="font-bold text-sm">Status:</p>
+            <div className="flex items-center gap-1 md:gap-2 mt-4">
+              <img src={ICONS.jobStatus} alt="" className="size-4 md:size-5" />
+              <p className="font-bold">Status:</p>
               <p className={`capitalize ${statusTextColor}`}>{status}</p>
             </div>
           </div>
