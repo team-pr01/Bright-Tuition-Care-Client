@@ -9,24 +9,28 @@ import {
 
 export const studentOrGuardianSteps = [
   {
+    step : 1,
     icon: ICONS.send,
     title: "Request A Tutor",
     description:
       "Fill out a simple form with your subject, class, location, and preferred tutoring method. It takes less than 2 minutes!",
   },
   {
+    step : 2,
     icon: ICONS.choose,
     title: "Chose The Right One",
     description:
       "Browse tutor profiles, compare experience, read reviews, and choose the best fit for your child.",
   },
   {
+    step : 3,
     icon: ICONS.receive,
     title: "Receive the Best Tutors",
     description:
       "Top-rated and verified tutors will respond to your request. We filter based on quality, reviews, and availability.",
   },
   {
+    step : 4,
     icon: ICONS.getStarted,
     title: "Get Started Learning",
     description:

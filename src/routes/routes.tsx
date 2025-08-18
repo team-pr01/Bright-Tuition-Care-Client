@@ -24,6 +24,8 @@ import Payment from "../pages/Dashboard/Tutor/Payment/Payment";
 import JobApplicationsSummary from "../pages/Dashboard/Tutor/JobApplicationsSummary/JobApplicationsSummary";
 import MyProfile from "../pages/Dashboard/Shared/MyProfile/MyProfile";
 import ReferAndEarn from "../pages/Dashboard/Tutor/ReferAndEarn/ReferAndEarn";
+import GuardianDashboardHome from "../pages/Dashboard/Guardian/GuardianDashboardHome/GuardianDashboardHome";
+import StudentSteps from "../components/HomePage/HowItWorksStudent/StudentSteps";
 
 export const router = createBrowserRouter([
   {
@@ -117,6 +119,50 @@ export const router = createBrowserRouter([
       {
         path: "refer-and-earn",
         element: <ReferAndEarn />,
+      },
+      {
+        path: "terms-and-conditions",
+        element: <TermsAndConditionsDashboard />,
+      },
+      {
+        path: "payment",
+        element: <Payment />,
+      },
+      {
+        path: "settings",
+        element: <Settings />,
+      },
+    ],
+  },
+  {
+    path: "dashboard/guardian",
+    element: <DashboardLayout />,
+    errorElement: <NotFound />,
+    children: [
+      {
+        path: "home",
+        element: <GuardianDashboardHome />,
+      },
+      
+      {
+        path: "my-profile",
+        element: <MyProfile />,
+      },
+      {
+        path: "how-it-works",
+        element: <StudentSteps />,
+      },
+      {
+        path: "community",
+        element: <JoinCommunity />,
+      },
+      {
+        path: "share-app",
+        element: <ShareThisApp />,
+      },
+      {
+        path: "share-app",
+        element: <ShareThisApp />,
       },
       {
         path: "terms-and-conditions",

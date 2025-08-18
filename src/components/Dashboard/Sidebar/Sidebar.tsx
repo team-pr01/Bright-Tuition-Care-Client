@@ -1,6 +1,8 @@
 import { Link, useLocation } from "react-router-dom";
 import UserProfilePhoto from "./UserProfilePhoto/UserProfilePhoto";
 import {
+  adminDashboardLinks,
+  guardianDashboardLinks,
   otherLinks,
   tutorDashboardLinks,
 } from "../../../data/dashboardSidebarLinks";
@@ -8,6 +10,7 @@ import { TbLogout2 } from "react-icons/tb";
 
 const Sidebar = () => {
   const location = useLocation();
+  const navlinks = location.pathname.startsWith("/dashboard/tutor") ? tutorDashboardLinks : location.pathname.startsWith("/dashboard/guardian") ? guardianDashboardLinks : adminDashboardLinks;
   return (
     <div className="sticky top-0 left-0 hidden xl:block">
       <div className="w-[230px] 2xl:w-[270px] h-full bg-primary-10 p-5 font-Nunito flex flex-col gap-10 justify-between">
@@ -15,7 +18,7 @@ const Sidebar = () => {
 
         <div className="flex flex-col gap-4 h-full xl:h-[380px] 2xl:h-[600px] overflow-y-auto custom-scrollbar-sidebar">
           <div className="flex flex-col gap-2">
-            {tutorDashboardLinks?.map((link) => (
+            {navlinks?.map((link) => (
               <Link
                 key={link?.label}
                 to={link?.path}

@@ -82,7 +82,7 @@ const SelectedPaymentMethod: React.FC<TSelectedPaymentMethodProps> = ({
           <h2 className="font-semibold text-center">Submit Payment Proof</h2>
           <p>
             <FaChevronDown
-              className={`text-[1.2rem] dark:text-slate-600 text-text transition-all duration-300 ${
+              className={`text-text transition-all duration-300 ${
                 isAccordingOpen && "rotate-[180deg] !text-[#3B9DF8]"
               }`}
             />

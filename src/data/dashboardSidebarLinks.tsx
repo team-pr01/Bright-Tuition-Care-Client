@@ -61,6 +61,67 @@ export const tutorDashboardLinks: DashboardLink[] = [
   },
 ];
 
+export const guardianDashboardLinks: DashboardLink[] = [
+  {
+    label: "Dashboard",
+    path: "/dashboard/tutor/home",
+    icon: <LuLayoutDashboard />,
+  },
+  {
+    label: "Profile",
+    path: "/dashboard/tutor/my-profile",
+    icon: <LuUser />,
+  },
+  {
+    label: "How It Works",
+    path: "/dashboard/tutor/how-it-works",
+    icon: <TbSettingsQuestion />,
+  },
+  {
+    label: "Payment",
+    path: "/dashboard/tutor/payment",
+    icon: <LuCreditCard />,
+  },
+  {
+    label: "Settings",
+    path: "/dashboard/tutor/settings",
+    icon: <LuSettings />,
+  },
+  {
+    label: "Join Community",
+    path: "/dashboard/tutor/community",
+    icon: <RiFacebookFill />,
+  },
+];
+
+export const adminDashboardLinks: DashboardLink[] = [
+  {
+    label: "Dashboard",
+    path: "/dashboard/tutor/home",
+    icon: <LuLayoutDashboard />,
+  },
+  {
+    label: "Profile",
+    path: "/dashboard/tutor/my-profile",
+    icon: <LuUser />,
+  },
+  {
+    label: "How It Works",
+    path: "/dashboard/tutor/how-it-works",
+    icon: <TbSettingsQuestion />,
+  },
+  {
+    label: "Settings",
+    path: "/dashboard/tutor/settings",
+    icon: <LuSettings />,
+  },
+  {
+    label: "Join Community",
+    path: "/dashboard/tutor/community",
+    icon: <RiFacebookFill />,
+  },
+];
+
 export const otherLinks: DashboardLink[] = [
   {
     label: "Share The App",
@@ -68,7 +129,7 @@ export const otherLinks: DashboardLink[] = [
     icon: <LuShare2 />,
   },
   {
-    label: "Terms And Conditions",
+    label: "Terms & Conditions",
     path: "/dashboard/tutor/terms-and-conditions",
     icon: <LuFileText />,
   },

@@ -16,8 +16,8 @@ const NoticeBoard = () => {
           Lorem ipsum dolor, sit amet consectetur adipisicing elit. Accusamus
           fugiat facere reiciendis ratione cum, sed numquam pariatur
           perspiciatis in rerum. Lorem ipsum dolor sit amet, consectetur
-          adipisicing elit. Reprehenderit beatae deleniti totam voluptatem
-          aliquid quaerat iste quae praesentium porro enim!
+          adipisicing elit. Reprehenderit beatae deleniti totam voluptat
+          
         </p>
       </div>
     </div>
