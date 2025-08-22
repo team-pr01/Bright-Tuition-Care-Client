@@ -576,7 +576,7 @@ const Accordion = ({ activeTab }: { activeTab: string }) => {
       {accordionData?.map((according, index) => (
         <motion.article
           key={index}
-          className="border-b border-neutral-45/30 py-5 hover:border-primary-10 transform duration-300"
+          className="bg-white rounded-xl shadow border border-neutral-45/10 p-5 hover:border-primary-10 transform duration-300"
           variants={itemVariants}
           layout
         >

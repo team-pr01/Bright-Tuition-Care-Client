@@ -76,6 +76,7 @@ import platformCharge from "../assets/Icons/platform-charge.svg";
 import verificationCharge from "../assets/Icons/verification-charge.svg";
 import bkash from "../assets/Icons/bkash.svg";
 import nagad from "../assets/Icons/nagad.svg";
+import rocket from "../assets/Icons/rocket.png";
 import bank from "../assets/Icons/bank.svg";
 import rightArrow from "../assets/Icons/right-arrow.svg";
 import jobStatus from "../assets/Icons/status.svg";
@@ -86,6 +87,7 @@ import address from "../assets/Icons/address.svg";
 import pen from "../assets/Icons/pen.svg";
 import plusBlue from "../assets/Icons/plus-blue.svg";
 import copy from "../assets/Icons/copy.svg";
+import deleteWhite from "../assets/Icons/delete-white.svg";
 
 
 import aboutUs from "../assets/Images/about-us.svg";
@@ -195,6 +197,7 @@ export const ICONS = {
   verificationCharge,
   bkash,
   nagad,
+  rocket,
   bank,
   rightArrow,
   jobStatus,
@@ -205,4 +208,5 @@ export const ICONS = {
   pen,
   plusBlue,
   copy,
+  deleteWhite,
 };

@@ -103,7 +103,7 @@ const MultiSelectDropdown = forwardRef<
           </button>
 
           {isOpen && (
-            <div className="absolute z-30 mt-1 w-full rounded-lg bg-white shadow-lg border border-neutral-45/30 max-h-60 overflow-auto">
+            <div className="absolute z-30 bottom-full mb-1 w-full rounded-lg bg-white shadow-lg border border-neutral-45/30 max-h-60 overflow-auto">
               {/* Search bar */}
               <div className="sticky top-0 bg-white p-2 border-b border-neutral-45/20">
                 <input

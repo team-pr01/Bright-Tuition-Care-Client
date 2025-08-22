@@ -37,6 +37,7 @@ const UpdateContactInfoForm = () => {
               message: "Invalid email address",
             },
           })}
+          isDisabled={true} // NOTE : Email cannot be changed
         />
 
         {/* Phone Number */}

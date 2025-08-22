@@ -7,6 +7,8 @@ import ProfileStatusForm from "../../../../components/Dashboard/Settings/Profile
 import { RiContactsBook3Line, RiLockPasswordLine } from "react-icons/ri";
 import { PiIdentificationBadge } from "react-icons/pi";
 import { FiUnlock } from "react-icons/fi";
+import DeleteAccount from "../../../../components/Dashboard/Settings/DeleteAccount/DeleteAccount";
+import { BsTrash } from "react-icons/bs";
 
 const Settings = () => {
   const [activeTab, setActiveTab] = useState<string>("Contact Info");
@@ -31,12 +33,17 @@ const Settings = () => {
       description: "Lock or unlock your profile for privacy.",
       icon: <FiUnlock />,
     },
+    {
+      title: "Delete Account",
+      description: "Delete your account.",
+      icon: <BsTrash />,
+    },
   ];
 
   return (
     <div className="font-Nunito">
       {/* Tabs */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-6">
+      <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
         {settingsTabs?.map((role) => {
           const isActive = role?.title === activeTab;
           return (
@@ -44,7 +51,7 @@ const Settings = () => {
               key={role?.title}
               onClick={() => setActiveTab(role?.title)}
               type="button"
-              className={`relative border py-2 md:py-4 px-3 md:px-5 rounded-xl text-start flex flex-col-reverse xl:flex-row items-center justify-between gap-3 xl:gap-6 cursor-pointer transform duration-300 shadow-xs ${
+              className={`relative border py-3 md:py-4 px-3 md:px-5 rounded-xl text-start flex flex-col-reverse xl:flex-row items-center justify-between gap-3 xl:gap-6 cursor-pointer transform duration-300 shadow-xs ${
                 isActive
                   ? "bg-gradient-to-r from-blue-500 to-primary-10 border-primary-10 text-white"
                   : "bg-white border border-primary-40/10 text-neutral-10 hover:bg-neutral-50/20"
@@ -60,7 +67,7 @@ const Settings = () => {
                 </div>
               )}
 
-              <div>
+              <div className="flex-1">
                 <h1 className="font-semibold text-sm lg:text-lg">
                   {role?.title}
                 </h1>
@@ -81,6 +88,7 @@ const Settings = () => {
         {activeTab === "Change Password" && <ChangePasswordForm />}
         {activeTab === "Profile Verification" && <ProfileVerificationForm />}
         {activeTab === "Profile Lock/Unlock" && <ProfileStatusForm />}
+        {activeTab === "Delete Account" && <DeleteAccount />}
       </div>
     </div>
   );

@@ -12,12 +12,14 @@ type TCredentialsInfoProps = {
 };
 
 const CredentialsInfo: React.FC<TCredentialsInfoProps> = ({ credentialInfo }) => {
+  console.log(credentialInfo);
     const [editCredentialsInfo, setEditCredentialsInfo] = useState<boolean>(false);
   return (
     <div className="font-Nunito">
       <ProfileTabHeading heading="Credentials Information" onClick={() => setEditCredentialsInfo(!editCredentialsInfo)} />
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mt-4">
+<h2 className="text-red-500 text-sm md:text-base mt-4">No Credentials Uploaded.</h2>
+      {/* <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mt-4">
         {
             credentialInfo?.length === 0 ? <h2 className="text-red-500 text-sm md:text-base">No Credentials Found</h2> :
         credentialInfo?.map((info:TCredential) => (
@@ -31,7 +33,7 @@ const CredentialsInfo: React.FC<TCredentialsInfoProps> = ({ credentialInfo }) =>
           </div>
         ))
         }
-      </div>
+      </div> */}
     </div>
   );
 };

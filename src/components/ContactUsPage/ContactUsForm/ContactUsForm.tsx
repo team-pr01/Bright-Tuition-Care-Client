@@ -4,7 +4,6 @@ import TextInput from "../../Reusable/TextInput/TextInput";
 import Textarea from "../../Reusable/TextArea/TextArea";
 import Button from "../../Reusable/Button/Button";
 import { ICONS } from "../../../assets";
-import MultiSelectDropdown from "../../Reusable/MultiSelectDropdown/MultiSelectDropdown";
 import { useState } from "react";
 
 type TFormData = {
@@ -29,18 +28,39 @@ const ContactUsForm = () => {
   return (
     <form
       onSubmit={handleSubmit(handleSubmitRequest)}
-      className="flex flex-col gap-6 bg-neutral-50/20 rounded-2xl p-5"
+      className="flex flex-col gap-6 bg-neutral-50/20 rounded-2xl p-5 font-Nunito"
     >
-      <MultiSelectDropdown
-        label="I am a"
-        name="role"
-        options={["Tutor", "Guardian/Student"]}
-        value={selectedRole ? [selectedRole] : []}
-        onChange={(selected) => {
-          setSelectedRole(selected.length > 0 ? selected.slice(-1)[0] : "");
-        }}
-        isRequired
-      />
+      {/* Role input boxes */}
+      <div className="flex flex-col gap-3">
+        <label className="text-neutral-10 leading-[18px] text-[15px] font-medium tracking-[-0.16]">
+          I am a <span className="text-primary-10">*</span>
+        </label>
+        <div className="flex gap-6">
+          <label className="flex items-center gap-2 cursor-pointer">
+            <input
+              type="radio"
+              value="Tutor"
+              checked={selectedRole === "Tutor"}
+              onChange={(e) => setSelectedRole(e.target.value)}
+              required
+              className="w-5 h-5 accent-primary-10 cursor-pointer"
+            />
+            <span className="text-neutral-800">Tutor</span>
+          </label>
+
+          <label className="flex items-center gap-2 cursor-pointer">
+            <input
+              type="radio"
+              value="Guardian/Student"
+              checked={selectedRole === "Guardian/Student"}
+              onChange={(e) => setSelectedRole(e.target.value)}
+              required
+              className="w-5 h-5 accent-primary-10 cursor-pointer"
+            />
+            <span className="text-neutral-800">Guardian/Student</span>
+          </label>
+        </div>
+      </div>
 
       <TextInput
         label="Name"

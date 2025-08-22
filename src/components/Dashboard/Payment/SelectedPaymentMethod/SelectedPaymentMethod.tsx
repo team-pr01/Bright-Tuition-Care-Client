@@ -20,13 +20,15 @@ const SelectedPaymentMethod: React.FC<TSelectedPaymentMethodProps> = ({
 }) => {
   const [isAccordingOpen, setIsAccordingOpen] = useState<boolean>(false);
   return (
-    <div className="w-full flex flex-col items-center gap-6 mt-2 md:mt-5 px-0 md:px-5 font-Nunito">
+    <div className="w-full flex flex-col items-center gap-6 mt-2 md:mt-5 font-Nunito">
       <div>
         <h1 className="text-xl font-semibold text-center">
           {selectedPaymentMethod === "bankTransfer"
             ? "Bank Transfer"
             : selectedPaymentMethod === "nagad"
             ? "Nagad Payment"
+            : selectedPaymentMethod === "rocket"
+            ? "Rocket Payment"
             : "bKash Payment"}
         </h1>
         <p className="text-neutral-20 mt-1 max-w-[400px] mx-auto text-center">
@@ -43,6 +45,8 @@ const SelectedPaymentMethod: React.FC<TSelectedPaymentMethodProps> = ({
                 ? ICONS.bank
                 : selectedPaymentMethod === "nagad"
                 ? ICONS.nagad
+                : selectedPaymentMethod === "rocket"
+                ? ICONS.rocket
                 : ICONS.bkash
             }
             alt="bKash-icon"
@@ -54,6 +58,8 @@ const SelectedPaymentMethod: React.FC<TSelectedPaymentMethodProps> = ({
                 ? "MTB"
                 : selectedPaymentMethod === "nagad"
                 ? "Nagad"
+                : selectedPaymentMethod === "rocket"
+                ? "Rocket"
                 : "bKash"}
             </h1>
             <h1 className="text-lg md:text-xl font-semibold ">
