@@ -26,6 +26,7 @@ import MyProfile from "../pages/Dashboard/Shared/MyProfile/MyProfile";
 import ReferAndEarn from "../pages/Dashboard/Tutor/ReferAndEarn/ReferAndEarn";
 import GuardianDashboardHome from "../pages/Dashboard/Guardian/GuardianDashboardHome/GuardianDashboardHome";
 import StudentSteps from "../components/HomePage/HowItWorksStudent/StudentSteps";
+import ImportantGuidelines from "../pages/Dashboard/Shared/ImportantGuidelines/ImportantGuidelines";
 
 export const router = createBrowserRouter([
   {
@@ -131,6 +132,10 @@ export const router = createBrowserRouter([
       {
         path: "settings",
         element: <Settings />,
+      },
+      {
+        path: "important-guidelines",
+        element: <ImportantGuidelines />,
       },
     ],
   },

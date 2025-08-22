@@ -5,6 +5,7 @@ import { IMAGES } from "../../../../assets";
 import { BiHelpCircle, BiLogOut } from "react-icons/bi";
 import { CiSettings } from "react-icons/ci";
 import { LuUser } from "react-icons/lu";
+import { Link } from "react-router-dom";
 
 const UserProfileDropdown = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -49,6 +50,9 @@ const UserProfileDropdown = () => {
     hidden: { opacity: 0, x: -15 },
     visible: { opacity: 1, x: 0 },
   };
+
+  const MotionLink = motion(Link);
+
   return (
     <div className="relative" ref={dropdownRef}>
       {/* Profile Picture Button */}
@@ -96,24 +100,30 @@ const UserProfileDropdown = () => {
 
               {/* Menu Links */}
               <motion.ul className="py-2">
-                <motion.li
+                <MotionLink
+                  to="/dashboard/tutor/my-profile"
+                  onClick={() => setIsOpen(false)}
                   variants={itemVariants}
                   className="px-4 py-2 flex items-center gap-3 cursor-pointer hover:bg-neutral-45/10 transition duration-500"
                 >
                   <LuUser size={18} /> View Profile
-                </motion.li>
-                <motion.li
+                </MotionLink>
+                <MotionLink
+                  to="/dashboard/tutor/important-guidelines"
+                  onClick={() => setIsOpen(false)}
                   variants={itemVariants}
                   className="px-4 py-2 flex items-center gap-3 cursor-pointer hover:bg-neutral-45/10 transition duration-500"
                 >
-                  <BiHelpCircle size={18} /> Help Center
-                </motion.li>
-                <motion.li
+                  <BiHelpCircle size={18} /> Important Guidelines
+                </MotionLink>
+                <MotionLink
+                  to="/dashboard/tutor/settings"
+                  onClick={() => setIsOpen(false)}
                   variants={itemVariants}
                   className="px-4 py-2 flex items-center gap-3 cursor-pointer hover:bg-neutral-45/10 transition duration-500"
                 >
                   <CiSettings size={18} /> Account Settings
-                </motion.li>
+                </MotionLink>
               </motion.ul>
 
               {/* Divider */}
