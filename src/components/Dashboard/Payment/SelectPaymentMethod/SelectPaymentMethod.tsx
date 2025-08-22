@@ -17,7 +17,7 @@ const SelectPaymentMethod: React.FC<TSelectPaymentMethodProps> = ({
   setPaymentModalType,
 }) => {
   const paymentMethods = [
-     {
+    {
       name: "bKash",
       description: "Transfer through mobile banking",
       icon: ICONS.bkash,
@@ -42,7 +42,6 @@ const SelectPaymentMethod: React.FC<TSelectPaymentMethodProps> = ({
       icon: ICONS.bank,
       key: "bankTransfer",
     },
-   
   ];
   return (
     <div className="w-full flex flex-col items-center gap-6 mt-2 md:mt-5">
@@ -55,7 +54,7 @@ const SelectPaymentMethod: React.FC<TSelectPaymentMethodProps> = ({
           <button
             key={paymentMethod?.key}
             onClick={() => setSelectedPaymentMethod(paymentMethod?.key)}
-            className={`border cursor-pointer transition duration-300 py-5 rounded-2xl px-3 flex flex-col items-center text-center gap-5 ${
+            className={`border cursor-pointer transition duration-300 py-5 rounded-2xl px-3 flex flex-row md:flex-col items-start md:items-center text-start md:text-center gap-5 ${
               selectedPaymentMethod === paymentMethod?.key
                 ? "bg-primary-10 border-primary-10 text-white"
                 : "bg-white hover:bg-neutral-50/5 border-primary-40/10"

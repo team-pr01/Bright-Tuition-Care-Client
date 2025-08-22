@@ -4,42 +4,57 @@ import DashboardDataCard from "../../../../components/Dashboard/DashboardDataCar
 import DashboardOverviewCard from "../../../../components/Dashboard/DashboardOverviewCard/DashboardOverviewCard";
 import NoticeBoard from "../../../../components/Dashboard/NoticeBoard/NoticeBoard";
 import SupportBar from "../../../../components/Dashboard/SupportBar/SupportBar";
+import {
+  FaBriefcase,
+  FaClipboardCheck,
+  FaUserCheck,
+  FaCheckCircle,
+  FaTimesCircle,
+} from "react-icons/fa";
 
 const TutorDashboardHome = () => {
   return (
     <div className="flex flex-col gap-4 lg:gap-9 font-Nunito">
       <div className="flex items-center overflow-x-auto w-full gap-3 md:gap-6">
         <DashboardOverviewCard
-          title="Applied Jobs"
+          title="Applied"
+          additionalTitle="Jobs"
           value="7"
           textColor="text-neutral-10"
           path="/dashboard/tutor/job-applications/applied"
+          icon={<FaBriefcase />}
         />
         <DashboardOverviewCard
-          title="Shortlisted Jobs"
+          title="Shortlisted"
+          additionalTitle="Jobs"
           value="5"
           textColor="text-primary-10"
           path="/dashboard/tutor/job-applications/shortlisted"
+          icon={<FaClipboardCheck />}
         />
         <DashboardOverviewCard
           title="Appointed"
           value="2"
           textColor="text-[#9C9700]"
           path="/dashboard/tutor/job-applications/appointed"
+          icon={<FaUserCheck />}
         />
         <DashboardOverviewCard
           title="Confirmed"
           value="1"
           textColor="text-green-500"
           path="/dashboard/tutor/job-applications/confirmed"
+          icon={<FaCheckCircle />}
         />
         <DashboardOverviewCard
           title="Cancelled"
           value="6"
           textColor="text-rose-500"
           path="/dashboard/tutor/job-applications/cancelled"
+          icon={<FaTimesCircle />}
         />
       </div>
+
       <NoticeBoard />
       {/* bg-gradient-to-r from-slate-50 to-sky-50 */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
@@ -52,9 +67,13 @@ const TutorDashboardHome = () => {
             />
           </div>
           <div>
-            <h1 className={`text-xl lg:text-[28px] font-semibold text-primary-10`}>
+            <h1
+              className={`text-xl lg:text-[28px] font-semibold text-primary-10`}
+            >
               Profile Completed{" "}
-              <span className={`text-2xl md:text-[33px] font-bold text-primary-10`}>
+              <span
+                className={`text-2xl md:text-[33px] font-bold text-primary-10`}
+              >
                 50%
               </span>
             </h1>

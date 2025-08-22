@@ -2,13 +2,13 @@ import { ICONS } from "../../../assets";
 
 const NoticeBoard = () => {
   return (
-    <div className="bg-gradient-to-r from-primary-10 to-cyan-500 border border-primary-40/10 rounded-xl md:rounded-2xl p-1 md:p-4 flex items-center gap-6 font-Nunito">
+    <div className="bg-gradient-to-r from-primary-10 to-cyan-500 border border-primary-40/10 rounded-xl md:rounded-2xl p-[2px] md:p-4 flex items-center gap-6 font-Nunito">
       <img src={ICONS.notice} alt="" className="hidden lg:block size-24" />
 
-      <div className="bg-white shadow p-2 md:p-4 rounded-xl md:rounded-2xl w-full">
+      <div className="bg-white shadow p-2 md:p-4 rounded-lg md:rounded-2xl w-full">
         <div className="flex items-center gap-3">
           <img src={ICONS.notice2} alt="" className="size-9 block lg:hidden" />
-        <div className="rounded-lg bg-gradient-to-r from-cyan-500 to-primary-10 text-white p-2 w-fit text-xs">
+        <div className="rounded md:rounded-lg bg-gradient-to-r from-cyan-500 to-primary-10 text-white p-[6px] md:p-2 w-fit text-[10px] md:text-xs">
           Notice Board
         </div>
         </div>
