@@ -32,34 +32,21 @@ const ContactUs = () => {
 
   return (
     <Container>
-      <div className="mt-10 mb-72 lg:mb-96">
+      <div className="mt-10 mb-72 lg:mb-96 flex flex-col gap-5 lg:gap-10">
         <Heading
           titleParts={[{ text: "Contact Us" }]}
           description="Have a question, feedback, or need help? Our team is here to assist you."
           align="center"
           headingClassName="text-center"
         />
-        <div className="flex flex-col gap-10 lg:flex-row mt-20">
           {/* Animated Form */}
           <motion.div
-            className="w-full lg:w-[60%]"
             variants={fromLeftVariant}
             initial="hidden"
             animate="visible"
           >
             <ContactUsForm />
           </motion.div>
-
-          {/* Image */}
-          <motion.div
-            className="p-10 md:p-20 lg:p-10 xl:p-20 w-full lg:w-[40%] flex items-center justify-center"
-            variants={fromRightVariant}
-            initial="hidden"
-            animate="visible"
-          >
-            <img src={IMAGES.contactUs} alt="Contact Us Illustration" className="" />
-          </motion.div>
-        </div>
       </div>
     </Container>
   );

@@ -1,14 +1,28 @@
 import { RxCross1 } from "react-icons/rx";
 import { ICONS } from "../../../../assets";
 import Button from "../../../Reusable/Button/Button";
+import Textarea from "../../../Reusable/TextArea/TextArea";
+import { useForm } from "react-hook-form";
 
-const DeleteAccountCOnfirmationModal = ({
+type TFormData = {
+  reason: string;
+};
+const DeleteAccountConfirmationModal = ({
   isConfirmDeleteModalOpen,
   setIsConfirmDeleteModalOpen,
 }: {
   isConfirmDeleteModalOpen: boolean;
   setIsConfirmDeleteModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<TFormData>();
+
+  const handleSubmitDeleteRequest = (data: TFormData) => {
+    console.log(data);
+  };
   return (
     <div
       className={`${
@@ -27,34 +41,50 @@ const DeleteAccountCOnfirmationModal = ({
           onClick={() => setIsConfirmDeleteModalOpen(false)}
         />
 
-        <div className="w-full flex flex-col items-center gap-6">
+        <form
+          onSubmit={handleSubmit(handleSubmitDeleteRequest)}
+          className="w-full flex flex-col items-center gap-6"
+        >
           <img src={ICONS.warning} alt="warning icon" className="size-28" />
-          <div className="text-center text-neutral-900">
-            <h1 className="text-xl font-semibold ">Delete Account</h1>
+
+          <div className="text-center text-neutral-900 dark:text-neutral-100">
+            <h1 className="text-xl font-semibold">Delete Account</h1>
             <p className="text-sm mt-2">
-              Are you sure want to delete your account?
+              It’s sad to see you go. Are you sure you want to delete your
+              account?
             </p>
+          </div>
+
+          <div className="w-full">
+            <Textarea
+              label="Reason for account deletion (Optional)"
+              placeholder="Please share your reason..."
+              rows={4}
+              error={errors.reason}
+              {...register("reason")}
+              isRequired={false}
+            />
           </div>
 
           <div className="flex items-center justify-center gap-3">
             <Button
               type="submit"
-              label="Yes"
+              label="Yes, Delete"
               variant="primary"
               className="py-2 lg:py-2"
             />
             <Button
               type="button"
-              label="No"
+              label="Cancel"
               variant="tertiary"
               className="py-2 lg:py-2"
               onClick={() => setIsConfirmDeleteModalOpen(false)}
             />
           </div>
-        </div>
+        </form>
       </div>
     </div>
   );
 };
 
-export default DeleteAccountCOnfirmationModal;
+export default DeleteAccountConfirmationModal;

@@ -83,8 +83,14 @@ import jobStatus from "../assets/Icons/status.svg";
 import reset from "../assets/Icons/reset.svg";
 import email from "../assets/Icons/email.svg";
 import phoneGray from "../assets/Icons/phone-gray.svg";
+import phoneBlue from "../assets/Icons/phone-blue.svg";
+import locationBlue from "../assets/Icons/location-blue.svg";
+import emailBlue from "../assets/Icons/email-blue.svg";
 import address from "../assets/Icons/address.svg";
 import pen from "../assets/Icons/pen.svg";
+import penWhite from "../assets/Icons/pen-white.svg";
+import downloadWhite from "../assets/Icons/download-white.svg";
+import eyeWhite from "../assets/Icons/eye-blue.svg";
 import plusBlue from "../assets/Icons/plus-blue.svg";
 import copy from "../assets/Icons/copy.svg";
 import deleteWhite from "../assets/Icons/delete-white.svg";
@@ -204,8 +210,14 @@ export const ICONS = {
   reset,
   email,
   phoneGray,
+  phoneBlue,
+  locationBlue,
+  emailBlue,
   address,
   pen,
+  penWhite,
+  downloadWhite,
+  eyeWhite,
   plusBlue,
   copy,
   deleteWhite,

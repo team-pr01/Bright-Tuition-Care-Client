@@ -24,21 +24,7 @@ const UpdateContactInfoForm = () => {
       <h1 className="font-semibold text-lg text-neutral-10/90">
         Update Contact Info
       </h1>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {/* Email */}
-        <TextInput
-          label="Email"
-          placeholder="Enter your email"
-          error={errors.email}
-          {...register("email", {
-            required: "Email is required",
-            pattern: {
-              value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-              message: "Invalid email address",
-            },
-          })}
-          isDisabled={true} // NOTE : Email cannot be changed
-        />
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
 
         {/* Phone Number */}
         <TextInput

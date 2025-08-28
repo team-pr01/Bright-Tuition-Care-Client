@@ -112,16 +112,17 @@ const TutorDashboardHome = () => {
             </div>
           </div>
 
-          <DashboardDataCard
-            title={"Confirmation Letters"}
+           <DashboardDataCard
+            title={"Nearby Jobs"}
             description={"Because you have not confirmed any tuition job"}
-            icon={ICONS.confirmationLetter}
-            value={"2"}
-            titleColor={"text-primary-10"}
+            icon={ICONS.animatedLocation}
+            value={"35+"}
+            titleColor={"text-primary-10/80"}
             valueColor={"text-primary-10"}
-            btnLabel={"Confirm Now"}
+            btnLabel={"View Details"}
             path={""}
           />
+
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -135,16 +136,19 @@ const TutorDashboardHome = () => {
             btnLabel={"Verify Now"}
             path={""}
           />
+
+          
           <DashboardDataCard
-            title={"Nearby Jobs"}
+            title={"Confirmation Letters"}
             description={"Because you have not confirmed any tuition job"}
-            icon={ICONS.animatedLocation}
-            value={"35+"}
-            titleColor={"text-primary-10/80"}
+            icon={ICONS.confirmationLetter}
+            value={"2"}
+            titleColor={"text-primary-10"}
             valueColor={"text-primary-10"}
-            btnLabel={"View Details"}
+            btnLabel={"Confirm Now"}
             path={""}
           />
+         
           <DashboardDataCard
             title={"Invoice"}
             description={"Because you have not confirmed any tuition job"}

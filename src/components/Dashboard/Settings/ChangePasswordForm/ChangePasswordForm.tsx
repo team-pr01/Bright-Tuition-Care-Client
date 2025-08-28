@@ -82,7 +82,7 @@ const ChangePasswordForm = () => {
       </div>
       <Button
         type="submit"
-        label="Submit"
+        label="Update"
         variant="primary"
         iconWithoutBg={ICONS.topRightArrowWhite}
         className="py-2 lg:py-2"

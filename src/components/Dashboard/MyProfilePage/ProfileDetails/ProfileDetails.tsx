@@ -4,17 +4,17 @@ import Button from "../../../Reusable/Button/Button";
 const ProfileDetails = () => {
   const contactInfo = [
     {
-      icon: ICONS.email,
+      icon: ICONS.emailBlue,
       label: "Email",
       value: "hello@example.com",
     },
     {
-      icon: ICONS.phoneGray,
+      icon: ICONS.phoneBlue,
       label: "Phone Number",
       value: "124326547890",
     },
     {
-      icon: ICONS.address,
+      icon: ICONS.locationBlue,
       label: "Address",
       value: "Rampura, Bonosre",
     },
@@ -50,7 +50,8 @@ const ProfileDetails = () => {
           type="button"
           label="Edit Information"
           variant="quaternary"
-          className="py-2 lg:py-2 w-full flex items-center justify-center mt-3"
+          className="py-2 lg:py-2 w-full flex-row-reverse items-center justify-center mt-3 hover:bg-primary-10/90 hover:text-white"
+          iconWithoutBg={ICONS.penWhite}
         />
       </div>
 
@@ -73,13 +74,15 @@ const ProfileDetails = () => {
           type="button"
           label="Download CV"
           variant="quaternary"
-          className="py-2 lg:py-2 w-full flex items-center justify-center"
+          className="py-2 lg:py-2 w-full flex-row-reverse items-center justify-center hover:bg-primary-10/90 hover:text-white"
+          iconWithoutBg={ICONS.downloadWhite}
         />
         <Button
           type="button"
           label="View as Guardian or Student"
           variant="tertiary"
-          className="py-2 lg:py-2 w-full flex items-center justify-center mt-3"
+          className="py-2 lg:py-2 w-full flex-row-reverse items-center justify-center mt-3 hover:bg-primary-20 hover:text-primary-10"
+          iconWithoutBg={ICONS.eyeWhite}
         />
       </div>
     </div>

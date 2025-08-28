@@ -28,7 +28,7 @@ const ContactUsForm = () => {
   return (
     <form
       onSubmit={handleSubmit(handleSubmitRequest)}
-      className="flex flex-col gap-6 bg-neutral-50/20 rounded-2xl p-5 font-Nunito"
+      className="flex flex-col gap-6 bg-neutral-50/20 rounded-2xl p-3 md:p-5 font-Nunito max-w-full lg:max-w-[60%] mx-auto"
     >
       {/* Role input boxes */}
       <div className="flex flex-col gap-3">
