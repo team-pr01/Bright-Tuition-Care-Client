@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { motion } from "framer-motion";
-import { IMAGES } from "../../assets";
 import ContactUsForm from "../../components/ContactUsPage/ContactUsForm/ContactUsForm";
 import Container from "../../components/Reusable/Container/Container";
 import Heading from "../../components/Reusable/Heading/Heading";
@@ -8,18 +7,6 @@ import Heading from "../../components/Reusable/Heading/Heading";
 const ContactUs = () => {
   const fromLeftVariant:any = {
     hidden: { x: -100, opacity: 0 },
-    visible: {
-      x: 0,
-      opacity: 1,
-      transition: {
-        duration: 0.5,
-        ease: "easeInOut",
-      },
-    },
-  };
-
-  const fromRightVariant:any = {
-    hidden: { x: 100, opacity: 0 },
     visible: {
       x: 0,
       opacity: 1,
