@@ -30,10 +30,10 @@ const RoleTab = ({
             key={role?.title}
             onClick={() => setActiveTab(role?.title)}
             type="button"
-            className={`relative border py-2 px-3 rounded-xl text-start flex items-center justify-between gap-6 cursor-pointer transform duration-300 ${
+            className={`relative  py-2 px-3 rounded-xl text-start flex items-center justify-between gap-6 cursor-pointer transform duration-300 ${
               isActive
-                ? "bg-primary-10 border-primary-10 text-white"
-                : "bg-white border-neutral-45/20 text-neutral-10 hover:bg-neutral-50/40"
+                ? "bg-blue-100/80 text-neutral-10"
+                : "bg-white text-neutral-10 hover:bg-neutral-50/40"
             }`}
           >
             {/* Tick mark positioned above */}

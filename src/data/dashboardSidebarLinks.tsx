@@ -73,6 +73,11 @@ export const guardianDashboardLinks: DashboardLink[] = [
     icon: <LuUser />,
   },
   {
+    label: "Hire Tutor",
+    path: "/dashboard/tutor/my-profile",
+    icon: <LuUser />,
+  },
+  {
     label: "How It Works",
     path: "/dashboard/tutor/how-it-works",
     icon: <TbSettingsQuestion />,

@@ -29,7 +29,7 @@ const DashboardOverviewCard: React.FC<TDashboardOverviewCardProps> = ({
         <h1 className="text-xs md:text-3xl 2xl:4xl font-bold mt-0 md:mt-2">{value}</h1>
         
       </div>
-      <div className="size-10 md:size-16 xl:size-12 2xl:size-16 text-lg md:text-2xl rounded-full bg-white md:bg-neutral-20/10 flex items-center justify-center">
+      <div className="size-10 md:size-16 xl:size-12 2xl:size-16 text-lg md:text-2xl rounded-full bg-primary-50/30 md:bg-neutral-20/10 flex items-center justify-center">
         {icon}
       </div>
     </Link>

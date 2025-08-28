@@ -576,7 +576,7 @@ const Accordion = ({ activeTab }: { activeTab: string }) => {
       {accordionData?.map((according, index) => (
         <motion.article
           key={index}
-          className="bg-white rounded-xl shadow border border-neutral-45/10 p-5 hover:border-primary-10 transform duration-300"
+          className={`bg-white rounded-xl shadow border border-neutral-45/10 p-5 hover:border-primary-10 transform duration-300 ${isAccordingOpen === index ? "border-primary-10" : "border-neutral-45/10"}`}
           variants={itemVariants}
           layout
         >
@@ -584,7 +584,7 @@ const Accordion = ({ activeTab }: { activeTab: string }) => {
             className="flex gap-2 cursor-pointer items-center justify-between w-full"
             onClick={() => handleClick(index)}
           >
-            <h2 className="text-neutral-10 font-medium leading-[22px]">
+            <h2 className={`text-neutral-10 font-medium leading-[22px] ${isAccordingOpen === index && "text-primary-10"}`}>
               {according.title}
             </h2>
             <p>
