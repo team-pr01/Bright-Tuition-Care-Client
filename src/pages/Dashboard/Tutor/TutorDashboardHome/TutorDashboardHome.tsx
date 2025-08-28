@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { ICONS, IMAGES } from "../../../../assets";
+import { ICONS } from "../../../../assets";
 import DashboardDataCard from "../../../../components/Dashboard/DashboardDataCard/DashboardDataCard";
 import DashboardOverviewCard from "../../../../components/Dashboard/DashboardOverviewCard/DashboardOverviewCard";
 import NoticeBoard from "../../../../components/Dashboard/NoticeBoard/NoticeBoard";
@@ -60,21 +60,41 @@ const TutorDashboardHome = () => {
         {/* bg-gradient-to-r from-slate-50 to-sky-50 */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           <div className="bg-white rounded-2xl border border-primary-40/10 p-5 flex flex-col md:flex-row items-center md:items-start gap-3 md:gap-6">
-            <div className="size-32 bg-white/40 rounded-full p-[2px]">
-              <img
-                src={IMAGES.dummyAvatar}
-                alt=""
-                className="size-full object-cover rounded-full"
-              />
+            {/* Progress Circle */}
+            <div className="relative size-32">
+              <svg className="size-full transform -rotate-90">
+                <circle
+                  className="text-gray-200"
+                  strokeWidth="6"
+                  stroke="currentColor"
+                  fill="transparent"
+                  r="58"
+                  cx="64"
+                  cy="64"
+                />
+                <circle
+                  className="text-primary-10"
+                  strokeWidth="6"
+                  strokeDasharray={2 * Math.PI * 58}
+                  strokeDashoffset={2 * Math.PI * 58 * (1 - 0.5)} // 0.5 => 50%
+                  strokeLinecap="round"
+                  stroke="currentColor"
+                  fill="transparent"
+                  r="58"
+                  cx="64"
+                  cy="64"
+                />
+              </svg>
+              <div className="absolute inset-0 flex items-center justify-center">
+                <span className="text-xl font-bold text-primary-10">50%</span>
+              </div>
             </div>
+
+            {/* Text Section */}
             <div>
-              <h1
-                className={`text-xl lg:text-[28px] font-semibold text-primary-10`}
-              >
+              <h1 className="text-xl lg:text-[28px] font-semibold text-primary-10">
                 Profile Completed{" "}
-                <span
-                  className={`text-2xl md:text-[33px] font-bold text-primary-10`}
-                >
+                <span className="text-2xl md:text-[33px] font-bold text-primary-10">
                   50%
                 </span>
               </h1>
