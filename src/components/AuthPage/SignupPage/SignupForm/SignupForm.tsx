@@ -85,7 +85,7 @@ const SignupForm = ({
       />
 
       <RoleTab activeTab={activeTab} setActiveTab={setActiveTab} />
-      <div className="bg-neutral-50/10 rounded-2xl p-5 lg:p-7 flex flex-col gap-6">
+      <div className="bg-neutral-50/10 border border-primary-10/30 rounded-2xl p-5 lg:p-7 flex flex-col gap-6">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {/* Name */}
           <TextInput

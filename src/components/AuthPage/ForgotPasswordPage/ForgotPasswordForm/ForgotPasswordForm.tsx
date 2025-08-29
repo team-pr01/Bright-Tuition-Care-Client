@@ -57,7 +57,7 @@ const ForgotPasswordForm = () => {
               type="button"
               className={` rounded-3xl px-3 py-2 flex items-center gap-3 border cursor-pointer ${
                 button?.label === activeTab
-                  ? "bg-primary-10/5 text-primary-10 border-primary-10/20"
+                  ? "bg-primary-10/5 text-primary-10 border-primary-10/80"
                   : "bg-white text-neutral-20 border-neutral-45/20"
               }`}
             >
