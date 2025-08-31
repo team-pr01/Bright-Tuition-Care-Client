@@ -4,6 +4,7 @@ import Button from "../../Reusable/Button/Button";
 import JobDetails from "../JobDetails/JobDetails";
 import JobApplyConfirmationModal from "./JobApplyConfirmationModal";
 import ShareJobModal from "../ShareJobModal";
+import DeleteJobConfirmationModal from "../../Reusable/DeleteJobConfirmationModal/DeleteJobConfirmationModal";
 
 type TJobCardProps = {
   variant?: string;
@@ -48,11 +49,9 @@ const JobCard: React.FC<TJobCardProps> = ({
       : "text-rose-500";
 
   const statusTextColorForGuardian =
-    status === "pending"
-      ? "text-yellow-600"
-      :
-      "text-green-500" 
-      ;
+    status === "pending" ? "text-yellow-600" : "text-green-500";
+  const [isConfirmDeleteModalOpen, setIsConfirmDeleteModalOpen] =
+    useState<boolean>(false);
 
   return (
     <>
@@ -107,7 +106,9 @@ const JobCard: React.FC<TJobCardProps> = ({
             </p>
           </div>
         </div>
-        <div className={`grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-0 mt-4 ${detailsWidth}`}>
+        <div
+          className={`grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-0 mt-4 ${detailsWidth}`}
+        >
           {jobDetails.map((details, index) => (
             <div key={index} className="flex gap-2">
               <img src={details.icon} alt="" className="size-5" />
@@ -150,14 +151,16 @@ const JobCard: React.FC<TJobCardProps> = ({
 
         {variant === "guardian" && (
           <div className="flex items-center gap-5 text-neutral-10 text-xs md:text-sm">
-            <div className="flex items-center gap-1 md:gap-2 mt-4">
+            <button onClick={() => setIsConfirmDeleteModalOpen(true)} className="flex items-center gap-1 md:gap-2 mt-4 cursor-pointer">
               <img src={ICONS.deleteRed} alt="" className="size-4 md:size-5" />
               <p className="font-bold">Delete Job</p>
-            </div>
+            </button>
             <div className="flex items-center gap-1 md:gap-2 mt-4">
               <img src={ICONS.jobStatus} alt="" className="size-4 md:size-5" />
               <p className="font-bold">Status:</p>
-              <p className={`capitalize ${statusTextColorForGuardian}`}>{status}</p>
+              <p className={`capitalize ${statusTextColorForGuardian}`}>
+                {status}
+              </p>
             </div>
           </div>
         )}
@@ -199,6 +202,10 @@ const JobCard: React.FC<TJobCardProps> = ({
         isShareJobModalOpen={isShareJobModalOpen}
         setIsShareJobModalOpen={setIsShareJobModalOpen}
         link={shareUrl}
+      />
+      <DeleteJobConfirmationModal
+        isConfirmDeleteModalOpen={isConfirmDeleteModalOpen}
+        setIsConfirmDeleteModalOpen={setIsConfirmDeleteModalOpen}
       />
     </>
   );

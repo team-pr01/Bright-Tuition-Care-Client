@@ -9,6 +9,7 @@ import {
   LuAward,
   LuShare2,
   LuFileText,
+  LuUserRoundSearch,
 } from "react-icons/lu";
 import { RiFacebookFill } from "react-icons/ri";
 import { TbSettingsQuestion } from "react-icons/tb";
@@ -78,7 +79,7 @@ export const guardianDashboardLinks: DashboardLink[] = [
   {
     label: "Hire Tutor",
     path: "/dashboard/guardian/hire-a-tutor",
-    icon: <LuUser />,
+    icon: <LuUserRoundSearch />,
   },
   {
     label: "Posted Jobs",
