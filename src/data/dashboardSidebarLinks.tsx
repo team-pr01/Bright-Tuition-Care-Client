@@ -1,4 +1,5 @@
 import React from "react";
+import { BsBriefcase } from "react-icons/bs";
 import {
   LuLayoutDashboard,
   LuClipboardList,
@@ -17,6 +18,8 @@ interface DashboardLink {
   path: string;
   icon: React.ReactNode;
 }
+
+const user = {role:"guardian"}
 
 export const tutorDashboardLinks: DashboardLink[] = [
   {
@@ -74,8 +77,13 @@ export const guardianDashboardLinks: DashboardLink[] = [
   },
   {
     label: "Hire Tutor",
-    path: "/dashboard/guardian/my-profile",
+    path: "/dashboard/guardian/hire-a-tutor",
     icon: <LuUser />,
+  },
+  {
+    label: "Posted Jobs",
+    path: "/dashboard/guardian/posted-jobs",
+    icon: <BsBriefcase />,
   },
   {
     label: "How It Works",
@@ -130,12 +138,12 @@ export const adminDashboardLinks: DashboardLink[] = [
 export const otherLinks: DashboardLink[] = [
   {
     label: "Share The App",
-    path: "/dashboard/tutor/share-app",
+    path: `/dashboard/${user?.role === "tutor" ? "tutor" : "guardian"}/share-app`,
     icon: <LuShare2 />,
   },
   {
     label: "Terms & Conditions",
-    path: "/dashboard/tutor/terms-and-conditions",
+    path: `/dashboard/${user?.role === "tutor" ? "tutor" : "guardian"}/terms-and-conditions`,
     icon: <LuFileText />,
   },
 ];

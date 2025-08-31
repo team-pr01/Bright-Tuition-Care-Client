@@ -2,6 +2,7 @@ import { ICONS, IMAGES } from "../../../../assets";
 import Button from "../../../Reusable/Button/Button";
 
 const ProfileDetails = () => {
+  const user = {role:"guardian"}
   const contactInfo = [
     {
       icon: ICONS.emailBlue,
@@ -69,7 +70,7 @@ const ProfileDetails = () => {
         ))}
       </div>
 
-      <div>
+      <div className={`${user?.role === "guardian"? "hidden" : "flex flex-col"}`}>
         <Button
           type="button"
           label="Download CV"

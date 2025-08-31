@@ -47,6 +47,13 @@ const JobCard: React.FC<TJobCardProps> = ({
       ? "text-green-500"
       : "text-rose-500";
 
+  const statusTextColorForGuardian =
+    status === "pending"
+      ? "text-yellow-600"
+      :
+      "text-green-500" 
+      ;
+
   return (
     <>
       {/* Smooth Overlay & Drawer */}
@@ -141,7 +148,21 @@ const JobCard: React.FC<TJobCardProps> = ({
           </div>
         )}
 
-        {variant !== "status" && (
+        {variant === "guardian" && (
+          <div className="flex items-center gap-5 text-neutral-10 text-xs md:text-sm">
+            <div className="flex items-center gap-1 md:gap-2 mt-4">
+              <img src={ICONS.deleteRed} alt="" className="size-4 md:size-5" />
+              <p className="font-bold">Delete Job</p>
+            </div>
+            <div className="flex items-center gap-1 md:gap-2 mt-4">
+              <img src={ICONS.jobStatus} alt="" className="size-4 md:size-5" />
+              <p className="font-bold">Status:</p>
+              <p className={`capitalize ${statusTextColorForGuardian}`}>{status}</p>
+            </div>
+          </div>
+        )}
+
+        {variant === "tutorJobCard" && (
           <div className="flex gap-4 mt-5 items-center justify-between">
             <div className="flex items-center gap-4">
               <button

@@ -27,6 +27,8 @@ import ReferAndEarn from "../pages/Dashboard/Tutor/ReferAndEarn/ReferAndEarn";
 import GuardianDashboardHome from "../pages/Dashboard/Guardian/GuardianDashboardHome/GuardianDashboardHome";
 import StudentSteps from "../components/HomePage/HowItWorksStudent/StudentSteps";
 import ImportantGuidelines from "../pages/Dashboard/Shared/ImportantGuidelines/ImportantGuidelines";
+import HireATutor from "../pages/Dashboard/Guardian/HireATutor/HireATutor";
+import PostedJobs from "../pages/Dashboard/Guardian/PostedJobs/PostedJobs";
 
 export const router = createBrowserRouter([
   {
@@ -152,6 +154,14 @@ export const router = createBrowserRouter([
       {
         path: "my-profile",
         element: <MyProfile />,
+      },
+      {
+        path: "posted-jobs",
+        element: <PostedJobs />,
+      },
+      {
+        path: "hire-a-tutor",
+        element: <HireATutor />,
       },
       {
         path: "how-it-works",
