@@ -65,9 +65,9 @@ const Notification = () => {
         <img
           src={ICONS.notification}
           alt="notification-icon"
-          className="size-8"
+          className="size-7"
         />
-        <div className="bg-gradient-to-r from-rose-400 to-red-500 size-4 rounded-full flex items-center justify-center text-xs text-white absolute -top-0 -right-[2px]">
+        <div className="bg-gradient-to-r from-rose-400 to-red-500 size-4 rounded-full flex items-center justify-center text-xs text-white absolute -top-1 -right-[2px]">
           1
         </div>
       </button>

@@ -64,37 +64,37 @@ export const tutorDashboardLinks: DashboardLink[] = [
 export const guardianDashboardLinks: DashboardLink[] = [
   {
     label: "Dashboard",
-    path: "/dashboard/tutor/home",
+    path: "/dashboard/guardian/home",
     icon: <LuLayoutDashboard />,
   },
   {
     label: "Profile",
-    path: "/dashboard/tutor/my-profile",
+    path: "/dashboard/guardian/my-profile",
     icon: <LuUser />,
   },
   {
     label: "Hire Tutor",
-    path: "/dashboard/tutor/my-profile",
+    path: "/dashboard/guardian/my-profile",
     icon: <LuUser />,
   },
   {
     label: "How It Works",
-    path: "/dashboard/tutor/how-it-works",
+    path: "/dashboard/guardian/how-it-works",
     icon: <TbSettingsQuestion />,
   },
   {
     label: "Payment",
-    path: "/dashboard/tutor/payment",
+    path: "/dashboard/guardian/payment",
     icon: <LuCreditCard />,
   },
   {
     label: "Settings",
-    path: "/dashboard/tutor/settings",
+    path: "/dashboard/guardian/settings",
     icon: <LuSettings />,
   },
   {
     label: "Join Community",
-    path: "/dashboard/tutor/community",
+    path: "/dashboard/guardian/community",
     icon: <RiFacebookFill />,
   },
 ];
