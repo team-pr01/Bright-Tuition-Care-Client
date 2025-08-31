@@ -76,7 +76,7 @@ export const router = createBrowserRouter([
       },
       {
         path: "faqs",
-        element: <Faq/>,
+        element: <Faq />,
       },
     ],
   },
@@ -148,7 +148,7 @@ export const router = createBrowserRouter([
         path: "home",
         element: <GuardianDashboardHome />,
       },
-      
+
       {
         path: "my-profile",
         element: <MyProfile />,

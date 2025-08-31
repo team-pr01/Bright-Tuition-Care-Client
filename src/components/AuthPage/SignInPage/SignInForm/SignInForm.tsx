@@ -42,7 +42,7 @@ const SignInForm = ({
       />
 
       <RoleTab activeTab={activeTab} setActiveTab={setActiveTab} />
-      <div className="bg-neutral-50/10 rounded-2xl p-5 lg:p-7 flex flex-col gap-6">
+      <div className="bg-neutral-50/10 border border-primary-10/30 rounded-2xl p-5 lg:p-7 flex flex-col gap-3 md:gap-6">
         <div className="flex flex-col gap-6">
           {/* Email */}
           <TextInput
@@ -74,8 +74,9 @@ const SignInForm = ({
             setIsPasswordVisible={setIsPasswordVisible}
           />
         </div>
-        <div className="flex items-center justify-between">
-          <p className="font-lg leading-[24px] text-neutral-20">
+        
+        <div className="flex items-center justify-end md:justify-between">
+          <p className="font-lg leading-[24px] text-neutral-20 hidden md:block">
             Don't have an account?{" "}
             <Link
               to="/signup"
@@ -86,20 +87,29 @@ const SignInForm = ({
           </p>
           <Link
             to="/forgot-password"
-            className="text-primary-10 font-semibold underline text-end"
+            className="text-primary-10 font-semibold underline text-end text-sm md:text-base"
           >
             Forgot Password?
           </Link>
         </div>
 
-        <div className="flex md:gap-0 items-center justify-between">
+        <div className="flex flex-col gap-3 items-center justify-between">
           <Button
             type="submit"
             label="Sign In"
             variant="primary"
-            icon={ICONS.topRightArrow}
-            className="py-2 lg:py-2"
+            iconWithoutBg={ICONS.topRightArrowWhite}
+            className="py-2 lg:py-2 w-full md:w-fit"
           />
+           <p className="text-sm md:font-lg leading-[24px] text-neutral-20 block md:hidden">
+            Don't have an account?{" "}
+            <Link
+              to="/signup"
+              className="font-semibold bg-gradient-to-r from-primary-10 to-primary-40/60 bg-clip-text text-transparent cursor-pointer"
+            >
+              Sign Up
+            </Link>
+          </p>
         </div>
       </div>
     </form>

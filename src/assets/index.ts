@@ -94,6 +94,7 @@ import eyeWhite from "../assets/Icons/eye-blue.svg";
 import plusBlue from "../assets/Icons/plus-blue.svg";
 import copy from "../assets/Icons/copy.svg";
 import deleteWhite from "../assets/Icons/delete-white.svg";
+import hire from "../assets/Icons/hire.png";
 
 
 import aboutUs from "../assets/Images/about-us.svg";
@@ -221,4 +222,5 @@ export const ICONS = {
   plusBlue,
   copy,
   deleteWhite,
+  hire,
 };

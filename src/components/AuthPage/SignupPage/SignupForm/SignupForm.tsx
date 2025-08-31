@@ -248,14 +248,14 @@ const SignupForm = ({
                     height="20"
                     rx="4"
                     className="fill-transparent"
-                    stroke="#ccc"
+                    stroke="#545454"
                   ></rect>
                 </g>
               </svg>
             </span>
           </div>
 
-          <p className="text-neutral-20 leading-5">
+          <p className="text-neutral-20 leading-5 text-sm md:text-base">
             By signing up, you agree to our{" "}
             <Link
               to="/terms-and-conditions"
@@ -275,7 +275,7 @@ const SignupForm = ({
             className="py-2 lg:py-2"
           />
 
-          <p className="font-lg leading-[24px] text-neutral-20">
+          <p className="text-sm md:text-base leading-[24px] text-neutral-20">
             Already have an account?{" "}
             <Link
               to="/signin"

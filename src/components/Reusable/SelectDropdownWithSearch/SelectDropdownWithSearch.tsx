@@ -17,18 +17,16 @@ const SelectDropdownWithSearch = forwardRef<
   HTMLDivElement,
   SingleSelectDropdownProps
 >(
-  (
-    {
-      label,
-      name,
-      options,
-      placeholder = "Select Option",
-      error,
-      value = "",
-      onChange,
-      isRequired = true,
-    },
-  ) => {
+  ({
+    label,
+    name,
+    options,
+    placeholder = "Select Option",
+    error,
+    value = "",
+    onChange,
+    isRequired = true,
+  }) => {
     const [isOpen, setIsOpen] = useState(false);
     const [selectedValue, setSelectedValue] = useState<string>(value);
     const [searchTerm, setSearchTerm] = useState("");
@@ -85,9 +83,7 @@ const SelectDropdownWithSearch = forwardRef<
             } ${!selectedValue ? "text-neutral-65" : "text-neutral-10"}`}
             onClick={() => setIsOpen((prev) => !prev)}
           >
-            <span className="truncate">
-              {selectedValue || placeholder}
-            </span>
+            <span className="truncate">{selectedValue || placeholder}</span>
             <FiChevronDown
               className={`transition-transform duration-200 ${
                 isOpen ? "rotate-180" : ""
@@ -97,43 +93,44 @@ const SelectDropdownWithSearch = forwardRef<
           </button>
 
           {isOpen && (
-  <div className="absolute z-30 mt-1 w-full rounded-lg bg-white shadow-lg border border-neutral-45/30 max-h-60 overflow-auto">
-    {/* Search input */}
-    <div className="sticky top-0 bg-white p-2 border-b border-neutral-45/20">
-      <input
-        type="text"
-        placeholder="Search..."
-        className="w-full px-3 py-2 text-sm border border-neutral-45/20 rounded-md focus:outline-none focus:border-primary-10"
-        value={searchTerm}
-        onChange={(e) => setSearchTerm(e.target.value)}
-        onClick={(e) => e.stopPropagation()}
-      />
-    </div>
+            <div className="absolute z-30 bottom-full mb-1 w-full rounded-lg bg-white shadow-lg border border-neutral-45/30 max-h-60 overflow-auto">
+              {/* Search input */}
+              <div className="sticky top-0 bg-white p-2 border-b border-neutral-45/20">
+                <input
+                  type="text"
+                  placeholder="Search..."
+                  className="w-full px-3 py-2 text-sm border border-primary-30 rounded-md focus:outline-none focus:border-primary-10"
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                  onClick={(e) => e.stopPropagation()}
+                />
+              </div>
 
-    {filteredOptions.length > 0 ? (
-      filteredOptions.map((option) => (
-        <div
-          key={option}
-          className={`px-4 py-2 cursor-pointer hover:bg-neutral-98 ${
-            selectedValue === option ? "bg-neutral-98 font-medium" : ""
-          }`}
-          onClick={() => handleSelect(option)}
-        >
-          {option}
-        </div>
-      ))
-    ) : searchTerm.trim() === "" && !selectedValue ? (
-      <div className="px-4 py-2 text-neutral-65 text-sm">
-        Please select city first
-      </div>
-    ) : (
-      <div className="px-4 py-2 text-neutral-65 text-sm">
-        No location found
-      </div>
-    )}
-  </div>
-)}
-
+              {filteredOptions.length > 0 ? (
+                filteredOptions.map((option) => (
+                  <div
+                    key={option}
+                    className={`px-4 py-2 cursor-pointer hover:bg-neutral-98 ${
+                      selectedValue === option
+                        ? "bg-neutral-98 font-medium"
+                        : ""
+                    }`}
+                    onClick={() => handleSelect(option)}
+                  >
+                    {option}
+                  </div>
+                ))
+              ) : searchTerm.trim() === "" && !selectedValue ? (
+                <div className="px-4 py-2 text-neutral-65 text-sm">
+                  Please select city first
+                </div>
+              ) : (
+                <div className="px-4 py-2 text-neutral-65 text-sm">
+                  No location found
+                </div>
+              )}
+            </div>
+          )}
         </div>
 
         {error && <span className="text-red-500 text-sm">{error.message}</span>}

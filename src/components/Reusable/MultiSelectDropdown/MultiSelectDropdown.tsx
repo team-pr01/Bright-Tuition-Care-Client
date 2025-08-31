@@ -109,7 +109,7 @@ const MultiSelectDropdown = forwardRef<
                 <input
                   type="text"
                   placeholder="Search..."
-                  className="w-full px-3 py-2 text-sm border border-neutral-45/20 rounded-md focus:outline-none focus:border-primary-10"
+                  className="w-full px-3 py-2 text-sm border border-primary-30 rounded-md focus:outline-none focus:border-primary-10"
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
                   onClick={(e) => e.stopPropagation()}

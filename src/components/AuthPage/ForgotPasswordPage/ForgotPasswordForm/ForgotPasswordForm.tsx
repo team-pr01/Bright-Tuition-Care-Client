@@ -47,15 +47,15 @@ const ForgotPasswordForm = () => {
         title="Forgot Password?"
         description="Please enter your email address to receive a link to reset your password."
       />
-      <div className="bg-neutral-50/10 rounded-2xl p-5 lg:p-7 flex flex-col gap-6">
+      <div className="bg-neutral-50/10 border border-primary-10/30 rounded-2xl p-5 lg:p-7 flex flex-col gap-6">
         {/* Tab buttons */}
-        <div className="flex items-center justify-center gap-4 mb-2">
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-2">
           {tabButtons?.map((button) => (
             <button
               key={button?.label}
               onClick={() => setActiveTab(button?.label)}
               type="button"
-              className={` rounded-3xl px-3 py-2 flex items-center gap-3 border cursor-pointer ${
+              className={`text-sm md:text-base rounded-3xl px-3 py-2 flex items-center gap-3 border cursor-pointer ${
                 button?.label === activeTab
                   ? "bg-primary-10/5 text-primary-10 border-primary-10/80"
                   : "bg-white text-neutral-20 border-neutral-45/20"
@@ -107,7 +107,7 @@ const ForgotPasswordForm = () => {
             type="submit"
             label="Submit"
             variant="primary"
-            icon={ICONS.topRightArrow}
+            iconWithoutBg={ICONS.topRightArrowWhite}
             className="py-2 lg:py-2"
           />
           <p className="font-lg leading-[24px] text-neutral-20">

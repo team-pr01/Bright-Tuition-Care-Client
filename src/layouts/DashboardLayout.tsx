@@ -10,7 +10,7 @@ const DashboardLayout = () => {
       <Sidebar />
       <div className="flex flex-col w-full">
         <DashboardHeader />
-        <div className={`flex-1 overflow-y-auto ${location.pathname.startsWith("/dashboard/tutor/home") ? "px-0 lg:px-0 py-0" : "px-3 lg:px-6 py-8"}`}>
+        <div className={`flex-1 overflow-y-auto ${location.pathname.startsWith("/dashboard/tutor/home") || location.pathname.startsWith("/dashboard/guardian/home") ? "px-0 lg:px-0 py-0" : "px-3 lg:px-6 py-8"}`}>
           <Outlet />
         </div>
       </div>

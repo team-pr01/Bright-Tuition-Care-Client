@@ -61,8 +61,19 @@ const TutorDashboardHome = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           <div className="bg-white rounded-2xl border border-primary-40/10 p-5 flex flex-col md:flex-row items-center md:items-start gap-3 md:gap-6">
             {/* Progress Circle */}
+           {/* Progress Circle */}
             <div className="relative size-32">
               <svg className="size-full transform -rotate-90">
+                {/* Background Fill */}
+                <circle
+                  className="text-neutral-100"
+                  fill="currentColor"
+                  r="58"
+                  cx="64"
+                  cy="64"
+                />
+
+                {/* Track */}
                 <circle
                   className="text-gray-200"
                   strokeWidth="6"
@@ -72,11 +83,13 @@ const TutorDashboardHome = () => {
                   cx="64"
                   cy="64"
                 />
+
+                {/* Progress */}
                 <circle
                   className="text-primary-10"
                   strokeWidth="6"
                   strokeDasharray={2 * Math.PI * 58}
-                  strokeDashoffset={2 * Math.PI * 58 * (1 - 0.5)} // 0.5 => 50%
+                  strokeDashoffset={2 * Math.PI * 58 * (1 - 0.5)} // 50%
                   strokeLinecap="round"
                   stroke="currentColor"
                   fill="transparent"
@@ -85,6 +98,7 @@ const TutorDashboardHome = () => {
                   cy="64"
                 />
               </svg>
+
               <div className="absolute inset-0 flex items-center justify-center">
                 <span className="text-xl font-bold text-primary-10">50%</span>
               </div>

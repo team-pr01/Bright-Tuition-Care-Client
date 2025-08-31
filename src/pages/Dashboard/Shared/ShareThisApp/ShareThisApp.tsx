@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { BiLogoTelegram } from "react-icons/bi";
 import {
   FaFacebookF,
   FaInstagram,
@@ -25,6 +26,7 @@ const ShareThisApp = () => {
       bgColor: "bg-[#E1306C]",
       shareLink: `https://www.instagram.com/`, // Instagram does not support direct URL sharing
     },
+
     {
       name: "Twitter",
       icon: <FaTwitter className="text-xl md:text-2xl" />,
@@ -41,11 +43,20 @@ const ShareThisApp = () => {
         link
       )}`,
     },
+
     {
       name: "TikTok",
       icon: <FaTiktok className="text-xl md:text-2xl" />,
       bgColor: "bg-black",
       shareLink: `https://www.tiktok.com/`, // TikTok doesn't support direct URL sharing either
+    },
+    {
+      name: "Telegram",
+      icon: <BiLogoTelegram className="text-xl md:text-2xl" />,
+      bgColor: "bg-[#30A3D9]",
+      shareLink: `https://t.me/share/url?url=${encodeURIComponent(
+        link
+      )}&text=${encodeURIComponent("Check this out!")}`,
     },
     {
       name: "WhatsApp",
