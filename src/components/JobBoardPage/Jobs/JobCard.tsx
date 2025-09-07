@@ -151,7 +151,10 @@ const JobCard: React.FC<TJobCardProps> = ({
 
         {variant === "guardian" && (
           <div className="flex items-center gap-5 text-neutral-10 text-xs md:text-sm">
-            <button onClick={() => setIsConfirmDeleteModalOpen(true)} className="flex items-center gap-1 md:gap-2 mt-4 cursor-pointer">
+            <button
+              onClick={() => setIsConfirmDeleteModalOpen(true)}
+              className="flex items-center gap-1 md:gap-2 mt-4 cursor-pointer"
+            >
               <img src={ICONS.deleteRed} alt="" className="size-4 md:size-5" />
               <p className="font-bold">Delete Job</p>
             </button>

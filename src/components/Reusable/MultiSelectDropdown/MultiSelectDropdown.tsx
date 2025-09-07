@@ -11,6 +11,8 @@ interface MultiSelectDropdownProps {
   value?: string[];
   onChange?: (selected: string[]) => void;
   isRequired?: boolean;
+  isDisabled?: boolean;
+  dropdownDirection?:string
 }
 
 const MultiSelectDropdown = forwardRef<
@@ -26,6 +28,8 @@ const MultiSelectDropdown = forwardRef<
     value = [],
     onChange,
     isRequired = true,
+    isDisabled,
+    dropdownDirection="bottom-full"
   }) => {
     const [isOpen, setIsOpen] = useState(false);
     const [selectedValues, setSelectedValues] = useState<string[]>(value);
@@ -84,9 +88,10 @@ const MultiSelectDropdown = forwardRef<
         <div className="relative">
           <button
             type="button"
-            className={`w-full px-4 py-[14px] rounded-lg bg-white border leading-[18px] focus:outline-none focus:border-primary-10 transition duration-300 text-left flex items-center justify-between cursor-pointer ${
+            disabled={isDisabled}
+            className={`w-full px-4 py-[14px] rounded-lg border leading-[18px] focus:outline-none focus:border-primary-10 transition duration-300 text-left flex items-center justify-between ${
               error ? "border-red-500" : "border-neutral-45/20"
-            } ${
+            } ${isDisabled ? "cursor-not-allowed bg-neutral-50/20" : "bg-white cursor-pointer"} ${
               selectedValues.length === 0
                 ? "text-neutral-65"
                 : "text-neutral-10"
@@ -103,7 +108,7 @@ const MultiSelectDropdown = forwardRef<
           </button>
 
           {isOpen && (
-            <div className="absolute z-30 bottom-full mb-1 w-full rounded-lg bg-white shadow-lg border border-neutral-45/30 max-h-60 overflow-auto">
+            <div className={`absolute z-50 ${dropdownDirection} mb-1 w-full rounded-lg bg-white shadow-lg border border-neutral-45/30 max-h-60 overflow-auto`}>
               {/* Search bar */}
               <div className="sticky top-0 bg-white p-2 border-b border-neutral-45/20">
                 <input
@@ -131,6 +136,7 @@ const MultiSelectDropdown = forwardRef<
                         checked={selectedValues.includes(option)}
                         readOnly
                         className="mr-2 rounded border-neutral-95 text-neutral-10 focus:ring-neutral-10"
+
                       />
                       <span className="text-neutral-10">{option}</span>
                     </div>

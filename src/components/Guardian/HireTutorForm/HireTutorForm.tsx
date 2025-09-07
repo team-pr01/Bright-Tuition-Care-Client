@@ -3,6 +3,8 @@ import { useState } from "react";
 import JobDetailsForm from "./JobDetailsForm";
 import StudentInfoForm from "./StudentInfoForm";
 import LocationForm from "./LocationForm";
+import { ICONS } from "../../../assets";
+import Preview from "./Preview";
 
 interface FormValues {
   // Job Details
@@ -29,7 +31,7 @@ interface FormValues {
   address: string;
 }
 
-const steps = ["Job Details", "Tutor Preferences", "Student Info"];
+const steps = ["Job Details", "Tutor Preferences", "Student Info", "Preview"];
 
 const HireTutorForm = () => {
   const methods = useForm<FormValues>({ mode: "onBlur" });
@@ -44,17 +46,25 @@ const HireTutorForm = () => {
   return (
     <FormProvider {...methods}>
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-6 mt-5">
-         {/* Progress Bar */}
-    <div className="relative w-full h-3 bg-gray-200 rounded-full overflow-hidden">
-      <div
-        className="h-full bg-primary-10 transition-all duration-500 ease-in-out"
-        style={{ width: `${((currentStep + 1) / steps.length) * 100}%` }}
-      />
-    </div>
+        {/* Progress Bar */}
+<div className="relative w-full h-3 bg-gray-200 rounded-full overflow-hidden">
+  <div
+    className="h-full bg-primary-10 transition-all duration-500 ease-in-out relative"
+    style={{ width: `${((currentStep + 1) / steps.length) * 100}%` }}
+  >
+    {/* Percentage inside blue area */}
+    <span className="absolute right-1 top-1/2 -translate-y-1/2 text-xs font-medium text-white">
+      {Math.round(((currentStep + 1) / steps.length) * 100)}%
+    </span>
+  </div>
+</div>
+
+
         {/* Step Content */}
         {currentStep === 0 && <JobDetailsForm />}
-        {currentStep === 2 && <StudentInfoForm />}
-        {currentStep === 1 && <LocationForm />}
+        {currentStep === 1 && <StudentInfoForm />}
+        {currentStep === 2 && <LocationForm />}
+        {currentStep === 3 && <Preview />}
 
         {/* Navigation */}
         <div className="flex justify-between mt-4">
@@ -67,13 +77,28 @@ const HireTutorForm = () => {
               Previous
             </button>
           )}
-          {currentStep < steps.length - 1 ? (
+
+          {currentStep === 2 ? (
             <button
               type="button"
               onClick={() => setCurrentStep(currentStep + 1)}
-              className="px-4 py-2 bg-primary-10 text-white rounded cursor-pointer"
+              className="px-4 py-2 bg-primary-10 text-white rounded cursor-pointer flex items-center gap-2"
+            >
+              Show Preview
+              <img src={ICONS.eyeWhite} alt="eye-icon" className="size-4" />
+            </button>
+          ) : currentStep < steps.length - 1 ? (
+            <button
+              type="button"
+              onClick={() => setCurrentStep(currentStep + 1)}
+              className="px-4 py-2 bg-primary-10 text-white rounded cursor-pointer flex items-center gap-2"
             >
               Next
+              <img
+                src={ICONS.rightArrow}
+                alt="right-arrow"
+                className="size-4"
+              />
             </button>
           ) : (
             <button

@@ -3,6 +3,8 @@ import { useFormContext } from "react-hook-form";
 import MultiSelectDropdown from "../../Reusable/MultiSelectDropdown/MultiSelectDropdown";
 import TextInput from "../../Reusable/TextInput/TextInput";
 import { filterData } from "../../../constants/filterData";
+import { ICONS } from "../../../assets";
+import { useState } from "react";
 
 const LocationForm = () => {
   const {
@@ -23,6 +25,7 @@ const LocationForm = () => {
     return cityObj?.locations || [];
   });
 
+  const [isDirectionAdded, setIsDirectionAdded] = useState<boolean>(false);
   // Function to get user's location and save Google Maps URL
   const getLocation = () => {
     if (!navigator.geolocation) {
@@ -39,6 +42,8 @@ const LocationForm = () => {
 
         // Save to form value
         setValue("locationUrl", googleMapsUrl);
+
+        setIsDirectionAdded(true);
       },
       (error) => {
         alert("Unable to retrieve your location. Please allow access.");
@@ -55,6 +60,7 @@ const LocationForm = () => {
         options={filterData.cityCorporationWithLocation.map((c) => c.name)}
         value={selectedCity}
         onChange={(val) => setValue("city", val)}
+        dropdownDirection="top-full"
       />
 
       <MultiSelectDropdown
@@ -63,6 +69,7 @@ const LocationForm = () => {
         options={areaOptions}
         value={selectedArea}
         onChange={(val) => setValue("area", val)}
+        dropdownDirection="top-full"
       />
 
       <TextInput
@@ -72,24 +79,31 @@ const LocationForm = () => {
         {...register("address", { required: "Address is required" })}
       />
 
-      {/* Hidden field to store location URL */}
-      <TextInput
-        label="Location URL"
-        placeholder=""
-        error={errors.locationUrl}
-        {...register("locationUrl")}
-        isDisabled={true}
-      />
+      <div className="relative">
+        <TextInput
+          label="Location Direction"
+          placeholder=""
+          error={errors.locationUrl}
+          {...register("locationUrl")}
+          isDisabled={true}
+        />
 
-      {/* Button to capture location */}
-      <div className="col-span-full mt-2">
-        <button
+        {/* Button to capture location */}
+       {
+        !isDirectionAdded && 
+         <button
           type="button"
           onClick={getLocation}
-          className="px-2 py-2 bg-primary-10 text-sm text-white rounded cursor-pointer"
+          className="text-primary-10 text-sm cursor-pointer absolute bottom-[13px] right-3 flex items-center gap-1"
         >
-          Allow Directions
+          <img
+            src={ICONS.location}
+            alt="location-icon"
+            className="size-4 mb-1"
+          />
+          Allow
         </button>
+       }
       </div>
     </div>
   );

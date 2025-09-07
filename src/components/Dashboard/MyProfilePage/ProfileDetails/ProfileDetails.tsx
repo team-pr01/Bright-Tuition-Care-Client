@@ -83,7 +83,7 @@ const ProfileDetails = () => {
           label="View as Guardian or Student"
           variant="tertiary"
           className="py-2 lg:py-2 w-full flex-row-reverse items-center justify-center mt-3 hover:bg-primary-20 hover:text-primary-10"
-          iconWithoutBg={ICONS.eyeWhite}
+          iconWithoutBg={ICONS.eyeBlue}
         />
       </div>
     </div>

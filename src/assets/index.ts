@@ -90,7 +90,8 @@ import address from "../assets/Icons/address.svg";
 import pen from "../assets/Icons/pen.svg";
 import penWhite from "../assets/Icons/pen-white.svg";
 import downloadWhite from "../assets/Icons/download-white.svg";
-import eyeWhite from "../assets/Icons/eye-blue.svg";
+import eyeBlue from "../assets/Icons/eye-blue.svg";
+import eyeWhite from "../assets/Icons/eye.svg";
 import plusBlue from "../assets/Icons/plus-blue.svg";
 import copy from "../assets/Icons/copy.svg";
 import deleteRed from "../assets/Icons/delete.svg";
@@ -219,6 +220,7 @@ export const ICONS = {
   pen,
   penWhite,
   downloadWhite,
+  eyeBlue,
   eyeWhite,
   plusBlue,
   copy,
