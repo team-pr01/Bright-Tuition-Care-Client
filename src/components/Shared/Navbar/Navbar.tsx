@@ -15,16 +15,8 @@ const Navbar = () => {
       <Container>
         <nav className="flex items-center font-Nunito justify-between">
           {/* Logo and Brand */}
-          <Link to="/" className="flex items-center space-x-2">
-            <img src={ICONS.logo} alt="Logo" className="size-10 md:size-13" />
-            <div>
-              <h1 className="text-sm md:text-xl leading-[24px] font-bold text-primary-40">
-                Bright Tuition Care
-              </h1>
-              <p className="text-xs md:text-sm leading-6 text-neutral-20">
-                Join, Learn, Teach
-              </p>
-            </div>
+          <Link to="/">
+            <img src={ICONS.logo} alt="Logo" className="w-56" />
           </Link>
 
           {/* Nav Links */}
@@ -58,7 +50,7 @@ const Navbar = () => {
             </Link>
           </div>
           <div className="flex lg:hidden items-center gap-3">
-            <Button label="Sign In" variant="primary" className="text-sm" />
+            {/* <Button label="Sign In" variant="primary" className="text-sm" /> */}
             <HamburgerMenu />
           </div>
         </nav>

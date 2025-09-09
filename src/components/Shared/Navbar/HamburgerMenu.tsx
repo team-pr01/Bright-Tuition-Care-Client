@@ -56,13 +56,9 @@ const HamburgerMenu = () => {
             <div className="flex justify-between items-center gap-5 w-full border-b border-neutral-30/50 pb-4">
               <Link
                 to="/"
-                className="flex items-center gap-2"
                 onClick={toggleHamburgerMenu}
               >
-                <img src={ICONS.logo} alt="Logo" className="size-10" />
-                <span className="text-lg font-bold text-primary-40">
-                  Bright Tuition Care
-                </span>
+                <img src={ICONS.logo} alt="Logo" className="w-56" />
               </Link>
               <button onClick={toggleHamburgerMenu}>
                 <RxCross2 className="text-neutral-10 text-2xl" />

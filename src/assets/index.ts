@@ -5,6 +5,7 @@ import topRightArrowWhite from "../assets/Icons/top-right-arrow-white.svg";
 import testimonials from "../assets/Icons/testimonials.svg";
 import stepLine from "../assets/Images/steps-line.png"
 import logo from "../assets/Icons/logo.png";
+import logoWhite from "../assets/Icons/logo-white.png";
 import menu from "../assets/Icons/menu.svg";
 
 // counter icons
@@ -145,6 +146,7 @@ export const ICONS = {
   topRightArrowWhite,
   testimonials,
   logo,
+  logoWhite,
   menu,
 
   user,

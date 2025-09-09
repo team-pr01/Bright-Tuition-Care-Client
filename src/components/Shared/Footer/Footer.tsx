@@ -51,19 +51,9 @@ const Footer: React.FC = () => {
           <div className="flex flex-col xl:flex-row gap-10 justify-between">
             {/* Left side details */}
             <motion.div variants={itemVariants} className="max-w-[350px]">
-              <div className="flex items-center gap-4">
-                <Link to="/" className="size-15 p-[1px] bg-white rounded-xl">
-                  <img src={ICONS.logo} alt="Logo" className="w-full" />
+                <Link to="/">
+                  <img src={ICONS.logoWhite} alt="Bright Tuition Care" className="w-56 md:w-full" />
                 </Link>
-                <div>
-                  <h1 className="text-xl md:text-3xl leading-7 font-bold text-white">
-                    Bright Tuition Care
-                  </h1>
-                  <p className="text-sm md:text-lg leading-6 text-white mt-2">
-                    Join, Learn, Teach
-                  </p>
-                </div>
-              </div>
               <p className="text-sm md:text-base text-neutral-50 mt-8">
                 Bright Tuition Care connects students with verified tutors
                 online. We offer a trusted space for connections.
