@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import type { TableHead } from "../../../../components/Reusable/Table/Table";
 import { useState } from "react";
 import Table from "../../../../components/Reusable/Table/Table";
@@ -56,29 +56,26 @@ const Applications = () => {
     },
   ];
 
-
-  const tableData = applications.map((app) => ({
-    ...app,
-    jobTitle: app.jobTitle,
+  const tableData = applications.map((application) => ({
+    ...application,
+    jobTitle: application.jobTitle,
     name: (
       <div className="flex items-center gap-2">
         <img
-          src={app.photo}
-          alt={app.name}
+          src={application.photo}
+          alt={application.name}
           className="w-8 h-8 rounded-full object-cover"
         />
-        <span>{app.name}</span>
+        <span>{application.name}</span>
       </div>
     ),
     cv: (
-      <a
-        href={app.cvUrl}
-        target="_blank"
-        rel="noopener noreferrer"
+      <Link
+        to={`/dashboard/guardian/applications/${jobId}/${application.tutorId}`}
         className="text-primary-10 cursor-pointer"
       >
         <FiEye className="w-5 h-5" />
-      </a>
+      </Link>
     ),
   }));
 
