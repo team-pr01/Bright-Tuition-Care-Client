@@ -29,6 +29,7 @@ const StudentInfoForm = () => {
         placeholder="Enter number"
         error={errors.noOfStudents}
         {...register("noOfStudents", { required: "Number is required" })}
+        isRequired={false}
       />
 
       <MultiSelectDropdown

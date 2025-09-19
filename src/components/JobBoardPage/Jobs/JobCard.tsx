@@ -5,6 +5,7 @@ import JobDetails from "../JobDetails/JobDetails";
 import JobApplyConfirmationModal from "./JobApplyConfirmationModal";
 import ShareJobModal from "../ShareJobModal";
 import DeleteJobConfirmationModal from "../../Reusable/DeleteJobConfirmationModal/DeleteJobConfirmationModal";
+import { Link } from "react-router-dom";
 
 type TJobCardProps = {
   variant?: string;
@@ -73,9 +74,9 @@ const JobCard: React.FC<TJobCardProps> = ({
         <div className="flex justify-between gap-3">
           <button
             onClick={() => setShowDrawer(true)}
-            className="text-neutral-10 text-lg md:text-xl font-bold leading-6 hover:underline cursor-pointer text-start"
+            className="text-neutral-10 text-lg md:text-xl font-bold leading-6 hover:text-primary-10 cursor-pointer text-start"
           >
-            Advanced Mathematics Tutor -{" "}
+            Need English Version Tutor For Class 3 Student -{" "}
             <span className="text-primary-10 font-normal text-sm">
               Home Tutoring
             </span>
@@ -150,21 +151,25 @@ const JobCard: React.FC<TJobCardProps> = ({
         )}
 
         {variant === "guardian" && (
-          <div className="flex items-center gap-5 text-neutral-10 text-xs md:text-sm">
+          <div className="flex items-center gap-5 text-neutral-10 text-xs md:text-sm mt-4">
             <button
               onClick={() => setIsConfirmDeleteModalOpen(true)}
-              className="flex items-center gap-1 md:gap-2 mt-4 cursor-pointer"
+              className="flex items-center gap-1 md:gap-2 cursor-pointer"
             >
               <img src={ICONS.deleteRed} alt="" className="size-4 md:size-5" />
               <p className="font-bold">Delete Job</p>
             </button>
-            <div className="flex items-center gap-1 md:gap-2 mt-4">
-              <img src={ICONS.jobStatus} alt="" className="size-4 md:size-5" />
+            <div className="flex items-center gap-1 md:gap-2">
+              <img src={ICONS.jobStatus} alt="" className="size-4" />
               <p className="font-bold">Status:</p>
               <p className={`capitalize ${statusTextColorForGuardian}`}>
                 {status}
               </p>
             </div>
+            <Link to={"/"} className="flex items-center gap-1 md:gap-2 hover:underline">
+              <img src={ICONS.applications} alt="" className="size-4 md:size-5" />
+              <p className="font-bold">View Applications</p>
+            </Link>
           </div>
         )}
 

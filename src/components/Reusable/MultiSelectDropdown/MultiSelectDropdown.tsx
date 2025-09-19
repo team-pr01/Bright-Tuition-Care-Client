@@ -12,7 +12,7 @@ interface MultiSelectDropdownProps {
   onChange?: (selected: string[]) => void;
   isRequired?: boolean;
   isDisabled?: boolean;
-  dropdownDirection?:string
+  dropdownDirection?: string;
 }
 
 const MultiSelectDropdown = forwardRef<
@@ -29,7 +29,7 @@ const MultiSelectDropdown = forwardRef<
     onChange,
     isRequired = true,
     isDisabled,
-    dropdownDirection="bottom-full"
+    dropdownDirection = "bottom-full",
   }) => {
     const [isOpen, setIsOpen] = useState(false);
     const [selectedValues, setSelectedValues] = useState<string[]>(value);
@@ -78,7 +78,8 @@ const MultiSelectDropdown = forwardRef<
       <div className="flex flex-col gap-2 font-Nunito" ref={dropdownRef}>
         <label
           htmlFor={name}
-          className="flex flex-row items-center w-full justify-between text-neutral-65">
+          className="flex flex-row items-center w-full justify-between text-neutral-65"
+        >
           <p className="text-neutral-10 leading-[18px] text-[15px] font-medium tracking-[-0.16] ">
             {label}{" "}
             <span className="text-primary-10">{isRequired ? "*" : ""}</span>
@@ -91,7 +92,11 @@ const MultiSelectDropdown = forwardRef<
             disabled={isDisabled}
             className={`w-full px-4 py-[14px] rounded-lg border leading-[18px] focus:outline-none focus:border-primary-10 transition duration-300 text-left flex items-center justify-between ${
               error ? "border-red-500" : "border-neutral-45/20"
-            } ${isDisabled ? "cursor-not-allowed bg-neutral-50/20" : "bg-white cursor-pointer"} ${
+            } ${
+              isDisabled
+                ? "cursor-not-allowed bg-neutral-50/20"
+                : "bg-white cursor-pointer"
+            } ${
               selectedValues.length === 0
                 ? "text-neutral-65"
                 : "text-neutral-10"
@@ -108,7 +113,9 @@ const MultiSelectDropdown = forwardRef<
           </button>
 
           {isOpen && (
-            <div className={`absolute z-50 ${dropdownDirection} mb-1 w-full rounded-lg bg-white shadow-lg border border-neutral-45/30 max-h-60 overflow-auto`}>
+            <div
+              className={`absolute z-50 ${dropdownDirection} mb-1 w-full rounded-lg bg-white shadow-lg border border-neutral-45/30 max-h-60 overflow-auto`}
+            >
               {/* Search bar */}
               <div className="sticky top-0 bg-white p-2 border-b border-neutral-45/20">
                 <input
@@ -135,9 +142,9 @@ const MultiSelectDropdown = forwardRef<
                         type="checkbox"
                         checked={selectedValues.includes(option)}
                         readOnly
-                        className="mr-2 rounded border-neutral-95 text-neutral-10 focus:ring-neutral-10"
-
+                        className="mr-2 size-4 appearance-none rounded-full border border-neutral-95 checked:bg-primary-10 checked:border-primary-10 focus:ring-2 focus:ring-primary-10"
                       />
+
                       <span className="text-neutral-10">{option}</span>
                     </div>
                   </div>

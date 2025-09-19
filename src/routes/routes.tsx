@@ -29,6 +29,8 @@ import StudentSteps from "../components/HomePage/HowItWorksStudent/StudentSteps"
 import ImportantGuidelines from "../pages/Dashboard/Shared/ImportantGuidelines/ImportantGuidelines";
 import HireATutor from "../pages/Dashboard/Guardian/HireATutor/HireATutor";
 import PostedJobs from "../pages/Dashboard/Guardian/PostedJobs/PostedJobs";
+import Applications from "../pages/Dashboard/Guardian/Applications/Applications";
+import TutorsResume from "../pages/Dashboard/Shared/TutorsResume/TutorsResume";
 
 export const router = createBrowserRouter([
   {
@@ -158,6 +160,14 @@ export const router = createBrowserRouter([
       {
         path: "posted-jobs",
         element: <PostedJobs />,
+      },
+      {
+        path: "applications/:jobId",
+        element: <Applications />,
+      },
+      {
+        path: "applications/:jobId/:tutorId",
+        element: <TutorsResume />,
       },
       {
         path: "hire-a-tutor",

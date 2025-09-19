@@ -84,6 +84,7 @@ const Preview = () => {
           value={watch("tutoringTime")}
           isDisabled={!isEditEnable}
           {...register("tutoringTime")}
+          isRequired={false}
         />
 
         <MultiSelectDropdown
@@ -111,6 +112,7 @@ const Preview = () => {
           value={watch("noOfStudents")}
           isDisabled={!isEditEnable}
           {...register("noOfStudents")}
+          isRequired={false}
         />
 
         <MultiSelectDropdown
@@ -186,6 +188,7 @@ const Preview = () => {
         isDisabled={!isEditEnable}
         {...register("otherRequirements")}
         rows={4}
+        isRequired={false}
       />
     </div>
   );

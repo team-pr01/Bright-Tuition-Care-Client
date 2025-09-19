@@ -98,6 +98,8 @@ import copy from "../assets/Icons/copy.svg";
 import deleteRed from "../assets/Icons/delete.svg";
 import deleteWhite from "../assets/Icons/delete-white.svg";
 import hire from "../assets/Icons/hire.png";
+import applications from "../assets/Icons/applications.svg";
+import threeDots from "../assets/Icons/three-dots.svg";
 
 
 import aboutUs from "../assets/Images/about-us.svg";
@@ -229,4 +231,6 @@ export const ICONS = {
   deleteWhite,
   deleteRed,
   hire,
+  applications,
+  threeDots,
 };
