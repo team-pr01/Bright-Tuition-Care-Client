@@ -23,7 +23,7 @@ const applicationTheads: TableHead[] = [
   { key: "jobTitle", label: "Job Title" },
   { key: "tutorId", label: "Tutor ID" },
   { key: "jobId", label: "Job ID" },
-  { key: "cv", label: "CV" },
+  { key: "cv", label: "View CV" },
 ];
 
 const Applications = () => {
@@ -64,7 +64,7 @@ const Applications = () => {
         <img
           src={application.photo}
           alt={application.name}
-          className="w-8 h-8 rounded-full object-cover"
+          className="size-8 rounded-full object-cover"
         />
         <span>{application.name}</span>
       </div>
@@ -72,9 +72,9 @@ const Applications = () => {
     cv: (
       <Link
         to={`/dashboard/guardian/applications/${jobId}/${application.tutorId}`}
-        className="text-primary-10 cursor-pointer"
+        className="text-primary-10 cursor-pointer flex items-center gap-1"
       >
-        <FiEye className="w-5 h-5" />
+        <FiEye className="size-4" /> View
       </Link>
     ),
   }));
