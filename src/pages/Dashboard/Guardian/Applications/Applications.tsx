@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useParams } from "react-router-dom";
 import type { TableHead } from "../../../../components/Reusable/Table/Table";
 import { useState } from "react";
@@ -6,7 +7,7 @@ import { FiEye } from "react-icons/fi";
 
 type Application = {
   id: number;
-  name: string;
+  name: any;
   photo: string;
   appliedDate: string;
   jobTitle: string;
@@ -30,7 +31,7 @@ const Applications = () => {
   console.log("Job/Context ID:", jobId);
 
   const [page, setPage] = useState(1);
-  const [loading, setLoading] = useState(false);
+  const loading = false;
 
   const applications: Application[] = [
     {
@@ -55,7 +56,7 @@ const Applications = () => {
     },
   ];
 
-  // 🔹 Transform data for Table (so "photo + name" + CV button render properly)
+
   const tableData = applications.map((app) => ({
     ...app,
     jobTitle: app.jobTitle,

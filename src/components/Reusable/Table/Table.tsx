@@ -9,7 +9,7 @@ export type TableHead = {
 };
 
 export type TableAction<T> = {
-  label: string;
+  label: any;
   onClick: (row: T) => void;
 };
 
