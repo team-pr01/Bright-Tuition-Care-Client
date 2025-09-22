@@ -1,0 +1,114 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { useState } from "react";
+import Table, { type TableHead } from "../../../../components/Reusable/Table/Table";
+import { FiEye, FiEdit, FiSlash } from "react-icons/fi";
+import SuspendGuardianModal from "../../../../components/Admin/GuardiansPage/SuspendGuardianModal/SuspendGuardianModal";
+
+
+export type TableAction<T> = {
+  label: any;
+  onClick: (row: T) => void;
+};
+
+const Guardians = () => {
+  const [page, setPage] = useState<number>(1);
+  const [limit, setLimit] = useState<number>(1);
+  const [searchQuery, setSearchQuery] = useState<string>("");
+  const [isSuspendGuardianModalOpen, setIsSuspendGuardianModalOpen] = useState<boolean>(false);
+
+  const isLoading = false;
+
+  // Updated table heads
+  const guardianTheads: TableHead[] = [
+    { key: "id", label: "Guardian ID" },
+    { key: "name", label: "Name" },
+    { key: "email", label: "Email" },
+    { key: "phone", label: "Phone Number" },
+    { key: "role", label: "Role" },
+    { key: "registeredOn", label: "Registered On" },
+    { key: "status", label: "Status" },
+  ];
+
+  // Mock data
+  const allGuardiansOrStudents: any[] = [
+    {
+      id: "G-001",
+      name: "John Doe",
+      email: "john@example.com",
+      phone: "+44 1234 567890",
+      role: "Guardian",
+      registeredOn: "2025-09-15",
+      status: "Active",
+      photo: "https://i.pravatar.cc/40?img=1",
+    },
+    {
+      id: "S-002",
+      name: "Jane Smith",
+      email: "jane@example.com",
+      phone: "+44 9876 543210",
+      role: "Guardian",
+      registeredOn: "2025-09-16",
+      status: "Pending",
+      photo: "https://i.pravatar.cc/40?img=2",
+    },
+  ];
+
+  // Action Menu
+  const actions: TableAction<any>[] = [
+  { 
+    label: "View Profile", 
+    icon: <FiEye className="inline mr-2" />, 
+    onClick: (row) => console.log("View Profile:", row) 
+  },
+  { 
+    label: "Edit Info", 
+    icon: <FiEdit className="inline mr-2" />, 
+    onClick: (row) => console.log("Edit Info:", row) 
+  },
+  { 
+    label: "Suspend", 
+    icon: <FiSlash className="inline mr-2" />, 
+    onClick: (row) => setIsSuspendGuardianModalOpen(true)
+  },
+];
+
+
+  // Format table data
+  const tableData = allGuardiansOrStudents.map((guardian) => ({
+    ...guardian,
+    name: (
+      <div className="flex items-center gap-2">
+        <img
+          src={guardian.photo}
+          alt={guardian.name}
+          className="size-8 rounded-full object-cover"
+        />
+        <span>{guardian.name}</span>
+      </div>
+    ),
+  }));
+
+  const handleSearch = (q: string) => {
+    setSearchQuery(q);
+  };
+
+  return (
+    <div>
+      <Table<any>
+        title="All Guardians/Students"
+        description="Manage all the guardians and students registered on the platform."
+        theads={guardianTheads}
+        data={tableData}
+        totalPages={5}
+        currentPage={page}
+        onPageChange={(p) => setPage(p)}
+        isLoading={isLoading}
+        onSearch={handleSearch}
+        actions={actions}
+      />
+      <SuspendGuardianModal isSuspendGuardianModalOpen={isSuspendGuardianModalOpen} setIsSuspendGuardianModalOpen={setIsSuspendGuardianModalOpen} />
+    </div>
+  );
+};
+
+export default Guardians;

@@ -28,7 +28,7 @@ const StudentInfoForm = () => {
         label="Number of Students"
         placeholder="Enter number"
         error={errors.noOfStudents}
-        {...register("noOfStudents", { required: "Number is required" })}
+        {...register("noOfStudents")}
         isRequired={false}
       />
 

@@ -72,7 +72,7 @@ const Notification = () => {
         </div>
       </button>
 
-      <div style={{ perspective: "1000px" }} className="z-[999]">
+      <div style={{ perspective: "1000px" }} className="z-50">
         <AnimatePresence>
           {isNotificationOpen && (
             <motion.div

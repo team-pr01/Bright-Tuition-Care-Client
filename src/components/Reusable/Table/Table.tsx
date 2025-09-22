@@ -3,14 +3,15 @@ import React, { useEffect, useRef, useState } from "react";
 import { ICONS } from "../../../assets";
 
 export type TableHead = {
-  key: string; // key to read from data row
-  label: string; // column header text
-  className?: string; // optional additional classes for th
+  key: string;
+  label: string;
+  className?: string;
 };
 
 export type TableAction<T> = {
   label: any;
   onClick: (row: T) => void;
+  icon?: React.ReactNode;
 };
 
 type Props<T extends Record<string, any>> = {
@@ -50,20 +51,17 @@ export default function Table<T extends Record<string, any>>({
 
   useEffect(() => {
     function handleClick(e: MouseEvent) {
-      // if there's no open menu nothing to do
       if (!openMenuId) return;
 
       const menu = menuRef.current;
       if (!menu) return;
 
       if (!menu.contains(e.target as Node)) {
-        // begin smooth close
         setClosingMenuId(openMenuId);
-        // after animation remove
         setTimeout(() => {
           setOpenMenuId(null);
           setClosingMenuId(null);
-        }, 180); // match transition time in CSS
+        }, 180);
       }
     }
 
@@ -86,7 +84,6 @@ export default function Table<T extends Record<string, any>>({
   }, [openMenuId]);
 
   useEffect(() => {
-    // notify parent of search change (debounced simple implementation)
     if (!onSearch) return;
     const t = setTimeout(() => onSearch(query), 300);
     return () => clearTimeout(t);
@@ -149,7 +146,7 @@ export default function Table<T extends Record<string, any>>({
 
         <div className="overflow-x-auto rounded-md">
           <table className="min-w-full table-auto border-collapse">
-            <thead className="sticky top-0 z-10 bg-white">
+            <thead className="sticky top-0 bg-white">
               <tr>
                 {theads.map((th) => (
                   <th
@@ -246,8 +243,11 @@ export default function Table<T extends Record<string, any>>({
                                       setClosingMenuId(null);
                                     }, 180);
                                   }}
-                                  className="w-full text-left px-3 py-2 text-sm hover:bg-slate-100 cursor-pointer"
+                                  className="w-full text-left px-3 py-2 text-sm hover:bg-slate-100 cursor-pointer flex items-center gap-1"
                                 >
+                                  {act.icon && (
+                                    <p>{act.icon}</p>
+                                  )}
                                   {act.label}
                                 </button>
                               ))}

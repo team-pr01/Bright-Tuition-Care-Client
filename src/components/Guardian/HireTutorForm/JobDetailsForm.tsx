@@ -55,7 +55,7 @@ const JobDetailsForm = () => {
           type=""
           placeholder="Ex: 10:00 AM - 12:00 PM"
           error={errors.tutoringTime}
-          {...register("tutoringTime", { required: "Time is required" })}
+          {...register("tutoringTime")}
           isRequired={false}
         />
 

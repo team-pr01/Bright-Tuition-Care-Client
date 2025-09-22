@@ -1,5 +1,6 @@
 import React from "react";
 import { BsBriefcase } from "react-icons/bs";
+import { FaUserShield } from "react-icons/fa";
 import {
   LuLayoutDashboard,
   LuClipboardList,
@@ -111,28 +112,28 @@ export const guardianDashboardLinks: DashboardLink[] = [
 export const adminDashboardLinks: DashboardLink[] = [
   {
     label: "Dashboard",
-    path: "/dashboard/tutor/home",
+    path: "/dashboard/admin/home",
     icon: <LuLayoutDashboard />,
   },
   {
-    label: "Profile",
-    path: "/dashboard/tutor/my-profile",
-    icon: <LuUser />,
+    label: "Guardian/Students",
+    path: "/dashboard/admin/guardians",
+    icon: <FaUserShield />,
   },
   {
-    label: "How It Works",
-    path: "/dashboard/tutor/how-it-works",
-    icon: <TbSettingsQuestion />,
+    label: "Hire Tutor",
+    path: "/dashboard/admin/hire-a-tutor",
+    icon: <LuUserRoundSearch />,
+  },
+  {
+    label: "Posted Jobs",
+    path: "/dashboard/admin/posted-jobs",
+    icon: <BsBriefcase />,
   },
   {
     label: "Settings",
-    path: "/dashboard/tutor/settings",
+    path: "/dashboard/admin/settings",
     icon: <LuSettings />,
-  },
-  {
-    label: "Join Community",
-    path: "/dashboard/tutor/community",
-    icon: <RiFacebookFill />,
   },
 ];
 

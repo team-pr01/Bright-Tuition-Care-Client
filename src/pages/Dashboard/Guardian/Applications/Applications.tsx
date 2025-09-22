@@ -16,7 +16,7 @@ type Application = {
   cvUrl: string;
 };
 
-// Define headers
+// Table headers
 const applicationTheads: TableHead[] = [
   { key: "name", label: "Applicant Name" },
   { key: "appliedDate", label: "Applied Date" },

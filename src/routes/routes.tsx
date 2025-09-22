@@ -31,6 +31,8 @@ import HireATutor from "../pages/Dashboard/Guardian/HireATutor/HireATutor";
 import PostedJobs from "../pages/Dashboard/Guardian/PostedJobs/PostedJobs";
 import Applications from "../pages/Dashboard/Guardian/Applications/Applications";
 import TutorsResume from "../pages/Dashboard/Shared/TutorsResume/TutorsResume";
+import AdminDashboardHome from "../pages/Dashboard/Admin/AdminDashboardHome/AdminDashboardHome";
+import Guardians from "../pages/Dashboard/Admin/Guardians/Guardians";
 
 export const router = createBrowserRouter([
   {
@@ -196,6 +198,41 @@ export const router = createBrowserRouter([
       {
         path: "payment",
         element: <Payment />,
+      },
+      {
+        path: "settings",
+        element: <Settings />,
+      },
+    ],
+  },
+  {
+    path: "dashboard/admin",
+    element: <DashboardLayout />,
+    errorElement: <NotFound />,
+    children: [
+      {
+        path: "home",
+        element: <AdminDashboardHome />,
+      },
+      {
+        path: "guardians",
+        element: <Guardians />,
+      },
+      {
+        path: "posted-jobs",
+        element: <PostedJobs />,
+      },
+      {
+        path: "applications/:jobId",
+        element: <Applications />,
+      },
+      {
+        path: "applications/:jobId/:tutorId",
+        element: <TutorsResume />,
+      },
+      {
+        path: "hire-a-tutor",
+        element: <HireATutor />,
       },
       {
         path: "settings",
