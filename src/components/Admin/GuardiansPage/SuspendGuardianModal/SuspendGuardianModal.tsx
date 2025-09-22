@@ -10,11 +10,13 @@ type TFormData = {
 };
 
 type TSuspendGuardianModalProps = {
+  selectedGuardianId: string | null;
   isSuspendGuardianModalOpen: boolean;
   setIsSuspendGuardianModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 const SuspendGuardianModal: React.FC<TSuspendGuardianModalProps> = ({
+  selectedGuardianId,
   isSuspendGuardianModalOpen,
   setIsSuspendGuardianModalOpen,
 }) => {
@@ -31,33 +33,33 @@ const SuspendGuardianModal: React.FC<TSuspendGuardianModalProps> = ({
     <Modal
       isModalOpen={isSuspendGuardianModalOpen}
       setIsModalOpen={setIsSuspendGuardianModalOpen}
-      heading="Suspend John Doe"
+      heading={`Suspend ${selectedGuardianId}`}
     >
       <form
         onSubmit={handleSubmit(handleSuspend)}
         className="flex flex-col gap-6 font-Nunito mt-5"
       >
-          <div className="flex flex-col gap-6">
-            {/* Email */}
-            <Textarea
-              label="Reason for Suspension"
-              placeholder="Enter reason for suspension"
-              error={errors.reason}
-              {...register("reason", {
-                required: "This field is required",
-              })}
-            />
-          </div>
+        <div className="flex flex-col gap-6">
+          {/* Email */}
+          <Textarea
+            label="Reason for Suspension"
+            placeholder="Enter reason for suspension"
+            error={errors.reason}
+            {...register("reason", {
+              required: "This field is required",
+            })}
+          />
+        </div>
 
-          <div className="flex justify-end">
-            <Button
-              type="submit"
-              label="Suspend"
-              variant="primary"
-              iconWithoutBg={ICONS.topRightArrowWhite}
-              className="py-[7px] lg:py-[7px] w-full md:w-fit"
-            />
-          </div>
+        <div className="flex justify-end">
+          <Button
+            type="submit"
+            label="Suspend"
+            variant="primary"
+            iconWithoutBg={ICONS.topRightArrowWhite}
+            className="py-[7px] lg:py-[7px] w-full md:w-fit"
+          />
+        </div>
       </form>
     </Modal>
   );

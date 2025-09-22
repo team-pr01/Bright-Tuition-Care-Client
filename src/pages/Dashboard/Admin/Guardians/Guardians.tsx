@@ -1,9 +1,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState } from "react";
-import Table, { type TableHead } from "../../../../components/Reusable/Table/Table";
+import Table, {
+  type TableHead,
+} from "../../../../components/Reusable/Table/Table";
 import { FiEye, FiEdit, FiSlash } from "react-icons/fi";
 import SuspendGuardianModal from "../../../../components/Admin/GuardiansPage/SuspendGuardianModal/SuspendGuardianModal";
-
 
 export type TableAction<T> = {
   label: any;
@@ -14,13 +15,17 @@ const Guardians = () => {
   const [page, setPage] = useState<number>(1);
   const [limit, setLimit] = useState<number>(1);
   const [searchQuery, setSearchQuery] = useState<string>("");
-  const [isSuspendGuardianModalOpen, setIsSuspendGuardianModalOpen] = useState<boolean>(false);
+  const [selectedGuardianId, setSelectedGuardianId] = useState<string | null>(
+    null
+  );
+  const [isSuspendGuardianModalOpen, setIsSuspendGuardianModalOpen] =
+    useState<boolean>(false);
 
   const isLoading = false;
 
   // Updated table heads
   const guardianTheads: TableHead[] = [
-    { key: "id", label: "Guardian ID" },
+    { key: "_id", label: "Guardian ID" },
     { key: "name", label: "Name" },
     { key: "email", label: "Email" },
     { key: "phone", label: "Phone Number" },
@@ -32,7 +37,7 @@ const Guardians = () => {
   // Mock data
   const allGuardiansOrStudents: any[] = [
     {
-      id: "G-001",
+      _id: "G-001",
       name: "John Doe",
       email: "john@example.com",
       phone: "+44 1234 567890",
@@ -42,7 +47,7 @@ const Guardians = () => {
       photo: "https://i.pravatar.cc/40?img=1",
     },
     {
-      id: "S-002",
+      _id: "S-002",
       name: "Jane Smith",
       email: "jane@example.com",
       phone: "+44 9876 543210",
@@ -55,23 +60,25 @@ const Guardians = () => {
 
   // Action Menu
   const actions: TableAction<any>[] = [
-  { 
-    label: "View Profile", 
-    icon: <FiEye className="inline mr-2" />, 
-    onClick: (row) => console.log("View Profile:", row) 
-  },
-  { 
-    label: "Edit Info", 
-    icon: <FiEdit className="inline mr-2" />, 
-    onClick: (row) => console.log("Edit Info:", row) 
-  },
-  { 
-    label: "Suspend", 
-    icon: <FiSlash className="inline mr-2" />, 
-    onClick: (row) => setIsSuspendGuardianModalOpen(true)
-  },
-];
-
+    {
+      label: "View Profile",
+      icon: <FiEye className="inline mr-2" />,
+      onClick: (row) => console.log("View Profile:", row),
+    },
+    {
+      label: "Edit Info",
+      icon: <FiEdit className="inline mr-2" />,
+      onClick: (row) => console.log("Edit Info:", row),
+    },
+    {
+      label: "Suspend",
+      icon: <FiSlash className="inline mr-2" />,
+      onClick: (row) => {
+        setSelectedGuardianId(row._id);
+        setIsSuspendGuardianModalOpen(true);
+      },
+    },
+  ];
 
   // Format table data
   const tableData = allGuardiansOrStudents.map((guardian) => ({
@@ -106,7 +113,11 @@ const Guardians = () => {
         onSearch={handleSearch}
         actions={actions}
       />
-      <SuspendGuardianModal isSuspendGuardianModalOpen={isSuspendGuardianModalOpen} setIsSuspendGuardianModalOpen={setIsSuspendGuardianModalOpen} />
+      <SuspendGuardianModal
+        selectedGuardianId={selectedGuardianId}
+        isSuspendGuardianModalOpen={isSuspendGuardianModalOpen}
+        setIsSuspendGuardianModalOpen={setIsSuspendGuardianModalOpen}
+      />
     </div>
   );
 };
