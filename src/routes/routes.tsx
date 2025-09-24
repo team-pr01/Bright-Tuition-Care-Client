@@ -34,6 +34,7 @@ import TutorsResume from "../pages/Dashboard/Shared/TutorsResume/TutorsResume";
 import AdminDashboardHome from "../pages/Dashboard/Admin/AdminDashboardHome/AdminDashboardHome";
 import Guardians from "../pages/Dashboard/Admin/Guardians/Guardians";
 import GuardianProfile from "../pages/Dashboard/Admin/GuardianProfile/GuardianProfile";
+import EditJob from "../pages/Dashboard/Admin/EditJob/EditJob";
 
 export const router = createBrowserRouter([
   {
@@ -226,6 +227,10 @@ export const router = createBrowserRouter([
       {
         path: "posted-jobs",
         element: <PostedJobs />,
+      },
+      {
+        path: "edit-job/:jobId",
+        element: <EditJob />,
       },
       {
         path: "applications/:jobId",

@@ -1,15 +1,10 @@
 import { useParams } from "react-router-dom";
 import { ICONS, IMAGES } from "../../../../assets";
 import Button from "../../../../components/Reusable/Button/Button";
-import { useState } from "react";
+import JobCard from "../../../../components/JobBoardPage/Jobs/JobCard";
 
 const GuardianProfile = () => {
   const { id } = useParams();
-  const [activetab, setActiveTab] = useState("guardianInfo");
-  const tabButtons = [
-    { label: "Guardian Info", key: "guardianInfo" },
-    { label: "Posted Jobs", key: "postedJobs" },
-  ];
 
   const personalInfo = {
     email: "rahulsd380@gmail.com",
@@ -45,14 +40,6 @@ const GuardianProfile = () => {
     { label: "Religion", value: personalInfo?.religion },
     { label: "Identity Type", value: personalInfo?.identityType },
     { label: "Nationality", value: personalInfo?.nationality },
-    // {
-    //   label: "Facebook Profile Link",
-    //   value: personalInfo?.socialLinks?.facebook,
-    // },
-    // {
-    //   label: "LinkedIn Profile Link",
-    //   value: personalInfo?.socialLinks?.linkedIn,
-    // },
     { label: "Father's Name", value: personalInfo?.family?.fatherName },
     { label: "Father's Number", value: personalInfo?.family?.fatherNumber },
     { label: "Mother's Name", value: personalInfo?.family?.motherName },
@@ -68,7 +55,7 @@ const GuardianProfile = () => {
 
   return (
     <div className="font-Nunito">
-      <div className="flex items-center justify-between pb-5 border-b border-neutral-5/15">
+      <div className="flex items-center justify-between pb-5">
         <div className="flex items-center gap-3">
           <div className="size-32 rounded-full relative">
             <div className="bg-white/40 rounded-full p-[2px] size-full">
@@ -87,11 +74,10 @@ const GuardianProfile = () => {
               John Smith
             </h1>
             <h2 className="text-neutral-5e text-sm mt-2">Tutor Id : 0001</h2>
-            <p className="text-neutral-20 mt-3 max-w-[800px]">
+            <p className="text-neutral-20 mt-3 max-w-[500px] 2xl:max-w-[800px]">
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui natus
               incidunt eum asperiores quisquam omnis facilis voluptates iste
-              dolorum nam cumque esse sit doloribus temporibus fugit a commodi,
-              dicta error ratione!
+              dolorum nam cumque esse sit doloribus temporibus
             </p>
           </div>
         </div>
@@ -113,23 +99,11 @@ const GuardianProfile = () => {
         </div>
       </div>
 
-      <div className="flex items-center gap-5 mt-5">
-        {tabButtons?.map((button) => (
-          <button
-            key={button?.key}
-            onClick={() => setActiveTab(button?.key)}
-            className={`text-neutral-10 text-lg font-medium hover:text-primary-10 transition duration-300 cursor-pointer border-b pb-2 ${
-              activetab === button?.key
-                ? "text-primary-10  border-primary-10"
-                : "border-transparent"
-            }`}
-          >
-            {button?.label}
-          </button>
-        ))}
-      </div>
+      <p className="text-neutral-10 text-lg font-medium border-b pb-2 border-primary-10 mt-2">Personal and Posted Jobs</p>
 
-      <div className="grid grid-cols-1 gap-3 mt-4 bg-white p-5 rounded-2xl shadow-sm max-w-[400px]">
+
+<div className="flex gap-6 mt-6">
+      <div className="flex flex-col gap-3 bg-white p-5 rounded-2xl shadow-sm w-[30%] h-fit">
         {details.map((item, index) => {
           const provided = isProvided(item.value);
 
@@ -157,6 +131,13 @@ const GuardianProfile = () => {
           );
         })}
       </div>
+
+       <div className="grid grid-cols-1 2xl:grid-cols-2 gap-6 w-[70%]">
+      {[1,2,3].map((_, index) => (
+          <JobCard key={index} variant="guardian" status="pending" />
+      ))}
+    </div>
+    </div>
     </div>
   );
 };

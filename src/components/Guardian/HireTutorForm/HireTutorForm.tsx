@@ -47,18 +47,17 @@ const HireTutorForm = () => {
     <FormProvider {...methods}>
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-6 mt-5">
         {/* Progress Bar */}
-<div className="relative w-full h-3 bg-gray-200 rounded-full overflow-hidden">
-  <div
-    className="h-full bg-primary-10 transition-all duration-500 ease-in-out relative"
-    style={{ width: `${((currentStep + 1) / steps.length) * 100}%` }}
-  >
-    {/* Percentage inside blue area */}
-    <span className="absolute right-1 top-1/2 -translate-y-1/2 text-xs font-medium text-white">
-      {Math.round(((currentStep + 1) / steps.length) * 100)}%
-    </span>
-  </div>
-</div>
-
+        <div className="relative w-full h-3 bg-gray-200 rounded-full overflow-hidden">
+          <div
+            className="h-full bg-primary-10 transition-all duration-500 ease-in-out relative"
+            style={{ width: `${((currentStep + 1) / steps.length) * 100}%` }}
+          >
+            {/* Percentage inside blue area */}
+            <span className="absolute right-1 top-1/2 -translate-y-1/2 text-xs font-medium text-white">
+              {Math.round(((currentStep + 1) / steps.length) * 100)}%
+            </span>
+          </div>
+        </div>
 
         {/* Step Content */}
         {currentStep === 0 && <JobDetailsForm />}

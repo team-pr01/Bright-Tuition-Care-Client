@@ -20,20 +20,3 @@ const HireATutor = () => {
 };
 
 export default HireATutor;
-
-// Form values
-// title
-// tuitionType
-// salary
-// studentGender
-// preferedTutorGender
-// class
-// noOfStudents
-// tutoringTime (time range)
-// tutoringDays
-// category
-// city
-// area
-// address
-// subjects
-// otherRequirements
