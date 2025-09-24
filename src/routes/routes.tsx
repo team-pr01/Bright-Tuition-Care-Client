@@ -33,6 +33,7 @@ import Applications from "../pages/Dashboard/Guardian/Applications/Applications"
 import TutorsResume from "../pages/Dashboard/Shared/TutorsResume/TutorsResume";
 import AdminDashboardHome from "../pages/Dashboard/Admin/AdminDashboardHome/AdminDashboardHome";
 import Guardians from "../pages/Dashboard/Admin/Guardians/Guardians";
+import GuardianProfile from "../pages/Dashboard/Admin/GuardianProfile/GuardianProfile";
 
 export const router = createBrowserRouter([
   {
@@ -217,6 +218,10 @@ export const router = createBrowserRouter([
       {
         path: "guardians",
         element: <Guardians />,
+      },
+      {
+        path: "guardian/:id",
+        element: <GuardianProfile />,
       },
       {
         path: "posted-jobs",

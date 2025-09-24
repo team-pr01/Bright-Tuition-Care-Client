@@ -100,6 +100,7 @@ import deleteWhite from "../assets/Icons/delete-white.svg";
 import hire from "../assets/Icons/hire.png";
 import applications from "../assets/Icons/applications.svg";
 import threeDots from "../assets/Icons/three-dots.svg";
+import suspend from "../assets/Icons/suspend.svg";
 
 
 import aboutUs from "../assets/Images/about-us.svg";
@@ -233,4 +234,5 @@ export const ICONS = {
   hire,
   applications,
   threeDots,
+  suspend,
 };

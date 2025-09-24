@@ -3,8 +3,9 @@ import { useState } from "react";
 import Table, {
   type TableHead,
 } from "../../../../components/Reusable/Table/Table";
-import { FiEye, FiEdit, FiSlash } from "react-icons/fi";
+import { FiEye, FiSlash } from "react-icons/fi";
 import SuspendGuardianModal from "../../../../components/Admin/GuardiansPage/SuspendGuardianModal/SuspendGuardianModal";
+import { useNavigate } from "react-router-dom";
 
 export type TableAction<T> = {
   label: any;
@@ -12,6 +13,7 @@ export type TableAction<T> = {
 };
 
 const Guardians = () => {
+    const navigate = useNavigate();
   const [page, setPage] = useState<number>(1);
   const [limit, setLimit] = useState<number>(1);
   const [searchQuery, setSearchQuery] = useState<string>("");
@@ -63,13 +65,13 @@ const Guardians = () => {
     {
       label: "View Profile",
       icon: <FiEye className="inline mr-2" />,
-      onClick: (row) => console.log("View Profile:", row),
+      onClick: (row) => navigate(`/dashboard/admin/guardian/${row._id}`),
     },
-    {
-      label: "Edit Info",
-      icon: <FiEdit className="inline mr-2" />,
-      onClick: (row) => console.log("Edit Info:", row),
-    },
+    // {
+    //   label: "Edit Info",
+    //   icon: <FiEdit className="inline mr-2" />,
+    //   onClick: (row) => console.log("Edit Info:", row),
+    // },
     {
       label: "Suspend",
       icon: <FiSlash className="inline mr-2" />,
