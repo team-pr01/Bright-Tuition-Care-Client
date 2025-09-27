@@ -1,6 +1,6 @@
 import React from "react";
 import { BsBriefcase } from "react-icons/bs";
-import { FaUserShield } from "react-icons/fa";
+import { FaChalkboardTeacher, FaUserShield } from "react-icons/fa";
 import {
   LuLayoutDashboard,
   LuClipboardList,
@@ -119,6 +119,11 @@ export const adminDashboardLinks: DashboardLink[] = [
     label: "Guardian/Students",
     path: "/dashboard/admin/guardians",
     icon: <FaUserShield />,
+  },
+  {
+    label: "Tutors",
+    path: "/dashboard/admin/tutors",
+    icon: <FaChalkboardTeacher />,
   },
   {
     label: "Hire Tutor",

@@ -3,7 +3,7 @@ import type { FieldError } from "react-hook-form";
 import { FiChevronDown } from "react-icons/fi";
 
 interface MultiSelectDropdownProps {
-  label: string;
+  label?: string;
   name: string;
   options: string[];
   placeholder?: string;
@@ -76,7 +76,9 @@ const MultiSelectDropdown = forwardRef<
 
     return (
       <div className="flex flex-col gap-2 font-Nunito" ref={dropdownRef}>
-        <label
+        {
+          label &&
+          <label
           htmlFor={name}
           className="flex flex-row items-center w-full justify-between text-neutral-65"
         >
@@ -85,6 +87,7 @@ const MultiSelectDropdown = forwardRef<
             <span className="text-primary-10">{isRequired ? "*" : ""}</span>
           </p>
         </label>
+        }
 
         <div className="relative">
           <button

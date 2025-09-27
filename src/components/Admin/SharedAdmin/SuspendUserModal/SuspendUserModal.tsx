@@ -9,16 +9,16 @@ type TFormData = {
   password: string;
 };
 
-type TSuspendGuardianModalProps = {
+type TSuspendUserModalProps = {
   selectedGuardianId: string | null;
-  isSuspendGuardianModalOpen: boolean;
-  setIsSuspendGuardianModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  isSuspendUserModalOpen: boolean;
+  setIsSuspendUserModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-const SuspendGuardianModal: React.FC<TSuspendGuardianModalProps> = ({
+const SuspendUserModal: React.FC<TSuspendUserModalProps> = ({
   selectedGuardianId,
-  isSuspendGuardianModalOpen,
-  setIsSuspendGuardianModalOpen,
+  isSuspendUserModalOpen,
+  setIsSuspendUserModalOpen,
 }) => {
   const {
     register,
@@ -31,8 +31,8 @@ const SuspendGuardianModal: React.FC<TSuspendGuardianModalProps> = ({
   };
   return (
     <Modal
-      isModalOpen={isSuspendGuardianModalOpen}
-      setIsModalOpen={setIsSuspendGuardianModalOpen}
+      isModalOpen={isSuspendUserModalOpen}
+      setIsModalOpen={setIsSuspendUserModalOpen}
       heading={`Suspend ${selectedGuardianId}`}
     >
       <form
@@ -65,4 +65,4 @@ const SuspendGuardianModal: React.FC<TSuspendGuardianModalProps> = ({
   );
 };
 
-export default SuspendGuardianModal;
+export default SuspendUserModal;

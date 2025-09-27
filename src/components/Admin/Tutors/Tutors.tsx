@@ -1,36 +1,30 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useState } from "react";
-import Table, {
-  type TableHead,
-} from "../../../../components/Reusable/Table/Table";
-import { FiEye, FiSlash } from "react-icons/fi";
 import { useNavigate } from "react-router-dom";
-import SuspendUserModal from "../../../../components/Admin/SharedAdmin/SuspendUserModal/SuspendUserModal";
+import Table, {
+  type TableAction,
+  type TableHead,
+} from "../../Reusable/Table/Table";
+import { useState } from "react";
+import { FiEye, FiSlash } from "react-icons/fi";
+import SuspendUserModal from "../SharedAdmin/SuspendUserModal/SuspendUserModal";
 
-export type TableAction<T> = {
-  label: any;
-  onClick: (row: T) => void;
-};
-
-const Guardians = () => {
-    const navigate = useNavigate();
+const Tutors = () => {
+  const navigate = useNavigate();
   const [page, setPage] = useState<number>(1);
   const [limit, setLimit] = useState<number>(10);
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [selectedCity, setSelectedCity] = useState<string>("");
   const [selectedAreas, setSelectedAreas] = useState<string[]>([]);
   const [areaOptions, setAreaOptions] = useState<string[]>([]);
-  const [selectedGuardianId, setSelectedGuardianId] = useState<string | null>(
-    null
-  );
+  const [selectedTutorId, setSelectedTutorId] = useState<string | null>(null);
   const [isSuspendUserModalOpen, setIsSuspendUserModalOpen] =
     useState<boolean>(false);
 
   const isLoading = false;
 
-  // Updated table heads
-  const guardianTheads: TableHead[] = [
-    { key: "_id", label: "Guardian ID" },
+  // Table headers
+  const tutorTheads: TableHead[] = [
+    { key: "_id", label: "Tutor ID" },
     { key: "name", label: "Name" },
     { key: "email", label: "Email" },
     { key: "phone", label: "Phone Number" },
@@ -40,26 +34,26 @@ const Guardians = () => {
   ];
 
   // Mock data
-  const allGuardiansOrStudents: any[] = [
+  const allTutors: any[] = [
     {
-      _id: "G-001",
+      _id: "Tutor-001",
       name: "John Doe",
       email: "john@example.com",
       phone: "+44 1234 567890",
-      role: "Guardian",
+      role: "Tutor",
       registeredOn: "2025-09-15",
       status: "Active",
-      photo: "https://i.pravatar.cc/40?img=1",
+      imageUrl: "https://i.pravatar.cc/40?img=1",
     },
     {
-      _id: "S-002",
+      _id: "Tutor-002",
       name: "Jane Smith",
       email: "jane@example.com",
       phone: "+44 9876 543210",
-      role: "Guardian",
+      role: "Tutor",
       registeredOn: "2025-09-16",
       status: "Pending",
-      photo: "https://i.pravatar.cc/40?img=2",
+      imageUrl: "https://i.pravatar.cc/40?img=2",
     },
   ];
 
@@ -68,34 +62,29 @@ const Guardians = () => {
     {
       label: "View Profile",
       icon: <FiEye className="inline mr-2" />,
-      onClick: (row) => navigate(`/dashboard/admin/guardian/${row._id}`),
+      onClick: (row) => navigate(`/dashboard/admin/tutors/${row._id}`),
     },
-    // {
-    //   label: "Edit Info",
-    //   icon: <FiEdit className="inline mr-2" />,
-    //   onClick: (row) => console.log("Edit Info:", row),
-    // },
     {
       label: "Suspend",
       icon: <FiSlash className="inline mr-2" />,
       onClick: (row) => {
-        setSelectedGuardianId(row._id);
+        setSelectedTutorId(row._id);
         setIsSuspendUserModalOpen(true);
       },
     },
   ];
 
   // Format table data
-  const tableData = allGuardiansOrStudents.map((guardian) => ({
-    ...guardian,
+  const tableData = allTutors.map((tutor) => ({
+    ...tutor,
     name: (
       <div className="flex items-center gap-2">
         <img
-          src={guardian.photo}
-          alt={guardian.name}
+          src={tutor.imageUrl}
+          alt={tutor.name}
           className="size-8 rounded-full object-cover"
         />
-        <span>{guardian.name}</span>
+        <span>{tutor.name}</span>
       </div>
     ),
   }));
@@ -107,9 +96,9 @@ const Guardians = () => {
   return (
     <div>
       <Table<any>
-        title="All Guardians/Students"
-        description="Manage all the guardians and students registered on the platform."
-        theads={guardianTheads}
+        title="All Registered Tutors"
+        description="Manage all the tutors registered on the platform."
+        theads={tutorTheads}
         data={tableData}
         totalPages={5}
         currentPage={page}
@@ -127,7 +116,7 @@ const Guardians = () => {
         setLimit={setLimit}
       />
       <SuspendUserModal
-        selectedGuardianId={selectedGuardianId}
+        selectedGuardianId={selectedTutorId}
         isSuspendUserModalOpen={isSuspendUserModalOpen}
         setIsSuspendUserModalOpen={setIsSuspendUserModalOpen}
       />
@@ -135,4 +124,4 @@ const Guardians = () => {
   );
 };
 
-export default Guardians;
+export default Tutors;

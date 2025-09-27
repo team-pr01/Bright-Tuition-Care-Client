@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useEffect, useRef, useState } from "react";
 import { ICONS } from "../../../assets";
+import { filterData } from "../../../constants/filterData";
 
 export type TableHead = {
   key: string;
@@ -25,6 +26,14 @@ type Props<T extends Record<string, any>> = {
   onPageChange?: (page: number) => void;
   isLoading?: boolean;
   onSearch?: (q: string) => void;
+  selectedCity: string;
+  setSelectedCity: React.Dispatch<React.SetStateAction<string>>;
+  selectedAreas: string[];
+  setSelectedAreas: React.Dispatch<React.SetStateAction<string[]>>;
+  areaOptions: string[];
+  setAreaOptions: React.Dispatch<React.SetStateAction<string[]>>;
+  limit: number;
+  setLimit: React.Dispatch<React.SetStateAction<number>>;
   className?: string;
 };
 
@@ -40,6 +49,14 @@ export default function Table<T extends Record<string, any>>({
   onPageChange,
   isLoading = false,
   onSearch,
+  selectedCity,
+  setSelectedCity,
+  selectedAreas,
+  setSelectedAreas,
+  areaOptions,
+  setAreaOptions,
+  limit = 10,
+  setLimit,
   className = "",
 }: Props<T>) {
   const [query, setQuery] = useState("");
@@ -109,6 +126,24 @@ export default function Table<T extends Record<string, any>>({
     onPageChange(page);
   };
 
+  // For city and area/location filter
+  useEffect(() => {
+    if (!selectedCity) {
+      setAreaOptions([]);
+      setSelectedAreas([]);
+      return;
+    }
+
+    const cityObj = filterData.cityCorporationWithLocation.find(
+      (city) => city.name === selectedCity
+    );
+
+    setAreaOptions(cityObj ? cityObj.locations : []);
+    setSelectedAreas([]);
+  }, [selectedCity]);
+
+  const limits = [5, 10, 15, 20, 25, 30, 50, 100];
+
   return (
     <div
       className={`w-full bg-white dark:bg-slate-900 rounded-lg shadow-sm p-4 font-Nunito ${className}`}
@@ -131,6 +166,46 @@ export default function Table<T extends Record<string, any>>({
               aria-label="Search table"
             />
           </div>
+
+          <select
+            value={limit}
+            onChange={(e) => setLimit(Number(e.target.value))}
+            className="input input-sm px-3 py-2 border border-neutral-55/60 focus:border-primary-10 transition duration-300 focus:outline-none rounded-md text-sm shadow-sm cursor-pointer"
+          >
+            <option value="">Limit/Page</option>
+            {limits?.map((limit) => (
+              <option key={limit} value={limit}>
+                {limit}
+              </option>
+            ))}
+          </select>
+
+          <select
+            value={selectedCity}
+            onChange={(e) => setSelectedCity(e.target.value)}
+            className="input input-sm px-3 py-2 border border-neutral-55/60 focus:border-primary-10 transition duration-300 focus:outline-none rounded-md text-sm shadow-sm cursor-pointer"
+          >
+            <option value="">Select City</option>
+            {filterData.cityCorporationWithLocation.map((city) => (
+              <option key={city.name} value={city.name}>
+                {city.name}
+              </option>
+            ))}
+          </select>
+
+          <select
+            value={selectedAreas[0] || ""}
+            onChange={(e) => setSelectedAreas([e.target.value])}
+            disabled={areaOptions.length === 0}
+            className="input input-sm px-3 py-2 border border-neutral-55/60 focus:border-primary-10 transition duration-300 focus:outline-none rounded-md text-sm shadow-sm cursor-pointer"
+          >
+            <option value="">Select Area</option>
+            {areaOptions.map((area: string) => (
+              <option key={area} value={area}>
+                {area}
+              </option>
+            ))}
+          </select>
         </div>
       </div>
 
@@ -245,9 +320,7 @@ export default function Table<T extends Record<string, any>>({
                                   }}
                                   className="w-full text-left px-3 py-2 text-sm hover:bg-slate-100 cursor-pointer flex items-center gap-1"
                                 >
-                                  {act.icon && (
-                                    <p>{act.icon}</p>
-                                  )}
+                                  {act.icon && <p>{act.icon}</p>}
                                   {act.label}
                                 </button>
                               ))}
