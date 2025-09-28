@@ -29,8 +29,10 @@ const applicationTheads: TableHead[] = [
 const Applications = () => {
   const { jobId } = useParams();
   console.log("Job/Context ID:", jobId);
+  const path = "admin";
 
-  const [page, setPage] = useState(1);
+  const [page, setPage] = useState<number>(1);
+  const [limit, setLimit] = useState<number>(10);
   const loading = false;
 
   const applications: Application[] = [
@@ -71,7 +73,7 @@ const Applications = () => {
     ),
     cv: (
       <Link
-        to={`/dashboard/guardian/applications/${jobId}/${application.tutorId}`}
+        to={`/dashboard/${path}/applications/resume/${application.tutorId}`}
         className="text-primary-10 cursor-pointer flex items-center gap-1"
       >
         <FiEye className="size-4" /> View
@@ -95,6 +97,8 @@ const Applications = () => {
         onPageChange={(p) => setPage(p)}
         isLoading={loading}
         onSearch={handleSearch}
+        limit={limit}
+        setLimit={setLimit}
       />
     </div>
   );

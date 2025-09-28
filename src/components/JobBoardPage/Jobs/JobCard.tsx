@@ -17,6 +17,9 @@ const JobCard: React.FC<TJobCardProps> = ({
   status,
   detailsWidth = "max-w-full 2xl:max-w-[80%]",
 }) => {
+  // const user = useSelector(useCurrentUser);
+  // const path = user?.role === "guardian" ? "guardian" : "admin";
+  const path = "admin";
   const [isShareJobModalOpen, setIsShareJobModalOpen] =
     useState<boolean>(false);
   const [isJobApplyConfirmationModalOpen, setIsJobApplyConfirmationModalOpen] =
@@ -173,7 +176,7 @@ const JobCard: React.FC<TJobCardProps> = ({
                 {status}
               </p>
             </div>
-            <Link to={`/dashboard/guardian/applications/${1}`} className="flex items-center gap-1 md:gap-2 hover:underline">
+            <Link to={`/dashboard/${path}/applications/${1}`} className="flex items-center gap-1 md:gap-2 hover:underline">
               <img src={ICONS.applications} alt="" className="size-4 md:size-5" />
               <p className="font-bold">View Applications(1)</p>
             </Link>

@@ -31,6 +31,7 @@ const Tutors = () => {
     { key: "role", label: "Role" },
     { key: "registeredOn", label: "Registered On" },
     { key: "status", label: "Status" },
+    { key: "profileStatus", label: "Profile Status" },
   ];
 
   // Mock data
@@ -43,6 +44,7 @@ const Tutors = () => {
       role: "Tutor",
       registeredOn: "2025-09-15",
       status: "Active",
+      profileStatus: "Locked",
       imageUrl: "https://i.pravatar.cc/40?img=1",
     },
     {
@@ -53,6 +55,7 @@ const Tutors = () => {
       role: "Tutor",
       registeredOn: "2025-09-16",
       status: "Pending",
+      profileStatus: "Unlocked",
       imageUrl: "https://i.pravatar.cc/40?img=2",
     },
   ];
@@ -62,7 +65,7 @@ const Tutors = () => {
     {
       label: "View Profile",
       icon: <FiEye className="inline mr-2" />,
-      onClick: (row) => navigate(`/dashboard/admin/tutors/${row._id}`),
+      onClick: (row) => navigate(`/dashboard/admin/tutor/${row._id}`),
     },
     {
       label: "Suspend",

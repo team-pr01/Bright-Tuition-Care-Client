@@ -26,12 +26,12 @@ type Props<T extends Record<string, any>> = {
   onPageChange?: (page: number) => void;
   isLoading?: boolean;
   onSearch?: (q: string) => void;
-  selectedCity: string;
-  setSelectedCity: React.Dispatch<React.SetStateAction<string>>;
-  selectedAreas: string[];
-  setSelectedAreas: React.Dispatch<React.SetStateAction<string[]>>;
-  areaOptions: string[];
-  setAreaOptions: React.Dispatch<React.SetStateAction<string[]>>;
+  selectedCity?: string;
+  setSelectedCity?: React.Dispatch<React.SetStateAction<string>>;
+  selectedAreas?: string[];
+  setSelectedAreas?: React.Dispatch<React.SetStateAction<string[]>>;
+  areaOptions?: string[];
+  setAreaOptions?: React.Dispatch<React.SetStateAction<string[]>>;
   limit: number;
   setLimit: React.Dispatch<React.SetStateAction<number>>;
   className?: string;
@@ -128,18 +128,20 @@ export default function Table<T extends Record<string, any>>({
 
   // For city and area/location filter
   useEffect(() => {
-    if (!selectedCity) {
-      setAreaOptions([]);
-      setSelectedAreas([]);
-      return;
+    if (setAreaOptions && setSelectedAreas) {
+      if (!selectedCity) {
+        setAreaOptions([]);
+        setSelectedAreas([]);
+        return;
+      }
     }
 
     const cityObj = filterData.cityCorporationWithLocation.find(
       (city) => city.name === selectedCity
     );
 
-    setAreaOptions(cityObj ? cityObj.locations : []);
-    setSelectedAreas([]);
+    if (setAreaOptions) setAreaOptions(cityObj ? cityObj.locations : []);
+    if (setSelectedAreas) setSelectedAreas([]);
   }, [selectedCity]);
 
   const limits = [5, 10, 15, 20, 25, 30, 50, 100];
@@ -180,32 +182,32 @@ export default function Table<T extends Record<string, any>>({
             ))}
           </select>
 
-          <select
-            value={selectedCity}
-            onChange={(e) => setSelectedCity(e.target.value)}
-            className="input input-sm px-3 py-2 border border-neutral-55/60 focus:border-primary-10 transition duration-300 focus:outline-none rounded-md text-sm shadow-sm cursor-pointer"
-          >
-            <option value="">Select City</option>
-            {filterData.cityCorporationWithLocation.map((city) => (
-              <option key={city.name} value={city.name}>
-                {city.name}
-              </option>
-            ))}
-          </select>
+            <select
+              value={selectedCity}
+              onChange={(e) => setSelectedCity && setSelectedCity(e.target.value)}
+              className="input input-sm px-3 py-2 border border-neutral-55/60 focus:border-primary-10 transition duration-300 focus:outline-none rounded-md text-sm shadow-sm cursor-pointer"
+            >
+              <option value="">Select City</option>
+              {filterData.cityCorporationWithLocation.map((city) => (
+                <option key={city.name} value={city.name}>
+                  {city.name}
+                </option>
+              ))}
+            </select>
 
-          <select
-            value={selectedAreas[0] || ""}
-            onChange={(e) => setSelectedAreas([e.target.value])}
-            disabled={areaOptions.length === 0}
-            className="input input-sm px-3 py-2 border border-neutral-55/60 focus:border-primary-10 transition duration-300 focus:outline-none rounded-md text-sm shadow-sm cursor-pointer"
-          >
-            <option value="">Select Area</option>
-            {areaOptions.map((area: string) => (
-              <option key={area} value={area}>
-                {area}
-              </option>
-            ))}
-          </select>
+            <select
+              value={(selectedAreas?.[0] || "")}
+              onChange={(e) => setSelectedAreas && setSelectedAreas([e.target.value])}
+              disabled={(areaOptions?.length ?? 0) === 0}
+              className="input input-sm px-3 py-2 border border-neutral-55/60 focus:border-primary-10 transition duration-300 focus:outline-none rounded-md text-sm shadow-sm cursor-pointer"
+            >
+              <option value="">Select Area</option>
+              {areaOptions?.map((area: string) => (
+                <option key={area} value={area}>
+                  {area}
+                </option>
+              ))}
+            </select>
         </div>
       </div>
 

@@ -230,6 +230,10 @@ export const router = createBrowserRouter([
         element: <Tutors />,
       },
       {
+        path: "tutor/:tutorId",
+        element: <TutorsResume />,
+      },
+      {
         path: "posted-jobs",
         element: <PostedJobs />,
       },
@@ -242,7 +246,7 @@ export const router = createBrowserRouter([
         element: <Applications />,
       },
       {
-        path: "applications/:jobId/:tutorId",
+        path: "applications/resume/:tutorId",
         element: <TutorsResume />,
       },
       {
