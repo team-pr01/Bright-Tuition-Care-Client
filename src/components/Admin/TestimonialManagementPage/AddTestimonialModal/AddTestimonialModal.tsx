@@ -8,7 +8,8 @@ import SelectDropdown from "../../../Reusable/SelectDropdown/SelectDropdown";
 
 type TFormData = {
   name: string;
-  roleAndLocation: string;
+  designationAndLocation: string;
+  role : string
   review: string;
   rating: string;
 };
@@ -57,11 +58,11 @@ const AddTestimonialModal: React.FC<TAddTestimonialModalProps> = ({
 
           {/* Role */}
           <TextInput
-            label="Role & Location"
+            label="Designation & Location"
             placeholder="Ex: Math Teacher, Banani, Dhaka"
-            error={errors.roleAndLocation}
-            {...register("roleAndLocation", {
-              required: "Role & Location is required",
+            error={errors.designationAndLocation}
+            {...register("designationAndLocation", {
+              required: "Designation & Location is required",
             })}
           />
 
@@ -71,6 +72,14 @@ const AddTestimonialModal: React.FC<TAddTestimonialModalProps> = ({
             options={["1", "2", "3", "4", "5"]}
             error={errors.rating}
             {...register("rating", { required: "Rating is required" })}
+          />
+
+          {/* Role */}
+          <SelectDropdown
+            label="Role"
+            options={["Guardian", "Tutor"]}
+            error={errors.role}
+            {...register("role", { required: "Role is required" })}
           />
 
           {/* Review */}

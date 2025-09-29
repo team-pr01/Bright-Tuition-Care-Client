@@ -20,7 +20,7 @@ const AdminTestimonialCard: React.FC<TAdminTestimonialCardProps> = ({
   onEdit,
   onDelete,
 }) => {
-   const renderStars = () => {
+  const renderStars = () => {
     const stars = [];
     for (let i = 1; i <= 5; i++) {
       if (rating >= i) {
@@ -35,7 +35,7 @@ const AdminTestimonialCard: React.FC<TAdminTestimonialCardProps> = ({
   };
   return (
     <div className="bg-white shadow rounded-lg p-4 flex flex-col gap-2 border border-gray-100">
-      <div className="flex items-center justify-between">
+      <div className="flex justify-between">
         <div className="flex items-center gap-3">
           <img
             src={userImage}
@@ -43,16 +43,27 @@ const AdminTestimonialCard: React.FC<TAdminTestimonialCardProps> = ({
             className="w-12 h-12 rounded-full object-cover"
           />
           <div>
-            <p className="font-semibold">{userName}</p>
+            <p className="font-semibold">
+              {userName}{" "}
+              <span className="bg-primary-10 text-white rounded px-2 py-[2px] text-sm font-normal">
+                Tutor
+              </span>
+            </p>
             <p className="text-sm text-gray-500">{location}</p>
           </div>
         </div>
 
         <div className="flex items-center gap-2">
-          <button onClick={onEdit} className="text-blue-500 hover:text-blue-600 cursor-pointer">
+          <button
+            onClick={onEdit}
+            className="text-blue-500 hover:text-blue-600 cursor-pointer"
+          >
             <FiEdit2 />
           </button>
-          <button onClick={onDelete} className="text-red-500 hover:text-red-600 cursor-pointer">
+          <button
+            onClick={onDelete}
+            className="text-red-500 hover:text-red-600 cursor-pointer"
+          >
             <FiTrash2 />
           </button>
         </div>
