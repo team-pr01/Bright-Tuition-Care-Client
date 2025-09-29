@@ -38,7 +38,7 @@ const JoinCommunity = () => {
         href={communityLink}
         className={`bg-primary-10 hover:bg-primary-20 hover:text-primary-10 transition duration-300 font-semibold text-white rounded-xl flex items-center gap-2 px-5 py-3 cursor-pointer mt-5`}
       >
-        Join Community <RxArrowTopRight className="text-lg mt-1" />
+        Join Community <RxArrowTopRight className="text-lg" />
       </a>
     </div>
   );

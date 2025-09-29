@@ -54,7 +54,7 @@ const NoticeBoardManagement = () => {
           }}
           className={`bg-primary-10 hover:bg-primary-20 hover:text-primary-10 transition duration-300 font-semibold text-white rounded-lg flex items-center gap-2 px-3 py-2 pointer cursor-pointer`}
         >
-          Add Notice <RxArrowTopRight className="text-lg mt-1" />
+          Add Notice <RxArrowTopRight className="text-lg" />
         </button>
       </div>
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">

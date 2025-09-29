@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { FiEdit2, FiTrash2 } from "react-icons/fi";
 import type {
@@ -11,7 +10,6 @@ import Button from "../../../../components/Reusable/Button/Button";
 import AddNewStaffModal from "../../../../components/Admin/StaffsPage/AddOrUpdateStaffModal/AddOrUpdateStaffModal";
 
 const Staffs = () => {
-  const navigate = useNavigate();
   const [isStaffModalOpen, setIsStaffModalOpen] = useState<boolean>(false);
   const [selectedStaffId, setSelectedStaffId] = useState<string | null>(null);
   const [modalType, setModalType] = useState<"add" | "edit">("add");

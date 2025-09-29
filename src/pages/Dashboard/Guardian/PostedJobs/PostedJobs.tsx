@@ -36,7 +36,7 @@ const PostedJobs = () => {
             to="/dashboard/guardian/hire-a-tutor"
             className={`bg-primary-10 hover:bg-primary-20 hover:text-primary-10 transition duration-300 font-semibold text-white rounded-lg flex items-center gap-2 px-3 py-2 pointer`}
           >
-            Hire a Tutor <RxArrowTopRight className="text-lg mt-1" />
+            Hire a Tutor <RxArrowTopRight className="text-lg" />
           </Link>
         </div>
       </div>

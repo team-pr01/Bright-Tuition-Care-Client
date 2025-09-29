@@ -39,6 +39,7 @@ import Tutors from "../components/Admin/Tutors/Tutors";
 import NoticeBoardManagement from "../pages/Dashboard/Admin/NoticeBoardManagement/NoticeBoardManagement";
 import PaymentsManagement from "../pages/Dashboard/Admin/PaymentsManagement/PaymentsManagement";
 import Staffs from "../pages/Dashboard/Admin/Staffs/Staffs";
+import TestimonialManagement from "../pages/Dashboard/Admin/TestimonialManagement/TestimonialManagement";
 
 export const router = createBrowserRouter([
   {
@@ -267,6 +268,10 @@ export const router = createBrowserRouter([
       {
         path: "notice-board-management",
         element: <NoticeBoardManagement />,
+      },
+      {
+        path: "testimonials-management",
+        element: <TestimonialManagement />,
       },
       {
         path: "settings",
