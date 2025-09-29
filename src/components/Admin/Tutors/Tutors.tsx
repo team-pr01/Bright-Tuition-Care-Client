@@ -7,6 +7,8 @@ import Table, {
 import { useState } from "react";
 import { FiEye, FiSlash } from "react-icons/fi";
 import SuspendUserModal from "../SharedAdmin/SuspendUserModal/SuspendUserModal";
+import { BsUnlock } from "react-icons/bs";
+import { VscUnlock } from "react-icons/vsc";
 
 const Tutors = () => {
   const navigate = useNavigate();
@@ -28,7 +30,8 @@ const Tutors = () => {
     { key: "name", label: "Name" },
     { key: "email", label: "Email" },
     { key: "phone", label: "Phone Number" },
-    { key: "role", label: "Role" },
+    { key: "city", label: "City" },
+    { key: "area", label: "Area" },
     { key: "registeredOn", label: "Registered On" },
     { key: "status", label: "Status" },
     { key: "profileStatus", label: "Profile Status" },
@@ -41,7 +44,8 @@ const Tutors = () => {
       name: "John Doe",
       email: "john@example.com",
       phone: "+44 1234 567890",
-      role: "Tutor",
+      city: "Dhaka",
+      area: "Banani",
       registeredOn: "2025-09-15",
       status: "Active",
       profileStatus: "Locked",
@@ -52,7 +56,8 @@ const Tutors = () => {
       name: "Jane Smith",
       email: "jane@example.com",
       phone: "+44 9876 543210",
-      role: "Tutor",
+      city: "Cumilla",
+      area: "Cumilla Cantonment",
       registeredOn: "2025-09-16",
       status: "Pending",
       profileStatus: "Unlocked",
@@ -70,6 +75,14 @@ const Tutors = () => {
     {
       label: "Suspend",
       icon: <FiSlash className="inline mr-2" />,
+      onClick: (row) => {
+        setSelectedTutorId(row._id);
+        setIsSuspendUserModalOpen(true);
+      },
+    },
+    {
+      label: "Unlock",
+      icon: <VscUnlock className="inline mr-2" />,
       onClick: (row) => {
         setSelectedTutorId(row._id);
         setIsSuspendUserModalOpen(true);
