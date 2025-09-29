@@ -1,25 +1,48 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { FaPen, FaTrash } from "react-icons/fa";
 
-const NoticeCard = ({ notice, setIsAddNoticeModalOpen, setSelectedNoticeId }: { notice:any, setIsAddNoticeModalOpen:any, setSelectedNoticeId:any }) => {
+import { FiEdit2, FiTrash2 } from "react-icons/fi";
+
+const NoticeCard = ({
+  notice,
+  setModalType,
+  setIsAddNoticeModalOpen,
+  setSelectedNoticeId,
+}: {
+  notice: any;
+  setModalType: any;
+  setIsAddNoticeModalOpen: any;
+  setSelectedNoticeId: any;
+}) => {
   return (
     <div className="bg-white border-l-4 border-primary-10 shadow-md rounded-xl p-5 flex flex-col gap-3">
       {/* Header */}
       <div className="flex justify-between items-start">
         <h3 className="text-lg font-semibold text-gray-800">{notice?.title}</h3>
         <div className="flex gap-3 text-gray-400">
-          <button onClick={() => {setIsAddNoticeModalOpen(true); setSelectedNoticeId(notice?._id);}} className="hover:text-blue-600 transition cursor-pointer">
-            <FaPen />
+          <button
+            onClick={() => {
+              setModalType("edit");
+              setIsAddNoticeModalOpen(true);
+              setSelectedNoticeId(notice?._id);
+            }}
+            className="hover:text-blue-600 transition cursor-pointer"
+          >
+            <FiEdit2 />
           </button>
           <button className="hover:text-red-600 transition cursor-pointer">
-            <FaTrash />
+            <FiTrash2 />
           </button>
         </div>
       </div>
 
       <p className="text-gray-600 text-sm leading-relaxed">{notice?.notice}</p>
-      <div className="flex items-center text-xs text-gray-500 mt-2">
+      <div className="flex items-center justify-between">
+        <p className="flex items-center text-xs text-gray-500 mt-2">
         <span className="mr-1">📅</span> {notice?.date}
+      </p>
+      <div className="bg-primary-60 px-2 py-1 text-white rounded w-fit text-sm">
+           For {notice?.targetedAudience}
+      </div>
       </div>
     </div>
   );

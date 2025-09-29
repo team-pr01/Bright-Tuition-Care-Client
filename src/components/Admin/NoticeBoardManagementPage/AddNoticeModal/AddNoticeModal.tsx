@@ -4,10 +4,12 @@ import { ICONS } from "../../../../assets";
 import Textarea from "../../../Reusable/TextArea/TextArea";
 import Modal from "../../../Reusable/Modal/Modal";
 import TextInput from "../../../Reusable/TextInput/TextInput";
+import SelectDropdown from "../../../Reusable/SelectDropdown/SelectDropdown";
 
 type TFormData = {
   title: string;
   notice: string;
+  targetedAudience: string;
 };
 
 type TAddNoticeModalProps = {
@@ -61,6 +63,14 @@ const AddNoticeModal: React.FC<TAddNoticeModalProps> = ({
             {...register("notice", {
               required: "This field is required",
             })}
+          />
+
+          {/* Targeted Audience */}
+          <SelectDropdown
+            label="Targeted Audience"
+            options={["Tutor", "Guardian", "Both"]}
+            error={errors.targetedAudience}
+            {...register("targetedAudience")}
           />
         </div>
 
