@@ -37,6 +37,7 @@ import GuardianProfile from "../pages/Dashboard/Admin/GuardianProfile/GuardianPr
 import EditJob from "../pages/Dashboard/Admin/EditJob/EditJob";
 import Tutors from "../components/Admin/Tutors/Tutors";
 import NoticeBoardManagement from "../pages/Dashboard/Admin/NoticeBoardManagement/NoticeBoardManagement";
+import PaymentsManagement from "../pages/Dashboard/Admin/PaymentsManagement/PaymentsManagement";
 
 export const router = createBrowserRouter([
   {
@@ -255,7 +256,11 @@ export const router = createBrowserRouter([
         element: <HireATutor />,
       },
       {
-        path: "notice-board",
+        path: "payments-management",
+        element: <PaymentsManagement />,
+      },
+      {
+        path: "notice-board-management",
         element: <NoticeBoardManagement />,
       },
       {

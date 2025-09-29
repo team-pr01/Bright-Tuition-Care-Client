@@ -5,6 +5,7 @@ import TextInput from "../../../Reusable/TextInput/TextInput";
 
 type TFormData = {
   senderNumber: string;
+  transactionId?: string;
   bankName?: string;
   file?: string;
   amount?: string;
@@ -67,6 +68,16 @@ const SubmitProofForm: React.FC<TSubmitProofFormProps> = ({
             required: "Number is required",
           })}
         />
+
+        {selectedPaymentMethod !== "bankTransfer" && (
+          <TextInput
+            label={"Transaction Id"}
+            placeholder={`Enter transaction id`}
+            error={errors.transactionId}
+            {...register("transactionId")}
+            isRequired={selectedPaymentMethod !== "bankTransfer"}
+          />
+        )}
         <TextInput
           label="Screenshot of Payment (optional)"
           type="file"

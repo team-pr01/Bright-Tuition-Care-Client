@@ -1,7 +1,7 @@
 import React from "react";
 import { BsBriefcase } from "react-icons/bs";
 import { FaChalkboardTeacher, FaUserShield } from "react-icons/fa";
-import { FiInfo } from "react-icons/fi";
+import { FiCreditCard, FiInfo } from "react-icons/fi";
 import {
   LuLayoutDashboard,
   LuClipboardList,
@@ -137,8 +137,13 @@ export const adminDashboardLinks: DashboardLink[] = [
     icon: <BsBriefcase />,
   },
   {
+    label: "Payments",
+    path: "/dashboard/admin/payments-management",
+    icon: <FiCreditCard />,
+  },
+  {
     label: "Notice Board",
-    path: "/dashboard/admin/notice-board",
+    path: "/dashboard/admin/notice-board-management",
     icon: <FiInfo />,
   },
   {

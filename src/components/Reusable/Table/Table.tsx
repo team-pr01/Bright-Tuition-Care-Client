@@ -34,6 +34,7 @@ type Props<T extends Record<string, any>> = {
   setAreaOptions?: React.Dispatch<React.SetStateAction<string[]>>;
   limit: number;
   setLimit: React.Dispatch<React.SetStateAction<number>>;
+  filters?: React.ReactNode;
   className?: string;
 };
 
@@ -57,6 +58,7 @@ export default function Table<T extends Record<string, any>>({
   setAreaOptions,
   limit = 10,
   setLimit,
+  filters,
   className = "",
 }: Props<T>) {
   const [query, setQuery] = useState("");
@@ -182,7 +184,9 @@ export default function Table<T extends Record<string, any>>({
             ))}
           </select>
 
-            <select
+           {
+            selectedCity &&
+             <select
               value={selectedCity}
               onChange={(e) => setSelectedCity && setSelectedCity(e.target.value)}
               className="input input-sm px-3 py-2 border border-neutral-55/60 focus:border-primary-10 transition duration-300 focus:outline-none rounded-md text-sm shadow-sm cursor-pointer"
@@ -194,8 +198,11 @@ export default function Table<T extends Record<string, any>>({
                 </option>
               ))}
             </select>
+           }
 
-            <select
+            {
+              selectedAreas &&
+              <select
               value={(selectedAreas?.[0] || "")}
               onChange={(e) => setSelectedAreas && setSelectedAreas([e.target.value])}
               disabled={(areaOptions?.length ?? 0) === 0}
@@ -208,6 +215,9 @@ export default function Table<T extends Record<string, any>>({
                 </option>
               ))}
             </select>
+            }
+
+            {filters}
         </div>
       </div>
 

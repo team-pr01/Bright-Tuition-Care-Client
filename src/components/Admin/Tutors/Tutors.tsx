@@ -7,7 +7,6 @@ import Table, {
 import { useState } from "react";
 import { FiEye, FiSlash } from "react-icons/fi";
 import SuspendUserModal from "../SharedAdmin/SuspendUserModal/SuspendUserModal";
-import { BsUnlock } from "react-icons/bs";
 import { VscUnlock } from "react-icons/vsc";
 
 const Tutors = () => {
