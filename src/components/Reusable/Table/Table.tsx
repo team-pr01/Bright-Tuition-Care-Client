@@ -34,7 +34,7 @@ type Props<T extends Record<string, any>> = {
   setAreaOptions?: React.Dispatch<React.SetStateAction<string[]>>;
   limit: number;
   setLimit: React.Dispatch<React.SetStateAction<number>>;
-  filters?: React.ReactNode;
+  children?: React.ReactNode;
   className?: string;
 };
 
@@ -58,7 +58,7 @@ export default function Table<T extends Record<string, any>>({
   setAreaOptions,
   limit = 10,
   setLimit,
-  filters,
+  children,
   className = "",
 }: Props<T>) {
   const [query, setQuery] = useState("");
@@ -217,7 +217,7 @@ export default function Table<T extends Record<string, any>>({
             </select>
             }
 
-            {filters}
+            {children && children}
         </div>
       </div>
 

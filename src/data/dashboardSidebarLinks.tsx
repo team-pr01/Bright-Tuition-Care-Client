@@ -1,7 +1,7 @@
 import React from "react";
 import { BsBriefcase } from "react-icons/bs";
 import { FaChalkboardTeacher, FaUserShield } from "react-icons/fa";
-import { FiCreditCard, FiInfo } from "react-icons/fi";
+import { FiCreditCard, FiInfo, FiUserPlus } from "react-icons/fi";
 import {
   LuLayoutDashboard,
   LuClipboardList,
@@ -115,6 +115,11 @@ export const adminDashboardLinks: DashboardLink[] = [
     label: "Dashboard",
     path: "/dashboard/admin/home",
     icon: <LuLayoutDashboard />,
+  },
+  {
+    label: "Staffs",
+    path: "/dashboard/admin/staffs",
+    icon: <FiUserPlus />,
   },
   {
     label: "Guardian/Students",

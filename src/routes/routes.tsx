@@ -38,6 +38,7 @@ import EditJob from "../pages/Dashboard/Admin/EditJob/EditJob";
 import Tutors from "../components/Admin/Tutors/Tutors";
 import NoticeBoardManagement from "../pages/Dashboard/Admin/NoticeBoardManagement/NoticeBoardManagement";
 import PaymentsManagement from "../pages/Dashboard/Admin/PaymentsManagement/PaymentsManagement";
+import Staffs from "../pages/Dashboard/Admin/Staffs/Staffs";
 
 export const router = createBrowserRouter([
   {
@@ -218,6 +219,10 @@ export const router = createBrowserRouter([
       {
         path: "home",
         element: <AdminDashboardHome />,
+      },
+      {
+        path: "staffs",
+        element: <Staffs />,
       },
       {
         path: "guardians",

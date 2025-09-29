@@ -119,7 +119,7 @@ const PaymentsManagement = () => {
         actions={actions}
         limit={limit}
         setLimit={setLimit}
-        filters={statusFilterDropdown}
+        children={statusFilterDropdown}
       />
 
       {isProofModalOpen && selectedPaymentProof && (
