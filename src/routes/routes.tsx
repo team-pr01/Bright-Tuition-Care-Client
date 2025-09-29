@@ -36,6 +36,7 @@ import Guardians from "../pages/Dashboard/Admin/Guardians/Guardians";
 import GuardianProfile from "../pages/Dashboard/Admin/GuardianProfile/GuardianProfile";
 import EditJob from "../pages/Dashboard/Admin/EditJob/EditJob";
 import Tutors from "../components/Admin/Tutors/Tutors";
+import NoticeBoardManagement from "../pages/Dashboard/Admin/NoticeBoardManagement/NoticeBoardManagement";
 
 export const router = createBrowserRouter([
   {
@@ -252,6 +253,10 @@ export const router = createBrowserRouter([
       {
         path: "hire-a-tutor",
         element: <HireATutor />,
+      },
+      {
+        path: "notice-board",
+        element: <NoticeBoardManagement />,
       },
       {
         path: "settings",

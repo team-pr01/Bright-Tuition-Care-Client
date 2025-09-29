@@ -1,6 +1,7 @@
 import React from "react";
 import { BsBriefcase } from "react-icons/bs";
 import { FaChalkboardTeacher, FaUserShield } from "react-icons/fa";
+import { FiInfo } from "react-icons/fi";
 import {
   LuLayoutDashboard,
   LuClipboardList,
@@ -134,6 +135,11 @@ export const adminDashboardLinks: DashboardLink[] = [
     label: "Posted Jobs",
     path: "/dashboard/admin/posted-jobs",
     icon: <BsBriefcase />,
+  },
+  {
+    label: "Notice Board",
+    path: "/dashboard/admin/notice-board",
+    icon: <FiInfo />,
   },
   {
     label: "Settings",
