@@ -41,8 +41,8 @@ const Tutorials = () => {
     },
   ];
 
-  const [activeTab, setActiveTab] = useState("All");
-  const tabButtons = ["All", "For Tutors", "For Students/Guardians"];
+  const [activeTab, setActiveTab] = useState("For All");
+  const tabButtons = ["For All", "For Tutors", "For Students/Guardians"];
 
   const cardVariants = {
     hidden: { y: 20, opacity: 0 },

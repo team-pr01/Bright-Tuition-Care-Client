@@ -2,6 +2,7 @@ import React from "react";
 import { BsBriefcase } from "react-icons/bs";
 import { FaChalkboardTeacher, FaUserShield } from "react-icons/fa";
 import { FiCreditCard, FiInfo, FiStar, FiUserPlus } from "react-icons/fi";
+import { IoNotificationsOutline } from "react-icons/io5";
 import {
   LuLayoutDashboard,
   LuClipboardList,
@@ -155,6 +156,11 @@ export const adminDashboardLinks: DashboardLink[] = [
     label: "Testimonials",
     path: "/dashboard/admin/testimonials-management",
     icon: <FiStar />,
+  },
+  {
+    label: "Notifications",
+    path: "/dashboard/admin/notifications-management",
+    icon: <IoNotificationsOutline />,
   },
   {
     label: "Settings",

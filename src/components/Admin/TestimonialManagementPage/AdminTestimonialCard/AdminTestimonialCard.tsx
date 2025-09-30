@@ -45,7 +45,7 @@ const AdminTestimonialCard: React.FC<TAdminTestimonialCardProps> = ({
           <div>
             <p className="font-semibold">
               {userName}{" "}
-              <span className="bg-primary-10 text-white rounded px-2 py-[2px] text-sm font-normal">
+              <span className="bg-primary-10 text-white rounded px-2 py-[2px] text-xs font-normal">
                 Tutor
               </span>
             </p>

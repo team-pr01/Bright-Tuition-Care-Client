@@ -40,6 +40,8 @@ import NoticeBoardManagement from "../pages/Dashboard/Admin/NoticeBoardManagemen
 import PaymentsManagement from "../pages/Dashboard/Admin/PaymentsManagement/PaymentsManagement";
 import Staffs from "../pages/Dashboard/Admin/Staffs/Staffs";
 import TestimonialManagement from "../pages/Dashboard/Admin/TestimonialManagement/TestimonialManagement";
+import NotificationsManagement from "../pages/NotificationsManagement/NotificationsManagement";
+import SendNotification from "../pages/NotificationsManagement/SendNotification";
 
 export const router = createBrowserRouter([
   {
@@ -272,6 +274,14 @@ export const router = createBrowserRouter([
       {
         path: "testimonials-management",
         element: <TestimonialManagement />,
+      },
+      {
+        path: "notifications-management",
+        element: <NotificationsManagement />,
+      },
+      {
+        path: "send-notification",
+        element: <SendNotification />,
       },
       {
         path: "settings",
