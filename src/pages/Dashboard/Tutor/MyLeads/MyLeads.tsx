@@ -7,8 +7,10 @@ import { useState } from "react";
 import TextInput from "../../../../components/Reusable/TextInput/TextInput";
 import { useForm } from "react-hook-form";
 import Button from "../../../../components/Reusable/Button/Button";
+import SelectDropdown from "../../../../components/Reusable/SelectDropdown/SelectDropdown";
 
 type TFormData = {
+  paymentMethod: string;
   paymentNumber: string;
 };
 
@@ -35,7 +37,7 @@ const MyLeads = () => {
     { key: "guardianAddress", label: "Guardian Address" },
     { key: "details", label: "Details" },
     { key: "createdAt", label: "Added On" },
-    { key: "paymentNumber", label: "Payment Number" }, // ✅ new column
+    { key: "paymentNumber", label: "Payment Method" },
     { key: "status", label: "Status" },
   ];
 
@@ -48,7 +50,8 @@ const MyLeads = () => {
       guardianAddress: "Banani, Dhaka",
       details: "Looking for an English tutor for his son.",
       createdAt: "2025-09-15",
-      paymentNumber: "+880 1888 112233", // ✅ has number
+      paymentMethod : "bKash",
+      paymentNumber: "+880 1888 112233",
       status: "confirmed",
     },
     {
@@ -68,7 +71,8 @@ const MyLeads = () => {
       guardianAddress: "Gulshan, Dhaka",
       details: "Searching for a tutor in general subjects.",
       createdAt: "2025-09-18",
-      paymentNumber: "+880 1999 445566", // ✅ has number
+      paymentMethod : "Nagad",
+      paymentNumber: "+880 1999 445566",
       status: "confirmed",
     },
     {
@@ -87,7 +91,7 @@ const MyLeads = () => {
   const tableData = myLeads.map((lead) => ({
     ...lead,
     paymentNumber: lead?.paymentNumber ? (
-      <span className="text-gray-700">{lead.paymentNumber}</span>
+      <span className="text-gray-700">{lead?.paymentMethod}, {lead?.paymentNumber}</span>
     ) : (
       <button
         onClick={() => {
@@ -96,7 +100,7 @@ const MyLeads = () => {
         }}
         className="text-blue-500 cursor-pointer"
       >
-        Add Number
+        Add Payment Method
       </button>
     ),
     status: (
@@ -145,6 +149,13 @@ const MyLeads = () => {
           onSubmit={handleSubmit(handleAddPaymentNumber)}
           className="space-y-4 mt-5"
         >
+          {/* Payment Method */}
+          <SelectDropdown
+            label="Payment Method"
+            options={["Bkash", "Nagad", "Rocket"]}
+            error={errors.paymentMethod}
+            {...register("paymentMethod")}
+          />
           {/*Bkash/Nagad Personal Number */}
           <TextInput
             label="Bkash/Nagad Personal Number"

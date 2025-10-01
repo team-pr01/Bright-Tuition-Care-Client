@@ -66,19 +66,6 @@ const AddLeadFormModal = () => {
             required: "Details is required",
           })}
         />
-        <div>
-          {/*Bkash/Nagad Personal Number */}
-        <TextInput
-          label="Bkash/Nagad Personal Number"
-          type="number"
-          placeholder="Enter your bkash/nagad personal number"
-          error={errors.paymentNumber}
-          {...register("paymentNumber", {
-            required: "Payment number is required",
-          })}
-        />
-        <p className="italic text-[13px] text-orange-600 mt-2">**Please add your preferred payment method. Once your lead is confirmed, we will contact you and process your payment accordingly.</p>
-        </div>
         <Button
           type="submit"
           label="Submit"

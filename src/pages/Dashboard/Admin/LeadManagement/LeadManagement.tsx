@@ -24,7 +24,7 @@ const LeadManagement = () => {
     { key: "guardianAddress", label: "Guardian Address" },
     { key: "details", label: "Details" },
     { key: "createdAt", label: "Added On" },
-    { key: "paymentNumber", label: "Payment Number" },
+    { key: "paymentDetails", label: "Payment Details" },
     { key: "status", label: "Status" },
   ];
 
@@ -33,19 +33,20 @@ const LeadManagement = () => {
     {
       _id: "Lead-001",
       tutorName: "John Doe",
-      tutorPhoneNumber: "John Doe",
+      tutorPhoneNumber: "9876543224",
       guardianPhoneNumber: "+880 1711 223344",
       class: "Class 8",
       guardianAddress: "Banani, Dhaka",
       details: "Looking for an English tutor for his son.",
       createdAt: "2025-09-15",
+      paymentMethod : "bKash",
       paymentNumber: "+880 1888 112233",
       status: "confirmed",
     },
     {
       _id: "Lead-002",
       tutorName: "John Doe",
-      tutorPhoneNumber: "John Doe",
+      tutorPhoneNumber: "123456789",
       guardianPhoneNumber: "+880 1922 334455",
       class: "Class 10",
       guardianAddress: "Cumilla Cantonment, Cumilla",
@@ -57,19 +58,20 @@ const LeadManagement = () => {
     {
       _id: "Lead-003",
       tutorName: "John Doe",
-      tutorPhoneNumber: "John Doe",
+      tutorPhoneNumber: "9876543224",
       guardianPhoneNumber: "+880 1533 445566",
       class: "Class 6",
       guardianAddress: "Gulshan, Dhaka",
       details: "Searching for a tutor in general subjects.",
       createdAt: "2025-09-18",
+      paymentMethod : "bKash",
       paymentNumber: "+880 1999 445566",
       status: "confirmed",
     },
     {
       _id: "Lead-004",
       tutorName: "John Doe",
-      tutorPhoneNumber: "John Doe",
+      tutorPhoneNumber: "9876543224",
       guardianPhoneNumber: "+880 1777 889900",
       class: "Class 9",
       guardianAddress: "Chattogram City",
@@ -86,13 +88,18 @@ const LeadManagement = () => {
     addedBy: (
       <p>
         {lead?.tutorName ? lead?.tutorName : "N/A"}
-        {lead?.tutorPhoneNumber ? lead?.tutorPhoneNumber : "N/A"}
+        <span className="block">
+          {lead?.tutorPhoneNumber ? lead?.tutorPhoneNumber : "N/A"}
+        </span>
       </p>
     ),
-    paymentNumber: (
-      <span className="text-gray-700">
-        {lead?.paymentNumber ? lead?.paymentNumber : "N/A"}
-      </span>
+    paymentDetails: (
+      <p>
+        {lead?.paymentMethod ? lead?.paymentMethod : "N/A"}
+        <span className="block">
+          {lead?.paymentNumber ? lead?.paymentNumber : "N/A"}
+        </span>
+      </p>
     ),
     status: (
       <div

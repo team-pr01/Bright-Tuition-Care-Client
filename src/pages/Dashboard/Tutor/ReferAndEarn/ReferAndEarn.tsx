@@ -5,6 +5,7 @@ import Heading from "../../../../components/Reusable/Heading/Heading";
 import Modal from "../../../../components/Reusable/Modal/Modal";
 import AddLeadFormModal from "../../../../components/Dashboard/Tutor/AddLeadFormModal/AddLeadFormModal";
 import { Link } from "react-router-dom";
+import toast from "react-hot-toast";
 
 const ReferAndEarn = () => {
   const [isFormModalOpen, setIsFormModalOpen] = useState<boolean>(false);
@@ -36,6 +37,9 @@ const ReferAndEarn = () => {
     },
   ];
 
+  const referralLink =
+    "http://localhost:5173/tuition-request/referral/tutor-123";
+
   return (
     <div className="flex flex-col items-center justify-center gap-5 lg:gap-10 font-Nunito">
       <Heading
@@ -60,12 +64,12 @@ const ReferAndEarn = () => {
 
       <div className="flex items-center justify-between w-full">
         <Link to={"/dashboard/tutor/my-leads"}>
-        <Button
-          type="button"
-          label="My Leads"
-          variant="quaternary"
-          className="py-2 lg:py-2 w-full flex items-center justify-center"
-        />
+          <Button
+            type="button"
+            label="My Leads"
+            variant="quaternary"
+            className="py-2 lg:py-2 w-full flex items-center justify-center"
+          />
         </Link>
         <div className="flex items-center gap-4">
           <Button
@@ -74,6 +78,10 @@ const ReferAndEarn = () => {
             variant="tertiary"
             className="py-2 lg:py-2 w-full flex items-center justify-center"
             iconWithoutBg={ICONS.copy}
+            onClick={() => {
+              navigator.clipboard.writeText(referralLink);
+              toast.success("Referral link copied to clipboard!");
+            }}
           />
           <Button
             type="button"

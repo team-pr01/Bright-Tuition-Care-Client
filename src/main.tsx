@@ -4,6 +4,7 @@ import "./index.css";
 import { RouterProvider } from "react-router-dom";
 import { router } from "./routes/routes";
 import { HelmetProvider } from "react-helmet-async";
+import { Toaster } from "react-hot-toast";
 // import SmoothScroll from "./components/SmoothScroll";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
@@ -12,6 +13,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
       {/* <SmoothScroll> */}
         <RouterProvider router={router} />
       {/* </SmoothScroll> */}
+      <Toaster />
     </HelmetProvider>
   </React.StrictMode>
 );
