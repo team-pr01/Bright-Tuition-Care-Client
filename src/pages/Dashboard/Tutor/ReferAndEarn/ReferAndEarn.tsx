@@ -4,6 +4,7 @@ import Button from "../../../../components/Reusable/Button/Button";
 import Heading from "../../../../components/Reusable/Heading/Heading";
 import Modal from "../../../../components/Reusable/Modal/Modal";
 import AddLeadFormModal from "../../../../components/Dashboard/Tutor/AddLeadFormModal/AddLeadFormModal";
+import { Link } from "react-router-dom";
 
 const ReferAndEarn = () => {
   const [isFormModalOpen, setIsFormModalOpen] = useState<boolean>(false);
@@ -57,27 +58,37 @@ const ReferAndEarn = () => {
         ))}
       </div>
 
-      <div className="flex items-center gap-4">
+      <div className="flex items-center justify-between w-full">
+        <Link to={"/dashboard/tutor/my-leads"}>
         <Button
           type="button"
-          label="Copy Referral Link"
-          variant="tertiary"
-          className="py-2 lg:py-2 w-full flex items-center justify-center"
-          iconWithoutBg={ICONS.copy}
-        />
-        <Button
-          type="button"
-          label="Add New lead +"
+          label="My Leads"
           variant="quaternary"
           className="py-2 lg:py-2 w-full flex items-center justify-center"
-          onClick={() => setIsFormModalOpen(true)}
         />
+        </Link>
+        <div className="flex items-center gap-4">
+          <Button
+            type="button"
+            label="Copy Referral Link"
+            variant="tertiary"
+            className="py-2 lg:py-2 w-full flex items-center justify-center"
+            iconWithoutBg={ICONS.copy}
+          />
+          <Button
+            type="button"
+            label="Add New Lead +"
+            variant="quaternary"
+            className="py-2 lg:py-2 w-full flex items-center justify-center"
+            onClick={() => setIsFormModalOpen(true)}
+          />
+        </div>
       </div>
 
       <Modal
         isModalOpen={isFormModalOpen}
         setIsModalOpen={setIsFormModalOpen}
-        width="w-[95%] md:w-[80%] lg:w-[60%] xl:w-[40%] 2xl:w-[25%] h-fit overflow-y-auto"
+        width="w-[95%] md:w-[80%] lg:w-[60%] xl:w-[40%] 2xl:w-[30%] h-[90vh] 2xl:h-fit overflow-y-auto"
       >
         <AddLeadFormModal />
       </Modal>

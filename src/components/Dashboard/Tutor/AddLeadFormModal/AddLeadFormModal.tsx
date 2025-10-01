@@ -5,9 +5,10 @@ import Button from "../../../Reusable/Button/Button";
 
 type TFormData = {
   class: string;
-  phoneNumber: string;
-  address: string;
+  guardianPhoneNumber: string;
+  guardianAddress: string;
   details: string;
+  paymentNumber: string;
 };
 
 const AddLeadFormModal = () => {
@@ -40,9 +41,10 @@ const AddLeadFormModal = () => {
         {/* Guardian/Student Number */}
         <TextInput
           label="Guardian/Student Number"
+          type="number"
           placeholder="Enter guardian/student number"
-          error={errors.phoneNumber}
-          {...register("phoneNumber", {
+          error={errors.guardianPhoneNumber}
+          {...register("guardianPhoneNumber", {
             required: "Guardian/Student number is required",
           })}
         />
@@ -50,8 +52,8 @@ const AddLeadFormModal = () => {
         <TextInput
           label="Address"
           placeholder="Enter address"
-          error={errors.address}
-          {...register("address", {
+          error={errors.guardianAddress}
+          {...register("guardianAddress", {
             required: "Address is required",
           })}
         />
@@ -64,6 +66,19 @@ const AddLeadFormModal = () => {
             required: "Details is required",
           })}
         />
+        <div>
+          {/*Bkash/Nagad Personal Number */}
+        <TextInput
+          label="Bkash/Nagad Personal Number"
+          type="number"
+          placeholder="Enter your bkash/nagad personal number"
+          error={errors.paymentNumber}
+          {...register("paymentNumber", {
+            required: "Payment number is required",
+          })}
+        />
+        <p className="italic text-[13px] text-orange-600 mt-2">**Please add your preferred payment method. Once your lead is confirmed, we will contact you and process your payment accordingly.</p>
+        </div>
         <Button
           type="submit"
           label="Submit"

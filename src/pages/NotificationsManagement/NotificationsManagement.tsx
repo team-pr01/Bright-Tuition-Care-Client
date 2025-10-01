@@ -27,8 +27,8 @@ const NotificationsManagement = () => {
           </Link>
       </div>
     <div className="flex flex-col gap-4">
-      {[1, 2, 3].map((notification) => (
-        <NotificationCard />
+      {[1, 2, 3].map((notification, index:number) => (
+        <NotificationCard key={index} />
       ))}
     </div>
    </div>

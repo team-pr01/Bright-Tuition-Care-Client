@@ -42,6 +42,7 @@ import Staffs from "../pages/Dashboard/Admin/Staffs/Staffs";
 import TestimonialManagement from "../pages/Dashboard/Admin/TestimonialManagement/TestimonialManagement";
 import NotificationsManagement from "../pages/NotificationsManagement/NotificationsManagement";
 import SendNotification from "../pages/NotificationsManagement/SendNotification";
+import MyLeads from "../pages/Dashboard/Tutor/MyLeads/MyLeads";
 
 export const router = createBrowserRouter([
   {
@@ -135,6 +136,10 @@ export const router = createBrowserRouter([
       {
         path: "refer-and-earn",
         element: <ReferAndEarn />,
+      },
+      {
+        path: "my-leads",
+        element: <MyLeads />,
       },
       {
         path: "terms-and-conditions",
