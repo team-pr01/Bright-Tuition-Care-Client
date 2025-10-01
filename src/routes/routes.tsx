@@ -43,6 +43,7 @@ import TestimonialManagement from "../pages/Dashboard/Admin/TestimonialManagemen
 import NotificationsManagement from "../pages/NotificationsManagement/NotificationsManagement";
 import SendNotification from "../pages/NotificationsManagement/SendNotification";
 import MyLeads from "../pages/Dashboard/Tutor/MyLeads/MyLeads";
+import LeadManagement from "../pages/Dashboard/Admin/LeadManagement/LeadManagement";
 
 export const router = createBrowserRouter([
   {
@@ -287,6 +288,10 @@ export const router = createBrowserRouter([
       {
         path: "send-notification",
         element: <SendNotification />,
+      },
+      {
+        path: "lead-management",
+        element: <LeadManagement />,
       },
       {
         path: "settings",
