@@ -46,6 +46,7 @@ import MyLeads from "../pages/Dashboard/Tutor/MyLeads/MyLeads";
 import LeadManagement from "../pages/Dashboard/Admin/LeadManagement/LeadManagement";
 import TuitionRequest from "../pages/TuitionRequest/TuitionRequest";
 import ConfirmationLetters from "../pages/Dashboard/Tutor/ConfirmationLetters/ConfirmationLetters";
+import Invoice from "../pages/Dashboard/Tutor/Invoice/Invoice";
 
 export const router = createBrowserRouter([
   {
@@ -159,6 +160,10 @@ export const router = createBrowserRouter([
       {
         path: "confirmation-letters",
         element: <ConfirmationLetters />,
+      },
+      {
+        path: "invoice",
+        element: <Invoice />,
       },
       {
         path: "settings",

@@ -1,7 +1,13 @@
 import React from "react";
 import { BsBriefcase } from "react-icons/bs";
 import { FaChalkboardTeacher, FaUserShield } from "react-icons/fa";
-import { FiCreditCard, FiInfo, FiStar, FiUserPlus } from "react-icons/fi";
+import {
+  FiCreditCard,
+  FiFileText,
+  FiInfo,
+  FiStar,
+  FiUserPlus,
+} from "react-icons/fi";
 import { HiOutlineUser } from "react-icons/hi";
 import { IoNotificationsOutline } from "react-icons/io5";
 import {
@@ -25,7 +31,7 @@ interface DashboardLink {
   icon: React.ReactNode;
 }
 
-const user = {role:"guardian"}
+const user = { role: "guardian" };
 
 export const tutorDashboardLinks: DashboardLink[] = [
   {
@@ -52,6 +58,11 @@ export const tutorDashboardLinks: DashboardLink[] = [
     label: "Payment",
     path: "/dashboard/tutor/payment",
     icon: <LuCreditCard />,
+  },
+  {
+    label: "Invoice",
+    path: "/dashboard/tutor/invoice",
+    icon: <FiFileText />,
   },
   {
     label: "Confirmation Letters",
@@ -184,12 +195,16 @@ export const adminDashboardLinks: DashboardLink[] = [
 export const otherLinks: DashboardLink[] = [
   {
     label: "Share The App",
-    path: `/dashboard/${user?.role === "tutor" ? "tutor" : "guardian"}/share-app`,
+    path: `/dashboard/${
+      user?.role === "tutor" ? "tutor" : "guardian"
+    }/share-app`,
     icon: <LuShare2 />,
   },
   {
     label: "Terms & Conditions",
-    path: `/dashboard/${user?.role === "tutor" ? "tutor" : "guardian"}/terms-and-conditions`,
+    path: `/dashboard/${
+      user?.role === "tutor" ? "tutor" : "guardian"
+    }/terms-and-conditions`,
     icon: <LuFileText />,
   },
 ];
