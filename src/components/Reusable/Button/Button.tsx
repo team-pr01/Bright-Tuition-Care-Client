@@ -1,8 +1,9 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React from "react";
 import { twMerge } from "tailwind-merge";
 
 interface ButtonProps {
-  label?: string;
+  label?: any;
   variant?: "primary" | "secondary" | "tertiary" | "quaternary" | string;
   onClick?: () => void;
   icon?: React.ReactNode;

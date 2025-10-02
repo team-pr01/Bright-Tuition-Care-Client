@@ -48,6 +48,7 @@ import TuitionRequest from "../pages/TuitionRequest/TuitionRequest";
 import ConfirmationLetters from "../pages/Dashboard/Tutor/ConfirmationLetters/ConfirmationLetters";
 import Invoice from "../pages/Dashboard/Tutor/Invoice/Invoice";
 import InvoiceManagement from "../pages/Dashboard/Admin/InvoiceManagement/InvoiceManagement";
+import ConfirmationLetterManagement from "../pages/Dashboard/Admin/ConfirmationLetterManagement/ConfirmationLetterManagement";
 
 export const router = createBrowserRouter([
   {
@@ -296,6 +297,10 @@ export const router = createBrowserRouter([
       {
         path: "invoice-management",
         element: <InvoiceManagement />,
+      },
+      {
+        path: "confirmation-letters-management",
+        element: <ConfirmationLetterManagement />,
       },
       {
         path: "notice-board-management",

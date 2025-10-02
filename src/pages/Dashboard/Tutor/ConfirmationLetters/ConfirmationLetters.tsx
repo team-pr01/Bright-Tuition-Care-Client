@@ -1,10 +1,11 @@
+/* eslint-disable react-refresh/only-export-components */
 import { useState } from "react";
 import ConfirmationLetterCard from "../../../../components/Dashboard/Tutor/ConfirmationLettersPage/ConfirmationLetterCard/ConfirmationLetterCard";
 import Modal from "../../../../components/Reusable/Modal/Modal";
 import type { TConfirmationLetter } from "../../../../types/confirmationLetter.types";
 import ConfirmationLetterPreview from "../../../../components/Dashboard/Tutor/ConfirmationLettersPage/ConfirmationLetterPreview/ConfirmationLetterPreview";
 
-const mockData: TConfirmationLetter[] = [
+export const mockData: TConfirmationLetter[] = [
   {
     _id: "1234",
     jobId: "JOB-101",
