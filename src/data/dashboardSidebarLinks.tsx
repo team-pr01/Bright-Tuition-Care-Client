@@ -102,6 +102,7 @@ export const guardianDashboardLinks: DashboardLink[] = [
     path: "/dashboard/guardian/hire-a-tutor",
     icon: <LuUserRoundSearch />,
   },
+
   {
     label: "Posted Jobs",
     path: "/dashboard/guardian/posted-jobs",
@@ -116,6 +117,11 @@ export const guardianDashboardLinks: DashboardLink[] = [
     label: "Payment",
     path: "/dashboard/guardian/payment",
     icon: <LuCreditCard />,
+  },
+  {
+    label: "Confirmation Letters",
+    path: "/dashboard/guardian/confirmation-letters",
+    icon: <MdOutlineMail />,
   },
   {
     label: "Settings",

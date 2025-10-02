@@ -206,6 +206,10 @@ export const router = createBrowserRouter([
         element: <HireATutor />,
       },
       {
+        path: "confirmation-letters",
+        element: <ConfirmationLetters />,
+      },
+      {
         path: "how-it-works",
         element: <StudentSteps />,
       },
