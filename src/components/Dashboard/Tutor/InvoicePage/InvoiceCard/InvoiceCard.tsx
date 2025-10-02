@@ -7,6 +7,7 @@ type InvoiceCardProps = {
 };
 
 const InvoiceCard = ({ invoice, onSelect }: InvoiceCardProps) => {
+  console.log(invoice.status);
   return (
     <div className="border border-neutral-55/50 p-4 rounded-lg bg-white flex justify-between">
       <div className="flex flex-col gap-2">
@@ -28,8 +29,8 @@ const InvoiceCard = ({ invoice, onSelect }: InvoiceCardProps) => {
 
       <div
         className={`${
-          invoice.status === "Paid" ? "bg-green-600" : "bg-red-500"
-        } font-medium px-3 py-1 rounded-md text-sm text-white h-fit`}
+          invoice.status === "paid" ? "bg-green-600" : "bg-red-500"
+        } font-medium px-3 py-1 rounded-md text-sm text-white h-fit capitalize`}
       >
         {invoice.status}
       </div>

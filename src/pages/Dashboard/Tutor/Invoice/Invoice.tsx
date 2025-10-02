@@ -7,7 +7,7 @@ const invoices = [
   {
     id: "INV-101",
     charge: 2000,
-    status: "Due",
+    status: "due",
     issueDate: "2025-10-01",
     dueDate: "2025-10-10",
     student: {
@@ -21,7 +21,7 @@ const invoices = [
   {
     id: "INV-102",
     charge: 1800,
-    status: "Paid",
+    status: "paid",
     issueDate: "2025-09-20",
     paidDate: "2025-09-25",
     student: {

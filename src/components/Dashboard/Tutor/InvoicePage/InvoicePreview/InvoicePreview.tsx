@@ -13,6 +13,7 @@ const InvoicePreview = ({
   invoice: any;
   onBack: () => void;
 }) => {
+  const user = { role: "admin" };
   const [isPaymentModalOpen, setIsPaymentModalOpen] = useState<boolean>(false);
   const [paymentModalType, setPaymentModalType] = useState<
     "selectPaymentMethod" | "addPaymentDetails" | "paymentSuccess"
@@ -32,17 +33,22 @@ const InvoicePreview = ({
       </button>
 
       {/* Payment Helpline */}
-      <div className="border border-neutral-55/50 p-3 mb-6 rounded">
-        <p className="font-semibold">Payment Helpline</p>
-        <div className="flex items-center gap-1 mt-1">
-          <p className="font-semibold">Contact:</p>
+      {user?.role !== "admin" && (
+        <div className="border border-neutral-55/50 p-3 mb-6 rounded">
+          <p className="font-semibold">Payment Helpline</p>
+          <div className="flex items-center gap-1 mt-1">
+            <p className="font-semibold">Contact:</p>
 
-          <a href="tel:01810786588" className="hover:underline text-primary-10">
-            {" "}
-            01810-786588
-          </a>
+            <a
+              href="tel:01810786588"
+              className="hover:underline text-primary-10"
+            >
+              {" "}
+              01810-786588
+            </a>
+          </div>
         </div>
-      </div>
+      )}
 
       {/* Bill To Section */}
       <div className="border border-neutral-55/50 rounded p-4">
@@ -75,7 +81,7 @@ const InvoicePreview = ({
             <span className="font-semibold">Payment Status:</span>{" "}
             <span
               className={`${
-                invoice.status === "Paid" ? "text-green-600" : "text-red-500"
+                invoice.status === "paid" ? "text-green-600" : "text-red-500"
               } font-semibold text-sm h-fit w-fit`}
             >
               {invoice.status}
@@ -106,7 +112,7 @@ const InvoicePreview = ({
           </p>
         </div>
 
-        {invoice.status === "Due" && (
+        {invoice?.status === "due" && user.role === "tutor" && (
           <div className="mt-6 flex items-center justify-center">
             <Button
               type="submit"

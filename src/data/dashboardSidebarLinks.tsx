@@ -172,6 +172,16 @@ export const adminDashboardLinks: DashboardLink[] = [
     icon: <FiCreditCard />,
   },
   {
+    label: "Invoice",
+    path: "/dashboard/admin/invoice-management",
+    icon: <FiFileText />,
+  },
+  {
+    label: "Confirmation Letters",
+    path: "/dashboard/admin/confirmation-letters-management",
+    icon: <MdOutlineMail />,
+  },
+  {
     label: "Notice Board",
     path: "/dashboard/admin/notice-board-management",
     icon: <FiInfo />,

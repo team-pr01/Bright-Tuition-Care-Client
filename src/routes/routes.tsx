@@ -47,6 +47,7 @@ import LeadManagement from "../pages/Dashboard/Admin/LeadManagement/LeadManageme
 import TuitionRequest from "../pages/TuitionRequest/TuitionRequest";
 import ConfirmationLetters from "../pages/Dashboard/Tutor/ConfirmationLetters/ConfirmationLetters";
 import Invoice from "../pages/Dashboard/Tutor/Invoice/Invoice";
+import InvoiceManagement from "../pages/Dashboard/Admin/InvoiceManagement/InvoiceManagement";
 
 export const router = createBrowserRouter([
   {
@@ -291,6 +292,10 @@ export const router = createBrowserRouter([
       {
         path: "payments-management",
         element: <PaymentsManagement />,
+      },
+      {
+        path: "invoice-management",
+        element: <InvoiceManagement />,
       },
       {
         path: "notice-board-management",
