@@ -15,6 +15,7 @@ import {
   LuFileText,
   LuUserRoundSearch,
 } from "react-icons/lu";
+import { MdOutlineMail } from "react-icons/md";
 import { RiFacebookFill } from "react-icons/ri";
 import { TbSettingsQuestion } from "react-icons/tb";
 
@@ -51,6 +52,11 @@ export const tutorDashboardLinks: DashboardLink[] = [
     label: "Payment",
     path: "/dashboard/tutor/payment",
     icon: <LuCreditCard />,
+  },
+  {
+    label: "Confirmation Letters",
+    path: "/dashboard/tutor/confirmation-letters",
+    icon: <MdOutlineMail />,
   },
   {
     label: "Settings",

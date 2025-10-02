@@ -50,7 +50,7 @@ const MyLeads = () => {
       guardianAddress: "Banani, Dhaka",
       details: "Looking for an English tutor for his son.",
       createdAt: "2025-09-15",
-      paymentMethod : "bKash",
+      paymentMethod: "bKash",
       paymentNumber: "+880 1888 112233",
       status: "confirmed",
     },
@@ -71,7 +71,7 @@ const MyLeads = () => {
       guardianAddress: "Gulshan, Dhaka",
       details: "Searching for a tutor in general subjects.",
       createdAt: "2025-09-18",
-      paymentMethod : "Nagad",
+      paymentMethod: "Nagad",
       paymentNumber: "+880 1999 445566",
       status: "confirmed",
     },
@@ -91,7 +91,9 @@ const MyLeads = () => {
   const tableData = myLeads.map((lead) => ({
     ...lead,
     paymentNumber: lead?.paymentNumber ? (
-      <span className="text-gray-700">{lead?.paymentMethod}, {lead?.paymentNumber}</span>
+      <span className="text-gray-700">
+        {lead?.paymentMethod}, {lead?.paymentNumber}
+      </span>
     ) : (
       <button
         onClick={() => {
