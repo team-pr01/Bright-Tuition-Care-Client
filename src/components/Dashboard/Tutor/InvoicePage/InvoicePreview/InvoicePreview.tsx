@@ -1,6 +1,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { BsArrowLeft } from "react-icons/bs";
 import Button from "../../../../Reusable/Button/Button";
+import Modal from "../../../../Reusable/Modal/Modal";
+import { useState } from "react";
+import SelectPaymentMethod from "../../../Payment/SelectPaymentMethod/SelectPaymentMethod";
+import SelectedPaymentMethod from "../../../Payment/SelectedPaymentMethod/SelectedPaymentMethod";
 
 const InvoicePreview = ({
   invoice,
@@ -9,6 +13,14 @@ const InvoicePreview = ({
   invoice: any;
   onBack: () => void;
 }) => {
+  const [isPaymentModalOpen, setIsPaymentModalOpen] = useState<boolean>(false);
+  const [paymentModalType, setPaymentModalType] = useState<
+    "selectPaymentMethod" | "addPaymentDetails" | "paymentSuccess"
+  >("selectPaymentMethod");
+
+  const [selectedPaymentMethod, setSelectedPaymentMethod] = useState<
+    "bankTransfer" | "bKash" | "nagad" | string
+  >("");
   return (
     <div className="bg-white shadow-md border-primary-10/30 rounded-2xl p-5 lg:p-7 max-w-[600px] mx-auto font-Nunito">
       {/* Back Button */}
@@ -90,7 +102,7 @@ const InvoicePreview = ({
             <span className="font-semibold">Invoice ID:</span> {invoice.id}
           </p>
           <p className="font-bold mt-2">
-            <span className="font-semibold">Amount:</span> ৳ {invoice.charge}
+            <span className="font-semibold">Amount:</span> ৳{invoice.charge}
           </p>
         </div>
 
@@ -101,10 +113,34 @@ const InvoicePreview = ({
               label="Pay Now"
               variant="primary"
               className="py-2 lg:py-2"
+              onClick={() => {
+                setIsPaymentModalOpen(true);
+                setPaymentModalType("selectPaymentMethod");
+              }}
             />
           </div>
         )}
       </div>
+
+      <Modal
+        isModalOpen={isPaymentModalOpen}
+        setIsModalOpen={setIsPaymentModalOpen}
+        width="w-[90%] md:w-auto max-h-[600px] overflow-y-auto"
+      >
+        {paymentModalType === "selectPaymentMethod" ? (
+          <SelectPaymentMethod
+            selectedPaymentMethod={selectedPaymentMethod}
+            setSelectedPaymentMethod={setSelectedPaymentMethod}
+            setPaymentModalType={setPaymentModalType}
+          />
+        ) : (
+          <SelectedPaymentMethod
+            selectedPaymentMethod={selectedPaymentMethod}
+            setPaymentModalType={setPaymentModalType}
+            amount={invoice?.charge}
+          />
+        )}
+      </Modal>
     </div>
   );
 };
