@@ -61,7 +61,6 @@ const TutorDashboardHome = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           <div className="bg-white rounded-2xl border border-primary-40/10 p-5 flex flex-col md:flex-row items-center md:items-start gap-3 md:gap-6">
             {/* Progress Circle */}
-           {/* Progress Circle */}
             <div className="relative size-32">
               <svg className="size-full transform -rotate-90">
                 {/* Background Fill */}
@@ -160,7 +159,7 @@ const TutorDashboardHome = () => {
             titleColor={"text-primary-10"}
             valueColor={"text-primary-10"}
             btnLabel={"Confirm Now"}
-            path={""}
+            path={"/dashboard/tutor/confirmation-letters"}
           />
          
           <DashboardDataCard
@@ -171,7 +170,7 @@ const TutorDashboardHome = () => {
             titleColor={"text-primary-10/80"}
             valueColor={"text-primary-10"}
             btnLabel={"Pay Now"}
-            path={""}
+            path={"/dashboard/tutor/invoice"}
           />
         </div>
 
