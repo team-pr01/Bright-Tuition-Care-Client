@@ -12,40 +12,76 @@ import { useRef } from "react";
 
 const categories = [
   {
-    image: IMAGES.service1,
+    image: IMAGES.admissionTest,
     title: "Admission Test",
     description:
-      "Get expert tutors for Dakhil, Alim, and academic Islamic studies.",
+      "Tutors for university, medical, engineering, and institutional entrance exams.",
   },
   {
-    image: IMAGES.service2,
-    title: "Madrasa Medium",
+    image: IMAGES.arbi,
+    title: "Madarsa Medium",
     description:
-      "Get expert tutors for Dakhil, Alim, and academic Islamic studies.",
+      "Expert tutors for Dakhil, Alim, and academic Islamic studies.",
   },
   {
-    image: IMAGES.service3,
+    image: IMAGES.banglaMedium,
+    title: "Bangla Medium",
+    description:
+      "Academic support for all subjects (Class 1-12) following the national curriculum.",
+  },
+  {
+    image: IMAGES.drawing,
+    title: "Drawing & Art",
+    description:
+      "Lessons in drawing, painting, sketching, and various creative art forms.",
+  },
+  {
+    image: IMAGES.englishMedium,
     title: "English Medium",
     description:
-      "Tutors for Edexcel, Cambridge (O/A Levels), and IB curriculum.",
+      "Tutors for Edexcel, Cambridge (O/A Levels), and IB curriculum subjects.",
   },
   {
-    image: IMAGES.service3,
-    title: "English Medium",
+    image: IMAGES.englishVersion,
+    title: "English Version",
     description:
-      "Tutors for Edexcel, Cambridge (O/A Levels), and IB curriculum.",
+      "Academic support for all grades based on the national curriculum in English.",
   },
   {
-    image: IMAGES.service3,
-    title: "English Medium",
+    image: IMAGES.languageLearning,
+    title: "Language Learning",
     description:
-      "Tutors for Edexcel, Cambridge (O/A Levels), and IB curriculum.",
+      "Master new languages like English, French, Spanish, Japanese, and more.",
   },
   {
-    image: IMAGES.service3,
-    title: "English Medium",
+    image: IMAGES.professionalSkillDevelopment,
+    title: "Professional Skills",
     description:
-      "Tutors for Edexcel, Cambridge (O/A Levels), and IB curriculum.",
+      "Courses in software, coding, digital marketing, and business for career growth.",
+  },
+  {
+    image: IMAGES.specialChildEducation,
+    title: "Special Education",
+    description:
+      "Tailored education and guidance for children with special needs.",
+  },
+  {
+    image: IMAGES.specialSkillDevelopment,
+    title: "Special Skills & Hobbies",
+    description:
+      "Lessons for non-academic hobbies like music, photography, and cooking.",
+  },
+  {
+    image: IMAGES.testPreparation,
+    title: "Standardized Test Prep",
+    description:
+      "Preparation for international tests like SAT, GRE, GMAT, IELTS, and TOEFL.",
+  },
+  {
+    image: IMAGES.uniHelp,
+    title: "University Help",
+    description:
+      "Specialized tutoring and project guidance for undergraduate and graduate courses.",
   },
 ];
 
@@ -80,10 +116,6 @@ const Services = () => {
             disableOnInteraction: false,
           }}
           pagination={{ clickable: true }}
-          // navigation={{
-          //   prevEl: prevRef.current,
-          //   nextEl: nextRef.current,
-          // }}
           onBeforeInit={(swiper) => {
             if (
               swiper.params.navigation &&
@@ -100,8 +132,8 @@ const Services = () => {
             1024: { slidesPerView: 3 },
           }}
         >
-          {categories.map((category, index) => (
-            <SwiperSlide key={index}>
+          {categories.map((category) => (
+            <SwiperSlide key={category?.title}>
               <ServiceCard
                 image={category.image}
                 title={category.title}

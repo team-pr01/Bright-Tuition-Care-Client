@@ -25,9 +25,18 @@ import appStore from "../assets/DownloadStore/app-store.svg"
 import playStore from "../assets/DownloadStore/play-store.svg"
 
 // service categories
-import service2 from "../assets/Images/serviceCatagories/service2.png";
-import service1 from "../assets/Images/serviceCatagories/service1.png";
-import service3 from "../assets/Images/serviceCatagories/service3.png"; 
+import admissionTest from "../assets/Images/serviceCatagories/Admission-Test.png";
+import arbi from "../assets/Images/serviceCatagories/Arbi.png";
+import banglaMedium from "../assets/Images/serviceCatagories/Bangla-Medium.png";
+import drawing from "../assets/Images/serviceCatagories/Drawing.png";
+import englishMedium from "../assets/Images/serviceCatagories/English-Medium.png";
+import englishVersion from "../assets/Images/serviceCatagories/English-Version.png";
+import languageLearning from "../assets/Images/serviceCatagories/Language-Learning.png";
+import professionalSkillDevelopment from "../assets/Images/serviceCatagories/Professional-Skill- Development.png";
+import specialChildEducation from "../assets/Images/serviceCatagories/Special-Child-Education.png";
+import specialSkillDevelopment from "../assets/Images/serviceCatagories/Special-Skill-Develepment.png";
+import testPreparation from "../assets/Images/serviceCatagories/Test-Preparation.png";
+import uniHelp from "../assets/Images/serviceCatagories/Uni-Help.png";
 import termsAndConditionHero from "../assets/Images/terms-and-condition-hero.webp"; 
 
 // students steps
@@ -128,9 +137,18 @@ export const IMAGES = {
   appDownload,
   stepLine,
 
-  service1,
-  service2,
-  service3,
+  admissionTest,
+  arbi,
+  banglaMedium,
+  drawing,
+  englishMedium,
+  englishVersion, 
+  languageLearning,
+  professionalSkillDevelopment,
+  specialChildEducation,
+  specialSkillDevelopment,
+  testPreparation,
+  uniHelp,
   dummyAvatar,
   contactUs,
   teacher,
