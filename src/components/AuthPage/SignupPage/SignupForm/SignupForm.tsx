@@ -31,7 +31,12 @@ const SignupForm = ({
   activeTab: string;
   setActiveTab: React.Dispatch<React.SetStateAction<string>>;
 }) => {
-  const [checked, setChecked] = useState(false);
+  const [checked, setChecked] = useState<boolean>(false);
+  const [fieldErrors, setFieldErrors] = useState<any>({
+    gender: "",
+    city: "",
+    area: "",
+  });
   const [signup, { isLoading }] = useSignupMutation();
   const navigate = useNavigate();
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -57,6 +62,8 @@ const SignupForm = ({
   const password = watch("password");
   const [areaOptions, setAreaOptions] = useState<string[]>([]);
   const selectedCity = watch("city");
+  const selectedGender = watch("gender");
+  const selectedArea = watch("area");
 
   // Update area options when city changes
   useEffect(() => {
@@ -75,6 +82,24 @@ const SignupForm = ({
   }, [selectedCity, setValue]);
 
   const handleSignup = async (data: TFormData) => {
+      if (!selectedCity) {
+    setFieldErrors((prev:any) => ({
+      ...prev,
+      city: "City is required",
+    }));
+  }
+    if (!selectedArea) {
+     setFieldErrors((prev:any) => ({
+      ...prev,
+        area: "Area is required",
+      }));
+    }
+    if (!selectedGender) {
+      setFieldErrors((prev:any)=>({
+        ...prev,
+        gender: "Gender is required",
+      }));
+    }
     try {
       await signup(data).unwrap();
       navigate("/signin");
@@ -149,6 +174,7 @@ const SignupForm = ({
             options={["Male", "Female", "Other"]}
             onChange={(value) => setValue("gender", value.toLocaleLowerCase())}
             isRequired={true}
+            error={fieldErrors.gender}
           />
 
           {/* City Dropdown */}
@@ -159,6 +185,7 @@ const SignupForm = ({
             value={selectedCity}
             onChange={(value) => setValue("city", value)}
             isRequired={true}
+            error={fieldErrors.city}
           />
 
           {/* Area Dropdown */}
@@ -169,6 +196,7 @@ const SignupForm = ({
             value={watch("area")}
             onChange={(value) => setValue("area", value)}
             isRequired={true}
+            error={fieldErrors.area}
           />
 
           <PasswordInput
