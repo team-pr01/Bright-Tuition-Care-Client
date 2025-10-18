@@ -76,7 +76,7 @@ const GuardianDashboardHome = () => {
             value={"2"}
             titleColor={"text-primary-10"}
             valueColor={"text-primary-10"}
-            btnLabel={"Confirm Now"}
+            btnLabel={"View All"}
             path={"/dashboard/guardian/confirmation-letters"}
           />
         </div>

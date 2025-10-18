@@ -151,6 +151,7 @@ const LeadManagement = () => {
         onSearch={handleSearch}
         limit={limit}
         setLimit={setLimit}
+        selectedCity={null}
       />
     </div>
   );

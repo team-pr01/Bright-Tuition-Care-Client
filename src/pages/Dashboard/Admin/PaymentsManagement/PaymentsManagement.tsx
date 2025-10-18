@@ -28,6 +28,7 @@ const PaymentsManagement = () => {
     { key: "paidFor", label: "Paid For" },
     { key: "date", label: "Date" },
     { key: "paymentProof", label: "Payment Proof" },
+    { key: "status", label: "Status" },
   ];
 
   // Mock data
@@ -42,7 +43,7 @@ const PaymentsManagement = () => {
       paidFor: "Platform Charge",
       date: "2025-09-28",
       paymentProof:
-        "https://www.google.com/imgres?q=razorpay%20test%20card&imgurl=https%3A%2F%2Frazorpay.com%2Fdocs%2Fbuild%2Fbrowser%2Fassets%2Fimages%2Fsubscriptions-test-6.jpg&imgrefurl=https%3A%2F%2Frazorpay.com%2Fdocs%2Fpayments%2Fsubscriptions%2Ftest%2F&docid=_bGcD4V6yRgs3M&tbnid=Yb8RPRRzPAhZ-M&vet=12ahUKEwicl5WOrv6PAxX-SWwGHXMSBg0QM3oECCQQAA..i&w=551&h=358&hcb=2&ved=2ahUKEwicl5WOrv6PAxX-SWwGHXMSBg0QM3oECCQQAA",
+        "https://www.google.com/imgres?q=razorpay%20test%20card&imgurl=https%3A%2F%2Fd6xcmfyh68wv8.cloudfront.net%2Fblog-content%2Fuploads%2F2025%2F08%2Fhugg1-1-770x515.png&imgrefurl=https%3A%2F%2Frazorpay.com%2Fblog%2Fdiscover-the-ultimate-card-experience-with-razorpay%2F&docid=nOkvSRlOhBAv_M&tbnid=xikWFmkbNE2MaM&vet=12ahUKEwj24dLnvoiQAxXHxzgGHfDxHHQQM3oECBcQAA..i&w=770&h=515&hcb=2&ved=2ahUKEwj24dLnvoiQAxXHxzgGHfDxHHQQM3oECBcQAA",
       status: "Pending",
     },
     {
@@ -120,6 +121,7 @@ const PaymentsManagement = () => {
         limit={limit}
         setLimit={setLimit}
         children={statusFilterDropdown}
+        selectedCity={null}
       />
 
       {isProofModalOpen && selectedPaymentProof && (

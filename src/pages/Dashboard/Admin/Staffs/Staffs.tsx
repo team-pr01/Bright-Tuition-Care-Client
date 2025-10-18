@@ -117,6 +117,7 @@ const Staffs = () => {
         limit={limit}
         setLimit={setLimit}
         children={addStaffButton}
+        selectedCity={null}
       />
 
       <AddNewStaffModal

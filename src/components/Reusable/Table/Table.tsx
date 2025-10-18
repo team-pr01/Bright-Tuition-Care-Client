@@ -185,7 +185,7 @@ export default function Table<T extends Record<string, any>>({
           </select>
 
            {
-            selectedCity &&
+            selectedCity !== null &&
              <select
               value={selectedCity}
               onChange={(e) => setSelectedCity && setSelectedCity(e.target.value)}

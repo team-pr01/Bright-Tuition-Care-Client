@@ -58,7 +58,7 @@ const Tutors = () => {
       city: "Cumilla",
       area: "Cumilla Cantonment",
       registeredOn: "2025-09-16",
-      status: "Pending",
+      status: "Suspended",
       profileStatus: "Unlocked",
       imageUrl: "https://i.pravatar.cc/40?img=2",
     },

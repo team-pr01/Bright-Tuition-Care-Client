@@ -111,7 +111,7 @@ const AdminDashboardHome = () => {
   const jobsGradientStop2 = "#ffffff";
 
   return (
-    <div className="font-Nunito flex flex-col gap-5">
+    <div className="font-Nunito flex flex-col gap-6">
       {/* Overview Cards */}
       <div className="grid grid-cols-5 gap-6">
         {/* Total Guardians */}

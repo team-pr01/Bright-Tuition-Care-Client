@@ -13,7 +13,7 @@ const InvoicePreview = ({
   invoice: any;
   onBack: () => void;
 }) => {
-  const user = { role: "admin" };
+  const user = { role: "tutor" };
   const [isPaymentModalOpen, setIsPaymentModalOpen] = useState<boolean>(false);
   const [paymentModalType, setPaymentModalType] = useState<
     "selectPaymentMethod" | "addPaymentDetails" | "paymentSuccess"
@@ -23,7 +23,7 @@ const InvoicePreview = ({
     "bankTransfer" | "bKash" | "nagad" | string
   >("");
   return (
-    <div className="bg-white shadow-md border-primary-10/30 rounded-2xl p-5 lg:p-7 max-w-[600px] mx-auto font-Nunito">
+    <div className="bg-white shadow-md border border-primary-10/30 rounded-2xl p-5 lg:p-7 max-w-[600px] mx-auto font-Nunito">
       {/* Back Button */}
       <button
         onClick={onBack}
