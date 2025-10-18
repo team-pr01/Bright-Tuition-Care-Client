@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import AuthHeading from "../../../Reusable/AuthHeading/AuthHeading";
@@ -5,10 +6,12 @@ import RoleTab from "./RoleTab";
 import TextInput from "../../../Reusable/TextInput/TextInput";
 import SelectDropdownWithSearch from "../../../Reusable/SelectDropdownWithSearch/SelectDropdownWithSearch";
 import PasswordInput from "../../../Reusable/PasswordInput/PasswordInput";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Button from "../../../Reusable/Button/Button";
 import { ICONS } from "../../../../assets";
 import { filterData } from "../../../../constants/filterData";
+import { useSignupMutation } from "../../../../redux/Features/Auth/authApi";
+import toast from "react-hot-toast";
 
 type TFormData = {
   name: string;
@@ -29,7 +32,8 @@ const SignupForm = ({
   setActiveTab: React.Dispatch<React.SetStateAction<string>>;
 }) => {
   const [checked, setChecked] = useState(false);
-
+  const [signup, { isLoading }] = useSignupMutation();
+  const navigate = useNavigate();
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.checked) {
       setChecked(true);
@@ -47,10 +51,10 @@ const SignupForm = ({
     formState: { errors },
     watch,
     setValue,
+    reset,
   } = useForm<TFormData>();
 
   const password = watch("password");
-
   const [areaOptions, setAreaOptions] = useState<string[]>([]);
   const selectedCity = watch("city");
 
@@ -70,8 +74,20 @@ const SignupForm = ({
     setValue("area", "");
   }, [selectedCity, setValue]);
 
-  const handleSignup = (data: TFormData) => {
-    console.log(data);
+  const handleSignup = async (data: TFormData) => {
+    try {
+      await signup(data).unwrap();
+      navigate("/signin");
+      reset();
+    } catch (err: any) {
+      console.error("Signup failed:", err);
+      const errorMessage =
+        err?.data?.message ||
+        err?.error ||
+        "Something went wrong during signup. Please try again.";
+
+      toast.error(errorMessage);
+    }
   };
 
   return (
@@ -115,6 +131,7 @@ const SignupForm = ({
           <TextInput
             label="Phone Number"
             placeholder="Enter your phone number"
+            type="number"
             error={errors.phoneNumber}
             {...register("phoneNumber", {
               required: "Phone number is required",
@@ -130,7 +147,7 @@ const SignupForm = ({
             label="Gender"
             name="gender"
             options={["Male", "Female", "Other"]}
-            onChange={(value) => setValue("gender", value)}
+            onChange={(value) => setValue("gender", value.toLocaleLowerCase())}
             isRequired={true}
           />
 
@@ -269,10 +286,12 @@ const SignupForm = ({
         <div className="flex flex-col md:flex-row gap-5 md:gap-0 items-center justify-between">
           <Button
             type="submit"
-            label="Sign Up"
+            label={isLoading ? "Signing Up..." : "Sign Up"}
             variant="primary"
             icon={ICONS.topRightArrow}
             className="py-2 lg:py-2"
+            isDisabled={!checked || isLoading}
+            isLoading={isLoading}
           />
 
           <p className="text-sm md:text-base leading-[24px] text-neutral-20">

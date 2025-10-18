@@ -1,13 +1,13 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import type { BaseQueryApi } from '@reduxjs/toolkit/query/react';
 import type { BaseQueryFn } from '@reduxjs/toolkit/query/react'
-import { createApi, DefinitionType, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 import type { FetchArgs } from '@reduxjs/toolkit/query/react'
 import { setUser } from '../Features/Auth/authSlice';
 import type { RootState } from '../store';
 
 const baseQuery = fetchBaseQuery({
-  baseUrl: 'https://vedic-app-server.vercel.app/api/v1',
+  baseUrl: 'https://bright-tuition-care-server.onrender.com/api/v1',
   credentials : 'include',
   prepareHeaders : (headers, {getState}) => {
     const token = (getState() as RootState).auth.token;
@@ -19,11 +19,11 @@ const baseQuery = fetchBaseQuery({
   }
 });
 
-const baseQueryWithRefreshToken: BaseQueryFn<FetchArgs, BaseQueryApi, DefinitionType> = async (args, api, extraOptions) : Promise<any> => {
+const baseQueryWithRefreshToken: BaseQueryFn< string | FetchArgs, BaseQueryApi,unknown> = async (args, api, extraOptions) : Promise<any> => {
   let result = await baseQuery(args, api, extraOptions);
 
   if(result.error?.status === 401){
-    const res = await fetch('https://vedic-app-server.vercel.app/api/v1/auth/refresh-token', {
+    const res = await fetch('https://bright-tuition-care-server.onrender.com/api/v1/auth/refresh-token', {
       credentials : 'include'
     });
 
@@ -44,7 +44,7 @@ const baseQueryWithRefreshToken: BaseQueryFn<FetchArgs, BaseQueryApi, Definition
 export const baseApi = createApi({
   reducerPath: 'baseApi',
   baseQuery: baseQueryWithRefreshToken,
-  tagTypes: ["emergencies", "users", "reels", "yoga", "vastu", "temple", "organization"],
+  tagTypes: ["users", "tutors", "students", "jobs", "applications", "tutorials", "invoices"],
   endpoints: () => ({}),
 });
 
