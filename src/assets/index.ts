@@ -112,7 +112,7 @@ import threeDots from "../assets/Icons/three-dots.svg";
 import suspend from "../assets/Icons/suspend.svg";
 
 
-import aboutUs from "../assets/Images/about-us.svg";
+import aboutUs from "../assets/Images/about-us.jpg";
 import appDownload from "../assets/Images/app-download.svg"
 import heroImg from "../assets/Images/hero-img.svg";
 import heroImg1 from "../assets/Images/hero-img1.svg";
