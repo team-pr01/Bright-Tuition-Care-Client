@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React from "react";
 import { twMerge } from "tailwind-merge";
+import { ICONS } from "../../../assets";
 
 interface ButtonProps {
   label?: any;
@@ -12,6 +13,7 @@ interface ButtonProps {
   type?: "submit" | "reset" | "button";
   iconWithoutBg?: React.ReactNode;
   isDisabled?: boolean;
+  isLoading?: boolean;
 }
 
 const variantClasses: Record<string, string> = {
@@ -33,6 +35,7 @@ const Button: React.FC<ButtonProps> = ({
   type = "button",
   iconWithoutBg,
   isDisabled,
+  isLoading,
 }) => {
   const variantClass = variantClasses[variant] || variantClasses["primary"];
 
@@ -46,10 +49,14 @@ const Button: React.FC<ButtonProps> = ({
     <div className={variant ? "relative" : ""}>
       <button
         type={type}
-        disabled={isDisabled}
+        disabled={isDisabled || isLoading}
         onClick={onClick}
         className={combinedClasses}
-      >
+      >{isLoading ? <img
+              src={ICONS.loader}
+              alt="Button Icon"
+              className="size-3 lg:size-6 animate-spin"
+            />:""}
         {label}
         {icon && (
           <span

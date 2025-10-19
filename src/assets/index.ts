@@ -126,6 +126,7 @@ import forgotPassword from "../assets/Images/forgot-password.webp";
 import resetPassword from "../assets/Images/reset-password.webp";
 import verifyOtp from "../assets/Images/verify-otp.png";
 import community from "../assets/Images/community.webp";
+import loader from "../assets/Icons/loader.svg";
 
 
 export const IMAGES = {
@@ -253,4 +254,5 @@ export const ICONS = {
   applications,
   threeDots,
   suspend,
+  loader,
 };

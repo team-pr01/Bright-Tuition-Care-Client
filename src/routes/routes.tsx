@@ -5,7 +5,6 @@ import Home from "../pages/Home/Home";
 import JobBoard from "../pages/JobBoard/JobBoard";
 import Tutorial from "../pages/Tutorial/Tutorial";
 import ContactUs from "../pages/ContactUs/ContactUs";
-import Signup from "../pages/Signup/Signup";
 import SignIn from "../pages/Auth/SignIn/SignIn";
 import TermsAndConditions from "../pages/TermsAndConditions/TermsAndConditions";
 import Faq from "../pages/Faq/Faq";
@@ -49,6 +48,7 @@ import ConfirmationLetters from "../pages/Dashboard/Tutor/ConfirmationLetters/Co
 import Invoice from "../pages/Dashboard/Tutor/Invoice/Invoice";
 import InvoiceManagement from "../pages/Dashboard/Admin/InvoiceManagement/InvoiceManagement";
 import ConfirmationLetterManagement from "../pages/Dashboard/Admin/ConfirmationLetterManagement/ConfirmationLetterManagement";
+import Signup from "../pages/Auth/Signup/Signup";
 
 export const router = createBrowserRouter([
   {

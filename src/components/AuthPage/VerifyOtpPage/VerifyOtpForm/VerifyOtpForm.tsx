@@ -1,23 +1,27 @@
 import { useState, useRef, useEffect } from "react";
 import AuthHeading from "../../../Reusable/AuthHeading/AuthHeading";
 import { useForm } from "react-hook-form";
+import { useVerifyOtpMutation } from "../../../../redux/Features/Auth/authApi";
+import { useNavigate } from "react-router-dom";
 
 type TFormData = {
+  email: string;
   otp: string;
 };
 
 const VerifyOtpForm = () => {
+  const [verifyOtp ] = useVerifyOtpMutation();
+  const navigate = useNavigate();
   const {
     handleSubmit,
     formState: { errors, isSubmitting },
     setValue,
     trigger,
+    setError,
   } = useForm<TFormData>();
-
+  const email = localStorage.getItem("signupEmail");
   const [otpValues, setOtpValues] = useState(["", "", "", ""]);
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
-
-  // Timer state
   const [timeLeft, setTimeLeft] = useState(120);
   const [canResend, setCanResend] = useState(false);
 
@@ -61,14 +65,25 @@ const VerifyOtpForm = () => {
     idx: number
   ) => {
     if (e.key === "Backspace" && otpValues[idx] === "" && idx > 0) {
+    
       inputRefs.current[idx - 1]?.focus();
     }
   };
 
   const handleVerifyOtp = async (data: TFormData) => {
-    console.log("OTP entered:", data.otp);
-    // Simulate API delay
-    await new Promise((resolve) => setTimeout(resolve, 1500));
+    try {
+      const payload = {
+        email,
+        otp: data.otp,
+      }
+     const response = await verifyOtp(payload).unwrap();
+     if(response?.success){
+      navigate("/signin");
+     }
+    } catch (err) {
+      console.error("OTP verification failed:", err);
+      setError("otp", { type: "manual", message: "Invalid OTP. Please try again." });
+    }
   };
 
   const handleResend = () => {
@@ -96,9 +111,9 @@ const VerifyOtpForm = () => {
       />
 
       <div className="bg-neutral-50/10 rounded-2xl p-5 lg:p-7 flex flex-col gap-6">
-        {errors.otp && (
-          <p className="text-red-500 text-sm">{errors.otp.message}</p>
-        )}
+        {/* {errors?.otp && (
+          <p className="text-red-500 text-sm">{errors?.otp?.message}</p>
+        )} */}
 
         <div className="flex items-center justify-center gap-5 md:gap-8">
           {/* OTP Inputs */}
@@ -110,8 +125,14 @@ const VerifyOtpForm = () => {
                 inputMode="numeric"
                 maxLength={1}
                 className={`size-10 md:size-12 text-center text-xl rounded-lg border ${
-                  digit ? "border-primary-10" : "border-neutral-30"
-                } focus:outline-none focus:border-primary-10 text-primary-10 transition-colors`}
+                  digit && !errors.otp && !isSubmitting
+                    ? "border-primary-10 text-primary-10 focus:border-primary-10"
+                    : isSubmitting
+                    ? "border-primary-10 opacity-40 animate-pulse text-primary-10"
+                    : errors?.otp
+                    ? "border-red-500 focus:border-red-500 text-red-500"
+                    : "border-neutral-30 focus:border-primary-10 text-primary-10"
+                } focus:outline-none transition-colors`}
                 value={digit}
                 onChange={(e) => handleChange(e, idx)}
                 onKeyDown={(e) => handleKeyDown(e, idx)}

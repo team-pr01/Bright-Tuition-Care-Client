@@ -1,5 +1,4 @@
 import { useState, useRef, useEffect, forwardRef } from "react";
-import type { FieldError } from "react-hook-form";
 import { FiChevronDown } from "react-icons/fi";
 
 interface SingleSelectDropdownProps {
@@ -7,7 +6,7 @@ interface SingleSelectDropdownProps {
   name: string;
   options: string[];
   placeholder?: string;
-  error?: FieldError;
+  error?: string;
   value?: string;
   onChange?: (selected: string) => void;
   isRequired?: boolean;
@@ -133,7 +132,7 @@ const SelectDropdownWithSearch = forwardRef<
           )}
         </div>
 
-        {error && <span className="text-red-500 text-sm">{error.message}</span>}
+        {error && <span className="text-red-500 text-sm">{error}</span>}
       </div>
     );
   }

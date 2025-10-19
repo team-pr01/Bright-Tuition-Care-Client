@@ -1,7 +1,8 @@
-import Container from "../../components/Reusable/Container/Container";
 import { useState } from "react";
-import SignupForm from "../../components/AuthPage/SignupPage/SignupForm/SignupForm";
-import AuthSteps from "../../components/AuthPage/AuthSteps/AuthSteps";
+import Container from "../../../components/Reusable/Container/Container";
+import AuthSteps from "../../../components/AuthPage/AuthSteps/AuthSteps";
+import SignupForm from "../../../components/AuthPage/SignupPage/SignupForm/SignupForm";
+
 
 const Signup = () => {
   const [activeTab, setActiveTab] = useState<string>("Guardian/Student");
