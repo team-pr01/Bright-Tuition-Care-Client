@@ -11,7 +11,7 @@ const VerifyOtp = () => {
           <img src={IMAGES.verifyOtp} />
         </div>
         <div className="w-full lg:w-[50%]">
-          <VerifyOtpForm />
+          <VerifyOtpForm/>
         </div>
       </div>
     </Container>

@@ -37,7 +37,7 @@ const SignupForm = ({
     city: "",
     area: "",
   });
-  const [signup, { isLoading }] = useSignupMutation();
+  const [signup, { isLoading}] = useSignupMutation();
   const navigate = useNavigate();
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.checked) {
@@ -102,8 +102,10 @@ const SignupForm = ({
     }
     try {
       await signup(data).unwrap();
-      navigate("/signin");
+      localStorage.setItem("signupEmail", data.email);
+      navigate("/verify-otp" );
       reset();
+      setFieldErrors({ gender: "", city: "", area: "" });
     } catch (err: any) {
       console.error("Signup failed:", err);
       const errorMessage =
