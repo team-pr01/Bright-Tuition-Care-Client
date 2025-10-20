@@ -56,8 +56,7 @@ const categories = [
   {
     image: IMAGES.professionalSkillDevelopment,
     title: "Professional Skills",
-    description:
-      "Courses in software, coding and business for career growth.",
+    description: "Courses in software, coding and business for career growth.",
   },
   {
     image: IMAGES.specialChildEducation,

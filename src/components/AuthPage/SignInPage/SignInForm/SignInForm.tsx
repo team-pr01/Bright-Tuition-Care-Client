@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState } from "react";
 import AuthHeading from "../../../Reusable/AuthHeading/AuthHeading";
 import PasswordInput from "../../../Reusable/PasswordInput/PasswordInput";
@@ -11,6 +12,7 @@ import { useLoginMutation } from "../../../../redux/Features/Auth/authApi";
 import { useDispatch } from "react-redux";
 import { setUser } from "../../../../redux/Features/Auth/authSlice";
 import Cookies from "js-cookie";
+import toast from "react-hot-toast";
 
 type TFormData = {
   email: string;
@@ -61,9 +63,8 @@ const SignInForm = ({
         navigate("/dashboard/guardian/home");
       }
       reset();
-    } catch (err) {
-      console.error("Login failed:", err);
-      reset();
+    } catch (err :any) {
+      toast.error(err?.message || "Login failed. Please try again.");
     }
   };
   return (

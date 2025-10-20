@@ -3,8 +3,11 @@ import JobCard from "../../../../components/JobBoardPage/Jobs/JobCard";
 import { Link } from "react-router-dom";
 import { ICONS } from "../../../../assets";
 import { useState } from "react";
+import { useGetAllJobsQuery } from "../../../../redux/Features/Job/jobApi";
 
 const PostedJobs = () => {
+  const {data:allJobs, isLoading} = useGetAllJobsQuery({});
+  console.log(allJobs);
   const role = "admin"
   const [status, setStatus] = useState<string>("");
   return (

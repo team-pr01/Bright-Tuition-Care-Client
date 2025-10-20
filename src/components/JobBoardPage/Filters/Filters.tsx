@@ -3,20 +3,60 @@ import { useState, useEffect } from "react";
 import MultiSelectDropdown from "../../Reusable/MultiSelectDropdown/MultiSelectDropdown";
 import { filterData } from "../../../constants/filterData";
 
-const Filters = () => {
+// Filters.types.ts (optional file)
+export type TFiltersProps = {
+  keyword: string;
+  setKeyword: React.Dispatch<React.SetStateAction<string>>;
+  selectedCities: string[];
+  setSelectedCities: React.Dispatch<React.SetStateAction<string[]>>;
+
+  selectedAreas: string[];
+  setSelectedAreas: React.Dispatch<React.SetStateAction<string[]>>;
+  areaOptions: string[];
+  setAreaOptions: React.Dispatch<React.SetStateAction<string[]>>;
+
+  selectedCategory: string[];
+  setSelectedCategory: React.Dispatch<React.SetStateAction<string[]>>;
+
+  selectedDays: string[];
+  setSelectedDays: React.Dispatch<React.SetStateAction<string[]>>;
+
+  selectedClass: string[];
+  setSelectedClass: React.Dispatch<React.SetStateAction<string[]>>;
+
+  selectedTutorGender: string[];
+  setSelectedTutorGender: React.Dispatch<React.SetStateAction<string[]>>;
+
+  selectedStudentGender: string[];
+  setSelectedStudentGender: React.Dispatch<React.SetStateAction<string[]>>;
+
+  selectedTuitionType: string[];
+  setSelectedTuitionType: React.Dispatch<React.SetStateAction<string[]>>;
+};
+
+const Filters: React.FC<TFiltersProps> = ({
+  keyword,
+  setKeyword,
+  selectedCities,
+  setSelectedCities,
+  selectedAreas,
+  setSelectedAreas,
+  areaOptions,
+  setAreaOptions,
+  selectedCategory,
+  setSelectedCategory,
+  selectedDays,
+  setSelectedDays,
+  selectedClass,
+  setSelectedClass,
+  selectedTutorGender,
+  setSelectedTutorGender,
+  selectedStudentGender,
+  setSelectedStudentGender,
+  selectedTuitionType,
+  setSelectedTuitionType,
+}) => {
   const [isAccordingOpen, setIsAccordingOpen] = useState<boolean>(false);
-
-  // Selected states for each filter
-  const [selectedCities, setSelectedCities] = useState<string[]>([]);
-  const [selectedAreas, setSelectedAreas] = useState<string[]>([]);
-  const [areaOptions, setAreaOptions] = useState<string[]>([]);
-
-  const [selectedCategory, setSelectedCategory] = useState<string[]>([]);
-  const [selectedDays, setSelectedDays] = useState<string[]>([]);
-  const [selectedClass, setSelectedClass] = useState<string[]>([]);
-  const [selectedTutorGender, setSelectedTutorGender] = useState<string[]>([]);
-  const [selectedStudentGender, setSelectedStudentGender] = useState<string[]>([]);
-  const [selectedTuitionType, setSelectedTuitionType] = useState<string[]>([]);
 
   const handleResetFilters = () => {
     setSelectedCities([]);
@@ -27,7 +67,7 @@ const Filters = () => {
     setSelectedTutorGender([]);
     setSelectedStudentGender([]);
     setSelectedTuitionType([]);
-  }
+  };
 
   // Update area options when city changes
   useEffect(() => {
@@ -66,6 +106,8 @@ const Filters = () => {
         <div className="flex items-center gap-3">
           <div className="relative w-full lg:w-[400px]">
             <input
+              value={keyword}
+              onChange={(e) => setKeyword(e.target.value)}
               placeholder={"Search by job title or id..."}
               className={`w-full pl-8 pr-2 py-[10px] rounded-lg bg-white border border-primary-30 leading-[18px] focus:outline-none focus:border-primary-10 transition duration-300`}
             />

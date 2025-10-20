@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useForm, FormProvider } from "react-hook-form";
 import { useState } from "react";
 import JobDetailsForm from "./JobDetailsForm";
@@ -5,10 +6,11 @@ import StudentInfoForm from "./StudentInfoForm";
 import LocationForm from "./LocationForm";
 import { ICONS } from "../../../assets";
 import Preview from "./Preview";
+import toast from "react-hot-toast";
+import { usePostJobMutation } from "../../../redux/Features/Job/jobApi";
 
 interface FormValues {
   // Job Details
-  title: string;
   tuitionType: string[];
   salary: string;
   tutoringDays: string[];
@@ -34,13 +36,22 @@ interface FormValues {
 const steps = ["Job Details", "Tutor Preferences", "Student Info", "Preview"];
 
 const HireTutorForm = () => {
+  const [postJob, { isLoading: isPostingJob }] = usePostJobMutation();
   const methods = useForm<FormValues>({ mode: "onBlur" });
   const { handleSubmit } = methods;
 
   const [currentStep, setCurrentStep] = useState(0);
 
-  const onSubmit = (data: FormValues) => {
-    console.log("Form Data", data);
+  const onSubmit = async (data: FormValues) => {
+    console.log(data);
+    try {
+      const response = await postJob(data).unwrap();
+      if (response?.success) {
+        toast.success("Job posted successfully!");
+      }
+    } catch (err: any) {
+      toast.error(err?.data?.message || "Submission failed. Please try again.");
+    }
   };
 
   return (
@@ -103,8 +114,10 @@ const HireTutorForm = () => {
             <button
               type="submit"
               className="px-4 py-2 bg-primary-10 text-white rounded cursor-pointer"
+              disabled={isPostingJob}
+
             >
-              Submit
+              {isPostingJob ? "Submitting..." : "Submit"}
             </button>
           )}
         </div>

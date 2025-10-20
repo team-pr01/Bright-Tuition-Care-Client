@@ -40,14 +40,6 @@ const Preview = () => {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 lg:gap-5">
-        <TextInput
-          label="Job Title"
-          placeholder="Enter job title"
-          error={errors.title}
-          value={watch("title")}
-          isDisabled={!isEditEnable}
-          {...register("title")}
-        />
 
         <TextInput
           label="Salary (BDT)"
