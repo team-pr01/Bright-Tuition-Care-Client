@@ -32,7 +32,7 @@ const authApi = baseApi.injectEndpoints({
 
     resendOtp: builder.mutation({
       query: (OtpData) => ({
-        url: "/auth/verify-otp",
+        url: "/auth/resend-otp",
         method: "POST",
         body: OtpData,
         credentials: "include",
@@ -49,9 +49,10 @@ const authApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ["users"],
     }),
+
      resendForgetPasswordOtp: builder.mutation({
       query: (OtpData) => ({
-        url: "/auth/verify-otp",
+        url: "/auth/resend-forgot-password-otp",
         method: "POST",
         body: OtpData,
         credentials: "include",
@@ -59,9 +60,28 @@ const authApi = baseApi.injectEndpoints({
       invalidatesTags: ["users"],
     }),
 
+     verifyResetPasswordOtp: builder.mutation({
+      query: (verifyOtpData) => ({
+        url: "/auth/verify-reset-password-otp",
+        method: "POST",
+        body: verifyOtpData,
+        credentials: "include",
+      }),
+      invalidatesTags: ["users"],
+    }),
+
     resetPassword: builder.mutation({
-      query: ({resetPasswordData, token}) => ({
-        url: `/auth/reset-password/${token}`,
+      query: (resetPasswordData) => ({
+        url: `/auth/reset-password`,
+        method: "POST",
+        body: resetPasswordData,
+        credentials: "include",
+      }),
+      invalidatesTags: ["users"],
+    }),
+    changePassword: builder.mutation({
+      query: (resetPasswordData) => ({
+        url: `/auth/change-password`,
         method: "POST",
         body: resetPasswordData,
         credentials: "include",
@@ -80,5 +100,7 @@ export const {
   useResendOtpMutation,
   useForgotPasswordMutation,
   useResendForgetPasswordOtpMutation,
-  useResetPasswordMutation
+  useVerifyResetPasswordOtpMutation,
+  useResetPasswordMutation,
+  useChangePasswordMutation,
 } = authApi;

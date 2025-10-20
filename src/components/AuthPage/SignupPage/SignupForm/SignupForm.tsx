@@ -19,6 +19,7 @@ type TFormData = {
   email: string;
   gender: string;
   city: string;
+  role:string;
   area: string;
   password: string;
   confirmPassword: string;
@@ -101,7 +102,11 @@ const SignupForm = ({
       }));
     }
     try {
-      const res = await signup(data).unwrap();
+      const payload = {
+        ...data,
+        role: activeTab==="Guardian/Student"?"guardian":"tutor",
+      }
+      const res = await signup(payload).unwrap();
       if (res?.success) {
         localStorage.setItem("signupEmail", data.email);
         navigate("/verify-otp");

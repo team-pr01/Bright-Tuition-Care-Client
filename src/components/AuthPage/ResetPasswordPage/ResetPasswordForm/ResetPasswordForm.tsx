@@ -1,10 +1,12 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import AuthHeading from "../../../Reusable/AuthHeading/AuthHeading";
 import PasswordInput from "../../../Reusable/PasswordInput/PasswordInput";
 import { useForm } from "react-hook-form";
 import Button from "../../../Reusable/Button/Button";
 import { ICONS } from "../../../../assets";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useResetPasswordMutation } from "../../../../redux/Features/Auth/authApi";
+import toast from "react-hot-toast";
 
 type TFormData = {
   password: string;
@@ -12,10 +14,12 @@ type TFormData = {
 };
 
 const ResetPasswordForm = () => {
+  const navigate=useNavigate();
+  const [resetPassword,{isLoading:isResetPasswordLoading}] =useResetPasswordMutation();
+  const [phoneNumber, setPhoneNumber] = useState<string |null>("");
   const [isPasswordVisible, setIsPasswordVisible] = useState<boolean>(false);
   const [isConfirmPasswordVisible, setIsConfirmPasswordVisible] =
     useState<boolean>(false);
-
   const {
     register,
     handleSubmit,
@@ -25,9 +29,28 @@ const ResetPasswordForm = () => {
 
   // To compare confirmPassword with password
   const passwordValue = watch("password");
+ useEffect(() => {
+    const phoneNumber = localStorage.getItem("forgetPasswordPhNo");
+    setPhoneNumber(phoneNumber);
+  }, []);
 
-  const handleResetPassword = (data: TFormData) => {
-    console.log(data);
+  const handleResetPassword = async(data: TFormData) => {
+   try{
+   
+      const payload={
+        phoneNumber:phoneNumber,
+        newPassword:data.confirmPassword,
+      };
+    const res= await resetPassword(payload).unwrap();
+    if(res?.success){
+      toast.success("Password changed successfully");
+      localStorage.removeItem("forgetPasswordPhNo");
+      navigate("/signin");
+      
+    }
+   }catch(err){
+    console.error("Error resetting password:", err);
+   }
   };
 
   return (
@@ -42,6 +65,7 @@ const ResetPasswordForm = () => {
 
       <div className="bg-neutral-50/10 border border-primary-10/30 rounded-2xl p-5 lg:p-7 flex flex-col gap-6">
         <div className="flex flex-col gap-6">
+        
           <PasswordInput
             label="Password"
             placeholder="Must be at least 8 Characters"
@@ -76,6 +100,8 @@ const ResetPasswordForm = () => {
             variant="primary"
             icon={ICONS.topRightArrow}
             className="py-2 lg:py-2"
+            isDisabled={isResetPasswordLoading}
+            isLoading={isResetPasswordLoading}
           />
           <p className="font-lg leading-[24px] text-neutral-20">
             Back to{" "}

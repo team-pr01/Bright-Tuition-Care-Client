@@ -52,13 +52,18 @@ const Button: React.FC<ButtonProps> = ({
         disabled={isDisabled || isLoading}
         onClick={onClick}
         className={combinedClasses}
-      >{isLoading ? <img
-              src={ICONS.loader}
-              alt="Button Icon"
-              className="size-3 lg:size-6 animate-spin"
-            />:""}
+      >
+        {isLoading ? (
+          <img
+            src={ICONS.loader}
+            alt="Button Icon"
+            className="size-4 md:size-5 lg:size-6 animate-spin"
+          />
+        ) : (
+          ""
+        )}
         {label}
-        {icon && (
+        {!isLoading && icon && (
           <span
             className="rounded-full p-1 size-6 flex items-center justify-center"
             style={{ backgroundColor: iconBg }}
@@ -70,7 +75,7 @@ const Button: React.FC<ButtonProps> = ({
             />
           </span>
         )}
-        {iconWithoutBg && (
+        {!isLoading && iconWithoutBg && (
           <img
             src={typeof iconWithoutBg === "string" ? iconWithoutBg : undefined}
             alt="Button Icon"

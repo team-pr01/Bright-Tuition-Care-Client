@@ -1,8 +1,11 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState } from "react";
 import PasswordInput from "../../../Reusable/PasswordInput/PasswordInput";
 import { useForm } from "react-hook-form";
 import Button from "../../../Reusable/Button/Button";
 import { ICONS } from "../../../../assets";
+import toast from "react-hot-toast";
+import { useChangePasswordMutation } from "../../../../redux/Features/Auth/authApi";
 
 type TFormData = {
   currentPassword: string;
@@ -10,6 +13,7 @@ type TFormData = {
   confirmNewPassword: string;
 };
 const ChangePasswordForm = () => {
+  const [changePassword,{isLoading}]=useChangePasswordMutation();
   const [isCurrentPasswordVisible, setIsCurrentPasswordVisible] =
     useState<boolean>(false);
   const [isNewPasswordVisible, setIsNewPasswordVisible] =
@@ -27,8 +31,19 @@ const ChangePasswordForm = () => {
   // To compare confirmPassword with password
   const passwordValue = watch("newPassword");
 
-  const handleChangePassword = (data: TFormData) => {
-    console.log(data);
+  const handleChangePassword = async(data: TFormData) => {
+ try{
+  const payload={
+    currentPassword:data.currentPassword,
+    newPassword:data.newPassword,
+  }
+  const res= await changePassword(payload).unwrap();
+  if(res?.success){
+    toast.success("Password changed successfully")
+  }
+ }catch(err:any){
+   toast.error(err || "Error changing password");
+ }
   };
   return (
     <form
@@ -86,6 +101,8 @@ const ChangePasswordForm = () => {
         variant="primary"
         iconWithoutBg={ICONS.topRightArrowWhite}
         className="py-2 lg:py-2"
+        isDisabled={isLoading}
+        isLoading={isLoading}
       />
     </form>
   );
