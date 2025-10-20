@@ -1,12 +1,14 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useForm } from "react-hook-form";
 import AuthHeading from "../../../Reusable/AuthHeading/AuthHeading";
 import TextInput from "../../../Reusable/TextInput/TextInput";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Button from "../../../Reusable/Button/Button";
 import { ICONS } from "../../../../assets";
-import { MdEmail } from "react-icons/md";
 import { useState } from "react";
 import { RiPhoneFill } from "react-icons/ri";
+import { useForgotPasswordMutation } from "../../../../redux/Features/Auth/authApi";
+import toast from "react-hot-toast";
 
 type TFormData = {
   method: string;
@@ -15,23 +17,30 @@ type TFormData = {
 };
 
 const ForgotPasswordForm = () => {
+  const [forgotPassword,{isLoading}]= useForgotPasswordMutation();
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<TFormData>();
-
-  const handleForgotPassword = (data: TFormData) => {
-    console.log(data);
+  const navigate= useNavigate();
+  const handleForgotPassword =async (data: TFormData) => {
+    try{const payload={
+    phoneNumber:data.phoneNumber
+   }
+   const res= await forgotPassword(payload).unwrap();
+   if(res.success){
+    navigate("/verify-otp",{state:{from:"forgot-password"}});
+   }
+  }catch(err:any){
+    toast.error("Failed to send OTP. Please try again.");
+  }
+   
   };
 
-  const [activeTab, setActiveTab] = useState<string>("email");
+  const [activeTab, setActiveTab] = useState<string>("phone");
 
   const tabButtons = [
-    {
-      label: "email",
-      icon: <MdEmail />,
-    },
     {
       label: "phone",
       icon: <RiPhoneFill />,
@@ -75,22 +84,7 @@ const ForgotPasswordForm = () => {
           ))}
         </div>
 
-        {/* Email */}
-        {activeTab === "email" ? (
-          <TextInput
-            label="Email"
-            placeholder="Enter your registered email address"
-            type="email"
-            error={errors.email}
-            {...register("email", {
-              required: "Email is required",
-              pattern: {
-                value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-                message: "Invalid email address",
-              },
-            })}
-          />
-        ) : (
+        
           <TextInput
             label="Phone Number"
             placeholder="Enter your registered phone number"
@@ -100,7 +94,7 @@ const ForgotPasswordForm = () => {
               required: "Phone number is required",
             })}
           />
-        )}
+        
 
         <div className="flex md:gap-0 items-center justify-between">
           <Button
@@ -109,6 +103,8 @@ const ForgotPasswordForm = () => {
             variant="primary"
             iconWithoutBg={ICONS.topRightArrowWhite}
             className="py-2 lg:py-2"
+            isLoading={isLoading}
+            isDisabled={isLoading}
           />
           <p className="font-lg leading-[24px] text-neutral-20">
             Back to{" "}

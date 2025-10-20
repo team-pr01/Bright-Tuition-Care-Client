@@ -5,8 +5,12 @@ import TextInput from "../../../Reusable/TextInput/TextInput";
 import RoleTab from "../../SignupPage/SignupForm/RoleTab";
 import { useForm } from "react-hook-form";
 import Button from "../../../Reusable/Button/Button";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { ICONS } from "../../../../assets";
+import { useLoginMutation } from "../../../../redux/Features/Auth/authApi";
+import { useDispatch } from "react-redux";
+import { setUser } from "../../../../redux/Features/Auth/authSlice";
+import Cookies from "js-cookie";
 
 type TFormData = {
   email: string;
@@ -21,15 +25,38 @@ const SignInForm = ({
   setActiveTab: React.Dispatch<React.SetStateAction<string>>;
 }) => {
   const [isPasswordVisible, setIsPasswordVisible] = useState<boolean>(false);
-
+  const [login, { isLoading }] = useLoginMutation();
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm<TFormData>();
-
-  const handleSigIn = (data: TFormData) => {
-    console.log(data);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const handleSigIn = async (data: TFormData) => {
+    try {
+      const payload = {
+        email: data.email,
+        password: data.password,
+      };
+      const res = await login(payload).unwrap();
+      if (res.success) {
+        Cookies.set("accessToken", res?.data?.accessToken, {
+          expires: 7, 
+          secure: true,
+          sameSite: "strict",
+        });
+        dispatch(
+          setUser({ user: res?.data?.user, token: res?.data?.accessToken })
+        );
+      }
+      navigate("/dashboard");
+      reset();
+    } catch (err) {
+      console.error("Login failed:", err);
+      reset();
+    }
   };
   return (
     <form
@@ -74,7 +101,7 @@ const SignInForm = ({
             setIsPasswordVisible={setIsPasswordVisible}
           />
         </div>
-        
+
         <div className="flex items-center justify-end md:justify-between">
           <p className="font-lg leading-[24px] text-neutral-20 hidden md:block">
             Don't have an account?{" "}
@@ -100,8 +127,10 @@ const SignInForm = ({
             variant="primary"
             iconWithoutBg={ICONS.topRightArrowWhite}
             className="py-2 lg:py-2 w-full md:w-fit"
+            isLoading={isLoading}
+            isDisabled={isLoading}
           />
-           <p className="text-sm md:font-lg leading-[24px] text-neutral-20 block md:hidden">
+          <p className="text-sm md:font-lg leading-[24px] text-neutral-20 block md:hidden">
             Don't have an account?{" "}
             <Link
               to="/signup"

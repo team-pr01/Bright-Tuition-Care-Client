@@ -1,7 +1,10 @@
 import { useState, useRef, useEffect } from "react";
 import AuthHeading from "../../../Reusable/AuthHeading/AuthHeading";
 import { useForm } from "react-hook-form";
-import { useVerifyOtpMutation } from "../../../../redux/Features/Auth/authApi";
+import {
+  useResendOtpMutation,
+  useVerifyOtpMutation,
+} from "../../../../redux/Features/Auth/authApi";
 import { useNavigate } from "react-router-dom";
 
 type TFormData = {
@@ -9,8 +12,11 @@ type TFormData = {
   otp: string;
 };
 
-const VerifyOtpForm = () => {
-  const [verifyOtp ] = useVerifyOtpMutation();
+const VerifyOtpForm = (({ isForgetPasswordVerification }: {
+  isForgetPasswordVerification?: boolean
+}) => {
+  const [verifyOtp] = useVerifyOtpMutation();
+  const [resendOtp] = useResendOtpMutation();
   const navigate = useNavigate();
   const {
     handleSubmit,
@@ -65,7 +71,6 @@ const VerifyOtpForm = () => {
     idx: number
   ) => {
     if (e.key === "Backspace" && otpValues[idx] === "" && idx > 0) {
-    
       inputRefs.current[idx - 1]?.focus();
     }
   };
@@ -75,22 +80,35 @@ const VerifyOtpForm = () => {
       const payload = {
         email,
         otp: data.otp,
+      };
+      const response = await verifyOtp(payload).unwrap();
+      if (response?.success && isForgetPasswordVerification) {
+        navigate("/signin");
       }
-     const response = await verifyOtp(payload).unwrap();
-     if(response?.success){
-      navigate("/signin");
-     }
     } catch (err) {
       console.error("OTP verification failed:", err);
-      setError("otp", { type: "manual", message: "Invalid OTP. Please try again." });
+      setError("otp", {
+        type: "manual",
+        message: "Invalid OTP. Please try again.",
+      });
     }
   };
 
-  const handleResend = () => {
-    console.log("Resend OTP triggered");
-    setTimeLeft(120);
-    setCanResend(false);
+  const handleResend = async () => {
+  
     setOtpValues(["", "", "", ""]);
+    try {
+      const payload = {
+        email,
+      };
+      const res = await resendOtp(payload);
+      if (res?.data?.success) {
+        setTimeLeft(120);
+        setCanResend(false);
+      }
+    } catch (err) {
+      console.error("Resend OTP failed:", err);
+    }
   };
 
   // Convert timeLeft to mm:ss format
