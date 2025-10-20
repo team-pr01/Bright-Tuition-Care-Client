@@ -20,8 +20,11 @@ const VerifyOtpForm = ({
   isForgetPasswordVerification?: boolean;
 }) => {
   const [verifyOtp] = useVerifyOtpMutation();
-  const [resendOtp] = useResendOtpMutation();
-  const [resendForgetPasswordOtp] = useResendForgetPasswordOtpMutation();
+  const [resendOtp, { isLoading: isResendOtpLoading }] = useResendOtpMutation();
+  const [
+    resendForgetPasswordOtp,
+    { isLoading: isResendForgotPasswordOtpLoading },
+  ] = useResendForgetPasswordOtpMutation();
   const [verifyResetPasswordOtp] = useVerifyResetPasswordOtpMutation();
   const navigate = useNavigate();
   const {
@@ -30,12 +33,13 @@ const VerifyOtpForm = ({
     setValue,
     trigger,
     setError,
+    clearErrors,
   } = useForm<TFormData>();
   const [email, setEmail] = useState<string | null>(null);
   const [phoneNumber, setPhoneNumber] = useState<string | null>(null);
   const [otpValues, setOtpValues] = useState(["", "", "", ""]);
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
-  const [timeLeft, setTimeLeft] = useState(120);
+  const [timeLeft, setTimeLeft] = useState(10);
   const [canResend, setCanResend] = useState(false);
 
   useEffect(() => {
@@ -68,6 +72,8 @@ const VerifyOtpForm = ({
     newOtpValues[idx] = val;
     setOtpValues(newOtpValues);
     setValue("otp", newOtpValues.join(""));
+      // ✅ Clear OTP error once user starts typing again
+  clearErrors("otp");
     trigger("otp");
 
     if (val && idx < inputRefs.current.length - 1) {
@@ -92,24 +98,28 @@ const VerifyOtpForm = ({
   const handleVerifyOtp = async (data: TFormData) => {
     try {
       if (!isForgetPasswordVerification) {
-      const payload = {
-        email,
-        otp: data.otp,
-      };
-      const response = await verifyOtp(payload).unwrap();
-      if (response?.success) {
-       navigate("/signin");
-      }}else{
         const payload = {
-        phoneNumber,
-        otp: data.otp,
-      };
-      const response = await verifyResetPasswordOtp(payload).unwrap();
-      if (response?.success) {
-       navigate("/reset-password", {state: {navigateFrom:"verify-otp"}});
+          email,
+          otp: data.otp,
+        };
+        const response = await verifyOtp(payload).unwrap();
+        if (response?.success) {
+          navigate("/signin");
+          localStorage.removeItem("signupEmail");
+        }
+      } else {
+        const payload = {
+          phoneNumber,
+          otp: data.otp,
+        };
+        const response = await verifyResetPasswordOtp(payload).unwrap();
+        if (response?.success) {
+          navigate("/reset-password", {
+            state: { navigateFrom: "verify-otp" },
+          });
+        }
       }
-    }
-   }catch (err) {
+    } catch (err) {
       console.error("OTP verification failed:", err);
       setError("otp", {
         type: "manual",
@@ -210,7 +220,9 @@ const VerifyOtpForm = ({
               onClick={handleResend}
               className="font-semibold bg-gradient-to-r from-primary-10 to-primary-40/60 bg-clip-text text-transparent cursor-pointer"
             >
-              Resend OTP
+              {isResendForgotPasswordOtpLoading || isResendOtpLoading
+                ? "Resending OTP ..."
+                : "Resend OTP"}
             </button>
           ) : (
             <p className="text-sm md:text-base leading-[24px] text-neutral-20">

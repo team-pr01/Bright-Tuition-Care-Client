@@ -4,24 +4,22 @@ import PasswordInput from "../../../Reusable/PasswordInput/PasswordInput";
 import { useForm } from "react-hook-form";
 import Button from "../../../Reusable/Button/Button";
 import { ICONS } from "../../../../assets";
-import { Link } from "react-router-dom";
-import { useChangePasswordMutation, useResetPasswordMutation } from "../../../../redux/Features/Auth/authApi";
+import { Link, useNavigate } from "react-router-dom";
+import { useResetPasswordMutation } from "../../../../redux/Features/Auth/authApi";
 import toast from "react-hot-toast";
 
 type TFormData = {
-  currentPassword: string;
   password: string;
   confirmPassword: string;
 };
 
-const ResetPasswordForm = ({isNavigatedFromVerifyOtp}:{isNavigatedFromVerifyOtp:boolean}) => {
-  const [changePassword,{isLoading}] =useChangePasswordMutation();
+const ResetPasswordForm = () => {
+  const navigate=useNavigate();
   const [resetPassword,{isLoading:isResetPasswordLoading}] =useResetPasswordMutation();
   const [phoneNumber, setPhoneNumber] = useState<string |null>("");
   const [isPasswordVisible, setIsPasswordVisible] = useState<boolean>(false);
   const [isConfirmPasswordVisible, setIsConfirmPasswordVisible] =
     useState<boolean>(false);
-
   const {
     register,
     handleSubmit,
@@ -38,24 +36,17 @@ const ResetPasswordForm = ({isNavigatedFromVerifyOtp}:{isNavigatedFromVerifyOtp:
 
   const handleResetPassword = async(data: TFormData) => {
    try{
-    if(!isNavigatedFromVerifyOtp){
-    const payload={
-      currentPassword:data.currentPassword,
-      newPassword:data.confirmPassword,
-    };
-    const res= await changePassword(payload).unwrap();
-    if(res?.success){
-      toast.success("Password changed successfully");
-    }}
-    else{
-       const payload={
-      phoneNumber:phoneNumber,
-      newPassword:data.confirmPassword,
-    };
+   
+      const payload={
+        phoneNumber:phoneNumber,
+        newPassword:data.confirmPassword,
+      };
     const res= await resetPassword(payload).unwrap();
     if(res?.success){
       toast.success("Password changed successfully");
-    }
+      localStorage.removeItem("forgetPasswordPhNo");
+      navigate("/signin");
+      
     }
    }catch(err){
     console.error("Error resetting password:", err);
@@ -74,20 +65,7 @@ const ResetPasswordForm = ({isNavigatedFromVerifyOtp}:{isNavigatedFromVerifyOtp:
 
       <div className="bg-neutral-50/10 border border-primary-10/30 rounded-2xl p-5 lg:p-7 flex flex-col gap-6">
         <div className="flex flex-col gap-6">
-         { !isNavigatedFromVerifyOtp &&<PasswordInput
-            label="current Password"
-            placeholder="Enter your current password"
-            error={errors.currentPassword}
-            {...register("currentPassword", {
-              required: "current Password is required",
-              minLength: {
-                value: 8,
-                message: "current Password must be at least 8 characters",
-              },
-            })}
-            isPasswordVisible={isPasswordVisible}
-            setIsPasswordVisible={setIsPasswordVisible}
-          />}
+        
           <PasswordInput
             label="Password"
             placeholder="Must be at least 8 Characters"
@@ -122,8 +100,8 @@ const ResetPasswordForm = ({isNavigatedFromVerifyOtp}:{isNavigatedFromVerifyOtp:
             variant="primary"
             icon={ICONS.topRightArrow}
             className="py-2 lg:py-2"
-            isDisabled={isLoading || isResetPasswordLoading}
-            isLoading={isLoading || isResetPasswordLoading}
+            isDisabled={isResetPasswordLoading}
+            isLoading={isResetPasswordLoading}
           />
           <p className="font-lg leading-[24px] text-neutral-20">
             Back to{" "}
