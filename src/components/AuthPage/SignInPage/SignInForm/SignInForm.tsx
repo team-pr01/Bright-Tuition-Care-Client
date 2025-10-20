@@ -50,8 +50,16 @@ const SignInForm = ({
         dispatch(
           setUser({ user: res?.data?.user, token: res?.data?.accessToken })
         );
+      };
+      if(res?.data?.user?.role==="admin"){
+        navigate("/dashboard/admin/home");
       }
-      navigate("/dashboard");
+      else if(res?.data?.user?.role==="tutor"){
+        navigate("/dashboard/tutor/home");
+      }
+      else{
+        navigate("/dashboard/guardian/home");
+      }
       reset();
     } catch (err) {
       console.error("Login failed:", err);
