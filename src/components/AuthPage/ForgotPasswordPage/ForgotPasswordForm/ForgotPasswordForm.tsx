@@ -28,6 +28,9 @@ const ForgotPasswordForm = () => {
     try{const payload={
     phoneNumber:data.phoneNumber
    }
+   if (data.phoneNumber) {
+     localStorage.setItem("forgetPasswordPhNo", data.phoneNumber);
+   }
    const res= await forgotPassword(payload).unwrap();
    if(res.success){
     navigate("/verify-otp",{state:{from:"forgot-password"}});

@@ -37,7 +37,7 @@ const SignupForm = ({
     city: "",
     area: "",
   });
-  const [signup, { isLoading}] = useSignupMutation();
+  const [signup, { isLoading }] = useSignupMutation();
   const navigate = useNavigate();
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.checked) {
@@ -82,32 +82,33 @@ const SignupForm = ({
   }, [selectedCity, setValue]);
 
   const handleSignup = async (data: TFormData) => {
-      if (!selectedCity) {
-    setFieldErrors((prev:any) => ({
-      ...prev,
-      city: "City is required",
-    }));
-  }
+    if (!selectedCity) {
+      setFieldErrors((prev: any) => ({
+        ...prev,
+        city: "City is required",
+      }));
+    }
     if (!selectedArea) {
-     setFieldErrors((prev:any) => ({
-      ...prev,
+      setFieldErrors((prev: any) => ({
+        ...prev,
         area: "Area is required",
       }));
     }
     if (!selectedGender) {
-      setFieldErrors((prev:any)=>({
+      setFieldErrors((prev: any) => ({
         ...prev,
         gender: "Gender is required",
       }));
     }
     try {
-      await signup(data).unwrap();
-      localStorage.setItem("signupEmail", data.email);
-      navigate("/verify-otp" );
-      reset();
-      setFieldErrors({ gender: "", city: "", area: "" });
+      const res = await signup(data).unwrap();
+      if (res?.success) {
+        localStorage.setItem("signupEmail", data.email);
+        navigate("/verify-otp");
+        reset();
+        setFieldErrors({ gender: "", city: "", area: "" });
+      }
     } catch (err: any) {
-      console.error("Signup failed:", err);
       const errorMessage =
         err?.data?.message ||
         err?.error ||

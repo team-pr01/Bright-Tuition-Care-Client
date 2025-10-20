@@ -15,7 +15,7 @@ const categories = [
     image: IMAGES.admissionTest,
     title: "Admission Test",
     description:
-      "Tutors for university, medical, engineering, and institutional entrance exams.",
+      "Tutors for university, medical, engineering, and institutional exams.",
   },
   {
     image: IMAGES.arbi,
@@ -57,7 +57,7 @@ const categories = [
     image: IMAGES.professionalSkillDevelopment,
     title: "Professional Skills",
     description:
-      "Courses in software, coding, digital marketing, and business for career growth.",
+      "Courses in software, coding and business for career growth.",
   },
   {
     image: IMAGES.specialChildEducation,

@@ -2,6 +2,7 @@ import { useState, useRef, useEffect } from "react";
 import AuthHeading from "../../../Reusable/AuthHeading/AuthHeading";
 import { useForm } from "react-hook-form";
 import {
+  useResendForgetPasswordOtpMutation,
   useResendOtpMutation,
   useVerifyOtpMutation,
 } from "../../../../redux/Features/Auth/authApi";
@@ -12,11 +13,14 @@ type TFormData = {
   otp: string;
 };
 
-const VerifyOtpForm = (({ isForgetPasswordVerification }: {
-  isForgetPasswordVerification?: boolean
+const VerifyOtpForm = ({
+  isForgetPasswordVerification,
+}: {
+  isForgetPasswordVerification?: boolean;
 }) => {
   const [verifyOtp] = useVerifyOtpMutation();
   const [resendOtp] = useResendOtpMutation();
+  const [resendForgetPasswordOtp] = useResendForgetPasswordOtpMutation();
   const navigate = useNavigate();
   const {
     handleSubmit,
@@ -25,11 +29,19 @@ const VerifyOtpForm = (({ isForgetPasswordVerification }: {
     trigger,
     setError,
   } = useForm<TFormData>();
-  const email = localStorage.getItem("signupEmail");
+  const [email, setEmail] = useState<string | null>(null);
+  const [phoneNumber, setPhoneNumber] = useState<string | null>(null);
   const [otpValues, setOtpValues] = useState(["", "", "", ""]);
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
   const [timeLeft, setTimeLeft] = useState(120);
   const [canResend, setCanResend] = useState(false);
+
+  useEffect(() => {
+    const email = localStorage.getItem("signupEmail");
+    const phoneNumber = localStorage.getItem("forgetPasswordPhNo");
+    setEmail(email);
+    setPhoneNumber(phoneNumber);
+  }, []);
 
   useEffect(() => {
     if (timeLeft <= 0) {
@@ -82,8 +94,8 @@ const VerifyOtpForm = (({ isForgetPasswordVerification }: {
         otp: data.otp,
       };
       const response = await verifyOtp(payload).unwrap();
-      if (response?.success && isForgetPasswordVerification) {
-        navigate("/signin");
+      if (response?.success) {
+       navigate("/signin");
       }
     } catch (err) {
       console.error("OTP verification failed:", err);
@@ -95,23 +107,32 @@ const VerifyOtpForm = (({ isForgetPasswordVerification }: {
   };
 
   const handleResend = async () => {
-  
     setOtpValues(["", "", "", ""]);
     try {
-      const payload = {
-        email,
-      };
-      const res = await resendOtp(payload);
-      if (res?.data?.success) {
-        setTimeLeft(120);
-        setCanResend(false);
+      if (!isForgetPasswordVerification) {
+        const payload = {
+          email,
+        };
+        const res = await resendOtp(payload);
+        if (res?.data?.success) {
+          setTimeLeft(120);
+          setCanResend(false);
+        }
+      } else {
+        const payload = {
+          phoneNumber,
+        };
+        const res = await resendForgetPasswordOtp(payload);
+        if (res?.data?.success) {
+          setTimeLeft(120);
+          setCanResend(false);
+        }
       }
     } catch (err) {
       console.error("Resend OTP failed:", err);
     }
   };
 
-  // Convert timeLeft to mm:ss format
   const formatTime = (seconds: number) => {
     const m = Math.floor(seconds / 60);
     const s = seconds % 60;
