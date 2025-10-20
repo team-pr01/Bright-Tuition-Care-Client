@@ -5,6 +5,7 @@ import {
   useResendForgetPasswordOtpMutation,
   useResendOtpMutation,
   useVerifyOtpMutation,
+  useVerifyResetPasswordOtpMutation,
 } from "../../../../redux/Features/Auth/authApi";
 import { useNavigate } from "react-router-dom";
 
@@ -21,6 +22,7 @@ const VerifyOtpForm = ({
   const [verifyOtp] = useVerifyOtpMutation();
   const [resendOtp] = useResendOtpMutation();
   const [resendForgetPasswordOtp] = useResendForgetPasswordOtpMutation();
+  const [verifyResetPasswordOtp] = useVerifyResetPasswordOtpMutation();
   const navigate = useNavigate();
   const {
     handleSubmit,
@@ -89,6 +91,7 @@ const VerifyOtpForm = ({
 
   const handleVerifyOtp = async (data: TFormData) => {
     try {
+      if (!isForgetPasswordVerification) {
       const payload = {
         email,
         otp: data.otp,
@@ -96,8 +99,17 @@ const VerifyOtpForm = ({
       const response = await verifyOtp(payload).unwrap();
       if (response?.success) {
        navigate("/signin");
+      }}else{
+        const payload = {
+        phoneNumber,
+        otp: data.otp,
+      };
+      const response = await verifyResetPasswordOtp(payload).unwrap();
+      if (response?.success) {
+       navigate("/reset-password", {state: {navigateFrom:"verify-otp"}});
       }
-    } catch (err) {
+    }
+   }catch (err) {
       console.error("OTP verification failed:", err);
       setError("otp", {
         type: "manual",

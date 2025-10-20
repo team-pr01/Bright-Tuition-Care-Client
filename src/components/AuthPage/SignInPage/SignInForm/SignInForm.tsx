@@ -41,7 +41,7 @@ const SignInForm = ({
         password: data.password,
       };
       const res = await login(payload).unwrap();
-      if (res.success) {
+      if (res?.success) {
         Cookies.set("accessToken", res?.data?.accessToken, {
           expires: 7, 
           secure: true,
