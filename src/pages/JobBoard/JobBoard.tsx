@@ -4,14 +4,13 @@ import Jobs from "../../components/JobBoardPage/Jobs/Jobs";
 import Container from "../../components/Reusable/Container/Container";
 import Heading from "../../components/Reusable/Heading/Heading";
 import { useGetAllJobsQuery } from "../../redux/Features/Job/jobApi";
+import { useDebounce } from "../../hooks/useDebounce";
 
 const JobBoard = () => {
-  // Selected states for each filter
   const [keyword, setKeyword] = useState<string>("");
   const [selectedCities, setSelectedCities] = useState<string[]>([]);
   const [selectedAreas, setSelectedAreas] = useState<string[]>([]);
   const [areaOptions, setAreaOptions] = useState<string[]>([]);
-
   const [selectedCategory, setSelectedCategory] = useState<string[]>([]);
   const [selectedDays, setSelectedDays] = useState<string[]>([]);
   const [selectedClass, setSelectedClass] = useState<string[]>([]);
@@ -20,9 +19,10 @@ const JobBoard = () => {
     []
   );
   const [selectedTuitionType, setSelectedTuitionType] = useState<string[]>([]);
+  const debouncedKeyword = useDebounce(keyword, 500);
 
   const { data: allJobs, isLoading, isFetching } = useGetAllJobsQuery({
-    keyword : keyword || undefined,
+    keyword : debouncedKeyword || undefined,
     city: selectedCities.join(",") || undefined,
     area: selectedAreas.join(",") || undefined,
     category: selectedCategory.join(",") || undefined,

@@ -1,7 +1,9 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { ICONS } from "../../../assets";
 import { useState, useEffect } from "react";
 import MultiSelectDropdown from "../../Reusable/MultiSelectDropdown/MultiSelectDropdown";
 import { filterData } from "../../../constants/filterData";
+import SearchInput from "../../Reusable/SearchBar/SearchBar";
 
 // Filters.types.ts (optional file)
 export type TFiltersProps = {
@@ -57,7 +59,6 @@ const Filters: React.FC<TFiltersProps> = ({
   setSelectedTuitionType,
 }) => {
   const [isAccordingOpen, setIsAccordingOpen] = useState<boolean>(false);
-
   const handleResetFilters = () => {
     setSelectedCities([]);
     setSelectedAreas([]);
@@ -89,7 +90,6 @@ const Filters: React.FC<TFiltersProps> = ({
     setAreaOptions(uniqueLocations);
     setSelectedAreas([]);
   }, [selectedCities]);
-
   const buttonCommonClassNames =
     "flex items-center justify-center gap-2 leading-[24px] w-fit w-fit rounded-lg font-semibold font-Nunito cursor-pointer transition-all duration-300 py-2 px-3 lg:px-6 text-sm md:text-lg";
 
@@ -104,19 +104,11 @@ const Filters: React.FC<TFiltersProps> = ({
         </div>
 
         <div className="flex items-center gap-3">
-          <div className="relative w-full lg:w-[400px]">
-            <input
-              value={keyword}
-              onChange={(e) => setKeyword(e.target.value)}
-              placeholder={"Search by job title or id..."}
-              className={`w-full pl-8 pr-2 py-[10px] rounded-lg bg-white border border-primary-30 leading-[18px] focus:outline-none focus:border-primary-10 transition duration-300`}
-            />
-            <img
-              src={ICONS.search}
-              alt=""
-              className="size-5 absolute top-3 bottom-0 left-2"
-            />
-          </div>
+          <SearchInput
+            value={keyword}
+            onChange={(e: any) => setKeyword(e.target.value)}
+            placeholder="Search by job title or id..."
+          />
           <button
             onClick={() => setIsAccordingOpen(!isAccordingOpen)}
             className="flex items-center justify-center gap-[10px] px-3 py-2 bg-white border border-primary-30 rounded-lg cursor-pointer w-[145px]"
