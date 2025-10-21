@@ -1,5 +1,5 @@
 import { RxArrowTopRight } from "react-icons/rx";
-import JobCard from "../../../../components/JobBoardPage/Jobs/JobCard";
+import JobCard from "../../../../components/JobBoardPage/Jobs/jobCard/JobCard";
 import { Link } from "react-router-dom";
 import { ICONS } from "../../../../assets";
 import { useState } from "react";

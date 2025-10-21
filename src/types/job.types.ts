@@ -12,11 +12,11 @@ export type TJobs = {
   jobId: string | any;
   title: string;
   salary: number;
-  tuitionType: string;
+  tuitionType: string[];
   category: string;
   tutoringTime: string;
   tutoringDays: string;
-  subjects: string;
+  subjects: string[];
   otherRequirements?: string;
   preferredTutorGender: "male" | "female" | "any";
   numberOfStudents: number;

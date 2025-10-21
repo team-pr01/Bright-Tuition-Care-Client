@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
 import { ICONS } from "../../../../assets";
-import JobCard from "../../../../components/JobBoardPage/Jobs/JobCard";
+import JobCard from "../../../../components/JobBoardPage/Jobs/jobCard/JobCard";
 
 const JobApplicationsSummary = () => {
     const {status} = useParams();

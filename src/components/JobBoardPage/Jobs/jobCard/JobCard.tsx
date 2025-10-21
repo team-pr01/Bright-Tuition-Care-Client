@@ -1,23 +1,26 @@
 import { useEffect, useRef, useState } from "react";
-import { ICONS } from "../../../assets";
-import Button from "../../Reusable/Button/Button";
-import JobDetails from "../JobDetails/JobDetails";
-import JobApplyConfirmationModal from "./JobApplyConfirmationModal";
-import ShareJobModal from "../ShareJobModal";
-import DeleteJobConfirmationModal from "../../Reusable/DeleteJobConfirmationModal/DeleteJobConfirmationModal";
+import { ICONS } from "../../../../assets";
+import Button from "../../../Reusable/Button/Button";
+import JobDetails from "../../JobDetails/JobDetails";
+import JobApplyConfirmationModal from "../JobApplyConfirmationModal";
+import ShareJobModal from "../../ShareJobModal";
+import DeleteJobConfirmationModal from "../../../Reusable/DeleteJobConfirmationModal/DeleteJobConfirmationModal";
 import { Link } from "react-router-dom";
 import { TbMenuDeep } from "react-icons/tb";
 import { FiCheckCircle, FiX, FiXCircle } from "react-icons/fi";
+import type { TJobs } from "../../../../types/job.types";
 
 type TJobCardProps = {
   variant?: string;
   status?: string;
   detailsWidth?: string;
+  job?: TJobs;
 };
 const JobCard: React.FC<TJobCardProps> = ({
   variant,
   status,
   detailsWidth = "max-w-full 2xl:max-w-[80%]",
+  job,
 }) => {
   // const user = useSelector(useCurrentUser);
   // const path = user?.role === "guardian" ? "guardian" : "admin";
@@ -50,10 +53,10 @@ const JobCard: React.FC<TJobCardProps> = ({
     {
       icon: ICONS.tutoringDays,
       title: "Tutoring Days",
-      value: "3 Days / Week",
+      value: job?.tutoringDays,
     },
-    { icon: ICONS.salary, title: "Salary", value: "5000 BDT" },
-    { icon: ICONS.preferredTutor, title: "Prefer Tutor", value: "Female" },
+    { icon: ICONS.salary, title: "Salary", value: `${job?.salary} BDT`},
+    { icon: ICONS.preferredTutor, title: "Prefer Tutor", value: job?.preferredTutorGender },
     // { icon: ICONS.subject, title: "Subjects", value: "Physics, Chemistry, Math" },
     // { icon: ICONS.location, title: "Location", value: "Mohammodpur" },
   ];
@@ -98,9 +101,9 @@ const JobCard: React.FC<TJobCardProps> = ({
             onClick={() => setShowDrawer(true)}
             className="text-neutral-10 text-lg md:text-xl font-bold leading-6 hover:text-primary-10 cursor-pointer text-start"
           >
-            Need English Version Tutor For Class 3 Student -{" "}
+            {job?.title} -{" "}
             <span className="text-primary-10 font-normal text-sm">
-              Home Tutoring
+              {job?.tuitionType?.join(", ")}
             </span>
           </button>
 
@@ -113,7 +116,7 @@ const JobCard: React.FC<TJobCardProps> = ({
 
         <div className="flex items-center gap-5 text-neutral-10 text-xs sm:text-sm md:text-base mt-3 md:mt-0">
           <p>
-            Job Id : <span className="font-semibold">#12345</span>
+            Job Id : <span className="font-semibold">#{job?.jobId}</span>
           </p>
           <p>
             Posted Date : <span className="font-semibold">August 15, 2025</span>
@@ -125,7 +128,7 @@ const JobCard: React.FC<TJobCardProps> = ({
           <div>
             <p className="text-neutral-45 text-sm leading-normal">Subjects</p>
             <p className="text-neutral-10 font-medium leading-6 mt-1">
-              Physics, Chemistry, Math
+             {job?.subjects}
             </p>
           </div>
         </div>
@@ -139,7 +142,7 @@ const JobCard: React.FC<TJobCardProps> = ({
                 <p className="text-neutral-45 text-sm leading-normal">
                   {details.title}
                 </p>
-                <p className="text-neutral-10 font-medium leading-6 mt-1">
+                <p className="text-neutral-10 font-medium leading-6 mt-1 capitalize">
                   {details.value}
                 </p>
               </div>
@@ -152,8 +155,7 @@ const JobCard: React.FC<TJobCardProps> = ({
           <div>
             <p className="text-neutral-45 text-sm leading-normal">Location</p>
             <p className="text-neutral-10 font-medium leading-6 mt-1">
-              Mohammodpur, Dhaka
-            </p>
+            {job?.area} {" "} { job?.city}            </p>
           </div>
         </div>
 
@@ -193,7 +195,7 @@ const JobCard: React.FC<TJobCardProps> = ({
                 <img src={ICONS.jobStatus} alt="" className="size-4" />
                 <p className="font-bold">Status:</p>
                 <p className={`capitalize ${statusTextColorForGuardian}`}>
-                  {status}
+                  {job?.status}
                 </p>
               </div>
               <Link
