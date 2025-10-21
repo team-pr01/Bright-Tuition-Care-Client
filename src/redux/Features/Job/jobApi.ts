@@ -16,6 +16,8 @@ const jobApi = baseApi.injectEndpoints({
         preferredTutorGender?: string;
         studentGender?: string;
         tuitionType?: string;
+        skip?: number;
+        limit?: number;
       }
     >({
       query: (filters) => {
@@ -36,6 +38,10 @@ const jobApi = baseApi.injectEndpoints({
           params.append("studentGender", filters.studentGender);
         if (filters.tuitionType)
           params.append("tuitionType", filters.tuitionType);
+        if (filters.skip !== undefined)
+          params.append("skip", String(filters.skip));
+        if (filters.limit !== undefined)
+          params.append("limit", String(filters.limit));
 
         return {
           url: `/job?${params.toString()}`,

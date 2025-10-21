@@ -2,8 +2,9 @@
 import React, { useEffect } from "react";
 import { motion, useAnimation } from "framer-motion";
 import { useInView } from "react-intersection-observer";
-import JobCard from "./JobCard";
+import JobCard from "./jobCard/JobCard";
 import type { TJobs } from "../../../types/job.types";
+import JobCardSkeleton from "./jobCard/JobCardSkeleton";
 
 const Jobs = ({
   allJobs,
@@ -12,11 +13,20 @@ const Jobs = ({
   allJobs: TJobs[];
   isLoading: boolean;
 }) => {
+  if (isLoading) {
+    return (
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        {Array.from({ length: 3 }).map((_, i) => (
+          <JobCardSkeleton key={i} />
+        ))}
+      </div>
+    );
+  }
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
       {allJobs?.map((job: TJobs, index: number) => (
         <AnimatedJobCard key={index}>
-          <JobCard variant="tutorJobCard" />
+          <JobCard variant="tutorJobCard" job={job}/>
         </AnimatedJobCard>
       ))}
     </div>
