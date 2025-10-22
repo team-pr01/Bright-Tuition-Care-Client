@@ -9,7 +9,10 @@ import { useEffect, useState } from "react";
 import SelectDropdownWithSearch from "../../../Reusable/SelectDropdownWithSearch/SelectDropdownWithSearch";
 import { filterData } from "../../../../constants/filterData";
 import toast from "react-hot-toast";
-import { useAddStaffMutation, useUpdateStaffInfoMutation } from "../../../../redux/Features/Staff/staffApi";
+import {
+  useAddStaffMutation,
+  useUpdateStaffInfoMutation,
+} from "../../../../redux/Features/Staff/staffApi";
 
 type TFormData = {
   name: string;
@@ -39,7 +42,8 @@ const AddOrUpdateStaffModal: React.FC<TAddOrUpdateStaffModalProps> = ({
   isLoading,
 }) => {
   const [addStaff, { isLoading: isAddingStaff }] = useAddStaffMutation();
-  const [updateStaffInfo, { isLoading: isUpdatingStaff }] = useUpdateStaffInfoMutation();
+  const [updateStaffInfo, { isLoading: isUpdatingStaff }] =
+    useUpdateStaffInfoMutation();
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const [fieldErrors, setFieldErrors] = useState<any>({
     gender: "",
@@ -62,6 +66,7 @@ const AddOrUpdateStaffModal: React.FC<TAddOrUpdateStaffModalProps> = ({
 
   useEffect(() => {
     if (modalType === "edit" && defaultValues) {
+      console.log(defaultValues);
       setValue("name", defaultValues?.userId?.name);
       setValue("email", defaultValues?.userId?.email);
       setValue("phoneNumber", defaultValues?.userId?.phoneNumber);
@@ -73,7 +78,6 @@ const AddOrUpdateStaffModal: React.FC<TAddOrUpdateStaffModalProps> = ({
     }
   }, [defaultValues, modalType, reset, setValue]);
 
-  // Update area options when city changes
   useEffect(() => {
     if (!selectedCity) {
       setAreaOptions([]);
@@ -86,8 +90,20 @@ const AddOrUpdateStaffModal: React.FC<TAddOrUpdateStaffModalProps> = ({
     );
     const locations = cityObj?.locations || [];
     setAreaOptions(locations);
-    setValue("area", "");
-  }, [selectedCity, setValue]);
+
+    // ✅ Don't reset area here when editing
+    if (modalType === "add") {
+      setValue("area", "");
+    }
+
+    // ✅ Restore area only when editing and option exists
+    if (modalType === "edit" && defaultValues?.userId?.area) {
+      const exists = locations.includes(defaultValues.userId.area);
+      if (exists) {
+        setValue("area", defaultValues.userId.area);
+      }
+    }
+  }, [selectedCity, setValue, defaultValues, modalType]);
 
   const handleSubmitStaff = async (data: TFormData) => {
     if (!selectedCity) {
@@ -120,7 +136,10 @@ const AddOrUpdateStaffModal: React.FC<TAddOrUpdateStaffModalProps> = ({
           setIsStaffModalOpen(false);
         }
       } else if (modalType === "edit" && defaultValues) {
-        const res = await updateStaffInfo({ id: defaultValues._id, data: payload }).unwrap();
+        const res = await updateStaffInfo({
+          id: defaultValues._id,
+          data: payload,
+        }).unwrap();
         if (res?.success) {
           reset();
           setFieldErrors({ gender: "", city: "", area: "" });
@@ -186,8 +205,9 @@ const AddOrUpdateStaffModal: React.FC<TAddOrUpdateStaffModalProps> = ({
           <SelectDropdownWithSearch
             label="Gender"
             name="gender"
+            value={selectedGender}
             options={["Male", "Female", "Other"]}
-            onChange={(value) => setValue("gender", value.toLocaleLowerCase())}
+            onChange={(value) => setValue("gender", value)}
             isRequired={true}
             error={fieldErrors.gender}
           />
@@ -215,20 +235,22 @@ const AddOrUpdateStaffModal: React.FC<TAddOrUpdateStaffModalProps> = ({
           />
 
           {/* Password */}
-          <PasswordInput
-            label="Password"
-            placeholder="Must be at least 8 Characters"
-            error={errors.password}
-            {...register("password", {
-              required: "Password is required",
-              minLength: {
-                value: 8,
-                message: "Password must be at least 8 characters",
-              },
-            })}
-            isPasswordVisible={isPasswordVisible}
-            setIsPasswordVisible={setIsPasswordVisible}
-          />
+          {modalType === "add" && (
+            <PasswordInput
+              label="Password"
+              placeholder="Must be at least 8 Characters"
+              error={errors.password}
+              {...register("password", {
+                required: "Password is required",
+                minLength: {
+                  value: 8,
+                  message: "Password must be at least 8 characters",
+                },
+              })}
+              isPasswordVisible={isPasswordVisible}
+              setIsPasswordVisible={setIsPasswordVisible}
+            />
+          )}
         </div>
 
         {/* Buttons */}

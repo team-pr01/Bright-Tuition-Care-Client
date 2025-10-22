@@ -54,7 +54,7 @@ const staffApi = baseApi.injectEndpoints({
     updateStaffInfo: builder.mutation<any, any>({
       query: ({ id, data }) => ({
         url: `/staff/update/${id}`,
-        method: "PUT",
+        method: "PATCH",
         body: data,
         credentials: "include",
       }),

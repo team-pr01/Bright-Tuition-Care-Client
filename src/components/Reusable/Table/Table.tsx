@@ -161,7 +161,9 @@ export default function Table<T extends Record<string, any>>({
         </div>
 
         <div className="flex items-center gap-3">
-          <div>
+          {
+            onSearch &&
+            <div>
             <input
               placeholder="Search..."
               value={query}
@@ -170,6 +172,7 @@ export default function Table<T extends Record<string, any>>({
               aria-label="Search table"
             />
           </div>
+          }
 
           <select
             value={limit}

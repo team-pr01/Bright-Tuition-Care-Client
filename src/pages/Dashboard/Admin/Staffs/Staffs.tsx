@@ -8,27 +8,32 @@ import type {
 import Table from "../../../../components/Reusable/Table/Table";
 import Button from "../../../../components/Reusable/Button/Button";
 import AddNewStaffModal from "../../../../components/Admin/StaffsPage/AddOrUpdateStaffModal/AddOrUpdateStaffModal";
-import { useGetAllStaffsQuery, useGetSingleStaffByIdQuery, useRemoveStaffMutation } from "../../../../redux/Features/Staff/staffApi";
+import {
+  useGetAllStaffsQuery,
+  useGetSingleStaffByIdQuery,
+  useRemoveStaffMutation,
+} from "../../../../redux/Features/Staff/staffApi";
 import toast from "react-hot-toast";
+import type { TStaff } from "../../../../types/staff.types";
 
 const Staffs = () => {
-    const [page, setPage] = useState<number>(1);
+  const [page, setPage] = useState<number>(1);
   const [limit, setLimit] = useState<number>(10);
   const [selectedStaffId, setSelectedStaffId] = useState<string | null>(null);
-  const {data:allStaffs, isLoading} = useGetAllStaffsQuery({
+  const { data: allStaffs, isLoading } = useGetAllStaffsQuery({
     page,
     limit,
   });
-  console.log(allStaffs);
-  const {data:singleStaff, isLoading:isSingleStaffLoading, isFetching:isSingleStaffFetching} = useGetSingleStaffByIdQuery(selectedStaffId);
-  const [removeStaff] =useRemoveStaffMutation();
+  const {
+    data: singleStaff,
+    isLoading: isSingleStaffLoading,
+    isFetching: isSingleStaffFetching,
+  } = useGetSingleStaffByIdQuery(selectedStaffId);
+  const [removeStaff] = useRemoveStaffMutation();
   const [isStaffModalOpen, setIsStaffModalOpen] = useState<boolean>(false);
   const [modalType, setModalType] = useState<"add" | "edit">("add");
 
-
-  const [searchQuery, setSearchQuery] = useState<string>("");
-
-    const handleRemoveStaff = async (id: string) => {
+  const handleRemoveStaff = async (id: string) => {
     try {
       await toast.promise(removeStaff(id).unwrap(), {
         loading: "Loading...",
@@ -64,24 +69,20 @@ const Staffs = () => {
       label: "Delete",
       icon: <FiTrash2 className="inline mr-2" />,
       onClick: (row) => {
-        handleRemoveStaff(row?._id);
+        handleRemoveStaff(row?.userId);
       },
     },
   ];
 
-const tableData = allStaffs?.data?.staffs?.map((staff) => ({
-  _id: staff._id,
-  name: staff?.userId?.name,
-  email: staff?.userId?.email,
-  phoneNumber: staff?.userId?.phoneNumber,
-  pagesAssigned: staff.pagesAssigned,
-  joinedDate: staff.createdAt,
-}));
-
-
-  const handleSearch = (q: string) => {
-    setSearchQuery(q);
-  };
+  const tableData = allStaffs?.data?.staffs?.map((staff: TStaff) => ({
+    _id: staff._id,
+    userId: staff.userId._id,
+    name: staff?.userId?.name,
+    email: staff?.userId?.email,
+    phoneNumber: staff?.userId?.phoneNumber,
+    pagesAssigned: staff.pagesAssigned,
+    joinedDate: staff.createdAt,
+  }));
 
   const addStaffButton = (
     <Button
@@ -101,11 +102,10 @@ const tableData = allStaffs?.data?.staffs?.map((staff) => ({
         description="Manage all staff members on the platform."
         theads={staffTheads}
         data={tableData || []}
-        totalPages={5}
+        totalPages={allStaffs?.data?.meta?.totalPages || 1}
         currentPage={page}
         onPageChange={(p) => setPage(p)}
         isLoading={isLoading}
-        onSearch={handleSearch}
         actions={actions}
         limit={limit}
         setLimit={setLimit}
