@@ -13,6 +13,7 @@ import {
   useAddStaffMutation,
   useUpdateStaffInfoMutation,
 } from "../../../../redux/Features/Staff/staffApi";
+import Loader from "../../../Reusable/Loader/Loader";
 
 type TFormData = {
   name: string;
@@ -147,7 +148,7 @@ const AddOrUpdateStaffModal: React.FC<TAddOrUpdateStaffModalProps> = ({
       const errorMessage =
         err?.data?.message ||
         err?.error ||
-        "Something went wrong during. Please try again.";
+        "Something went wrong. Please try again.";
 
       toast.error(errorMessage);
     }
@@ -159,120 +160,129 @@ const AddOrUpdateStaffModal: React.FC<TAddOrUpdateStaffModalProps> = ({
       setIsModalOpen={setIsStaffModalOpen}
       heading={`${modalType === "add" ? "Add" : "Update"} Staff`}
     >
-      <form
-        onSubmit={handleSubmit(handleSubmitStaff)}
-        className="flex flex-col gap-6 font-Nunito mt-5"
-      >
-        <div className="flex flex-col gap-6">
-          {/* Name */}
-          <TextInput
-            label="Name"
-            placeholder="Enter full name"
-            error={errors.name}
-            {...register("name", {
-              required: "Name is required",
-            })}
-          />
+      <div className="relative">
+        {isLoading && (
+          <div className="absolute inset-0 flex flex-col items-center justify-center backdrop-blur-[2px] bg-white/30 z-50">
+            <Loader size="lg" text="Please wait..." />
+          </div>
+        )}
+        <form
+          onSubmit={handleSubmit(handleSubmitStaff)}
+          className="flex flex-col gap-6 font-Nunito mt-5"
+        >
+          <div className="flex flex-col gap-6">
+            {/* Name */}
+            <TextInput
+              label="Name"
+              placeholder="Enter full name"
+              error={errors.name}
+              {...register("name", {
+                required: "Name is required",
+              })}
+            />
 
-          {/* Email */}
-          <TextInput
-            label="Email"
-            placeholder="Enter email"
-            error={errors.email}
-            {...register("email", {
-              required: "Email is required",
-              pattern: {
-                value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-                message: "Enter a valid email address",
-              },
-            })}
-          />
-
-          {/* Phone */}
-          <TextInput
-            label="Phone Number"
-            placeholder="Enter phone number"
-            error={errors.phoneNumber}
-            {...register("phoneNumber", {
-              required: "Phone number is required",
-            })}
-          />
-
-          {/* Gender */}
-          <SelectDropdownWithSearch
-            label="Gender"
-            name="gender"
-            value={selectedGender}
-            options={["Male", "Female", "Other"]}
-            onChange={(value) => setValue("gender", value)}
-            isRequired={true}
-            error={fieldErrors.gender}
-          />
-
-          {/* City Dropdown */}
-          <SelectDropdownWithSearch
-            label="City"
-            name="city"
-            options={filterData.cityCorporationWithLocation.map((c) => c.name)}
-            value={selectedCity}
-            onChange={(value) => setValue("city", value)}
-            isRequired={true}
-            error={fieldErrors.city}
-          />
-
-          {/* Area Dropdown */}
-          <SelectDropdownWithSearch
-            label="Location"
-            name="area"
-            options={areaOptions}
-            value={watch("area")}
-            onChange={(value) => setValue("area", value)}
-            isRequired={true}
-            error={fieldErrors.area}
-          />
-
-          {/* Password */}
-          {modalType === "add" && (
-            <PasswordInput
-              label="Password"
-              placeholder="Must be at least 8 Characters"
-              error={errors.password}
-              {...register("password", {
-                required: "Password is required",
-                minLength: {
-                  value: 8,
-                  message: "Password must be at least 8 characters",
+            {/* Email */}
+            <TextInput
+              label="Email"
+              placeholder="Enter email"
+              error={errors.email}
+              {...register("email", {
+                required: "Email is required",
+                pattern: {
+                  value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                  message: "Enter a valid email address",
                 },
               })}
-              isPasswordVisible={isPasswordVisible}
-              setIsPasswordVisible={setIsPasswordVisible}
             />
-          )}
-        </div>
 
-        {/* Buttons */}
-        <div className="flex gap-3 justify-end">
-          <Button
-            type="button"
-            label={"Cancel"}
-            variant="tertiary"
-            className="py-[7px] lg:py-[7px] w-full md:w-fit"
-            onClick={() => {
-              setIsStaffModalOpen(false);
-              setModalType("add");
-            }}
-          />
-          <Button
-            type="submit"
-            label={modalType === "add" ? "Add Staff" : "Update Staff"}
-            variant="primary"
-            iconWithoutBg={ICONS.topRightArrowWhite}
-            className="py-[7px] lg:py-[7px] w-full md:w-fit"
-            isDisabled={isLoading}
-            isLoading={isLoading || isAddingStaff || isUpdatingStaff}
-          />
-        </div>
-      </form>
+            {/* Phone */}
+            <TextInput
+              label="Phone Number"
+              placeholder="Enter phone number"
+              error={errors.phoneNumber}
+              {...register("phoneNumber", {
+                required: "Phone number is required",
+              })}
+            />
+
+            {/* Gender */}
+            <SelectDropdownWithSearch
+              label="Gender"
+              name="gender"
+              value={selectedGender}
+              options={["Male", "Female", "Other"]}
+              onChange={(value) => setValue("gender", value)}
+              isRequired={true}
+              error={fieldErrors.gender}
+            />
+
+            {/* City Dropdown */}
+            <SelectDropdownWithSearch
+              label="City"
+              name="city"
+              options={filterData.cityCorporationWithLocation.map(
+                (c) => c.name
+              )}
+              value={selectedCity}
+              onChange={(value) => setValue("city", value)}
+              isRequired={true}
+              error={fieldErrors.city}
+            />
+
+            {/* Area Dropdown */}
+            <SelectDropdownWithSearch
+              label="Location"
+              name="area"
+              options={areaOptions}
+              value={watch("area")}
+              onChange={(value) => setValue("area", value)}
+              isRequired={true}
+              error={fieldErrors.area}
+            />
+
+            {/* Password */}
+            {modalType === "add" && (
+              <PasswordInput
+                label="Password"
+                placeholder="Must be at least 8 Characters"
+                error={errors.password}
+                {...register("password", {
+                  required: "Password is required",
+                  minLength: {
+                    value: 8,
+                    message: "Password must be at least 8 characters",
+                  },
+                })}
+                isPasswordVisible={isPasswordVisible}
+                setIsPasswordVisible={setIsPasswordVisible}
+              />
+            )}
+          </div>
+
+          {/* Buttons */}
+          <div className="flex gap-3 justify-end">
+            <Button
+              type="button"
+              label={"Cancel"}
+              variant="tertiary"
+              className="py-[7px] lg:py-[7px] w-full md:w-fit"
+              onClick={() => {
+                setIsStaffModalOpen(false);
+                setModalType("add");
+              }}
+            />
+            <Button
+              type="submit"
+              label={modalType === "add" ? "Add Staff" : "Update Staff"}
+              variant="primary"
+              iconWithoutBg={ICONS.topRightArrowWhite}
+              className="py-[7px] lg:py-[7px] w-full md:w-fit"
+              isDisabled={isLoading}
+              isLoading={isLoading || isAddingStaff || isUpdatingStaff}
+            />
+          </div>
+        </form>
+      </div>
     </Modal>
   );
 };

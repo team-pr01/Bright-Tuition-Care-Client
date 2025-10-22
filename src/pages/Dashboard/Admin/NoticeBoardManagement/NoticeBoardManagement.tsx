@@ -2,6 +2,12 @@ import { RxArrowTopRight } from "react-icons/rx";
 import NoticeCard from "../../../../components/Admin/NoticeBoardManagementPage/NoticeCard/NoticeCard";
 import AddNoticeModal from "../../../../components/Admin/NoticeBoardManagementPage/AddNoticeModal/AddNoticeModal";
 import { useState } from "react";
+import {
+  useGetAllNoticesQuery,
+  useGetSingleNoticeByIdQuery,
+} from "../../../../redux/Features/NoticeBoard/noticeBoardApi";
+import type { TNotice } from "../../../../types/noticeBoard.types";
+import Loader from "../../../../components/Reusable/Loader/Loader";
 
 export type Notice = {
   _id: string;
@@ -11,38 +17,18 @@ export type Notice = {
   date: string;
 };
 
-const notices: Notice[] = [
-  {
-    _id: "1",
-    title: "System Maintenance",
-    notice:
-      "The system will be down for scheduled maintenance on Sunday from 2 AM to 4 AM.",
-    targetedAudience: "Tutor",
-    date: "2025-09-28",
-  },
-  {
-    _id: "2",
-    title: "New Course Released",
-    notice:
-      "We have released a new MERN stack course. Check it out in the courses section.",
-    targetedAudience: "Guardian",
-    date: "2025-09-25",
-  },
-  {
-    _id: "3",
-    title: "Exam Schedule Updated",
-    notice:
-      "The mid-term exam schedule has been updated. Please download the new version.",
-    targetedAudience: "Both",
-    date: "2025-09-20",
-  },
-];
-
 const NoticeBoardManagement = () => {
   const [modalType, setModalType] = useState<string>("add");
   const [selectedNoticeId, setSelectedNoticeId] = useState<string | null>(null);
   const [isAddNoticeModalOpen, setIsAddNoticeModalOpen] =
     useState<boolean>(false);
+
+  const { data: allNotices, isLoading } = useGetAllNoticesQuery({});
+  const {
+    data: singleNotice,
+    isLoading: isSingleNoticeLoading,
+    isFetching: isSingleNoticeFetching,
+  } = useGetSingleNoticeByIdQuery(selectedNoticeId);
   return (
     <div className="flex flex-col gap-5">
       <div className="flex items-center justify-end border-b border-neutral-30/20 pb-3">
@@ -57,23 +43,31 @@ const NoticeBoardManagement = () => {
           Add Notice <RxArrowTopRight className="text-lg" />
         </button>
       </div>
-      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {notices?.map((notice) => (
-          <NoticeCard
-            key={notice?._id}
-            notice={notice}
-            setModalType={setModalType}
-            setIsAddNoticeModalOpen={setIsAddNoticeModalOpen}
-            setSelectedNoticeId={setSelectedNoticeId}
-          />
-        ))}
-      </div>
+      {isLoading ? (
+        <div className="py-10">
+          <Loader size="lg" text="Please wait..." />
+        </div>
+      ) : (
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {allNotices?.data?.map((notice: TNotice) => (
+            <NoticeCard
+              key={notice?._id}
+              notice={notice}
+              setModalType={setModalType}
+              setIsAddNoticeModalOpen={setIsAddNoticeModalOpen}
+              setSelectedNoticeId={setSelectedNoticeId}
+            />
+          ))}
+        </div>
+      )}
 
       <AddNoticeModal
         isAddNoticeModalOpen={isAddNoticeModalOpen}
         setIsAddNoticeModalOpen={setIsAddNoticeModalOpen}
         modalType={modalType}
         setModalType={setModalType}
+        defaultValues={singleNotice?.data}
+        isLoading={isSingleNoticeLoading || isSingleNoticeFetching}
       />
     </div>
   );
