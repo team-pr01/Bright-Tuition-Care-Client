@@ -6,10 +6,11 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import { Navigation, Pagination, Autoplay } from "swiper/modules";
-import { ICONS, IMAGES } from "../../../assets";
+import { ICONS } from "../../../assets";
 import { FaChevronRight } from "react-icons/fa";
 import Button from "../../Reusable/Button/Button";
 import { Link } from "react-router-dom";
+import type { TTestimonial } from "../../../types/testimonial.types";
 
 interface TestimonialsProps {
   title: string;
@@ -17,6 +18,7 @@ interface TestimonialsProps {
   variant?: "default" | "primary";
   buttonText: string;
   navigatePath: string;
+  data?: TTestimonial[];
 }
 
 const Testimonials: React.FC<TestimonialsProps> = ({
@@ -25,6 +27,7 @@ const Testimonials: React.FC<TestimonialsProps> = ({
   variant,
   buttonText,
   navigatePath,
+  data,
 }) => {
   return (
     <div className="py-12 w-full font-Nunito overflow-hidden">
@@ -61,14 +64,10 @@ const Testimonials: React.FC<TestimonialsProps> = ({
             }}
             className="w-full mx-auto"
           >
-            {[1, 2, 3, 4].map((_, i) => (
-              <SwiperSlide key={i} className="overflow-visible">
+            {data?.map((testimonial) => (
+              <SwiperSlide key={testimonial?._id} className="overflow-visible">
                 <TestimonialCard
-                  image={IMAGES.dummyAvatar}
-                  name="Tanvir Rahman"
-                  role="Math Tutor, Dhaka"
-                  rating={4}
-                  review="I joined the platform just 3 months ago, and I’ve already connected with 5 great students. The process is easy and fast — it truly changed my career!"
+                  testimonial={testimonial}
                   variant={variant}
                 />
               </SwiperSlide>

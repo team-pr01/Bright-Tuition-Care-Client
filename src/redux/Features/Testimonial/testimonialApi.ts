@@ -26,6 +26,28 @@ const staffApi = baseApi.injectEndpoints({
       providesTags: ["testimonial"],
     }),
 
+    getAllTutorsTestimonials: builder.query<any, { role?: string }>({
+      query: () => {
+        return {
+          url: `/testimonial/tutors`,
+          method: "GET",
+          credentials: "include",
+        };
+      },
+      providesTags: ["testimonial"],
+    }),
+
+    getAllGuardiansTestimonials: builder.query<any, { role?: string }>({
+      query: () => {
+        return {
+          url: `/testimonial/guardians`,
+          method: "GET",
+          credentials: "include",
+        };
+      },
+      providesTags: ["testimonial"],
+    }),
+
     addTestimonial: builder.mutation<any, any>({
       query: (data) => ({
         url: `/testimonial/add`,
@@ -60,6 +82,8 @@ const staffApi = baseApi.injectEndpoints({
 export const {
   useGetAllTestimonialsQuery,
   useGetSingleTestimonialByIdQuery,
+  useGetAllTutorsTestimonialsQuery,
+  useGetAllGuardiansTestimonialsQuery,
   useAddTestimonialMutation,
   useDeleteTestimonialMutation,
   useUpdateTestimonialMutation,

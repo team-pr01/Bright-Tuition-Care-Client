@@ -7,8 +7,16 @@ import TutorSteps from "../../components/HomePage/HowItWorksTutor/TutorSteps";
 import Services from "../../components/HomePage/Services/Services";
 import Testimonials from "../../components/HomePage/Testimonials/Testimonials";
 import TuitionMethods from "../../components/HomePage/TuitionMethods/TuitionMethods";
+import {
+  useGetAllGuardiansTestimonialsQuery,
+  useGetAllTutorsTestimonialsQuery,
+} from "../../redux/Features/Testimonial/testimonialApi";
 
 const Home = () => {
+  const { data: allTutorsTestimonials } = useGetAllTutorsTestimonialsQuery({});
+  const { data: allGuardianTestimonials } = useGetAllGuardiansTestimonialsQuery(
+    {}
+  );
   return (
     <div className="overflow-hidden">
       <Hero />
@@ -22,6 +30,7 @@ const Home = () => {
         description="Real stories from real tutors who found success through our platform."
         buttonText="Hire A Tutor"
         navigatePath="/tutors"
+        data={allGuardianTestimonials?.data}
       />
       <TutorSteps />
 
@@ -31,6 +40,7 @@ const Home = () => {
         variant="primary"
         buttonText="Become A Tutor"
         navigatePath="/tutors"
+        data={allTutorsTestimonials?.data}
       />
       <div className="mb-72 overflow-hidden">
         <DownloadApp />

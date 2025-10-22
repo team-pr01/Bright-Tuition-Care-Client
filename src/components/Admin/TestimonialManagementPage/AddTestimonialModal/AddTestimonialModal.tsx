@@ -59,8 +59,10 @@ const AddTestimonialModal: React.FC<TAddTestimonialModalProps> = ({
       setValue("role", defaultValues.role);
       setValue("review", defaultValues.review);
       setValue("rating", defaultValues.rating);
+    } else {
+      reset();
     }
-  }, [defaultValues, modalType, setValue]);
+  }, [defaultValues, modalType, setValue , reset]);
 
   const handleSubmitTestimonial = async (data: TFormData) => {
     try {

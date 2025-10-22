@@ -53,8 +53,10 @@ const AddNoticeModal: React.FC<TAddNoticeModalProps> = ({
       setValue("title", defaultValues.title);
       setValue("description", defaultValues.description);
       setValue("targetedAudience", defaultValues.targetedAudience);
+    } else {
+      reset();
     }
-  }, [defaultValues, modalType, setValue]);
+  }, [defaultValues, modalType, setValue , reset]);
 
   const handleSubmitNotice = async (data: TFormData) => {
     try {

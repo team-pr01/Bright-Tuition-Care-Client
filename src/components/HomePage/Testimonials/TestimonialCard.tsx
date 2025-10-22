@@ -1,28 +1,22 @@
 import React, { useState } from "react";
 import { ICONS } from "../../../assets";
+import type { TTestimonial } from "../../../types/testimonial.types";
 
 interface TestimonialCardProps {
-  image: string;
-  name: string;
-  role: string;
-  review: string;
-  rating: number;
-  variant?: "default" | "primary"; // Optional variant prop for future use
+  testimonial: TTestimonial;
+  variant?: "default" | "primary";
 }
 
 const TestimonialCard: React.FC<TestimonialCardProps> = ({
-  image,
-  name,
-  role,
-  review,
+  testimonial,
   variant = "default",
 }) => {
   const [showFull, setShowFull] = useState(false);
 
-  const isLong = review.length > 100;
+  const isLong = testimonial?.review?.length > 100;
   const displayText = showFull
-    ? review
-    : review.slice(0, 100) + (isLong ? "..." : "");
+    ? testimonial?.review
+    : testimonial?.review?.slice(0, 100) + (isLong ? "..." : "");
   return (
     <div
       className={`flex flex-col ${
@@ -44,7 +38,7 @@ const TestimonialCard: React.FC<TestimonialCardProps> = ({
         ))}
       </div> */}
 
-      <div className="flex flex-col items-start gap-3 bg-primary-10/10 p-5 rounded-2xl relative">
+      <div className="flex flex-col items-start gap-3 bg-primary-10/10 p-5 rounded-2xl relative w-full">
         {/* Profile */}
         <div className="flex flex-col gap-4 items-center justify-center absolute left-0 right-0 -top-32 z-50">
           {/* Profile Image */}
@@ -52,20 +46,22 @@ const TestimonialCard: React.FC<TestimonialCardProps> = ({
             <div className="p-[3px] bg-primary-10 rounded-full w-full h-full">
               <div className="p-[3px] bg-white rounded-full w-full h-full">
                 <img
-                  src={image}
-                  alt={name}
+                  src={testimonial?.imageUrl}
+                  alt={testimonial?.name}
                   className="w-full h-full object-cover rounded-full"
                 />
               </div>
             </div>
           </div>
 
-          {/* Name and Role */}
+          {/* Name and designation */}
           <div className="">
-            <p className="font-bold text-neutral-10 mb-1 text-xl leading-[24px]">
-              {name}
+            <p className="font-bold text-neutral-10 mb-1 text-xl text-center leading-[24px]">
+              {testimonial?.name}
             </p>
-            <p className="text-lg text-neutral-10 leading-[24px]">{role}</p>
+            <p className="text-lg text-neutral-10 leading-[24px]">
+              {testimonial?.designation}
+            </p>
           </div>
         </div>
 

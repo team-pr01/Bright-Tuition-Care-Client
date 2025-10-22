@@ -11,7 +11,7 @@ const noticeBoardApi = baseApi.injectEndpoints({
           credentials: "include",
         };
       },
-      providesTags: ["testimonial"],
+      providesTags: ["notice"],
     }),
     getAllTutorsNotice: builder.query<any, { role?: string }>({
       query: () => {
@@ -21,7 +21,7 @@ const noticeBoardApi = baseApi.injectEndpoints({
           credentials: "include",
         };
       },
-      providesTags: ["testimonial"],
+      providesTags: ["notice"],
     }),
     getAllGuardiansNotice: builder.query<any, { role?: string }>({
       query: () => {
@@ -31,7 +31,7 @@ const noticeBoardApi = baseApi.injectEndpoints({
           credentials: "include",
         };
       },
-      providesTags: ["testimonial"],
+      providesTags: ["notice"],
     }),
 
     getSingleNoticeById: builder.query({
@@ -40,7 +40,7 @@ const noticeBoardApi = baseApi.injectEndpoints({
         method: "GET",
         credentials: "include",
       }),
-      providesTags: ["testimonial"],
+      providesTags: ["notice"],
     }),
 
     addNotice: builder.mutation<any, any>({
@@ -50,7 +50,7 @@ const noticeBoardApi = baseApi.injectEndpoints({
         body: data,
         credentials: "include",
       }),
-      invalidatesTags: ["testimonial"],
+      invalidatesTags: ["notice"],
     }),
 
     deleteNotice: builder.mutation<any, string>({
@@ -59,7 +59,7 @@ const noticeBoardApi = baseApi.injectEndpoints({
         method: "DELETE",
         credentials: "include",
       }),
-      invalidatesTags: ["testimonial"],
+      invalidatesTags: ["notice"],
     }),
 
     updateNotice: builder.mutation<any, any>({
@@ -69,7 +69,7 @@ const noticeBoardApi = baseApi.injectEndpoints({
         body: data,
         credentials: "include",
       }),
-      invalidatesTags: ["testimonial"],
+      invalidatesTags: ["notice"],
     }),
   }),
 });
