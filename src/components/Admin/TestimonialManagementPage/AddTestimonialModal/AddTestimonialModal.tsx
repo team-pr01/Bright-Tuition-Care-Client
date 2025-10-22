@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useForm } from "react-hook-form";
 import Button from "../../../Reusable/Button/Button";
 import { ICONS } from "../../../../assets";
@@ -5,13 +6,20 @@ import Textarea from "../../../Reusable/TextArea/TextArea";
 import Modal from "../../../Reusable/Modal/Modal";
 import TextInput from "../../../Reusable/TextInput/TextInput";
 import SelectDropdown from "../../../Reusable/SelectDropdown/SelectDropdown";
+import {
+  useAddTestimonialMutation,
+  useUpdateTestimonialMutation,
+} from "../../../../redux/Features/Testimonial/testimonialApi";
+import toast from "react-hot-toast";
+import { useEffect } from "react";
 
 type TFormData = {
   name: string;
-  designationAndLocation: string;
-  role : string
+  designation: string;
+  role: string;
   review: string;
   rating: string;
+  file : FileList;
 };
 
 type TAddTestimonialModalProps = {
@@ -19,6 +27,8 @@ type TAddTestimonialModalProps = {
   setIsTestimonialModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
   modalType: "add" | "edit";
   setModalType: React.Dispatch<React.SetStateAction<"add" | "edit">>;
+  defaultValues?: any;
+  isLoading: boolean;
 };
 
 const AddTestimonialModal: React.FC<TAddTestimonialModalProps> = ({
@@ -26,15 +36,64 @@ const AddTestimonialModal: React.FC<TAddTestimonialModalProps> = ({
   setIsTestimonialModalOpen,
   modalType,
   setModalType,
+  defaultValues,
+  isLoading,
 }) => {
+  const [addTestimonial, { isLoading: isAddingTestimonial }] =
+    useAddTestimonialMutation();
+  const [updateTestimonial, { isLoading: isUpdatingTestimonial }] =
+    useUpdateTestimonialMutation();
   const {
     register,
     handleSubmit,
+    reset,
+    setValue,
     formState: { errors },
   } = useForm<TFormData>();
 
-  const handleSubmitForm = (data: TFormData) => {
-    console.log(data);
+  useEffect(() => {
+    if (modalType === "edit" && defaultValues) {
+      setValue("name", defaultValues.name);
+      setValue("designation", defaultValues.designation);
+      setValue("role", defaultValues.role);
+      setValue("review", defaultValues.review);
+      setValue("rating", defaultValues.rating);
+    }
+  }, [defaultValues, modalType, setValue]);
+
+  const handleSubmitTestimonial = async (data: TFormData) => {
+    try {
+      const formData = new FormData();
+      formData.append("name", data.name);
+      formData.append("designation", data.designation);
+      formData.append("role", data.role);
+      formData.append("review", data.review);
+      formData.append("rating", data.rating);
+      formData.append("file", data.file[0]);
+      if (modalType === "add") {
+        const res = await addTestimonial(formData).unwrap();
+        if (res?.success) {
+          reset();
+          setIsTestimonialModalOpen(false);
+        }
+      } else if (modalType === "edit" && defaultValues) {
+        const res = await updateTestimonial({
+          id: defaultValues._id,
+          data: formData,
+        }).unwrap();
+        if (res?.success) {
+          reset();
+          setIsTestimonialModalOpen(false);
+        }
+      }
+    } catch (err: any) {
+      const errorMessage =
+        err?.data?.message ||
+        err?.error ||
+        "Something went wrong. Please try again.";
+
+      toast.error(errorMessage);
+    }
   };
 
   return (
@@ -44,7 +103,7 @@ const AddTestimonialModal: React.FC<TAddTestimonialModalProps> = ({
       heading={`${modalType === "add" ? "Add" : "Update"} Testimonial`}
     >
       <form
-        onSubmit={handleSubmit(handleSubmitForm)}
+        onSubmit={handleSubmit(handleSubmitTestimonial)}
         className="flex flex-col gap-6 font-Nunito mt-5"
       >
         <div className="flex flex-col gap-6">
@@ -60,8 +119,8 @@ const AddTestimonialModal: React.FC<TAddTestimonialModalProps> = ({
           <TextInput
             label="Designation & Location"
             placeholder="Ex: Math Teacher, Banani, Dhaka"
-            error={errors.designationAndLocation}
-            {...register("designationAndLocation", {
+            error={errors.designation}
+            {...register("designation", {
               required: "Designation & Location is required",
             })}
           />
@@ -77,7 +136,7 @@ const AddTestimonialModal: React.FC<TAddTestimonialModalProps> = ({
           {/* Role */}
           <SelectDropdown
             label="Role"
-            options={["Guardian", "Tutor"]}
+            options={["guardian", "tutor"]}
             error={errors.role}
             {...register("role", { required: "Role is required" })}
           />
@@ -88,6 +147,15 @@ const AddTestimonialModal: React.FC<TAddTestimonialModalProps> = ({
             placeholder="Write the testimonial"
             error={errors.review}
             {...register("review", { required: "Review is required" })}
+          />
+
+          {/* Image */}
+          <TextInput
+            label="Picture"
+            error={errors.file}
+            type="file"
+            {...register("file")}
+            isRequired={modalType === "add"}
           />
         </div>
 
@@ -111,6 +179,7 @@ const AddTestimonialModal: React.FC<TAddTestimonialModalProps> = ({
             variant="primary"
             iconWithoutBg={ICONS.topRightArrowWhite}
             className="py-[7px] lg:py-[7px] w-full md:w-fit"
+            isLoading={isAddingTestimonial || isUpdatingTestimonial || isLoading}
           />
         </div>
       </form>

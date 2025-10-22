@@ -1,33 +1,54 @@
 import { FiEdit2, FiStar, FiTrash2 } from "react-icons/fi";
-import { IoIosStarHalf } from "react-icons/io";
+import { IoIosStar, IoIosStarHalf } from "react-icons/io";
+import { useDeleteTestimonialMutation } from "../../../../redux/Features/Testimonial/testimonialApi";
+import toast from "react-hot-toast";
 
 type TAdminTestimonialCardProps = {
+  _id: string;
   userName: string;
   userImage: string;
   location: string;
+  role : string;
   rating: number;
   review: string;
   onEdit: () => void;
-  onDelete: () => void;
 };
 
 const AdminTestimonialCard: React.FC<TAdminTestimonialCardProps> = ({
+  _id,
   userName,
   userImage,
   location,
+  role,
   rating,
   review,
   onEdit,
-  onDelete,
 }) => {
+  const [deleteTestimonial] = useDeleteTestimonialMutation();
+
+  const handleDeleteTestimonial = async () => {
+    try {
+      await toast.promise(deleteTestimonial(_id).unwrap(), {
+        loading: "Loading...",
+        success: "Testimonial deleted successfully!",
+        error: "Failed to delete testimonial. Please try again.",
+      });
+    } catch (err) {
+      console.error("Error deleting testimonial:", err);
+    }
+  };
+
   const renderStars = () => {
     const stars = [];
     for (let i = 1; i <= 5; i++) {
       if (rating >= i) {
-        stars.push(<FiStar key={i} className="text-yellow-400" />);
+        // full star
+        stars.push(<IoIosStar key={i} className="text-yellow-400" />);
       } else if (rating + 0.5 >= i) {
+        // half star
         stars.push(<IoIosStarHalf key={i} className="text-yellow-400" />);
       } else {
+        // empty star
         stars.push(<FiStar key={i} className="text-gray-300" />);
       }
     }
@@ -43,10 +64,10 @@ const AdminTestimonialCard: React.FC<TAdminTestimonialCardProps> = ({
             className="w-12 h-12 rounded-full object-cover"
           />
           <div>
-            <p className="font-semibold">
+            <p className="font-semibold capitalize">
               {userName}{" "}
               <span className="bg-primary-10 text-white rounded px-2 py-[2px] text-xs font-normal">
-                Tutor
+                {role}
               </span>
             </p>
             <p className="text-sm text-gray-500">{location}</p>
@@ -61,7 +82,7 @@ const AdminTestimonialCard: React.FC<TAdminTestimonialCardProps> = ({
             <FiEdit2 />
           </button>
           <button
-            onClick={onDelete}
+            onClick={handleDeleteTestimonial}
             className="text-red-500 hover:text-red-600 cursor-pointer"
           >
             <FiTrash2 />

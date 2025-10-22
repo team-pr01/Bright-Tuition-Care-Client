@@ -2,33 +2,28 @@ import { useState } from "react";
 import AdminTestimonialCard from "../../../../components/Admin/TestimonialManagementPage/AdminTestimonialCard/AdminTestimonialCard";
 import { FiStar } from "react-icons/fi";
 import AddTestimonialModal from "../../../../components/Admin/TestimonialManagementPage/AddTestimonialModal/AddTestimonialModal";
-
+import {
+  useGetAllTestimonialsQuery,
+  useGetSingleTestimonialByIdQuery,
+} from "../../../../redux/Features/Testimonial/testimonialApi";
+import type { TTestimonial } from "../../../../types/testimonial.types";
+import Loader from "../../../../components/Reusable/Loader/Loader";
 const TestimonialManagement = () => {
   const [modalType, setModalType] = useState<"add" | "edit">("add");
+  // const [role, setRole] = useState<"tutor" | "guardian" | "">("");
   const [selectedTestimonialId, setSelectedTestimonialId] = useState<
     string | null
   >(null);
   const [isTestimonialModalOpen, setIsTestimonialModalOpen] =
     useState<boolean>(false);
 
-  const testimonials = [
-    {
-      _id: "1",
-      userName: "John Doe",
-      userImage: "https://i.pravatar.cc/40?img=5",
-      location: "New York, USA",
-      rating: 4,
-      review: "Great service! Highly recommended.",
-    },
-    {
-      _id: "2",
-      userName: "Jane Smith",
-      userImage: "https://i.pravatar.cc/40?img=6",
-      location: "London, UK",
-      rating: 5,
-      review: "Amazing experience and friendly staff.",
-    },
-  ];
+  const { data: allTestimonials, isLoading } = useGetAllTestimonialsQuery({});
+  console.log(allTestimonials);
+  const {
+    data: singleTestimonial,
+    isLoading: isSingleTestimonialLoading,
+    isFetching: isSingleTestimonialFetching,
+  } = useGetSingleTestimonialByIdQuery(selectedTestimonialId);
 
   return (
     <div className="flex flex-col gap-5">
@@ -45,30 +40,39 @@ const TestimonialManagement = () => {
           Add Testimonial <FiStar className="text-lg" />
         </button>
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {testimonials.map((testimonial) => (
-          <AdminTestimonialCard
-            key={testimonial?._id}
-            userName={testimonial.userName}
-            userImage={testimonial.userImage}
-            location={testimonial.location}
-            rating={testimonial.rating}
-            review={testimonial.review}
-            onEdit={() => {
-              setModalType("edit");
-              setIsTestimonialModalOpen(true);
-              setSelectedTestimonialId(testimonial?._id);
-            }}
-            onDelete={() => console.log("Delete", testimonial?._id)}
-          />
-        ))}
-      </div>
+      {isLoading ? (
+        <div className="py-10">
+          <Loader size="lg" text="Please wait..." />
+        </div>
+      ) : (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {allTestimonials?.data?.map((testimonial: TTestimonial) => (
+            <AdminTestimonialCard
+              key={testimonial?._id}
+              _id={testimonial._id}
+              userName={testimonial.name}
+              userImage={testimonial.imageUrl}
+              location={testimonial.designation}
+              role={testimonial.role}
+              rating={testimonial.rating}
+              review={testimonial.review}
+              onEdit={() => {
+                setModalType("edit");
+                setIsTestimonialModalOpen(true);
+                setSelectedTestimonialId(testimonial?._id);
+              }}
+            />
+          ))}
+        </div>
+      )}
 
       <AddTestimonialModal
         isTestimonialModalOpen={isTestimonialModalOpen}
         setIsTestimonialModalOpen={setIsTestimonialModalOpen}
         modalType={modalType}
         setModalType={setModalType}
+        defaultValues={singleTestimonial?.data}
+        isLoading={isSingleTestimonialLoading || isSingleTestimonialFetching}
       />
     </div>
   );

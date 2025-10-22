@@ -90,13 +90,10 @@ const AddOrUpdateStaffModal: React.FC<TAddOrUpdateStaffModalProps> = ({
     );
     const locations = cityObj?.locations || [];
     setAreaOptions(locations);
-
-    // ✅ Don't reset area here when editing
     if (modalType === "add") {
       setValue("area", "");
     }
 
-    // ✅ Restore area only when editing and option exists
     if (modalType === "edit" && defaultValues?.userId?.area) {
       const exists = locations.includes(defaultValues.userId.area);
       if (exists) {
@@ -150,7 +147,7 @@ const AddOrUpdateStaffModal: React.FC<TAddOrUpdateStaffModalProps> = ({
       const errorMessage =
         err?.data?.message ||
         err?.error ||
-        "Something went wrong during signup. Please try again.";
+        "Something went wrong during. Please try again.";
 
       toast.error(errorMessage);
     }
