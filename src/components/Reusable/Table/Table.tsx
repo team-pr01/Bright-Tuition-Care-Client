@@ -26,7 +26,7 @@ type Props<T extends Record<string, any>> = {
   onPageChange?: (page: number) => void;
   isLoading?: boolean;
   onSearch?: (q: string) => void;
-  selectedCity?: string;
+  selectedCity?: string | null;
   setSelectedCity?: React.Dispatch<React.SetStateAction<string>>;
   selectedAreas?: string[];
   setSelectedAreas?: React.Dispatch<React.SetStateAction<string[]>>;

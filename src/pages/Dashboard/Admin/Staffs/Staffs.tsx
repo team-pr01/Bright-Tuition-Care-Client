@@ -8,45 +8,45 @@ import type {
 import Table from "../../../../components/Reusable/Table/Table";
 import Button from "../../../../components/Reusable/Button/Button";
 import AddNewStaffModal from "../../../../components/Admin/StaffsPage/AddOrUpdateStaffModal/AddOrUpdateStaffModal";
+import { useGetAllStaffsQuery, useGetSingleStaffByIdQuery, useRemoveStaffMutation } from "../../../../redux/Features/Staff/staffApi";
+import toast from "react-hot-toast";
 
 const Staffs = () => {
-  const [isStaffModalOpen, setIsStaffModalOpen] = useState<boolean>(false);
+    const [page, setPage] = useState<number>(1);
+  const [limit, setLimit] = useState<number>(10);
   const [selectedStaffId, setSelectedStaffId] = useState<string | null>(null);
+  const {data:allStaffs, isLoading} = useGetAllStaffsQuery({
+    page,
+    limit,
+  });
+  console.log(allStaffs);
+  const {data:singleStaff, isLoading:isSingleStaffLoading, isFetching:isSingleStaffFetching} = useGetSingleStaffByIdQuery(selectedStaffId);
+  const [removeStaff] =useRemoveStaffMutation();
+  const [isStaffModalOpen, setIsStaffModalOpen] = useState<boolean>(false);
   const [modalType, setModalType] = useState<"add" | "edit">("add");
 
-  const [page, setPage] = useState<number>(1);
-  const [limit, setLimit] = useState<number>(10);
+
   const [searchQuery, setSearchQuery] = useState<string>("");
 
-  const isLoading = false;
+    const handleRemoveStaff = async (id: string) => {
+    try {
+      await toast.promise(removeStaff(id).unwrap(), {
+        loading: "Loading...",
+        success: "Staff removed successfully!",
+        error: "Failed to remove staff. Please try again.",
+      });
+    } catch (err) {
+      console.error("Error removing staff:", err);
+    }
+  };
 
   // Table headers
   const staffTheads: TableHead[] = [
     { key: "_id", label: "ID" },
     { key: "name", label: "Name" },
     { key: "email", label: "Email" },
-    { key: "phone", label: "Phone Number" },
+    { key: "phoneNumber", label: "Phone Number" },
     { key: "joinedDate", label: "Joined Date" },
-  ];
-
-  // Mock data
-  const allStaffs: any[] = [
-    {
-      _id: "Staff-001",
-      name: "Alice Johnson",
-      email: "alice@example.com",
-      phone: "+44 1234 567890",
-      joinedDate: "2025-01-15",
-      profilePhoto: "https://i.pravatar.cc/40?img=10",
-    },
-    {
-      _id: "Staff-002",
-      name: "Bob Smith",
-      email: "bob@example.com",
-      phone: "+44 9876 543210",
-      joinedDate: "2025-03-20",
-      profilePhoto: "https://i.pravatar.cc/40?img=11",
-    },
   ];
 
   // Actions
@@ -64,27 +64,20 @@ const Staffs = () => {
       label: "Delete",
       icon: <FiTrash2 className="inline mr-2" />,
       onClick: (row) => {
-        if (window.confirm(`Are you sure you want to delete ${row.name}?`)) {
-          alert(`Deleted ${row.name}`);
-        }
+        handleRemoveStaff(row?._id);
       },
     },
   ];
 
-  // Format table data
-  const tableData = allStaffs.map((staff) => ({
-    ...staff,
-    name: (
-      <div className="flex items-center gap-2">
-        <img
-          src={staff.profilePhoto}
-          alt={staff.name}
-          className="size-8 rounded-full object-cover"
-        />
-        <span>{staff.name}</span>
-      </div>
-    ),
-  }));
+const tableData = allStaffs?.data?.staffs?.map((staff) => ({
+  _id: staff._id,
+  name: staff?.userId?.name,
+  email: staff?.userId?.email,
+  phoneNumber: staff?.userId?.phoneNumber,
+  pagesAssigned: staff.pagesAssigned,
+  joinedDate: staff.createdAt,
+}));
+
 
   const handleSearch = (q: string) => {
     setSearchQuery(q);
@@ -107,7 +100,7 @@ const Staffs = () => {
         title="All Staffs"
         description="Manage all staff members on the platform."
         theads={staffTheads}
-        data={tableData}
+        data={tableData || []}
         totalPages={5}
         currentPage={page}
         onPageChange={(p) => setPage(p)}
@@ -125,6 +118,8 @@ const Staffs = () => {
         setIsStaffModalOpen={setIsStaffModalOpen}
         modalType={modalType}
         setModalType={setModalType}
+        defaultValues={selectedStaffId ? singleStaff?.data : null}
+        isLoading={isSingleStaffLoading || isSingleStaffFetching}
       />
     </div>
   );

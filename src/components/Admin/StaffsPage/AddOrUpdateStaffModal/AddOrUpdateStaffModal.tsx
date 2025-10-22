@@ -1,15 +1,23 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useForm } from "react-hook-form";
 import Button from "../../../Reusable/Button/Button";
 import { ICONS } from "../../../../assets";
 import Modal from "../../../Reusable/Modal/Modal";
 import TextInput from "../../../Reusable/TextInput/TextInput";
 import PasswordInput from "../../../Reusable/PasswordInput/PasswordInput";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import SelectDropdownWithSearch from "../../../Reusable/SelectDropdownWithSearch/SelectDropdownWithSearch";
+import { filterData } from "../../../../constants/filterData";
+import toast from "react-hot-toast";
+import { useAddStaffMutation, useUpdateStaffInfoMutation } from "../../../../redux/Features/Staff/staffApi";
 
 type TFormData = {
   name: string;
   email: string;
-  phone: string;
+  phoneNumber: string;
+  gender: string;
+  city: string;
+  area: string;
   password: string;
 };
 
@@ -18,6 +26,8 @@ type TAddOrUpdateStaffModalProps = {
   setIsStaffModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
   modalType: string;
   setModalType: React.Dispatch<React.SetStateAction<"add" | "edit">>;
+  defaultValues?: any;
+  isLoading: boolean;
 };
 
 const AddOrUpdateStaffModal: React.FC<TAddOrUpdateStaffModalProps> = ({
@@ -25,17 +35,106 @@ const AddOrUpdateStaffModal: React.FC<TAddOrUpdateStaffModalProps> = ({
   setIsStaffModalOpen,
   modalType,
   setModalType,
+  defaultValues,
+  isLoading,
 }) => {
+  const [addStaff, { isLoading: isAddingStaff }] = useAddStaffMutation();
+  const [updateStaffInfo, { isLoading: isUpdatingStaff }] = useUpdateStaffInfoMutation();
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
-
+  const [fieldErrors, setFieldErrors] = useState<any>({
+    gender: "",
+    city: "",
+    area: "",
+  });
   const {
     register,
     handleSubmit,
+    setValue,
+    watch,
+    reset,
     formState: { errors },
   } = useForm<TFormData>();
 
-  const handleSubmitForm = (data: TFormData) => {
-    console.log(data);
+  const selectedCity = watch("city");
+  const [areaOptions, setAreaOptions] = useState<string[]>([]);
+  const selectedGender = watch("gender");
+  const selectedArea = watch("area");
+
+  useEffect(() => {
+    if (modalType === "edit" && defaultValues) {
+      setValue("name", defaultValues?.userId?.name);
+      setValue("email", defaultValues?.userId?.email);
+      setValue("phoneNumber", defaultValues?.userId?.phoneNumber);
+      setValue("gender", defaultValues?.userId?.gender);
+      setValue("city", defaultValues?.userId?.city);
+      setValue("area", defaultValues?.userId?.area);
+    } else {
+      reset();
+    }
+  }, [defaultValues, modalType, reset, setValue]);
+
+  // Update area options when city changes
+  useEffect(() => {
+    if (!selectedCity) {
+      setAreaOptions([]);
+      setValue("area", "");
+      return;
+    }
+
+    const cityObj = filterData.cityCorporationWithLocation.find(
+      (city) => city.name === selectedCity
+    );
+    const locations = cityObj?.locations || [];
+    setAreaOptions(locations);
+    setValue("area", "");
+  }, [selectedCity, setValue]);
+
+  const handleSubmitStaff = async (data: TFormData) => {
+    if (!selectedCity) {
+      setFieldErrors((prev: any) => ({
+        ...prev,
+        city: "City is required",
+      }));
+    }
+    if (!selectedArea) {
+      setFieldErrors((prev: any) => ({
+        ...prev,
+        area: "Area is required",
+      }));
+    }
+    if (!selectedGender) {
+      setFieldErrors((prev: any) => ({
+        ...prev,
+        gender: "Gender is required",
+      }));
+    }
+    try {
+      const payload = {
+        ...data,
+      };
+      if (modalType === "add") {
+        const res = await addStaff(payload).unwrap();
+        if (res?.success) {
+          reset();
+          setFieldErrors({ gender: "", city: "", area: "" });
+          setIsStaffModalOpen(false);
+        }
+      } else if (modalType === "edit" && defaultValues) {
+        const res = await updateStaffInfo({ id: defaultValues._id, data: payload }).unwrap();
+        if (res?.success) {
+          reset();
+          setFieldErrors({ gender: "", city: "", area: "" });
+          setIsStaffModalOpen(false);
+        }
+      }
+    } catch (err: any) {
+      const errorMessage =
+        err?.data?.message ||
+        err?.error ||
+        "Something went wrong during signup. Please try again.";
+
+      toast.error(errorMessage);
+    }
   };
 
   return (
@@ -45,7 +144,7 @@ const AddOrUpdateStaffModal: React.FC<TAddOrUpdateStaffModalProps> = ({
       heading={`${modalType === "add" ? "Add" : "Update"} Staff`}
     >
       <form
-        onSubmit={handleSubmit(handleSubmitForm)}
+        onSubmit={handleSubmit(handleSubmitStaff)}
         className="flex flex-col gap-6 font-Nunito mt-5"
       >
         <div className="flex flex-col gap-6">
@@ -77,10 +176,42 @@ const AddOrUpdateStaffModal: React.FC<TAddOrUpdateStaffModalProps> = ({
           <TextInput
             label="Phone Number"
             placeholder="Enter phone number"
-            error={errors.phone}
-            {...register("phone", {
+            error={errors.phoneNumber}
+            {...register("phoneNumber", {
               required: "Phone number is required",
             })}
+          />
+
+          {/* Gender */}
+          <SelectDropdownWithSearch
+            label="Gender"
+            name="gender"
+            options={["Male", "Female", "Other"]}
+            onChange={(value) => setValue("gender", value.toLocaleLowerCase())}
+            isRequired={true}
+            error={fieldErrors.gender}
+          />
+
+          {/* City Dropdown */}
+          <SelectDropdownWithSearch
+            label="City"
+            name="city"
+            options={filterData.cityCorporationWithLocation.map((c) => c.name)}
+            value={selectedCity}
+            onChange={(value) => setValue("city", value)}
+            isRequired={true}
+            error={fieldErrors.city}
+          />
+
+          {/* Area Dropdown */}
+          <SelectDropdownWithSearch
+            label="Location"
+            name="area"
+            options={areaOptions}
+            value={watch("area")}
+            onChange={(value) => setValue("area", value)}
+            isRequired={true}
+            error={fieldErrors.area}
           />
 
           {/* Password */}
@@ -118,6 +249,8 @@ const AddOrUpdateStaffModal: React.FC<TAddOrUpdateStaffModalProps> = ({
             variant="primary"
             iconWithoutBg={ICONS.topRightArrowWhite}
             className="py-[7px] lg:py-[7px] w-full md:w-fit"
+            isDisabled={isLoading}
+            isLoading={isLoading || isAddingStaff || isUpdatingStaff}
           />
         </div>
       </form>
