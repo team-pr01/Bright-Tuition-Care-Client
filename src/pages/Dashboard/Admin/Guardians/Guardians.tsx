@@ -6,16 +6,15 @@ import Table, {
 import { FiEye, FiSlash } from "react-icons/fi";
 import { useNavigate } from "react-router-dom";
 import SuspendUserModal from "../../../../components/Admin/SharedAdmin/SuspendUserModal/SuspendUserModal";
-import {
-  useActiveUserMutation,
-  useGetAllGuardiansQuery,
-} from "../../../../redux/Features/Guardian/guardianApi";
+import { useGetAllGuardiansQuery } from "../../../../redux/Features/Guardian/guardianApi";
 import { formatDate } from "../../../../utils/formatDate";
 import { HiOutlineUserCircle } from "react-icons/hi";
 import toast from "react-hot-toast";
+import { useActiveUserMutation } from "../../../../redux/Features/User/userApi";
 
 export type TableAction<T> = {
   label: any;
+  icon?: React.ReactNode;
   onClick: (row: T) => void;
 };
 
@@ -50,6 +49,8 @@ const Guardians = () => {
     city: selectedCity,
     area: selectedArea,
     keyword: searchQuery,
+    page,
+    limit,
   });
   const [activeUser] = useActiveUserMutation();
 
@@ -72,11 +73,6 @@ const Guardians = () => {
       icon: <FiEye className="inline mr-2" />,
       onClick: (row) => navigate(`/dashboard/admin/guardian/${row._id}`),
     },
-    // {
-    //   label: "Edit Info",
-    //   icon: <FiEdit className="inline mr-2" />,
-    //   onClick: (row) => console.log("Edit Info:", row),
-    // },
     {
       label: "Suspend",
       icon: <FiSlash className="inline mr-2" />,
@@ -94,7 +90,7 @@ const Guardians = () => {
     },
   ];
 
-  // Format table data
+  // Formatted table data
   const tableData = data?.data?.guardians?.map((guardian: any) => ({
     _id: guardian.guardianId,
     userId: guardian.userId,

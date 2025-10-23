@@ -5,7 +5,7 @@ import { ICONS } from "../../../../assets";
 import Textarea from "../../../Reusable/TextArea/TextArea";
 import Modal from "../../../Reusable/Modal/Modal";
 import toast from "react-hot-toast";
-import { useSuspendUserMutation } from "../../../../redux/Features/Guardian/guardianApi";
+import { useSuspendUserMutation } from "../../../../redux/Features/User/userApi";
 
 type TFormData = {
   suspensionReason: string;
@@ -48,7 +48,7 @@ const SuspendUserModal: React.FC<TSuspendUserModalProps> = ({
     <Modal
       isModalOpen={isSuspendUserModalOpen}
       setIsModalOpen={setIsSuspendUserModalOpen}
-      heading={`Suspend ${selectedGuardianId}`}
+      heading={`Suspend User`}
     >
       <form
         onSubmit={handleSubmit(handleSuspend)}

@@ -235,7 +235,7 @@ useEffect(() => {
           </div>
         )}
 
-        <div className="overflow-x-auto rounded-md">
+        <div className="overflow-x-auto rounded-md min-h-[300px]">
           <table className="min-w-full table-auto border-collapse">
             <thead className="sticky top-0 bg-white">
               <tr>

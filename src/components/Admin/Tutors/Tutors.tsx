@@ -7,7 +7,16 @@ import Table, {
 import { useState } from "react";
 import { FiEye, FiSlash } from "react-icons/fi";
 import SuspendUserModal from "../SharedAdmin/SuspendUserModal/SuspendUserModal";
-import { VscUnlock } from "react-icons/vsc";
+import { VscLock, VscUnlock } from "react-icons/vsc";
+import toast from "react-hot-toast";
+import {
+  useGetAllTutorsQuery,
+  useToggleTutorProfileStatusMutation,
+} from "../../../redux/Features/Tutor/tutorApi";
+import { HiOutlineUserCircle } from "react-icons/hi";
+import type { TTutor } from "../../../types/tutor.types";
+import { formatDate } from "../../../utils/formatDate";
+import { useActiveUserMutation } from "../../../redux/Features/User/userApi";
 
 const Tutors = () => {
   const navigate = useNavigate();
@@ -15,53 +24,61 @@ const Tutors = () => {
   const [limit, setLimit] = useState<number>(10);
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [selectedCity, setSelectedCity] = useState<string>("");
-  const [selectedAreas, setSelectedAreas] = useState<string[]>([]);
+  const [selectedArea, setSelectedArea] = useState<string>("");
   const [areaOptions, setAreaOptions] = useState<string[]>([]);
   const [selectedTutorId, setSelectedTutorId] = useState<string | null>(null);
   const [isSuspendUserModalOpen, setIsSuspendUserModalOpen] =
     useState<boolean>(false);
 
-  const isLoading = false;
+  const { data, isLoading, isFetching } = useGetAllTutorsQuery({
+    city: selectedCity,
+    area: selectedArea,
+    keyword: searchQuery,
+    page,
+    limit,
+  });
+  const [activeUser] = useActiveUserMutation();
+  const [toggleTutorProfileStatus] = useToggleTutorProfileStatusMutation();
+
+  const handleActiveTutor = async (id: string) => {
+    try {
+      await toast.promise(activeUser(id).unwrap(), {
+        loading: "Loading...",
+        success: "Tutor re-activated successfully!",
+        error: "Failed to reactivate tutor. Please try again.",
+      });
+    } catch (err: any) {
+      toast.error(
+        err?.data?.message || "Failed to reactivate tutor. Please try again."
+      );
+    }
+  };
+
+  const handleToggleTutorProfile = async (id: string) => {
+    try {
+      await toast.promise(toggleTutorProfileStatus(id).unwrap(), {
+        loading: "Loading...",
+        success: "Status changed successfully!",
+        error: "Failed to change status. Please try again.",
+      });
+    } catch (err: any) {
+      toast.error(
+        err?.data?.message || "Failed to change status. Please try again."
+      );
+    }
+  };
 
   // Table headers
   const tutorTheads: TableHead[] = [
-    { key: "_id", label: "Tutor ID" },
+    { key: "tutorId", label: "Tutor ID" },
     { key: "name", label: "Name" },
     { key: "email", label: "Email" },
-    { key: "phone", label: "Phone Number" },
+    { key: "phoneNumber", label: "Phone Number" },
     { key: "city", label: "City" },
     { key: "area", label: "Area" },
     { key: "registeredOn", label: "Registered On" },
     { key: "status", label: "Status" },
     { key: "profileStatus", label: "Profile Status" },
-  ];
-
-  // Mock data
-  const allTutors: any[] = [
-    {
-      _id: "Tutor-001",
-      name: "John Doe",
-      email: "john@example.com",
-      phone: "+44 1234 567890",
-      city: "Dhaka",
-      area: "Banani",
-      registeredOn: "2025-09-15",
-      status: "Active",
-      profileStatus: "Locked",
-      imageUrl: "https://i.pravatar.cc/40?img=1",
-    },
-    {
-      _id: "Tutor-002",
-      name: "Jane Smith",
-      email: "jane@example.com",
-      phone: "+44 9876 543210",
-      city: "Cumilla",
-      area: "Cumilla Cantonment",
-      registeredOn: "2025-09-16",
-      status: "Suspended",
-      profileStatus: "Unlocked",
-      imageUrl: "https://i.pravatar.cc/40?img=2",
-    },
   ];
 
   // Action Menu
@@ -75,34 +92,74 @@ const Tutors = () => {
       label: "Suspend",
       icon: <FiSlash className="inline mr-2" />,
       onClick: (row) => {
-        setSelectedTutorId(row._id);
+        setSelectedTutorId(row.userId);
         setIsSuspendUserModalOpen(true);
       },
     },
     {
-      label: "Unlock",
-      icon: <VscUnlock className="inline mr-2" />,
+      label: "Active Tutor",
+      icon: <HiOutlineUserCircle className="inline mr-2" />,
       onClick: (row) => {
-        setSelectedTutorId(row._id);
-        setIsSuspendUserModalOpen(true);
+        handleActiveTutor(row.userId);
       },
+    },
+    {
+      label: "Lock Profile",
+      icon: <VscLock className="inline mr-2" />,
+      onClick: (row) => handleToggleTutorProfile(row._id),
+    },
+    {
+      label: "Unlock Profile",
+      icon: <VscUnlock className="inline mr-2" />,
+      onClick: (row) => handleToggleTutorProfile(row._id),
     },
   ];
 
-  // Format table data
-  const tableData = allTutors.map((tutor) => ({
-    ...tutor,
+  // Formatted table data
+  const tableData = data?.data?.tutors?.map((tutor: TTutor) => ({
+    _id: tutor._id,
+    userId: tutor.userId,
+    tutorId : tutor.tutorId,
     name: (
-      <div className="flex items-center gap-2">
+      <div className="flex items-center gap-2 capitalize">
         <img
           src={tutor.imageUrl}
-          alt={tutor.name}
-          className="size-8 rounded-full object-cover"
+          alt={tutor?.name}
+          className="w-8 h-8 rounded-full object-cover"
         />
-        <span>{tutor.name}</span>
+        <span>{tutor?.name}</span>
       </div>
     ),
+    email: tutor?.email || "N/A",
+    phoneNumber: tutor?.phoneNumber || "N/A",
+    city: tutor?.city || "N/A",
+    area: tutor?.area || "N/A",
+    registeredOn: formatDate(tutor.createdAt),
+    status: (
+      <span
+        className={`px-3 py-1 rounded-full text-xs font-medium ${
+          tutor.isSuspended
+            ? "bg-red-100 text-red-600"
+            : "bg-green-100 text-green-600"
+        }`}
+      >
+        {tutor.isSuspended ? "Suspended" : "Active"}
+      </span>
+    ),
+    profileStatus: (
+      <span
+        className={`px-3 py-1 rounded-full text-xs font-medium capitalize ${
+          tutor.profileStatus === "locked"
+            ? "bg-red-100 text-red-600"
+            : "bg-green-100 text-green-600"
+        }`}
+      >
+        {tutor.profileStatus}
+      </span>
+    ),
   }));
+
+  console.log(data);
 
   const handleSearch = (q: string) => {
     setSearchQuery(q);
@@ -114,18 +171,18 @@ const Tutors = () => {
         title="All Registered Tutors"
         description="Manage all the tutors registered on the platform."
         theads={tutorTheads}
-        data={tableData}
-        totalPages={5}
+        data={tableData || []}
+        totalPages={data?.data?.meta?.totalPages || 1}
         currentPage={page}
         onPageChange={(p) => setPage(p)}
-        isLoading={isLoading}
+        isLoading={isLoading || isFetching}
         onSearch={handleSearch}
         actions={actions}
         selectedCity={selectedCity}
         setSelectedCity={setSelectedCity}
         areaOptions={areaOptions}
-        selectedAreas={selectedAreas}
-        setSelectedAreas={setSelectedAreas}
+        selectedArea={selectedArea}
+        setSelectedArea={setSelectedArea}
         setAreaOptions={setAreaOptions}
         limit={limit}
         setLimit={setLimit}

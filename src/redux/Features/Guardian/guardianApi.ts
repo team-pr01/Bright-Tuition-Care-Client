@@ -5,14 +5,28 @@ const guardianApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     getAllGuardians: builder.query<
       any,
-      { city?: string; area?: string; keyword?: string }
+      {
+        city?: string;
+        area?: string;
+        keyword?: string;
+        page?: number;
+        limit?: number;
+      }
     >({
-      query: ({ city = "", area = "", keyword = "" } = {}) => {
+      query: ({
+        city = "",
+        area = "",
+        keyword = "",
+        page = 1,
+        limit = 10,
+      } = {}) => {
         const params = new URLSearchParams();
 
         if (city) params.append("city", city);
         if (area) params.append("area", area);
         if (keyword) params.append("keyword", keyword);
+        params.append("page", page.toString());
+        params.append("limit", limit.toString());
 
         return {
           url: `/guardian?${params.toString()}`,
@@ -82,23 +96,6 @@ const guardianApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ["testimonial"],
     }),
-
-    suspendUser: builder.mutation({
-      query: ({userId, data}) => ({
-        url: `/user/suspend/${userId}`,
-        body: data,
-        method: "PATCH",
-      }),
-      invalidatesTags: ["guardian"],
-    }),
-
-    activeUser: builder.mutation({
-      query: (userId) => ({
-        url: `/user/active/${userId}`,
-        method: "PATCH",
-      }),
-      invalidatesTags: ["guardian"],
-    }),
   }),
 });
 
@@ -110,6 +107,4 @@ export const {
   useAddTestimonialMutation,
   useDeleteTestimonialMutation,
   useUpdateTestimonialMutation,
-  useSuspendUserMutation,
-  useActiveUserMutation
 } = guardianApi;
