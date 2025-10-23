@@ -40,8 +40,7 @@ const SignatureField: React.FC<SignatureFieldProps> = ({
             value={signature}
             onChange={(e) => setSignature(e.target.value)}
             disabled={isDisabled}
-            className="font-[Dancing Script] text-neutral-20 bg-transparent border-none outline-none text-center disabled:opacity-50 disabled:cursor-not-allowed"
-            style={{ fontFamily: "'Dancing Script', cursive" }}
+            className="font-Alex-Brush text-2xl font-semibold text-neutral-5 bg-transparent border-none outline-none text-center disabled:opacity-50 disabled:cursor-not-allowed"
           />
           {!isDisabled && signature && (
             <button
@@ -54,10 +53,7 @@ const SignatureField: React.FC<SignatureFieldProps> = ({
           )}
         </div>
       ) : (
-        <p
-          className="font-[Dancing Script] text-xl text-neutral-20"
-          style={{ fontFamily: "'Dancing Script', cursive" }}
-        >
+        <p className="font-Alex-Brush text-2xl text-neutral-5 font-semibold">
           {signature}
         </p>
       )}
@@ -68,7 +64,11 @@ const SignatureField: React.FC<SignatureFieldProps> = ({
       {/* Labels */}
       <p className="text-sm font-medium">{label}</p>
       <p className="text-xs text-neutral-30">
-        (Date: {defaultDate ? new Date(defaultDate).toLocaleDateString() : new Date().toLocaleDateString()})
+        (Date:{" "}
+        {defaultDate
+          ? new Date(defaultDate).toLocaleDateString()
+          : new Date().toLocaleDateString()}
+        )
       </p>
     </div>
   );
