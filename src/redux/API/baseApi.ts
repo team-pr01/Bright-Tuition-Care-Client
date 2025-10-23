@@ -7,7 +7,8 @@ import { setUser } from '../Features/Auth/authSlice';
 import type { RootState } from '../store';
 
 const baseQuery = fetchBaseQuery({
-  baseUrl: 'https://bright-tuition-care-server.onrender.com/api/v1',
+  // baseUrl: 'https://bright-tuition-care-server.onrender.com/api/v1',
+  baseUrl: 'http://localhost:5000/api/v1',
   credentials : 'include',
   prepareHeaders : (headers, {getState}) => {
     const token = (getState() as RootState).auth.token;
@@ -44,7 +45,7 @@ const baseQueryWithRefreshToken: BaseQueryFn< string | FetchArgs, BaseQueryApi,u
 export const baseApi = createApi({
   reducerPath: 'baseApi',
   baseQuery: baseQueryWithRefreshToken,
-  tagTypes: ["users", "tutors", "students", "jobs", "applications", "tutorials", "invoices", "staff", "testimonial", "notice"],
+  tagTypes: ["users", "tutors", "guardian", "jobs", "applications", "tutorials", "invoices", "staff", "testimonial", "notice"],
   endpoints: () => ({}),
 });
 

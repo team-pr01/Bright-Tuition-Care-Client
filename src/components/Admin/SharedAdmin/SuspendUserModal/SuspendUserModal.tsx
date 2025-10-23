@@ -1,11 +1,14 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useForm } from "react-hook-form";
 import Button from "../../../Reusable/Button/Button";
 import { ICONS } from "../../../../assets";
 import Textarea from "../../../Reusable/TextArea/TextArea";
 import Modal from "../../../Reusable/Modal/Modal";
+import toast from "react-hot-toast";
+import { useSuspendUserMutation } from "../../../../redux/Features/Guardian/guardianApi";
 
 type TFormData = {
-  reason: string;
+  suspensionReason: string;
   password: string;
 };
 
@@ -20,14 +23,26 @@ const SuspendUserModal: React.FC<TSuspendUserModalProps> = ({
   isSuspendUserModalOpen,
   setIsSuspendUserModalOpen,
 }) => {
+  const [suspendUser, {isLoading}] = useSuspendUserMutation();
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<TFormData>();
 
-  const handleSuspend = (data: TFormData) => {
-    console.log(data);
+  const handleSuspend = async (data: TFormData) => {
+    try{
+      const payload = {
+        suspensionReason: data.suspensionReason,
+      }
+      const response = await suspendUser({userId:selectedGuardianId, data:payload}).unwrap();
+      if(response.success){
+        toast.success(response.message || "User suspended successfully");
+        setIsSuspendUserModalOpen(false);
+      }
+    } catch(error:any){
+      toast.error(error?.data?.message || "Failed to suspend user");
+    }
   };
   return (
     <Modal
@@ -44,8 +59,8 @@ const SuspendUserModal: React.FC<TSuspendUserModalProps> = ({
           <Textarea
             label="Reason for Suspension"
             placeholder="Enter reason for suspension"
-            error={errors.reason}
-            {...register("reason", {
+            error={errors.suspensionReason}
+            {...register("suspensionReason", {
               required: "This field is required",
             })}
           />
@@ -58,6 +73,7 @@ const SuspendUserModal: React.FC<TSuspendUserModalProps> = ({
             variant="primary"
             iconWithoutBg={ICONS.topRightArrowWhite}
             className="py-[7px] lg:py-[7px] w-full md:w-fit"
+            isLoading={isLoading}
           />
         </div>
       </form>

@@ -14,9 +14,7 @@ import {
 
 const Home = () => {
   const { data: allTutorsTestimonials } = useGetAllTutorsTestimonialsQuery({});
-  const { data: allGuardianTestimonials } = useGetAllGuardiansTestimonialsQuery(
-    {}
-  );
+  const { data: allGuardianTestimonials } = useGetAllGuardiansTestimonialsQuery({});
   return (
     <div className="overflow-hidden">
       <Hero />

@@ -28,8 +28,8 @@ type Props<T extends Record<string, any>> = {
   onSearch?: (q: string) => void;
   selectedCity?: string | null;
   setSelectedCity?: React.Dispatch<React.SetStateAction<string>>;
-  selectedAreas?: string[];
-  setSelectedAreas?: React.Dispatch<React.SetStateAction<string[]>>;
+  selectedArea?: string;
+  setSelectedArea?: React.Dispatch<React.SetStateAction<string>>;
   areaOptions?: string[];
   setAreaOptions?: React.Dispatch<React.SetStateAction<string[]>>;
   limit: number;
@@ -52,8 +52,8 @@ export default function Table<T extends Record<string, any>>({
   onSearch,
   selectedCity,
   setSelectedCity,
-  selectedAreas,
-  setSelectedAreas,
+  selectedArea,
+  setSelectedArea,
   areaOptions,
   setAreaOptions,
   limit = 10,
@@ -128,23 +128,24 @@ export default function Table<T extends Record<string, any>>({
     onPageChange(page);
   };
 
-  // For city and area/location filter
-  useEffect(() => {
-    if (setAreaOptions && setSelectedAreas) {
-      if (!selectedCity) {
-        setAreaOptions([]);
-        setSelectedAreas([]);
-        return;
-      }
+// For city and area/location filter
+useEffect(() => {
+  if (setAreaOptions && setSelectedArea) {
+    if (!selectedCity) {
+      setAreaOptions([]);
+      setSelectedArea(""); // reset single selected area
+      return;
     }
+  }
 
-    const cityObj = filterData.cityCorporationWithLocation.find(
-      (city) => city.name === selectedCity
-    );
+  const cityObj = filterData.cityCorporationWithLocation.find(
+    (city) => city.name === selectedCity
+  );
 
-    if (setAreaOptions) setAreaOptions(cityObj ? cityObj.locations : []);
-    if (setSelectedAreas) setSelectedAreas([]);
-  }, [selectedCity]);
+  if (setAreaOptions) setAreaOptions(cityObj ? cityObj.locations : []);
+  if (setSelectedArea) setSelectedArea(""); // reset when city changes
+}, [selectedCity]);
+
 
   const limits = [5, 10, 15, 20, 25, 30, 50, 100];
 
@@ -204,10 +205,10 @@ export default function Table<T extends Record<string, any>>({
            }
 
             {
-              selectedAreas &&
+              selectedArea !== null &&
               <select
-              value={(selectedAreas?.[0] || "")}
-              onChange={(e) => setSelectedAreas && setSelectedAreas([e.target.value])}
+              value={selectedArea}
+              onChange={(e) => setSelectedArea && setSelectedArea(e.target.value)}
               disabled={(areaOptions?.length ?? 0) === 0}
               className="input input-sm px-3 py-2 border border-neutral-55/60 focus:border-primary-10 transition duration-300 focus:outline-none rounded-md text-sm shadow-sm cursor-pointer"
             >
