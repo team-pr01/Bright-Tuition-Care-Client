@@ -50,7 +50,7 @@ const ConfirmationLetterManagement = () => {
         setIsModalOpen={setIsConfirmationLetterModalOpen}
         width="w-[60%] md:w-[30%] max-h-[600px] overflow-y-auto"
       >
-        <SendConfirmationLetterForm />
+        <SendConfirmationLetterForm setIsConfirmationLetterModalOpen={setIsConfirmationLetterModalOpen} />
       </Modal>
     </div>
   );
