@@ -7,6 +7,7 @@ import SendConfirmationLetterForm from "../../../../components/Admin/Confirmatio
 import { useGetAllConfirmationLettersQuery } from "../../../../redux/Features/ConfirmationLetter/confirmationLetterApi";
 import type { TConfirmationLetter } from "../../../../types/confirmationLetter.types";
 import Loader from "../../../../components/Reusable/Loader/Loader";
+import NoData from "../../../../components/Reusable/NoData/NoData";
 
 const ConfirmationLetterManagement = () => {
   const [isConfirmationLetterModalOpen, setIsConfirmationLetterModalOpen] =
@@ -37,9 +38,10 @@ const ConfirmationLetterManagement = () => {
         <div className="py-10">
           <Loader size="lg" text="Please wait..." />
         </div>
-      ) : (
+      ) : allConfirmationLetters?.data &&
+        allConfirmationLetters.data.length > 0 ? (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {allConfirmationLetters?.data?.map((letter: TConfirmationLetter) => (
+          {allConfirmationLetters.data.map((letter: TConfirmationLetter) => (
             <ConfirmationLetterCard
               key={letter?._id}
               letter={letter}
@@ -48,7 +50,10 @@ const ConfirmationLetterManagement = () => {
             />
           ))}
         </div>
+      ) : (
+        <NoData />
       )}
+
       <Modal
         isModalOpen={isLetterPreviewOpen}
         setIsModalOpen={setIsLetterPreviewOpen}

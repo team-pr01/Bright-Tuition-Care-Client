@@ -8,6 +8,7 @@ import {
 } from "../../../../redux/Features/NoticeBoard/noticeBoardApi";
 import type { TNotice } from "../../../../types/noticeBoard.types";
 import Loader from "../../../../components/Reusable/Loader/Loader";
+import NoData from "../../../../components/Reusable/NoData/NoData";
 
 export type Notice = {
   _id: string;
@@ -47,9 +48,9 @@ const NoticeBoardManagement = () => {
         <div className="py-10">
           <Loader size="lg" text="Please wait..." />
         </div>
-      ) : (
+      ) : allNotices?.data && allNotices.data.length > 0 ? (
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {allNotices?.data?.map((notice: TNotice) => (
+          {allNotices.data.map((notice: TNotice) => (
             <NoticeCard
               key={notice?._id}
               notice={notice}
@@ -59,6 +60,8 @@ const NoticeBoardManagement = () => {
             />
           ))}
         </div>
+      ) : (
+        <NoData />
       )}
 
       <AddNoticeModal

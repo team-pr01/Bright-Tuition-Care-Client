@@ -5,6 +5,7 @@ import Modal from "../../../../Reusable/Modal/Modal";
 import { useState } from "react";
 import SelectPaymentMethod from "../../../Payment/SelectPaymentMethod/SelectPaymentMethod";
 import SelectedPaymentMethod from "../../../Payment/SelectedPaymentMethod/SelectedPaymentMethod";
+import { formatDate } from "../../../../../utils/formatDate";
 
 const InvoicePreview = ({
   invoice,
@@ -55,28 +56,28 @@ const InvoicePreview = ({
         <h3 className="text-center font-semibold mb-4">Bill To</h3>
 
         <p>
-          <span className="font-semibold">Name:</span> {invoice.student.name}
+          <span className="font-semibold">Name:</span> {invoice.tutorId.name}
         </p>
         <p>
-          <span className="font-semibold">Tutor ID:</span>{" "}
-          {invoice.student.tutorId}
+          <span className="font-semibold">Email:</span> {invoice.tutorId.email}
         </p>
         <p>
-          <span className="font-semibold">Phone:</span> {invoice.student.phone}
+          <span className="font-semibold">Phone:</span>{" "}
+          {invoice.tutorId.phoneNumber}
         </p>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
           <p>
             <span className="font-semibold">Issue Date:</span>{" "}
-            {invoice.issueDate}
+            {formatDate(invoice.createdAt)}
           </p>
           <p>
             <span className="font-semibold">Due Date:</span>{" "}
-            {invoice.dueDate || "N/A"}
+            {formatDate(invoice.dueDate || "N/A")}
           </p>
         </div>
 
-        <div className="grid grid-cols-2 gap-4 mt-2">
+        <div className="grid grid-cols-2 gap-4 mt-2 capitalize">
           <p>
             <span className="font-semibold">Payment Status:</span>{" "}
             <span
@@ -90,25 +91,26 @@ const InvoicePreview = ({
           {invoice.paidDate && (
             <p>
               <span className="font-semibold">Paid Date:</span>{" "}
-              {invoice.paidDate}
+              {formatDate(invoice.paidDate)}
             </p>
           )}
         </div>
 
         <div className="mt-4">
           <p className="font-semibold">Invoice Details:</p>
-          <p>{invoice.details}</p>
+          <p>{invoice.jobId?.title}</p>
         </div>
 
         <div className="mt-4">
           <p>
-            <span className="font-semibold">Job ID:</span> {invoice.jobId}
+            <span className="font-semibold">Job ID:</span>{" "}
+            {invoice.jobId?.jobId}
           </p>
           <p>
-            <span className="font-semibold">Invoice ID:</span> {invoice.id}
+            <span className="font-semibold">Invoice ID:</span> {invoice._id}
           </p>
           <p className="font-bold mt-2">
-            <span className="font-semibold">Amount:</span> ৳{invoice.charge}
+            <span className="font-semibold">Amount:</span> ৳{invoice.amount}
           </p>
         </div>
 

@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { FiFileText } from "react-icons/fi";
+import { formatDate } from "../../../../../utils/formatDate";
 
 type InvoiceCardProps = {
   invoice: any;
@@ -7,7 +8,6 @@ type InvoiceCardProps = {
 };
 
 const InvoiceCard = ({ invoice, onSelect }: InvoiceCardProps) => {
-  console.log(invoice.status);
   return (
     <div className="border border-neutral-55/50 p-4 rounded-lg bg-white flex justify-between">
       <div className="flex flex-col gap-2">
@@ -15,9 +15,9 @@ const InvoiceCard = ({ invoice, onSelect }: InvoiceCardProps) => {
           <FiFileText size={20} /> {invoice.id}
         </p>
         <p className="text-sm text-gray-600 mt-1">
-          Due Date: {invoice.dueDate || "N/A"}
+          Due Date: {formatDate(invoice.dueDate || "N/A")}
         </p>
-        <p className="text-sm text-gray-500">Amount: ৳ {invoice.charge}</p>
+        <p className="text-sm text-gray-500">Amount: ৳ {invoice.amount}</p>
 
         <button
           onClick={() => onSelect(invoice)}

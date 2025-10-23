@@ -14,10 +14,13 @@ const invoiceApi = baseApi.injectEndpoints({
       providesTags: ["invoice"],
     }),
 
-    getAllInvoices: builder.query<any, any>({
-      query: () => {
+    getAllInvoices: builder.query<any, { status?: string }>({
+      query: ({ status } = {}) => {
+        const params = new URLSearchParams();
+        if (status) params.append("status", status);
+
         return {
-          url: `/invoice`,
+          url: `/invoice?${params.toString()}`,
           method: "GET",
           credentials: "include",
         };

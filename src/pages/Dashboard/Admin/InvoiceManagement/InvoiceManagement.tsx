@@ -5,46 +5,29 @@ import InvoicePreview from "../../../../components/Dashboard/Tutor/InvoicePage/I
 import Button from "../../../../components/Reusable/Button/Button";
 import SendInvoiceForm from "../../../../components/Admin/InvoiceManagementPage/SendInvoiceForm/SendInvoiceForm";
 import Modal from "../../../../components/Reusable/Modal/Modal";
+import { useGetAllInvoicesQuery } from "../../../../redux/Features/Invoice/invoiceApi";
+import type { TInvoice } from "../../../../types/invoice.types";
+import Loader from "../../../../components/Reusable/Loader/Loader";
+import NoData from "../../../../components/Reusable/NoData/NoData";
 
-const invoices = [
-  {
-    _id: "INV-101",
-    charge: 2000,
-    status: "due",
-    issueDate: "2025-10-01",
-    dueDate: "2025-10-10",
-    student: {
-      name: "John Doe",
-      tutorId: "T-501",
-      phone: "0123456789",
-    },
-    jobId: "JOB-202",
-    details: "Need Bangla Medium student tuition for class 9 student.",
-  },
-  {
-    _id: "INV-102",
-    charge: 1800,
-    status: "paid",
-    issueDate: "2025-09-20",
-    paidDate: "2025-09-25",
-    student: {
-      name: "Sarah Lee",
-      tutorId: "T-502",
-      phone: "0198765432",
-    },
-    jobId: "JOB-303",
-    details: "Math tuition for class 8 student.",
-  },
-];
 const InvoiceManagement = () => {
   const [isSendInvoiceModalOpen, setIsSendInvoiceModalOpen] =
     useState<boolean>(false);
   const [selectedInvoice, setSelectedInvoice] = useState<any | null>(null);
   const [status, setStatus] = useState<string>("");
+
+  const {
+    data: allInvoicesData,
+    isLoading,
+    isFetching,
+  } = useGetAllInvoicesQuery({ status });
+  console.log(allInvoicesData);
   return (
     <div className="font-Nunito flex flex-col gap-5">
       <div className="flex items-center justify-between">
-        <h3 className="text-xl font-semibold">Total Invoice (2)</h3>
+        <h3 className="text-xl font-semibold">
+          Total Invoice ({allInvoicesData?.data?.length || 0})
+        </h3>
         <div className="flex items-center gap-3">
           <select
             value={status}
@@ -67,16 +50,24 @@ const InvoiceManagement = () => {
           />
         </div>
       </div>
-      {!selectedInvoice ? (
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-          {invoices.map((invoice) => (
-            <InvoiceCard
-              key={invoice._id}
-              invoice={invoice}
-              onSelect={setSelectedInvoice}
-            />
-          ))}
+      {isLoading || isFetching ? (
+        <div className="py-10">
+          <Loader size="lg" text="Please wait..." />
         </div>
+      ) : !selectedInvoice ? (
+        allInvoicesData?.data && allInvoicesData.data.length > 0 ? (
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+            {allInvoicesData.data.map((invoice: TInvoice) => (
+              <InvoiceCard
+                key={invoice._id}
+                invoice={invoice}
+                onSelect={setSelectedInvoice}
+              />
+            ))}
+          </div>
+        ) : (
+          <NoData />
+        )
       ) : (
         <InvoicePreview
           invoice={selectedInvoice}
@@ -85,12 +76,14 @@ const InvoiceManagement = () => {
       )}
 
       <Modal
-      heading="Send Invoice"
+        heading="Send Invoice"
         isModalOpen={isSendInvoiceModalOpen}
         setIsModalOpen={setIsSendInvoiceModalOpen}
         width="w-[90%] md:w-[30%] overflow-y-auto"
       >
-        <SendInvoiceForm setIsSendInvoiceModalOpen={setIsSendInvoiceModalOpen} />
+        <SendInvoiceForm
+          setIsSendInvoiceModalOpen={setIsSendInvoiceModalOpen}
+        />
       </Modal>
     </div>
   );

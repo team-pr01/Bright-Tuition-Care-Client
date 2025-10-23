@@ -2,6 +2,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { ICONS } from "../../../assets";
 import { filterData } from "../../../constants/filterData";
+import NoData from "../NoData/NoData";
 
 export type TableHead = {
   key: string;
@@ -28,7 +29,7 @@ type Props<T extends Record<string, any>> = {
   onSearch?: (q: string) => void;
   selectedCity?: string | null;
   setSelectedCity?: React.Dispatch<React.SetStateAction<string>>;
-  selectedArea?: string;
+  selectedArea?: string | null;
   setSelectedArea?: React.Dispatch<React.SetStateAction<string>>;
   areaOptions?: string[];
   setAreaOptions?: React.Dispatch<React.SetStateAction<string[]>>;
@@ -262,9 +263,8 @@ useEffect(() => {
                 <tr>
                   <td
                     colSpan={theads.length + (actions.length ? 1 : 0)}
-                    className="p-6 text-center text-sm text-slate-500"
                   >
-                    No data found!
+                    <NoData/>
                   </td>
                 </tr>
               )}

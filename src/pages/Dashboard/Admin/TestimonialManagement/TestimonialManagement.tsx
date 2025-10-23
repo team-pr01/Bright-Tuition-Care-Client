@@ -8,6 +8,7 @@ import {
 } from "../../../../redux/Features/Testimonial/testimonialApi";
 import type { TTestimonial } from "../../../../types/testimonial.types";
 import Loader from "../../../../components/Reusable/Loader/Loader";
+import NoData from "../../../../components/Reusable/NoData/NoData";
 const TestimonialManagement = () => {
   const [modalType, setModalType] = useState<"add" | "edit">("add");
   // const [role, setRole] = useState<"tutor" | "guardian" | "">("");
@@ -44,9 +45,9 @@ const TestimonialManagement = () => {
         <div className="py-10">
           <Loader size="lg" text="Please wait..." />
         </div>
-      ) : (
+      ) : allTestimonials?.data && allTestimonials.data.length > 0 ? (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {allTestimonials?.data?.map((testimonial: TTestimonial) => (
+          {allTestimonials.data.map((testimonial: TTestimonial) => (
             <AdminTestimonialCard
               key={testimonial?._id}
               _id={testimonial._id}
@@ -64,6 +65,8 @@ const TestimonialManagement = () => {
             />
           ))}
         </div>
+      ) : (
+        <NoData />
       )}
 
       <AddTestimonialModal

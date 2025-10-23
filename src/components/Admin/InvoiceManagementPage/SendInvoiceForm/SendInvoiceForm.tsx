@@ -15,6 +15,7 @@ type TFormData = {
   tutorId: string;
   phoneNumber: string;
   jobTitle: string;
+  dueDate: string;
   amount: string;
 };
 
@@ -58,6 +59,7 @@ const SendInvoiceForm = ({
         jobId: jobId,
         tutorId: data.tutorId,
         amount: data.amount,
+        dueDate: data.dueDate,
       };
       const response = await sendInvoice(payload).unwrap();
       if (response?.success) {
@@ -143,6 +145,16 @@ const SendInvoiceForm = ({
                   value: /^[0-9]+$/,
                   message: "Amount must be a number",
                 },
+              })}
+            />
+
+            {/* Due Date */}
+            <TextInput
+              label="Due Date"
+              error={errors.dueDate}
+              type="date"
+              {...register("dueDate", {
+                required: "Due Date is required",
               })}
             />
           </div>
