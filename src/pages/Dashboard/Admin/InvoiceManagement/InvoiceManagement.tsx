@@ -90,7 +90,7 @@ const InvoiceManagement = () => {
         setIsModalOpen={setIsSendInvoiceModalOpen}
         width="w-[90%] md:w-[30%] overflow-y-auto"
       >
-        <SendInvoiceForm />
+        <SendInvoiceForm setIsSendInvoiceModalOpen={setIsSendInvoiceModalOpen} />
       </Modal>
     </div>
   );

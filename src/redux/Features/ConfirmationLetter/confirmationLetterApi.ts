@@ -34,6 +34,28 @@ const confirmationLetter = baseApi.injectEndpoints({
       providesTags: ["confirmationLetter"],
     }),
 
+    getAllTutorsConfirmationLetters: builder.query<any, any>({
+      query: () => {
+        return {
+          url: `/confirmation-letter/tutor/my`,
+          method: "GET",
+          credentials: "include",
+        };
+      },
+      providesTags: ["confirmationLetter"],
+    }),
+
+    getAllGuardiansConfirmationLetters: builder.query<any, any>({
+      query: () => {
+        return {
+          url: `/confirmation-letter/guardian/my`,
+          method: "GET",
+          credentials: "include",
+        };
+      },
+      providesTags: ["confirmationLetter"],
+    }),
+
     sendConfirmationLetter: builder.mutation<any, any>({
       query: (data) => ({
         url: `/confirmation-letter/send`,
@@ -45,7 +67,7 @@ const confirmationLetter = baseApi.injectEndpoints({
     }),
 
     signOnLetterForTutor: builder.mutation<any, any>({
-      query: ({id, data}) => ({
+      query: ({ id, data }) => ({
         url: `/confirmation-letter/sign/tutor/${id}`,
         method: "PATCH",
         body: data,
@@ -55,7 +77,7 @@ const confirmationLetter = baseApi.injectEndpoints({
     }),
 
     signOnLetterForGuardian: builder.mutation<any, any>({
-      query: ({id, data}) => ({
+      query: ({ id, data }) => ({
         url: `/confirmation-letter/sign/guardian/${id}`,
         method: "PATCH",
         body: data,
@@ -70,6 +92,8 @@ export const {
   useGetJobDetailsForConfirmationLetterQuery,
   useGetAllConfirmationLettersQuery,
   useGetSingleConfirmationLetterByIdQuery,
+  useGetAllTutorsConfirmationLettersQuery,
+  useGetAllGuardiansConfirmationLettersQuery,
   useSendConfirmationLetterMutation,
   useSignOnLetterForTutorMutation,
   useSignOnLetterForGuardianMutation,
