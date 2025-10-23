@@ -1,6 +1,7 @@
 import { FaFileInvoice } from "react-icons/fa";
 import { FiCalendar } from "react-icons/fi";
 import type { TConfirmationLetter } from "../../../../../types/confirmationLetter.types";
+import toast from "react-hot-toast";
 
 const ConfirmationLetterCard = ({
   letter,
@@ -14,27 +15,44 @@ const ConfirmationLetterCard = ({
   return (
     <div
       key={letter?._id}
-      className="bg-white shadow-lg rounded-2xl border border-gray-200 p-5 flex flex-col justify-between hover:shadow-xl transition cursor-pointer"
+      className="bg-white font-Nunito shadow-lg rounded-2xl border border-gray-200 p-5 flex flex-col justify-between hover:shadow-xl transition cursor-pointer"
     >
       <div className="flex items-center gap-3 mb-4">
         <FaFileInvoice className="text-3xl text-primary-10" />
         <div>
-          <h3 className="text-lg font-semibold text-gray-800">
-            Confirmation Letter - #{letter?._id}
+          <h3 className="text-lg font-semibold text-gray-800 flex items-center gap-2">
+            Confirmation Letter -
+            <span className="max-w-[160px] truncate" title={letter?._id}>
+              #{letter?._id}
+            </span>
+            <button
+              type="button"
+              onClick={() => {
+                navigator.clipboard.writeText(letter?._id || "");
+                toast.success("Letter ID copied to clipboard");
+              }}
+              className="text-xs underline text-primary-10 hover:text-blue-600 cursor-pointer"
+            >
+              Copy
+            </button>
           </h3>
-          <p className="text-sm text-gray-500">Job ID: {letter?.jobId}</p>
+
+          <p className="text-sm text-gray-500">
+            Job ID: {letter?.jobId?.jobId}
+          </p>
         </div>
       </div>
 
-      <div className="mb-4 space-y-1">
+      <div className="mb-4 space-y-1 capitalize">
         <p className="text-sm text-neutral-20">
-          <span className="font-medium">Tutor:</span> {letter?.tutorName}
+          <span className="font-medium">Tutor:</span> {letter?.tutorId?.name}
         </p>
         <p className="text-sm text-neutral-20">
-          <span className="font-medium">Guardian:</span> {letter?.guardianName}
+          <span className="font-medium">Guardian:</span>{" "}
+          {letter?.guardianId?.name}
         </p>
         <p className="text-sm text-neutral-20">
-          <span className="font-medium">Tuition:</span> {letter?.tuitionDetails}
+          <span className="font-medium">Tuition:</span> {letter?.jobId?.title}
         </p>
       </div>
 

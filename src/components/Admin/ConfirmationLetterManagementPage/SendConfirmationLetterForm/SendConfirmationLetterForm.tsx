@@ -31,8 +31,6 @@ const SendConfirmationLetterForm = ({
     skip: !jobId,
   });
 
-  console.log(jobData);
-
   const [sendConfirmationLetter, { isLoading: isSending }] =
     useSendConfirmationLetterMutation();
 
@@ -80,7 +78,7 @@ const SendConfirmationLetterForm = ({
         />
       </form>
 
-      {!jobData && (
+      {jobId && !jobData && (
         <p className="text-red-500 text-sm mt-2">
           No data found for the provided Job ID.
         </p>

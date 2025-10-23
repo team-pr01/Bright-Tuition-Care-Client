@@ -1,10 +1,19 @@
 export type TConfirmationLetter = {
   _id: string;
-  jobId: string;
-  tutorName: string;
-  guardianName: string;
-  studentName: string;
-  tuitionDetails: string;
+  jobId: {
+    title : string;
+    jobId : string
+  };
+  tutorId: {
+    name: string;
+    email: string;
+    phoneNumber: string;
+  };
+  guardianId: {
+    name: string;
+    email: string;
+    phoneNumber: string;
+  };
   createdAt: string;
   updatedAt?: string;
 };

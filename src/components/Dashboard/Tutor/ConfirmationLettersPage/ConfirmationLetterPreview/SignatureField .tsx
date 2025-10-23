@@ -1,12 +1,30 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState } from "react";
 import { FiCheck } from "react-icons/fi";
+import { useSelector } from "react-redux";
+import { useCurrentUser } from "../../../../../redux/Features/Auth/authSlice";
 
-const SignatureField = ({ label }: { label: string }) => {
-  const [signature, setSignature] = useState("");
-  const [submitted, setSubmitted] = useState(false);
+type SignatureFieldProps = {
+  label: string;
+  onClick: (signature: string) => void;
+  signature: string | null;
+  signatureDate: string | null;
+};
+
+const SignatureField: React.FC<SignatureFieldProps> = ({
+  label,
+  onClick,
+  signature: defaultSignature,
+  signatureDate: defaultDate,
+}) => {
+  const user = useSelector(useCurrentUser) as any;
+  const [signature, setSignature] = useState(defaultSignature || "");
+  const [submitted, setSubmitted] = useState(!!defaultSignature);
+  const isDisabled = submitted || user?.role === "admin";
 
   const handleSubmit = () => {
     if (signature.trim()) {
+      onClick(signature);
       setSubmitted(true);
     }
   };
@@ -21,12 +39,14 @@ const SignatureField = ({ label }: { label: string }) => {
             placeholder="Type Your Signature..."
             value={signature}
             onChange={(e) => setSignature(e.target.value)}
-            className="font-[Dancing Script] text-neutral-20 bg-transparent border-none outline-none text-center"
+            disabled={isDisabled}
+            className="font-[Dancing Script] text-neutral-20 bg-transparent border-none outline-none text-center disabled:opacity-50 disabled:cursor-not-allowed"
             style={{ fontFamily: "'Dancing Script', cursive" }}
           />
-          {signature && (
+          {!isDisabled && signature && (
             <button
               onClick={handleSubmit}
+              type="button"
               className="text-green-600 hover:text-green-800 cursor-pointer flex items-center"
             >
               <FiCheck size={20} /> Submit
@@ -48,11 +68,10 @@ const SignatureField = ({ label }: { label: string }) => {
       {/* Labels */}
       <p className="text-sm font-medium">{label}</p>
       <p className="text-xs text-neutral-30">
-        (Date: {new Date().toLocaleDateString()})
+        (Date: {defaultDate ? new Date(defaultDate).toLocaleDateString() : new Date().toLocaleDateString()})
       </p>
     </div>
   );
 };
 
-
-export default SignatureField
+export default SignatureField;
