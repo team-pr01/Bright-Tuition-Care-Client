@@ -20,56 +20,9 @@ import {
   FaClock,
   FaDollarSign,
 } from "react-icons/fa";
+import { useGetAdminStatsQuery } from "../../../../redux/Features/Admin/adminApi";
 
-// --- 1. Data Interfaces ---
-
-interface MonthlyRegistration {
-  name: string;
-  Tutor: number;
-  Guardian: number;
-}
-
-// New interface for the Jobs Posted Chart
-interface JobPostCount {
-  name: string;
-  JobsPosted: number;
-}
-
-// --- 2. Mock Data ---
-
-const monthlyRegData: MonthlyRegistration[] = [
-  { name: "Jan", Tutor: 45, Guardian: 25 },
-  { name: "Feb", Tutor: 60, Guardian: 48 },
-  { name: "Mar", Tutor: 75, Guardian: 55 },
-  { name: "Apr", Tutor: 50, Guardian: 32 },
-  { name: "May", Tutor: 40, Guardian: 35 },
-  { name: "Jun", Tutor: 45, Guardian: 52 },
-  { name: "Jul", Tutor: 30, Guardian: 25 },
-  { name: "Aug", Tutor: 55, Guardian: 40 },
-  { name: "Sep", Tutor: 65, Guardian: 50 },
-  { name: "Oct", Tutor: 70, Guardian: 60 },
-  { name: "Nov", Tutor: 58, Guardian: 45 },
-  { name: "Dec", Tutor: 62, Guardian: 55 },
-];
-
-// Mock data for the new Jobs Posted chart (12 months)
-const jobPostData: JobPostCount[] = [
-  { name: "Jan", JobsPosted: 120 },
-  { name: "Feb", JobsPosted: 400 },
-  { name: "Mar", JobsPosted: 150 },
-  { name: "Apr", JobsPosted: 220 },
-  { name: "May", JobsPosted: 250 },
-  { name: "Jun", JobsPosted: 300 },
-  { name: "Jul", JobsPosted: 280 },
-  { name: "Aug", JobsPosted: 350 },
-  { name: "Sep", JobsPosted: 310 },
-  { name: "Oct", JobsPosted: 380 },
-  { name: "Nov", JobsPosted: 320 },
-  { name: "Dec", JobsPosted: 400 },
-];
-
-// --- 3. Custom Tooltip Components ---
-
+// --- Custom Tooltip Components ---
 const CustomTooltip = ({ active, payload, label }: any) => {
   if (active && payload && payload.length) {
     return (
@@ -86,7 +39,7 @@ const CustomTooltip = ({ active, payload, label }: any) => {
   return null;
 };
 
-// --- 4. Chart Card Component ---
+// ---Chart Card Component ---
 
 interface ChartCardProps {
   title: string;
@@ -100,9 +53,11 @@ const ChartCard: React.FC<ChartCardProps> = ({ title, children }) => (
   </div>
 );
 
-// --- 5. Main Dashboard Component ---
+// --- Main Dashboard Component ---
 
 const AdminDashboardHome = () => {
+  const { data: adminStats } = useGetAdminStatsQuery({});
+  console.log(adminStats);
   const tutorColor = "#3B82F6"; // Blue for Tutor
   const guardianColor = "#10B981"; // Green for Guardian
 
@@ -118,7 +73,7 @@ const AdminDashboardHome = () => {
         <DashboardOverviewCard
           title="Total"
           additionalTitle="Guardians"
-          value="1,250"
+          value={adminStats?.data?.totalGuardians || 0}
           textColor="text-neutral-10"
           path="/dashboard/admin/guardians"
           icon={<FaUserFriends className="text-[#3B82F6]" />} // Blue
@@ -128,7 +83,7 @@ const AdminDashboardHome = () => {
         <DashboardOverviewCard
           title="Registered"
           additionalTitle="Tutors"
-          value="450"
+          value={adminStats?.data?.totalTutors || 0}
           textColor="text-neutral-10"
           path="/dashboard/admin/tutors"
           icon={<FaChalkboardTeacher className="text-[#10B981]" />} // Green
@@ -138,7 +93,7 @@ const AdminDashboardHome = () => {
         <DashboardOverviewCard
           title="Posted"
           additionalTitle="Jobs"
-          value="320"
+          value={adminStats?.data?.totalJobs || 0}
           textColor="text-neutral-10"
           path="/dashboard/admin/posted-jobs"
           icon={<FaBriefcase className="text-[#F59E0B]" />} // Amber/Yellow
@@ -148,7 +103,7 @@ const AdminDashboardHome = () => {
         <DashboardOverviewCard
           title="Pending"
           additionalTitle="Jobs"
-          value="45"
+          value={adminStats?.data?.pendingJobs || 0}
           textColor="text-neutral-10"
           path="/dashboard/admin/posted-jobs"
           icon={<FaClock className="text-[#EF4444]" />} // Red
@@ -171,7 +126,7 @@ const AdminDashboardHome = () => {
         <ChartCard title="Monthly Registrations">
           <ResponsiveContainer width="100%" height="100%">
             <LineChart
-              data={monthlyRegData}
+              data={adminStats?.data?.monthlyRegData || []}
               margin={{ top: 5, right: 20, left: 0, bottom: 5 }} // reduce left margin
             >
               <CartesianGrid strokeDasharray="3 3" stroke="#e0e0e0" />
@@ -204,7 +159,7 @@ const AdminDashboardHome = () => {
         <ChartCard title="Jobs Posted Per Month">
           <ResponsiveContainer width="100%" height="100%">
             <AreaChart
-              data={jobPostData}
+              data={adminStats?.data?.jobPostData || []}
               margin={{ top: 10, right: 20, left: -10, bottom: 0 }}
             >
               <defs>
