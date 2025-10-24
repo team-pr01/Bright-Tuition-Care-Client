@@ -28,7 +28,7 @@ const LeadManagement = () => {
 
   //   Table heads
   const leadTheads: TableHead[] = [
-    { key: "_id", label: "ID" },
+    { key: "tutorId", label: "Tutor ID" },
     { key: "addedBy", label: "Added By" },
     { key: "guardianPhoneNumber", label: "Guardian Phone Number" },
     { key: "class", label: "Class" },
@@ -42,6 +42,8 @@ const LeadManagement = () => {
   // Format table data
   const tableData = allLeads?.data?.leads?.map((lead: TLead) => ({
     ...lead,
+    _id: lead?._id || "N/A",
+    tutorId: lead?.tutorId?.tutorId || "N/A",
     addedBy: (
       <p>
         {lead?.userId?.name ? lead?.userId?.name : "N/A"}
@@ -61,7 +63,7 @@ const LeadManagement = () => {
     status: (
       <div
         className={`px-2 py-1 rounded-xl font-Nunito w-fit capitalize ${
-          lead?.status === "confirmed"
+          lead?.status === "confirmed" || lead?.status === "paid"
             ? "bg-green-100 text-green-600"
             : "bg-orange-100 text-orange-600"
         }`}
@@ -121,7 +123,7 @@ const LeadManagement = () => {
         theads={leadTheads}
         data={tableData || []}
         actions={actions}
-        totalPages={5}
+        totalPages={allLeads?.data?.meta?.totalPages}
         currentPage={page}
         onPageChange={(p) => setPage(p)}
         isLoading={isLoading || isFetching}
@@ -129,6 +131,7 @@ const LeadManagement = () => {
         limit={limit}
         setLimit={setLimit}
         selectedCity={null}
+        selectedArea={null}
       />
     </div>
   );

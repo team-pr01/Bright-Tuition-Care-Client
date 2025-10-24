@@ -6,6 +6,10 @@ export type TLead = {
     email: string;
     phoneNumber: string;
   };
+  tutorId: {
+    _id: string;
+    tutorId: string;
+  };
   class: string;
   guardianPhoneNumber: string;
   address: string;
