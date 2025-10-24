@@ -8,6 +8,9 @@ import { ICONS } from "../../../assets";
 import Preview from "./Preview";
 import toast from "react-hot-toast";
 import { usePostJobMutation } from "../../../redux/Features/Job/jobApi";
+import { useSelector } from "react-redux";
+import { useCurrentUser } from "../../../redux/Features/Auth/authSlice";
+import { useNavigate } from "react-router-dom";
 
 interface FormValues {
   // Job Details
@@ -36,6 +39,8 @@ interface FormValues {
 const steps = ["Job Details", "Tutor Preferences", "Student Info", "Preview"];
 
 const HireTutorForm = () => {
+  const user = useSelector(useCurrentUser);
+  const navigate = useNavigate();
   const [postJob, { isLoading: isPostingJob }] = usePostJobMutation();
   const methods = useForm<FormValues>({ mode: "onBlur" });
   const { handleSubmit } = methods;
@@ -45,10 +50,19 @@ const HireTutorForm = () => {
   const onSubmit = async (data: FormValues) => {
     console.log(data);
     try {
-      const response = await postJob(data).unwrap();
+      const payload = {
+        ...data,
+        postedBy: user?._id,
+        postedByModel: user?.role === "admin" ? "User" : "Guardian",
+      };
+      const response = await postJob(payload).unwrap();
       if (response?.success) {
         toast.success("Job posted successfully!");
-      }
+        if (user?.role === "admin") navigate("/dashboard/admin/posted-jobs");
+        else if (user?.role === "guardian")
+          navigate("/dashboard/guardian/posted-jobs");
+        else navigate("/dashboard/staff/posted-jobs");
+      };
     } catch (err: any) {
       toast.error(err?.data?.message || "Submission failed. Please try again.");
     }
@@ -115,7 +129,6 @@ const HireTutorForm = () => {
               type="submit"
               className="px-4 py-2 bg-primary-10 text-white rounded cursor-pointer"
               disabled={isPostingJob}
-
             >
               {isPostingJob ? "Submitting..." : "Submit"}
             </button>

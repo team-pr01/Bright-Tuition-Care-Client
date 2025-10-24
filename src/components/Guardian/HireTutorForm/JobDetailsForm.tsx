@@ -4,6 +4,7 @@ import TextInput from "../../Reusable/TextInput/TextInput";
 import MultiSelectDropdown from "../../Reusable/MultiSelectDropdown/MultiSelectDropdown";
 import { filterData } from "../../../constants/filterData";
 import Textarea from "../../Reusable/TextArea/TextArea";
+import SelectDropdown from "../../Reusable/SelectDropdown/SelectDropdown";
 
 const JobDetailsForm = () => {
   const {
@@ -14,12 +15,10 @@ const JobDetailsForm = () => {
   } = useFormContext<any>();
 
   const selectedTuitionType = watch("tuitionType") || [];
-  const selectedCategory = watch("category") || [];
 
   return (
     <div className="flex flex-col gap-4">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 lg:gap-6">
-
         <TextInput
           label="Salary (BDT)"
           type="number"
@@ -36,38 +35,32 @@ const JobDetailsForm = () => {
           onChange={(val) => setValue("tuitionType", val)}
         />
 
-        <MultiSelectDropdown
+        <SelectDropdown
           label="Category"
-          name="category"
           options={filterData.category}
-          value={selectedCategory}
-          onChange={(val) => setValue("category", val)}
+          {...register("category", { required: "Category is required" })}
         />
 
         <TextInput
           label="Tutoring Time"
-          type=""
           placeholder="Ex: 10:00 AM - 12:00 PM"
           error={errors.tutoringTime}
           {...register("tutoringTime")}
           isRequired={false}
         />
 
-        <MultiSelectDropdown
+        <SelectDropdown
           label="Tutoring Days"
-          name="tutoringDays"
           options={filterData.daysPerWeek}
-          value={watch("tutoringDays") || []}
-          onChange={(val) => setValue("tutoringDays", val)}
+         {...register("tutoringDays", { required: "Tutoring days is required" })}
+        />
+        <TextInput
+          label="Subjects"
+          placeholder="Enter subjects"
+          error={errors.subjects}
+          {...register("subjects", { required: "Subjects are required" })}
         />
       </div>
-
-      <TextInput
-        label="Subjects"
-        placeholder="Enter subjects"
-        error={errors.subjects}
-        {...register("subjects", { required: "Subjects are required" })}
-      />
 
       <Textarea
         label="Other Requirements"

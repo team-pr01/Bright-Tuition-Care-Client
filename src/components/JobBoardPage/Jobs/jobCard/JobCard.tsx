@@ -207,7 +207,7 @@ const JobCard: React.FC<TJobCardProps> = ({
                   alt=""
                   className="size-4 md:size-5"
                 />
-                <p className="font-bold">View Applications(1)</p>
+                <p className="font-bold">Applications(1)</p>
               </Link>
 
               {/* Dropdown Menu */}

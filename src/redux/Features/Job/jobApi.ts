@@ -61,6 +61,34 @@ const jobApi = baseApi.injectEndpoints({
       providesTags: ["jobs"],
     }),
 
+    getMyPostedJobs: builder.query({
+      query: ({
+        keyword,
+        status,
+        skip,
+        limit,
+      }: {
+        keyword?: string;
+        status?: string;
+        skip?: number;
+        limit?: number;
+      } = {}) => {
+        const params = new URLSearchParams();
+
+        if (keyword) params.append("keyword", keyword);
+        if (status) params.append("status", status);
+        if (typeof skip === "number") params.append("skip", skip.toString());
+        if (typeof limit === "number") params.append("limit", limit.toString());
+
+        return {
+          url: `/job/my-posted-jobs?${params.toString()}`,
+          method: "GET",
+          credentials: "include",
+        };
+      },
+      providesTags: ["jobs"],
+    }),
+
     postJob: builder.mutation<any, any>({
       query: (data) => ({
         url: `/job/post`,
@@ -88,25 +116,13 @@ const jobApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ["jobs"],
     }),
-
-    // changeStatusToResolved: builder.mutation<
-    //   any,
-    //   { id: string; status: string }
-    // >({
-    //   query: ({ id, status }) => ({
-    //     url: `/job/update-status/${id}`,
-    //     method: "PUT",
-    //     body: { status },
-    //     credentials: "include",
-    //   }),
-    //   invalidatesTags: ["emergencies"],
-    // }),
   }),
 });
 
 export const {
   useGetAllJobsQuery,
   useGetSingleJobByIdQuery,
+  useGetMyPostedJobsQuery,
   usePostJobMutation,
   useDeleteJobMutation,
   useUpdateJobMutation,

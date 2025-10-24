@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState, useEffect, useRef } from "react";
 import Filters from "../../components/JobBoardPage/Filters/Filters";
 import Jobs from "../../components/JobBoardPage/Jobs/Jobs";
@@ -99,8 +100,8 @@ const JobBoard = () => {
     return () => {
       if (node) observer.unobserve(node);
     };
-  }, [allJobs, isFetching,allJobs?.data?.meta?.hasMore]);
-  console.log(jobs,"jobs")
+  }, [allJobs, isFetching, allJobs?.data?.meta?.hasMore]);
+  console.log(jobs, "jobs");
 
   return (
     <Container>
@@ -137,15 +138,15 @@ const JobBoard = () => {
           />
         </div>
 
-        <Jobs allJobs={jobs} isLoading={isLoading || isFetching} />
+        <Jobs allJobs={jobs} isLoading={isLoading || isFetching} variant="tutorJobCard" />
         <div ref={loaderRef} className="h-10"></div>
 
         {allJobs?.data?.meta?.hasMore && isFetching && (
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        {Array.from({ length: 3 }).map((_, i) => (
-          <JobCardSkeleton key={i} />
-        ))}
-      </div> 
+            {Array.from({ length: 3 }).map((_, i) => (
+              <JobCardSkeleton key={i} />
+            ))}
+          </div>
         )}
         {!allJobs?.data?.meta?.hasMore && !isFetching && (
           <p className="text-center mt-4 text-gray-400">

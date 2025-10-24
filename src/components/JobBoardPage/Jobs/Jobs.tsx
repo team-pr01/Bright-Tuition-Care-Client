@@ -9,9 +9,11 @@ import JobCardSkeleton from "./jobCard/JobCardSkeleton";
 const Jobs = ({
   allJobs,
   isLoading,
+  variant,
 }: {
   allJobs: TJobs[];
   isLoading: boolean;
+  variant:any
 }) => {
   if (isLoading) {
     return (
@@ -26,7 +28,7 @@ const Jobs = ({
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
       {allJobs?.map((job: TJobs, index: number) => (
         <AnimatedJobCard key={index}>
-          <JobCard variant="tutorJobCard" job={job}/>
+          <JobCard variant={variant} job={job} status={job?.status}/>
         </AnimatedJobCard>
       ))}
     </div>

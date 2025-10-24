@@ -6,6 +6,7 @@ import TextInput from "../../Reusable/TextInput/TextInput";
 import Textarea from "../../Reusable/TextArea/TextArea";
 import { ICONS } from "../../../assets";
 import { useState } from "react";
+import SelectDropdown from "../../Reusable/SelectDropdown/SelectDropdown";
 
 const Preview = () => {
   const [isEditEnable, setIsEditEnable] = useState<boolean>(false);
@@ -17,8 +18,6 @@ const Preview = () => {
   } = useFormContext<any>();
 
   const selectedTuitionType = watch("tuitionType") || [];
-  const selectedCategory = watch("category") || [];
-  const selectedTutorGender = watch("preferedTutorGender") || [];
   const selectedCity = watch("city") || [];
   const selectedArea = watch("area") || [];
 
@@ -34,13 +33,15 @@ const Preview = () => {
     <div className="flex flex-col gap-4 lg:gap-5 font-Nunito">
       <div className="flex items-center gap-2">
         Need any correction?
-        <button onClick={() => setIsEditEnable(!isEditEnable)} className="cursor-pointer flex items-center gap-1 text-primary-10">
+        <button
+          onClick={() => setIsEditEnable(!isEditEnable)}
+          className="cursor-pointer flex items-center gap-1 text-primary-10"
+        >
           <img src={ICONS.pen} alt="" className="size-4" /> Edit
         </button>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 lg:gap-5">
-
         <TextInput
           label="Salary (BDT)"
           type="number"
@@ -60,13 +61,10 @@ const Preview = () => {
           isDisabled={!isEditEnable}
         />
 
-        <MultiSelectDropdown
+        <SelectDropdown
           label="Category"
-          name="category"
           options={filterData.category}
-          value={selectedCategory}
-          onChange={(val) => setValue("category", val)}
-          isDisabled={!isEditEnable}
+          {...register("category", { required: "Category is required" })}
         />
 
         <TextInput
@@ -79,23 +77,17 @@ const Preview = () => {
           isRequired={false}
         />
 
-        <MultiSelectDropdown
+         <SelectDropdown
           label="Tutoring Days"
-          name="tutoringDays"
           options={filterData.daysPerWeek}
-          value={watch("tutoringDays") || []}
-          onChange={(val) => setValue("tutoringDays", val)}
-          isDisabled={!isEditEnable}
+         {...register("tutoringDays", { required: "Tutoring days is required" })}
         />
 
-        <MultiSelectDropdown
-          label="Preferred Tutor"
-          name="preferedTutorGender"
-          options={filterData.tutorGender}
-          value={selectedTutorGender}
-          onChange={(val) => setValue("preferedTutorGender", val)}
-          isDisabled={!isEditEnable}
-        />
+        <SelectDropdown
+        label="Preferred Tutor"
+        options={filterData.tutorGender}
+        {...register("preferredTutorGender", { required: "Gender is required" })}
+      />
 
         <TextInput
           label="Number of Students"
@@ -107,14 +99,13 @@ const Preview = () => {
           isRequired={false}
         />
 
-        <MultiSelectDropdown
-          label="Student Gender"
-          name="studentGender"
-          options={filterData.studentGender}
-          value={watch("studentGender") || []}
-          onChange={(val) => setValue("studentGender", val)}
-          isDisabled={!isEditEnable}
-        />
+        <SelectDropdown
+        label="Student Gender"
+        options={filterData.studentGender}
+        {...register("studentGender", {
+          required: "Student gender is required",
+        })}
+      />
 
         <MultiSelectDropdown
           label="Class"
@@ -155,22 +146,20 @@ const Preview = () => {
         {/* Hidden field to store location URL */}
         <TextInput
           label="Location URL"
-          error={errors.locationUrl}
-          value={watch("locationUrl")}
+          error={errors.locationDirection}
+          value={watch("locationDirection")}
           isDisabled={!isEditEnable}
-          {...register("locationUrl")}
+          {...register("locationDirection")}
+        />
+        <TextInput
+          label="Subjects"
+          placeholder="Enter subjects"
+          error={errors.subjects}
+          value={watch("subjects")}
+          isDisabled={!isEditEnable}
+          {...register("subjects")}
         />
       </div>
-
-      {/* Full-width fields */}
-      <TextInput
-        label="Subjects"
-        placeholder="Enter subjects"
-        error={errors.subjects}
-        value={watch("subjects")}
-        isDisabled={!isEditEnable}
-        {...register("subjects")}
-      />
 
       <Textarea
         label="Other Requirements"

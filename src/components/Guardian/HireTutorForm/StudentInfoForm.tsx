@@ -3,6 +3,7 @@ import { useFormContext } from "react-hook-form";
 import { filterData } from "../../../constants/filterData";
 import TextInput from "../../Reusable/TextInput/TextInput";
 import MultiSelectDropdown from "../../Reusable/MultiSelectDropdown/MultiSelectDropdown";
+import SelectDropdown from "../../Reusable/SelectDropdown/SelectDropdown";
 
 const StudentInfoForm = () => {
   const {
@@ -12,33 +13,38 @@ const StudentInfoForm = () => {
     setValue,
   } = useFormContext<any>();
 
-  const selectedTutorGender = watch("preferedTutorGender") || [];
-
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-4 lg:gap-6">
-      <MultiSelectDropdown
+      <SelectDropdown
         label="Preferred Tutor"
-        name="preferedTutor"
         options={filterData.tutorGender}
-        value={selectedTutorGender}
-        onChange={(val) => setValue("preferedTutor", val)}
+        {...register("preferredTutorGender", {
+          required: "Gender is required",
+        })}
       />
 
       <TextInput
         label="Number of Students"
         placeholder="Enter number"
-        error={errors.noOfStudents}
-        {...register("noOfStudents")}
+        error={errors.numberOfStudents}
+        {...register("numberOfStudents")}
         isRequired={false}
       />
 
-      <MultiSelectDropdown
+      <SelectDropdown
         label="Student Gender"
-        name="studentGender"
         options={filterData.studentGender}
-        value={watch("studentGender") || []}
-        onChange={(val) => setValue("studentGender", val)}
+        {...register("studentGender", {
+          required: "Student gender is required",
+        })}
       />
+      {/* <MultiSelectDropdown
+       label="Student Gender"
+       name="studentGender"
+       options={filterData.studentGender}
+       value={watch("studentGender") || []}
+       onChange={(val) => setValue("studentGender", val)}
+      /> */}
 
       <MultiSelectDropdown
         label="Class"

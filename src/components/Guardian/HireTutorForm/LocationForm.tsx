@@ -41,7 +41,7 @@ const LocationForm = () => {
         const googleMapsUrl = `https://www.google.com/maps?q=${latitude},${longitude}`;
 
         // Save to form value
-        setValue("locationUrl", googleMapsUrl);
+        setValue("locationDirection", googleMapsUrl);
 
         setIsDirectionAdded(true);
       },
@@ -83,8 +83,8 @@ const LocationForm = () => {
         <TextInput
           label="Location Direction"
           placeholder=""
-          error={errors.locationUrl}
-          {...register("locationUrl")}
+          error={errors.locationDirection}
+          {...register("locationDirection")}
           isDisabled={true}
         />
 
