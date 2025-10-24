@@ -108,10 +108,11 @@ const jobApi = baseApi.injectEndpoints({
       invalidatesTags: ["jobs"],
     }),
 
-    updateJob: builder.mutation<any, string>({
-      query: (id) => ({
+    updateJob: builder.mutation<any, any>({
+      query: ({ id, data }) => ({
         url: `/job/update/${id}`,
         method: "PATCH",
+        body: data,
         credentials: "include",
       }),
       invalidatesTags: ["jobs"],

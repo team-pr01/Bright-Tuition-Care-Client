@@ -25,7 +25,7 @@ const Jobs = ({
     );
   }
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+    <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 relative z-0 overflow-visible">
       {allJobs?.map((job: TJobs, index: number) => (
         <AnimatedJobCard key={index}>
           <JobCard variant={variant} job={job} status={job?.status}/>

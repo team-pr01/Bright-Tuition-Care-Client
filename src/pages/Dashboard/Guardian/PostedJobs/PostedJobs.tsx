@@ -115,7 +115,7 @@ const PostedJobs = () => {
         </div>
       </div>
 
-      <div className="mt-5">
+      <div className="mt-5 ">
         <Jobs
           allJobs={jobs}
           isLoading={isLoading || isFetching}

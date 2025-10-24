@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useEffect, useRef, useState } from "react";
 import { ICONS } from "../../../../assets";
 import Button from "../../../Reusable/Button/Button";
@@ -9,6 +10,8 @@ import { Link } from "react-router-dom";
 import { TbMenuDeep } from "react-icons/tb";
 import { FiCheckCircle, FiX, FiXCircle } from "react-icons/fi";
 import type { TJobs } from "../../../../types/job.types";
+import { useUpdateJobMutation } from "../../../../redux/Features/Job/jobApi";
+import toast from "react-hot-toast";
 
 type TJobCardProps = {
   variant?: string;
@@ -34,12 +37,13 @@ const JobCard: React.FC<TJobCardProps> = ({
         dropdownRef.current &&
         !dropdownRef.current.contains(event.target as Node)
       ) {
-        setIsOpen(false);
+        setIsOpen(!isOpen);
       }
     };
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, []);
+  }, [isOpen]);
+
   const path = "admin";
   const role = "admin";
   const [isShareJobModalOpen, setIsShareJobModalOpen] =
@@ -55,8 +59,12 @@ const JobCard: React.FC<TJobCardProps> = ({
       title: "Tutoring Days",
       value: job?.tutoringDays,
     },
-    { icon: ICONS.salary, title: "Salary", value: `${job?.salary} BDT`},
-    { icon: ICONS.preferredTutor, title: "Prefer Tutor", value: job?.preferredTutorGender },
+    { icon: ICONS.salary, title: "Salary", value: `${job?.salary} BDT` },
+    {
+      icon: ICONS.preferredTutor,
+      title: "Prefer Tutor",
+      value: job?.preferredTutorGender,
+    },
     // { icon: ICONS.subject, title: "Subjects", value: "Physics, Chemistry, Math" },
     // { icon: ICONS.location, title: "Location", value: "Mohammodpur" },
   ];
@@ -75,9 +83,34 @@ const JobCard: React.FC<TJobCardProps> = ({
       : "text-rose-500";
 
   const statusTextColorForGuardian =
-    status === "pending" ? "text-yellow-600" : "text-green-500";
+    job?.status === "pending"
+      ? "text-yellow-600"
+      : job?.status === "cancelled"
+      ? "text-red-600"
+      : job?.status === "closed"
+      ? "text-gray-500"
+      : "text-green-500";
   const [isConfirmDeleteModalOpen, setIsConfirmDeleteModalOpen] =
     useState<boolean>(false);
+
+  const [updateJob] = useUpdateJobMutation();
+
+  const handleUpdateStatus = async (status: string) => {
+    try {
+      const payload = {
+        status,
+      };
+      await toast.promise(updateJob({ id: job?._id, data: payload }).unwrap(), {
+        loading: "Loading...",
+        success: `Status updated to ${status}`,
+        error: "Failed to update status. Please try again.",
+      });
+    } catch (error: any) {
+      toast.error(
+        error?.data?.message || "Failed to update status. Please try again."
+      );
+    }
+  };
 
   return (
     <>
@@ -128,7 +161,7 @@ const JobCard: React.FC<TJobCardProps> = ({
           <div>
             <p className="text-neutral-45 text-sm leading-normal">Subjects</p>
             <p className="text-neutral-10 font-medium leading-6 mt-1">
-             {job?.subjects}
+              {job?.subjects}
             </p>
           </div>
         </div>
@@ -155,7 +188,8 @@ const JobCard: React.FC<TJobCardProps> = ({
           <div>
             <p className="text-neutral-45 text-sm leading-normal">Location</p>
             <p className="text-neutral-10 font-medium leading-6 mt-1">
-            {job?.area} {" "} { job?.city}            </p>
+              {job?.area} {job?.city}{" "}
+            </p>
           </div>
         </div>
 
@@ -223,20 +257,29 @@ const JobCard: React.FC<TJobCardProps> = ({
                   {isOpen && (
                     <div
                       ref={dropdownRef}
-                      className="absolute right-0 mt-2 w-40 bg-white shadow-lg rounded-md border border-gray-100 z-50"
+                      className="absolute right-0 bottom-full mb-2 w-40 bg-white shadow-lg rounded-md border border-gray-100 z-50"
                     >
                       {/* Make Live */}
-                      <button className="flex items-center gap-2 px-4 py-2 text-sm w-full hover:bg-green-50 text-green-600 cursor-pointer">
+                      <button
+                        onClick={() => handleUpdateStatus("live")}
+                        className="flex items-center gap-2 px-4 py-2 text-sm w-full hover:bg-green-50 text-green-600 cursor-pointer"
+                      >
                         <FiCheckCircle /> Make Live
                       </button>
 
                       {/* Close Job */}
-                      <button className="flex items-center gap-2 px-4 py-2 text-sm w-full hover:bg-yellow-50 text-yellow-600 cursor-pointer">
+                      <button
+                        onClick={() => handleUpdateStatus("closed")}
+                        className="flex items-center gap-2 px-4 py-2 text-sm w-full hover:bg-yellow-50 text-yellow-600 cursor-pointer"
+                      >
                         <FiXCircle /> Close Job
                       </button>
 
                       {/* Cancel */}
-                      <button className="flex items-center gap-2 px-4 py-2 text-sm w-full hover:bg-gray-50 cursor-pointer">
+                      <button
+                        onClick={() => handleUpdateStatus("cancelled")}
+                        className="flex items-center gap-2 px-4 py-2 text-sm w-full hover:bg-gray-50 cursor-pointer"
+                      >
                         <FiX /> Cancel
                       </button>
                     </div>
