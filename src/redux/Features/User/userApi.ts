@@ -11,6 +11,15 @@ const userApi = baseApi.injectEndpoints({
       invalidatesTags: ["users", "tutor", "guardian", "staff"],
     }),
 
+    deleteAccount: builder.mutation({
+      query: (data) => ({
+        url: `/user/delete-account`,
+        body: data,
+        method: "PATCH",
+      }),
+      invalidatesTags: ["users", "tutor", "guardian", "staff"],
+    }),
+
     suspendUser: builder.mutation({
       query: ({ userId, data }) => ({
         url: `/user/suspend/${userId}`,
@@ -30,4 +39,4 @@ const userApi = baseApi.injectEndpoints({
   }),
 });
 
-export const { useUpdateUserProfileMutation, useSuspendUserMutation, useActiveUserMutation } = userApi;
+export const { useUpdateUserProfileMutation, useDeleteAccountMutation, useSuspendUserMutation, useActiveUserMutation } = userApi;

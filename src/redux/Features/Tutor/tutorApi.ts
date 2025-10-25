@@ -46,6 +46,15 @@ const tutorApi = baseApi.injectEndpoints({
       providesTags: ["tutor"],
     }),
 
+    getMyTutorProfile: builder.query({
+      query: () => ({
+        url: `/tutor/me`,
+        method: "GET",
+        credentials: "include",
+      }),
+      providesTags: ["tutor"],
+    }),
+
     toggleTutorProfileStatus: builder.mutation({
       query: (tutorId) => ({
         url: `/tutor/profile-lock/${tutorId}`,
@@ -59,5 +68,6 @@ const tutorApi = baseApi.injectEndpoints({
 export const {
     useGetAllTutorsQuery,
     useGetSingleTutorByIdQuery,
+    useGetMyTutorProfileQuery,
     useToggleTutorProfileStatusMutation,
 } = tutorApi;

@@ -12,8 +12,9 @@ type TFormData = {
   newPassword: string;
   confirmNewPassword: string;
 };
+
 const ChangePasswordForm = () => {
-  const [changePassword,{isLoading}]=useChangePasswordMutation();
+  const [changePassword, { isLoading }] = useChangePasswordMutation();
   const [isCurrentPasswordVisible, setIsCurrentPasswordVisible] =
     useState<boolean>(false);
   const [isNewPasswordVisible, setIsNewPasswordVisible] =
@@ -25,25 +26,27 @@ const ChangePasswordForm = () => {
     register,
     handleSubmit,
     watch,
+    reset,
     formState: { errors },
   } = useForm<TFormData>();
 
   // To compare confirmPassword with password
   const passwordValue = watch("newPassword");
 
-  const handleChangePassword = async(data: TFormData) => {
- try{
-  const payload={
-    currentPassword:data.currentPassword,
-    newPassword:data.newPassword,
-  }
-  const res= await changePassword(payload).unwrap();
-  if(res?.success){
-    toast.success("Password changed successfully")
-  }
- }catch(err:any){
-   toast.error(err || "Error changing password");
- }
+  const handleChangePassword = async (data: TFormData) => {
+    try {
+      const payload = {
+        currentPassword: data.currentPassword,
+        newPassword: data.newPassword,
+      };
+      const res = await changePassword(payload).unwrap();
+      if (res?.success) {
+        toast.success("Password changed successfully");
+        reset();
+      }
+    } catch (error: any) {
+      toast.error(error?.data?.message || "Error changing password");
+    }
   };
   return (
     <form

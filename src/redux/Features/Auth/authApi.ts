@@ -39,7 +39,7 @@ const authApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ["users"],
     }),
-    
+
     forgotPassword: builder.mutation({
       query: (forgotPasswordData) => ({
         url: "/auth/forgot-password",
@@ -50,7 +50,7 @@ const authApi = baseApi.injectEndpoints({
       invalidatesTags: ["users"],
     }),
 
-     resendForgetPasswordOtp: builder.mutation({
+    resendForgetPasswordOtp: builder.mutation({
       query: (OtpData) => ({
         url: "/auth/resend-forgot-password-otp",
         method: "POST",
@@ -60,7 +60,7 @@ const authApi = baseApi.injectEndpoints({
       invalidatesTags: ["users"],
     }),
 
-     verifyResetPasswordOtp: builder.mutation({
+    verifyResetPasswordOtp: builder.mutation({
       query: (verifyOtpData) => ({
         url: "/auth/verify-reset-password-otp",
         method: "POST",
@@ -88,8 +88,6 @@ const authApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ["users"],
     }),
-
-
   }),
 });
 

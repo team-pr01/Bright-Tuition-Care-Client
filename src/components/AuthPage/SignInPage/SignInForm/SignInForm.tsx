@@ -63,8 +63,8 @@ const SignInForm = ({
         navigate("/dashboard/guardian/home");
       }
       reset();
-    } catch (err :any) {
-      toast.error(err?.message || "Login failed. Please try again.");
+    } catch (error :any) {
+      toast.error(error?.data?.message || "Login failed. Please try again.");
     }
   };
   return (

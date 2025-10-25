@@ -1,11 +1,14 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { RxCross1 } from "react-icons/rx";
 import { ICONS } from "../../../../assets";
 import Button from "../../../Reusable/Button/Button";
 import Textarea from "../../../Reusable/TextArea/TextArea";
 import { useForm } from "react-hook-form";
+import { useDeleteAccountMutation } from "../../../../redux/Features/User/userApi";
+import toast from "react-hot-toast";
 
 type TFormData = {
-  reason: string;
+  accountDeleteReason: string;
 };
 const DeleteAccountConfirmationModal = ({
   isConfirmDeleteModalOpen,
@@ -14,15 +17,31 @@ const DeleteAccountConfirmationModal = ({
   isConfirmDeleteModalOpen: boolean;
   setIsConfirmDeleteModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
+  // const navigate = useNavigate();
+  const [deleteAccount, {isLoading}] = useDeleteAccountMutation();
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm<TFormData>();
 
-  const handleSubmitDeleteRequest = (data: TFormData) => {
-    console.log(data);
-  };
+  const handleSubmitDeleteRequest = async (data: TFormData) => {
+      try {
+        const payload = {
+          accountDeleteReason: data.accountDeleteReason,
+        };
+        const res = await deleteAccount(payload).unwrap();
+        if (res?.success) {
+          toast.success("Account deleted successfully");
+          reset();
+          setIsConfirmDeleteModalOpen(false);
+          // navigate("/");
+        }
+      } catch (error: any) {
+        toast.error(error?.data?.message || "Error deleting account.");
+      }
+    };
   return (
     <div
       className={`${
@@ -60,8 +79,8 @@ const DeleteAccountConfirmationModal = ({
               label="Reason for account deletion (Optional)"
               placeholder="Please share your reason..."
               rows={4}
-              error={errors.reason}
-              {...register("reason")}
+              error={errors.accountDeleteReason}
+              {...register("accountDeleteReason")}
               isRequired={false}
             />
           </div>
@@ -72,6 +91,8 @@ const DeleteAccountConfirmationModal = ({
               label="Yes, Delete"
               variant="primary"
               className="py-2 lg:py-2"
+              isLoading={isLoading}
+              isDisabled={isLoading}
             />
             <Button
               type="button"
