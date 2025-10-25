@@ -3,18 +3,15 @@ import { baseApi } from "../../API/baseApi";
 
 const leadApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
-
-    
-
     getAllLeads: builder.query({
       query: ({
         keyword,
         limit,
-        page
+        page,
       }: {
         keyword?: string;
         limit?: number;
-        page?: number
+        page?: number;
       } = {}) => {
         const params = new URLSearchParams();
 
@@ -41,11 +38,23 @@ const leadApi = baseApi.injectEndpoints({
     }),
 
     getMyLeads: builder.query({
-      query: () => ({
-        url: `/lead/tutor/my-leads`,
-        method: "GET",
-        credentials: "include",
-      }),
+      query: ({
+        page,
+        limit,
+        keyword,
+      }: { page?: number; limit?: number; keyword?: string } = {}) => {
+        const params = new URLSearchParams();
+
+        if (page) params.append("page", page.toString());
+        if (limit) params.append("limit", limit.toString());
+        if (keyword) params.append("keyword", keyword);
+
+        return {
+          url: `/lead/tutor/my-leads?${params.toString()}`,
+          method: "GET",
+          credentials: "include",
+        };
+      },
       providesTags: ["lead"],
     }),
 
@@ -86,5 +95,5 @@ export const {
   useGetMyLeadsQuery,
   useAddLeadMutation,
   useDeleteLeadMutation,
-  useUpdateLeadInfoMutation
+  useUpdateLeadInfoMutation,
 } = leadApi;

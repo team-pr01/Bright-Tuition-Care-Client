@@ -8,18 +8,25 @@ import TextInput from "../../../../components/Reusable/TextInput/TextInput";
 import { useForm } from "react-hook-form";
 import Button from "../../../../components/Reusable/Button/Button";
 import SelectDropdown from "../../../../components/Reusable/SelectDropdown/SelectDropdown";
-import { useGetMyLeadsQuery } from "../../../../redux/Features/Lead/leadApi";
+import {
+  useGetMyLeadsQuery,
+  useUpdateLeadInfoMutation,
+} from "../../../../redux/Features/Lead/leadApi";
 import type { TLead } from "../../../../types/lead.types";
+import toast from "react-hot-toast";
 
 type TFormData = {
   paymentMethod: string;
-  paymentNumber: string;
+  paymentAccountNumber: string;
 };
 
 const MyLeads = () => {
+  const [updateLeadInfo, { isLoading: isUpdatingInfo }] =
+    useUpdateLeadInfoMutation();
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm<TFormData>();
 
@@ -33,8 +40,7 @@ const MyLeads = () => {
     data: myLeads,
     isLoading,
     isFetching,
-  } = useGetMyLeadsQuery({ page, limit, searchQuery });
-  console.log(myLeads);
+  } = useGetMyLeadsQuery({ page, limit, keyword: searchQuery });
 
   //   Table heads
   const leadTheads: TableHead[] = [
@@ -48,8 +54,8 @@ const MyLeads = () => {
     { key: "status", label: "Status" },
   ];
 
-  // Format table data
-  const tableData = myLeads?.data?.map((lead:TLead) => ({
+  // Formatted table data
+  const tableData = myLeads?.data?.leads?.map((lead: TLead) => ({
     ...lead,
     paymentAccountNumber: lead?.paymentAccountNumber ? (
       <span className="text-gray-700">
@@ -83,9 +89,28 @@ const MyLeads = () => {
     setSearchQuery(q);
   };
 
-  const handleAddPaymentNumber = (data: TFormData) => {
-    console.log(data);
+  const handleAddPaymentNumber = async (data: TFormData) => {
+    try {
+      const payload = {
+        ...data,
+      };
+      const res = await updateLeadInfo({
+        id: selectedLeadId,
+        data: payload,
+      }).unwrap();
+      if (res?.success) {
+        toast.success("Payment info updated successfully.");
+        reset();
+        setIsPaymentModalOpen(false);
+      }
+    } catch (error: any) {
+      toast.error(
+        error?.data?.message || "Error updating payment info. Please try again."
+      );
+    }
   };
+
+  console.log(myLeads);
   return (
     <div>
       <Table<any>
@@ -93,7 +118,7 @@ const MyLeads = () => {
         description="See your leads here."
         theads={leadTheads}
         data={tableData || []}
-        totalPages={5}
+        totalPages={myLeads?.data?.meta?.totalPages}
         currentPage={page}
         onPageChange={(p) => setPage(p)}
         isLoading={isLoading || isFetching}
@@ -126,8 +151,8 @@ const MyLeads = () => {
             label="Bkash/Nagad Personal Number"
             type="number"
             placeholder="Enter your bkash/nagad personal number"
-            error={errors.paymentNumber}
-            {...register("paymentNumber", {
+            error={errors.paymentAccountNumber}
+            {...register("paymentAccountNumber", {
               required: "Payment number is required",
             })}
           />
@@ -136,6 +161,8 @@ const MyLeads = () => {
             label="Submit"
             variant="quaternary"
             className="py-2 lg:py-2 w-full flex items-center justify-center"
+            isLoading={isUpdatingInfo}
+            isDisabled={isUpdatingInfo}
           />
         </form>
       </Modal>
