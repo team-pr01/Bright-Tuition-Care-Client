@@ -2,6 +2,15 @@ import { baseApi } from "../../API/baseApi";
 
 const userApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
+    updateUserProfile: builder.mutation({
+      query: (data) => ({
+        url: `/user/update-profile`,
+        body: data,
+        method: "PATCH",
+      }),
+      invalidatesTags: ["users", "tutor", "guardian", "staff"],
+    }),
+
     suspendUser: builder.mutation({
       query: ({ userId, data }) => ({
         url: `/user/suspend/${userId}`,
@@ -21,4 +30,4 @@ const userApi = baseApi.injectEndpoints({
   }),
 });
 
-export const { useSuspendUserMutation, useActiveUserMutation } = userApi;
+export const { useUpdateUserProfileMutation, useSuspendUserMutation, useActiveUserMutation } = userApi;

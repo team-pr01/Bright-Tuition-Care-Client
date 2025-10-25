@@ -9,10 +9,11 @@ import { PiIdentificationBadge } from "react-icons/pi";
 import { FiUnlock } from "react-icons/fi";
 import DeleteAccount from "../../../../components/Dashboard/Settings/DeleteAccount/DeleteAccount";
 import { BsTrash } from "react-icons/bs";
+import { useSelector } from "react-redux";
+import { useCurrentUser } from "../../../../redux/Features/Auth/authSlice";
 
 const Settings = () => {
-  // const user = useSelector(useCurrentUser);
-  const user = { role: "admin" };
+  const user = useSelector(useCurrentUser);
   const [activeTab, setActiveTab] = useState<string>(
     user?.role === "admin" ? "Change Password" : "Contact Info"
   );

@@ -1,20 +1,33 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useForm } from "react-hook-form";
 import TextInput from "../../../Reusable/TextInput/TextInput";
 import Button from "../../../Reusable/Button/Button";
 import { ICONS } from "../../../../assets";
+import { useUpdateUserProfileMutation } from "../../../../redux/Features/User/userApi";
+import toast from "react-hot-toast";
 
 type TFormData = {
   phoneNumber: string;
   email: string;
 };
 const UpdateContactInfoForm = () => {
+  const [updateUserProfile, { isLoading: isUpdating }] =
+    useUpdateUserProfileMutation();
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<TFormData>();
-  const handleUpdateContactInfo = (data: TFormData) => {
-    console.log(data);
+  const handleUpdateContactInfo = async (data: TFormData) => {
+    try {
+      const payload = { ...data };
+      const response = await updateUserProfile(payload).unwrap();
+      if (response.success) {
+        toast.success("Contact info updated successfully");
+      }
+    } catch (error: any) {
+      toast.error(error?.data?.message || "Failed to update contact info");
+    }
   };
   return (
     <form
@@ -25,7 +38,6 @@ const UpdateContactInfoForm = () => {
         Update Contact Info
       </h1>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-
         {/* Phone Number */}
         <TextInput
           label="Phone Number"
@@ -47,6 +59,8 @@ const UpdateContactInfoForm = () => {
         variant="primary"
         iconWithoutBg={ICONS.topRightArrowWhite}
         className="py-2 lg:py-2"
+        isLoading={isUpdating}
+        isDisabled={isUpdating}
       />
     </form>
   );
