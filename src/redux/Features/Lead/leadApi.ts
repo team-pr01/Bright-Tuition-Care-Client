@@ -40,7 +40,16 @@ const leadApi = baseApi.injectEndpoints({
       providesTags: ["lead"],
     }),
 
-    addJob: builder.mutation<any, any>({
+    getMyLeads: builder.query({
+      query: () => ({
+        url: `/lead/tutor/my-leads`,
+        method: "GET",
+        credentials: "include",
+      }),
+      providesTags: ["lead"],
+    }),
+
+    addLead: builder.mutation<any, any>({
       query: (data) => ({
         url: `/lead/add`,
         method: "POST",
@@ -74,7 +83,8 @@ const leadApi = baseApi.injectEndpoints({
 export const {
   useGetAllLeadsQuery,
   useGetSingleLeadByIdQuery,
-  useAddJobMutation,
+  useGetMyLeadsQuery,
+  useAddLeadMutation,
   useDeleteLeadMutation,
   useUpdateLeadInfoMutation
 } = leadApi;

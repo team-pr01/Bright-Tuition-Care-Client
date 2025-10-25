@@ -1,25 +1,49 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useForm } from "react-hook-form";
 import TextInput from "../../../Reusable/TextInput/TextInput";
 import Textarea from "../../../Reusable/TextArea/TextArea";
 import Button from "../../../Reusable/Button/Button";
+import { useAddLeadMutation } from "../../../../redux/Features/Lead/leadApi";
+import toast from "react-hot-toast";
+import { useSelector } from "react-redux";
+import { useCurrentUser } from "../../../../redux/Features/Auth/authSlice";
+import { useNavigate } from "react-router-dom";
 
 type TFormData = {
   class: string;
   guardianPhoneNumber: string;
-  guardianAddress: string;
+  address: string;
   details: string;
   paymentNumber: string;
 };
 
-const AddLeadFormModal = () => {
+const AddLeadFormModal = ({setIsFormModalOpen} : {setIsFormModalOpen: React.Dispatch<React.SetStateAction<boolean>>}) => {
+  const user = useSelector(useCurrentUser);
+  const navigate=useNavigate();
+  const [addLead, { isLoading }] = useAddLeadMutation();
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm<TFormData>();
 
-  const handleAddLead = (data: TFormData) => {
-    console.log(data);
+  const handleAddLead = async (data: TFormData) => {
+   try {
+      const payload = {
+        ...data,
+        userId : user?._id,
+      };
+      const res = await addLead(payload).unwrap();
+      if (res?.success) {
+        toast.success("Lead added. please for admin approval.");
+        setIsFormModalOpen(false);
+        reset();
+        navigate("/dashboard/tutor/my-leads");
+      }
+    } catch (error: any) {
+      toast.error(error?.data?.message || "Error adding lead. Please try again.");
+    }
   };
   return (
     <div className="w-full flex flex-col items-center gap-6">
@@ -52,8 +76,8 @@ const AddLeadFormModal = () => {
         <TextInput
           label="Address"
           placeholder="Enter address"
-          error={errors.guardianAddress}
-          {...register("guardianAddress", {
+          error={errors.address}
+          {...register("address", {
             required: "Address is required",
           })}
         />
@@ -71,6 +95,8 @@ const AddLeadFormModal = () => {
           label="Submit"
           variant="quaternary"
           className="py-2 lg:py-2 w-full flex items-center justify-center"
+          isLoading={isLoading}
+          isDisabled={isLoading}
         />
       </form>
     </div>

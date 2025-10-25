@@ -30,9 +30,11 @@ const baseQueryWithRefreshToken: BaseQueryFn<
   if (result.error?.status === 401) {
     const res = await fetch("http://localhost:5000/api/v1/auth/refresh-token", {
       credentials: "include",
+      method: "POST",
     });
 
     const data = await res.json();
+    console.log(data);
     const user = (api.getState() as RootState).auth.user;
     api.dispatch(
       setUser({

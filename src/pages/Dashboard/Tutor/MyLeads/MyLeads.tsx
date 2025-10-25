@@ -8,6 +8,8 @@ import TextInput from "../../../../components/Reusable/TextInput/TextInput";
 import { useForm } from "react-hook-form";
 import Button from "../../../../components/Reusable/Button/Button";
 import SelectDropdown from "../../../../components/Reusable/SelectDropdown/SelectDropdown";
+import { useGetMyLeadsQuery } from "../../../../redux/Features/Lead/leadApi";
+import type { TLead } from "../../../../types/lead.types";
 
 type TFormData = {
   paymentMethod: string;
@@ -27,72 +29,31 @@ const MyLeads = () => {
   const [limit, setLimit] = useState<number>(10);
   const [searchQuery, setSearchQuery] = useState<string>("");
 
-  const isLoading = false;
+  const {
+    data: myLeads,
+    isLoading,
+    isFetching,
+  } = useGetMyLeadsQuery({ page, limit, searchQuery });
+  console.log(myLeads);
 
   //   Table heads
   const leadTheads: TableHead[] = [
     { key: "_id", label: "ID" },
     { key: "guardianPhoneNumber", label: "Guardian Phone Number" },
     { key: "class", label: "Class" },
-    { key: "guardianAddress", label: "Guardian Address" },
+    { key: "address", label: "Guardian Address" },
     { key: "details", label: "Details" },
     { key: "createdAt", label: "Added On" },
-    { key: "paymentNumber", label: "Payment Method" },
+    { key: "paymentAccountNumber", label: "Payment Method" },
     { key: "status", label: "Status" },
   ];
 
-  // Mock data
-  const myLeads: any[] = [
-    {
-      _id: "Lead-001",
-      guardianPhoneNumber: "+880 1711 223344",
-      class: "Class 8",
-      guardianAddress: "Banani, Dhaka",
-      details: "Looking for an English tutor for his son.",
-      createdAt: "2025-09-15",
-      paymentMethod: "bKash",
-      paymentNumber: "+880 1888 112233",
-      status: "confirmed",
-    },
-    {
-      _id: "Lead-002",
-      guardianPhoneNumber: "+880 1922 334455",
-      class: "Class 10",
-      guardianAddress: "Cumilla Cantonment, Cumilla",
-      details: "Needs a Math and Science tutor for daughter.",
-      createdAt: "2025-09-16",
-      // no paymentNumber
-      status: "pending",
-    },
-    {
-      _id: "Lead-003",
-      guardianPhoneNumber: "+880 1533 445566",
-      class: "Class 6",
-      guardianAddress: "Gulshan, Dhaka",
-      details: "Searching for a tutor in general subjects.",
-      createdAt: "2025-09-18",
-      paymentMethod: "Nagad",
-      paymentNumber: "+880 1999 445566",
-      status: "confirmed",
-    },
-    {
-      _id: "Lead-004",
-      guardianPhoneNumber: "+880 1777 889900",
-      class: "Class 9",
-      guardianAddress: "Chattogram City",
-      details: "Wants a Physics tutor for her son.",
-      createdAt: "2025-09-19",
-      // no paymentNumber
-      status: "pending",
-    },
-  ];
-
   // Format table data
-  const tableData = myLeads.map((lead) => ({
+  const tableData = myLeads?.data?.map((lead:TLead) => ({
     ...lead,
-    paymentNumber: lead?.paymentNumber ? (
+    paymentAccountNumber: lead?.paymentAccountNumber ? (
       <span className="text-gray-700">
-        {lead?.paymentMethod}, {lead?.paymentNumber}
+        {lead?.paymentMethod}, {lead?.paymentAccountNumber}
       </span>
     ) : (
       <button
@@ -131,14 +92,16 @@ const MyLeads = () => {
         title="Leads"
         description="See your leads here."
         theads={leadTheads}
-        data={tableData}
+        data={tableData || []}
         totalPages={5}
         currentPage={page}
         onPageChange={(p) => setPage(p)}
-        isLoading={isLoading}
+        isLoading={isLoading || isFetching}
         onSearch={handleSearch}
         limit={limit}
         setLimit={setLimit}
+        selectedCity={null}
+        selectedArea={null}
       />
 
       <Modal

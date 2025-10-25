@@ -98,7 +98,7 @@ const ReferAndEarn = () => {
         setIsModalOpen={setIsFormModalOpen}
         width="w-[95%] md:w-[80%] lg:w-[60%] xl:w-[40%] 2xl:w-[30%] h-[90vh] 2xl:h-fit overflow-y-auto"
       >
-        <AddLeadFormModal />
+        <AddLeadFormModal setIsFormModalOpen={setIsFormModalOpen} />
       </Modal>
     </div>
   );
