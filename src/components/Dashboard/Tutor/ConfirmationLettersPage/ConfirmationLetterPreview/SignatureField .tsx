@@ -9,6 +9,7 @@ type SignatureFieldProps = {
   onClick: (signature: string) => void;
   signature: string | null;
   signatureDate: string | null;
+  role: any;
 };
 
 const SignatureField: React.FC<SignatureFieldProps> = ({
@@ -16,11 +17,12 @@ const SignatureField: React.FC<SignatureFieldProps> = ({
   onClick,
   signature: defaultSignature,
   signatureDate: defaultDate,
+  role
 }) => {
   const user = useSelector(useCurrentUser) as any;
   const [signature, setSignature] = useState(defaultSignature || "");
   const [submitted, setSubmitted] = useState(!!defaultSignature);
-  const isDisabled = submitted || user?.role === "admin";
+  const isDisabled = submitted || user?.role === "admin" || role;
 
   const handleSubmit = () => {
     if (signature.trim()) {

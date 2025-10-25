@@ -19,7 +19,6 @@ const ConfirmationLetterPreview = ({ letterId }: { letterId: string }) => {
   const [
     signOnLetterForGuardian
   ] = useSignOnLetterForGuardianMutation();
-  console.log(data);
   const handleDownloadConfirmationLetterPdf = async () => {
     const blob = await pdf(<ConfirmationLetterPdf />).toBlob();
     const url = URL.createObjectURL(blob);
@@ -131,6 +130,7 @@ const ConfirmationLetterPreview = ({ letterId }: { letterId: string }) => {
           signatureDate={
             data?.data?.guardianSinnedDate ? data?.data?.guardianSinnedDate : ""
           }
+          role={"tutor"}
         />
         <SignatureField
           label="Tutor Signature"
@@ -141,6 +141,7 @@ const ConfirmationLetterPreview = ({ letterId }: { letterId: string }) => {
           signatureDate={
             data?.data?.tutorSinnedDate ? data?.data?.tutorSinnedDate : ""
           }
+          role={"guardian"}
         />
       </div>
 
