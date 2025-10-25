@@ -57,8 +57,9 @@ const TutorJobBoard = () => {
         setSelectedStudentGender={setSelectedStudentGender}
         selectedTuitionType={selectedTuitionType}
         setSelectedTuitionType={setSelectedTuitionType}
+        totalJobs={allJobs?.data?.meta?.total || 0}
       />
-      <Jobs allJobs={allJobs?.data?.jobs} isLoading={isLoading || isFetching} />
+      <Jobs allJobs={allJobs?.data?.jobs} isLoading={isLoading || isFetching} variant="tutorJobCard" />
     </div>
   );
 };

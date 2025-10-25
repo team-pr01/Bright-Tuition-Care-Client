@@ -101,7 +101,7 @@ const JobBoard = () => {
       if (node) observer.unobserve(node);
     };
   }, [allJobs, isFetching, allJobs?.data?.meta?.hasMore]);
-  console.log(jobs, "jobs");
+  console.log(allJobs);
 
   return (
     <Container>
@@ -135,6 +135,7 @@ const JobBoard = () => {
             setSelectedStudentGender={setSelectedStudentGender}
             selectedTuitionType={selectedTuitionType}
             setSelectedTuitionType={setSelectedTuitionType}
+            totalJobs={allJobs?.data?.meta?.total || 0}
           />
         </div>
 
