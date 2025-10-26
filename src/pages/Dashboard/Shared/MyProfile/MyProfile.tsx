@@ -171,7 +171,7 @@ const MyProfile = () => {
 
   return (
     <div className="flex flex-col lg:flex-row gap-5 font-Nunito w-full">
-      <ProfileDetails />
+      <ProfileDetails data={myProfile} />
 
       <div className="w-full lg:w-[75%]">
         {/* Tabs */}
