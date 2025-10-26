@@ -17,8 +17,8 @@ type TTuitionRelatedInfoProps = {
       preferredCategories?: string[] | string;
       preferredClasses?: string[] | string;
       preferredSubjects?: string[] | string;
-      placeOfTutoring?: string;
-      preferredLocations: string[];
+      placeOfTuition?: string[];
+      preferredLocation: string[];
     };
     expectedSalary: string | number;
     experience: {
@@ -37,8 +37,6 @@ const TuitionRelatedInfo = ({
     { label: "Tutoring Styles", value: tuitionRelatedInfo?.tutoringStyles },
     { label: "Available Days", value: tuitionRelatedInfo?.availableDays },
     { label: "Time", value: tuitionRelatedInfo?.time },
-    { label: "City", value: tuitionRelatedInfo?.location?.city },
-    { label: "Area", value: tuitionRelatedInfo?.location?.area },
     {
       label: "Preferred Categories",
       value: tuitionRelatedInfo?.preferences?.preferredCategories,
@@ -53,11 +51,11 @@ const TuitionRelatedInfo = ({
     },
     {
       label: "Place of Tutoring",
-      value: tuitionRelatedInfo?.preferences?.placeOfTutoring,
+      value: tuitionRelatedInfo?.preferences?.placeOfTuition,
     },
     {
       label: "Preferred Locations",
-      value: tuitionRelatedInfo?.preferences?.preferredLocations,
+      value: tuitionRelatedInfo?.preferences?.preferredLocation,
     },
     { label: "Expected Salary", value: tuitionRelatedInfo?.expectedSalary },
     { label: "Total Experience", value: tuitionRelatedInfo?.experience?.total },
@@ -85,7 +83,10 @@ const TuitionRelatedInfo = ({
           const provided = isProvided(item.value);
 
           return (
-            <div key={index} className="flex text-[13px] md:text-sm lg:text-base">
+            <div
+              key={index}
+              className="flex text-[13px] md:text-sm lg:text-base"
+            >
               <span className="text-neutral-5 font-medium min-w-[140px] md:max-w-[160px] lg:min-w-[200px]">
                 {item.label}
               </span>
@@ -113,6 +114,7 @@ const TuitionRelatedInfo = ({
       >
         <UpdateTuitionRelatedInfoModal
           setIsFormModalOpen={setIsFormModalOpen}
+          defaultValues={tuitionRelatedInfo}
         />
       </Modal>
     </div>

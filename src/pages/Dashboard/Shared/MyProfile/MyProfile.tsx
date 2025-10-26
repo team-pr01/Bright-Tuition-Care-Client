@@ -20,31 +20,32 @@ const MyProfile = () => {
   const myProfile = data?.data;
   const personalInformation = myProfile?.personalInformation;
   const socialMediaInformation = myProfile?.socialMediaInformation;
-  console.log(personalInformation);
+  const tuitionPreference = myProfile?.tuitionPreference;
+  const experience = myProfile?.experience;
+  console.log(tuitionPreference);
   const location = useLocation();
   const [isFormModalOpen, setIsFormModalOpen] = useState<boolean>(false);
   const profile = {
     tuitionRelatedInfo: {
-      tutoringMethod:
-        "I take tuition in such a way so that the student whom I am teaching understands what I am teaching.",
-      tutoringStyles: ["One to One", "Online Tutoring"],
-      availableDays: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday"],
-      time: "5:00 PM - 8:50 PM",
-      location: {
-        city: "Cumilla",
-        area: "Cumilla Cantonment",
+      tutoringMethod: tuitionPreference?.tutoringMethod,
+      tutoringStyles: tuitionPreference?.tuitionStyle, // []
+      availableDays: tuitionPreference?.availableDays, // []
+      time: `${tuitionPreference?.availableTime?.from} - ${tuitionPreference?.availableTime?.to}`,
+      availableTime : {
+        from : tuitionPreference?.availableTime?.from,
+        to : tuitionPreference?.availableTime?.to
       },
-      expectedSalary: 5000,
+      expectedSalary: tuitionPreference?.expectedSalary,
       preferences: {
-        preferredCategories: "",
-        preferredClasses: "",
-        preferredSubjects: "",
-        placeOfTutoring: "",
-        preferredLocations: ["Cumilla Cantonment"],
+        preferredCategories: tuitionPreference?.preferredCategories, // []
+        preferredClasses: tuitionPreference?.preferredClasses, // []
+        preferredSubjects: tuitionPreference?.preferredSubjects,
+        placeOfTuition: tuitionPreference?.placeOfTuition, // []
+        preferredLocation: tuitionPreference?.preferredLocation,
       },
       experience: {
-        total: "",
-        details: "",
+        total: experience?.totalExperience,
+        details: experience?.experienceDetails,
       },
     },
 

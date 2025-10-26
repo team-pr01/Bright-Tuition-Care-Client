@@ -6,40 +6,37 @@ import Button from "../../../Reusable/Button/Button";
 import { filterData } from "../../../../constants/filterData";
 import MultiSelectDropdown from "../../../Reusable/MultiSelectDropdown/MultiSelectDropdown";
 import { useEffect, useState } from "react";
+import { useUpdateTutorProfileInfoMutation } from "../../../../redux/Features/Tutor/tutorApi";
+import toast from "react-hot-toast";
 
 type TTuitionRelatedInfoProps = {
   tuitionRelatedInfo: {
     tutoringMethod: string;
-    tutoringStyles: string[];
+    tuitionStyle: string[];
     availableDays: string[];
-    time: string;
-    location: {
-      city: string;
-      area: string;
-    };
-    preferences?: {
-      preferredCategories?: string[] | string;
-      preferredClasses?: string[] | string;
-      preferredSubjects?: string[] | string;
-      placeOfTutoring?: string;
-      preferredLocations: string[];
-    };
+    preferredCategories?: string[] | string;
+    preferredClasses?: string[] | string;
+    preferredSubjects?: string;
+    preferredLocation?: string;
+    placeOfTutoring?: string;
+    preferredLocations: string[];
     expectedSalary: string | number;
-    experience: {
-      total: string;
-      details: string;
-    };
+    totalExperience: string;
+    experienceDetails: string;
+    from?: string;
+    to?: string;
   };
 };
 
 const UpdateTuitionRelatedInfoModal = ({
   setIsFormModalOpen,
+  defaultValues,
 }: {
   setIsFormModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  defaultValues: any;
 }) => {
-  const [selectedCities, setSelectedCities] = useState<string[]>([]);
-  const [selectedAreas, setSelectedAreas] = useState<string[]>([]);
-  const [areaOptions, setAreaOptions] = useState<string[]>([]);
+  const [updateTutorProfileInfo, { isLoading }] =
+    useUpdateTutorProfileInfoMutation();
   const [selectedDays, setSelectedDays] = useState<string[]>([]);
   const [selectedTutoringStyles, setSelectedTutoringStyles] = useState<
     string[]
@@ -50,37 +47,76 @@ const UpdateTuitionRelatedInfoModal = ({
     string[]
   >([]);
 
-  // Update area options when city changes
-  useEffect(() => {
-    if (selectedCities.length === 0) {
-      setAreaOptions([]);
-      setSelectedAreas([]);
-      return;
-    }
-
-    const locations = selectedCities.flatMap((cityName) => {
-      const cityObj = filterData.cityCorporationWithLocation.find(
-        (city) => city.name === cityName
-      );
-      return cityObj ? cityObj.locations : [];
-    });
-
-    // Remove duplicates and update state
-    const uniqueLocations = [...new Set(locations)];
-    setAreaOptions(uniqueLocations);
-    setSelectedAreas([]);
-  }, [selectedCities]);
-
   const {
     register,
     handleSubmit,
+    setValue,
     formState: { errors },
   } = useForm<TTuitionRelatedInfoProps["tuitionRelatedInfo"]>();
 
-  const handleUpdateInfo = (
+  useEffect(() => {
+    if (defaultValues) {
+      setValue("tutoringMethod", defaultValues.tutoringMethod);
+      setValue(
+        "preferredSubjects",
+        defaultValues.preferences?.preferredSubjects
+      );
+      setValue(
+        "preferredLocation",
+        defaultValues.preferences?.preferredLocation
+      );
+      setValue("expectedSalary", defaultValues.expectedSalary);
+      setValue("totalExperience", defaultValues?.experience?.totalExperience);
+      setValue(
+        "experienceDetails",
+        defaultValues?.experience?.experienceDetails
+      );
+      setValue("from", defaultValues.availableTime?.from);
+      setValue("to", defaultValues.availableTime?.to);
+
+      setSelectedDays(defaultValues.availableDays);
+      setSelectedTutoringStyles(defaultValues.tutoringStyles);
+      setSelectedCategory(defaultValues?.preferences?.preferredCategories);
+      setSelectedClass(defaultValues?.preferences?.preferredClasses);
+      setSelectedPlaceOfTuition(defaultValues?.preferences?.placeOfTuition);
+    }
+  }, [defaultValues, setValue]);
+
+  const handleUpdateInfo = async (
     data: TTuitionRelatedInfoProps["tuitionRelatedInfo"]
   ) => {
-    console.log(data);
+    try {
+      const payload = {
+        tuitionPreference: {
+          tutoringMethod: data.tutoringMethod,
+          tuitionStyle: selectedTutoringStyles,
+          availableDays: selectedDays,
+          preferredCategories: selectedCategory,
+          preferredClasses: selectedClass,
+          preferredSubjects: data.preferredSubjects,
+          placeOfTuition: selectedPlaceOfTuition,
+          preferredLocation: data.preferredLocation,
+          expectedSalary: data.expectedSalary,
+          availableTime: {
+            from: data.from,
+            to: data.to,
+          },
+        },
+        experience: {
+          totalExperience: data.totalExperience,
+          experienceDetails: data.experienceDetails,
+        },
+      };
+      const response = await updateTutorProfileInfo(payload).unwrap();
+      if (response.success) {
+        toast.success(response.message || "Tuition info updated successfully");
+        setIsFormModalOpen(false);
+      }
+    } catch (error: any) {
+      toast.error(
+        error?.data?.message || "Error updating info. Please try again."
+      );
+    }
   };
 
   return (
@@ -91,15 +127,25 @@ const UpdateTuitionRelatedInfoModal = ({
         placeholder="Enter tutoring method and explain how you will guide your student"
         error={errors?.tutoringMethod}
         {...register("tutoringMethod")}
+        isRequired={false}
       />
       <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
         {/* Time */}
         <TextInput
-          label="Available Time"
-          type="text"
+          label="Available Time (From)"
+          type="time"
           placeholder="Enter available time (e.g. 5-7 PM)"
-          error={errors.time}
-          {...register("time", { required: "Available time is required" })}
+          error={errors.from}
+          {...register("from")}
+          isRequired={false}
+        />
+        <TextInput
+          label="Available Time (To)"
+          type="time"
+          placeholder="Enter available time (e.g. 5-7 PM)"
+          error={errors.to}
+          {...register("to")}
+          isRequired={false}
         />
 
         {/* Tutoring Styles */}
@@ -109,6 +155,7 @@ const UpdateTuitionRelatedInfoModal = ({
           options={filterData.tutoringStyles}
           value={selectedTutoringStyles}
           onChange={setSelectedTutoringStyles}
+          isRequired={false}
         />
 
         {/* Available Days */}
@@ -126,24 +173,7 @@ const UpdateTuitionRelatedInfoModal = ({
           ]}
           value={selectedDays}
           onChange={setSelectedDays}
-        />
-
-        {/* City Dropdown */}
-        <MultiSelectDropdown
-          label="City"
-          name="city"
-          options={filterData.cityCorporationWithLocation.map((c) => c.name)}
-          value={selectedCities}
-          onChange={setSelectedCities}
-        />
-
-        {/* Area Dropdown */}
-        <MultiSelectDropdown
-          label="Area"
-          name="area"
-          options={areaOptions}
-          value={selectedAreas}
-          onChange={setSelectedAreas}
+          isRequired={false}
         />
 
         {/* Preferences */}
@@ -154,6 +184,7 @@ const UpdateTuitionRelatedInfoModal = ({
           options={filterData.category}
           value={selectedCategory}
           onChange={setSelectedCategory}
+          isRequired={false}
         />
 
         {/* Preferred Classes */}
@@ -163,6 +194,7 @@ const UpdateTuitionRelatedInfoModal = ({
           options={filterData.class}
           value={selectedClass}
           onChange={setSelectedClass}
+          isRequired={false}
         />
 
         {/* Place of Tutoring */}
@@ -172,14 +204,16 @@ const UpdateTuitionRelatedInfoModal = ({
           options={filterData.placeOfTuition}
           value={selectedPlaceOfTuition}
           onChange={setSelectedPlaceOfTuition}
+          isRequired={false}
         />
 
-        {/* Preferred Subjects */}
+        {/* Preferred Location */}
         <TextInput
-          label="Preferred Subjects"
-          placeholder="Enter preferred subjects (comma separated)"
-          error={errors?.preferences?.preferredSubjects as any}
-          {...register("preferences.preferredSubjects")}
+          label="Preferred Location"
+          placeholder="Ex: Dhaka, Banani"
+          error={errors?.preferredLocation}
+          {...register("preferredLocation")}
+          isRequired={false}
         />
 
         {/* Expected Salary */}
@@ -191,24 +225,34 @@ const UpdateTuitionRelatedInfoModal = ({
           {...register("expectedSalary", {
             required: "Expected salary is required",
           })}
+          isRequired={false}
+        />
+        {/* Preferred Subjects */}
+        <TextInput
+          label="Preferred Subjects"
+          placeholder="Enter preferred subjects (comma separated)"
+          error={errors?.preferredSubjects as any}
+          {...register("preferredSubjects")}
+          isRequired={false}
         />
       </div>
+
       {/* Total Experience */}
       <TextInput
         label="Total Experience"
         placeholder="Enter total experience (e.g. 2 years)"
-        error={errors.experience?.total}
-        {...register("experience.total")}
+        error={errors.totalExperience}
+        {...register("totalExperience")}
+        isRequired={false}
       />
 
       {/* Experience Details */}
       <Textarea
         label="Experience Details"
         placeholder="Write experience details"
-        error={errors.experience?.details}
-        {...register("experience.details", {
-          required: "Experience details are required",
-        })}
+        error={errors.experienceDetails}
+        {...register("experienceDetails")}
+        isRequired={false}
       />
 
       <div className="flex items-center gap-4 justify-end">
@@ -224,6 +268,8 @@ const UpdateTuitionRelatedInfoModal = ({
           label="Submit"
           variant="quaternary"
           className="py-2 lg:py-2 w-full flex items-center justify-center"
+          isLoading={isLoading}
+          isDisabled={isLoading}
         />
       </div>
     </form>
