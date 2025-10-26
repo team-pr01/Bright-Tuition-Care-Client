@@ -23,6 +23,7 @@ const MyProfile = () => {
   const tuitionPreference = myProfile?.tuitionPreference;
   const experience = myProfile?.experience;
   const emergencyInformation = myProfile?.emergencyInformation;
+  const educationalInformation = myProfile?.educationalInformation;
   console.log(tuitionPreference);
   const location = useLocation();
   const [isFormModalOpen, setIsFormModalOpen] = useState<boolean>(false);
@@ -75,38 +76,7 @@ const MyProfile = () => {
       },
     },
 
-    educationalInfo: [
-      {
-        degree: "BSC in Computer Science and Engineering",
-        info: {
-          institute: "CCN Polytechnic Institute",
-          examDegreeTitle: "Diploma in Computer Engineering",
-          majorGroup: "Computer Science and Engineering (CSE)",
-          idCardNo: "582693",
-          result: "3.81",
-          curriculum: "Bangla Version",
-          fromDate: "2020-08-01",
-          toDate: "2024-08-01",
-          yearOfPassing: 2024,
-          currentInstitute: "No",
-        },
-      },
-      {
-        degree: "Secondary Education",
-        info: {
-          institute: "ABC High School",
-          examDegreeTitle: "SSC",
-          majorGroup: "Science",
-          idCardNo: "123456",
-          result: "4.75",
-          curriculum: "Bangla Version",
-          fromDate: "2014-01-01",
-          toDate: "2020-06-30",
-          yearOfPassing: 2020,
-          currentInstitute: "No",
-        },
-      },
-    ],
+    educationalInfo: educationalInformation,
 
     emergencyInfo: {
       name: emergencyInformation?.emergencyContactPersonName,
