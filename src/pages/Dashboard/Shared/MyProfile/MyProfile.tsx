@@ -13,8 +13,14 @@ import ProfileTabHeading from "../../../../components/Reusable/ProfileTabHeading
 import Modal from "../../../../components/Reusable/Modal/Modal";
 import UpdatePersonalInfoModal from "../../../../components/Dashboard/MyProfilePage/PersonalInfo/UpdatePersonalInfoModal";
 import { useLocation } from "react-router-dom";
+import { useGetMyTutorProfileQuery } from "../../../../redux/Features/Tutor/tutorApi";
 
 const MyProfile = () => {
+  const { data, isLoading } = useGetMyTutorProfileQuery({});
+  const myProfile = data?.data;
+  const personalInformation = myProfile?.personalInformation;
+  const socialMediaInformation = myProfile?.socialMediaInformation;
+  console.log(personalInformation);
   const location = useLocation();
   const [isFormModalOpen, setIsFormModalOpen] = useState<boolean>(false);
   const profile = {
@@ -43,25 +49,27 @@ const MyProfile = () => {
     },
 
     personalInfo: {
-      email: "rahulsd380@gmail.com",
-      phoneNumber: "",
-      additionalNumber: "",
-      city: "",
-      address: "",
-      gender: "Male",
-      dateOfBirth: "",
-      religion: "",
-      identityType: "",
-      nationality: "",
-      socialLinks: {
-        facebook: "",
-        linkedIn: "",
-      },
-      family: {
-        fatherName: "",
-        fatherNumber: "",
-        motherName: "",
-        motherNumber: "",
+      overview: personalInformation?.overview,
+      name: myProfile?.userId?.name,
+      email: myProfile?.userId?.email,
+      phoneNumber: myProfile?.userId?.phoneNumber,
+      additionalPhoneNumber: personalInformation?.additionalPhoneNumber,
+      city: myProfile?.userId?.city,
+      area: myProfile?.userId?.area,
+      address: personalInformation?.address,
+      gender: myProfile?.userId?.gender,
+      dateOfBirth: personalInformation?.dateOfBirth,
+      religion: personalInformation?.religion,
+      nationality: personalInformation?.nationality,
+      fatherName: personalInformation?.fatherName,
+      fatherPhoneNumber: personalInformation?.fatherPhoneNumber,
+      motherName: personalInformation?.motherName,
+      motherPhoneNumber: personalInformation?.motherPhoneNumber,
+
+      socialMediaInformation: {
+        facebook: socialMediaInformation?.facebook,
+        instagram: socialMediaInformation?.instagram,
+        linkedin: socialMediaInformation?.linkedin,
       },
     },
 
@@ -218,13 +226,7 @@ const MyProfile = () => {
                   onClick={() => setIsFormModalOpen(!isFormModalOpen)}
                 />
                 <p className="text-neutral-45 mt-3">
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Tempore modi ad consequuntur ea. Distinctio velit atque
-                  corporis labore quis commodi est necessitatibus fugiat
-                  adipisci dicta consequatur cum dignissimos quasi debitis
-                  laboriosam doloremque laborum eos consequuntur, hic quidem?
-                  Mollitia blanditiis, assumenda voluptatem velit dolores aut,
-                  cumque numquam alias maxime itaque ipsa?
+                  {profile?.personalInfo?.overview}
                 </p>
               </div>
 
@@ -258,7 +260,10 @@ const MyProfile = () => {
         setIsModalOpen={setIsFormModalOpen}
         width="w-[90%] md:w-[35%] max-h-[600px] overflow-y-auto"
       >
-        <UpdatePersonalInfoModal setIsFormModalOpen={setIsFormModalOpen} />
+        <UpdatePersonalInfoModal
+          setIsFormModalOpen={setIsFormModalOpen}
+          defaultValues={profile.personalInfo}
+        />
       </Modal>
     </div>
   );
