@@ -1,27 +1,50 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useForm } from "react-hook-form";
 import TextInput from "../../Reusable/TextInput/TextInput";
 import Textarea from "../../Reusable/TextArea/TextArea";
 import Button from "../../Reusable/Button/Button";
 import { ICONS } from "../../../assets";
 import { useParams } from "react-router-dom";
+import { useAddLeadMutation } from "../../../redux/Features/Lead/leadApi";
+import { useSelector } from "react-redux";
+import { useCurrentUser } from "../../../redux/Features/Auth/authSlice";
+import toast from "react-hot-toast";
 
 type TFormData = {
   guardianPhoneNumber: string;
   email: string;
   class: string;
-  guardianAddress: string;
+  address: string;
   details: string;
 };
 const TuitionRequestForm = () => {
   const { id } = useParams();
+  const user = useSelector(useCurrentUser);
+  const [addLead, { isLoading }] = useAddLeadMutation();
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm<TFormData>();
-
-  const handleSubmitRequest = (data: TFormData) => {
-    console.log(data, id);
+  const handleSubmitRequest = async (data: TFormData) => {
+    try {
+      const payload = {
+        ...data,
+        userId: user?._id ? user?._id : null,
+        tutorId: id,
+      };
+      const res = await addLead(payload).unwrap();
+      if (res?.success) {
+        toast.success("Tuition request submitted successfully.");
+        reset();
+      }
+    } catch (error: any) {
+      toast.error(
+        error?.data?.message ||
+          "Error submitting tuition request. Please try again."
+      );
+    }
   };
   return (
     <form
@@ -44,8 +67,8 @@ const TuitionRequestForm = () => {
       <TextInput
         label="Address"
         placeholder="Enter your address"
-        error={errors.guardianAddress}
-        {...register("guardianAddress")}
+        error={errors.address}
+        {...register("address")}
       />
       <Textarea
         label="Details (optional)"
@@ -62,6 +85,8 @@ const TuitionRequestForm = () => {
           label="Submit"
           variant="primary"
           icon={ICONS.topRightArrow}
+          isLoading={isLoading}
+          isDisabled={isLoading}
         />
       </div>
     </form>

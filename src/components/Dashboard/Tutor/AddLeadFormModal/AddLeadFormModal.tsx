@@ -17,9 +17,13 @@ type TFormData = {
   paymentNumber: string;
 };
 
-const AddLeadFormModal = ({setIsFormModalOpen} : {setIsFormModalOpen: React.Dispatch<React.SetStateAction<boolean>>}) => {
+const AddLeadFormModal = ({
+  setIsFormModalOpen,
+}: {
+  setIsFormModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
+}) => {
   const user = useSelector(useCurrentUser);
-  const navigate=useNavigate();
+  const navigate = useNavigate();
   const [addLead, { isLoading }] = useAddLeadMutation();
   const {
     register,
@@ -29,10 +33,10 @@ const AddLeadFormModal = ({setIsFormModalOpen} : {setIsFormModalOpen: React.Disp
   } = useForm<TFormData>();
 
   const handleAddLead = async (data: TFormData) => {
-   try {
+    try {
       const payload = {
         ...data,
-        userId : user?._id,
+        userId: user?._id,
       };
       const res = await addLead(payload).unwrap();
       if (res?.success) {
@@ -42,7 +46,9 @@ const AddLeadFormModal = ({setIsFormModalOpen} : {setIsFormModalOpen: React.Disp
         navigate("/dashboard/tutor/my-leads");
       }
     } catch (error: any) {
-      toast.error(error?.data?.message || "Error adding lead. Please try again.");
+      toast.error(
+        error?.data?.message || "Error adding lead. Please try again."
+      );
     }
   };
   return (
