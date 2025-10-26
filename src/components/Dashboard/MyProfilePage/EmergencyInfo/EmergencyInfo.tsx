@@ -68,7 +68,7 @@ const EmergencyInfo: React.FC<TEmergencyInfoProps> = ({ emergencyInfo }) => {
         setIsModalOpen={setIsFormModalOpen}
         width="w-[90%] md:w-[35%] max-h-[600px] overflow-y-auto"
       >
-        <UpdateEmergencyInfoModal setIsFormModalOpen={setIsFormModalOpen} />
+        <UpdateEmergencyInfoModal setIsFormModalOpen={setIsFormModalOpen} defaultValues={emergencyInfo} />
       </Modal>
     </div>
   );

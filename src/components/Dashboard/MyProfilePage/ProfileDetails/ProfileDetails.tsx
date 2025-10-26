@@ -127,7 +127,7 @@ const ProfileDetails = ({ data }: { data: any }) => {
 
       {/* ACTION BUTTONS */}
       {user?.role !== "guardian" && (
-        <div className="flex flex-col gap-3">
+        <div className="flex flex-col">
           <Button
             type="button"
             label="Download CV"

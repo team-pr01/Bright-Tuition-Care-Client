@@ -22,6 +22,7 @@ const MyProfile = () => {
   const socialMediaInformation = myProfile?.socialMediaInformation;
   const tuitionPreference = myProfile?.tuitionPreference;
   const experience = myProfile?.experience;
+  const emergencyInformation = myProfile?.emergencyInformation;
   console.log(tuitionPreference);
   const location = useLocation();
   const [isFormModalOpen, setIsFormModalOpen] = useState<boolean>(false);
@@ -108,10 +109,10 @@ const MyProfile = () => {
     ],
 
     emergencyInfo: {
-      name: "",
-      relation: "",
-      number: "",
-      address: "",
+      name: emergencyInformation?.emergencyContactPersonName,
+      relation: emergencyInformation?.relation,
+      number: emergencyInformation?.phoneNumber,
+      address: emergencyInformation?.address,
     },
 
     identityProofsInfo: [

@@ -134,7 +134,9 @@ const PersonalInfo: React.FC<TPersonalInfoProps> = ({ personalInfo }) => {
           return (
             <div
               key={index}
-              className="flex text-[13px] md:text-sm lg:text-base"
+              className={`flex text-[13px] md:text-sm lg:text-base ${
+                item.label !== "Email" ? "capitalize" : ""
+              }`}
             >
               <span className="text-neutral-5 font-medium min-w-[140px] lg:min-w-[200px] xl:min-w-fit">
                 {item.label}

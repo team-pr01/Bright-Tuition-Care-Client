@@ -9,10 +9,6 @@ type TTuitionRelatedInfoProps = {
     tutoringStyles: string[];
     availableDays: string[];
     time: string;
-    location: {
-      city: string;
-      area: string;
-    };
     preferences?: {
       preferredCategories?: string[] | string;
       preferredClasses?: string[] | string;
