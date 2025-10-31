@@ -30,7 +30,6 @@ type TEducationalInfoProps = {
 const EducationalInfo: React.FC<TEducationalInfoProps> = ({
   educationalInfo,
 }) => {
-  console.log(educationalInfo);
   const [isFormModalOpen, setIsFormModalOpen] = useState<boolean>(false);
   return (
     <div className="font-Nunito">

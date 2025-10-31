@@ -71,6 +71,15 @@ const tutorApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ["tutor"],
     }),
+
+    updateIdentityInfo: builder.mutation({
+      query: (data) => ({
+        url: `/tutor/update/identity-info`,
+        body: data,
+        method: "PATCH",
+      }),
+      invalidatesTags: ["tutor"],
+    }),
   }),
 });
 
@@ -79,5 +88,6 @@ export const {
     useGetSingleTutorByIdQuery,
     useGetMyTutorProfileQuery,
     useToggleTutorProfileStatusMutation,
-    useUpdateTutorProfileInfoMutation
+    useUpdateTutorProfileInfoMutation,
+    useUpdateIdentityInfoMutation
 } = tutorApi;

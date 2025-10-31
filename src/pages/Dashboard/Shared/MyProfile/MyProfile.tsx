@@ -24,6 +24,7 @@ const MyProfile = () => {
   const experience = myProfile?.experience;
   const emergencyInformation = myProfile?.emergencyInformation;
   const educationalInformation = myProfile?.educationalInformation;
+  const identityInformation = myProfile?.identityInformation;
   console.log(tuitionPreference);
   const location = useLocation();
   const [isFormModalOpen, setIsFormModalOpen] = useState<boolean>(false);
@@ -85,17 +86,7 @@ const MyProfile = () => {
       address: emergencyInformation?.address,
     },
 
-    identityProofsInfo: [
-      {
-        documentType: "SSC Certificate",
-        imageUrl: "https://i.ibb.co.com/391Jr7r4/cloud-security3.pngE",
-      },
-      {
-        documentType: "NID Card",
-        imageUrl:
-          "https://i.ibb.co.com/JWyDbXS9/thanks-popup-screen-login-sign-260nw-2237153683.webp",
-      },
-    ],
+    identityInformation: identityInformation,
   };
 
   const [activeTab, setActiveTab] = useState<string>("personalInfo");
@@ -221,7 +212,7 @@ const MyProfile = () => {
           )}
           {activeTab === "credentialInfo" &&
             location.pathname.startsWith("/dashboard/tutor") && (
-              <CredentialsInfo credentialInfo={profile.identityProofsInfo} />
+              <CredentialsInfo identityInformation={profile.identityInformation} />
             )}
         </div>
       </div>
