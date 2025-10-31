@@ -1,11 +1,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React, { useEffect, useState } from "react";
-import { useForm, useFieldArray } from "react-hook-form";
+import React, { useState } from "react";
+import { useForm } from "react-hook-form";
 import Button from "../../../Reusable/Button/Button";
 import SelectDropdown from "../../../Reusable/SelectDropdown/SelectDropdown";
 import TextInput from "../../../Reusable/TextInput/TextInput";
 import toast from "react-hot-toast";
-import { FiTrash2 } from "react-icons/fi";
 import { useUpdateIdentityInfoMutation } from "../../../../redux/Features/Tutor/tutorApi";
 
 const fileTypes = [
@@ -16,91 +15,54 @@ const fileTypes = [
   "Others",
 ];
 
-type TIdentityForm = {
+type TFormData = {
   fileType: string;
   file?: File | null;
 };
 
-type TFormData = {
-  identityInformation: TIdentityForm[];
-};
-
-const emptyIdentity = (): TIdentityForm => ({
-  fileType: "",
-  file: null,
-});
-
 const UpdateIdentityInfoModal = ({
   setIsFormModalOpen,
-  defaultValues,
 }: {
   setIsFormModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
-  defaultValues?: any[];
 }) => {
   const [updateIdentityInfo, { isLoading }] = useUpdateIdentityInfoMutation();
+  const [fileError, setFileError] = useState<string>("");
 
-  const [fileErrors, setFileErrors] = useState<Record<number, string>>({});
+  const { register, handleSubmit, setValue, watch, reset } = useForm<TFormData>();
 
-  const { register, control, handleSubmit, setValue, watch, reset } =
-    useForm<TFormData>({
-      defaultValues: { identityInformation: [emptyIdentity()] },
-    });
+  const selectedFile = watch("file");
 
-  const { fields, append, remove } = useFieldArray({
-    control,
-    name: "identityInformation",
-  });
-
-  // Prefill defaults if available
-  useEffect(() => {
-    if (defaultValues && Array.isArray(defaultValues)) {
-      const mapped = defaultValues.map((info: any) => ({
-        fileType: info.fileType || "",
-        file: null,
-      }));
-      reset({
-        identityInformation: mapped.length ? mapped : [emptyIdentity()],
-      });
-    }
-  }, [defaultValues, reset]);
-
-  // ✅ File validation handler
-  const handleFileChange = (file: File | null, index: number) => {
+  // File validation
+  const handleFileChange = (file: File | null) => {
     if (!file) return;
 
     const allowedTypes = ["image/png", "image/jpg", "image/jpeg"];
     if (!allowedTypes.includes(file.type)) {
-      setFileErrors((prev) => ({
-        ...prev,
-        [index]: "Only PNG, JPG, and JPEG files are allowed ❌",
-      }));
-      setValue(`identityInformation.${index}.file`, null);
+      setFileError("Only PNG, JPG, and JPEG files are allowed ❌");
+      setValue("file", null);
       return;
     }
 
-    setFileErrors((prev) => ({ ...prev, [index]: "" }));
-    setValue(`identityInformation.${index}.file`, file);
+    setFileError("");
+    setValue("file", file);
   };
 
-  // ✅ Submit handler
-  const onSubmit = async (formData: TFormData) => {
+  const onSubmit = async (data: TFormData) => {
     try {
-      const formDataToSend = new FormData();
+      const formData = new FormData();
+      formData.append("fileType", data.fileType);
+      if (data.file) {
+        formData.append("file", data.file);
+      }
 
-      formData.identityInformation.forEach((info) => {
-        formDataToSend.append("fileType", info.fileType);
-        if (info.file) {
-          formDataToSend.append("file", info.file);
-        }
-      });
-
-      const response = await updateIdentityInfo(formDataToSend).unwrap();
+      const response = await updateIdentityInfo(formData).unwrap();
 
       if (response.success) {
         toast.success(
           response.message || "Identity information updated successfully ✅"
         );
         setIsFormModalOpen(false);
+        reset();
       } else {
         toast.error(response.message || "Something went wrong ❌");
       }
@@ -111,83 +73,39 @@ const UpdateIdentityInfoModal = ({
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-6 mt-4">
-      <div className="space-y-4">
-        {fields.map((field, index) => {
-          const selectedFile = watch(`identityInformation.${index}.file`);
-          return (
-            <div
-              key={field.id}
-              className="p-4 border border-neutral-30/30 rounded-md bg-white"
-            >
-              <div className="flex items-center justify-between mb-3">
-                <h3 className="font-medium">Document #{index + 1}</h3>
-                {fields.length > 1 && (
-                  <button
-                    type="button"
-                    onClick={() => remove(index)}
-                    className="text-red-500 hover:text-red-700 text-sm flex items-center gap-1 cursor-pointer"
-                    title="Remove Document"
-                  >
-                    <FiTrash2 className="mb-[2px]" /> Remove
-                  </button>
-                )}
-              </div>
+      <div className="p-4 border border-neutral-30/30 rounded-md bg-white">
+        {/* File Type Dropdown */}
+        <SelectDropdown
+          label="File Type"
+          options={fileTypes}
+          {...register("fileType", { required: true })}
+          isRequired
+        />
 
-              <div className="flex flex-col gap-3">
-                {/* File Type Dropdown */}
-                <SelectDropdown
-                  label="File Type"
-                  options={fileTypes}
-                  {...register(
-                    `identityInformation.${index}.fileType` as const,
-                    {
-                      required: true,
-                    }
-                  )}
-                  isRequired
-                />
+        {/* File Upload Input */}
+        <div className="mt-3">
+          <TextInput
+            label="Upload File"
+            type="file"
+            name=""
+            onChange={(e) => handleFileChange(e.target.files?.[0] || null)}
+            isRequired
+          />
+          <p className="text-xs text-gray-500 mt-2">
+            ⚠️ Only PNG, JPG, and JPEG formats are allowed
+          </p>
 
-                {/* File Upload Input */}
-                <div>
-                  <TextInput
-                    label="Upload File"
-                    type="file"
-                    name=""
-                    onChange={(e) =>
-                      handleFileChange(e.target.files?.[0] || null, index)
-                    }
-                    isRequired
-                  />
-                  <p className="text-xs text-gray-500 mt-1">
-                    ⚠️ Only PNG, JPG, and JPEG formats are allowed
-                  </p>
+          {fileError && (
+            <p className="text-xs text-red-500 mt-1">{fileError}</p>
+          )}
 
-                  {fileErrors[index] && (
-                    <p className="text-xs text-red-500 mt-1">
-                      {fileErrors[index]}
-                    </p>
-                  )}
-
-                  {selectedFile && (
-                    <p className="text-xs text-green-600 mt-1">
-                      ✅ {selectedFile.name}
-                    </p>
-                  )}
-                </div>
-              </div>
-            </div>
-          );
-        })}
+          {selectedFile && (
+            <p className="text-xs text-green-600 mt-1">
+              ✅ {selectedFile.name}
+            </p>
+          )}
+        </div>
       </div>
-
-      {/* Add more button */}
-      <button
-        type="button"
-        onClick={() => append(emptyIdentity())}
-        className="text-primary-10 text-sm font-medium italic underline cursor-pointer"
-      >
-        ➕ Add More Identity Documents
-      </button>
 
       {/* Submit + Cancel Buttons */}
       <div className="flex items-center gap-4 justify-end mt-4">
