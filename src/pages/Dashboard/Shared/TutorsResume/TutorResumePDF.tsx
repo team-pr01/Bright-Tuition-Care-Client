@@ -11,10 +11,14 @@ import {
 import { IMAGES } from "../../../../assets";
 import type { TEducation } from "../../../../types/tutor.types";
 import NunitoRegular from "../../../../assets/Fonts/Nunito-Regular.ttf";
+import NunitoBold from "../../../../assets/Fonts/Nunito-Bold.ttf"; // You might need to add this
 
 Font.register({
   family: "Nunito",
-  src: NunitoRegular,
+  fonts: [
+    { src: NunitoRegular, fontWeight: "normal" },
+    { src: NunitoBold, fontWeight: "bold" },
+  ],
 });
 
 const styles = StyleSheet.create({
@@ -53,6 +57,7 @@ const styles = StyleSheet.create({
   profileRow: {
     flexDirection: "row",
     gap: 15,
+    marginBottom: 15,
   },
   profileImage: {
     width: 90,
@@ -72,6 +77,37 @@ const styles = StyleSheet.create({
     marginTop: 6,
     fontSize: 11,
     color: "#4b5563",
+  },
+  // New styles for education grid
+  educationGrid: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+    gap: 10,
+    marginTop: 8,
+  },
+  educationCard: {
+    width: "48%",
+    marginBottom: 10,
+  },
+  educationDegree: {
+    fontWeight: "bold",
+    color: "#111827",
+    fontSize: 12,
+  },
+  educationRow: {
+    flexDirection: "row",
+    marginBottom: 3,
+  },
+  educationLabel: {
+    width: 80,
+    fontWeight: "bold",
+    color: "#111827",
+    fontSize: 10,
+  },
+  educationValue: {
+    flex: 1,
+    color: "#374151",
+    fontSize: 10,
   },
 });
 
@@ -153,13 +189,22 @@ const TutorResumePDF = ({ profile }: { profile: any }) => {
     },
   ].filter((item) => item.value && item.value !== "");
 
+  // For profile image - ensure it's a valid URL or use base64 data
+  const getProfileImageSrc = () => {
+    if (profile?.imageUrl) {
+      // If it's already a URL or base64 string, use it directly
+      return profile.imageUrl;
+    }
+    return IMAGES.dummyAvatar;
+  };
+
   return (
     <Document>
       <Page size="A4" style={styles.page}>
         {/* Profile Section */}
         <View style={styles.profileRow}>
           <Image
-            src={profile?.imageUrl || IMAGES.dummyAvatar}
+            src={getProfileImageSrc()}
             style={styles.profileImage}
           />
           <View style={styles.tutorInfo}>
@@ -172,39 +217,41 @@ const TutorResumePDF = ({ profile }: { profile: any }) => {
           </View>
         </View>
 
-        {/* Education Section */}
+        {/* Education Section - Now in 2-column grid */}
         <Text style={styles.sectionTitle}>Education</Text>
-        {educationDetails.map((edu: TEducation, index: number) => (
-          <View key={index} style={{ marginTop: 5 }}>
-            <Text style={{ fontWeight: "bold", color: "#111827" }}>
-              • {edu.degree || "Education"}
-            </Text>
-            <View style={styles.grid}>
-              <View style={styles.gridRow}>
-                <Text style={styles.label}>Institute Name</Text>
-                <Text style={styles.value}>{edu.instituteName || "N/A"}</Text>
-              </View>
-              <View style={styles.gridRow}>
-                <Text style={styles.label}>Department</Text>
-                <Text style={styles.value}>
-                  {edu.department || edu.group || "N/A"}
-                </Text>
-              </View>
-              <View style={styles.gridRow}>
-                <Text style={styles.label}>Curriculum</Text>
-                <Text style={styles.value}>{edu.medium || "N/A"}</Text>
-              </View>
-              <View style={styles.gridRow}>
-                <Text style={styles.label}>Result</Text>
-                <Text style={styles.value}>{edu.result || "N/A"}</Text>
-              </View>
-              <View style={styles.gridRow}>
-                <Text style={styles.label}>Passing Year</Text>
-                <Text style={styles.value}>{edu.passingYear || "N/A"}</Text>
+        <View style={styles.educationGrid}>
+          {educationDetails.map((edu: TEducation, index: number) => (
+            <View key={index} style={styles.educationCard}>
+              <Text style={styles.educationDegree}>
+                {edu.degree || "Education"}
+              </Text>
+              <View style={styles.grid}>
+                <View style={styles.educationRow}>
+                  <Text style={styles.educationLabel}>Institute</Text>
+                  <Text style={styles.educationValue}>{edu.instituteName || "N/A"}</Text>
+                </View>
+                <View style={styles.educationRow}>
+                  <Text style={styles.educationLabel}>Department</Text>
+                  <Text style={styles.educationValue}>
+                    {edu.department || edu.group || "N/A"}
+                  </Text>
+                </View>
+                <View style={styles.educationRow}>
+                  <Text style={styles.educationLabel}>Curriculum</Text>
+                  <Text style={styles.educationValue}>{edu.medium || "N/A"}</Text>
+                </View>
+                <View style={styles.educationRow}>
+                  <Text style={styles.educationLabel}>Result</Text>
+                  <Text style={styles.educationValue}>{edu.result || "N/A"}</Text>
+                </View>
+                <View style={styles.educationRow}>
+                  <Text style={styles.educationLabel}>Passing Year</Text>
+                  <Text style={styles.educationValue}>{edu.passingYear || "N/A"}</Text>
+                </View>
               </View>
             </View>
-          </View>
-        ))}
+          ))}
+        </View>
 
         {/* Tuition Section */}
         <Text style={styles.sectionTitle}>Tuition Related Information</Text>
