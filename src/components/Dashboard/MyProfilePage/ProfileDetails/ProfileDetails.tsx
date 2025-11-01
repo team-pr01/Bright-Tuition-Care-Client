@@ -8,7 +8,15 @@ import { FaUpload, FaPen, FaCheck } from "react-icons/fa";
 import type { TLoggedInUser } from "../../../../types/loggedinUser.types";
 import { Link } from "react-router-dom";
 
-const ProfileDetails = ({ data }: { data: any }) => {
+const ProfileDetails = ({
+  data,
+  isGenerating,
+  handleDownloadResume,
+}: {
+  data: any;
+  isGenerating: boolean;
+  handleDownloadResume: () => void;
+}) => {
   const [updateTutorProfileInfo, { isLoading }] =
     useUpdateTutorProfileInfoMutation();
   const user = useSelector(useCurrentUser) as TLoggedInUser;
@@ -131,20 +139,23 @@ const ProfileDetails = ({ data }: { data: any }) => {
       {user?.role !== "guardian" && (
         <div className="flex flex-col">
           <Button
+            onClick={handleDownloadResume}
             type="button"
             label="Download CV"
             variant="quaternary"
             className="py-2 lg:py-2 w-full flex-row-reverse items-center justify-center hover:bg-primary-10/90 hover:text-white"
             iconWithoutBg={ICONS.downloadWhite}
+            isLoading={isGenerating}
+            isDisabled={isGenerating}
           />
           <Link to={`/dashboard/tutor/view/${data?._id}`}>
-          <Button
-            type="button"
-            label="View as Guardian or Student"
-            variant="tertiary"
-            className="py-2 lg:py-2 w-full flex-row-reverse items-center justify-center mt-3 hover:bg-primary-20 hover:text-primary-10"
-            iconWithoutBg={ICONS.eyeBlue}
-          />
+            <Button
+              type="button"
+              label="View as Guardian or Student"
+              variant="tertiary"
+              className="py-2 lg:py-2 w-full flex-row-reverse items-center justify-center mt-3 hover:bg-primary-20 hover:text-primary-10"
+              iconWithoutBg={ICONS.eyeBlue}
+            />
           </Link>
         </div>
       )}

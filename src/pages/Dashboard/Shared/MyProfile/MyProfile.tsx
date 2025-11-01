@@ -14,6 +14,8 @@ import Modal from "../../../../components/Reusable/Modal/Modal";
 import UpdatePersonalInfoModal from "../../../../components/Dashboard/MyProfilePage/PersonalInfo/UpdatePersonalInfoModal";
 import { useLocation } from "react-router-dom";
 import { useGetMyTutorProfileQuery } from "../../../../redux/Features/Tutor/tutorApi";
+import TutorResumePDF from "../TutorsResume/TutorResumePDF";
+import { pdf } from "@react-pdf/renderer";
 
 const MyProfile = () => {
   const { data, isLoading } = useGetMyTutorProfileQuery({});
@@ -25,7 +27,6 @@ const MyProfile = () => {
   const emergencyInformation = myProfile?.emergencyInformation;
   const educationalInformation = myProfile?.educationalInformation;
   const identityInformation = myProfile?.identityInformation;
-  console.log(tuitionPreference);
   const location = useLocation();
   const [isFormModalOpen, setIsFormModalOpen] = useState<boolean>(false);
   const profile = {
@@ -132,9 +133,31 @@ const MyProfile = () => {
     },
   ];
 
+
+   const [isGenerating, setIsGenerating] = useState(false);
+
+  const handleDownloadResume = async () => {
+    setIsGenerating(true);
+    try {
+      const blob = await pdf(<TutorResumePDF profile={myProfile} />).toBlob();
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = `Tutor_Resume_${myProfile?.userId?.name || "resume"}.pdf`;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      URL.revokeObjectURL(url);
+    } catch (err) {
+      console.error("Failed to generate PDF:", err);
+    } finally {
+      setIsGenerating(false);
+    }
+  };
+
   return (
     <div className="flex flex-col lg:flex-row gap-5 font-Nunito w-full">
-      <ProfileDetails data={myProfile} />
+      <ProfileDetails data={myProfile} isGenerating={isGenerating} handleDownloadResume={handleDownloadResume} />
 
       <div className="w-full lg:w-[75%]">
         {/* Tabs */}

@@ -16,7 +16,7 @@ const TutorsResume = () => {
   const tuitionPreference = profile?.tuitionPreference;
   const personalInfo = profile?.personalInformation || {};
 
-  const educationData = educationDetails.map((item:TEducation) => [
+  const educationData = educationDetails?.map((item:TEducation) => [
     { label: "Institute Name", value: item.instituteName || "N/A" },
     { label: "Degree", value: item.degree || "N/A" },
     { label: "Department", value: item.department || item.group || "N/A" },
@@ -26,80 +26,80 @@ const TutorsResume = () => {
   ]);
 
   const tuitionData = [
-    { label: "Preferred Location", value: tuitionPreference.preferredLocation },
+    { label: "Preferred Location", value: tuitionPreference?.preferredLocation },
     {
       label: "Preferred Categories",
-      value: Array.isArray(tuitionPreference.preferredCategories)
-        ? tuitionPreference.preferredCategories.join(", ")
-        : tuitionPreference.preferredCategories,
+      value: Array.isArray(tuitionPreference?.preferredCategories)
+        ? tuitionPreference?.preferredCategories.join(", ")
+        : tuitionPreference?.preferredCategories,
     },
     {
       label: "Preferred Classes",
-      value: Array.isArray(tuitionPreference.preferredClasses)
-        ? tuitionPreference.preferredClasses.join(", ")
-        : tuitionPreference.preferredClasses,
+      value: Array.isArray(tuitionPreference?.preferredClasses)
+        ? tuitionPreference?.preferredClasses.join(", ")
+        : tuitionPreference?.preferredClasses,
     },
     {
       label: "Preferred Subjects",
-      value: tuitionPreference.preferredSubjects,
+      value: tuitionPreference?.preferredSubjects,
     },
     {
       label: "Tutoring Method",
-      value: tuitionPreference.tutoringMethod,
+      value: tuitionPreference?.tutoringMethod,
     },
     {
       label: "Tuition Style",
-      value: Array.isArray(tuitionPreference.tuitionStyle)
-        ? tuitionPreference.tuitionStyle.join(", ")
-        : tuitionPreference.tuitionStyle,
+      value: Array.isArray(tuitionPreference?.tuitionStyle)
+        ? tuitionPreference?.tuitionStyle.join(", ")
+        : tuitionPreference?.tuitionStyle,
     },
     {
       label: "Available Days",
-      value: Array.isArray(tuitionPreference.availableDays)
-        ? tuitionPreference.availableDays.join(", ")
-        : tuitionPreference.availableDays,
+      value: Array.isArray(tuitionPreference?.availableDays)
+        ? tuitionPreference?.availableDays.join(", ")
+        : tuitionPreference?.availableDays,
     },
     {
       label: "Available Time",
-      value: tuitionPreference.availableTime
-        ? `${tuitionPreference.availableTime.from} - ${tuitionPreference.availableTime.to}`
+      value: tuitionPreference?.availableTime
+        ? `${tuitionPreference?.availableTime.from} - ${tuitionPreference?.availableTime.to}`
         : null,
     },
     {
       label: "Expected Salary",
-      value: tuitionPreference.expectedSalary
-        ? `${tuitionPreference.expectedSalary} BDT`
+      value: tuitionPreference?.expectedSalary
+        ? `${tuitionPreference?.expectedSalary} BDT`
         : null,
     },
   ];
 
-  const filteredTuitionData = tuitionData.filter(
-    (item) => item.value && item.value !== ""
+  const filteredTuitionData = tuitionData?.filter(
+    (item) => item?.value && item?.value !== ""
   );
 
   const personalData = [
-    { label: "Gender", value: personalInfo.gender || "N/A" },
-    { label: "Religion", value: personalInfo.religion || "N/A" },
-    { label: "Nationality", value: personalInfo.nationality || "N/A" },
+    { label: "Gender", value: personalInfo?.gender || "N/A" },
+    { label: "Religion", value: personalInfo?.religion || "N/A" },
+    { label: "Nationality", value: personalInfo?.nationality || "N/A" },
     {
       label: "Date of Birth",
-      value: personalInfo.dateOfBirth
-        ? new Date(personalInfo.dateOfBirth).toLocaleDateString()
+      value: personalInfo?.dateOfBirth
+        ? new Date(personalInfo?.dateOfBirth).toLocaleDateString()
         : "N/A",
     },
-    { label: "Father's Name", value: personalInfo.fatherName || "N/A" },
-    { label: "Father's Phone", value: personalInfo.fatherPhoneNumber || "N/A" },
-    { label: "Mother's Name", value: personalInfo.motherName || "N/A" },
-    { label: "Mother's Phone", value: personalInfo.motherPhoneNumber || "N/A" },
+    { label: "Father's Name", value: personalInfo?.fatherName || "N/A" },
+    { label: "Father's Phone", value: personalInfo?.fatherPhoneNumber || "N/A" },
+    { label: "Mother's Name", value: personalInfo?.motherName || "N/A" },
+    { label: "Mother's Phone", value: personalInfo?.motherPhoneNumber || "N/A" },
     {
       label: "Additional Phone",
-      value: personalInfo.additionalPhoneNumber || "N/A",
+      value: personalInfo?.additionalPhoneNumber || "N/A",
     },
-    { label: "Address", value: personalInfo.address || "N/A" },
+    { label: "Address", value: personalInfo?.address || "N/A" },
   ];
 
-  const filteredPersonalData = personalData.filter(
-    (item) => item.value && item.value !== "N/A"
+  const filteredPersonalData = personalData?.filter(
+    (item) => item?.value && item?.value !== "N/A"
   );
 
   const buttonStyle = "py-[6px] lg:py-[6px] px-3 lg:px-2 text-sm lg:text-sm";
