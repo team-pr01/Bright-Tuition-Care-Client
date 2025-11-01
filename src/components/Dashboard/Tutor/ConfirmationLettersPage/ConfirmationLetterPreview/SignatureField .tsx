@@ -3,6 +3,7 @@ import { useState } from "react";
 import { FiCheck } from "react-icons/fi";
 import { useSelector } from "react-redux";
 import { useCurrentUser } from "../../../../../redux/Features/Auth/authSlice";
+import type { TLoggedInUser } from "../../../../../types/loggedinUser.types";
 
 type SignatureFieldProps = {
   label: string;
@@ -17,9 +18,9 @@ const SignatureField: React.FC<SignatureFieldProps> = ({
   onClick,
   signature: defaultSignature,
   signatureDate: defaultDate,
-  role
+  role,
 }) => {
-  const user = useSelector(useCurrentUser) as any;
+  const user = useSelector(useCurrentUser) as TLoggedInUser;
   const [signature, setSignature] = useState(defaultSignature || "");
   const [submitted, setSubmitted] = useState(!!defaultSignature);
   const isDisabled = submitted || user?.role === "admin" || role;

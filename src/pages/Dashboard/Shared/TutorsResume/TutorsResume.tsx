@@ -1,40 +1,106 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React from "react";
 import { IMAGES } from "../../../../assets";
 import { useLocation, useParams } from "react-router-dom";
 import Button from "../../../../components/Reusable/Button/Button";
+import { useGetSingleTutorByIdQuery } from "../../../../redux/Features/Tutor/tutorApi";
+import type { TEducation } from "../../../../types/tutor.types";
 
 const TutorsResume = () => {
   const location = useLocation();
   const { tutorId } = useParams();
+  const { data } = useGetSingleTutorByIdQuery(tutorId);
+  const profile = data?.data;
   const profileStatus = "locked";
-  const educationData = [
-    { label: "Institute Name", value: "Test University" },
-    { label: "Degree", value: "BSC in Computer Science" },
-    { label: "Major / Group", value: "CSE" },
-    { label: "Curriculum", value: "English" },
-    { label: "Result", value: "4.00" },
-    { label: "Year of Passing", value: "2024" },
-  ];
+  const educationDetails = data?.data?.educationalInformation || [];
+  const tuitionPreference = profile?.tuitionPreference;
+  const personalInfo = profile?.personalInformation || {};
+
+  const educationData = educationDetails.map((item:TEducation) => [
+    { label: "Institute Name", value: item.instituteName || "N/A" },
+    { label: "Degree", value: item.degree || "N/A" },
+    { label: "Department", value: item.department || item.group || "N/A" },
+    { label: "Curriculum", value: item.medium || "N/A" },
+    { label: "Result", value: item.result || "N/A" },
+    { label: "Year of Passing", value: item.passingYear || "N/A" },
+  ]);
 
   const tuitionData = [
-    { label: "City", value: "New York" },
-    { label: "Location", value: "Brooklyn" },
-    { label: "Preferred Categories", value: "Mathematics, Science" },
-    { label: "Tutoring Method", value: "Online & In-person" },
-    { label: "Total Experience", value: "5 Years" },
+    { label: "Preferred Location", value: tuitionPreference.preferredLocation },
     {
-      label: "Experience Overview",
-      value: "Worked with 50+ students in various grades",
+      label: "Preferred Categories",
+      value: Array.isArray(tuitionPreference.preferredCategories)
+        ? tuitionPreference.preferredCategories.join(", ")
+        : tuitionPreference.preferredCategories,
+    },
+    {
+      label: "Preferred Classes",
+      value: Array.isArray(tuitionPreference.preferredClasses)
+        ? tuitionPreference.preferredClasses.join(", ")
+        : tuitionPreference.preferredClasses,
+    },
+    {
+      label: "Preferred Subjects",
+      value: tuitionPreference.preferredSubjects,
+    },
+    {
+      label: "Tutoring Method",
+      value: tuitionPreference.tutoringMethod,
+    },
+    {
+      label: "Tuition Style",
+      value: Array.isArray(tuitionPreference.tuitionStyle)
+        ? tuitionPreference.tuitionStyle.join(", ")
+        : tuitionPreference.tuitionStyle,
+    },
+    {
+      label: "Available Days",
+      value: Array.isArray(tuitionPreference.availableDays)
+        ? tuitionPreference.availableDays.join(", ")
+        : tuitionPreference.availableDays,
+    },
+    {
+      label: "Available Time",
+      value: tuitionPreference.availableTime
+        ? `${tuitionPreference.availableTime.from} - ${tuitionPreference.availableTime.to}`
+        : null,
+    },
+    {
+      label: "Expected Salary",
+      value: tuitionPreference.expectedSalary
+        ? `${tuitionPreference.expectedSalary} BDT`
+        : null,
     },
   ];
 
+  const filteredTuitionData = tuitionData.filter(
+    (item) => item.value && item.value !== ""
+  );
+
   const personalData = [
-    { label: "Gender", value: "Male" },
-    { label: "Religion", value: "Christianity" },
-    { label: "Nationality", value: "American" },
-    { label: "Father's Name", value: "Robert Smith" },
-    { label: "Mother's Name", value: "Mary Smith" },
+    { label: "Gender", value: personalInfo.gender || "N/A" },
+    { label: "Religion", value: personalInfo.religion || "N/A" },
+    { label: "Nationality", value: personalInfo.nationality || "N/A" },
+    {
+      label: "Date of Birth",
+      value: personalInfo.dateOfBirth
+        ? new Date(personalInfo.dateOfBirth).toLocaleDateString()
+        : "N/A",
+    },
+    { label: "Father's Name", value: personalInfo.fatherName || "N/A" },
+    { label: "Father's Phone", value: personalInfo.fatherPhoneNumber || "N/A" },
+    { label: "Mother's Name", value: personalInfo.motherName || "N/A" },
+    { label: "Mother's Phone", value: personalInfo.motherPhoneNumber || "N/A" },
+    {
+      label: "Additional Phone",
+      value: personalInfo.additionalPhoneNumber || "N/A",
+    },
+    { label: "Address", value: personalInfo.address || "N/A" },
   ];
+
+  const filteredPersonalData = personalData.filter(
+    (item) => item.value && item.value !== "N/A"
+  );
 
   const buttonStyle = "py-[6px] lg:py-[6px] px-3 lg:px-2 text-sm lg:text-sm";
 
@@ -44,7 +110,7 @@ const TutorsResume = () => {
       <div className="flex flex-col lg:flex-row gap-2 lg:gap-5">
         <div className="flex gap-5">
           <img
-            src={IMAGES.dummyAvatar}
+            src={profile?.imageUrl || IMAGES.dummyAvatar}
             alt=""
             className="size-20 lg:size-56 object-cover rounded-xl"
           />
@@ -52,16 +118,17 @@ const TutorsResume = () => {
             <div className="flex items-start justify-between">
               <div>
                 <h1 className="text-xl lg:text-2xl font-semibold text-neutral-10">
-                  John Smith
+                  {profile?.userId?.name}
                 </h1>
                 <p className="text-neutral-10 mt-1 text-sm md:text-base">
-                  <strong>Tutor Id:</strong> {tutorId}
+                  <strong>Tutor Id:</strong> {profile?.tutorId}
                 </p>
                 <p className="text-neutral-10 mt-1 text-sm md:text-base">
-                  <strong>Phone Number:</strong> 01733333333
+                  <strong>Phone Number:</strong> {profile?.userId?.phoneNumber}
                 </p>
               </div>
 
+              {/* Admin controlls */}
               <div className="flex items-center gap-3">
                 {location.pathname.startsWith("/dashboard/admin/tutor/") &&
                   (profileStatus === "locked" ? (
@@ -104,22 +171,12 @@ const TutorsResume = () => {
               </div>
             </div>
             <p className="text-neutral-20 mt-3 hidden lg:block">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui natus
-              incidunt eum asperiores quisquam omnis facilis voluptates iste
-              dolorum nam cumque esse sit doloribus temporibus fugit a commodi,
-              dicta error ratione! Esse tempore asperiores nam. Eos et quas
-              possimus mollitia itaque! Aliquam cum dolor laboriosam praesentium
-              cumque omnis, rerum accusamus?
+              {profile?.personalInformation?.overview}
             </p>
           </div>
         </div>
         <p className="text-neutral-20 mt-3 block lg:hidden">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui natus
-          incidunt eum asperiores quisquam omnis facilis voluptates iste dolorum
-          nam cumque esse sit doloribus temporibus fugit a commodi, dicta error
-          ratione! Esse tempore asperiores nam. Eos et quas possimus mollitia
-          itaque! Aliquam cum dolor laboriosam praesentium cumque omnis, rerum
-          accusamus?
+          {profile?.personalInformation?.overview}
         </p>
       </div>
 
@@ -130,30 +187,23 @@ const TutorsResume = () => {
         </h2>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-0">
-          <div>
-            <h2 className="font-bold text-neutral-10 mt-4">• BSC</h2>
-            <div className="text-neutral-20 grid grid-cols-[150px_20px_1fr] gap-y-2 mt-3">
-              {educationData.map((item, index) => (
-                <React.Fragment key={index}>
-                  <span className="font-medium">{item.label}</span>
-                  <span className="text-neutral-10">:</span>
-                  <span>{item.value}</span>
-                </React.Fragment>
-              ))}
+          {educationData.map((edu:TEducation[], eduIndex:number) => (
+            <div key={eduIndex}>
+              <h2 className="font-bold text-neutral-10 mt-4">
+                • {educationDetails[eduIndex]?.degree || "Education"}
+              </h2>
+
+              <div className="text-neutral-20 grid grid-cols-[150px_20px_1fr] gap-y-2 mt-3">
+                {edu?.map((item: any, index:number) => (
+                  <React.Fragment key={index}>
+                    <span className="font-medium">{item.label}</span>
+                    <span className="text-neutral-10">:</span>
+                    <span>{item.value}</span>
+                  </React.Fragment>
+                ))}
+              </div>
             </div>
-          </div>
-          <div>
-            <h2 className="font-bold text-neutral-10 mt-4">• BSC</h2>
-            <div className="text-neutral-20 grid grid-cols-[150px_20px_1fr] gap-y-2 mt-3">
-              {educationData.map((item, index) => (
-                <React.Fragment key={index}>
-                  <span className="font-medium">{item.label}</span>
-                  <span className="text-neutral-10">:</span>
-                  <span>{item.value}</span>
-                </React.Fragment>
-              ))}
-            </div>
-          </div>
+          ))}
         </div>
       </div>
 
@@ -164,7 +214,7 @@ const TutorsResume = () => {
         </h2>
 
         <div className="text-neutral-20 grid grid-cols-[180px_20px_1fr] gap-y-2 mt-4">
-          {tuitionData.map((item, index) => (
+          {filteredTuitionData?.map((item, index) => (
             <React.Fragment key={index}>
               <span className="font-medium">{item.label}</span>
               <span className="text-neutral-10">:</span>
@@ -181,7 +231,7 @@ const TutorsResume = () => {
         </h2>
 
         <div className="text-neutral-20 grid grid-cols-[180px_20px_1fr] gap-y-2 mt-4">
-          {personalData.map((item, index) => (
+          {filteredPersonalData?.map((item, index) => (
             <React.Fragment key={index}>
               <span className="font-medium">{item.label}</span>
               <span className="text-neutral-10">:</span>

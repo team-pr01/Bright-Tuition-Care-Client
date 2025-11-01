@@ -5,11 +5,13 @@ import Button from "../../../Reusable/Button/Button";
 import { useCurrentUser } from "../../../../redux/Features/Auth/authSlice";
 import { useUpdateTutorProfileInfoMutation } from "../../../../redux/Features/Tutor/tutorApi";
 import { FaUpload, FaPen, FaCheck } from "react-icons/fa";
+import type { TLoggedInUser } from "../../../../types/loggedinUser.types";
+import { Link } from "react-router-dom";
 
 const ProfileDetails = ({ data }: { data: any }) => {
   const [updateTutorProfileInfo, { isLoading }] =
     useUpdateTutorProfileInfoMutation();
-  const user = useSelector(useCurrentUser);
+  const user = useSelector(useCurrentUser) as TLoggedInUser;
 
   const handleImageUpload = async (file: File) => {
     const formData = new FormData();
@@ -135,6 +137,7 @@ const ProfileDetails = ({ data }: { data: any }) => {
             className="py-2 lg:py-2 w-full flex-row-reverse items-center justify-center hover:bg-primary-10/90 hover:text-white"
             iconWithoutBg={ICONS.downloadWhite}
           />
+          <Link to={`/dashboard/tutor/view/${data?._id}`}>
           <Button
             type="button"
             label="View as Guardian or Student"
@@ -142,6 +145,7 @@ const ProfileDetails = ({ data }: { data: any }) => {
             className="py-2 lg:py-2 w-full flex-row-reverse items-center justify-center mt-3 hover:bg-primary-20 hover:text-primary-10"
             iconWithoutBg={ICONS.eyeBlue}
           />
+          </Link>
         </div>
       )}
     </div>

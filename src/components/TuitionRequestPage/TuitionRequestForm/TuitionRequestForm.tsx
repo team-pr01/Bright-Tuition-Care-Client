@@ -9,6 +9,7 @@ import { useAddLeadMutation } from "../../../redux/Features/Lead/leadApi";
 import { useSelector } from "react-redux";
 import { useCurrentUser } from "../../../redux/Features/Auth/authSlice";
 import toast from "react-hot-toast";
+import type { TLoggedInUser } from "../../../types/loggedinUser.types";
 
 type TFormData = {
   guardianPhoneNumber: string;
@@ -19,7 +20,7 @@ type TFormData = {
 };
 const TuitionRequestForm = () => {
   const { id } = useParams();
-  const user = useSelector(useCurrentUser);
+  const user = useSelector(useCurrentUser) as TLoggedInUser;
   const [addLead, { isLoading }] = useAddLeadMutation();
   const {
     register,

@@ -9,9 +9,10 @@ import { useCurrentUser } from "../../../../redux/Features/Auth/authSlice";
 import { useDebounce } from "../../../../hooks/useDebounce";
 import JobCardSkeleton from "../../../../components/JobBoardPage/Jobs/jobCard/JobCardSkeleton";
 import Jobs from "../../../../components/JobBoardPage/Jobs/Jobs";
+import type { TLoggedInUser } from "../../../../types/loggedinUser.types";
 
 const PostedJobs = () => {
-  const user = useSelector(useCurrentUser);
+  const user = useSelector(useCurrentUser) as TLoggedInUser;
   const [keyword, setKeyword] = useState<string>("");
   const [status, setStatus] = useState<string>("");
   const debouncedKeyword = useDebounce(keyword, 500);

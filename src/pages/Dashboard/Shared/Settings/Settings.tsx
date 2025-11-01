@@ -11,9 +11,10 @@ import DeleteAccount from "../../../../components/Dashboard/Settings/DeleteAccou
 import { BsTrash } from "react-icons/bs";
 import { useSelector } from "react-redux";
 import { useCurrentUser } from "../../../../redux/Features/Auth/authSlice";
+import type { TLoggedInUser } from "../../../../types/loggedinUser.types";
 
 const Settings = () => {
-  const user = useSelector(useCurrentUser);
+  const user = useSelector(useCurrentUser) as TLoggedInUser;
   const [activeTab, setActiveTab] = useState<string>(
     user?.role === "admin" ? "Change Password" : "Contact Info"
   );

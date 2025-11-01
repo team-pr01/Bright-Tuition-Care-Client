@@ -11,6 +11,7 @@ import { usePostJobMutation } from "../../../redux/Features/Job/jobApi";
 import { useSelector } from "react-redux";
 import { useCurrentUser } from "../../../redux/Features/Auth/authSlice";
 import { useNavigate } from "react-router-dom";
+import type { TLoggedInUser } from "../../../types/loggedinUser.types";
 
 interface FormValues {
   // Job Details
@@ -39,7 +40,7 @@ interface FormValues {
 const steps = ["Job Details", "Tutor Preferences", "Student Info", "Preview"];
 
 const HireTutorForm = () => {
-  const user = useSelector(useCurrentUser);
+  const user = useSelector(useCurrentUser) as TLoggedInUser;
   const navigate = useNavigate();
   const [postJob, { isLoading: isPostingJob }] = usePostJobMutation();
   const methods = useForm<FormValues>({ mode: "onBlur" });

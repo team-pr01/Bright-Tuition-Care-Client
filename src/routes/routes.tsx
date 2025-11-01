@@ -128,6 +128,10 @@ export const router = createBrowserRouter([
         element: <MyProfile />,
       },
       {
+        path: "view/:tutorId",
+        element: <TutorsResume />,
+      },
+      {
         path: "how-it-works",
         element: <HowItWorks />,
       },

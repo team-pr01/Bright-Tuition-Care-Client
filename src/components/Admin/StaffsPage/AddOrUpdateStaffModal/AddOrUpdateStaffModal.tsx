@@ -210,7 +210,7 @@ const AddOrUpdateStaffModal: React.FC<TAddOrUpdateStaffModalProps> = ({
               label="Gender"
               name="gender"
               value={selectedGender}
-              options={["Male", "Female", "Other"]}
+              options={["male", "female", "other"]}
               onChange={(value) => setValue("gender", value)}
               isRequired={true}
               error={fieldErrors.gender}

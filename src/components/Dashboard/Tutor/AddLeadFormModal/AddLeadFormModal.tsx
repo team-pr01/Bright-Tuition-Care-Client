@@ -8,6 +8,7 @@ import toast from "react-hot-toast";
 import { useSelector } from "react-redux";
 import { useCurrentUser } from "../../../../redux/Features/Auth/authSlice";
 import { useNavigate } from "react-router-dom";
+import type { TLoggedInUser } from "../../../../types/loggedinUser.types";
 
 type TFormData = {
   class: string;
@@ -22,7 +23,7 @@ const AddLeadFormModal = ({
 }: {
   setIsFormModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
-  const user = useSelector(useCurrentUser);
+  const user = useSelector(useCurrentUser) as TLoggedInUser;
   const navigate = useNavigate();
   const [addLead, { isLoading }] = useAddLeadMutation();
   const {

@@ -25,7 +25,7 @@ const JobCard: React.FC<TJobCardProps> = ({
   detailsWidth = "max-w-full 2xl:max-w-[80%]",
   job,
 }) => {
-  // const user = useSelector(useCurrentUser);
+  // const user = useSelector(useCurrentUser) as TLoggedInUser;
   // const path = user?.role === "guardian" ? "guardian" : "admin";
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement | null>(null);

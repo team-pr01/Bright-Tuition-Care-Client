@@ -6,6 +6,7 @@ import testimonials from "../assets/Icons/testimonials.svg";
 import stepLine from "../assets/Images/steps-line.png"
 import logo from "../assets/Icons/logo.png";
 import logoWhite from "../assets/Icons/logo-white.png";
+import logoWhiteVertical from "../assets/Images/logo-white.png";
 import menu from "../assets/Icons/menu.svg";
 
 // counter icons
@@ -130,6 +131,7 @@ import loader from "../assets/Icons/loader.svg";
 
 
 export const IMAGES = {
+  logoWhiteVertical,
   heroImg,
   heroImg1,
   heroImg2,
