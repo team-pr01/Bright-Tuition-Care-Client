@@ -19,9 +19,7 @@ const Sidebar = () => {
     ? tutorDashboardLinks
     : location.pathname.startsWith("/dashboard/guardian")
     ? guardianDashboardLinks
-    : adminDashboardLinks;
-
-  console.log(user);
+    : adminDashboardLinks
   return (
     <div className="sticky top-0 left-0 hidden xl:block">
       <div className="w-[230px] 2xl:w-[270px] h-full bg-primary-10 p-5 font-Nunito flex flex-col gap-5 justify-between">
