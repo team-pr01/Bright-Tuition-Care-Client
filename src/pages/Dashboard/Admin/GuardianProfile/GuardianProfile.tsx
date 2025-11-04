@@ -153,8 +153,8 @@ const GuardianProfile = () => {
 
       <SuspendGuardianModal
         selectedGuardianId={id as string}
-        isSuspendGuardianModalOpen={isSuspendGuardianModalOpen}
-        setIsSuspendGuardianModalOpen={setIsSuspendGuardianModalOpen}
+        isSuspendUserModalOpen={isSuspendGuardianModalOpen}
+        setIsSuspendUserModalOpen={setIsSuspendGuardianModalOpen}
       />
     </div>
   );

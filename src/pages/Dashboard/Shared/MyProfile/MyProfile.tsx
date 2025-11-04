@@ -18,7 +18,7 @@ import TutorResumePDF from "../TutorsResume/TutorResumePDF";
 import { pdf } from "@react-pdf/renderer";
 
 const MyProfile = () => {
-  const { data, isLoading } = useGetMyTutorProfileQuery({});
+  const { data } = useGetMyTutorProfileQuery({});
   const myProfile = data?.data;
   const personalInformation = myProfile?.personalInformation;
   const socialMediaInformation = myProfile?.socialMediaInformation;

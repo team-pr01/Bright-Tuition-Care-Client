@@ -16,6 +16,7 @@ const PaymentsManagement = () => {
     string | null
   >(null);
   const [isProofModalOpen, setIsProofModalOpen] = useState<boolean>(false);
+  console.log(searchQuery);
 
   // Table headers
   const paymentTheads: TableHead[] = [
