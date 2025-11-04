@@ -159,8 +159,6 @@ const Tutors = () => {
     ),
   }));
 
-  console.log(data);
-
   const handleSearch = (q: string) => {
     setSearchQuery(q);
   };

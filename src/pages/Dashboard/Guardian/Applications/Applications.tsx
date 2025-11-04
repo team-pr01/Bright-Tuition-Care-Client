@@ -4,6 +4,8 @@ import type { TableHead } from "../../../../components/Reusable/Table/Table";
 import { useState } from "react";
 import Table from "../../../../components/Reusable/Table/Table";
 import { FiEye } from "react-icons/fi";
+import { useGetAllApplicationsByJobIdQuery } from "../../../../redux/Features/Application/applicationApi";
+import { formatDate } from "../../../../utils/formatDate";
 
 type Application = {
   id: number;
@@ -19,70 +21,86 @@ type Application = {
 // Table headers
 const applicationTheads: TableHead[] = [
   { key: "name", label: "Applicant Name" },
+  { key: "email", label: "Email" },
+  { key: "phoneNumber", label: "Phone Number" },
+  { key: "location", label: "Location" },
   { key: "appliedDate", label: "Applied Date" },
   { key: "jobTitle", label: "Job Title" },
-  { key: "tutorId", label: "Tutor ID" },
-  { key: "jobId", label: "Job ID" },
   { key: "cv", label: "View CV" },
 ];
 
 const Applications = () => {
   const { jobId } = useParams();
-  console.log("Job/Context ID:", jobId);
   const path = "admin";
-
+  const [searchQuery, setSearchQuery] = useState<string>("");
   const [page, setPage] = useState<number>(1);
   const [limit, setLimit] = useState<number>(10);
-  const loading = false;
 
-  const applications: Application[] = [
-    {
-      id: 1,
-      name: "John Doe",
-      photo: "https://i.pravatar.cc/40?img=1",
-      appliedDate: "2025-09-15",
-      jobTitle: "Need a Math Tutor",
-      tutorId: "TUT123",
-      jobId: "JOB456",
-      cvUrl: "/cvs/johndoe.pdf",
-    },
-    {
-      id: 2,
-      name: "Jane Smith",
-      photo: "https://i.pravatar.cc/40?img=2",
-      appliedDate: "2025-09-16",
-      jobTitle: "Need a Math Tutor",
-      tutorId: "TUT456",
-      jobId: "JOB789",
-      cvUrl: "/cvs/janesmith.pdf",
-    },
-  ];
+  const {
+    data: applications,
+    isLoading,
+    isFetching,
+  } = useGetAllApplicationsByJobIdQuery({
+    jobId: jobId as string,
+    page,
+    limit,
+    keyword: searchQuery,
+  });
 
-  const tableData = applications.map((application) => ({
-    ...application,
-    jobTitle: application.jobTitle,
-    name: (
-      <div className="flex items-center gap-2">
-        <img
-          src={application.photo}
-          alt={application.name}
-          className="size-8 rounded-full object-cover"
-        />
-        <span>{application.name}</span>
-      </div>
-    ),
-    cv: (
-      <Link
-        to={`/dashboard/${path}/applications/resume/${application.tutorId}`}
-        className="text-primary-10 cursor-pointer flex items-center gap-1"
-      >
-        <FiEye className="size-4" /> View
-      </Link>
-    ),
-  }));
+  const tableData =
+    applications?.data?.applications?.map((application: any) => {
+      return {
+        id: application._id,
+        jobTitle: application.jobTitle || "N/A",
+        name: (
+          <div>
+            <span className="block font-medium">{application.userName}</span>
+            <span className="block text-sm text-gray-500">
+              {application.tutorCustomId}
+            </span>
+          </div>
+        ),
+        email: application.userEmail,
+        phoneNumber: application.userPhoneNumber,
+        location: `${application.userArea}, ${application.userCity}`,
+        appliedDate: formatDate(application.createdAt),
+        status: (
+          <span
+            className={`px-2 py-1 rounded-full text-xs ${
+              application.status === "applied"
+                ? "bg-blue-100 text-blue-800"
+                : application.status === "shortlisted"
+                ? "bg-green-100 text-green-800"
+                : application.status === "rejected"
+                ? "bg-red-100 text-red-800"
+                : "bg-gray-100 text-gray-800"
+            }`}
+          >
+            {application.status}
+          </span>
+        ),
+        appliedOn: new Date(application.appliedOn).toLocaleDateString(),
+        cv: (
+          <Link
+            to={`/dashboard/${path}/applications/resume/${application.tutorId}`}
+            className="text-primary-10 cursor-pointer flex items-center gap-1 hover:underline"
+          >
+            <FiEye className="size-4" /> View CV
+          </Link>
+        ),
+        actions: (
+          <div className="flex gap-2">
+            <button className="text-green-600 hover:text-green-800">
+              Approve
+            </button>
+            <button className="text-red-600 hover:text-red-800">Reject</button>
+          </div>
+        ),
+      };
+    }) || [];
 
   const handleSearch = (q: string) => {
-    console.log("Search query:", q);
+    setSearchQuery(q);
   };
 
   return (
@@ -91,15 +109,16 @@ const Applications = () => {
         title="Applications Data"
         description="Manage all applications"
         theads={applicationTheads}
-        data={tableData}
+        data={tableData || []}
         totalPages={5}
         currentPage={page}
         onPageChange={(p) => setPage(p)}
-        isLoading={loading}
+        isLoading={isLoading || isFetching}
         onSearch={handleSearch}
         limit={limit}
         setLimit={setLimit}
         selectedCity={null}
+        selectedArea={null}
       />
     </div>
   );

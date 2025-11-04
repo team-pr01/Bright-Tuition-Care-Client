@@ -6,7 +6,7 @@ import Container from "../../components/Reusable/Container/Container";
 import Heading from "../../components/Reusable/Heading/Heading";
 import { useGetAllJobsQuery } from "../../redux/Features/Job/jobApi";
 import { useDebounce } from "../../hooks/useDebounce";
-import JobCardSkeleton from "../../components/JobBoardPage/Jobs/jobCard/JobCardSkeleton";
+import JobCardSkeleton from "../../components/JobBoardPage/Jobs/JobCard/JobCardSkeleton";
 
 const JobBoard = () => {
   const [keyword, setKeyword] = useState<string>("");

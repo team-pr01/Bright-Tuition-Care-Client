@@ -1,7 +1,7 @@
 import { useParams } from "react-router-dom";
 import { ICONS, IMAGES } from "../../../../assets";
 import Button from "../../../../components/Reusable/Button/Button";
-import JobCard from "../../../../components/JobBoardPage/Jobs/jobCard/JobCard";
+import JobCard from "../../../../components/JobBoardPage/Jobs/JobCard/JobCard";
 import SuspendGuardianModal from "../../../../components/Admin/SharedAdmin/SuspendUserModal/SuspendUserModal";
 import { useState } from "react";
 

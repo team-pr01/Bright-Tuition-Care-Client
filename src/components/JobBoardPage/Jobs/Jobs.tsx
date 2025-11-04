@@ -2,9 +2,9 @@
 import React, { useEffect } from "react";
 import { motion, useAnimation } from "framer-motion";
 import { useInView } from "react-intersection-observer";
-import JobCard from "./jobCard/JobCard";
+import JobCard from "./JobCard/JobCard";
 import type { TJobs } from "../../../types/job.types";
-import JobCardSkeleton from "./jobCard/JobCardSkeleton";
+import JobCardSkeleton from "./JobCard/JobCardSkeleton";
 
 const Jobs = ({
   allJobs,

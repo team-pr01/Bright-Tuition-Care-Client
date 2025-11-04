@@ -37,16 +37,21 @@ const applicationApi = baseApi.injectEndpoints({
       providesTags: ["invoice"],
     }),
 
-    getAllTutorsInvoices: builder.query<any, any>({
-      query: () => {
-        return {
-          url: `/invoice/tutor`,
-          method: "GET",
-          credentials: "include",
-        };
-      },
-      providesTags: ["invoice"],
-    }),
+getAllApplicationsByJobId: builder.query<any, { jobId: string; keyword?: string; page?: number; limit?: number }>({
+  query: ({ jobId, keyword, page = 1, limit = 10 }) => {
+    let url = `/application/job/${jobId}?page=${page}&limit=${limit}`;
+    if (keyword) {
+      url += `&keyword=${encodeURIComponent(keyword)}`;
+    }
+    return {
+      url,
+      method: "GET",
+      credentials: "include",
+    };
+  },
+  providesTags: ["application"],
+}),
+
 
     applyOnJob: builder.mutation<any, any>({
       query: (data) => ({
@@ -64,6 +69,6 @@ export const {
   useGetJobDetailsForInvoiceQuery,
   useGetAllInvoicesQuery,
   useGetSingleInvoiceByIdQuery,
-  useGetAllTutorsInvoicesQuery,
+  useGetAllApplicationsByJobIdQuery,
   useApplyOnJobMutation,
 } = applicationApi;

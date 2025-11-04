@@ -7,7 +7,7 @@ import { useGetMyPostedJobsQuery } from "../../../../redux/Features/Job/jobApi";
 import { useSelector } from "react-redux";
 import { useCurrentUser } from "../../../../redux/Features/Auth/authSlice";
 import { useDebounce } from "../../../../hooks/useDebounce";
-import JobCardSkeleton from "../../../../components/JobBoardPage/Jobs/jobCard/JobCardSkeleton";
+import JobCardSkeleton from "../../../../components/JobBoardPage/Jobs/JobCard/JobCardSkeleton";
 import Jobs from "../../../../components/JobBoardPage/Jobs/Jobs";
 import type { TLoggedInUser } from "../../../../types/loggedinUser.types";
 
@@ -78,7 +78,6 @@ const PostedJobs = () => {
       if (node) observer.unobserve(node);
     };
   }, [allJobs, isFetching, allJobs?.data?.meta?.hasMore]);
-  console.log(jobs, "jobs");
 
   return (
     <div className="font-Nunito">

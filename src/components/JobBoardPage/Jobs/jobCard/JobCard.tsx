@@ -238,7 +238,7 @@ const JobCard: React.FC<TJobCardProps> = ({
                 </p>
               </div>
               <Link
-                to={`/dashboard/${path}/applications/${1}`}
+                to={`/dashboard/${path}/applications/${job?._id}`}
                 className="flex items-center gap-1 md:gap-2 hover:underline"
               >
                 <img
@@ -246,7 +246,7 @@ const JobCard: React.FC<TJobCardProps> = ({
                   alt=""
                   className="size-4 md:size-5"
                 />
-                <p className="font-bold">Applications(1)</p>
+                <p className="font-bold">Applications({job?.applications?.length || 0})</p>
               </Link>
 
               {/* Dropdown Menu */}
