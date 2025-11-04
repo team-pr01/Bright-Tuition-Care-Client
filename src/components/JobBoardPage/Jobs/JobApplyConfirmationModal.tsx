@@ -1,14 +1,43 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import toast from "react-hot-toast";
+import { useApplyOnJobMutation } from "../../../redux/Features/Application/applicationApi";
 import Button from "../../Reusable/Button/Button";
+import { useSelector } from "react-redux";
+import { useCurrentUser } from "../../../redux/Features/Auth/authSlice";
+import type { TLoggedInUser } from "../../../types/loggedinUser.types";
 
 const JobApplyConfirmationModal = ({
   isJobApplyConfirmationModalOpen,
   setIsJobApplyConfirmationModalOpen,
+  jobId,
 }: {
   isJobApplyConfirmationModalOpen: boolean;
   setIsJobApplyConfirmationModalOpen: React.Dispatch<
     React.SetStateAction<boolean>
   >;
+  jobId: string;
 }) => {
+  const user = useSelector(useCurrentUser) as TLoggedInUser;
+  const [applyOnJob, { isLoading: isApplyOnJobLoading }] =
+    useApplyOnJobMutation();
+
+  const handleApplyOnJob = async () => {
+    try {
+      const payload = {
+        userId: user._id,
+        jobId,
+      };
+      const response = await applyOnJob(payload).unwrap();
+      if (response?.success) {
+        toast.success(response.message || "Applied on job successfully.");
+        setIsJobApplyConfirmationModalOpen(false);
+      }
+    } catch (error: any) {
+      toast.error(
+        error?.data?.message || "Error applying on job. Please try again."
+      );
+    }
+  };
   return (
     <div
       className={`${
@@ -35,9 +64,15 @@ const JobApplyConfirmationModal = ({
               variant="secondary"
               iconBg="#0D99FF"
               className="border border-neutral-55 min-w-[100px] flex items-center justify-center"
-              onClick={() => setIsJobApplyConfirmationModalOpen(false)}
             />
-            <Button label="Apply Now" variant="primary" iconBg="#0D99FF" />
+            <Button
+              label="Apply Now"
+              variant="primary"
+              iconBg="#0D99FF"
+              onClick={handleApplyOnJob}
+              isLoading={isApplyOnJobLoading}
+              isDisabled={isApplyOnJobLoading}
+            />
           </div>
         </div>
       </div>

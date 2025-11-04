@@ -12,6 +12,9 @@ import { FiCheckCircle, FiX, FiXCircle } from "react-icons/fi";
 import type { TJobs } from "../../../../types/job.types";
 import { useUpdateJobMutation } from "../../../../redux/Features/Job/jobApi";
 import toast from "react-hot-toast";
+import { useSelector } from "react-redux";
+import { useCurrentUser } from "../../../../redux/Features/Auth/authSlice";
+import type { TLoggedInUser } from "../../../../types/loggedinUser.types";
 
 type TJobCardProps = {
   variant?: string;
@@ -25,7 +28,7 @@ const JobCard: React.FC<TJobCardProps> = ({
   detailsWidth = "max-w-full 2xl:max-w-[80%]",
   job,
 }) => {
-  // const user = useSelector(useCurrentUser) as TLoggedInUser;
+  const user = useSelector(useCurrentUser) as TLoggedInUser;
   // const path = user?.role === "guardian" ? "guardian" : "admin";
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement | null>(null);
@@ -111,6 +114,8 @@ const JobCard: React.FC<TJobCardProps> = ({
       );
     }
   };
+
+  const isApplied = job?.applications?.some((app) => app === user?._id);
 
   return (
     <>
@@ -308,11 +313,12 @@ const JobCard: React.FC<TJobCardProps> = ({
               </button>
             </div>
             <Button
-              label="Apply Now"
+              label={isApplied ? "Applied" : "Apply Now"}
               variant="primary"
               icon={ICONS.topRightArrowWhite}
               iconBg="#0D99FF"
               onClick={() => setIsJobApplyConfirmationModalOpen(true)}
+              isDisabled={isApplied}
             />
           </div>
         )}
@@ -320,6 +326,7 @@ const JobCard: React.FC<TJobCardProps> = ({
       <JobApplyConfirmationModal
         isJobApplyConfirmationModalOpen={isJobApplyConfirmationModalOpen}
         setIsJobApplyConfirmationModalOpen={setIsJobApplyConfirmationModalOpen}
+        jobId={job?._id as string}
       />
 
       <ShareJobModal
