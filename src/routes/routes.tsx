@@ -287,7 +287,7 @@ export const router = createBrowserRouter([
         element: <Applications />,
       },
       {
-        path: "applications/resume/:tutorId",
+        path: "application/:applicationId/resume/:tutorId",
         element: <TutorsResume />,
       },
       {
