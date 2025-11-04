@@ -1,0 +1,90 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import React from "react";
+import { twMerge } from "tailwind-merge";
+import { ICONS } from "../../../assets";
+
+interface ButtonProps {
+  label?: any;
+  variant?: "primary" | "secondary" | "tertiary" | "quaternary" | string;
+  onClick?: () => void;
+  icon?: React.ReactNode;
+  iconBg?: string;
+  className?: string;
+  type?: "submit" | "reset" | "button";
+  iconWithoutBg?: React.ReactNode;
+  isDisabled?: boolean;
+  isLoading?: boolean;
+}
+
+const variantClasses: Record<string, string> = {
+  primary: "bg-primary-10 border border-primary-10 text-white",
+  secondary: "bg-white text-black border border-black",
+  tertiary:
+    "bg-white text-primary-10 border border-primary-10 hover:bg-primary-10 hover:text-white",
+  quaternary:
+    "bg-primary-10 text-white border border-primary-10 hover:bg-white hover:text-primary-10",
+};
+
+const Button: React.FC<ButtonProps> = ({
+  label,
+  variant = "primary",
+  onClick,
+  icon,
+  iconBg = "white",
+  className = "",
+  type = "button",
+  iconWithoutBg,
+  isDisabled,
+  isLoading,
+}) => {
+  const variantClass = variantClasses[variant] || variantClasses["primary"];
+
+  const baseClasses = `flex items-center gap-2 text-lg leading-[24px] w-fit rounded-lg font-semibold font-Nunito transition-all duration-300 py-2 lg:py-3 px-3 lg:px-6 text-sm md:text-base ${
+    isDisabled ? "opacity-50 cursor-not-allowed" : "cursor-pointer"
+  }`;
+
+  const combinedClasses = twMerge(baseClasses, variantClass, className);
+
+  return (
+    <div className={variant ? "relative" : ""}>
+      <button
+        type={type}
+        disabled={isDisabled || isLoading}
+        onClick={onClick}
+        className={combinedClasses}
+      >
+        {isLoading ? (
+          <img
+            src={ICONS.loader}
+            alt="Button Icon"
+            className="size-4 md:size-5 lg:size-6 animate-spin"
+          />
+        ) : (
+          ""
+        )}
+        {label}
+        {!isLoading && icon && (
+          <span
+            className="rounded-full p-1 size-6 flex items-center justify-center"
+            style={{ backgroundColor: iconBg }}
+          >
+            <img
+              src={typeof icon === "string" ? icon : undefined}
+              alt="Button Icon"
+              className="size-3 lg:size-4"
+            />
+          </span>
+        )}
+        {!isLoading && iconWithoutBg && (
+          <img
+            src={typeof iconWithoutBg === "string" ? iconWithoutBg : undefined}
+            alt="Button Icon"
+            className="size-3 lg:size-4"
+          />
+        )}
+      </button>
+    </div>
+  );
+};
+
+export default Button;
