@@ -3,10 +3,10 @@ import React, { useEffect } from "react";
 import { useForm, useFieldArray } from "react-hook-form";
 import Button from "../../../Reusable/Button/Button";
 import TextInput from "../../../Reusable/TextInput/TextInput";
-import { useUpdateTutorProfileInfoMutation } from "../../../../redux/Features/Tutor/tutorApi";
 import toast from "react-hot-toast";
 import SelectDropdown from "../../../Reusable/SelectDropdown/SelectDropdown";
 import { FiTrash2 } from "react-icons/fi";
+import { useUpdateProfileMutation } from "../../../../redux/Features/User/userApi";
 
 type Degree =
   | "SSC / O Level"
@@ -28,7 +28,6 @@ const degreeOptions: Degree[] = [
 ];
 
 type FormEducation = Omit<any, "from" | "to"> & {
-  // form keeps time fields as strings for inputs, then we convert to Date on submit
   from?: string | null;
   to?: string | null;
 };
@@ -59,9 +58,7 @@ const UpdateEducationalInfoModal = ({
   setIsFormModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
   defaultValues?: any; // expected to be TTutor-like with educationalInformation: TEducation[]
 }) => {
-    console.log(defaultValues);
-  const [updateTutorProfileInfo, { isLoading }] =
-    useUpdateTutorProfileInfoMutation();
+  const [updateProfile, { isLoading }] = useUpdateProfileMutation();
 
   const { register, control, handleSubmit, reset, watch } = useForm<TFormData>({
     defaultValues: { educationalInformation: [emptyEducation()] },
@@ -75,23 +72,21 @@ const UpdateEducationalInfoModal = ({
   // Pre-fill when defaultValues provided
   useEffect(() => {
     if (defaultValues && Array.isArray(defaultValues)) {
-      const mapped: FormEducation[] = defaultValues?.map(
-        (edu: any) => ({
-          degree: edu.degree ?? "Bachelor",
-          instituteName: edu.instituteName ?? "",
-          medium: edu.medium ?? "",
-          group: edu.group ?? "",
-          department: edu.department ?? "",
-          semester: edu.semester ?? undefined,
-          year: edu.year ?? "",
-          result: edu.result ?? "",
-          // convert Date -> HH:MM string (works if edu.from/to are Date or ISO strings)
-          from: edu.from,
-          to: edu.to,
-          passingYear: edu.passingYear ?? "",
-          isCurrentInstitute: !!edu.isCurrentInstitute,
-        })
-      );
+      const mapped: FormEducation[] = defaultValues?.map((edu: any) => ({
+        degree: edu.degree ?? "Bachelor",
+        instituteName: edu.instituteName ?? "",
+        medium: edu.medium ?? "",
+        group: edu.group ?? "",
+        department: edu.department ?? "",
+        semester: edu.semester ?? undefined,
+        year: edu.year ?? "",
+        result: edu.result ?? "",
+        // convert Date -> HH:MM string (works if edu.from/to are Date or ISO strings)
+        from: edu.from,
+        to: edu.to,
+        passingYear: edu.passingYear ?? "",
+        isCurrentInstitute: !!edu.isCurrentInstitute,
+      }));
       reset({
         educationalInformation: mapped.length ? mapped : [emptyEducation()],
       });
@@ -118,9 +113,12 @@ const UpdateEducationalInfoModal = ({
         })
       );
 
-      const payload = { educationalInformation: payloadEducational, profileCompleted: 20};
+      const payload = {
+        educationalInformation: payloadEducational,
+        profileCompleted: 20,
+      };
 
-      const response = await updateTutorProfileInfo(payload).unwrap();
+      const response = await updateProfile(payload).unwrap();
       if (response.success) {
         toast.success(
           response.message || "Educational info updated successfully"

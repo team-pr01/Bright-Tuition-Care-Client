@@ -8,7 +8,11 @@ import {
 } from "../../../data/dashboardSidebarLinks";
 import { TbLogout2 } from "react-icons/tb";
 import { useDispatch, useSelector } from "react-redux";
-import { logout, setUser, useCurrentUser } from "../../../redux/Features/Auth/authSlice";
+import {
+  logout,
+  setUser,
+  useCurrentUser,
+} from "../../../redux/Features/Auth/authSlice";
 import type { TLoggedInUser } from "../../../types/loggedinUser.types";
 import { IMAGES } from "../../../assets";
 import Cookies from "js-cookie";
@@ -22,10 +26,9 @@ const Sidebar = () => {
     ? tutorDashboardLinks
     : location.pathname.startsWith("/dashboard/guardian")
     ? guardianDashboardLinks
-    : adminDashboardLinks
+    : adminDashboardLinks;
 
-
-    const handleLogout = async () => {
+  const handleLogout = async () => {
     dispatch(setUser({ user: null, token: null }));
     Cookies.remove("accessToken");
     Cookies.remove("role");

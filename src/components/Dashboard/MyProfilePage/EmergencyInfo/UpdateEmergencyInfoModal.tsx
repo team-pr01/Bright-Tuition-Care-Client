@@ -2,9 +2,9 @@
 import { useForm } from "react-hook-form";
 import TextInput from "../../../Reusable/TextInput/TextInput";
 import Button from "../../../Reusable/Button/Button";
-import { useUpdateTutorProfileInfoMutation } from "../../../../redux/Features/Tutor/tutorApi";
 import toast from "react-hot-toast";
 import { useEffect } from "react";
+import { useUpdateProfileMutation } from "../../../../redux/Features/User/userApi";
 
 type TFormData = {
   emergencyContactPersonName: string;
@@ -19,8 +19,7 @@ const UpdateEmergencyInfoModal = ({
   setIsFormModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
   defaultValues : any
 }) => {
-  const [updateTutorProfileInfo, { isLoading }] =
-    useUpdateTutorProfileInfoMutation();
+  const [updateProfile, { isLoading }] = useUpdateProfileMutation();
   const {
     register,
     handleSubmit,
@@ -48,7 +47,7 @@ const UpdateEmergencyInfoModal = ({
         },
         profileCompleted: 10
       };
-      const response = await updateTutorProfileInfo(payload).unwrap();
+      const response = await updateProfile(payload).unwrap();
       if (response.success) {
         toast.success(
           response.message || "Emergency info updated successfully"

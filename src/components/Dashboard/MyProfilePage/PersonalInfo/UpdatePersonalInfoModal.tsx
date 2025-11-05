@@ -3,12 +3,12 @@ import { useForm } from "react-hook-form";
 import Textarea from "../../../Reusable/TextArea/TextArea";
 import TextInput from "../../../Reusable/TextInput/TextInput";
 import Button from "../../../Reusable/Button/Button";
-import { useUpdateTutorProfileInfoMutation } from "../../../../redux/Features/Tutor/tutorApi";
 import toast from "react-hot-toast";
 import { filterData } from "../../../../constants/filterData";
 import SelectDropdown from "../../../Reusable/SelectDropdown/SelectDropdown";
 import SelectDropdownWithSearch from "../../../Reusable/SelectDropdownWithSearch/SelectDropdownWithSearch";
 import { useEffect, useState } from "react";
+import { useUpdateProfileMutation } from "../../../../redux/Features/User/userApi";
 
 type TFormData = {
   name: string;
@@ -39,8 +39,7 @@ const UpdatePersonalInfoModal = ({
   setIsFormModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
   defaultValues: any;
 }) => {
-  const [updateTutorProfileInfo, { isLoading }] =
-    useUpdateTutorProfileInfoMutation();
+  const [updateProfile, { isLoading }] = useUpdateProfileMutation();
   const {
     register,
     handleSubmit,
@@ -122,9 +121,9 @@ const UpdatePersonalInfoModal = ({
           instagram: data.instagram,
           linkedin: data.linkedin,
         },
-        profileCompleted: 25,   // Personal- 20, Qualification- 5
+        profileCompleted: 25, // Personal- 20, Qualification- 5
       };
-      const response = await updateTutorProfileInfo(payload).unwrap();
+      const response = await updateProfile(payload).unwrap();
       if (response.success) {
         toast.success(response.message || "Personal info updated successfully");
         setIsFormModalOpen(false);
@@ -144,9 +143,7 @@ const UpdatePersonalInfoModal = ({
           label="Full Name"
           placeholder="Enter full name"
           error={errors.name}
-          {...register("name", {
-            required: "Full Name is required",
-          })}
+          {...register("name")}
           isRequired={false}
         />
         {/* Email */}
@@ -155,9 +152,7 @@ const UpdatePersonalInfoModal = ({
           type="email"
           placeholder="Enter email"
           error={errors.email}
-          {...register("email", {
-            required: "Email is required",
-          })}
+          {...register("email")}
           isDisabled={true}
           isRequired={false}
         />
@@ -168,9 +163,7 @@ const UpdatePersonalInfoModal = ({
           type="tel"
           placeholder="Enter phone number"
           error={errors.phoneNumber}
-          {...register("phoneNumber", {
-            required: "Phone number is required",
-          })}
+          {...register("phoneNumber")}
           isRequired={false}
         />
 
@@ -190,9 +183,7 @@ const UpdatePersonalInfoModal = ({
           type="date"
           placeholder="Enter date of birth"
           error={errors.dateOfBirth}
-          {...register("dateOfBirth", {
-            required: "Date of Birth is required",
-          })}
+          {...register("dateOfBirth")}
           isRequired={false}
         />
 
@@ -200,9 +191,7 @@ const UpdatePersonalInfoModal = ({
         <SelectDropdown
           label="Gender"
           options={filterData.tutorGender}
-          {...register("gender", {
-            required: "Gender is required",
-          })}
+          {...register("gender")}
           isRequired={false}
         />
 
@@ -287,9 +276,7 @@ const UpdatePersonalInfoModal = ({
           label="Address"
           placeholder="Enter address"
           error={errors.address}
-          {...register("address", {
-            required: "Address is required",
-          })}
+          {...register("address")}
           isRequired={false}
         />
 
@@ -329,9 +316,7 @@ const UpdatePersonalInfoModal = ({
         label="Personal Overview"
         placeholder="Write about yourself"
         error={errors.overview}
-        {...register("overview", {
-          required: "Personal Overview is required",
-        })}
+        {...register("overview")}
         isRequired={false}
       />
 

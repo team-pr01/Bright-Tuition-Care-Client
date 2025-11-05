@@ -6,8 +6,8 @@ import Button from "../../../Reusable/Button/Button";
 import { filterData } from "../../../../constants/filterData";
 import MultiSelectDropdown from "../../../Reusable/MultiSelectDropdown/MultiSelectDropdown";
 import { useEffect, useState } from "react";
-import { useUpdateTutorProfileInfoMutation } from "../../../../redux/Features/Tutor/tutorApi";
 import toast from "react-hot-toast";
+import { useUpdateProfileMutation } from "../../../../redux/Features/User/userApi";
 
 type TTuitionRelatedInfoProps = {
   tuitionRelatedInfo: {
@@ -35,8 +35,7 @@ const UpdateTuitionRelatedInfoModal = ({
   setIsFormModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
   defaultValues: any;
 }) => {
-  const [updateTutorProfileInfo, { isLoading }] =
-    useUpdateTutorProfileInfoMutation();
+  const [updateProfile, { isLoading }] = useUpdateProfileMutation();
   const [selectedDays, setSelectedDays] = useState<string[]>([]);
   const [selectedTutoringStyles, setSelectedTutoringStyles] = useState<
     string[]
@@ -108,7 +107,7 @@ const UpdateTuitionRelatedInfoModal = ({
         },
         profileCompleted: 30,
       };
-      const response = await updateTutorProfileInfo(payload).unwrap();
+      const response = await updateProfile(payload).unwrap();
       if (response.success) {
         toast.success(response.message || "Tuition info updated successfully");
         setIsFormModalOpen(false);

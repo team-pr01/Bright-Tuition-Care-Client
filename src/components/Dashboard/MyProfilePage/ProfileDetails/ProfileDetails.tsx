@@ -3,10 +3,10 @@ import { useSelector } from "react-redux";
 import { ICONS, IMAGES } from "../../../../assets";
 import Button from "../../../Reusable/Button/Button";
 import { useCurrentUser } from "../../../../redux/Features/Auth/authSlice";
-import { useUpdateTutorProfileInfoMutation } from "../../../../redux/Features/Tutor/tutorApi";
 import { FaUpload, FaPen, FaCheck } from "react-icons/fa";
 import type { TLoggedInUser } from "../../../../types/loggedinUser.types";
 import { Link } from "react-router-dom";
+import { useUpdateProfileMutation } from "../../../../redux/Features/User/userApi";
 
 const ProfileDetails = ({
   data,
@@ -17,15 +17,14 @@ const ProfileDetails = ({
   isGenerating: boolean;
   handleDownloadResume: () => void;
 }) => {
-  const [updateTutorProfileInfo, { isLoading }] =
-    useUpdateTutorProfileInfoMutation();
+  const [updateProfile, { isLoading }] = useUpdateProfileMutation();
   const user = useSelector(useCurrentUser) as TLoggedInUser;
 
   const handleImageUpload = async (file: File) => {
     const formData = new FormData();
     formData.append("profileCompleted", "5");
     formData.append("file", file);
-    await updateTutorProfileInfo(formData);
+    await updateProfile(formData);
   };
 
   const contactInfo = [
@@ -187,89 +186,91 @@ const ProfileDetails = ({
       </div>
 
       {/* PROFILE COMPLETION - ENHANCED VERSION */}
-      <div className="relative">
-        {/* Progress Bar Container */}
-        <div className="relative bg-gray-200 rounded-full h-4 mb-3 overflow-hidden shadow-inner">
-          {/* Animated Progress Fill */}
-          <div
-            className="h-full rounded-full transition-all duration-1000 ease-out"
-            style={{
-              width: `${data?.profileCompleted ?? 0}%`,
-              background: `linear-gradient(90deg,
+      {data?.userId?.role === "tutor" && (
+        <div className="relative">
+          {/* Progress Bar Container */}
+          <div className="relative bg-gray-200 rounded-full h-4 mb-3 overflow-hidden shadow-inner">
+            {/* Animated Progress Fill */}
+            <div
+              className="h-full rounded-full transition-all duration-1000 ease-out"
+              style={{
+                width: `${data?.profileCompleted ?? 0}%`,
+                background: `linear-gradient(90deg,
           ${getProgressColor(data?.profileCompleted).from} 0%,
           ${getProgressColor(data?.profileCompleted).to} 100%)`,
-              boxShadow: `0 0 10px ${
-                getProgressColor(data?.profileCompleted).glow
-              }`,
-            }}
-          >
-            {/* Shimmer Effect */}
-            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent animate-shimmer"></div>
+                boxShadow: `0 0 10px ${
+                  getProgressColor(data?.profileCompleted).glow
+                }`,
+              }}
+            >
+              {/* Shimmer Effect */}
+              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent animate-shimmer"></div>
+            </div>
+
+            {/* Progress Steps */}
+            <div className="absolute inset-0 flex justify-between items-center px-2">
+              {[0, 25, 50, 75, 100].map((step) => (
+                <div
+                  key={step}
+                  className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                    (data?.profileCompleted ?? 0) >= step
+                      ? getProgressColor(data?.profileCompleted).step
+                      : "bg-gray-400"
+                  }`}
+                />
+              ))}
+            </div>
           </div>
 
-          {/* Progress Steps */}
-          <div className="absolute inset-0 flex justify-between items-center px-2">
-            {[0, 25, 50, 75, 100].map((step) => (
-              <div
-                key={step}
-                className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                  (data?.profileCompleted ?? 0) >= step
-                    ? getProgressColor(data?.profileCompleted).step
-                    : "bg-gray-400"
-                }`}
-              />
-            ))}
-          </div>
-        </div>
-
-        {/* Status Badge */}
-        <div className="flex items-center justify-center gap-3">
-          <div className="flex items-center gap-2">
-            {/* Animated Icon */}
-            <div className="relative">
-              <div
-                className={`w-8 h-8 rounded-full flex items-center justify-center 
+          {/* Status Badge */}
+          <div className="flex items-center justify-center gap-3">
+            <div className="flex items-center gap-2">
+              {/* Animated Icon */}
+              <div className="relative">
+                <div
+                  className={`w-8 h-8 rounded-full flex items-center justify-center 
           ${getProgressColor(data?.profileCompleted).badge} 
           shadow-lg transition-all duration-500`}
-              >
-                <span className="text-sm font-bold">
-                  {getProgressIcon(data?.profileCompleted)}
-                </span>
+                >
+                  <span className="text-sm font-bold">
+                    {getProgressIcon(data?.profileCompleted)}
+                  </span>
 
-                {/* Pulse Animation for incomplete profiles */}
-                {(data?.profileCompleted ?? 0) < 100 && (
-                  <div
-                    className={`absolute inset-0 rounded-full animate-ping 
+                  {/* Pulse Animation for incomplete profiles */}
+                  {(data?.profileCompleted ?? 0) < 100 && (
+                    <div
+                      className={`absolute inset-0 rounded-full animate-ping 
               ${getProgressColor(data?.profileCompleted).pulse}`}
-                  ></div>
-                )}
+                    ></div>
+                  )}
+                </div>
               </div>
-            </div>
 
-            {/* Text Display */}
-            <div className="">
-              <div
-                className={`text-sm font-semibold transition-colors duration-300
+              {/* Text Display */}
+              <div className="">
+                <div
+                  className={`text-sm font-semibold transition-colors duration-300
           ${getProgressColor(data?.profileCompleted).text}`}
-              >
-                {getProgressMessage(data?.profileCompleted)}
-              </div>
-              <div className="text-xs text-gray-600 font-medium">
-                {data?.profileCompleted ?? 0}% Complete
+                >
+                  {getProgressMessage(data?.profileCompleted)}
+                </div>
+                <div className="text-xs text-gray-600 font-medium">
+                  {data?.profileCompleted ?? 0}% Complete
+                </div>
               </div>
             </div>
           </div>
-        </div>
 
-        {/* Celebration Effect for 100% */}
-        {(data?.profileCompleted ?? 0) >= 100 && (
-          <div className="absolute -top-2 -right-2">
-            <div className="w-6 h-6 bg-yellow-400 rounded-full flex items-center justify-center animate-bounce">
-              <span className="text-xs">🎉</span>
+          {/* Celebration Effect for 100% */}
+          {(data?.profileCompleted ?? 0) >= 100 && (
+            <div className="absolute -top-2 -right-2">
+              <div className="w-6 h-6 bg-yellow-400 rounded-full flex items-center justify-center animate-bounce">
+                <span className="text-xs">🎉</span>
+              </div>
             </div>
-          </div>
-        )}
-      </div>
+          )}
+        </div>
+      )}
 
       {/* CONTACT INFO */}
       <div className="flex flex-col gap-3">

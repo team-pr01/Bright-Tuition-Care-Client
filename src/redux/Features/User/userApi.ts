@@ -2,7 +2,16 @@ import { baseApi } from "../../API/baseApi";
 
 const userApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
-    updateUserProfile: builder.mutation({
+    getMe: builder.query({
+      query: () => ({
+        url: `/user/me`,
+        method: "GET",
+        credentials: "include",
+      }),
+      providesTags: ["users"],
+    }),
+
+    updateProfile: builder.mutation({
       query: (data) => ({
         url: `/user/update-profile`,
         body: data,
@@ -39,4 +48,4 @@ const userApi = baseApi.injectEndpoints({
   }),
 });
 
-export const { useUpdateUserProfileMutation, useDeleteAccountMutation, useSuspendUserMutation, useActiveUserMutation } = userApi;
+export const {  useGetMeQuery, useUpdateProfileMutation, useDeleteAccountMutation, useSuspendUserMutation, useActiveUserMutation } = userApi;

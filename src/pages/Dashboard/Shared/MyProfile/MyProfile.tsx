@@ -13,12 +13,13 @@ import ProfileTabHeading from "../../../../components/Reusable/ProfileTabHeading
 import Modal from "../../../../components/Reusable/Modal/Modal";
 import UpdatePersonalInfoModal from "../../../../components/Dashboard/MyProfilePage/PersonalInfo/UpdatePersonalInfoModal";
 import { useLocation } from "react-router-dom";
-import { useGetMyTutorProfileQuery } from "../../../../redux/Features/Tutor/tutorApi";
+// import { useGetMyTutorProfileQuery } from "../../../../redux/Features/Tutor/tutorApi";
 import TutorResumePDF from "../TutorsResume/TutorResumePDF";
 import { pdf } from "@react-pdf/renderer";
+import { useGetMeQuery } from "../../../../redux/Features/User/userApi";
 
 const MyProfile = () => {
-  const { data } = useGetMyTutorProfileQuery({});
+  const { data } = useGetMeQuery({});
   const myProfile = data?.data;
   const personalInformation = myProfile?.personalInformation;
   const socialMediaInformation = myProfile?.socialMediaInformation;
@@ -35,9 +36,9 @@ const MyProfile = () => {
       tutoringStyles: tuitionPreference?.tuitionStyle, // []
       availableDays: tuitionPreference?.availableDays, // []
       time: `${tuitionPreference?.availableTime?.from} - ${tuitionPreference?.availableTime?.to}`,
-      availableTime : {
-        from : tuitionPreference?.availableTime?.from,
-        to : tuitionPreference?.availableTime?.to
+      availableTime: {
+        from: tuitionPreference?.availableTime?.from,
+        to: tuitionPreference?.availableTime?.to,
       },
       expectedSalary: tuitionPreference?.expectedSalary,
       preferences: {
@@ -133,8 +134,7 @@ const MyProfile = () => {
     },
   ];
 
-
-   const [isGenerating, setIsGenerating] = useState(false);
+  const [isGenerating, setIsGenerating] = useState(false);
 
   const handleDownloadResume = async () => {
     setIsGenerating(true);
@@ -157,7 +157,11 @@ const MyProfile = () => {
 
   return (
     <div className="flex flex-col lg:flex-row gap-5 font-Nunito w-full">
-      <ProfileDetails data={myProfile} isGenerating={isGenerating} handleDownloadResume={handleDownloadResume} />
+      <ProfileDetails
+        data={myProfile}
+        isGenerating={isGenerating}
+        handleDownloadResume={handleDownloadResume}
+      />
 
       <div className="w-full lg:w-[75%]">
         {/* Tabs */}
@@ -208,10 +212,18 @@ const MyProfile = () => {
             <>
               <div className="border-b border-neutral-30/20 pb-5 mb-4">
                 <ProfileTabHeading
-                  heading="Overview"
+                  heading={
+                    myProfile?.userId?.role === "tutor"
+                      ? "Overview"
+                      : "Profile Overview"
+                  }
                   onClick={() => setIsFormModalOpen(!isFormModalOpen)}
                 />
-                <p className="text-neutral-45 mt-3">
+                <p
+                  className={`text-neutral-45 ${
+                    myProfile?.userId?.role === "tutor" ? "mt-3" : "mt-0"
+                  }`}
+                >
                   {profile?.personalInfo?.overview}
                 </p>
               </div>
@@ -235,7 +247,9 @@ const MyProfile = () => {
           )}
           {activeTab === "credentialInfo" &&
             location.pathname.startsWith("/dashboard/tutor") && (
-              <CredentialsInfo identityInformation={profile.identityInformation} />
+              <CredentialsInfo
+                identityInformation={profile.identityInformation}
+              />
             )}
         </div>
       </div>

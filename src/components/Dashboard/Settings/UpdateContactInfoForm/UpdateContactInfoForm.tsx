@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import TextInput from "../../../Reusable/TextInput/TextInput";
 import Button from "../../../Reusable/Button/Button";
 import { ICONS } from "../../../../assets";
-import { useUpdateUserProfileMutation } from "../../../../redux/Features/User/userApi";
+import { useUpdateProfileMutation } from "../../../../redux/Features/User/userApi";
 import toast from "react-hot-toast";
 
 type TFormData = {
@@ -11,8 +11,8 @@ type TFormData = {
   email: string;
 };
 const UpdateContactInfoForm = () => {
-  const [updateUserProfile, { isLoading: isUpdating }] =
-    useUpdateUserProfileMutation();
+  const [updateProfile, { isLoading: isUpdating }] =
+    useUpdateProfileMutation();
   const {
     register,
     handleSubmit,
@@ -21,7 +21,7 @@ const UpdateContactInfoForm = () => {
   const handleUpdateContactInfo = async (data: TFormData) => {
     try {
       const payload = { ...data };
-      const response = await updateUserProfile(payload).unwrap();
+      const response = await updateProfile(payload).unwrap();
       if (response.success) {
         toast.success("Contact info updated successfully");
       }
