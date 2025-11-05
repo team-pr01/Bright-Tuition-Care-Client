@@ -247,7 +247,7 @@ const ProfileDetails = ({
             </div>
 
             {/* Text Display */}
-            <div className="text-center">
+            <div className="">
               <div
                 className={`text-sm font-semibold transition-colors duration-300
           ${getProgressColor(data?.profileCompleted).text}`}
