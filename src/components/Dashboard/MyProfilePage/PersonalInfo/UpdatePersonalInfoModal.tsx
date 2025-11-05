@@ -122,6 +122,7 @@ const UpdatePersonalInfoModal = ({
           instagram: data.instagram,
           linkedin: data.linkedin,
         },
+        profileCompleted: 25,   // Personal- 20, Qualification- 5
       };
       const response = await updateTutorProfileInfo(payload).unwrap();
       if (response.success) {

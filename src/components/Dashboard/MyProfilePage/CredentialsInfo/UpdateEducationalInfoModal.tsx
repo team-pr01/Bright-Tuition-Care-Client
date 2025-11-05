@@ -50,6 +50,7 @@ const UpdateIdentityInfoModal = ({
   const onSubmit = async (data: TFormData) => {
     try {
       const formData = new FormData();
+      formData.append("profileCompleted", "10");
       formData.append("fileType", data.fileType);
       if (data.file) {
         formData.append("file", data.file);

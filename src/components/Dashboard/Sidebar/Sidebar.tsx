@@ -1,4 +1,4 @@
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import UserProfilePhoto from "./UserProfilePhoto/UserProfilePhoto";
 import {
   adminDashboardLinks,
@@ -7,19 +7,32 @@ import {
   tutorDashboardLinks,
 } from "../../../data/dashboardSidebarLinks";
 import { TbLogout2 } from "react-icons/tb";
-import { useSelector } from "react-redux";
-import { useCurrentUser } from "../../../redux/Features/Auth/authSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { logout, setUser, useCurrentUser } from "../../../redux/Features/Auth/authSlice";
 import type { TLoggedInUser } from "../../../types/loggedinUser.types";
 import { IMAGES } from "../../../assets";
+import Cookies from "js-cookie";
 
 const Sidebar = () => {
   const user = useSelector(useCurrentUser) as TLoggedInUser;
+  const dispatch = useDispatch();
   const location = useLocation();
+  const navigate = useNavigate();
   const navlinks = location.pathname.startsWith("/dashboard/tutor")
     ? tutorDashboardLinks
     : location.pathname.startsWith("/dashboard/guardian")
     ? guardianDashboardLinks
     : adminDashboardLinks
+
+
+    const handleLogout = async () => {
+    dispatch(setUser({ user: null, token: null }));
+    Cookies.remove("accessToken");
+    Cookies.remove("role");
+    dispatch(logout());
+    localStorage.clear();
+    navigate("/signin");
+  };
   return (
     <div className="sticky top-0 left-0 hidden xl:block">
       <div className="w-[230px] 2xl:w-[270px] h-full bg-primary-10 p-5 font-Nunito flex flex-col gap-5 justify-between">
@@ -70,6 +83,7 @@ const Sidebar = () => {
         </div>
 
         <button
+          onClick={handleLogout}
           className={`text-lg flex items-center gap-2 rounded-lg p-2 transform transition-transform duration-500 hover:-translate-y-1 text-white font-semibold cursor-pointer`}
         >
           <TbLogout2 className="text-xl" />

@@ -75,13 +75,13 @@ const Staffs = () => {
   ];
 
   const tableData = allStaffs?.data?.staffs?.map((staff: TStaff) => ({
-    _id: staff._id,
-    userId: staff.userId._id,
+    _id: staff?._id || "N/A",
+    userId: staff?.userId?._id,
     name: staff?.userId?.name,
     email: staff?.userId?.email,
     phoneNumber: staff?.userId?.phoneNumber,
-    pagesAssigned: staff.pagesAssigned,
-    joinedDate: staff.createdAt,
+    pagesAssigned: staff?.pagesAssigned,
+    joinedDate: staff?.createdAt,
   }));
 
   const addStaffButton = (

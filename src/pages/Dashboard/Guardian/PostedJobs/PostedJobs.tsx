@@ -33,6 +33,8 @@ const PostedJobs = () => {
     skip,
   });
 
+  console.log(allJobs);
+
   // Update jobs when new data arrives
   useEffect(() => {
     if (allJobs?.data?.jobs) {

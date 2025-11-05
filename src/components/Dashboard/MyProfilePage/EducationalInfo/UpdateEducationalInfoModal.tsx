@@ -118,7 +118,7 @@ const UpdateEducationalInfoModal = ({
         })
       );
 
-      const payload = { educationalInformation: payloadEducational };
+      const payload = { educationalInformation: payloadEducational, profileCompleted: 20};
 
       const response = await updateTutorProfileInfo(payload).unwrap();
       if (response.success) {

@@ -106,6 +106,7 @@ const UpdateTuitionRelatedInfoModal = ({
           totalExperience: data.totalExperience,
           experienceDetails: data.experienceDetails,
         },
+        profileCompleted: 30,
       };
       const response = await updateTutorProfileInfo(payload).unwrap();
       if (response.success) {

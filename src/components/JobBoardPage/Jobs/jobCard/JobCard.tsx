@@ -283,7 +283,7 @@ const JobCard: React.FC<TJobCardProps> = ({
                       {/* Cancel */}
                       <button
                         onClick={() => handleUpdateStatus("cancelled")}
-                        className="flex items-center gap-2 px-4 py-2 text-sm w-full hover:bg-gray-50 cursor-pointer"
+                        className="flex items-center gap-2 px-4 py-2 text-sm w-full hover:bg-accent-20/5 text-accent-20 cursor-pointer"
                       >
                         <FiX /> Cancel
                       </button>

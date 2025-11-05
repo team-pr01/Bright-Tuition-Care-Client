@@ -23,6 +23,7 @@ const ProfileDetails = ({
 
   const handleImageUpload = async (file: File) => {
     const formData = new FormData();
+    formData.append("profileCompleted", "5");
     formData.append("file", file);
     await updateTutorProfileInfo(formData);
   };
@@ -44,6 +45,80 @@ const ProfileDetails = ({
       value: data?.personalInformation?.address,
     },
   ];
+  // Add these helper functions to your component
+  const getProgressColor = (percentage = 0) => {
+    const progress = percentage ?? 0;
+
+    if (progress >= 100) {
+      return {
+        from: "#10B981",
+        to: "#059669",
+        glow: "#10B981",
+        step: "bg-green-500",
+        badge: "bg-gradient-to-br from-green-500 to-emerald-600 text-white",
+        pulse: "bg-green-400",
+        text: "text-green-700",
+      };
+    } else if (progress >= 80) {
+      return {
+        from: "#34D399",
+        to: "#10B981",
+        glow: "#34D399",
+        step: "bg-green-400",
+        badge: "bg-gradient-to-br from-green-400 to-green-500 text-white",
+        pulse: "bg-green-300",
+        text: "text-green-600",
+      };
+    } else if (progress >= 60) {
+      return {
+        from: "#FBBF24",
+        to: "#F59E0B",
+        glow: "#FBBF24",
+        step: "bg-yellow-400",
+        badge: "bg-gradient-to-br from-yellow-400 to-amber-500 text-black",
+        pulse: "bg-yellow-300",
+        text: "text-amber-700",
+      };
+    } else if (progress >= 40) {
+      return {
+        from: "#FB923C",
+        to: "#F97316",
+        glow: "#FB923C",
+        step: "bg-orange-400",
+        badge: "bg-gradient-to-br from-orange-400 to-orange-500 text-white",
+        pulse: "bg-orange-300",
+        text: "text-orange-700",
+      };
+    } else {
+      return {
+        from: "#EF4444",
+        to: "#DC2626",
+        glow: "#EF4444",
+        step: "bg-red-500",
+        badge: "bg-gradient-to-br from-red-500 to-red-600 text-white",
+        pulse: "bg-red-400",
+        text: "text-red-700",
+      };
+    }
+  };
+
+  const getProgressIcon = (percentage = 0) => {
+    const progress = percentage ?? 0;
+    if (progress >= 100) return "✓";
+    if (progress >= 80) return "👏";
+    if (progress >= 60) return "👍";
+    if (progress >= 40) return "📝";
+    return "⚡";
+  };
+
+  const getProgressMessage = (percentage = 0) => {
+    const progress = percentage ?? 0;
+    if (progress >= 100) return "Profile Complete!";
+    if (progress >= 80) return "Almost There!";
+    if (progress >= 60) return "Good Progress";
+    if (progress >= 40) return "Getting There";
+    return "Get Started";
+  };
 
   return (
     <div className="bg-white border border-primary-40/10 p-5 rounded-2xl w-full lg:w-[25%] flex flex-col gap-6 font-Nunito">
@@ -111,11 +186,89 @@ const ProfileDetails = ({
         </h2>
       </div>
 
-      {/* PROFILE COMPLETION */}
-      <div>
-        <div className="bg-accent-25 py-2 px-5 text-accent-30 rounded-lg text-center text-sm">
-          Profile Completed {data?.profileCompleted}%
+      {/* PROFILE COMPLETION - ENHANCED VERSION */}
+      <div className="relative">
+        {/* Progress Bar Container */}
+        <div className="relative bg-gray-200 rounded-full h-4 mb-3 overflow-hidden shadow-inner">
+          {/* Animated Progress Fill */}
+          <div
+            className="h-full rounded-full transition-all duration-1000 ease-out"
+            style={{
+              width: `${data?.profileCompleted ?? 0}%`,
+              background: `linear-gradient(90deg,
+          ${getProgressColor(data?.profileCompleted).from} 0%,
+          ${getProgressColor(data?.profileCompleted).to} 100%)`,
+              boxShadow: `0 0 10px ${
+                getProgressColor(data?.profileCompleted).glow
+              }`,
+            }}
+          >
+            {/* Shimmer Effect */}
+            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent animate-shimmer"></div>
+          </div>
+
+          {/* Progress Steps */}
+          <div className="absolute inset-0 flex justify-between items-center px-2">
+            {[0, 25, 50, 75, 100].map((step) => (
+              <div
+                key={step}
+                className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                  (data?.profileCompleted ?? 0) >= step
+                    ? getProgressColor(data?.profileCompleted).step
+                    : "bg-gray-400"
+                }`}
+              />
+            ))}
+          </div>
         </div>
+
+        {/* Status Badge */}
+        <div className="flex items-center justify-center gap-3">
+          <div className="flex items-center gap-2">
+            {/* Animated Icon */}
+            <div className="relative">
+              <div
+                className={`w-8 h-8 rounded-full flex items-center justify-center 
+          ${getProgressColor(data?.profileCompleted).badge} 
+          shadow-lg transition-all duration-500`}
+              >
+                <span className="text-sm font-bold">
+                  {getProgressIcon(data?.profileCompleted)}
+                </span>
+
+                {/* Pulse Animation for incomplete profiles */}
+                {(data?.profileCompleted ?? 0) < 100 && (
+                  <div
+                    className={`absolute inset-0 rounded-full animate-ping 
+              ${getProgressColor(data?.profileCompleted).pulse}`}
+                  ></div>
+                )}
+              </div>
+            </div>
+
+            {/* Text Display */}
+            <div className="text-center">
+              <div
+                className={`text-sm font-semibold transition-colors duration-300
+          ${getProgressColor(data?.profileCompleted).text}`}
+              >
+                {getProgressMessage(data?.profileCompleted)}
+              </div>
+              <div className="text-xs text-gray-600 font-medium">
+                {data?.profileCompleted ?? 0}% Complete
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Celebration Effect for 100% */}
+        {(data?.profileCompleted ?? 0) >= 100 && (
+          <div className="absolute -top-2 -right-2">
+            <div className="w-6 h-6 bg-yellow-400 rounded-full flex items-center justify-center animate-bounce">
+              <span className="text-xs">🎉</span>
+            </div>
+          </div>
+        )}
       </div>
 
       {/* CONTACT INFO */}

@@ -101,7 +101,6 @@ const JobBoard = () => {
       if (node) observer.unobserve(node);
     };
   }, [allJobs, isFetching, allJobs?.data?.meta?.hasMore]);
-  console.log(allJobs);
 
   return (
     <Container>

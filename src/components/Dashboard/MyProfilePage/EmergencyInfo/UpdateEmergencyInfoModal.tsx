@@ -46,6 +46,7 @@ const UpdateEmergencyInfoModal = ({
           address: data.address,
           relation: data.relation,
         },
+        profileCompleted: 10
       };
       const response = await updateTutorProfileInfo(payload).unwrap();
       if (response.success) {
