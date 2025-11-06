@@ -12,10 +12,12 @@ type TCredential = {
 
 type TCredentialsInfoProps = {
   identityInformation: TCredential[];
+  isProfileLocked: boolean;
 };
 
 const CredentialsInfo: React.FC<TCredentialsInfoProps> = ({
   identityInformation,
+  isProfileLocked,
 }) => {
   const [isFormModalOpen, setIsFormModalOpen] = useState<boolean>(false);
   const [selectedDocument, setSelectedDocument] = useState<TCredential | null>(
@@ -35,6 +37,7 @@ const CredentialsInfo: React.FC<TCredentialsInfoProps> = ({
       <ProfileTabHeading
         heading="Credentials Information"
         onClick={() => setIsFormModalOpen(!isFormModalOpen)}
+        isProfileLocked={isProfileLocked}
       />
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-4">
@@ -83,9 +86,7 @@ const CredentialsInfo: React.FC<TCredentialsInfoProps> = ({
         setIsModalOpen={setIsFormModalOpen}
         width="w-[90%] md:w-[35%] max-h-[600px] overflow-y-auto"
       >
-        <UpdateCredentialsInfoModal
-          setIsFormModalOpen={setIsFormModalOpen}
-        />
+        <UpdateCredentialsInfoModal setIsFormModalOpen={setIsFormModalOpen} />
       </Modal>
 
       {/* Fullscreen Black View Modal */}

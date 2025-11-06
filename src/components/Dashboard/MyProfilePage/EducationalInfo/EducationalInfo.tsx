@@ -25,10 +25,12 @@ type TEducationInfoItem = {
 // Props type
 type TEducationalInfoProps = {
   educationalInfo: TEducationInfoItem[];
+  isProfileLocked: boolean
 };
 
 const EducationalInfo: React.FC<TEducationalInfoProps> = ({
   educationalInfo,
+  isProfileLocked
 }) => {
   const [isFormModalOpen, setIsFormModalOpen] = useState<boolean>(false);
   return (
@@ -36,6 +38,7 @@ const EducationalInfo: React.FC<TEducationalInfoProps> = ({
       <ProfileTabHeading
         heading="Educational Information"
         onClick={() => setIsFormModalOpen(!isFormModalOpen)}
+        isProfileLocked={isProfileLocked}
       />
 
      <div className="flex flex-col gap-4 mt-4">

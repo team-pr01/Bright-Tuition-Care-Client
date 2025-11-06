@@ -17,6 +17,7 @@ import { HiOutlineUserCircle } from "react-icons/hi";
 import type { TTutor } from "../../../types/tutor.types";
 import { formatDate } from "../../../utils/formatDate";
 import { useActiveUserMutation } from "../../../redux/Features/User/userApi";
+import { IMAGES } from "../../../assets";
 
 const Tutors = () => {
   const navigate = useNavigate();
@@ -77,6 +78,7 @@ const Tutors = () => {
     { key: "city", label: "City" },
     { key: "area", label: "Area" },
     { key: "registeredOn", label: "Registered On" },
+    { key: "isVerified", label: "Verification Status" },
     { key: "status", label: "Status" },
     { key: "profileStatus", label: "Profile Status" },
   ];
@@ -115,6 +117,8 @@ const Tutors = () => {
     },
   ];
 
+  console.log(data?.data?.tutors);
+
   // Formatted table data
   const tableData = data?.data?.tutors?.map((tutor: TTutor) => ({
     _id: tutor._id,
@@ -123,7 +127,7 @@ const Tutors = () => {
     name: (
       <div className="flex items-center gap-2 capitalize">
         <img
-          src={tutor.imageUrl}
+          src={tutor.imageUrl || IMAGES.dummyAvatar}
           alt={tutor?.name}
           className="w-8 h-8 rounded-full object-cover"
         />
@@ -135,6 +139,7 @@ const Tutors = () => {
     city: tutor?.city || "N/A",
     area: tutor?.area || "N/A",
     registeredOn: formatDate(tutor.createdAt),
+    isVerified : tutor.isVerified ? "Verified" : "Not Verified",
     status: (
       <span
         className={`px-3 py-1 rounded-full text-xs font-medium ${

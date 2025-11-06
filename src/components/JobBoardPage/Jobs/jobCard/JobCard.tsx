@@ -154,7 +154,7 @@ const JobCard: React.FC<TJobCardProps> = ({
 
         <div className="flex items-center gap-5 text-neutral-10 text-xs sm:text-sm md:text-base mt-3 md:mt-0">
           <p>
-            Job Id : <span className="font-semibold">#{job?.jobId}</span>
+            Job Id : <span className="font-semibold">{job?.jobId}</span>
           </p>
           <p>
             Posted Date : <span className="font-semibold">August 15, 2025</span>

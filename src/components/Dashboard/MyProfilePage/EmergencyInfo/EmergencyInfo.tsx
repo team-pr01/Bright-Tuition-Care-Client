@@ -12,6 +12,7 @@ type TEmergencyInfo = {
 
 type TEmergencyInfoProps = {
   emergencyInfo: TEmergencyInfo;
+  isProfileLocked: boolean;
 };
 
 const isProvided = (val: unknown): boolean => {
@@ -21,7 +22,7 @@ const isProvided = (val: unknown): boolean => {
   return val !== null && val !== undefined;
 };
 
-const EmergencyInfo: React.FC<TEmergencyInfoProps> = ({ emergencyInfo }) => {
+const EmergencyInfo: React.FC<TEmergencyInfoProps> = ({ emergencyInfo, isProfileLocked }) => {
   const [isFormModalOpen, setIsFormModalOpen] = useState<boolean>(false);
   const details = [
     { label: "Name", value: emergencyInfo?.name },
@@ -35,6 +36,7 @@ const EmergencyInfo: React.FC<TEmergencyInfoProps> = ({ emergencyInfo }) => {
       <ProfileTabHeading
         heading="Emergency Information"
         onClick={() => setIsFormModalOpen(!isFormModalOpen)}
+        isProfileLocked={isProfileLocked}
       />
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-2 mt-4">

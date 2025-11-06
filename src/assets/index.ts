@@ -115,10 +115,10 @@ import suspend from "../assets/Icons/suspend.svg";
 
 import aboutUs from "../assets/Images/about-us.jpg";
 import appDownload from "../assets/Images/app-download.svg";
-import heroImg from "../assets/Images/hero-img.svg";
-import heroImg1 from "../assets/Images/hero-img1.svg";
-import heroImg2 from "../assets/Images/hero-img2.svg";
-import heroImg3 from "../assets/Images/hero-img3.svg";
+import heroImg1 from "../assets/Images/hero-images/New H-1.png";
+import heroImg2 from "../assets/Images/hero-images/New H-2.png";
+import heroImg3 from "../assets/Images/hero-images/New H-3.png";
+import heroImg4 from "../assets/Images/hero-images/New H- 4.png";
 import dummyAvatar from "../assets/Images/dummy-avatar.jpg";  //dummy, please remove after integrating api
 import contactUs from "../assets/Images/contact-us.webp";
 import teacher from "../assets/Images/teacher.png";
@@ -132,10 +132,10 @@ import loader from "../assets/Icons/loader.svg";
 
 export const IMAGES = {
   logoWhiteVertical,
-  heroImg,
   heroImg1,
   heroImg2,
   heroImg3,
+  heroImg4,
   aboutUs,
   appDownload,
   stepLine,

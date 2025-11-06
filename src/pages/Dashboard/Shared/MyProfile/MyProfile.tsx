@@ -218,6 +218,7 @@ const MyProfile = () => {
                       : "Profile Overview"
                   }
                   onClick={() => setIsFormModalOpen(!isFormModalOpen)}
+                  isProfileLocked={myProfile?.profileStatus === "locked"}
                 />
                 <p
                   className={`text-neutral-45 ${
@@ -235,20 +236,28 @@ const MyProfile = () => {
             location.pathname.startsWith("/dashboard/tutor") && (
               <TuitionRelatedInfo
                 tuitionRelatedInfo={profile.tuitionRelatedInfo}
+                isProfileLocked={myProfile?.profileStatus === "locked"}
               />
             )}
 
           {activeTab === "educationalInfo" &&
             location.pathname.startsWith("/dashboard/tutor") && (
-              <EducationalInfo educationalInfo={profile.educationalInfo} />
+              <EducationalInfo
+                educationalInfo={profile.educationalInfo}
+                isProfileLocked={myProfile?.profileStatus === "locked"}
+              />
             )}
           {activeTab === "emergencyInfo" && (
-            <EmergencyInfo emergencyInfo={profile.emergencyInfo} />
+            <EmergencyInfo
+              emergencyInfo={profile.emergencyInfo}
+              isProfileLocked={myProfile?.profileStatus === "locked"}
+            />
           )}
           {activeTab === "credentialInfo" &&
             location.pathname.startsWith("/dashboard/tutor") && (
               <CredentialsInfo
                 identityInformation={profile.identityInformation}
+                isProfileLocked={myProfile?.profileStatus === "locked"}
               />
             )}
         </div>

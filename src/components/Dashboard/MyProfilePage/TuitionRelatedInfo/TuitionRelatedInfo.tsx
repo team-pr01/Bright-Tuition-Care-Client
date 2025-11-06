@@ -22,10 +22,12 @@ type TTuitionRelatedInfoProps = {
       details: string;
     };
   };
+  isProfileLocked: boolean;
 };
 
 const TuitionRelatedInfo = ({
   tuitionRelatedInfo,
+  isProfileLocked
 }: TTuitionRelatedInfoProps) => {
   const [isFormModalOpen, setIsFormModalOpen] = useState<boolean>(false);
   const details = [
@@ -72,6 +74,7 @@ const TuitionRelatedInfo = ({
       <ProfileTabHeading
         heading="Tuition Related Information"
         onClick={() => setIsFormModalOpen(!isFormModalOpen)}
+        isProfileLocked={isProfileLocked}
       />
 
       <div className="flex flex-col gap-2 mt-4">

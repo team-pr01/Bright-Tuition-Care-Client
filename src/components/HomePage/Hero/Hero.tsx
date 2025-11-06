@@ -46,7 +46,7 @@ const Hero = () => {
 
         {/* Right Image */}
         <div className="w-full lg:w-[35%] overflow-hidden">
-          <img src={IMAGES.heroImg} alt="Hero Section" className="w-full" />
+          <img src={IMAGES.heroImg1} alt="Hero Section" className="w-full" />
         </div>
       </div>
     </Container>

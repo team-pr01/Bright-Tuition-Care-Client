@@ -19,6 +19,7 @@ type TFormData = {
   name: string;
   email: string;
   phoneNumber: string;
+  jobRole: string;
   gender: string;
   city: string;
   area: string;
@@ -205,6 +206,16 @@ const AddOrUpdateStaffModal: React.FC<TAddOrUpdateStaffModalProps> = ({
               })}
             />
 
+            {/* Phone */}
+            <TextInput
+              label="Job Role"
+              placeholder="Enter job role"
+              error={errors.jobRole}
+              {...register("jobRole", {
+                required: "Job role is required",
+              })}
+            />
+
             {/* Gender */}
             <SelectDropdownWithSearch
               label="Gender"
@@ -277,7 +288,7 @@ const AddOrUpdateStaffModal: React.FC<TAddOrUpdateStaffModalProps> = ({
               variant="primary"
               iconWithoutBg={ICONS.topRightArrowWhite}
               className="py-[7px] lg:py-[7px] w-full md:w-fit"
-              isDisabled={isLoading}
+              isDisabled={isLoading || isAddingStaff || isUpdatingStaff}
               isLoading={isLoading || isAddingStaff || isUpdatingStaff}
             />
           </div>

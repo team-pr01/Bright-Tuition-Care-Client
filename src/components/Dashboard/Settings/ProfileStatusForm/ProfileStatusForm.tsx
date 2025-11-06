@@ -31,7 +31,7 @@ const ProfileStatusForm = () => {
       </p>
 
       {profileStatus === "unlocked" && (
-        <Link to="/dashboard/tutor/profile" className="flex justify-start mt-7">
+        <Link to="/dashboard/tutor/my-profile" className="flex justify-start mt-7">
           <Button
             type="button"
             label={"Edit Profile"}
