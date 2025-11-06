@@ -141,7 +141,7 @@ const JobCard: React.FC<TJobCardProps> = ({
           >
             {job?.title} -{" "}
             <span className="text-primary-10 font-normal text-sm">
-              {job?.tuitionType?.join(", ")}
+              {job?.tuitionType}
             </span>
           </button>
 

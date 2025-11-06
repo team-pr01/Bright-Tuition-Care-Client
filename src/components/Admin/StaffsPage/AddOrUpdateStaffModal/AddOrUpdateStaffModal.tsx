@@ -72,6 +72,7 @@ const AddOrUpdateStaffModal: React.FC<TAddOrUpdateStaffModalProps> = ({
       setValue("name", defaultValues?.userId?.name);
       setValue("email", defaultValues?.userId?.email);
       setValue("phoneNumber", defaultValues?.userId?.phoneNumber);
+      setValue("jobRole", defaultValues?.jobRole);
       setValue("gender", defaultValues?.userId?.gender);
       setValue("city", defaultValues?.userId?.city);
       setValue("area", defaultValues?.userId?.area);

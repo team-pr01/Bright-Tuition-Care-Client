@@ -46,10 +46,11 @@ const HireTutorForm = () => {
   const methods = useForm<FormValues>({ mode: "onBlur" });
   const { handleSubmit } = methods;
 
-  const [currentStep, setCurrentStep] = useState(0);
+  const [currentStep, setCurrentStep] = useState<number>(0);
 
+  console.log(currentStep);
   const onSubmit = async (data: FormValues) => {
-    console.log(data);
+    if (currentStep !== 3) return;
     try {
       const payload = {
         ...data,
@@ -63,22 +64,24 @@ const HireTutorForm = () => {
         else if (user?.role === "guardian")
           navigate("/dashboard/guardian/posted-jobs");
         else navigate("/dashboard/staff/posted-jobs");
-      };
+      }
     } catch (err: any) {
       toast.error(err?.data?.message || "Submission failed. Please try again.");
     }
   };
 
+  // ...imports and rest of component remain the same
+
   return (
     <FormProvider {...methods}>
-      <form onSubmit={handleSubmit(onSubmit)} className="space-y-6 mt-5">
+      {/* remove handleSubmit from form */}
+      <form className="space-y-6 mt-5">
         {/* Progress Bar */}
         <div className="relative w-full h-3 bg-gray-200 rounded-full overflow-hidden">
           <div
             className="h-full bg-primary-10 transition-all duration-500 ease-in-out relative"
             style={{ width: `${((currentStep + 1) / steps.length) * 100}%` }}
           >
-            {/* Percentage inside blue area */}
             <span className="absolute right-1 top-1/2 -translate-y-1/2 text-xs font-medium text-white">
               {Math.round(((currentStep + 1) / steps.length) * 100)}%
             </span>
@@ -103,36 +106,39 @@ const HireTutorForm = () => {
             </button>
           )}
 
-          {currentStep === 2 ? (
+          {currentStep < 3 ? (
             <button
               type="button"
               onClick={() => setCurrentStep(currentStep + 1)}
               className="px-4 py-2 bg-primary-10 text-white rounded cursor-pointer flex items-center gap-2"
             >
-              Show Preview
-              <img src={ICONS.eyeWhite} alt="eye-icon" className="size-4" />
-            </button>
-          ) : currentStep < steps.length - 1 ? (
-            <button
-              type="button"
-              onClick={() => setCurrentStep(currentStep + 1)}
-              className="px-4 py-2 bg-primary-10 text-white rounded cursor-pointer flex items-center gap-2"
-            >
-              Next
-              <img
-                src={ICONS.rightArrow}
-                alt="right-arrow"
-                className="size-4"
-              />
+              {currentStep === 2 ? (
+                <>
+                  Show Preview
+                  <img src={ICONS.eyeWhite} alt="eye-icon" className="size-4" />
+                </>
+              ) : (
+                <>
+                  Next
+                  <img
+                    src={ICONS.rightArrow}
+                    alt="right-arrow"
+                    className="size-4"
+                  />
+                </>
+              )}
             </button>
           ) : (
-            <button
-              type="submit"
-              className="px-4 py-2 bg-primary-10 text-white rounded cursor-pointer"
-              disabled={isPostingJob}
-            >
-              {isPostingJob ? "Submitting..." : "Submit"}
-            </button>
+            currentStep === 3 && (
+              <button
+                type="button"
+                onClick={() => handleSubmit(onSubmit)()}
+                className="px-4 py-2 bg-primary-10 disabled:bg-primary-10/50 disabled:cursor-not-allowed text-white rounded cursor-pointer"
+                disabled={isPostingJob}
+              >
+                {isPostingJob ? "Submitting..." : "Submit"}
+              </button>
+            )
           )}
         </div>
       </form>

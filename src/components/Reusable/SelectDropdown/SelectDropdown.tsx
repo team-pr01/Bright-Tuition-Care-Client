@@ -8,10 +8,11 @@ interface DropdownProps {
   error?: FieldError | Merge<FieldError, FieldErrorsImpl<any>>;
   isRequired?: boolean;
   selected?: boolean;
+  isDisabled?: boolean;
 }
 
 const SelectDropdown = forwardRef<HTMLSelectElement, DropdownProps>(
-  ({ label, options, error, isRequired = true, selected, ...rest }, ref) => {
+  ({ label, options, error, isRequired = true, selected, isDisabled, ...rest }, ref) => {
     return (
       <div className="flex flex-col gap-2 font-Nunito w-full">
         {label && (
@@ -24,6 +25,7 @@ const SelectDropdown = forwardRef<HTMLSelectElement, DropdownProps>(
         )}
         <select
           ref={ref}
+          disabled={isDisabled}
           defaultChecked={selected}
           required={isRequired}
            className={`w-full px-4 py-[11px] rounded-lg bg-white border leading-[18px] focus:outline-none focus:border-primary-10 transition duration-300 capitalize ${

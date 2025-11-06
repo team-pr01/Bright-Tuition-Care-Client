@@ -15,6 +15,7 @@ import {
 } from "../../../../redux/Features/Staff/staffApi";
 import toast from "react-hot-toast";
 import type { TStaff } from "../../../../types/staff.types";
+import { formatDate } from "../../../../utils/formatDate";
 
 const Staffs = () => {
   const [page, setPage] = useState<number>(1);
@@ -51,6 +52,7 @@ const Staffs = () => {
     { key: "name", label: "Name" },
     { key: "email", label: "Email" },
     { key: "phoneNumber", label: "Phone Number" },
+    { key: "jobRole", label: "Job Role" },
     { key: "joinedDate", label: "Joined Date" },
   ];
 
@@ -80,8 +82,9 @@ const Staffs = () => {
     name: staff?.userId?.name,
     email: staff?.userId?.email,
     phoneNumber: staff?.userId?.phoneNumber,
+    jobRole: staff?.jobRole,
     pagesAssigned: staff?.pagesAssigned,
-    joinedDate: staff?.createdAt,
+    joinedDate: formatDate(staff?.createdAt),
   }));
 
   const addStaffButton = (

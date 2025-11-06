@@ -86,6 +86,7 @@ const LocationForm = () => {
           error={errors.locationDirection}
           {...register("locationDirection")}
           isDisabled={true}
+          isRequired={false}
         />
 
         {/* Button to capture location */}

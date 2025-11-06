@@ -9,6 +9,7 @@ export type TStaff = {
     area : string;
   };
   pagesAssigned: string[];
+  jobRole: string;
   createdAt: string;
   updatedAt: string;
 };

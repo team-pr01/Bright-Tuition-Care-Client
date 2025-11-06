@@ -1115,7 +1115,7 @@ export const filterData = {
     "HSC 1st Year",
     "HSC 2nd Year",
   ],
-  studentGender: ["Male", "Female", "Any"],
+  studentGender: ["male", "female", "any"],
   tutorGender: ["male", "female", "any"],
   placeOfTuition: ["Student's Home", "My Home", "Online"],
 };

@@ -16,8 +16,7 @@ const Preview = () => {
     watch,
     setValue,
   } = useFormContext<any>();
-
-  const selectedTuitionType = watch("tuitionType") || [];
+  
   const selectedCity = watch("city") || [];
   const selectedArea = watch("area") || [];
 
@@ -42,22 +41,10 @@ const Preview = () => {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 lg:gap-5">
-        <TextInput
-          label="Salary (BDT)"
-          type="number"
-          placeholder="Enter salary"
-          error={errors.salary}
-          value={watch("salary")}
-          isDisabled={!isEditEnable}
-          {...register("salary")}
-        />
-
-        <MultiSelectDropdown
+        <SelectDropdown
           label="Tuition Type"
-          name="tuitionType"
           options={filterData.tuitionType}
-          value={selectedTuitionType}
-          onChange={(val) => setValue("tuitionType", val)}
+          {...register("tuitionType", { required: "Tuition type is required" })}
           isDisabled={!isEditEnable}
         />
 
@@ -65,6 +52,33 @@ const Preview = () => {
           label="Category"
           options={filterData.category}
           {...register("category", { required: "Category is required" })}
+          isDisabled={!isEditEnable}
+        />
+
+        {/* Conditionally show Curriculum field when Category is English Medium */}
+        {watch("category") === "English Medium" && (
+          <SelectDropdown
+            label="Curriculum"
+            options={["Ed-Excel", "Cambridge", "IB"]}
+            {...register("curriculum", { required: "Curriculum is required" })}
+            isDisabled={!isEditEnable}
+          />
+        )}
+
+        <TextInput
+          label="Subjects"
+          placeholder="Enter subjects"
+          error={errors.subjects}
+          value={watch("subjects")}
+          isDisabled={!isEditEnable}
+          {...register("subjects")}
+        />
+
+        <SelectDropdown
+          label="Tutoring Days"
+          options={filterData.daysPerWeek}
+          {...register("tutoringDays")}
+          isDisabled={!isEditEnable}
         />
 
         <TextInput
@@ -77,17 +91,42 @@ const Preview = () => {
           isRequired={false}
         />
 
-         <SelectDropdown
-          label="Tutoring Days"
-          options={filterData.daysPerWeek}
-         {...register("tutoringDays", { required: "Tutoring days is required" })}
+        <TextInput
+          label="Salary (BDT)"
+          type="number"
+          placeholder="Enter salary"
+          error={errors.salary}
+          value={watch("salary")}
+          isDisabled={!isEditEnable}
+          {...register("salary")}
+        />
+
+        <MultiSelectDropdown
+          label="Class"
+          name="class"
+          options={filterData.class}
+          value={watch("class") || []}
+          onChange={(val) => setValue("class", val)}
+          isDisabled={!isEditEnable}
         />
 
         <SelectDropdown
-        label="Preferred Tutor"
-        options={filterData.tutorGender}
-        {...register("preferredTutorGender", { required: "Gender is required" })}
-      />
+          label="Student Gender"
+          options={filterData.studentGender}
+          {...register("studentGender", {
+            required: "Student gender is required",
+          })}
+          isDisabled={!isEditEnable}
+        />
+
+        <SelectDropdown
+          label="Preferred Tutor"
+          options={filterData.tutorGender}
+          {...register("preferredTutorGender", {
+            required: "Gender is required",
+          })}
+          isDisabled={!isEditEnable}
+        />
 
         <TextInput
           label="Number of Students"
@@ -97,23 +136,6 @@ const Preview = () => {
           isDisabled={!isEditEnable}
           {...register("noOfStudents")}
           isRequired={false}
-        />
-
-        <SelectDropdown
-        label="Student Gender"
-        options={filterData.studentGender}
-        {...register("studentGender", {
-          required: "Student gender is required",
-        })}
-      />
-
-        <MultiSelectDropdown
-          label="Class"
-          name="class"
-          options={filterData.class}
-          value={watch("class") || []}
-          onChange={(val) => setValue("class", val)}
-          isDisabled={!isEditEnable}
         />
 
         <MultiSelectDropdown
@@ -150,14 +172,7 @@ const Preview = () => {
           value={watch("locationDirection")}
           isDisabled={!isEditEnable}
           {...register("locationDirection")}
-        />
-        <TextInput
-          label="Subjects"
-          placeholder="Enter subjects"
-          error={errors.subjects}
-          value={watch("subjects")}
-          isDisabled={!isEditEnable}
-          {...register("subjects")}
+          isRequired={false}
         />
       </div>
 

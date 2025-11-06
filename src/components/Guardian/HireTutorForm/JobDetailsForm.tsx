@@ -1,9 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useFormContext } from "react-hook-form";
 import TextInput from "../../Reusable/TextInput/TextInput";
-import MultiSelectDropdown from "../../Reusable/MultiSelectDropdown/MultiSelectDropdown";
 import { filterData } from "../../../constants/filterData";
-import Textarea from "../../Reusable/TextArea/TextArea";
 import SelectDropdown from "../../Reusable/SelectDropdown/SelectDropdown";
 
 const JobDetailsForm = () => {
@@ -11,34 +9,49 @@ const JobDetailsForm = () => {
     register,
     formState: { errors },
     watch,
-    setValue,
   } = useFormContext<any>();
 
-  const selectedTuitionType = watch("tuitionType") || [];
+  const selectedCategory = watch("category");
+
+  const curriculumOptions = ["Ed-Excel", "Cambridge", "IB"];
 
   return (
     <div className="flex flex-col gap-4">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 lg:gap-6">
-        <TextInput
-          label="Salary (BDT)"
-          type="number"
-          placeholder="Enter salary"
-          error={errors.salary}
-          {...register("salary", { required: "Salary is required" })}
-        />
-
-        <MultiSelectDropdown
+        <SelectDropdown
           label="Tuition Type"
-          name="tuitionType"
           options={filterData.tuitionType}
-          value={selectedTuitionType}
-          onChange={(val) => setValue("tuitionType", val)}
+          {...register("tuitionType", { required: "Tuition type is required" })}
         />
 
         <SelectDropdown
           label="Category"
           options={filterData.category}
           {...register("category", { required: "Category is required" })}
+        />
+
+        {/* if Category is English Medium then will show */}
+        {selectedCategory === "English Medium" && (
+          <SelectDropdown
+            label="Curriculum"
+            options={curriculumOptions}
+            {...register("curriculum", { required: "Curriculum is required" })}
+          />
+        )}
+
+        <TextInput
+          label="Subjects"
+          placeholder="Enter subjects"
+          error={errors.subjects}
+          {...register("subjects", { required: "Subjects are required" })}
+        />
+
+        <SelectDropdown
+          label="Tutoring Days"
+          options={filterData.daysPerWeek}
+          {...register("tutoringDays", {
+            required: "Tutoring days is required",
+          })}
         />
 
         <TextInput
@@ -49,27 +62,14 @@ const JobDetailsForm = () => {
           isRequired={false}
         />
 
-        <SelectDropdown
-          label="Tutoring Days"
-          options={filterData.daysPerWeek}
-         {...register("tutoringDays", { required: "Tutoring days is required" })}
-        />
         <TextInput
-          label="Subjects"
-          placeholder="Enter subjects"
-          error={errors.subjects}
-          {...register("subjects", { required: "Subjects are required" })}
+          label="Salary (BDT)"
+          type="number"
+          placeholder="Enter salary"
+          error={errors.salary}
+          {...register("salary", { required: "Salary is required" })}
         />
       </div>
-
-      <Textarea
-        label="Other Requirements"
-        placeholder="Any other requirements"
-        error={errors.otherRequirements}
-        {...register("otherRequirements")}
-        isRequired={false}
-        rows={4}
-      />
     </div>
   );
 };
