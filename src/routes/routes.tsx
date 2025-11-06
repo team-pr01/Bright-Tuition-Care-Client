@@ -101,7 +101,13 @@ export const router = createBrowserRouter([
         element: <Faq />,
       },
       {
+        // If tutor has shared referral link then this route will open
         path: "tuition-request/referral/:id",
+        element: <TuitionRequest />,
+      },
+      {
+        // If guardian come on this page directly then this route will open
+        path: "hire-a-tutor",
         element: <TuitionRequest />,
       },
     ],

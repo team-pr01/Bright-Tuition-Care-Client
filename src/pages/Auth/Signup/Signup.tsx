@@ -5,7 +5,7 @@ import SignupForm from "../../../components/AuthPage/SignupPage/SignupForm/Signu
 
 
 const Signup = () => {
-  const [activeTab, setActiveTab] = useState<string>("Guardian/Student");
+  const [activeTab, setActiveTab] = useState<string>("Tutor");
   return (
     <Container>
       <div className="flex flex-col-reverse lg:flex-row items-stretch gap-10 mt-10 mb-72 lg:mb-96 min-h-[600px]">

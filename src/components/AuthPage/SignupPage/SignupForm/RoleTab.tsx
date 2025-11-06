@@ -10,14 +10,14 @@ const RoleTab = ({
 }) => {
   const roles = [
     {
-      title: "Guardian/Student",
-      description: "Get started as a Guardian or Student.",
-      icon: IMAGES.guardian,
-    },
-    {
       title: "Tutor",
       description: "Join as a tutor and find tuition jobs.",
       icon: IMAGES.teacher,
+    },
+    {
+      title: "Guardian/Student",
+      description: "Get started as a Guardian or Student.",
+      icon: IMAGES.guardian,
     },
   ];
 

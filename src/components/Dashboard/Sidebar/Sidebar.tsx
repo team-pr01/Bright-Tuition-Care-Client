@@ -41,7 +41,9 @@ const Sidebar = () => {
       <div className="w-[230px] 2xl:w-[270px] h-full bg-primary-10 p-5 font-Nunito flex flex-col gap-5 justify-between">
         {user?.role !== "admin" && <UserProfilePhoto />}
         {user?.role === "admin" || user?.role === "staff" ? (
+          <Link to={"/"}>
           <img src={IMAGES.logoWhiteVertical} alt="" className="w-40 mx-auto" />
+          </Link>
         ) : (
           ""
         )}

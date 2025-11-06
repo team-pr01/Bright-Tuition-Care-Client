@@ -41,7 +41,7 @@ const Navbar = () => {
             <Link to={"/signup"}>
               <Button label="Sign Up" variant="tertiary" className="text-sm" />
             </Link>
-            <Link to={"/tutor-register"}>
+            <Link to={"/signup"}>
               <Button
                 label="Become A Tutor"
                 variant="quaternary"

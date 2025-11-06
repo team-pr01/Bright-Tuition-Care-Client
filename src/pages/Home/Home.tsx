@@ -27,7 +27,7 @@ const Home = () => {
         title="What Students / Guardian Say About Us"
         description="Real stories from real tutors who found success through our platform."
         buttonText="Hire A Tutor"
-        navigatePath="/tutors"
+        navigatePath="/hire-a-tutor"
         data={allGuardianTestimonials?.data}
       />
       <TutorSteps />
@@ -37,7 +37,7 @@ const Home = () => {
         description="Real stories from real tutors who found success through our platform."
         variant="primary"
         buttonText="Become A Tutor"
-        navigatePath="/tutors"
+        navigatePath="/signup"
         data={allTutorsTestimonials?.data}
       />
       <div className="mb-72 overflow-hidden">

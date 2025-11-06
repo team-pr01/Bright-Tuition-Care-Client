@@ -5,35 +5,35 @@ import Container from "../../Reusable/Container/Container";
 import { ICONS, IMAGES } from "../../../assets";
 import Heading from "../../Reusable/Heading/Heading";
 import Button from "../../Reusable/Button/Button";
+import { Link } from "react-router-dom";
 
 const AboutUs = () => {
   const ref = useRef(null);
 
- const containerVariants: any = {
-  hidden: { opacity: 0, y: "5%" },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      type: "spring" as const,
-      stiffness: 60,
-      damping: 14,
-      mass: 0.8,
-      staggerChildren: 0.2,
-      delayChildren: 0.2,
+  const containerVariants: any = {
+    hidden: { opacity: 0, y: "5%" },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        type: "spring" as const,
+        stiffness: 60,
+        damping: 14,
+        mass: 0.8,
+        staggerChildren: 0.2,
+        delayChildren: 0.2,
+      },
     },
-  },
-};
+  };
 
-const itemVariants: any = {
-  hidden: { y: "10%", opacity: 0 },
-  visible: {
-    y: 0,
-    opacity: 1,
-    transition: { ease: "easeInOut", duration: 0.8 },
-  },
-};
-
+  const itemVariants: any = {
+    hidden: { y: "10%", opacity: 0 },
+    visible: {
+      y: 0,
+      opacity: 1,
+      transition: { ease: "easeInOut", duration: 0.8 },
+    },
+  };
 
   return (
     <Container>
@@ -79,17 +79,21 @@ const itemVariants: any = {
               </p>
             </div>
             <div className="flex flex-row gap-4 mt-12 items-center justify-center lg:justify-start">
-              <Button
-                label="Hire A Tutor"
-                variant="primary"
-                icon={ICONS.topRightArrow}
-              />
-              <Button
-                label="Become A Tutor"
-                variant="secondary"
-                icon={ICONS.topRightArrowWhite}
-                iconBg="#0D99FF"
-              />
+              <Link to={"/hire-a-tutor"}>
+                <Button
+                  label="Hire A Tutor"
+                  variant="primary"
+                  icon={ICONS.topRightArrow}
+                />
+              </Link>
+              <Link to={"/signup"}>
+                <Button
+                  label="Become A Tutor"
+                  variant="secondary"
+                  icon={ICONS.topRightArrowWhite}
+                  iconBg="#0D99FF"
+                />
+              </Link>
             </div>
           </div>
         </motion.div>
