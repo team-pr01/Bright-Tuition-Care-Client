@@ -93,18 +93,32 @@ const Counter = () => {
                 }}
                 className="w-full mx-auto"
               >
-                {allStats?.jobsByCity?.map((data: any, index: number) => (
-                  <SwiperSlide key={index}>
-                    <a
-                      href={`/job-board/${data?.city}`}
-                      className="block w-full h-full"
-                    >
-                      <div className="border border-primary-10 text-primary-10 px-4 py-2 rounded-lg text-center text-nowrap hover:bg-primary-10/10 cursor-pointer">
-                        {data?.city} ({data?.count})
-                      </div>
-                    </a>
-                  </SwiperSlide>
-                ))}
+                {allStats?.jobsByCity
+                  ? allStats.jobsByCity.map((data: any, index: number) => (
+                      <SwiperSlide key={index}>
+                        <a
+                          href={`/job-board/${data?.city}`}
+                          className="block w-full h-full"
+                        >
+                          <div className="border border-primary-10 text-primary-10 px-4 py-2 rounded-lg text-center text-nowrap hover:bg-primary-10/10 cursor-pointer">
+                            {data?.city} ({data?.count})
+                          </div>
+                        </a>
+                      </SwiperSlide>
+                    ))
+                  : // Skeleton loader
+                    Array.from({ length: 5 }).map((_, index) => (
+                      <SwiperSlide key={index}>
+                        <div className="block w-full h-full">
+                          <div className="border border-primary-10/30 px-4 py-3 rounded-lg text-center text-nowrap cursor-pointer">
+                            <div className="animate-pulse flex items-center">
+                              <div className="h-4 bg-primary-10/20 rounded w-24 mx-auto"></div>
+                              <div className="h-3 bg-primary-10/20 rounded w-8 mx-auto"></div>
+                            </div>
+                          </div>
+                        </div>
+                      </SwiperSlide>
+                    ))}
               </Swiper>
             </div>
 
