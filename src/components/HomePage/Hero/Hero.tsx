@@ -9,62 +9,62 @@ import { useInView } from "framer-motion";
 import { useRef } from "react";
 
 // Animation variants
-const containerVariants:any = {
+const containerVariants: any = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
     transition: {
       staggerChildren: 0.2,
-      delayChildren: 0.3
-    }
-  }
+      delayChildren: 0.3,
+    },
+  },
 };
 
-const itemVariants:any = {
+const itemVariants: any = {
   hidden: { opacity: 0, y: 30 },
   visible: {
     opacity: 1,
     y: 0,
     transition: {
       duration: 0.6,
-      ease: "easeOut"
-    }
-  }
+      ease: "easeOut",
+    },
+  },
 };
 
-const floatingAnimation:any = {
+const floatingAnimation: any = {
   animate: {
     y: [-10, 10, -10],
     transition: {
       duration: 4,
       repeat: Infinity,
-      ease: "easeInOut"
-    }
-  }
+      ease: "easeInOut",
+    },
+  },
 };
 
-const staggeredFloating:any = (delay:any) => ({
+const staggeredFloating: any = (delay: any) => ({
   animate: {
     y: [-8, 12, -8],
     transition: {
       duration: 5,
       repeat: Infinity,
       ease: "easeInOut",
-      delay: delay
-    }
-  }
+      delay: delay,
+    },
+  },
 });
 
-const scaleInAnimation:any = {
+const scaleInAnimation: any = {
   hidden: { opacity: 0, scale: 0.8 },
   visible: {
     opacity: 1,
     scale: 1,
     transition: {
       duration: 0.8,
-      ease: "easeOut"
-    }
-  }
+      ease: "easeOut",
+    },
+  },
 };
 
 const Hero = () => {
@@ -75,17 +75,17 @@ const Hero = () => {
     <Container>
       <motion.div
         ref={ref}
-        className="flex flex-col gap-8 lg:gap-[44px] lg:flex-row font-Nunito h-fit items-center justify-between py-5 lg:py-[84px]"
+        className="flex flex-col gap-8 lg:gap-[44px] lg:flex-row font-Nunito h-fit justify-between py-5 lg:py-[84px]"
         variants={containerVariants}
         initial="hidden"
         animate={isInView ? "visible" : "hidden"}
       >
         {/* Left Content */}
-        <motion.div 
+        <motion.div
           className="w-full lg:w-[55%] flex flex-col justify-start mt-5 lg:mt-16"
           variants={itemVariants}
         >
-          <motion.div 
+          <motion.div
             className="flex items-center gap-3"
             variants={itemVariants}
           >
@@ -98,14 +98,14 @@ const Hero = () => {
             </a>
           </motion.div>
 
-          <motion.h1 
-            className="text-neutral-10 text-2xl lg:text-[56px] font-bold leading-8 lg:leading-[68px] mt-4"
+          <motion.h1
+            className="text-neutral-10 text-2xl lg:text-4xl xl:text-[56px] font-bold leading-8 lg:leading-[68px] mt-4"
             variants={itemVariants}
           >
             Find The Best <span className="text-primary-40">Tutor</span> Today
           </motion.h1>
 
-          <motion.p 
+          <motion.p
             className="text-neutral-10 text-sm lg:text-lg leading-normal lg:leading-6 max-w-full lg:max-w-[600px] mt-4"
             variants={itemVariants}
           >
@@ -114,7 +114,7 @@ const Hero = () => {
             clicks. Learn smarter. Teach better.
           </motion.p>
 
-          <motion.div 
+          <motion.div
             className="flex flex-col md:flex-row gap-5 mt-7 lg:mt-12 items-start md:items-center"
             variants={itemVariants}
           >
@@ -132,59 +132,44 @@ const Hero = () => {
         </motion.div>
 
         {/* Right Image - Keeping your exact positioning */}
-        <div className="w-full lg:w-[35%] flex items-center justify-center">
-          <motion.div 
-          className="relative"
-          variants={scaleInAnimation}
-        >
-          {/* Top Row - Same as your original */}
-          <div className="flex items-center">
-            <motion.div
-              variants={floatingAnimation}
-              animate="animate"
-            >
-              <img
-                src={IMAGES.heroImg2}
-                alt="Hero Section"
-                className="w-[180px]  rounded-xl transition-all duration-300 hover:scale-105 cursor-pointer"
-              />
-            </motion.div>
-            <motion.div
-              variants={staggeredFloating(0.5)}
-              animate="animate"
-            >
-              <img
-                src={IMAGES.heroImg1}
-                alt="Hero Section"
-                className="w-[180px]  rounded-xl transition-all duration-300 hover:scale-105 cursor-pointer"
-              />
-            </motion.div>
-          </div>
+        <div className="w-full lg:w-[35%] mt-6">
+          <motion.div className="relative" variants={scaleInAnimation}>
+            {/* Top Row - Same as your original */}
+            <div className="flex items-center gap-1 2xl:gap-[6px">
+              <motion.div variants={floatingAnimation} animate="animate">
+                <img
+                  src={IMAGES.heroImg4}
+                  alt="Hero Section"
+                  className="w-[120px] md:w-[180px] lg:w-[130px] xl:w-[180px] rounded-xl transition-all duration-300 hover:scale-105 cursor-pointer"
+                />
+              </motion.div>
+              <motion.div variants={staggeredFloating(0.5)} animate="animate">
+                <img
+                  src={IMAGES.heroImg1}
+                  alt="Hero Section"
+                  className="w-[120px] md:w-[180px] lg:w-[130px] xl:w-[180px] rounded-xl transition-all duration-300 hover:scale-105 cursor-pointer"
+                />
+              </motion.div>
+            </div>
 
-          {/* Bottom Row - Same absolute positioning as your original */}
-          <div className="flex items-center absolute left-[87px] top-40 w-full">
-            <motion.div
-              variants={staggeredFloating(1)}
-              animate="animate"
-            >
-              <img
-                src={IMAGES.heroImg3}
-                alt="Hero Section"
-                className="w-[180px]  rounded-xl transition-all duration-300 hover:scale-105 cursor-pointer"
-              />
-            </motion.div>
-            <motion.div
-              variants={staggeredFloating(1.5)}
-              animate="animate"
-            >
-              <img
-                src={IMAGES.heroImg4}
-                alt="Hero Section"
-                className="w-[180px]  rounded-xl transition-all duration-300 hover:scale-105 cursor-pointer"
-              />
-            </motion.div>
-          </div>
-        </motion.div>
+            {/* Bottom Row - Same absolute positioning as your original */}
+            <div className="flex items-center gap-1 2xl:gap-[6px] absolute left-[59px] md:left-[86px] lg:left-16 xl:left-[87px] top-24 md:top-[149px] lg:top-28 xl:top-[150px] w-full">
+              <motion.div variants={staggeredFloating(1)} animate="animate">
+                <img
+                  src={IMAGES.heroImg3}
+                  alt="Hero Section"
+                  className="w-[120px] md:w-[180px] lg:w-[130px] xl:w-[180px] rounded-xl transition-all duration-300 hover:scale-105 cursor-pointer"
+                />
+              </motion.div>
+              <motion.div variants={staggeredFloating(1.5)} animate="animate">
+                <img
+                  src={IMAGES.heroImg2}
+                  alt="Hero Section"
+                  className="w-[120px] md:w-[180px] lg:w-[130px] xl:w-[180px] rounded-xl transition-all duration-300 hover:scale-105 cursor-pointer"
+                />
+              </motion.div>
+            </div>
+          </motion.div>
         </div>
       </motion.div>
     </Container>

@@ -7,10 +7,12 @@ import Heading from "../../components/Reusable/Heading/Heading";
 import { useGetAllJobsQuery } from "../../redux/Features/Job/jobApi";
 import { useDebounce } from "../../hooks/useDebounce";
 import JobCardSkeleton from "../../components/JobBoardPage/Jobs/JobCard/JobCardSkeleton";
+import { useParams } from "react-router-dom";
 
 const JobBoard = () => {
+   const { city } = useParams();
   const [keyword, setKeyword] = useState<string>("");
-  const [selectedCities, setSelectedCities] = useState<string[]>([]);
+  const [selectedCities, setSelectedCities] = useState<string[]>(city ? [city] : []);
   const [selectedAreas, setSelectedAreas] = useState<string[]>([]);
   const [areaOptions, setAreaOptions] = useState<string[]>([]);
   const [selectedCategory, setSelectedCategory] = useState<string[]>([]);

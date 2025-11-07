@@ -61,7 +61,13 @@ export const router = createBrowserRouter([
         element: <Home />,
       },
       {
+        // for normal navigation
         path: "/job-board",
+        element: <JobBoard />,
+      },
+      {
+        // for city based navigation
+        path: "/job-board/:city",
         element: <JobBoard />,
       },
       {
