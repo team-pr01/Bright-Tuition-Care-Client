@@ -7,6 +7,7 @@ import TutorSteps from "../../components/HomePage/HowItWorksTutor/TutorSteps";
 import Services from "../../components/HomePage/Services/Services";
 import Testimonials from "../../components/HomePage/Testimonials/Testimonials";
 import TuitionMethods from "../../components/HomePage/TuitionMethods/TuitionMethods";
+import WhyChooseUs from "../../components/HomePage/WhyChooseUs/WhyChooseUs";
 import {
   useGetAllGuardiansTestimonialsQuery,
   useGetAllTutorsTestimonialsQuery,
@@ -14,7 +15,9 @@ import {
 
 const Home = () => {
   const { data: allTutorsTestimonials } = useGetAllTutorsTestimonialsQuery({});
-  const { data: allGuardianTestimonials } = useGetAllGuardiansTestimonialsQuery({});
+  const { data: allGuardianTestimonials } = useGetAllGuardiansTestimonialsQuery(
+    {}
+  );
   return (
     <div className="overflow-hidden">
       <Hero />
@@ -40,6 +43,7 @@ const Home = () => {
         navigatePath="/signup"
         data={allTutorsTestimonials?.data}
       />
+      <WhyChooseUs />
       <div className="mb-72 overflow-hidden">
         <DownloadApp />
       </div>
