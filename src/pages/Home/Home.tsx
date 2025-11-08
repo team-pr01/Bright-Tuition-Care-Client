@@ -14,8 +14,8 @@ import {
 } from "../../redux/Features/Testimonial/testimonialApi";
 
 const Home = () => {
-  const { data: allTutorsTestimonials } = useGetAllTutorsTestimonialsQuery({});
-  const { data: allGuardianTestimonials } = useGetAllGuardiansTestimonialsQuery(
+  const { data: allTutorsTestimonials, isLoading:isTutorTestimonialLoading } = useGetAllTutorsTestimonialsQuery({});
+  const { data: allGuardianTestimonials, isLoading:isGuardianTestimonialLoading } = useGetAllGuardiansTestimonialsQuery(
     {}
   );
   return (
@@ -32,6 +32,7 @@ const Home = () => {
         buttonText="Hire A Tutor"
         navigatePath="/hire-a-tutor"
         data={allGuardianTestimonials?.data}
+        isLoading={isTutorTestimonialLoading}
       />
       <TutorSteps />
 
@@ -42,6 +43,7 @@ const Home = () => {
         buttonText="Become A Tutor"
         navigatePath="/signup"
         data={allTutorsTestimonials?.data}
+        isLoading={isGuardianTestimonialLoading}
       />
       <WhyChooseUs />
       <div className="mb-72 overflow-hidden">

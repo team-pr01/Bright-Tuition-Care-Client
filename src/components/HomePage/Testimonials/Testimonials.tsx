@@ -19,6 +19,7 @@ interface TestimonialsProps {
   buttonText: string;
   navigatePath: string;
   data?: TTestimonial[];
+  isLoading: boolean
 }
 
 const Testimonials: React.FC<TestimonialsProps> = ({
@@ -28,6 +29,7 @@ const Testimonials: React.FC<TestimonialsProps> = ({
   buttonText,
   navigatePath,
   data,
+  isLoading
 }) => {
   return (
     <div className="py-12 w-full font-Nunito overflow-hidden">
@@ -69,6 +71,7 @@ const Testimonials: React.FC<TestimonialsProps> = ({
                 <TestimonialCard
                   testimonial={testimonial}
                   variant={variant}
+                  isLoading={isLoading}
                 />
               </SwiperSlide>
             ))}
