@@ -5,20 +5,19 @@ import { useState } from "react";
 import { FaChevronDown } from "react-icons/fa";
 
 type TSelectedPaymentMethodProps = {
+  setIsPaymentModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
   selectedPaymentMethod: string;
-  setPaymentModalType: React.Dispatch<
-    React.SetStateAction<
-      "selectPaymentMethod" | "addPaymentDetails" | "paymentSuccess"
-    >
-  >;
   amount: number;
+  paidFor: string;
 };
 const SelectedPaymentMethod: React.FC<TSelectedPaymentMethodProps> = ({
+  setIsPaymentModalOpen,
   selectedPaymentMethod,
-  setPaymentModalType,
   amount,
+  paidFor,
 }) => {
   const [isAccordingOpen, setIsAccordingOpen] = useState<boolean>(false);
+
   return (
     <div className="w-full flex flex-col items-center gap-6 mt-2 md:mt-5 font-Nunito">
       <div>
@@ -104,7 +103,8 @@ const SelectedPaymentMethod: React.FC<TSelectedPaymentMethodProps> = ({
           <SubmitProofForm
             amount={amount}
             selectedPaymentMethod={selectedPaymentMethod}
-            setPaymentModalType={setPaymentModalType}
+            paidFor={paidFor}
+            setIsPaymentModalOpen={setIsPaymentModalOpen}
           />
         </div>
       </div>

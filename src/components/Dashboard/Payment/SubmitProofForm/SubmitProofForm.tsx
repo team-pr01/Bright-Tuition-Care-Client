@@ -2,44 +2,71 @@
 import { useForm } from "react-hook-form";
 import Button from "../../../Reusable/Button/Button";
 import TextInput from "../../../Reusable/TextInput/TextInput";
+import { usePayMutation } from "../../../../redux/Features/Payment/paymentApi";
+import toast from "react-hot-toast";
+import { useSelector } from "react-redux";
+import { useCurrentUser } from "../../../../redux/Features/Auth/authSlice";
+import type { TLoggedInUser } from "../../../../types/loggedinUser.types";
 
 type TFormData = {
   senderNumber: string;
   transactionId?: string;
   bankName?: string;
-  file?: string;
+  file?: FileList;
   amount?: string;
 };
 
 type TSubmitProofFormProps = {
   amount: number;
   selectedPaymentMethod: string;
-  setPaymentModalType: React.Dispatch<
-    React.SetStateAction<
-      "selectPaymentMethod" | "addPaymentDetails" | "paymentSuccess"
-    >
-  >;
+  paidFor: string;
+  setIsPaymentModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 const SubmitProofForm: React.FC<TSubmitProofFormProps> = ({
   amount,
   selectedPaymentMethod,
-  setPaymentModalType,
+  paidFor,
+  setIsPaymentModalOpen,
 }) => {
+  const user = useSelector(useCurrentUser) as TLoggedInUser;
+  const [pay, { isLoading }] = usePayMutation();
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<TFormData>();
 
-  const handleSubmitProof = (data: TFormData) => {
-    console.log(selectedPaymentMethod);
-    console.log(data);
-    setPaymentModalType("paymentSuccess");
+  const handleCompletePayment = async (data: TFormData) => {
+    try {
+      const formData = new FormData();
+      formData.append("userId", user?._id);
+      formData.append("senderAccountNumber", data.senderNumber);
+      formData.append("transactionId", data.transactionId || "");
+      formData.append("paymentMethod", selectedPaymentMethod);
+      formData.append("bankName", data.bankName || "");
+      formData.append("paidFor", paidFor);
+      formData.append("amount", amount.toString());
+      if (data.file && data.file.length > 0) {
+        formData.append("file", data.file[0]);
+      }
+      const response = await pay(formData).unwrap();
+      if (response?.success) {
+        toast.success(
+          response?.message ||
+            "Payment is successful. Please wait for admin approval."
+        );
+        setIsPaymentModalOpen(false);
+      }
+    } catch (error: any) {
+      toast.error(
+        error?.data?.message || "Error completing payment. Please try again."
+      );
+    }
   };
   return (
     <form
-      onSubmit={handleSubmit(handleSubmitProof)}
+      onSubmit={handleSubmit(handleCompletePayment)}
       className="flex flex-col w-full"
     >
       <div className="flex flex-col gap-4 mt-4">
@@ -75,7 +102,7 @@ const SubmitProofForm: React.FC<TSubmitProofFormProps> = ({
             placeholder={`Enter transaction id`}
             error={errors.transactionId}
             {...register("transactionId")}
-            isRequired={selectedPaymentMethod !== "bankTransfer"}
+            isRequired={false}
           />
         )}
         <TextInput
@@ -98,6 +125,8 @@ const SubmitProofForm: React.FC<TSubmitProofFormProps> = ({
           label="Submit"
           variant="primary"
           className="py-2 lg:py-2 w-full flex items-center justify-center"
+          isLoading={isLoading}
+          isDisabled={isLoading}
         />
       </div>
 

@@ -7,6 +7,7 @@ import SelectPaymentMethod from "../../../../components/Dashboard/Payment/Select
 import SelectedPaymentMethod from "../../../../components/Dashboard/Payment/SelectedPaymentMethod/SelectedPaymentMethod";
 
 const Payment = () => {
+const [paidFor, setPaidFor] = useState<string>("");
   const [isPaymentModalOpen, setIsPaymentModalOpen] = useState<boolean>(false);
   const [paymentModalType, setPaymentModalType] = useState<
     "selectPaymentMethod" | "addPaymentDetails" | "paymentSuccess"
@@ -36,6 +37,8 @@ const Payment = () => {
     },
   ];
 
+
+
   return (
     <div className="font-Nunito flex flex-col justify-between gap-5 h-full">
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-6">
@@ -63,6 +66,7 @@ const Payment = () => {
                 setSelectedAmount(charge.amount);
                 setIsPaymentModalOpen(true);
                 setPaymentModalType("selectPaymentMethod");
+                setPaidFor(charge.title);
               }}
             />
           </div>
@@ -85,9 +89,10 @@ const Payment = () => {
           />
         ) : (
           <SelectedPaymentMethod
+          setIsPaymentModalOpen={setIsPaymentModalOpen}
             selectedPaymentMethod={selectedPaymentMethod}
-            setPaymentModalType={setPaymentModalType}
             amount={selectedAmount}
+            paidFor={paidFor}
           />
         )}
       </Modal>
