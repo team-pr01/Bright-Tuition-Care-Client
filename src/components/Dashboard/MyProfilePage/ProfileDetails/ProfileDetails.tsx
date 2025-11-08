@@ -174,7 +174,7 @@ const ProfileDetails = ({
             {data?.userId?.name}
           </h1>
           {/* VERIFIED TICK - Top right corner */}
-          {!data?.isVerified && (
+          {data?.isVerified && (
             <div className="bg-primary-10 shadow-2xl size-5 rounded-full flex items-center justify-center border-2 border-white">
               <FaCheck className="text-white text-[10px]" />
             </div>

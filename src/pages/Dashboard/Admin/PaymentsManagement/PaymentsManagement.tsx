@@ -6,9 +6,13 @@ import type {
   TableHead,
 } from "../../../../components/Reusable/Table/Table";
 import Table from "../../../../components/Reusable/Table/Table";
-import { useGetAllPaymentsQuery } from "../../../../redux/Features/Payment/paymentApi";
+import {
+  useGetAllPaymentsQuery,
+  useUpdatePaymentStatusMutation,
+} from "../../../../redux/Features/Payment/paymentApi";
 import { formatDate } from "../../../../utils/formatDate";
 import type { TPayment } from "../../../../types/payment.types";
+import toast from "react-hot-toast";
 
 const PaymentsManagement = () => {
   const [page, setPage] = useState<number>(1);
@@ -19,13 +23,13 @@ const PaymentsManagement = () => {
     string | null
   >(null);
   const [isProofModalOpen, setIsProofModalOpen] = useState<boolean>(false);
-  console.log(searchQuery);
   const { data, isLoading, isFetching } = useGetAllPaymentsQuery({
     page,
     limit,
     status: statusFilter,
     keyword: searchQuery,
   });
+  const [updatePaymentStatus] = useUpdatePaymentStatusMutation();
 
   // Table headers
   const paymentTheads: TableHead[] = [
@@ -47,7 +51,11 @@ const PaymentsManagement = () => {
       label: "Approve",
       icon: <FiCheck className="inline text-green-600" />,
       onClick: (row) => {
-        alert(`Approved Payment ${row._id}`);
+        handleApprovePayment({
+          id: row?._id,
+          userId : row?.userId,
+          paidFor: row?.paidFor,
+        });
       },
     },
   ];
@@ -104,6 +112,26 @@ const PaymentsManagement = () => {
     </select>
   );
 
+  const handleApprovePayment = async (payment: any) => {
+    try {
+      const payload = {
+        userId: payment?.userId?._id,
+        paidFor: payment?.paidFor,
+        status: "approved",
+      };
+      await toast.promise(
+        updatePaymentStatus({ id: payment?.id, data: payload }).unwrap(),
+        {
+          loading: "Loading...",
+          success: "Notice deleted successfully!",
+          error: "Failed to delete notice. Please try again.",
+        }
+      );
+    } catch (err) {
+      console.error("Error deleting notice:", err);
+    }
+  };
+
   return (
     <div>
       <Table<any>
@@ -121,6 +149,7 @@ const PaymentsManagement = () => {
         setLimit={setLimit}
         children={statusFilterDropdown}
         selectedCity={null}
+        selectedArea={null}
       />
 
       {isProofModalOpen && selectedPaymentProof && (
