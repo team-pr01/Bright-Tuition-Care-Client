@@ -7,8 +7,8 @@ import { setUser } from "../Features/Auth/authSlice";
 import type { RootState } from "../store";
 
 const baseQuery = fetchBaseQuery({
-  // baseUrl: 'https://bright-tuition-care-server.onrender.com/api/v1',
-  baseUrl: "http://localhost:5000/api/v1",
+  baseUrl: 'https://bright-tuition-care-server.onrender.com/api/v1',
+  // baseUrl: "http://localhost:5000/api/v1",
   credentials: "include",
   prepareHeaders: (headers, { getState }) => {
     const token = (getState() as RootState).auth.token;
