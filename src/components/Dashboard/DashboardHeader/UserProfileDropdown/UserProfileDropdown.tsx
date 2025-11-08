@@ -5,15 +5,18 @@ import { IMAGES } from "../../../../assets";
 import { BiHelpCircle, BiLogOut } from "react-icons/bi";
 import { CiSettings } from "react-icons/ci";
 import { LuUser } from "react-icons/lu";
-import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
-import { useCurrentUser } from "../../../../redux/Features/Auth/authSlice";
+import { Link, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { logout, setUser, useCurrentUser } from "../../../../redux/Features/Auth/authSlice";
 import type { TLoggedInUser } from "../../../../types/loggedinUser.types";
+import Cookies from "js-cookie";
 
 const UserProfileDropdown = () => {
   const user = useSelector(useCurrentUser) as TLoggedInUser;
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
+    const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   // Close dropdown when clicking outside
   useEffect(() => {
@@ -57,6 +60,14 @@ const UserProfileDropdown = () => {
 
   const path = user?.role === "tutor" ? "/dashboard/tutor" : "/dashboard/guardian";
 
+   const handleLogout = async () => {
+    dispatch(setUser({ user: null, token: null }));
+    Cookies.remove("accessToken");
+    Cookies.remove("role");
+    dispatch(logout());
+    localStorage.clear();
+    navigate("/signin");
+  };
   return (
     <div className="relative" ref={dropdownRef}>
       {/* Profile Picture Button */}
@@ -140,6 +151,7 @@ const UserProfileDropdown = () => {
                 <motion.ul className="py-2">
                   <motion.li
                     variants={itemVariants}
+                    onClick={handleLogout}
                     className="px-4 py-2 flex items-center gap-3 cursor-pointer hover:bg-red-50/70 text-red-500"
                   >
                     <BiLogOut size={18} /> Log Out

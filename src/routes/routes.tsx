@@ -50,8 +50,10 @@ import InvoiceManagement from "../pages/Dashboard/Admin/InvoiceManagement/Invoic
 import ConfirmationLetterManagement from "../pages/Dashboard/Admin/ConfirmationLetterManagement/ConfirmationLetterManagement";
 import Signup from "../pages/Auth/Signup/Signup";
 import MyApplications from "../pages/Dashboard/Tutor/MyApplications/MyApplications";
+import ProtectedRoute from "./ProtectedRoute";
 
 export const router = createBrowserRouter([
+  // Main layout routes
   {
     path: "/",
     element: <MainLayout />,
@@ -121,7 +123,11 @@ export const router = createBrowserRouter([
   },
   {
     path: "dashboard/tutor",
-    element: <DashboardLayout />,
+    element: (
+      <ProtectedRoute>
+        <DashboardLayout />
+      </ProtectedRoute>
+    ),
     errorElement: <NotFound />,
     children: [
       {
@@ -212,7 +218,11 @@ export const router = createBrowserRouter([
   },
   {
     path: "dashboard/guardian",
-    element: <DashboardLayout />,
+    element: (
+      <ProtectedRoute>
+        <DashboardLayout />
+      </ProtectedRoute>
+    ),
     errorElement: <NotFound />,
     children: [
       {
@@ -276,7 +286,11 @@ export const router = createBrowserRouter([
   },
   {
     path: "dashboard/admin",
-    element: <DashboardLayout />,
+    element: (
+      <ProtectedRoute>
+        <DashboardLayout />
+      </ProtectedRoute>
+    ),
     errorElement: <NotFound />,
     children: [
       {

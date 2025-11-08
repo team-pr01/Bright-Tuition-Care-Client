@@ -317,7 +317,13 @@ const JobCard: React.FC<TJobCardProps> = ({
               variant="primary"
               icon={ICONS.topRightArrowWhite}
               iconBg="#0D99FF"
-              onClick={() => setIsJobApplyConfirmationModalOpen(true)}
+              onClick={() => {
+                if(!user){
+                  toast.error("Please login to apply for a job.");
+                } else {
+                  setIsJobApplyConfirmationModalOpen(true);
+                }
+              }}
               isDisabled={isApplied}
             />
           </div>

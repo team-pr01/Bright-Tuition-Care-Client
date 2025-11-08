@@ -4,9 +4,21 @@ import Button from "../../Reusable/Button/Button";
 import Container from "../../Reusable/Container/Container";
 import { navLinks } from "./navlinks";
 import HamburgerMenu from "./HamburgerMenu";
+import { useSelector } from "react-redux";
+import { useCurrentUser } from "../../../redux/Features/Auth/authSlice";
+import type { TLoggedInUser } from "../../../types/loggedinUser.types";
 
 const Navbar = () => {
+  const user = useSelector(useCurrentUser) as TLoggedInUser;
   const location = useLocation();
+  const dashboardPath =
+    user?.role === "tutor"
+      ? "tutor"
+      : user?.role === "admin"
+      ? "admin"
+      : user?.role === "guardian"
+      ? "guardian"
+      : "staff";
 
   return (
     <div
@@ -37,17 +49,34 @@ const Navbar = () => {
           </div>
 
           {/* Auth Buttons */}
-          <div className="hidden lg:flex items-center gap-5">
-            <Link to={"/signup"}>
-              <Button label="Sign Up" variant="tertiary" className="text-sm" />
-            </Link>
-            <Link to={"/signup"}>
-              <Button
-                label="Become A Tutor"
-                variant="quaternary"
-                className="text-sm"
-              />
-            </Link>
+          <div className="hidden lg:flex">
+            {!user && (
+              <div className="hidden lg:flex items-center gap-5">
+                <Link to={"/signin"}>
+                  <Button
+                    label="Sign In"
+                    variant="tertiary"
+                    className="text-sm"
+                  />
+                </Link>
+                <Link to={"/signup"}>
+                  <Button
+                    label="Become A Tutor"
+                    variant="quaternary"
+                    className="text-sm"
+                  />
+                </Link>
+              </div>
+            )}
+            {user && (
+              <Link to={`/dashboard/${dashboardPath}/home`}>
+                <Button
+                  label="Dashboard"
+                  variant="quaternary"
+                  className="text-sm"
+                />
+              </Link>
+            )}
           </div>
           <div className="flex lg:hidden items-center gap-3">
             {/* <Button label="Sign In" variant="primary" className="text-sm" /> */}
