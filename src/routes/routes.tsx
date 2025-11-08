@@ -200,6 +200,14 @@ export const router = createBrowserRouter([
         path: "important-guidelines",
         element: <ImportantGuidelines />,
       },
+      {
+        path: "share-app",
+        element: <ShareThisApp />,
+      },
+      {
+        path: "terms-and-conditions",
+        element: <TermsAndConditionsDashboard />,
+      },
     ],
   },
   {

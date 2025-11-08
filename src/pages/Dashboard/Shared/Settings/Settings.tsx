@@ -25,7 +25,29 @@ const Settings = () => {
       icon: <RiLockPasswordLine />,
     },
   ];
-  const settingsTabs = [
+  const guardianSettingsTabs = [
+    {
+      title: "Contact Info",
+      description: "Manage your contact details.",
+      icon: <RiContactsBook3Line />,
+    },
+    {
+      title: "Change Password",
+      description: "Update your password to be secure.",
+      icon: <RiLockPasswordLine />,
+    },
+    {
+      title: "Profile Verification",
+      description: "Verify your profile to gain full access.",
+      icon: <PiIdentificationBadge />,
+    },
+    {
+      title: "Delete Account",
+      description: "Delete your account.",
+      icon: <BsTrash />,
+    },
+  ];
+  const tutorSettingsTabs = [
     {
       title: "Contact Info",
       description: "Manage your contact details.",
@@ -57,7 +79,7 @@ const Settings = () => {
     <div className="font-Nunito">
       {/* Tabs */}
       <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
-        {(user?.role === "admin" ? adminSettingsTabs : settingsTabs).map(
+        {(user?.role === "admin" ? adminSettingsTabs : user?.role === "guardian" ? guardianSettingsTabs : tutorSettingsTabs).map(
           (role) => {
             const isActive = role?.title === activeTab;
             return (

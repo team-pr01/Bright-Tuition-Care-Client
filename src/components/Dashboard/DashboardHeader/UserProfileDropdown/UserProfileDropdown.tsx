@@ -6,8 +6,12 @@ import { BiHelpCircle, BiLogOut } from "react-icons/bi";
 import { CiSettings } from "react-icons/ci";
 import { LuUser } from "react-icons/lu";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { useCurrentUser } from "../../../../redux/Features/Auth/authSlice";
+import type { TLoggedInUser } from "../../../../types/loggedinUser.types";
 
 const UserProfileDropdown = () => {
+  const user = useSelector(useCurrentUser) as TLoggedInUser;
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
@@ -22,7 +26,6 @@ const UserProfileDropdown = () => {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  // Main dropdown animation
   const dropdownVariants: any = {
     hidden: {
       opacity: 0,
@@ -45,13 +48,14 @@ const UserProfileDropdown = () => {
     exit: { opacity: 0, scale: 0.9, transition: { duration: 0.2 } },
   };
 
-  // List item animation
   const itemVariants = {
     hidden: { opacity: 0, x: -15 },
     visible: { opacity: 1, x: 0 },
   };
 
   const MotionLink = motion(Link);
+
+  const path = user?.role === "tutor" ? "/dashboard/tutor" : "/dashboard/guardian";
 
   return (
     <div className="relative" ref={dropdownRef}>
@@ -62,9 +66,9 @@ const UserProfileDropdown = () => {
       >
         <div className="p-[2px] bg-white rounded-full w-full h-full">
           <img
-            src={IMAGES.dummyAvatar}
+            src={user?.profilePicture || IMAGES.dummyAvatar}
             className="w-full h-full object-cover rounded-full"
-            alt="User Avatar"
+            alt={user?.name}
           />
         </div>
       </button>
@@ -86,22 +90,22 @@ const UserProfileDropdown = () => {
                 className="px-4 py-3 border-b border-neutral-20/10 flex items-center gap-3"
               >
                 <img
-                  src={IMAGES.dummyAvatar}
+                  src={user?.profilePicture || IMAGES.dummyAvatar}
                   className="size-10 object-cover rounded-full"
-                  alt="Kasper Carlsen"
+                  alt={user?.name}
                 />
                 <div>
                   <p className="font-semibold text-neutral-90">
-                    Kasper Carlsen
+                    {user?.name}
                   </p>
-                  <p className="text-sm text-neutral-45">Product Designer</p>
+                  <p className="text-sm text-neutral-45 capitalize">{user?.role} Id: {user?.roleBasedId}</p>
                 </div>
               </motion.div>
 
               {/* Menu Links */}
               <motion.ul className="py-2">
                 <MotionLink
-                  to="/dashboard/tutor/my-profile"
+                  to={`${path}/my-profile`}
                   onClick={() => setIsOpen(false)}
                   variants={itemVariants}
                   className="px-4 py-2 flex items-center gap-3 cursor-pointer hover:bg-neutral-45/10 transition duration-500"
@@ -109,7 +113,7 @@ const UserProfileDropdown = () => {
                   <LuUser size={18} /> View Profile
                 </MotionLink>
                 <MotionLink
-                  to="/dashboard/tutor/important-guidelines"
+                  to={`${path}/important-guidelines`}
                   onClick={() => setIsOpen(false)}
                   variants={itemVariants}
                   className="px-4 py-2 flex items-center gap-3 cursor-pointer hover:bg-neutral-45/10 transition duration-500"
@@ -117,7 +121,7 @@ const UserProfileDropdown = () => {
                   <BiHelpCircle size={18} /> Important Guidelines
                 </MotionLink>
                 <MotionLink
-                  to="/dashboard/tutor/settings"
+                  to={`${path}/settings`}
                   onClick={() => setIsOpen(false)}
                   variants={itemVariants}
                   className="px-4 py-2 flex items-center gap-3 cursor-pointer hover:bg-neutral-45/10 transition duration-500"

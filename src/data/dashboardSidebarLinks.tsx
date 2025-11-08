@@ -17,21 +17,17 @@ import {
   LuCreditCard,
   LuSettings,
   LuAward,
-  LuShare2,
-  LuFileText,
   LuUserRoundSearch,
 } from "react-icons/lu";
 import { MdOutlineMail } from "react-icons/md";
 import { RiFacebookFill } from "react-icons/ri";
 import { TbSettingsQuestion } from "react-icons/tb";
 
-interface DashboardLink {
+export interface DashboardLink {
   label: string;
   path: string;
   icon: React.ReactNode;
 }
-
-const user = { role: "guardian" };
 
 export const tutorDashboardLinks: DashboardLink[] = [
   {
@@ -213,19 +209,4 @@ export const adminDashboardLinks: DashboardLink[] = [
   },
 ];
 
-export const otherLinks: DashboardLink[] = [
-  {
-    label: "Share The App",
-    path: `/dashboard/${
-      user?.role === "tutor" ? "tutor" : "guardian"
-    }/share-app`,
-    icon: <LuShare2 />,
-  },
-  {
-    label: "Terms & Conditions",
-    path: `/dashboard/${
-      user?.role === "tutor" ? "tutor" : "guardian"
-    }/terms-and-conditions`,
-    icon: <LuFileText />,
-  },
-];
+

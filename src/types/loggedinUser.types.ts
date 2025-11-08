@@ -5,4 +5,8 @@ export type TLoggedInUser = {
   email: string;
   phoneNumber: string;
   role: "tutor" | "guardian" | "staff" | "admin" | string;
+  profilePicture: string;
+  createdAt: string;
+  roleBasedId: string;
+  isVerified ?: boolean
 };
