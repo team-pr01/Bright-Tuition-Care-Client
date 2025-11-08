@@ -1,8 +1,12 @@
+import { useSelector } from "react-redux";
+import { useCurrentUser } from "../../../redux/Features/Auth/authSlice";
+import type { TLoggedInUser } from "../../../types/loggedinUser.types";
 import DashboardHamburgerMenu from "../DashboardHamburgerMenu/DashboardHamburgerMenu";
 import Notification from "./Notification/Notification";
 import UserProfileDropdown from "./UserProfileDropdown/UserProfileDropdown";
 
 const DashboardHeader = () => {
+  const user = useSelector(useCurrentUser) as TLoggedInUser;
   return (
     <div className="px-3 lg:px-6 py-3 font-Nunito flex items-center justify-between sticky top-0 bg-white z-10 border-b border-neutral-50/40">
       <DashboardHamburgerMenu/>
@@ -22,7 +26,10 @@ const DashboardHeader = () => {
         <Notification />
 
         {/* Profile Picture */}
-       <UserProfileDropdown/>
+       {
+        user && (user.role !== "admin" && user.role !== "staff") &&
+        <UserProfileDropdown user={user}/>
+       }
       </div>
     </div>
   );

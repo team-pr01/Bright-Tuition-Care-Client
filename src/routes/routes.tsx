@@ -51,6 +51,8 @@ import ConfirmationLetterManagement from "../pages/Dashboard/Admin/ConfirmationL
 import Signup from "../pages/Auth/Signup/Signup";
 import MyApplications from "../pages/Dashboard/Tutor/MyApplications/MyApplications";
 import ProtectedRoute from "./ProtectedRoute";
+import AdminAuthLayout from "../layouts/AdminAuthLayout";
+import AdminOrStaffLogin from "../pages/Auth/AdminOrStaffLogin/AdminOrStaffLogin";
 
 export const router = createBrowserRouter([
   // Main layout routes
@@ -121,6 +123,7 @@ export const router = createBrowserRouter([
       },
     ],
   },
+  // Tutor dashboard routes
   {
     path: "dashboard/tutor",
     element: (
@@ -216,6 +219,7 @@ export const router = createBrowserRouter([
       },
     ],
   },
+  // Guardian dashboard routes
   {
     path: "dashboard/guardian",
     element: (
@@ -284,6 +288,7 @@ export const router = createBrowserRouter([
       },
     ],
   },
+  // Admin dashboard routes
   {
     path: "dashboard/admin",
     element: (
@@ -372,6 +377,20 @@ export const router = createBrowserRouter([
       {
         path: "settings",
         element: <Settings />,
+      },
+    ],
+  },
+  // Admin/Staff login
+  {
+    path: "admin",
+    element: (
+        <AdminAuthLayout />
+    ),
+    errorElement: <NotFound />,
+    children: [
+      {
+        path: "",
+        element: <AdminOrStaffLogin />,
       },
     ],
   },

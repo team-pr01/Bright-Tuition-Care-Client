@@ -19,10 +19,10 @@ const ProtectedRoute = ({ children }: ProtectedRouteProps) => {
 
   // Role-based access map
   const roleAccess: Record<string, string> = {
-    tutor: "/dashboard/tutor/home",
-    guardian: "/dashboard/guardian/home",
-    admin: "/dashboard/admin/home",
-    staff: "/dashboard/staff/home",
+    tutor: "/dashboard/tutor",
+    guardian: "/dashboard/guardian",
+    admin: "/dashboard/admin",
+    staff: "/dashboard/staff",
   };
 
   if (user) {
@@ -35,7 +35,8 @@ const ProtectedRoute = ({ children }: ProtectedRouteProps) => {
       allowedBase &&
       !currentPath.startsWith(allowedBase)
     ) {
-      return <Navigate to={allowedBase} replace />;
+      // Redirect to their own dashboard home
+      return <Navigate to={`${allowedBase}/home`} replace />;
     }
   }
 

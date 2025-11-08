@@ -6,13 +6,13 @@ import { BiHelpCircle, BiLogOut } from "react-icons/bi";
 import { CiSettings } from "react-icons/ci";
 import { LuUser } from "react-icons/lu";
 import { Link, useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { logout, setUser, useCurrentUser } from "../../../../redux/Features/Auth/authSlice";
-import type { TLoggedInUser } from "../../../../types/loggedinUser.types";
+import { useDispatch } from "react-redux";
+import { logout, setUser } from "../../../../redux/Features/Auth/authSlice";
 import Cookies from "js-cookie";
+import type { TLoggedInUser } from "../../../../types/loggedinUser.types";
 
-const UserProfileDropdown = () => {
-  const user = useSelector(useCurrentUser) as TLoggedInUser;
+const UserProfileDropdown = ({user} : {user:TLoggedInUser}) => {
+  
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
     const dispatch = useDispatch();

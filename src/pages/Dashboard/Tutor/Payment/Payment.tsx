@@ -16,43 +16,62 @@ const Payment = () => {
     "bankTransfer" | "bKash" | "nagad" | string
   >("");
 
+  const [selectedAmount, setSelectedAmount] = useState<number>(0);
+
+  // Charge details
+  const charges = [
+    {
+      title: "Platform Charge",
+      amount: 500,
+      icon: ICONS.platformCharge,
+      description:
+        "After finalizing a job to a tutor, we ask for (55%-Home Tutoring; 55%-Online Tutoring; 35%-Package Tutoring; 55%-Group Tutoring) advance of his/her first month's payment only once for each tuition job.",
+    },
+    {
+      title: "Verification Charge",
+      amount: 500,
+      icon: ICONS.verificationCharge,
+      description:
+        "A one-time verification fee to verify your tutor profile, academic documents, and identity for ensuring trust and authenticity.",
+    },
+  ];
+
   return (
     <div className="font-Nunito flex flex-col justify-between gap-5 h-full">
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-6">
-        <div className="bg-white border border-primary-40/10 rounded-2xl py-7 px-5 flex flex-col items-center gap-5">
-          <img
-            src={ICONS.platformCharge}
-            alt="platform-charge"
-            className="size-20"
-          />
+        {charges.map((charge, index) => (
+          <div
+            key={index}
+            className="bg-white border border-primary-40/10 rounded-2xl py-7 px-5 flex flex-col items-center gap-5"
+          >
+            <img src={charge.icon} alt={charge.title} className="size-20" />
 
-          <div className="text-neutral-10 text-center">
-            <h1 className="font-bold text-xl">
-              Platform Charge <span className="text-primary-10">500 BDT</span>
-            </h1>
-            <p className="text-sm mt-[6px]">
-              After finalizing a job to a tutor, we ask for (55%-Home Tutoring;
-              55%-Online Tutoring; 35%-Package Tutoring; 55%-Group Tutoring)
-              advance of his/her first month's payment only once for each
-              tuition job.
-            </p>
+            <div className="text-neutral-10 text-center">
+              <h1 className="font-bold text-xl">
+                {charge.title}{" "}
+                <span className="text-primary-10">{charge.amount} BDT</span>
+              </h1>
+              <p className="text-sm mt-[6px]">{charge.description}</p>
+            </div>
+
+            <Button
+              type="button"
+              label="Pay Now"
+              variant="tertiary"
+              className="py-2 lg:py-2"
+              onClick={() => {
+                setSelectedAmount(charge.amount);
+                setIsPaymentModalOpen(true);
+                setPaymentModalType("selectPaymentMethod");
+              }}
+            />
           </div>
-
-          <Button
-            type="button"
-            label="Pay Now"
-            variant="tertiary"
-            className="py-2 lg:py-2"
-            onClick={() => {
-              setIsPaymentModalOpen(true);
-              setPaymentModalType("selectPaymentMethod");
-            }}
-          />
-        </div>
+        ))}
       </div>
 
       <SupportBar />
 
+      {/* Payment Modal */}
       <Modal
         isModalOpen={isPaymentModalOpen}
         setIsModalOpen={setIsPaymentModalOpen}
@@ -68,7 +87,7 @@ const Payment = () => {
           <SelectedPaymentMethod
             selectedPaymentMethod={selectedPaymentMethod}
             setPaymentModalType={setPaymentModalType}
-            amount={500}
+            amount={selectedAmount}
           />
         )}
       </Modal>
