@@ -109,8 +109,7 @@ const MyLeads = () => {
       );
     }
   };
-
-  console.log(myLeads);
+  
   return (
     <div>
       <Table<any>

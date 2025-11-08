@@ -1,6 +1,6 @@
 import React from "react";
 import { BsBriefcase } from "react-icons/bs";
-import { FaChalkboardTeacher, FaUserShield } from "react-icons/fa";
+import { FaChalkboardTeacher, FaRegFileAlt, FaUserShield } from "react-icons/fa";
 import {
   FiCreditCard,
   FiFileText,
@@ -48,6 +48,11 @@ export const tutorDashboardLinks: DashboardLink[] = [
     label: "Profile",
     path: "/dashboard/tutor/my-profile",
     icon: <LuUser />,
+  },
+  {
+    label: "My Applications",
+    path: "/dashboard/tutor/my-applications",
+    icon: <FaRegFileAlt />,
   },
   {
     label: "How It Works",

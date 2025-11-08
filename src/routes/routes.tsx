@@ -49,6 +49,7 @@ import Invoice from "../pages/Dashboard/Tutor/Invoice/Invoice";
 import InvoiceManagement from "../pages/Dashboard/Admin/InvoiceManagement/InvoiceManagement";
 import ConfirmationLetterManagement from "../pages/Dashboard/Admin/ConfirmationLetterManagement/ConfirmationLetterManagement";
 import Signup from "../pages/Auth/Signup/Signup";
+import MyApplications from "../pages/Dashboard/Tutor/MyApplications/MyApplications";
 
 export const router = createBrowserRouter([
   {
@@ -134,6 +135,10 @@ export const router = createBrowserRouter([
       {
         path: "job-applications/:status",
         element: <JobApplicationsSummary />,
+      },
+      {
+        path: "my-applications",
+        element: <MyApplications />,
       },
       {
         path: "my-profile",

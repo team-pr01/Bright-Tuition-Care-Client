@@ -55,6 +55,32 @@ const tutorApi = baseApi.injectEndpoints({
       providesTags: ["tutor"],
     }),
 
+    getMyApplications: builder.query<any, any | void>({
+      query: ({ keyword, status, page = 1, limit = 10 } = {}) => {
+        const params = new URLSearchParams();
+
+        if (keyword) params.append("keyword", keyword);
+        if (status) params.append("status", status);
+        if (page) params.append("page", page.toString());
+        if (limit) params.append("limit", limit.toString());
+
+        return {
+          url: `/tutor/my-applications?${params.toString()}`,
+          method: "GET",
+          credentials: "include",
+        };
+      },
+      providesTags: ["tutor"],
+    }),
+
+    withdrawApplication: builder.mutation({
+      query: (id) => ({
+        url: `/application/withdraw/${id}`,
+        method: "PATCH",
+      }),
+      invalidatesTags: ["tutor"],
+    }),
+
     toggleTutorProfileStatus: builder.mutation({
       query: (tutorId) => ({
         url: `/tutor/profile-lock/${tutorId}`,
@@ -75,9 +101,11 @@ const tutorApi = baseApi.injectEndpoints({
 });
 
 export const {
-    useGetAllTutorsQuery,
-    useGetSingleTutorByIdQuery,
-    useGetMyTutorProfileQuery,
-    useToggleTutorProfileStatusMutation,
-    useUpdateIdentityInfoMutation
+  useGetAllTutorsQuery,
+  useGetSingleTutorByIdQuery,
+  useGetMyTutorProfileQuery,
+  useGetMyApplicationsQuery,
+  useWithdrawApplicationMutation,
+  useToggleTutorProfileStatusMutation,
+  useUpdateIdentityInfoMutation,
 } = tutorApi;
