@@ -61,7 +61,7 @@ const DownloadApp: React.FC = () => {
 
           {/* Right Image Content */}
           <motion.div
-            className="w-full lg:w-[60%] flex flex-col gap-4 lg:gap-8"
+            className="w-full lg:w-[60%] flex flex-col gap-4"
             variants={contentVariants}
             initial="hidden"
             whileInView="visible"
@@ -76,12 +76,9 @@ const DownloadApp: React.FC = () => {
             />
 
             <p className="text-neutral-20 text-lg leading-[24px] text-center lg:text-start">
-              Bright Tuition Care is Bangladesh's first and most trusted online
-              platform for guardians, students and tutors to connect with
-              verified tutors and find any tuition jobs throughout the country.
-              Bright tuition care is dedicated to bridging the educational
+              Access everything you need for learning and teaching in one place. With our app, students can find expert tutors instantly and tutors can easily manage their tuitions — all through a smooth and user-friendly experience.
             </p>
-            <div className="flex justify-center lg:justify-start flex-row gap-4 items-center">
+            <div className="flex justify-center lg:justify-start flex-row gap-4 items-center mt-5">
               <IconButton variant="primary" icon={ICONS.appStore} />
               <IconButton variant="primary" icon={ICONS.playStore} />
             </div>

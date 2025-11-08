@@ -63,7 +63,7 @@ const Heading: React.FC<HeadingProps> = ({
     >
       <motion.div variants={itemVariants}>
         <h1
-          className={`text-2xl lg:text-[38px] font-Nunito font-semibold lg:font-bold text-neutral-10 leading-8 ${headingClassName}`}
+          className={`text-2xl lg:text-[38px] font-Nunito font-semibold lg:font-bold text-neutral-10 leading-8 2xl:leading-12 ${headingClassName}`}
         >
           {titleParts.map((part, index) => (
             <span key={index} className={part.highlight ? "text-blue-600" : ""}>

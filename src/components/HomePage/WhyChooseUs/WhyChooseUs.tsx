@@ -2,6 +2,7 @@
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import Container from "../../Reusable/Container/Container";
+import { ICONS } from "../../../assets";
 
 const WhyChooseUs = () => {
   const [ref, inView] = useInView({
@@ -81,52 +82,40 @@ const WhyChooseUs = () => {
 
   const features = [
     {
-      icon: "🎯",
-      title: "Personalized Learning",
+      title: "Verified & Experienced Tutors",
+      icon: ICONS.verified,
       description:
-        "Customized lesson plans tailored to each student's unique learning style, pace, and academic goals for maximum effectiveness.",
-      gradient: "from-blue-500 to-cyan-500",
-      bgGradient: "from-blue-50 to-cyan-50",
+        "Every tutor’s profile, academic background, and experience are carefully verified — ensuring guardians and students get the most reliable and skilled tutors.",
     },
     {
-      icon: "👨‍🏫",
-      title: "Expert Tutors",
+      title: "Secure and Trustworthy",
+      icon: ICONS.secure,
       description:
-        "Highly qualified tutors with advanced degrees and proven track records of student success across all subjects.",
-      gradient: "from-sky-500 to-blue-600",
-      bgGradient: "from-sky-50 to-blue-50",
+        "Secure and transparent managing of all documents and transactions, fostering confidence for both guardians and tutors.",
     },
     {
-      icon: "📊",
-      title: "Smart Progress Tracking",
+      title: "Fast & Reliable Service",
+      icon: ICONS.fastAndReliable,
       description:
-        "AI-powered analytics and regular assessments with detailed progress reports and actionable insights.",
-      gradient: "from-indigo-500 to-purple-500",
-      bgGradient: "from-indigo-50 to-purple-50",
+        "Get matched with the right tutor in the shortest time. Tutors also receive instant tuition offers and responsive support.",
     },
     {
-      icon: "💻",
-      title: "Flexible Learning",
+      title: "Customized Tuition Matching",
+      icon: ICONS.customizedTuition,
       description:
-        "Learn anytime, anywhere with our hybrid model - choose between online sessions or in-person tutoring.",
-      gradient: "from-teal-500 to-blue-500",
-      bgGradient: "from-teal-50 to-blue-50",
+        "Tuition is perfectly aligned with the student’s subject, schedule, and budget - ensuring a balanced and effective learning experience.",
     },
     {
-      icon: "🏆",
-      title: "Proven Excellence",
+      title: "Efficient & Affordable Services",
+      icon: ICONS.efficient,
       description:
-        "95% of our students show significant grade improvement within the first month of joining our program.",
-      gradient: "from-blue-600 to-indigo-600",
-      bgGradient: "from-blue-50 to-indigo-50",
+        "Expert guidance that ensures optimal learning outcomes at a reasonable cost.",
     },
     {
-      icon: "🤝",
-      title: "24/7 Support",
+      title: "Progress Monitoring & Support",
+      icon: ICONS.customerSupport,
       description:
-        "Round-the-clock academic support, homework help, and guidance for both students and parents.",
-      gradient: "from-cyan-500 to-blue-500",
-      bgGradient: "from-cyan-50 to-blue-50",
+        "Bright Tuition Care ensures continuous progress tracking and 24/7 support, assisting both guardians and tutors effectively.",
     },
   ];
 
@@ -184,12 +173,6 @@ const WhyChooseUs = () => {
             variants={containerVariants}
             className="text-center mb-20"
           >
-            <motion.div variants={titleVariants} className="inline-block mb-4">
-              <span className="text-sm font-semibold tracking-wider text-blue-200 uppercase bg-blue-900 bg-opacity-50 px-4 py-2 rounded-full border border-primary-40 border-opacity-30">
-                Why We're Different
-              </span>
-            </motion.div>
-
             <motion.h2
               variants={titleVariants}
               className="text-5xl md:text-7xl font-bold text-white mb-6"
@@ -231,7 +214,7 @@ const WhyChooseUs = () => {
               >
                 {/* Background Glow Effect */}
                 <div
-                  className={`absolute inset-0 bg-gradient-to-r ${feature.gradient} rounded-3xl blur-lg opacity-0 group-hover:opacity-30 transition-opacity duration-500`}
+                  className={`absolute inset-0 rounded-3xl blur-lg opacity-0 group-hover:opacity-30 transition-opacity duration-500`}
                 />
 
                 {/* Main Card */}
@@ -242,9 +225,9 @@ const WhyChooseUs = () => {
                   <motion.div
                     variants={floatingIconVariants}
                     animate="float"
-                    className={`inline-flex items-center justify-center w-20 h-20 rounded-2xl bg-gradient-to-r ${feature.gradient} mb-6 shadow-lg shadow-blue-500/20`}
+                    className={`mb-6 flex items-center justify-center`}
                   >
-                    <span className="text-3xl">{feature.icon}</span>
+                    <img src={feature.icon} alt="" className="size-20" />
                   </motion.div>
 
                   {/* Content */}
@@ -270,16 +253,15 @@ const WhyChooseUs = () => {
             <motion.div
               whileHover={{
                 scale: 1.05,
-                boxShadow: "0 20px 40px rgba(34, 211, 238, 0.3)",
               }}
               whileTap={{ scale: 0.95 }}
               className="inline-block"
             >
               <a
-                href="/signup"
-                className="inline-block bg-gradient-to-r from-cyan-500 to-blue-500 text-white px-6 py-4 md:px-12 md:py-4 rounded-2xl font-semibold text-base md:text-lg shadow-2xl hover:shadow-3xl transition-all duration-300 relative overflow-hidden group w-full sm:w-auto text-center"
+                href="/hire-a-tutor"
+                className="inline-block bg-gradient-to-r from-cyan-500 to-blue-500 text-white px-6 py-4 md:px-12 md:py-4 rounded-2xl font-semibold text-base md:text-lg shadow-2xl transition-all duration-300 relative overflow-hidden group w-full sm:w-auto text-center"
               >
-                Start Your Success Journey Today
+                Find Your Perfect Tutor Today
               </a>
             </motion.div>
           </motion.div>

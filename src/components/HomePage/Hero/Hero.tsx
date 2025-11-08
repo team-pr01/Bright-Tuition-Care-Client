@@ -91,10 +91,12 @@ const Hero = () => {
           >
             <ImWhatsapp className="text-green-500 text-xl" />
             <a
-              href="tel:+8801616012365"
+              href="https://wa.me/8801610785588"
+              target="_blank"
+              rel="noopener noreferrer"
               className="text-lg text-neutral-10 font-semibold leading-[24px] hover:text-green-500 transition-colors duration-300"
             >
-              +880 1616-012365
+              +880 1610-785588
             </a>
           </motion.div>
 
@@ -109,9 +111,8 @@ const Hero = () => {
             className="text-neutral-10 text-sm lg:text-lg leading-normal lg:leading-6 max-w-full lg:max-w-[600px] mt-4"
             variants={itemVariants}
           >
-            Whether you're a student seeking expert guidance or a tutor looking
-            for new opportunities — our platform connects you in just a few
-            clicks. Learn smarter. Teach better.
+            Easily connect with verified, qualified tutors for any subject or
+            class in your area and enhance your learning experience.
           </motion.p>
 
           <motion.div

@@ -15,26 +15,27 @@ export const studentOrGuardianSteps = [
     description:
       "Fill out a simple form with your subject, class, location, and preferred tutoring method. It takes less than 2 minutes!",
   },
-  {
+   {
     step : 2,
-    icon: ICONS.choose,
-    title: "Chose The Right One",
+    icon: ICONS.receive,
+    title: "Receive the Best Tutor CVs",
     description:
-      "Browse tutor profiles, compare experience, read reviews, and choose the best fit for your child.",
+      "TWithin 24 hours, you will get up to 3 CVs of the best tutors who applied your posted tuition job.",
   },
   {
     step : 3,
-    icon: ICONS.receive,
-    title: "Receive the Best Tutors",
+    icon: ICONS.choose,
+    title: "Chose the Right One",
     description:
-      "Top-rated and verified tutors will respond to your request. We filter based on quality, reviews, and availability.",
+      "Browse tutor profiles, compare experience, read reviews, and select the best tutor from the shortlist.",
   },
+ 
   {
     step : 4,
     icon: ICONS.getStarted,
     title: "Get Started Learning",
     description:
-      "Schedule your first session and begin a productive learning journey — at home or online, as you prefer.",
+      "Confirm your tutor by verifying their experience through trial classes and start learning.",
   },
 ];
 
@@ -43,7 +44,7 @@ export const tutorSteps = [
     step: 1,
     title: "Create Your Free Account",
     description:
-      "Register quickly using your email or social account. It's 100% free for tutors.",
+      "Click the Become A Tutor button & fill out all required information.",
     icon: <FaUserPlus />,
     iconBg: "#007bff",
   },
@@ -51,7 +52,7 @@ export const tutorSteps = [
     step: 2,
     title: "Complete Your Profile Setup",
     description:
-      "Add your educational background, subjects, location, experience, and availability to build trust and visibility.",
+      "Complete your profile by including your personal, educational, and tuition-related details along with any necessary documentation.",
     icon: <FaUserCheck />,
     iconBg: "#007bff",
   },
@@ -59,15 +60,15 @@ export const tutorSteps = [
     step: 3,
     title: "Apply To Your Preferred Jobs",
     description:
-      "Browse tuition requests that match your expertise. Apply to jobs that suit your timing and location.",
+      "Check the job board regularly and apply for your preferred tuition jobs.",
     icon: <FaBriefcase />,
     iconBg: "#007bff",
   },
   {
     step: 4,
-    title: "Get Shortlisted by Students / Guardian",
+    title: "Get Shortlisted by Guardian/Students",
     description:
-      "If selected, your profile will be shared with the student/guardian for review and confirmation.",
+      "Be shortlisted by guardians/students based on the information provided in your profile.",
     icon: <FaUsers />,
     iconBg: "#007bff",
   },
@@ -75,7 +76,7 @@ export const tutorSteps = [
     step: 5,
     title: "Start Your Tutoring Journey",
     description:
-      "Once confirmed, begin tutoring sessions and make a positive impact. Teach online or at home — your choice.",
+      "Take trial classes to confirm your desired tuition job and teaching.",
     icon: <FaPlayCircle />,
     iconBg: "#007bff",
   },

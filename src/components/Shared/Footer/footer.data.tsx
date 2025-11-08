@@ -56,7 +56,7 @@ export const quickLinks = [
   },
   {
     label: "Become A Tutor",
-    path: "/become-a-tutor",
+    path: "/signup",
   },
   {
     label: "Terms & Conditions",
@@ -72,8 +72,8 @@ export const quickLinks = [
 export const contactInfo = [
   {
     icon: <FiPhone className="text-xl" />,
-    label: "+880 1616-012365",
-    href: "tel:+8801616012365",
+    label: "09617-785588",
+    href: "tel:09617-785588",
   },
   {
     icon: <HiOutlineMail className="text-xl" />,
@@ -82,13 +82,13 @@ export const contactInfo = [
   },
   {
     icon: <IoLocationOutline className="text-xl" />,
-    label: "7 temasek boulevard #12-07 suntec tower one singapore (038987)",
+    label: "House-P23,Noorjahan Road, Mohammadpur, Dhaka-1207",
   },
 ];
 
 export const companyDetails = [
   "Trade License No :",
-  "TRAD/DNCC/095492/2022",
+  "TRAD/DNCC/017918/2023",
   "E-TIN Number : 435024284395",
-  "BIN Number : 003669024-0102",
+  "BIN Number : 003669024-010",
 ];

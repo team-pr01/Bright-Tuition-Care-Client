@@ -57,7 +57,7 @@ const StudentSteps = () => {
         <div>
           <Heading
             titleParts={[
-              { text: "How The System Works For Students / Guardian" },
+              { text: "How The System Works For Guardian/Students?" },
             ]}
             description={
               "Finding the right tutor is easier than ever. Follow these simple steps to connect with the best educators for your child."

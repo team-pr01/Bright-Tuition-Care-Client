@@ -66,16 +66,22 @@ const AboutUs = () => {
             <Heading titleParts={[{ text: "About Bright Tuition Care" }]} />
             <div className="flex flex-col gap-5 mt-2 lg:mt-4 text-neutral-45 text-lg leading-6 text-center lg:text-start">
               <p className="font-Nunito">
-                At Bright Tutor Care, we are passionate about connecting
-                students with the perfect tutors to support their learning
-                journey. Whether you are a student, guardian, or tutor, our
-                mission is to make tutoring simple, effective, and accessible
-                for everyone. We believe that every student deserves quality
-                education tailored to their unique needs. That's why we have
-                built a trusted platform where finding the right tutor is quick,
-                reliable, and hassle-free. From academic subjects to special
-                skills, our network of experienced tutors is here to help
-                students reach their full potential.
+                At Bright Tuition Care, we are dedicated to connecting students
+                with the most suitable and qualified tutors to{" "}
+                <strong>support</strong> their learning journey. Whether you’re
+                a student, guardian, or tutor, our goal is to make the tutoring
+                experience simple, effective, and accessible for everyone.
+                <br />
+                <br />
+                We believe that every learner deserves a quality education
+                customized to their individual goals and learning style. That’s
+                why we’ve built a trusted platform where finding the right tutor
+                is quick, reliable, and <strong>hassle-free</strong>.
+                <br />
+                <br />
+                From academic subjects to specialized skills, our network of
+                verified and experienced tutors is committed to helping students
+                reach their full potential.
               </p>
             </div>
             <div className="flex flex-row gap-4 mt-12 items-center justify-center lg:justify-start">

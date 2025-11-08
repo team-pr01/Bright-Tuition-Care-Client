@@ -47,15 +47,13 @@ const Banner: React.FC = () => {
           variants={itemVariants}
           className="text-xl md:text-4xl lg:text-[44px] leading-7 md:leading-10 lg:leading-12 text-center font-bold text-white max-w-[800px] mx-auto"
         >
-          Unlock Smarter Education With One Simple Registration Step
+          Start your journey to effective learning and tutoring with a simple registration.
         </motion.h1>
         <motion.p
           variants={itemVariants}
           className="text-xs md:text-base leading-5 lg:leading-6 text-center font-medium mt-4 text-white max-w-[655px] mx-auto"
         >
-          Join our trusted platform connecting students, guardians, and tutors.
-          Simplify the way you learn or teach with easy registration, verified
-          profiles, and smart tools—anytime, anywhere, on mobile.
+          With one easy registration, guardians connect with verified tutors, and tutors access genuine students on a trusted platform. Join Bright Tuition Care to make learning and tutoring simple, effective, and rewarding!
         </motion.p>
 
         <motion.div

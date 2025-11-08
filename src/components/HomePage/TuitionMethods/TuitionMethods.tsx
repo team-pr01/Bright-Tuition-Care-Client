@@ -38,7 +38,7 @@ const TuitionMethods: React.FC = () => {
       <Container>
         <div className="text-center">
           <Heading
-            titleParts={[{ text: "Tuition Method" }]}
+            titleParts={[{ text: "Tuition Methods" }]}
             description="We offer multiple flexible learning options to suit every student’s needs — whether it’s personal, online, in groups, or structured packages."
             align="center"
           />

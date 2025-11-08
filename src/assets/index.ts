@@ -128,6 +128,13 @@ import resetPassword from "../assets/Images/reset-password.webp";
 import verifyOtp from "../assets/Images/verify-otp.png";
 import community from "../assets/Images/community.webp";
 import loader from "../assets/Icons/loader.svg";
+import verified from "../assets/Icons/verified.svg";
+import secure from "../assets/Icons/secure.svg";
+import fastAndReliable from "../assets/Icons/rocket.svg";
+import customizedTuition from "../assets/Icons/customized-tuition.svg";
+import efficient from "../assets/Icons/efficient.svg";
+import customerSupport from "../assets/Icons/customer-support.svg";
+
 
 
 export const IMAGES = {
@@ -257,4 +264,11 @@ export const ICONS = {
   threeDots,
   suspend,
   loader,
+
+  verified,
+  secure,
+  fastAndReliable,
+  customizedTuition,
+  efficient,
+  customerSupport
 };

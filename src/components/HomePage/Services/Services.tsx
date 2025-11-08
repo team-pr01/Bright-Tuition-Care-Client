@@ -98,8 +98,8 @@ const Services = () => {
       <Container>
         <div className="text-center mb-12">
           <Heading
-            titleParts={[{ text: "Education Service Categories" }]}
-            description="We provide expert tutors across all major education systems — whether you're in Bangla, English, Madrasa medium, or preparing for admission tests."
+            titleParts={[{ text: "Our Tutoring Services" }]}
+            description="Connecting students with expert tutors across all education categories."
             align="center"
             headingClassName="text-center"
           />
