@@ -121,7 +121,7 @@ const TutorsResume = () => {
     (item) => item?.value && item?.value !== "N/A"
   );
 
-  // ✅ Handle Shortlist
+  // Handle Shortlist
   const handleShortlistTutor = async () => {
     try {
       const response = await shortlistTutor({ id: applicationId }).unwrap();
@@ -135,7 +135,7 @@ const TutorsResume = () => {
     }
   };
 
-  // ✅ Handle Appoint
+  // Handle Appoint
   const handleAppointTutor = async () => {
     try {
       const response = await appointTutor({ id: applicationId }).unwrap();
@@ -149,7 +149,7 @@ const TutorsResume = () => {
     }
   };
 
-  // ✅ Handle Confirm
+  // Handle Confirm
   const handleConfirmTutor = async () => {
     try {
       const payload = { selectedTutor: tutorId };
@@ -166,6 +166,10 @@ const TutorsResume = () => {
       );
     }
   };
+
+  const isContactDetailsHidden =
+    location?.pathname.startsWith("/dashboard/tutor/view") ||
+    location?.pathname.startsWith("/dashboard/guardian/applications");
 
   const buttonStyle = "py-[6px] lg:py-[6px] px-3 lg:px-2 text-sm lg:text-sm";
 
@@ -188,9 +192,12 @@ const TutorsResume = () => {
                 <p className="text-neutral-10 mt-1 text-sm md:text-base">
                   <strong>Tutor Id:</strong> {profile?.tutorId}
                 </p>
-                <p className="text-neutral-10 mt-1 text-sm md:text-base">
-                  <strong>Phone Number:</strong> {profile?.userId?.phoneNumber}
-                </p>
+                {!isContactDetailsHidden && (
+                  <p className="text-neutral-10 mt-1 text-sm md:text-base">
+                    <strong>Phone Number:</strong>{" "}
+                    {profile?.userId?.phoneNumber}
+                  </p>
+                )}
               </div>
 
               {/* Admin controlls */}
@@ -219,7 +226,9 @@ const TutorsResume = () => {
                       variant="tertiary"
                       className={`${buttonStyle}`}
                       onClick={handleShortlistTutor}
-                      isDisabled={isShortlisting || isAppointing || isConfirming}
+                      isDisabled={
+                        isShortlisting || isAppointing || isConfirming
+                      }
                     />
 
                     <Button
@@ -227,7 +236,9 @@ const TutorsResume = () => {
                       variant="tertiary"
                       className={`${buttonStyle} border-[#9C9700] hover:bg-[#9C9700] text-[#9C9700] hover:text-white`}
                       onClick={handleAppointTutor}
-                      isDisabled={isShortlisting || isAppointing || isConfirming}
+                      isDisabled={
+                        isShortlisting || isAppointing || isConfirming
+                      }
                     />
 
                     <Button
@@ -235,7 +246,9 @@ const TutorsResume = () => {
                       variant="tertiary"
                       className={`${buttonStyle} border-green-600 hover:bg-green-600 text-green-600 hover:text-white`}
                       onClick={handleConfirmTutor}
-                      isDisabled={isShortlisting || isAppointing || isConfirming}
+                      isDisabled={
+                        isShortlisting || isAppointing || isConfirming
+                      }
                     />
                   </div>
                 )}
