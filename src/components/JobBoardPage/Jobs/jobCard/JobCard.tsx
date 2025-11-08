@@ -29,7 +29,6 @@ const JobCard: React.FC<TJobCardProps> = ({
   job,
 }) => {
   const user = useSelector(useCurrentUser) as TLoggedInUser;
-  // const path = user?.role === "guardian" ? "guardian" : "admin";
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement | null>(null);
 
