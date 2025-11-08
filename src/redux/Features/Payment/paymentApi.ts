@@ -3,10 +3,22 @@ import { baseApi } from "../../API/baseApi";
 
 const paymentApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
-    getAllPayments: builder.query<any, { role?: string }>({
-      query: ({ role = "" } = { role: "" }) => {
+    getAllPayments: builder.query<
+      any,
+      {
+        page?: number;
+        limit?: number;
+        status?: string;
+        keyword?: string;
+      }
+    >({
+      query: ({ page = 1, limit = 10, status, keyword } = {}) => {
         const params = new URLSearchParams();
-        params.append("role", role.toString());
+
+        if (page) params.append("page", page.toString());
+        if (limit) params.append("limit", limit.toString());
+        if (status) params.append("status", status);
+        if (keyword) params.append("keyword", keyword);
 
         return {
           url: `/payment?${params.toString()}`,

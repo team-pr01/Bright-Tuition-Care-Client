@@ -6,6 +6,9 @@ import type {
   TableHead,
 } from "../../../../components/Reusable/Table/Table";
 import Table from "../../../../components/Reusable/Table/Table";
+import { useGetAllPaymentsQuery } from "../../../../redux/Features/Payment/paymentApi";
+import { formatDate } from "../../../../utils/formatDate";
+import type { TPayment } from "../../../../types/payment.types";
 
 const PaymentsManagement = () => {
   const [page, setPage] = useState<number>(1);
@@ -17,6 +20,12 @@ const PaymentsManagement = () => {
   >(null);
   const [isProofModalOpen, setIsProofModalOpen] = useState<boolean>(false);
   console.log(searchQuery);
+  const { data, isLoading, isFetching } = useGetAllPaymentsQuery({
+    page,
+    limit,
+    status: statusFilter,
+    keyword: searchQuery,
+  });
 
   // Table headers
   const paymentTheads: TableHead[] = [
@@ -27,39 +36,9 @@ const PaymentsManagement = () => {
     { key: "paymentMethod", label: "Payment Method" },
     { key: "amount", label: "Amount" },
     { key: "paidFor", label: "Paid For" },
-    { key: "date", label: "Date" },
+    { key: "createdAt", label: "Date" },
     { key: "paymentProof", label: "Payment Proof" },
     { key: "status", label: "Status" },
-  ];
-
-  // Mock data
-  const allPayments: any[] = [
-    {
-      _id: "PAY-001",
-      senderName: "John Doe",
-      senderAccountNumber: "+44 1234 567890",
-      transactionId: "TXN-001",
-      paymentMethod: "Credit Card",
-      amount: 500,
-      paidFor: "Platform Charge",
-      date: "2025-09-28",
-      paymentProof:
-        "https://www.google.com/imgres?q=razorpay%20test%20card&imgurl=https%3A%2F%2Fd6xcmfyh68wv8.cloudfront.net%2Fblog-content%2Fuploads%2F2025%2F08%2Fhugg1-1-770x515.png&imgrefurl=https%3A%2F%2Frazorpay.com%2Fblog%2Fdiscover-the-ultimate-card-experience-with-razorpay%2F&docid=nOkvSRlOhBAv_M&tbnid=xikWFmkbNE2MaM&vet=12ahUKEwj24dLnvoiQAxXHxzgGHfDxHHQQM3oECBcQAA..i&w=770&h=515&hcb=2&ved=2ahUKEwj24dLnvoiQAxXHxzgGHfDxHHQQM3oECBcQAA",
-      status: "Pending",
-    },
-    {
-      _id: "PAY-002",
-      senderName: "Jane Smith",
-      senderAccountNumber: "+44 9876 543210",
-      transactionId: "TXN-002",
-      paymentMethod: "Bkash",
-      amount: 1200,
-      paidFor: "Verification",
-      date: "2025-09-25",
-      paymentProof:
-        "https://www.google.com/imgres?q=razorpay%20test%20card&imgurl=https%3A%2F%2Frazorpay.com%2Fdocs%2Fbuild%2Fbrowser%2Fassets%2Fimages%2Fsubscriptions-test-6.jpg&imgrefurl=https%3A%2F%2Frazorpay.com%2Fdocs%2Fpayments%2Fsubscriptions%2Ftest%2F&docid=_bGcD4V6yRgs3M&tbnid=Yb8RPRRzPAhZ-M&vet=12ahUKEwicl5WOrv6PAxX-SWwGHXMSBg0QM3oECCQQAA..i&w=551&h=358&hcb=2&ved=2ahUKEwicl5WOrv6PAxX-SWwGHXMSBg0QM3oECCQQAA",
-      status: "Approved",
-    },
   ];
 
   // Actions
@@ -74,18 +53,37 @@ const PaymentsManagement = () => {
   ];
 
   // Format table data
-  const tableData = allPayments?.map((payment) => ({
+  const tableData = data?.data?.payments?.map((payment: TPayment) => ({
     ...payment,
+    senderName: (
+      <p>
+        {payment?.userId?.name} <br /> {payment?.userId?.phoneNumber}
+      </p>
+    ),
     amount: `৳${payment.amount}`,
+    transactionId: payment?.transactionId ? payment?.transactionId : "N/A",
+    createdAt: formatDate(payment?.createdAt as string),
+    status: (
+      <p
+        className={`capitalize px-2 py-1 rounded-xl w-fit font-Nunito ${
+          payment?.status === "approved"
+            ? "bg-green-100 text-green-600"
+            : "bg-red-100 text-red-600"
+        }`}
+      >
+        {payment?.status}
+      </p>
+    ),
+
     paymentProof: (
       <button
         className="text-primary-10 underline cursor-pointer"
         onClick={() => {
-          setSelectedPaymentProof(payment.paymentProof);
+          setSelectedPaymentProof(payment?.imageUrl);
           setIsProofModalOpen(true);
         }}
       >
-        View Proof
+        {payment?.imageUrl ? "View Proof" : "N/A"}
       </button>
     ),
   }));
@@ -112,11 +110,11 @@ const PaymentsManagement = () => {
         title="All Payments"
         description="Manage all payments on the platform."
         theads={paymentTheads}
-        data={tableData}
-        totalPages={5}
+        data={tableData || []}
+        totalPages={data?.data?.meta?.totalPages || 1}
         currentPage={page}
         onPageChange={(p) => setPage(p)}
-        isLoading={false}
+        isLoading={isLoading || isFetching}
         onSearch={handleSearch}
         actions={actions}
         limit={limit}

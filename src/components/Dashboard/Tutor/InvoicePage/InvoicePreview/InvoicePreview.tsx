@@ -114,17 +114,18 @@ const InvoicePreview = ({
           </p>
         </div>
 
-        {invoice?.status === "due" && user.role === "tutor" && (
+        {invoice?.status === "pending" && user.role === "tutor" && (
           <div className="mt-6 flex items-center justify-center">
             <Button
               type="submit"
-              label="Pay Now"
+              label={invoice?.status === "pending" ? "Pay Now" : "Paid"}
               variant="primary"
               className="py-2 lg:py-2"
               onClick={() => {
                 setIsPaymentModalOpen(true);
                 setPaymentModalType("selectPaymentMethod");
               }}
+              isDisabled={invoice?.status === "paid"}
             />
           </div>
         )}
@@ -143,9 +144,10 @@ const InvoicePreview = ({
           />
         ) : (
           <SelectedPaymentMethod
+            setIsPaymentModalOpen={setIsPaymentModalOpen}
             selectedPaymentMethod={selectedPaymentMethod}
-            setPaymentModalType={setPaymentModalType}
-            amount={invoice?.charge}
+            amount={invoice.amount}
+            paidFor={`Invoice: ${invoice?._id}`}
           />
         )}
       </Modal>

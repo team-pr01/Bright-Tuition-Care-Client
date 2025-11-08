@@ -7,7 +7,7 @@ import SelectPaymentMethod from "../../../../components/Dashboard/Payment/Select
 import SelectedPaymentMethod from "../../../../components/Dashboard/Payment/SelectedPaymentMethod/SelectedPaymentMethod";
 
 const Payment = () => {
-const [paidFor, setPaidFor] = useState<string>("");
+  const [paidFor, setPaidFor] = useState<string>("");
   const [isPaymentModalOpen, setIsPaymentModalOpen] = useState<boolean>(false);
   const [paymentModalType, setPaymentModalType] = useState<
     "selectPaymentMethod" | "addPaymentDetails" | "paymentSuccess"
@@ -36,8 +36,6 @@ const [paidFor, setPaidFor] = useState<string>("");
         "A one-time verification fee to verify your tutor profile, academic documents, and identity for ensuring trust and authenticity.",
     },
   ];
-
-
 
   return (
     <div className="font-Nunito flex flex-col justify-between gap-5 h-full">
@@ -89,7 +87,7 @@ const [paidFor, setPaidFor] = useState<string>("");
           />
         ) : (
           <SelectedPaymentMethod
-          setIsPaymentModalOpen={setIsPaymentModalOpen}
+            setIsPaymentModalOpen={setIsPaymentModalOpen}
             selectedPaymentMethod={selectedPaymentMethod}
             amount={selectedAmount}
             paidFor={paidFor}
