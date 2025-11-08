@@ -137,6 +137,10 @@ export const router = createBrowserRouter([
         element: <JobApplicationsSummary />,
       },
       {
+        path: "my-applications/:status",
+        element: <MyApplications />,
+      },
+      {
         path: "my-applications",
         element: <MyApplications />,
       },

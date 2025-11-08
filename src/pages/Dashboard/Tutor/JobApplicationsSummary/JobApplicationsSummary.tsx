@@ -1,9 +1,13 @@
 import { useParams } from "react-router-dom";
 import { ICONS } from "../../../../assets";
 import JobCard from "../../../../components/JobBoardPage/Jobs/JobCard/JobCard";
+// import { useGetMyApplicationsQuery } from "../../../../redux/Features/Tutor/tutorApi";
 
 const JobApplicationsSummary = () => {
     const {status} = useParams();
+    //  const { data, isLoading, isFetching } = useGetMyApplicationsQuery({
+    //     status,
+    //   });
   return (
     <div>
       <div className="flex items-center gap-3">

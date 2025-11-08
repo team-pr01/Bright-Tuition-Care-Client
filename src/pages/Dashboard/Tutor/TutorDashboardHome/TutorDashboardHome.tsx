@@ -21,7 +21,7 @@ const TutorDashboardHome = () => {
           additionalTitle="Jobs"
           value="7"
           textColor="text-white md:text-neutral-10"
-          path="/dashboard/tutor/job-applications/applied"
+          path="/dashboard/tutor/my-applications/applied"
           icon={<FaBriefcase />}
         />
         <DashboardOverviewCard

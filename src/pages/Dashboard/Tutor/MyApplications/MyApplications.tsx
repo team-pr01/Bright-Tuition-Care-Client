@@ -7,15 +7,22 @@ import {
 import type { TableHead } from "../../../../components/Reusable/Table/Table";
 import Table from "../../../../components/Reusable/Table/Table";
 import toast from "react-hot-toast";
+import { useParams } from "react-router-dom";
 
 const MyApplications = () => {
+  const { status } = useParams();
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [page, setPage] = useState<number>(1);
   const [limit, setLimit] = useState<number>(10);
+  const [statusFilter, setStatusFilter] = useState<string>(
+    status ? status : ""
+  );
+  console.log(status);
   const { data, isLoading, isFetching } = useGetMyApplicationsQuery({
     page,
     limit,
     keyword: searchQuery,
+    status: statusFilter,
   });
   const [withdrawApplication, { isLoading: isWithdrawingApplication }] =
     useWithdrawApplicationMutation();
@@ -90,6 +97,22 @@ const MyApplications = () => {
       );
     }
   };
+
+  const statusFilterDropdown = (
+    <select
+      value={statusFilter}
+      onChange={(e) => setStatusFilter(e.target.value)}
+      className="input input-sm px-3 py-2 border border-neutral-55/60 focus:border-primary-10 transition duration-300 focus:outline-none rounded-md text-sm shadow-sm cursor-pointer"
+    >
+      <option value="">All Applications</option>
+      <option value="applied">Applied</option>
+      <option value="withdrawn">Withdrawn</option>
+      <option value="shortlisted">Shortlisted</option>
+      <option value="appointed">Appointed</option>
+      <option value="confirmed">Confirmed</option>
+      <option value="rejected">Rejected</option>
+    </select>
+  );
   return (
     <div>
       <Table<any>
@@ -106,6 +129,7 @@ const MyApplications = () => {
         setLimit={setLimit}
         selectedCity={null}
         selectedArea={null}
+        children={statusFilterDropdown}
       />
     </div>
   );
