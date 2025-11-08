@@ -118,7 +118,7 @@ const LeadManagement = () => {
   return (
     <div>
       <Table<any>
-        title="All Leads"
+        title="All Leads & Tuition Requests"
         description="Manage all leads here."
         theads={leadTheads}
         data={tableData || []}
