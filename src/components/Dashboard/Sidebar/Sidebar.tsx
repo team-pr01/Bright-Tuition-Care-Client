@@ -8,7 +8,7 @@ import {
   useCurrentUser,
 } from "../../../redux/Features/Auth/authSlice";
 import type { TLoggedInUser } from "../../../types/loggedinUser.types";
-import { IMAGES } from "../../../assets";
+import { ICONS, IMAGES } from "../../../assets";
 import Cookies from "js-cookie";
 import OtherLinks from "./OtherLinks";
 import RoleBasedNavlinks from "./RoleBasedNavlinks/RoleBasedNavlinks";
@@ -29,6 +29,9 @@ const Sidebar = () => {
   return (
     <div className="sticky top-0 left-0 hidden xl:block">
       <div className="w-[230px] 2xl:w-[270px] h-full bg-primary-10 p-5 font-Nunito flex flex-col gap-5 justify-between">
+        <Link to="/">
+          <img src={ICONS.logoWhite} alt="Logo" className="mb-5" />
+        </Link>
         {user?.role !== "admin" && <UserProfilePhoto />}
         {user?.role === "admin" || user?.role === "staff" ? (
           <Link to={"/"}>

@@ -10,11 +10,13 @@ const RoleTab = ({
 }) => {
   const roles = [
     {
+      key: "tutor",
       title: "Tutor",
       description: "Join as a tutor and find tuition jobs.",
       icon: IMAGES.teacher,
     },
     {
+      key: "guardian",
       title: "Guardian/Student",
       description: "Get started as a Guardian or Student.",
       icon: IMAGES.guardian,
@@ -24,11 +26,11 @@ const RoleTab = ({
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-6">
       {roles?.map((role) => {
-        const isActive = role?.title === activeTab;
+        const isActive = role?.key === activeTab; // compare by key
         return (
           <button
-            key={role?.title}
-            onClick={() => setActiveTab(role?.title)}
+            key={role?.key}
+            onClick={() => setActiveTab(role?.key)} // set by key
             type="button"
             className={`relative border py-2 px-3 rounded-xl text-start flex items-center justify-between gap-6 cursor-pointer transform duration-300 ${
               isActive

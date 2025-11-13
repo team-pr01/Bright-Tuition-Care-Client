@@ -64,27 +64,27 @@ const AboutUs = () => {
         >
           <div>
             <Heading titleParts={[{ text: "About Bright Tuition Care" }]} />
-            <div className="flex flex-col gap-5 mt-2 lg:mt-4 text-neutral-45 text-lg leading-6 text-center lg:text-start">
-              <p className="font-Nunito">
+            <div className="flex flex-col gap-2 mt-2 lg:mt-4 text-neutral-45 text-lg leading-6 text-center lg:text-start">
+              <p>
                 At Bright Tuition Care, we are dedicated to connecting students
                 with the most suitable and qualified tutors to{" "}
                 <strong>support</strong> their learning journey. Whether you’re
                 a student, guardian, or tutor, our goal is to make the tutoring
                 experience simple, effective, and accessible for everyone.
-                <br />
-                <br />
+              </p>
+              <p>
                 We believe that every learner deserves a quality education
                 customized to their individual goals and learning style. That’s
                 why we’ve built a trusted platform where finding the right tutor
                 is quick, reliable, and <strong>hassle-free</strong>.
-                <br />
-                <br />
+              </p>
+              <p>
                 From academic subjects to specialized skills, our network of
                 verified and experienced tutors is committed to helping students
                 reach their full potential.
               </p>
             </div>
-            <div className="flex flex-row gap-4 mt-12 items-center justify-center lg:justify-start">
+            <div className="flex flex-row gap-4 mt-8 items-center justify-center lg:justify-start">
               <Link to={"/hire-a-tutor"}>
                 <Button
                   label="Hire A Tutor"

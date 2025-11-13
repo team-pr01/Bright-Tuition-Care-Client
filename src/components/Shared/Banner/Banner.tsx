@@ -47,13 +47,17 @@ const Banner: React.FC = () => {
           variants={itemVariants}
           className="text-xl md:text-4xl lg:text-[44px] leading-7 md:leading-10 lg:leading-12 text-center font-bold text-white max-w-[800px] mx-auto"
         >
-          Start your journey to effective learning and tutoring with a simple registration.
+          Start your journey to effective learning and tutoring with a simple
+          registration.
         </motion.h1>
         <motion.p
           variants={itemVariants}
           className="text-xs md:text-base leading-5 lg:leading-6 text-center font-medium mt-4 text-white max-w-[655px] mx-auto"
         >
-          With one easy registration, guardians connect with verified tutors, and tutors access genuine students on a trusted platform. Join Bright Tuition Care to make learning and tutoring simple, effective, and rewarding!
+          With one easy registration, guardians connect with verified tutors,
+          and tutors access genuine students on a trusted platform. Join Bright
+          Tuition Care to make learning and tutoring simple, effective, and
+          rewarding!
         </motion.p>
 
         <motion.div
@@ -61,13 +65,14 @@ const Banner: React.FC = () => {
           className="flex flex-col sm:flex-row items-center gap-4 justify-center mt-8"
         >
           <Link
-            to="/hire-a-tutor"
+            to="/signup/guardian"
             className={`bg-white hover:bg-transparent border border-white hover:text-white text-primary-10 ${buttonCommonClassNames}`}
           >
-            Hire A Tutor <RxArrowTopRight className="text-2xl font-black" />
+            Join as A Guardian{" "}
+            <RxArrowTopRight className="text-2xl font-black" />
           </Link>
           <Link
-            to="/signup"
+            to="/signup/tutor"
             className={`hover:bg-white border border-white hover:text-primary-10 text-white ${buttonCommonClassNames}`}
           >
             Become A Tutor <RxArrowTopRight className="text-2xl font-black" />

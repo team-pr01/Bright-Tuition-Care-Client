@@ -3,8 +3,13 @@ import type { DashboardLink } from "../../../data/dashboardSidebarLinks";
 import { LuFileText, LuShare2 } from "react-icons/lu";
 import type { TLoggedInUser } from "../../../types/loggedinUser.types";
 
-const OtherLinks = ({user} : {user: TLoggedInUser}) => {
-
+const OtherLinks = ({
+  user,
+  setIsHamburgerOpen,
+}: {
+  user: TLoggedInUser;
+  setIsHamburgerOpen?: React.Dispatch<React.SetStateAction<boolean>>;
+}) => {
   const otherLinks = [
     {
       label: "Share The App",
@@ -27,6 +32,7 @@ const OtherLinks = ({user} : {user: TLoggedInUser}) => {
         <Link
           key={link?.label}
           to={link?.path}
+          onClick={() => setIsHamburgerOpen && setIsHamburgerOpen(false)}
           className={`flex items-center gap-2 rounded-lg p-2 transform transition-transform duration-500 hover:-translate-y-1 ${
             location?.pathname === link?.path
               ? "bg-white text-primary-10 font-semibold"

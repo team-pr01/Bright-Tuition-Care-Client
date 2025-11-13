@@ -73,13 +73,13 @@ const StudentSteps = () => {
             <motion.img
               src={IMAGES.stepLine}
               alt="Connector line"
-              className="hidden md:block absolute top-7 left-0 right-0 mx-auto z-0 w-[80%] max-w-[90%] object-contain"
+              className="hidden md:block absolute top-7 left-0 right-0 mx-auto -z-10 w-[80%] max-w-[90%] object-contain"
               variants={lineVariants}
             />
 
             <motion.div
               variants={stepsContainerVariants}
-              className="grid grid-cols-1 md:grid-cols-4 gap-4 lg:gap-12 relative z-10"
+              className="grid grid-cols-1 md:grid-cols-4 gap-4 lg:gap-12 relative z-1"
             >
               {studentOrGuardianSteps.map((step, index) => (
                 <motion.div

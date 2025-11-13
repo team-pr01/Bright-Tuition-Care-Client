@@ -15,7 +15,7 @@ import {
 const TutorDashboardHome = () => {
   return (
     <div className="flex flex-col gap-4 md:gap-0 font-Nunito">
-      <div className="flex items-center overflow-x-auto w-full gap-3 md:gap-6 bg-primary-10 md:bg-[#F2F5FC] py-5 px-3 lg:px-6">
+      <div className="flex items-center overflow-x-auto w-full gap-3 md:gap-6 bg-primary-10 md:bg-[#F2F5FC] py-5 px-3 lg:px-6 rounded-b-3xl md:rounded-b-none">
         <DashboardOverviewCard
           title="Applied"
           additionalTitle="Jobs"

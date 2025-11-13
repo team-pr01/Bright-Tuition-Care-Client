@@ -34,7 +34,7 @@ const Testimonials: React.FC<TestimonialsProps> = ({
   return (
     <div className="py-12 w-full font-Nunito overflow-hidden">
       <Container>
-        <div className="text-center flex flex-col items-center justify-center gap-5 mb-16">
+        <div className="text-center flex flex-col items-center justify-center gap-5 mb-5">
           <Heading
             titleParts={[{ text: title }]}
             description={description}

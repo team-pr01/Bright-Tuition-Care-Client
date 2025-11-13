@@ -5,8 +5,12 @@ import Button from "../../../../components/Reusable/Button/Button";
 import Modal from "../../../../components/Reusable/Modal/Modal";
 import SelectPaymentMethod from "../../../../components/Dashboard/Payment/SelectPaymentMethod/SelectPaymentMethod";
 import SelectedPaymentMethod from "../../../../components/Dashboard/Payment/SelectedPaymentMethod/SelectedPaymentMethod";
+import type { TLoggedInUser } from "../../../../types/loggedinUser.types";
+import { useCurrentUser } from "../../../../redux/Features/Auth/authSlice";
+import { useSelector } from "react-redux";
 
 const Payment = () => {
+  const user = useSelector(useCurrentUser) as TLoggedInUser;
   const [paidFor, setPaidFor] = useState<string>("");
   const [isPaymentModalOpen, setIsPaymentModalOpen] = useState<boolean>(false);
   const [paymentModalType, setPaymentModalType] = useState<
@@ -37,10 +41,15 @@ const Payment = () => {
     },
   ];
 
+  const chargesToShow =
+    user?.role === "tutor"
+      ? charges
+      : charges?.filter((charge) => charge.title === "Verification Charge");
+
   return (
     <div className="font-Nunito flex flex-col justify-between gap-5 h-full">
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-6">
-        {charges.map((charge, index) => (
+        {chargesToShow?.map((charge, index) => (
           <div
             key={index}
             className="bg-white border border-primary-40/10 rounded-2xl py-7 px-5 flex flex-col items-center gap-5"

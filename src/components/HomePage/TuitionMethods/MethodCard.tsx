@@ -25,7 +25,7 @@ const MethodCard: React.FC<MethodCardProps> = ({
         />
       </div>
 
-      <h3 className="text-xl leading-[24px] font-bold text-neutral-10">
+      <h3 className="text-xl leading-[24px] font-bold text-primary-10">
         {title}
       </h3>
       <p className="text-lg text-neutral-30">{description}</p>

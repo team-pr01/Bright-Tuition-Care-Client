@@ -113,7 +113,7 @@ const AdminDashboardHome = () => {
         <DashboardOverviewCard
           title="Total"
           additionalTitle="Payment"
-          value={`৳${adminStats?.data?.totalPayment || 0}` }
+          value={`৳${adminStats?.data?.totalPayment || 0}`}
           textColor="text-neutral-10"
           path="/dashboard/admin/payments-management"
           icon={<FaDollarSign className="text-[#8B5CF6]" />} // Purple

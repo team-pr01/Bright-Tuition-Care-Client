@@ -68,7 +68,7 @@ const DashboardHamburgerMenu = () => {
 
       {/* Side Menu */}
       <div
-        className={`fixed inset-y-0 left-0 z-50 bg-primary-10 py-8 p-6 w-[250px] overflow-y-auto transition-all duration-300 transform flex flex-col gap-4 items-start justify-between ${
+        className={`fixed inset-y-0 left-0 z-9999 bg-primary-10 py-8 p-6 w-[250px] overflow-y-auto transition-all duration-300 transform flex flex-col gap-4 items-start justify-between ${
           isHamburgerOpen ? "translate-x-0" : "-translate-x-full"
         }`}
       >
@@ -88,10 +88,10 @@ const DashboardHamburgerMenu = () => {
         <hr className="border border-neutral-50/30 w-full" />
 
         <div className="flex flex-col gap-4">
-          <RoleBasedNavlinks />
+          <RoleBasedNavlinks setIsHamburgerOpen={setIsHamburgerOpen} />
 
           <hr className="border border-neutral-50/30" />
-          <OtherLinks user={user} />
+          <OtherLinks user={user} setIsHamburgerOpen={setIsHamburgerOpen} />
         </div>
 
         <button

@@ -4,7 +4,7 @@ import AuthSteps from "../../../components/AuthPage/AuthSteps/AuthSteps";
 import SignInForm from "../../../components/AuthPage/SignInPage/SignInForm/SignInForm";
 
 const SignIn = () => {
-  const [activeTab, setActiveTab] = useState<string>("Tutor");
+  const [activeTab, setActiveTab] = useState<string>("tutor");
   return (
     <Container>
       <div className="flex flex-col-reverse lg:flex-row items-stretch gap-10 mt-10 mb-72 lg:mb-96">

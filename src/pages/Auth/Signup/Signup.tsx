@@ -2,10 +2,12 @@ import { useState } from "react";
 import Container from "../../../components/Reusable/Container/Container";
 import AuthSteps from "../../../components/AuthPage/AuthSteps/AuthSteps";
 import SignupForm from "../../../components/AuthPage/SignupPage/SignupForm/SignupForm";
+import { useParams } from "react-router-dom";
 
 
 const Signup = () => {
-  const [activeTab, setActiveTab] = useState<string>("Tutor");
+  const {role} = useParams();
+  const [activeTab, setActiveTab] = useState<string>(role || "tutor");
   return (
     <Container>
       <div className="flex flex-col-reverse lg:flex-row items-stretch gap-10 mt-10 mb-72 lg:mb-96 min-h-[600px]">

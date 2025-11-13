@@ -22,7 +22,7 @@ const Navbar = () => {
 
   return (
     <div
-      className={`py-4 lg:py-5 sticky top-0 z-50 transition-all duration-300 border-b border-neutral-45/15 backdrop-blur-none lg:backdrop-blur-md bg-white shadow-sm`}
+      className={`py-4 lg:py-5 sticky top-0 z-50 transition-all duration-300 border-b border-neutral-45/15 backdrop-blur-none lg:backdrop-blur-md bg-neutral-50/10 shadow-sm`}
     >
       <Container>
         <nav className="flex items-center font-Nunito justify-between">
@@ -59,7 +59,7 @@ const Navbar = () => {
                     className="text-sm"
                   />
                 </Link>
-                <Link to={"/signup"}>
+                <Link to={"/signup/tutor"}>
                   <Button
                     label="Become A Tutor"
                     variant="quaternary"

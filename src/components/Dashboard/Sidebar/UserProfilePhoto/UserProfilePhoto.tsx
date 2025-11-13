@@ -9,14 +9,14 @@ const UserProfilePhoto = () => {
 
   return (
     <div className="font-Nunito flex flex-col items-center justify-center">
-      <div className="size-32 rounded-full relative">
+      <div className="size-28 rounded-full relative">
         <div className="bg-white/40 rounded-full p-[2px] size-full">
           {!user ? (
             <div className="size-full rounded-full bg-white/20 animate-pulse" />
           ) : (
             <img
               src={user?.profilePicture || IMAGES.dummyAvatar}
-              alt="Profile"
+              alt="Profile Picture"
               className="size-full object-cover rounded-full"
             />
           )}

@@ -122,7 +122,7 @@ const WhyChooseUs = () => {
   return (
     <section
       ref={ref}
-      className="relative py-24 bg-gradient-to-br from-blue-900 via-slate-900 to-indigo-900 overflow-hidden font-Nunito"
+      className="relative py-24 bg-gradient-to-br from-blue-900 via-slate-900 to-indigo-900 overflow-hidden font-Nunito rounded-t-[50px]"
     >
       <Container>
         {/* Animated Background Elements */}
@@ -219,7 +219,7 @@ const WhyChooseUs = () => {
 
                 {/* Main Card */}
                 <div
-                  className={`relative bg-white bg-opacity-10 backdrop-blur-lg rounded-2xl border border-white border-opacity-20 p-8 h-full transform-gpu hover:border-opacity-40 transition-all duration-300`}
+                  className={`relative bg-gray-50 bg-opacity-10 backdrop-blur-lg rounded-2xl border border-white border-opacity-20 p-8 h-full transform-gpu hover:border-opacity-40 transition-all duration-300`}
                 >
                   {/* Icon Container */}
                   <motion.div
