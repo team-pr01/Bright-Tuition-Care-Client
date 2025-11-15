@@ -9,6 +9,9 @@ import SelectDropdown from "../../../Reusable/SelectDropdown/SelectDropdown";
 import SelectDropdownWithSearch from "../../../Reusable/SelectDropdownWithSearch/SelectDropdownWithSearch";
 import { useEffect, useState } from "react";
 import { useUpdateProfileMutation } from "../../../../redux/Features/User/userApi";
+import { useSelector } from "react-redux";
+import { useCurrentUser } from "../../../../redux/Features/Auth/authSlice";
+import type { TLoggedInUser } from "../../../../types/loggedinUser.types";
 
 type TFormData = {
   name: string;
@@ -39,6 +42,7 @@ const UpdatePersonalInfoModal = ({
   setIsFormModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
   defaultValues: any;
 }) => {
+  const user = useSelector(useCurrentUser) as TLoggedInUser;
   const [updateProfile, { isLoading }] = useUpdateProfileMutation();
   const {
     register,
@@ -146,16 +150,6 @@ const UpdatePersonalInfoModal = ({
           {...register("name")}
           isRequired={false}
         />
-        {/* Email */}
-        <TextInput
-          label="Email"
-          type="email"
-          placeholder="Enter email"
-          error={errors.email}
-          {...register("email")}
-          isDisabled={true}
-          isRequired={false}
-        />
 
         {/* Phone Number */}
         <TextInput
@@ -213,43 +207,47 @@ const UpdatePersonalInfoModal = ({
           isRequired={false}
         />
 
-        {/* Father's Name */}
-        <TextInput
-          label="Father's Name"
-          placeholder="Enter father's name"
-          error={errors.fatherName}
-          {...register("fatherName")}
-          isRequired={false}
-        />
+        {user?.role !== "guardian" && (
+          <>
+            {/* Father's Name */}
+            <TextInput
+              label="Father's Name"
+              placeholder="Enter father's name"
+              error={errors.fatherName}
+              {...register("fatherName")}
+              isRequired={false}
+            />
 
-        {/* Father's Number */}
-        <TextInput
-          label="Father's Number"
-          type="tel"
-          placeholder="Enter father's number"
-          error={errors.fatherPhoneNumber}
-          {...register("fatherPhoneNumber")}
-          isRequired={false}
-        />
+            {/* Father's Number */}
+            <TextInput
+              label="Father's Number"
+              type="tel"
+              placeholder="Enter father's number"
+              error={errors.fatherPhoneNumber}
+              {...register("fatherPhoneNumber")}
+              isRequired={false}
+            />
 
-        {/* Mother's Name */}
-        <TextInput
-          label="Mother's Name"
-          placeholder="Enter mother's name"
-          error={errors.motherName}
-          {...register("motherName")}
-          isRequired={false}
-        />
+            {/* Mother's Name */}
+            <TextInput
+              label="Mother's Name"
+              placeholder="Enter mother's name"
+              error={errors.motherName}
+              {...register("motherName")}
+              isRequired={false}
+            />
 
-        {/* Mother's Number */}
-        <TextInput
-          label="Mother's Number"
-          type="tel"
-          placeholder="Enter mother's number"
-          error={errors.motherPhoneNumber}
-          {...register("motherPhoneNumber")}
-          isRequired={false}
-        />
+            {/* Mother's Number */}
+            <TextInput
+              label="Mother's Number"
+              type="tel"
+              placeholder="Enter mother's number"
+              error={errors.motherPhoneNumber}
+              {...register("motherPhoneNumber")}
+              isRequired={false}
+            />
+          </>
+        )}
 
         {/* City Dropdown */}
         <SelectDropdownWithSearch
@@ -279,46 +277,27 @@ const UpdatePersonalInfoModal = ({
           {...register("address")}
           isRequired={false}
         />
-
-        {/* LinkedIn */}
-        <TextInput
-          label="LinkedIn"
-          type="url"
-          placeholder="Enter LinkedIn profile URL"
-          error={errors.linkedin}
-          {...register("linkedin")}
-          isRequired={false}
-        />
-
-        {/* Facebook */}
-        <TextInput
-          label="Facebook"
-          type="url"
-          placeholder="Enter Facebook profile URL"
-          error={errors.facebook}
-          {...register("facebook")}
-          isRequired={false}
-        />
-
-        {/* Facebook */}
-        <TextInput
-          label="Instagram"
-          type="url"
-          placeholder="Enter Instagram profile URL"
-          error={errors.instagram}
-          {...register("instagram")}
-          isRequired={false}
-        />
       </div>
-
-      {/* Personal Overview */}
-      <Textarea
-        label="Personal Overview"
-        placeholder="Write about yourself"
-        error={errors.overview}
-        {...register("overview")}
+      {/* Facebook */}
+      <TextInput
+        label="Facebook Profile"
+        type="url"
+        placeholder="Enter Facebook profile URL"
+        error={errors.facebook}
+        {...register("facebook")}
         isRequired={false}
       />
+
+      {/* Personal Overview */}
+      {user?.role !== "guardian" && (
+        <Textarea
+          label="Personal Overview"
+          placeholder="Write about yourself"
+          error={errors.overview}
+          {...register("overview")}
+          isRequired={false}
+        />
+      )}
 
       <div className="flex items-center gap-4 justify-end">
         <Button

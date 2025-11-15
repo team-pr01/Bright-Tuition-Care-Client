@@ -35,30 +35,51 @@ const ContactUsForm = () => {
         <label className="text-neutral-10 leading-[18px] text-[15px] font-medium tracking-[-0.16]">
           I am a <span className="text-primary-10">*</span>
         </label>
-        <div className="flex gap-6">
-          <label className="flex items-center gap-2 cursor-pointer">
-            <input
-              type="radio"
-              value="Tutor"
-              checked={selectedRole === "Tutor"}
-              onChange={(e) => setSelectedRole(e.target.value)}
-              required
-              className="w-5 h-5 accent-primary-10 cursor-pointer"
-            />
-            <span className="text-neutral-800">Tutor</span>
-          </label>
 
-          <label className="flex items-center gap-2 cursor-pointer">
-            <input
-              type="radio"
-              value="Guardian/Student"
-              checked={selectedRole === "Guardian/Student"}
-              onChange={(e) => setSelectedRole(e.target.value)}
-              required
-              className="w-5 h-5 accent-primary-10 cursor-pointer"
-            />
-            <span className="text-neutral-800">Guardian/Student</span>
-          </label>
+        <div className="flex gap-6">
+          {[
+            { value: "Tutor", label: "Tutor" },
+            { value: "Guardian/Student", label: "Guardian/Student" },
+          ].map((role) => (
+            <label
+              key={role.value}
+              className="flex items-center gap-2 cursor-pointer select-none"
+            >
+              <div className="relative">
+                {/* Hidden native input for accessibility */}
+                <input
+                  type="radio"
+                  name="role"
+                  value={role.value}
+                  checked={selectedRole === role.value}
+                  onChange={(e) => setSelectedRole(e.target.value)}
+                  required
+                  className="sr-only"
+                />
+
+                {/* Custom circle */}
+                <div
+                  className={`w-5 h-5 rounded-full border-2 flex items-center justify-center transition-all duration-300 ${
+                    selectedRole === role.value
+                      ? "border-primary-10"
+                      : "border-gray-300"
+                  }`}
+                >
+                  {selectedRole === role.value && (
+                    <div className="w-2.5 h-2.5 bg-primary-10 rounded-full transition-all duration-300" />
+                  )}
+                </div>
+              </div>
+
+              <span
+                className={`text-neutral-800 transition-colors ${
+                  selectedRole === role.value ? "text-primary-10" : ""
+                }`}
+              >
+                {role.label}
+              </span>
+            </label>
+          ))}
         </div>
       </div>
 

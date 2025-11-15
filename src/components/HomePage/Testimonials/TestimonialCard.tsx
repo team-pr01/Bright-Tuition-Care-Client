@@ -53,12 +53,12 @@ const TestimonialCard: React.FC<TestimonialCardProps> = ({
     <div
       className={`flex flex-col ${
         variant === "default" ? "" : ""
-      } font-Nunito items-center justify-between gap-3 rounded-xl w-full lg:w-[80%] mx-auto overflow-y-visible pt-32 relative z-50`}
+      } font-Nunito items-center justify-between gap-3 rounded-xl w-full lg:w-[80%] mx-auto overflow-y-visible pt-20 relative z-50`}
     >
       <div className="flex flex-col items-start gap-3 bg-primary-10/10 p-5 rounded-2xl relative w-full">
         {/* Profile */}
-        <div className="flex flex-col gap-4 items-center justify-center absolute left-0 right-0 -top-32 z-50">
-          <div className="size-[200px] rounded-full bg-white flex items-center justify-center p-[3px] shadow-md">
+        <div className="flex flex-col gap-4 items-center justify-center absolute left-0 right-0 -top-20 z-50">
+          <div className="size-[150px] rounded-full bg-white flex items-center justify-center p-[3px] shadow-md">
             <div className="p-[3px] bg-primary-10 rounded-full w-full h-full">
               <div className="p-[3px] bg-white rounded-full w-full h-full">
                 <img

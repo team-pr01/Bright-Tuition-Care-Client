@@ -1,16 +1,9 @@
-import {
-  FaFacebook,
-  FaFemale,
-  FaInstagram,
-  FaLinkedin,
-  FaMale,
-} from "react-icons/fa";
+import { FaFacebook, FaFemale, FaMale } from "react-icons/fa";
 import { formatDate } from "../../../../utils/formatDate";
-import {
-  getFacebookUsername,
-  getInstagramUsername,
-  getLinkedInUsername,
-} from "../../../../utils/socialMediaUsernameExtractor";
+import { getFacebookUsername } from "../../../../utils/socialMediaUsernameExtractor";
+import { useSelector } from "react-redux";
+import { useCurrentUser } from "../../../../redux/Features/Auth/authSlice";
+import type { TLoggedInUser } from "../../../../types/loggedinUser.types";
 
 type TPersonalInfo = {
   email?: string;
@@ -41,6 +34,7 @@ type TPersonalInfoProps = {
 };
 
 const PersonalInfo: React.FC<TPersonalInfoProps> = ({ personalInfo }) => {
+  const user = useSelector(useCurrentUser) as TLoggedInUser;
   const socialMediaLinks = [
     {
       label: "Facebook",
@@ -50,22 +44,22 @@ const PersonalInfo: React.FC<TPersonalInfoProps> = ({ personalInfo }) => {
       icon: <FaFacebook />,
       link: personalInfo?.socialMediaInformation?.facebook,
     },
-    {
-      label: "Instagram",
-      username: getInstagramUsername(
-        personalInfo?.socialMediaInformation?.instagram as string
-      ),
-      icon: <FaInstagram />,
-      link: personalInfo?.socialMediaInformation?.instagram,
-    },
-    {
-      label: "LinkedIn",
-      username: getLinkedInUsername(
-        personalInfo?.socialMediaInformation?.linkedin as string
-      ),
-      icon: <FaLinkedin />,
-      link: personalInfo?.socialMediaInformation?.linkedin,
-    },
+    // {
+    //   label: "Instagram",
+    //   username: getInstagramUsername(
+    //     personalInfo?.socialMediaInformation?.instagram as string
+    //   ),
+    //   icon: <FaInstagram />,
+    //   link: personalInfo?.socialMediaInformation?.instagram,
+    // },
+    // {
+    //   label: "LinkedIn",
+    //   username: getLinkedInUsername(
+    //     personalInfo?.socialMediaInformation?.linkedin as string
+    //   ),
+    //   icon: <FaLinkedin />,
+    //   link: personalInfo?.socialMediaInformation?.linkedin,
+    // },
   ];
 
   const filteredSocialLinks = socialMediaLinks.filter((item) => item.link);
@@ -89,6 +83,20 @@ const PersonalInfo: React.FC<TPersonalInfoProps> = ({ personalInfo }) => {
     { label: "Mother's Name", value: personalInfo?.motherName },
     { label: "Mother's Number", value: personalInfo?.motherPhoneNumber },
   ];
+
+  // Remove parent details if guardian
+  const filteredDetails =
+    user?.role === "guardian"
+      ? details.filter(
+          (item) =>
+            ![
+              "Father's Name",
+              "Father's Number",
+              "Mother's Name",
+              "Mother's Number",
+            ].includes(item.label)
+        )
+      : details;
 
   const isProvided = (val: unknown): boolean => {
     if (Array.isArray(val))
@@ -128,7 +136,7 @@ const PersonalInfo: React.FC<TPersonalInfoProps> = ({ personalInfo }) => {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-2 mt-4">
-        {details.map((item, index) => {
+        {filteredDetails?.map((item, index) => {
           const provided = isProvided(item.value);
 
           return (

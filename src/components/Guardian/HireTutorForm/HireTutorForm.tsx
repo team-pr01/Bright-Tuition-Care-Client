@@ -48,7 +48,6 @@ const HireTutorForm = () => {
 
   const [currentStep, setCurrentStep] = useState<number>(0);
 
-  console.log(currentStep);
   const onSubmit = async (data: FormValues) => {
     if (currentStep !== 3) return;
     try {
@@ -96,15 +95,14 @@ const HireTutorForm = () => {
 
         {/* Navigation */}
         <div className="flex justify-between mt-4">
-          {currentStep > 0 && (
             <button
               type="button"
               onClick={() => setCurrentStep(currentStep - 1)}
-              className="px-4 py-2 bg-gray-300 rounded cursor-pointer"
+              className="px-4 py-2 bg-gray-300 rounded cursor-pointer disabled:cursor-not-allowed disabled:bg-gray-500/50"
+              disabled={currentStep === 0}
             >
               Previous
             </button>
-          )}
 
           {currentStep < 3 ? (
             <button

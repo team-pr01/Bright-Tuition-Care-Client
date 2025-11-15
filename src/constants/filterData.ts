@@ -1,9 +1,9 @@
 export const filterData = {
-  tutoringStyles : [
+  tutoringStyles: [
     "One to One",
     "One to many",
     "Online Tutoring",
-    "Shadow Tutoring "
+    "Shadow Tutoring ",
   ],
   tuitionType: [
     "Home Tutoring",
@@ -1094,7 +1094,25 @@ export const filterData = {
     "Uni Help",
     "Madrasa Medium",
   ],
-  class: [
+  englishMediumClasses: [
+    "Pre-Schooling",
+    "Play",
+    "Nursery",
+    "KG",
+    "Standard 1",
+    "Standard 2",
+    "Standard 3",
+    "Standard 4",
+    "Standard 5",
+    "Standard 6",
+    "Standard 7",
+    "Standard 8",
+    "Standard 9",
+    "O Level",
+    "A Level(AS)",
+    "A Level(A2)",
+  ],
+  banglaMediumClasses: [
     "Pre-Scholling",
     "Play",
     "Nursery",
@@ -1109,13 +1127,10 @@ export const filterData = {
     "Class 8",
     "Class 9",
     "Class 10",
-    "O Level",
-    "A Level (AS)",
-    "A Level (A2)",
     "HSC 1st Year",
     "HSC 2nd Year",
   ],
-  studentGender: ["male", "female", "any"],
+  studentGender: ["male", "female"],
   tutorGender: ["male", "female", "any"],
   placeOfTuition: ["Student's Home", "My Home", "Online"],
 };

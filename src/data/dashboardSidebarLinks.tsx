@@ -99,7 +99,7 @@ export const guardianDashboardLinks: DashboardLink[] = [
     icon: <LuUser />,
   },
   {
-    label: "Hire Tutor",
+    label: "Hire a Tutor",
     path: "/dashboard/guardian/hire-a-tutor",
     icon: <LuUserRoundSearch />,
   },
@@ -158,7 +158,7 @@ export const adminDashboardLinks: DashboardLink[] = [
     icon: <FaChalkboardTeacher />,
   },
   {
-    label: "Hire Tutor",
+    label: "Hire a Tutor",
     path: "/dashboard/admin/hire-a-tutor",
     icon: <LuUserRoundSearch />,
   },
