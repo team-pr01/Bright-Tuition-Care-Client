@@ -8,6 +8,7 @@ const TermsAndConditions = () => {
       <Container>
         <div className="py-[60px] mt-10 mb-72 lg:mb-96">
           <TermsAndConditionContents />
+          
         </div>
       </Container>
     </div>
