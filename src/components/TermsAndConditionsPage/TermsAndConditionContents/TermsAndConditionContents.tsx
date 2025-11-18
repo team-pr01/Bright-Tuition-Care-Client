@@ -18,7 +18,7 @@ const TermsAndConditionContents = () => {
 
             {sec.description && <p>{sec.description}</p>}
             {sec.points && (
-              <ul className="list-disc ml-6 space-y-1 text-gray-700">
+              <ul className="list-disc ml-6 space-y-1 text-neutral-40 pl-4">
                 {sec.points.map((p, j) => (
                   <li key={j}>{p}</li>
                 ))}
@@ -28,7 +28,7 @@ const TermsAndConditionContents = () => {
             {sec.requirements && (
               <>
                 <h3 className="font-semibold mt-4">Requirements</h3>
-                <ul className="list-disc ml-6 space-y-1">
+                <ul className="list-disc ml-6 space-y-1 pl-4">
                   {sec.requirements.map((r, j) => (
                     <li key={j}>{r}</li>
                   ))}
@@ -39,7 +39,7 @@ const TermsAndConditionContents = () => {
             {sec.must && (
               <>
                 <h3 className="font-semibold mt-4">You Must</h3>
-                <ul className="list-disc ml-6 space-y-1">
+                <ul className="list-disc ml-6 space-y-1 pl-4">
                   {sec.must.map((r, j) => (
                     <li key={j}>{r}</li>
                   ))}
@@ -52,7 +52,7 @@ const TermsAndConditionContents = () => {
                 <h3 className="font-semibold mt-4">
                   A tutor may be banned for:
                 </h3>
-                <ul className="list-disc ml-6 space-y-1">
+                <ul className="list-disc ml-6 space-y-1 pl-4">
                   {sec.tutorBan.map((b, j) => (
                     <li key={j}>{b}</li>
                   ))}
@@ -64,7 +64,7 @@ const TermsAndConditionContents = () => {
                 <h3 className="font-semibold mt-4">
                   A guardian/student may be banned for:
                 </h3>
-                <ul className="list-disc ml-6 space-y-1">
+                <ul className="list-disc ml-6 space-y-1 pl-4">
                   {sec.guardianBan.map((b, j) => (
                     <li key={j}>{b}</li>
                   ))}
@@ -73,7 +73,7 @@ const TermsAndConditionContents = () => {
             )}
             {/* Subsections */}
             {sec.subsections && (
-              <div className="space-y-6 mt-4">
+              <div className="space-y-6 mt-4 pl-10">
                 {sec.subsections.map((sub, j) => (
                   <div key={j}>
                     <h3 className="text-xl font-semibold mb-2">
@@ -89,7 +89,7 @@ const TermsAndConditionContents = () => {
                             </h3>
                             {ss.description && <p>{ss.description}</p>}
                             {ss.points && (
-                              <ul className="list-disc ml-6 space-y-1 text-gray-700">
+                              <ul className="list-disc ml-6 space-y-1 text-neutral-40 pl-4">
                                 {ss.points.map((p, k) => (
                                   <li key={k}>{p}</li>
                                 ))}
@@ -100,7 +100,7 @@ const TermsAndConditionContents = () => {
                       </div>
                     )}
                     {sub.points && (
-                      <ul className="list-disc ml-6 space-y-1 text-gray-700">
+                      <ul className="list-disc ml-6 space-y-1 text-neutral-40 pl-4">
                         {sub.points.map((p, k) => (
                           <li key={k}>{p}</li>
                         ))}
@@ -108,7 +108,7 @@ const TermsAndConditionContents = () => {
                     )}
 
                     {sub.conditions && (
-                      <ul className="list-disc ml-6 space-y-1 text-gray-700">
+                      <ul className="list-disc ml-6 space-y-1 text-neutral-40 pl-4">
                         {sub.conditions.map((p, k) => (
                           <li key={k}>{p}</li>
                         ))}
