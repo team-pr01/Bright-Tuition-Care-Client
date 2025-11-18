@@ -73,7 +73,7 @@ const StudentSteps = () => {
             <motion.img
               src={IMAGES.stepLine}
               alt="Connector line"
-              className="hidden md:block absolute top-7 left-0 right-0 mx-auto -z-10 w-[80%] max-w-[90%] object-contain"
+              className="hidden md:block absolute top-7 left-0 right-0 mx-auto w-[80%] max-w-[90%] object-contain"
               variants={lineVariants}
             />
 
