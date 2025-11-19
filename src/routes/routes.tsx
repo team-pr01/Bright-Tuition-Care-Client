@@ -25,7 +25,6 @@ import MyProfile from "../pages/Dashboard/Shared/MyProfile/MyProfile";
 import ReferAndEarn from "../pages/Dashboard/Tutor/ReferAndEarn/ReferAndEarn";
 import GuardianDashboardHome from "../pages/Dashboard/Guardian/GuardianDashboardHome/GuardianDashboardHome";
 import StudentSteps from "../components/HomePage/HowItWorksStudent/StudentSteps";
-import ImportantGuidelines from "../pages/Dashboard/Shared/ImportantGuidelines/ImportantGuidelines";
 import HireATutor from "../pages/Dashboard/Guardian/HireATutor/HireATutor";
 import PostedJobs from "../pages/Dashboard/Guardian/PostedJobs/PostedJobs";
 import Applications from "../pages/Dashboard/Guardian/Applications/Applications";
@@ -53,6 +52,8 @@ import MyApplications from "../pages/Dashboard/Tutor/MyApplications/MyApplicatio
 import ProtectedRoute from "./ProtectedRoute";
 import AdminAuthLayout from "../layouts/AdminAuthLayout";
 import AdminOrStaffLogin from "../pages/Auth/AdminOrStaffLogin/AdminOrStaffLogin";
+import TutorGuidelines from "../pages/Dashboard/Shared/TutorGuidelines/TutorGuidelines";
+import GuardianGuidelines from "../pages/Dashboard/Guardian/GurdianGuidelines/GuardianGuidelines";
 
 export const router = createBrowserRouter([
   // Main layout routes
@@ -211,7 +212,7 @@ export const router = createBrowserRouter([
       },
       {
         path: "important-guidelines",
-        element: <ImportantGuidelines />,
+        element: <TutorGuidelines />,
       },
       {
         path: "share-app",
@@ -289,6 +290,10 @@ export const router = createBrowserRouter([
       {
         path: "settings",
         element: <Settings />,
+      },
+      {
+        path: "important-guidelines",
+        element: <GuardianGuidelines />,
       },
     ],
   },
