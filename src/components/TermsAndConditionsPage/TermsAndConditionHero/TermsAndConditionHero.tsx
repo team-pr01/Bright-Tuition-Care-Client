@@ -21,9 +21,7 @@ const TermsAndConditionHero = () => {
             <p
               className={`mt-4 text-neutral-50 text-lg leading-[24px] max-w-[749px] text-center mx-auto`}
             >
-              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Harum
-              unde corporis laborum quas porro asperiores ad minus expedita
-              veniam quisquam.
+              Please read our terms and conditions, as they outline the official rules and important guidelines for using our website, services.
             </p>
           </div>
         </Container>

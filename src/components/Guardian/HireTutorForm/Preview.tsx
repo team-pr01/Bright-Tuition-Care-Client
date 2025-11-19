@@ -5,7 +5,7 @@ import MultiSelectDropdown from "../../Reusable/MultiSelectDropdown/MultiSelectD
 import TextInput from "../../Reusable/TextInput/TextInput";
 import Textarea from "../../Reusable/TextArea/TextArea";
 import { ICONS } from "../../../assets";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import SelectDropdown from "../../Reusable/SelectDropdown/SelectDropdown";
 
 const Preview = () => {
@@ -16,7 +16,7 @@ const Preview = () => {
     watch,
     setValue,
   } = useFormContext<any>();
-  
+
   const selectedCity = watch("city") || [];
   const selectedArea = watch("area") || [];
 
@@ -27,6 +27,64 @@ const Preview = () => {
     );
     return cityObj?.locations || [];
   });
+
+
+  const selectedCategory = watch("category");
+    const selectedClass = watch("class");
+  
+    const [classOptions, setClassOptions] = useState<string[]>([]);
+    const [subjectOptions, setSubjectOptions] = useState<string[]>([]);
+    const [selectedSubjects, setSelectedSubjects] = useState<string[]>([]);
+  
+    // ---------- UPDATE CLASS OPTIONS WHEN CATEGORY CHANGES ----------
+    useEffect(() => {
+      if (!selectedCategory) {
+        setClassOptions([]);
+        setSubjectOptions([]);
+        setSelectedSubjects([]);
+        return;
+      }
+  
+      const categoryData = filterData?.tutoringCatalog.find(
+        (item) => item.category === selectedCategory
+      );
+  
+      if (categoryData) {
+        const extractedClasses = categoryData.classes.map((cls) => cls.name);
+        setClassOptions(extractedClasses);
+      }
+  
+      setValue("class", "");
+      setSubjectOptions([]);
+      setSelectedSubjects([]);
+    }, [selectedCategory, setValue]);
+  
+    // ---------- UPDATE SUBJECT OPTIONS WHEN CLASS CHANGES ----------
+    useEffect(() => {
+      if (!selectedClass || !selectedCategory) return;
+  
+      const categoryData = filterData?.tutoringCatalog.find(
+        (item) => item.category === selectedCategory
+      );
+  
+      const classData = categoryData?.classes.find(
+        (cls) => cls.name === selectedClass
+      );
+  
+      if (classData) {
+        setSubjectOptions(classData.subjects);
+      }
+  
+      setSelectedSubjects([]);
+      setValue("subjects", []);
+    }, [selectedClass, selectedCategory, setValue]);
+  
+    // ---------- UPDATE SUBJECTS IN RHF ----------
+    useEffect(() => {
+      setValue("subjects", selectedSubjects);
+    }, [selectedSubjects, setValue]);
+  
+    const curriculumOptions = ["Ed-Excel", "Cambridge", "IB"];
 
   return (
     <div className="flex flex-col gap-4 lg:gap-5 font-Nunito">
@@ -55,23 +113,34 @@ const Preview = () => {
           isDisabled={!isEditEnable}
         />
 
+        <MultiSelectDropdown
+          label="Class"
+          name="class"
+          options={classOptions}
+          value={watch("class") || []}
+          onChange={(val) => setValue("class", val)}
+          isDisabled={!isEditEnable}
+        />
+
         {/* Conditionally show Curriculum field when Category is English Medium */}
         {watch("category") === "English Medium" && (
           <SelectDropdown
             label="Curriculum"
-            options={["Ed-Excel", "Cambridge", "IB"]}
+            options={curriculumOptions}
             {...register("curriculum", { required: "Curriculum is required" })}
             isDisabled={!isEditEnable}
           />
         )}
 
-        <TextInput
+         {/* SUBJECTS */}
+        <MultiSelectDropdown
           label="Subjects"
-          placeholder="Enter subjects"
-          error={errors.subjects}
-          value={watch("subjects")}
-          isDisabled={!isEditEnable}
-          {...register("subjects")}
+          name="subjects"
+          options={subjectOptions}
+          value={selectedSubjects}
+          onChange={setSelectedSubjects}
+          noDataMessage="Please select class first"
+          isDisabled={!selectedClass}
         />
 
         <SelectDropdown
@@ -83,7 +152,7 @@ const Preview = () => {
 
         <TextInput
           label="Tutoring Time"
-          placeholder="Ex: 10:00 AM - 12:00 PM"
+          placeholder="Ex: 5:00 PM - 6:00 PM"
           error={errors.tutoringTime}
           value={watch("tutoringTime")}
           isDisabled={!isEditEnable}
@@ -99,15 +168,6 @@ const Preview = () => {
           value={watch("salary")}
           isDisabled={!isEditEnable}
           {...register("salary")}
-        />
-
-        <MultiSelectDropdown
-          label="Class"
-          name="class"
-          options={filterData.class}
-          value={watch("class") || []}
-          onChange={(val) => setValue("class", val)}
-          isDisabled={!isEditEnable}
         />
 
         <SelectDropdown

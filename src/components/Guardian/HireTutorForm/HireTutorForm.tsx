@@ -69,8 +69,6 @@ const HireTutorForm = () => {
     }
   };
 
-  // ...imports and rest of component remain the same
-
   return (
     <FormProvider {...methods}>
       {/* remove handleSubmit from form */}
@@ -95,14 +93,14 @@ const HireTutorForm = () => {
 
         {/* Navigation */}
         <div className="flex justify-between mt-4">
-            <button
-              type="button"
-              onClick={() => setCurrentStep(currentStep - 1)}
-              className="px-4 py-2 bg-gray-300 rounded cursor-pointer disabled:cursor-not-allowed disabled:bg-gray-500/50"
-              disabled={currentStep === 0}
-            >
-              Previous
-            </button>
+          <button
+            type="button"
+            onClick={() => setCurrentStep(currentStep - 1)}
+            className="px-4 py-2 bg-gray-300 rounded cursor-pointer disabled:cursor-not-allowed disabled:bg-gray-500/50"
+            disabled={currentStep === 0}
+          >
+            Previous
+          </button>
 
           {currentStep < 3 ? (
             <button

@@ -13,6 +13,7 @@ interface MultiSelectDropdownProps {
   isRequired?: boolean;
   isDisabled?: boolean;
   dropdownDirection?: string;
+  noDataMessage?: string;
 }
 
 const MultiSelectDropdown = forwardRef<
@@ -30,6 +31,7 @@ const MultiSelectDropdown = forwardRef<
     isRequired = true,
     isDisabled,
     dropdownDirection = "bottom-full",
+    noDataMessage = "No option found",
   }) => {
     const [isOpen, setIsOpen] = useState(false);
     const [selectedValues, setSelectedValues] = useState<string[]>(value);
@@ -154,7 +156,7 @@ const MultiSelectDropdown = forwardRef<
                 ))
               ) : (
                 <div className="px-4 py-2 text-neutral-65 text-sm">
-                  No options found
+                  {noDataMessage}
                 </div>
               )}
             </div>

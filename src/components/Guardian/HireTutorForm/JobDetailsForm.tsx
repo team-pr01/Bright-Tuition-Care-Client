@@ -3,15 +3,71 @@ import { useFormContext } from "react-hook-form";
 import TextInput from "../../Reusable/TextInput/TextInput";
 import { filterData } from "../../../constants/filterData";
 import SelectDropdown from "../../Reusable/SelectDropdown/SelectDropdown";
+import MultiSelectDropdown from "../../Reusable/MultiSelectDropdown/MultiSelectDropdown";
+import { useEffect, useState } from "react";
 
 const JobDetailsForm = () => {
   const {
     register,
     formState: { errors },
     watch,
+    setValue,
   } = useFormContext<any>();
 
   const selectedCategory = watch("category");
+  const selectedClass = watch("class");
+
+  const [classOptions, setClassOptions] = useState<string[]>([]);
+  const [subjectOptions, setSubjectOptions] = useState<string[]>([]);
+  const [selectedSubjects, setSelectedSubjects] = useState<string[]>([]);
+
+  // ---------- UPDATE CLASS OPTIONS WHEN CATEGORY CHANGES ----------
+  useEffect(() => {
+    if (!selectedCategory) {
+      setClassOptions([]);
+      setSubjectOptions([]);
+      setSelectedSubjects([]);
+      return;
+    }
+
+    const categoryData = filterData?.tutoringCatalog.find(
+      (item) => item.category === selectedCategory
+    );
+
+    if (categoryData) {
+      const extractedClasses = categoryData.classes.map((cls) => cls.name);
+      setClassOptions(extractedClasses);
+    }
+
+    setValue("class", "");
+    setSubjectOptions([]);
+    setSelectedSubjects([]);
+  }, [selectedCategory, setValue]);
+
+  // ---------- UPDATE SUBJECT OPTIONS WHEN CLASS CHANGES ----------
+  useEffect(() => {
+    if (!selectedClass || !selectedCategory) return;
+
+    const categoryData = filterData?.tutoringCatalog.find(
+      (item) => item.category === selectedCategory
+    );
+
+    const classData = categoryData?.classes.find(
+      (cls) => cls.name === selectedClass
+    );
+
+    if (classData) {
+      setSubjectOptions(classData.subjects);
+    }
+
+    setSelectedSubjects([]);
+    setValue("subjects", []);
+  }, [selectedClass, selectedCategory, setValue]);
+
+  // ---------- UPDATE SUBJECTS IN RHF ----------
+  useEffect(() => {
+    setValue("subjects", selectedSubjects);
+  }, [selectedSubjects, setValue]);
 
   const curriculumOptions = ["Ed-Excel", "Cambridge", "IB"];
 
@@ -30,20 +86,34 @@ const JobDetailsForm = () => {
           {...register("category", { required: "Category is required" })}
         />
 
-        {/* if Category is English Medium then will show */}
+        {/* IF CATEGORY = ENGLISH MEDIUM SHOW CURRICULUM */}
         {selectedCategory === "English Medium" && (
           <SelectDropdown
             label="Curriculum"
             options={curriculumOptions}
+            error={errors.curriculum}
             {...register("curriculum", { required: "Curriculum is required" })}
           />
         )}
 
-        <TextInput
+        {/* CLASS */}
+        <SelectDropdown
+          label="Class"
+          options={classOptions}
+          error={errors.class}
+          {...register("class", { required: "Class is required" })}
+          isDisabled={!selectedCategory}
+        />
+
+        {/* SUBJECTS */}
+        <MultiSelectDropdown
           label="Subjects"
-          placeholder="Enter subjects"
-          error={errors.subjects}
-          {...register("subjects", { required: "Subjects are required" })}
+          name="subjects"
+          options={subjectOptions}
+          value={selectedSubjects}
+          onChange={setSelectedSubjects}
+          noDataMessage="Please select class first"
+          isDisabled={!selectedClass}
         />
 
         <SelectDropdown
@@ -56,7 +126,7 @@ const JobDetailsForm = () => {
 
         <TextInput
           label="Tutoring Time"
-          placeholder="Ex: 10:00 AM - 12:00 PM"
+          placeholder="Ex: 5:00 PM - 6:00 PM"
           error={errors.tutoringTime}
           {...register("tutoringTime")}
           isRequired={false}

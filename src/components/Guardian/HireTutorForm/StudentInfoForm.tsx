@@ -2,7 +2,6 @@
 import { useFormContext } from "react-hook-form";
 import { filterData } from "../../../constants/filterData";
 import TextInput from "../../Reusable/TextInput/TextInput";
-import MultiSelectDropdown from "../../Reusable/MultiSelectDropdown/MultiSelectDropdown";
 import SelectDropdown from "../../Reusable/SelectDropdown/SelectDropdown";
 import Textarea from "../../Reusable/TextArea/TextArea";
 
@@ -10,20 +9,11 @@ const StudentInfoForm = () => {
   const {
     register,
     formState: { errors },
-    watch,
-    setValue,
   } = useFormContext<any>();
 
   return (
     <div className="space-y-4 lg:space-y-6">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 lg:gap-6">
-        <MultiSelectDropdown
-          label="Class"
-          name="class"
-          options={filterData.class}
-          value={watch("class") || []}
-          onChange={(val) => setValue("class", val)}
-        />
 
         <SelectDropdown
           label="Student Gender"

@@ -28,7 +28,12 @@ const SelectDropdown = forwardRef<HTMLSelectElement, DropdownProps>(
           disabled={isDisabled}
           defaultChecked={selected}
           required={isRequired}
-           className={`w-full px-4 py-[11px] rounded-lg bg-white border leading-[18px] focus:outline-none focus:border-primary-10 transition duration-300 capitalize ${
+           className={`w-full px-4 py-[11px] rounded-lg border leading-[18px] focus:outline-none focus:border-primary-10 transition duration-300 capitalize disabled:cursor-not-allowed ${
+            isDisabled
+                ? "cursor-not-allowed bg-neutral-50/20"
+                : "bg-white cursor-pointer"
+            }
+           } ${
             error ? "border-red-500" : "border-neutral-45/20"
           }`}
           {...rest}

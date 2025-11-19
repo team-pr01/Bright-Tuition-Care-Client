@@ -1084,15 +1084,16 @@ export const filterData = {
     "Bangla Medium",
     "English Medium",
     "English Version",
+    "Madrasa Medium",
     "Arts",
     "Admission Test",
     "Test Preparation",
-    "Religion Studies",
-    "Skill Development",
+    "Religious Studies",
+    "Professional Skill Development",
+    "Special Skill Development",
     "Language Learning",
-    "Special Child Education",
-    "Uni Help",
-    "Madrasa Medium",
+    // "Special Child Education",
+    // "Uni Help",
   ],
   tutoringCatalog: [
     // English Medium
@@ -2042,6 +2043,245 @@ export const filterData = {
             "Chemistry",
             "All",
             "Engineering Drawing",
+          ],
+        },
+      ],
+    },
+    // Madrasa Medium
+    {
+      id: "madrasa_medium",
+      category: "Madrasa Medium",
+      classes: [
+        // ---------- PLAY ----------
+        {
+          id: "play",
+          name: "Play (Class / Course)",
+          subjects: [
+            "All",
+            "Arabic",
+            "Bangla",
+            "English",
+            "Math",
+            "Islamic Studies",
+            "Other",
+          ],
+        },
+
+        // ---------- NURSERY ----------
+        {
+          id: "nursery",
+          name: "Nursery (Class / Course)",
+          subjects: [
+            "All",
+            "Arabic",
+            "Bangla",
+            "English",
+            "Math",
+            "Islamic Studies",
+            "Other",
+          ],
+        },
+
+        // ---------- CLASS 1 ----------
+        {
+          id: "class_1",
+          name: "Class 1 (Class / Course)",
+          subjects: [
+            "All",
+            "Arabic",
+            "Bangla",
+            "English",
+            "Math",
+            "Islamic Studies",
+            "Other",
+          ],
+        },
+
+        // ---------- CLASS 2 ----------
+        {
+          id: "class_2",
+          name: "Class 2 (Class / Course)",
+          subjects: [
+            "All",
+            "Arabic",
+            "Bangla",
+            "English",
+            "Math",
+            "Islamic Studies",
+            "Other",
+          ],
+        },
+
+        // ---------- CLASS 3 ----------
+        {
+          id: "class_3",
+          name: "Class 3 (Class / Course)",
+          subjects: [
+            "All",
+            "Arabic",
+            "Bangla",
+            "English",
+            "Math",
+            "Science",
+            "Islamic Studies",
+            "Other",
+          ],
+        },
+
+        // ---------- CLASS 4 ----------
+        {
+          id: "class_4",
+          name: "Class 4 (Class / Course)",
+          subjects: [
+            "All",
+            "Arabic",
+            "Bangla",
+            "English",
+            "Math",
+            "Science",
+            "Islamic Studies",
+            "Other",
+          ],
+        },
+
+        // ---------- CLASS 5 ----------
+        {
+          id: "class_5",
+          name: "Class 5 (Class / Course)",
+          subjects: [
+            "All",
+            "Arabic",
+            "Bangla",
+            "English",
+            "Math",
+            "General Science",
+            "Islamic Studies",
+            "Other",
+          ],
+        },
+
+        // ---------- CLASS 6 ----------
+        {
+          id: "class_6",
+          name: "Class 6 (Class / Course)",
+          subjects: [
+            "All",
+            "Arabic",
+            "Bangla",
+            "English",
+            "Math",
+            "Science",
+            "Islamic Studies",
+            "ICT",
+            "Other",
+          ],
+        },
+
+        // ---------- CLASS 7 ----------
+        {
+          id: "class_7",
+          name: "Class 7 (Class / Course)",
+          subjects: [
+            "All",
+            "Arabic",
+            "Bangla",
+            "English",
+            "Math",
+            "Science",
+            "Islamic Studies",
+            "ICT",
+            "Geography & Environment",
+            "Other",
+          ],
+        },
+
+        // ---------- CLASS 8 ----------
+        {
+          id: "class_8",
+          name: "Class 8 (Class / Course)",
+          subjects: [
+            "All",
+            "Arabic",
+            "Bangla",
+            "English",
+            "Math",
+            "Science",
+            "Islamic Studies",
+            "ICT",
+            "Bangladesh & Global Studies",
+            "Other",
+          ],
+        },
+
+        // ---------- CLASS 9 ----------
+        {
+          id: "class_9",
+          name: "Class 9 (Class / Course)",
+          subjects: [
+            "All",
+            "Arabic",
+            "Bangla",
+            "English",
+            "Math",
+            "Science",
+            "Islamic Studies",
+            "ICT",
+            "Bangladesh & Global Studies",
+            "Other",
+          ],
+        },
+
+        // ---------- CLASS 10 ----------
+        {
+          id: "class_10",
+          name: "Class 10 (Class / Course)",
+          subjects: [
+            "All",
+            "Arabic",
+            "Bangla",
+            "English",
+            "Math",
+            "Science",
+            "Islamic Studies",
+            "ICT",
+            "Bangladesh & Global Studies",
+            "Other",
+          ],
+        },
+
+        // ---------- ALIM 1ST YEAR ----------
+        {
+          id: "alim_1st_year",
+          name: "Alim 1st Year (Class / Course)",
+          subjects: [
+            "All",
+            "Arabic",
+            "Bangla",
+            "English",
+            "Math",
+            "Quran & Hadith",
+            "Fiqh",
+            "Aqaid & Faraid",
+            "ICT",
+            "Other",
+          ],
+        },
+
+        // ---------- ALIM 2ND YEAR ----------
+        {
+          id: "alim_2nd_year",
+          name: "Alim 2nd Year (Class / Course)",
+          subjects: [
+            "All",
+            "Arabic",
+            "Bangla",
+            "English",
+            "Math",
+            "Quran & Hadith",
+            "Fiqh",
+            "Aqaid & Faraid",
+            "ICT",
+            "Other",
           ],
         },
       ],
