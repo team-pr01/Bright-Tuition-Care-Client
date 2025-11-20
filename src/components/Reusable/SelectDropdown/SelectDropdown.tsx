@@ -9,10 +9,28 @@ interface DropdownProps {
   isRequired?: boolean;
   selected?: boolean;
   isDisabled?: boolean;
+  value?: string;
+  onChange?: (value: string) => void;
 }
 
 const SelectDropdown = forwardRef<HTMLSelectElement, DropdownProps>(
-  ({ label, options, error, isRequired = true, selected, isDisabled, ...rest }, ref) => {
+  ({ 
+    label, 
+    options, 
+    error, 
+    isRequired = true, 
+    isDisabled, 
+    value,
+    onChange,
+    ...rest 
+  }, ref) => {
+    
+    const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+      if (onChange) {
+        onChange(e.target.value);
+      }
+    };
+
     return (
       <div className="flex flex-col gap-2 font-Nunito w-full">
         {label && (
@@ -26,9 +44,10 @@ const SelectDropdown = forwardRef<HTMLSelectElement, DropdownProps>(
         <select
           ref={ref}
           disabled={isDisabled}
-          defaultChecked={selected}
+          value={value}
           required={isRequired}
-           className={`w-full px-4 py-[11px] rounded-lg border leading-[18px] focus:outline-none focus:border-primary-10 transition duration-300 capitalize disabled:cursor-not-allowed ${
+          onChange={handleChange}
+          className={`w-full px-4 py-[11px] rounded-lg border leading-[18px] focus:outline-none focus:border-primary-10 transition duration-300 capitalize disabled:cursor-not-allowed ${
             isDisabled
                 ? "cursor-not-allowed bg-neutral-50/20"
                 : "bg-white cursor-pointer"

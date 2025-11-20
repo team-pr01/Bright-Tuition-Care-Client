@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import MultiSelectDropdown from "../../Reusable/MultiSelectDropdown/MultiSelectDropdown";
 import { filterData } from "../../../constants/filterData";
 import SearchInput from "../../Reusable/SearchBar/SearchBar";
+import SelectDropdown from "../../Reusable/SelectDropdown/SelectDropdown";
 
 // Filters.types.ts (optional file)
 export type TFiltersProps = {
@@ -17,14 +18,14 @@ export type TFiltersProps = {
   areaOptions: string[];
   setAreaOptions: React.Dispatch<React.SetStateAction<string[]>>;
 
-  selectedCategory: string[];
-  setSelectedCategory: React.Dispatch<React.SetStateAction<string[]>>;
+  selectedCategory: string;
+  setSelectedCategory: React.Dispatch<React.SetStateAction<string>>;
 
   selectedDays: string[];
   setSelectedDays: React.Dispatch<React.SetStateAction<string[]>>;
 
-  selectedClass: string[];
-  setSelectedClass: React.Dispatch<React.SetStateAction<string[]>>;
+  selectedClass: string;
+  setSelectedClass: React.Dispatch<React.SetStateAction<string>>;
 
   selectedTutorGender: string[];
   setSelectedTutorGender: React.Dispatch<React.SetStateAction<string[]>>;
@@ -65,9 +66,9 @@ const Filters: React.FC<TFiltersProps> = ({
   const handleResetFilters = () => {
     setSelectedCities([]);
     setSelectedAreas([]);
-    setSelectedCategory([]);
+    setSelectedCategory("");
     setSelectedDays([]);
-    setSelectedClass([]);
+    setSelectedClass("");
     setSelectedTutorGender([]);
     setSelectedStudentGender([]);
     setSelectedTuitionType([]);
@@ -93,6 +94,64 @@ const Filters: React.FC<TFiltersProps> = ({
     setAreaOptions(uniqueLocations);
     setSelectedAreas([]);
   }, [selectedCities]);
+
+  const [classOptions, setClassOptions] = useState<string[]>([]);
+  const [subjectOptions, setSubjectOptions] = useState<string[]>([]);
+  const [selectedSubjects, setSelectedSubjects] = useState<string[]>([]);
+
+  // ---------- UPDATE CLASS OPTIONS WHEN CATEGORY CHANGES ----------
+  useEffect(() => {
+    if (!selectedCategory) {
+      setClassOptions([]);
+      setSubjectOptions([]);
+      setSelectedSubjects([]);
+      setSelectedClass(""); // Reset class when category changes
+      return;
+    }
+
+    const categoryData = filterData?.tutoringCatalog.find(
+      (item) => item.category === selectedCategory
+    );
+
+    if (categoryData) {
+      const extractedClasses = categoryData.classes.map((cls) => cls.name);
+      setClassOptions(extractedClasses);
+    }
+
+    setSubjectOptions([]);
+    setSelectedSubjects([]);
+    setSelectedClass(""); // Reset class when category changes
+  }, [selectedCategory]);
+
+  // ---------- UPDATE SUBJECT OPTIONS WHEN CLASS CHANGES ----------
+  useEffect(() => {
+    if (!selectedClass || !selectedCategory) {
+      setSubjectOptions([]);
+      setSelectedSubjects([]);
+      return;
+    }
+
+    const categoryData = filterData?.tutoringCatalog.find(
+      (item) => item.category === selectedCategory
+    );
+
+    const classData = categoryData?.classes.find(
+      (cls) => cls.name === selectedClass
+    );
+
+    if (classData) {
+      setSubjectOptions(classData.subjects);
+
+      // Keep only subjects that exist in the new class
+      setSelectedSubjects((prev) =>
+        prev.filter((subject) => classData.subjects.includes(subject))
+      );
+    } else {
+      setSelectedSubjects([]);
+    }
+  }, [selectedClass, selectedCategory]);
+
+  const curriculumOptions = ["Ed-Excel", "Cambridge", "IB"];
   const buttonCommonClassNames =
     "flex items-center justify-center gap-2 leading-[24px] w-fit w-fit rounded-lg font-semibold font-Nunito cursor-pointer transition-all duration-300 py-2 px-3 lg:px-6 text-sm md:text-lg";
 
@@ -161,13 +220,36 @@ const Filters: React.FC<TFiltersProps> = ({
           />
 
           {/* Category */}
-          <MultiSelectDropdown
+          <SelectDropdown
             label="Category"
-            name="category"
             options={filterData.category}
             value={selectedCategory}
             onChange={setSelectedCategory}
-            isRequired={false}
+          />
+
+          {/* IF CATEGORY = ENGLISH MEDIUM SHOW CURRICULUM */}
+          {selectedCategory === "English Medium" && (
+            <SelectDropdown label="Curriculum" options={curriculumOptions} />
+          )}
+
+          {/* CLASS */}
+          <SelectDropdown
+            label="Class"
+            options={classOptions}
+            value={selectedClass}
+            onChange={setSelectedClass}
+            isDisabled={!selectedCategory}
+          />
+
+          {/* SUBJECTS */}
+          <MultiSelectDropdown
+            label="Subjects"
+            name="subjects"
+            options={subjectOptions}
+            value={selectedSubjects}
+            onChange={setSelectedSubjects}
+            noDataMessage="Please select class first"
+            isDisabled={!selectedClass}
           />
 
           {/* Tuition Type */}
@@ -177,16 +259,6 @@ const Filters: React.FC<TFiltersProps> = ({
             options={filterData.tuitionType}
             value={selectedTuitionType}
             onChange={setSelectedTuitionType}
-            isRequired={false}
-          />
-
-          {/* Class */}
-          <MultiSelectDropdown
-            label="Class"
-            name="class"
-            options={filterData.class}
-            value={selectedClass}
-            onChange={setSelectedClass}
             isRequired={false}
           />
 
@@ -227,6 +299,7 @@ const Filters: React.FC<TFiltersProps> = ({
               Close
             </button>
             <button
+              onClick={() => setIsAccordingOpen(!isAccordingOpen)}
               className={`bg-primary-10 hover:bg-transparent border border-primary-10 text-white hover:text-primary-10 w-fit ${buttonCommonClassNames}`}
             >
               Apply

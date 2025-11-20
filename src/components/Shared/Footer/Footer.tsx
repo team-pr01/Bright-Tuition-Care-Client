@@ -36,7 +36,7 @@ const Footer: React.FC = () => {
   };
 
   return (
-    <div className="bg-primary-50 pb-12 pt-[180px] xl:pt-[250px] font-Nunito relative rounded-t-[30px] lg:rounded-t-[50px]">
+    <div className="bg-primary-50 pb-12 pt-[180px] xl:pt-[250px] font-Nunito relative rounded-t-xl lg:rounded-t-[50px]">
       <div className="absolute -top-56 left-0 right-0">
         <Banner />
       </div>

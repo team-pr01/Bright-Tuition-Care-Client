@@ -15,9 +15,9 @@ const JobBoard = () => {
   const [selectedCities, setSelectedCities] = useState<string[]>(city ? [city] : []);
   const [selectedAreas, setSelectedAreas] = useState<string[]>([]);
   const [areaOptions, setAreaOptions] = useState<string[]>([]);
-  const [selectedCategory, setSelectedCategory] = useState<string[]>([]);
+  const [selectedCategory, setSelectedCategory] = useState<string>("");
   const [selectedDays, setSelectedDays] = useState<string[]>([]);
-  const [selectedClass, setSelectedClass] = useState<string[]>([]);
+  const [selectedClass, setSelectedClass] = useState<string>();
   const [selectedTutorGender, setSelectedTutorGender] = useState<string[]>([]);
   const [selectedStudentGender, setSelectedStudentGender] = useState<string[]>(
     []
@@ -40,8 +40,8 @@ const JobBoard = () => {
     keyword: debouncedKeyword || undefined,
     city: selectedCities.join(",") || undefined,
     area: selectedAreas.join(",") || undefined,
-    category: selectedCategory.join(",") || undefined,
-    class: selectedClass.join(",") || undefined,
+    category: selectedCategory || undefined,
+    class: selectedClass || undefined,
     tutoringDays: selectedDays.join(",") || undefined,
     preferredTutorGender: selectedTutorGender.join(",") || undefined,
     studentGender: selectedStudentGender.join(",") || undefined,
@@ -128,8 +128,8 @@ const JobBoard = () => {
             setSelectedCategory={setSelectedCategory}
             selectedDays={selectedDays}
             setSelectedDays={setSelectedDays}
-            selectedClass={selectedClass}
-            setSelectedClass={setSelectedClass}
+            selectedClass={selectedClass || ""}
+            setSelectedClass={setSelectedClass as React.Dispatch<React.SetStateAction<string>>}
             selectedTutorGender={selectedTutorGender}
             setSelectedTutorGender={setSelectedTutorGender}
             selectedStudentGender={selectedStudentGender}
