@@ -73,7 +73,7 @@ const jobApi = baseApi.injectEndpoints({
     getMyPostedJobs: builder.query({
       query: ({
         keyword,
-        status,
+        status = "",
         skip,
         limit,
       }: {

@@ -16,6 +16,7 @@ const JobDetailsForm = () => {
 
   const selectedCategory = watch("category");
   const selectedClass = watch("class");
+  const selectedSubject = watch("subjects");
 
   const [classOptions, setClassOptions] = useState<string[]>([]);
   const [subjectOptions, setSubjectOptions] = useState<string[]>([]);
@@ -110,8 +111,8 @@ const JobDetailsForm = () => {
           label="Subjects"
           name="subjects"
           options={subjectOptions}
-          value={selectedSubjects}
-          onChange={setSelectedSubjects}
+          value={selectedSubject}
+          onChange={(val) => setValue("subjects", val)}
           noDataMessage="Please select class first"
           isDisabled={!selectedClass}
         />

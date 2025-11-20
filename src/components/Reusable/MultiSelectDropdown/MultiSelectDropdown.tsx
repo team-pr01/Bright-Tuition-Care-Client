@@ -38,6 +38,7 @@ const MultiSelectDropdown = forwardRef<
     const [searchTerm, setSearchTerm] = useState("");
     const dropdownRef = useRef<HTMLDivElement>(null);
 
+    console.log(value);
     useEffect(() => {
       setSelectedValues(value);
     }, [value]);
@@ -60,8 +61,8 @@ const MultiSelectDropdown = forwardRef<
 
     const toggleOption = (option: string) => {
       let newSelectedValues;
-      if (selectedValues.includes(option)) {
-        newSelectedValues = selectedValues.filter((item) => item !== option);
+      if (selectedValues?.includes(option)) {
+        newSelectedValues = selectedValues?.filter((item) => item !== option);
       } else {
         newSelectedValues = [...selectedValues, option];
       }
@@ -74,7 +75,7 @@ const MultiSelectDropdown = forwardRef<
     );
 
     const displayText =
-      selectedValues.length > 0 ? selectedValues.join(", ") : placeholder;
+      selectedValues?.length > 0 ? selectedValues?.join(", ") : placeholder;
 
     return (
       <div className="flex flex-col gap-2 font-Nunito" ref={dropdownRef}>
@@ -102,7 +103,7 @@ const MultiSelectDropdown = forwardRef<
                 ? "cursor-not-allowed bg-neutral-50/20"
                 : "bg-white cursor-pointer"
             } ${
-              selectedValues.length === 0
+              selectedValues?.length === 0
                 ? "text-neutral-65"
                 : "text-neutral-10"
             }`}
@@ -138,14 +139,14 @@ const MultiSelectDropdown = forwardRef<
                   <div
                     key={option}
                     className={`px-4 py-2 cursor-pointer hover:bg-neutral-98 ${
-                      selectedValues.includes(option) ? "bg-neutral-98" : ""
+                      selectedValues?.includes(option) ? "bg-neutral-98" : ""
                     }`}
                     onClick={() => toggleOption(option)}
                   >
                     <div className="flex items-center">
                       <input
                         type="checkbox"
-                        checked={selectedValues.includes(option)}
+                        checked={selectedValues?.includes(option)}
                         readOnly
                         className="mr-2 size-4 appearance-none rounded-full border border-neutral-95 checked:bg-primary-10 checked:border-primary-10 focus:ring-2 focus:ring-primary-10"
                       />

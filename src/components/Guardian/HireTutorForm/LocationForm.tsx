@@ -90,21 +90,20 @@ const LocationForm = () => {
         />
 
         {/* Button to capture location */}
-       {
-        !isDirectionAdded && 
-         <button
-          type="button"
-          onClick={getLocation}
-          className="text-primary-10 text-sm cursor-pointer absolute bottom-[13px] right-3 flex items-center gap-1"
-        >
-          <img
-            src={ICONS.location}
-            alt="location-icon"
-            className="size-4 mb-1"
-          />
-          Allow
-        </button>
-       }
+        {!isDirectionAdded && (
+          <button
+            type="button"
+            onClick={getLocation}
+            className="text-primary-10 text-sm cursor-pointer absolute bottom-[13px] right-3 flex items-center gap-1"
+          >
+            <img
+              src={ICONS.location}
+              alt="location-icon"
+              className="size-4 mb-1"
+            />
+            Allow
+          </button>
+        )}
       </div>
     </div>
   );

@@ -165,7 +165,7 @@ const JobCard: React.FC<TJobCardProps> = ({
           <div>
             <p className="text-neutral-45 text-sm leading-normal">Subjects</p>
             <p className="text-neutral-10 font-medium leading-6 mt-1">
-              {job?.subjects}
+              {job?.subjects?.join(", ")}
             </p>
           </div>
         </div>

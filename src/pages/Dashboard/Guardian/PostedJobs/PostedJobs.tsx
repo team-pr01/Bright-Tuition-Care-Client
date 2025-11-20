@@ -28,36 +28,41 @@ const PostedJobs = () => {
     isLoading,
     isFetching,
   } = useGetMyPostedJobsQuery({
-    keyword: debouncedKeyword || undefined,
-    status: status || undefined,
+    keyword: debouncedKeyword,
+    status: status,
     skip,
   });
 
-  console.log(allJobs);
-
-  // Update jobs when new data arrives
+  // Update jobs when new data arrives - FIXED
   useEffect(() => {
-    if (allJobs?.data?.jobs) {
+    // Only update if we have new jobs data
+    if (allJobs?.data?.jobs && allJobs.data.jobs.length > 0) {
       if (skip === 0) {
+        // Reset jobs completely for new searches/filters
         setJobs(allJobs.data.jobs);
       } else {
+        // For pagination, append only new unique jobs
         setJobs((prev) => {
+          const existingIds = new Set(prev.map((job) => job._id));
           const newJobs = allJobs.data.jobs.filter(
-            (job: any) => !prev.some((p) => p._id === job._id)
+            (job: any) => !existingIds.has(job._id)
           );
-          return [...prev, ...newJobs];
+          return newJobs.length > 0 ? [...prev, ...newJobs] : prev;
         });
       }
+    } else if (skip === 0) {
+      // If no jobs returned and skip is 0, clear the jobs
+      setJobs([]);
     }
-  }, [allJobs, skip]);
+  }, [allJobs?.data?.jobs, skip]);
 
-  // Reset pagination when filters or search change
+  // Reset pagination when filters or search change - FIXED
   useEffect(() => {
     setSkip(0);
-    setJobs([]); // optional but better UX
+    // Don't setJobs([]) here - let the useEffect above handle it
   }, [debouncedKeyword, status]);
 
-  // Infinite Scroll Observer
+  // Infinite Scroll Observer - FIXED DEPENDENCIES
   const loaderRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
@@ -76,10 +81,11 @@ const PostedJobs = () => {
 
     const node = loaderRef.current;
     if (node) observer.observe(node);
+
     return () => {
       if (node) observer.unobserve(node);
     };
-  }, [allJobs, isFetching, allJobs?.data?.meta?.hasMore]);
+  }, [allJobs?.data?.meta?.hasMore, isFetching]);
 
   return (
     <div className="font-Nunito">
