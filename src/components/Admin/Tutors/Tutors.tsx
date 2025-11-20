@@ -117,8 +117,6 @@ const Tutors = () => {
     },
   ];
 
-  console.log(data?.data?.tutors);
-
   // Formatted table data
   const tableData = data?.data?.tutors?.map((tutor: TTutor) => ({
     _id: tutor._id,

@@ -57,7 +57,6 @@ const ChartCard: React.FC<ChartCardProps> = ({ title, children }) => (
 
 const AdminDashboardHome = () => {
   const { data: adminStats } = useGetAdminStatsQuery({});
-  console.log(adminStats);
   const tutorColor = "#3B82F6"; // Blue for Tutor
   const guardianColor = "#10B981"; // Green for Guardian
 

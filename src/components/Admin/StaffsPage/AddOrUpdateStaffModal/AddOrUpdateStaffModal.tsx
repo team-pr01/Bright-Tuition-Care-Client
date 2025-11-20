@@ -68,7 +68,6 @@ const AddOrUpdateStaffModal: React.FC<TAddOrUpdateStaffModalProps> = ({
 
   useEffect(() => {
     if (modalType === "edit" && defaultValues) {
-      console.log(defaultValues);
       setValue("name", defaultValues?.userId?.name);
       setValue("email", defaultValues?.userId?.email);
       setValue("phoneNumber", defaultValues?.userId?.phoneNumber);

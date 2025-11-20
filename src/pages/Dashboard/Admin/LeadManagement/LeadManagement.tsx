@@ -24,7 +24,6 @@ const LeadManagement = () => {
     isLoading,
     isFetching,
   } = useGetAllLeadsQuery({ keyword: searchQuery, page, limit });
-  console.log(allLeads);
 
   //   Table heads
   const leadTheads: TableHead[] = [

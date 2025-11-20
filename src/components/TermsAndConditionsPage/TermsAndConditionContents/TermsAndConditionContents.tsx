@@ -1,9 +1,7 @@
 import { termsData } from "../../../data/termsAndConditions";
-import Container from "../../Reusable/Container/Container";
 
 const TermsAndConditionContents = () => {
   return (
-    <Container>
       <div className="font-Nunito">
         {termsData.title && (
           <p className="text-neutral-5 text-3xl font-Nunito font-semibold">
@@ -122,7 +120,6 @@ const TermsAndConditionContents = () => {
           </div>
         ))}
       </div>
-    </Container>
   );
 };
 

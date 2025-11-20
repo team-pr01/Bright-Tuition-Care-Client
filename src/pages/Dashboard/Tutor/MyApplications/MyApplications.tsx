@@ -17,7 +17,6 @@ const MyApplications = () => {
   const [statusFilter, setStatusFilter] = useState<string>(
     status ? status : ""
   );
-  console.log(status);
   const { data, isLoading, isFetching } = useGetMyApplicationsQuery({
     page,
     limit,

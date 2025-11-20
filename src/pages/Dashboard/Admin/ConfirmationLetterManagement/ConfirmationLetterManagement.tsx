@@ -17,7 +17,6 @@ const ConfirmationLetterManagement = () => {
     useState<boolean>(false);
   const { data: allConfirmationLetters, isLoading } =
     useGetAllConfirmationLettersQuery({});
-  console.log(allConfirmationLetters);
   return (
     <div className="font-Nunito flex flex-col gap-5">
       <div className="flex items-center justify-between">

@@ -11,9 +11,9 @@ const TutorJobBoard = () => {
   const [selectedCities, setSelectedCities] = useState<string[]>([]);
   const [selectedAreas, setSelectedAreas] = useState<string[]>([]);
   const [areaOptions, setAreaOptions] = useState<string[]>([]);
-  const [selectedCategory, setSelectedCategory] = useState<string[]>([]);
+  const [selectedCategory, setSelectedCategory] = useState<string>("");
   const [selectedDays, setSelectedDays] = useState<string[]>([]);
-  const [selectedClass, setSelectedClass] = useState<string[]>([]);
+  const [selectedClass, setSelectedClass] = useState<string>("");
   const [selectedTutorGender, setSelectedTutorGender] = useState<string[]>([]);
   const [selectedStudentGender, setSelectedStudentGender] = useState<string[]>(
     []
@@ -34,8 +34,8 @@ const TutorJobBoard = () => {
     keyword: debouncedKeyword || undefined,
     city: selectedCities.join(",") || undefined,
     area: selectedAreas.join(",") || undefined,
-    category: selectedCategory.join(",") || undefined,
-    class: selectedClass.join(",") || undefined,
+    category: selectedCategory || undefined,
+    class: selectedClass || undefined,
     tutoringDays: selectedDays.join(",") || undefined,
     preferredTutorGender: selectedTutorGender.join(",") || undefined,
     studentGender: selectedStudentGender.join(",") || undefined,
@@ -97,7 +97,6 @@ const TutorJobBoard = () => {
         if (node) observer.unobserve(node);
       };
     }, [allJobs, isFetching, allJobs?.data?.meta?.hasMore]);
-    console.log(allJobs);
   return (
     <div className="z-[9999] relative">
       <Filters

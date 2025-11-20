@@ -74,7 +74,7 @@ const PersonalInfo: React.FC<TPersonalInfoProps> = ({ personalInfo }) => {
     { label: "Address", value: personalInfo?.address },
     {
       label: "Date of Birth",
-      value: formatDate(personalInfo?.dateOfBirth as string),
+      value: formatDate((personalInfo?.dateOfBirth) as string ),
     },
     { label: "Religion", value: personalInfo?.religion },
     { label: "Nationality", value: personalInfo?.nationality },

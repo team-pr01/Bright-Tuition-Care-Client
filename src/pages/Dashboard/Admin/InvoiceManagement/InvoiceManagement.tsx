@@ -21,7 +21,6 @@ const InvoiceManagement = () => {
     isLoading,
     isFetching,
   } = useGetAllInvoicesQuery({ status });
-  console.log(allInvoicesData);
   return (
     <div className="font-Nunito flex flex-col gap-5">
       <div className="flex items-center justify-between">
