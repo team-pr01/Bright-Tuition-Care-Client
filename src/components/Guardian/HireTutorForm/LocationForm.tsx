@@ -4,15 +4,25 @@ import MultiSelectDropdown from "../../Reusable/MultiSelectDropdown/MultiSelectD
 import TextInput from "../../Reusable/TextInput/TextInput";
 import { filterData } from "../../../constants/filterData";
 import { ICONS } from "../../../assets";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import type { TJobs } from "../../../types/job.types";
 
-const LocationForm = () => {
+const LocationForm = ({ defaultValues }: { defaultValues?: TJobs }) => {
   const {
     watch,
     setValue,
     register,
     formState: { errors },
   } = useFormContext<any>();
+
+  useEffect(() => {
+    if (defaultValues) {
+      setValue("city", defaultValues.city || []);
+      setValue("area", defaultValues.area || []);
+      setValue("address", defaultValues.address || "");
+      setValue("locationDirection", defaultValues.locationDirection || "");
+    }
+  }, [defaultValues, setValue]);
 
   const selectedCity = watch("city") || [];
   const selectedArea = watch("area") || [];

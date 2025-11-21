@@ -248,6 +248,10 @@ export const router = createBrowserRouter([
         element: <PostedJobs />,
       },
       {
+        path: "edit-job/:jobId",
+        element: <EditJob />,
+      },
+      {
         path: "applications/:jobId",
         element: <Applications />,
       },
@@ -392,9 +396,7 @@ export const router = createBrowserRouter([
   // Admin/Staff login
   {
     path: "admin",
-    element: (
-        <AdminAuthLayout />
-    ),
+    element: <AdminAuthLayout />,
     errorElement: <NotFound />,
     children: [
       {

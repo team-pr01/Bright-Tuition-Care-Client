@@ -10,7 +10,7 @@ interface DropdownProps {
   selected?: boolean;
   isDisabled?: boolean;
   value?: string;
-  onChange?: (value: string) => void;
+  onChange?: any;
 }
 
 const SelectDropdown = forwardRef<HTMLSelectElement, DropdownProps>(
@@ -26,10 +26,9 @@ const SelectDropdown = forwardRef<HTMLSelectElement, DropdownProps>(
   }, ref) => {
     
     const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-      if (onChange) {
-        onChange(e.target.value);
-      }
-    };
+  onChange?.(e);
+};
+
 
     return (
       <div className="flex flex-col gap-2 font-Nunito w-full">

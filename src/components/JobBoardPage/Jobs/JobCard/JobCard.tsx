@@ -46,8 +46,8 @@ const JobCard: React.FC<TJobCardProps> = ({
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [isOpen]);
 
-  const path = "admin";
-  const role = "admin";
+  const path = user?.role === "guardian" ? "guardian" : "admin";
+  const role = user?.role;
   const [isShareJobModalOpen, setIsShareJobModalOpen] =
     useState<boolean>(false);
   const [isJobApplyConfirmationModalOpen, setIsJobApplyConfirmationModalOpen] =
@@ -212,86 +212,87 @@ const JobCard: React.FC<TJobCardProps> = ({
           </div>
         )}
 
-        {variant === "guardian" ||
-          (variant === "admin" && (
-            <div className="flex items-center gap-5 text-neutral-10 text-xs md:text-sm mt-4">
-              <Link
-                to={`/dashboard/admin/edit-job/${1}`}
-                className="flex items-center gap-1 md:gap-2 cursor-pointer"
-              >
-                <img src={ICONS.pen} alt="" className="size-4 md:size-5" />
-                <p className="font-bold">Edit Job</p>
-              </Link>
-              {/* <button
+        {(variant === "guardian" || variant === "admin") && (
+          <div className="flex items-center gap-5 text-neutral-10 text-xs md:text-sm mt-4">
+            <Link
+              to={`/dashboard/${path}/edit-job/${job?._id}`}
+              className="flex items-center gap-1 md:gap-2 cursor-pointer"
+            >
+              <img src={ICONS.pen} alt="" className="size-4 md:size-5" />
+              <p className="font-bold">Edit Job</p>
+            </Link>
+            {/* <button
               onClick={() => setIsConfirmDeleteModalOpen(true)}
               className="flex items-center gap-1 md:gap-2 cursor-pointer"
             >
               <img src={ICONS.pen} alt="" className="size-4 md:size-5" />
               <p className="font-bold">Edit Job</p>
             </button> */}
-              <div className="flex items-center gap-1 md:gap-2">
-                <img src={ICONS.jobStatus} alt="" className="size-4" />
-                <p className="font-bold">Status:</p>
-                <p className={`capitalize ${statusTextColorForGuardian}`}>
-                  {job?.status}
-                </p>
-              </div>
-              <Link
-                to={`/dashboard/${path}/applications/${job?._id}`}
-                className="flex items-center gap-1 md:gap-2 hover:underline"
-              >
-                <img
-                  src={ICONS.applications}
-                  alt=""
-                  className="size-4 md:size-5"
-                />
-                <p className="font-bold">Applications({job?.applications?.length || 0})</p>
-              </Link>
-
-              {/* Dropdown Menu */}
-              {role === "admin" && (
-                <div className="relative">
-                  <button
-                    className="text-xl hover:text-gray-700 transition cursor-pointer"
-                    onClick={() => setIsOpen((prev) => !prev)}
-                  >
-                    <TbMenuDeep />
-                  </button>
-
-                  {isOpen && (
-                    <div
-                      ref={dropdownRef}
-                      className="absolute right-0 bottom-full mb-2 w-40 bg-white shadow-lg rounded-md border border-gray-100 z-50"
-                    >
-                      {/* Make Live */}
-                      <button
-                        onClick={() => handleUpdateStatus("live")}
-                        className="flex items-center gap-2 px-4 py-2 text-sm w-full hover:bg-green-50 text-green-600 cursor-pointer"
-                      >
-                        <FiCheckCircle /> Make Live
-                      </button>
-
-                      {/* Close Job */}
-                      <button
-                        onClick={() => handleUpdateStatus("closed")}
-                        className="flex items-center gap-2 px-4 py-2 text-sm w-full hover:bg-yellow-50 text-yellow-600 cursor-pointer"
-                      >
-                        <FiXCircle /> Close Job
-                      </button>
-
-                      {/* Cancel */}
-                      <button
-                        onClick={() => handleUpdateStatus("cancelled")}
-                        className="flex items-center gap-2 px-4 py-2 text-sm w-full hover:bg-accent-20/5 text-accent-20 cursor-pointer"
-                      >
-                        <FiX /> Cancel
-                      </button>
-                    </div>
-                  )}
-                </div>
-              )}
+            <div className="flex items-center gap-1 md:gap-2">
+              <img src={ICONS.jobStatus} alt="" className="size-4" />
+              <p className="font-bold">Status:</p>
+              <p className={`capitalize ${statusTextColorForGuardian}`}>
+                {job?.status}
+              </p>
             </div>
-          ))}
+            <Link
+              to={`/dashboard/${path}/applications/${job?._id}`}
+              className="flex items-center gap-1 md:gap-2 hover:underline"
+            >
+              <img
+                src={ICONS.applications}
+                alt=""
+                className="size-4 md:size-5"
+              />
+              <p className="font-bold">
+                Applications({job?.applications?.length || 0})
+              </p>
+            </Link>
+
+            {/* Dropdown Menu for Admin */}
+            {role === "admin" && (
+              <div className="relative">
+                <button
+                  className="text-xl hover:text-gray-700 transition cursor-pointer"
+                  onClick={() => setIsOpen((prev) => !prev)}
+                >
+                  <TbMenuDeep />
+                </button>
+
+                {isOpen && (
+                  <div
+                    ref={dropdownRef}
+                    className="absolute right-0 bottom-full mb-2 w-40 bg-white shadow-lg rounded-md border border-gray-100 z-50"
+                  >
+                    {/* Make Live */}
+                    <button
+                      onClick={() => handleUpdateStatus("live")}
+                      className="flex items-center gap-2 px-4 py-2 text-sm w-full hover:bg-green-50 text-green-600 cursor-pointer"
+                    >
+                      <FiCheckCircle /> Make Live
+                    </button>
+
+                    {/* Close Job */}
+                    <button
+                      onClick={() => handleUpdateStatus("closed")}
+                      className="flex items-center gap-2 px-4 py-2 text-sm w-full hover:bg-yellow-50 text-yellow-600 cursor-pointer"
+                    >
+                      <FiXCircle /> Close Job
+                    </button>
+
+                    {/* Cancel */}
+                    <button
+                      onClick={() => handleUpdateStatus("cancelled")}
+                      className="flex items-center gap-2 px-4 py-2 text-sm w-full hover:bg-accent-20/5 text-accent-20 cursor-pointer"
+                    >
+                      <FiX /> Cancel
+                    </button>
+                  </div>
+                )}
+              </div>
+            )}
+          </div>
+        )}
 
         {variant === "tutorJobCard" && (
           <div className="flex gap-4 mt-5 items-center justify-between">
@@ -317,7 +318,7 @@ const JobCard: React.FC<TJobCardProps> = ({
               icon={ICONS.topRightArrowWhite}
               iconBg="#0D99FF"
               onClick={() => {
-                if(!user){
+                if (!user) {
                   toast.error("Please login to apply for a job.");
                 } else {
                   setIsJobApplyConfirmationModalOpen(true);

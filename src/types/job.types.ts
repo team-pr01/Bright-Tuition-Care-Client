@@ -22,6 +22,7 @@ export type TJobs = {
   numberOfStudents: number;
   studentGender: "male" | "female" | "any";
   class: string;
+  curriculum?: string;
   city: string;
   area: string;
   address: string;
