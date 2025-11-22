@@ -40,6 +40,7 @@ const TutorJobBoard = () => {
     preferredTutorGender: selectedTutorGender.join(",") || undefined,
     studentGender: selectedStudentGender.join(",") || undefined,
     tuitionType: selectedTuitionType.join(",") || undefined,
+    status : "live",
     skip,
   });
 
@@ -120,7 +121,7 @@ const TutorJobBoard = () => {
         setSelectedStudentGender={setSelectedStudentGender}
         selectedTuitionType={selectedTuitionType}
         setSelectedTuitionType={setSelectedTuitionType}
-        totalJobs={allJobs?.data?.meta?.total || 0}
+        liveJobs={allJobs?.data?.meta?.liveJobs || 0}
       />
       <Jobs allJobs={jobs} isLoading={isLoading || isFetching} variant="tutorJobCard" />
         <div ref={loaderRef} className="h-10"></div>

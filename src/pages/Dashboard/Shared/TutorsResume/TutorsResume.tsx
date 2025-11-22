@@ -9,6 +9,7 @@ import toast from "react-hot-toast";
 import {
   useAppointTutorMutation,
   useConfirmTutorMutation,
+  useGetSingleApplicationByIdQuery,
   useShortlistTutorMutation,
 } from "../../../../redux/Features/Application/applicationApi";
 
@@ -25,6 +26,10 @@ const TutorsResume = () => {
   const educationDetails = data?.data?.educationalInformation || [];
   const tuitionPreference = profile?.tuitionPreference;
   const personalInfo = profile?.personalInformation || {};
+
+  const { data: applicationData } =
+    useGetSingleApplicationByIdQuery(applicationId);
+  const application = applicationData?.data;
 
   const educationData = educationDetails?.map((item: TEducation) => [
     { label: "Institute Name", value: item.instituteName || "N/A" },
@@ -168,8 +173,8 @@ const TutorsResume = () => {
   };
 
   const isContactDetailsHidden =
-    location?.pathname.startsWith("/dashboard/tutor/view") ||
-    location?.pathname.startsWith("/dashboard/guardian/applications");
+    location?.pathname.startsWith("/dashboard/guardian/application") &&
+    application?.status === "pending";
 
   const buttonStyle = "py-[6px] lg:py-[6px] px-3 lg:px-2 text-sm lg:text-sm";
 

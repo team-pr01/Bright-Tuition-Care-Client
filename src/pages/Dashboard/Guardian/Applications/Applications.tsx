@@ -24,8 +24,8 @@ type Application = {
 // Table headers
 const applicationTheads: TableHead[] = [
   { key: "name", label: "Applicant Name" },
-  { key: "email", label: "Email" },
-  { key: "phoneNumber", label: "Phone Number" },
+  // { key: "email", label: "Email" },
+  // { key: "phoneNumber", label: "Phone Number" },
   { key: "location", label: "Location" },
   { key: "appliedDate", label: "Applied Date" },
   { key: "status", label: "Status" },
@@ -65,8 +65,8 @@ const Applications = () => {
             </span>
           </div>
         ),
-        email: application.userEmail,
-        phoneNumber: application.userPhoneNumber,
+        // email: application.userEmail,
+        // phoneNumber: application.userPhoneNumber,
         location: `${application.userArea}, ${application.userCity}`,
         appliedDate: formatDate(application.createdAt),
         status: (<span className="capitalize">{application.status}</span>),

@@ -28,13 +28,13 @@ const applicationApi = baseApi.injectEndpoints({
       providesTags: ["invoice"],
     }),
 
-    getSingleInvoiceById: builder.query({
+    getSingleApplicationById: builder.query({
       query: (id) => ({
-        url: `/invoice/${id}`,
+        url: `/application/${id}`,
         method: "GET",
         credentials: "include",
       }),
-      providesTags: ["invoice"],
+      providesTags: ["application"],
     }),
 
     getAllApplicationsByJobId: builder.query<
@@ -101,7 +101,7 @@ const applicationApi = baseApi.injectEndpoints({
 export const {
   useGetJobDetailsForInvoiceQuery,
   useGetAllInvoicesQuery,
-  useGetSingleInvoiceByIdQuery,
+  useGetSingleApplicationByIdQuery,
   useGetAllApplicationsByJobIdQuery,
   useApplyOnJobMutation,
   useShortlistTutorMutation,

@@ -127,6 +127,7 @@ const AllJobs = () => {
         pendingJobs={allJobs?.data?.meta?.pendingJobs || 0}
         closedJobs={allJobs?.data?.meta?.closedJobs || 0}
         liveJobs={allJobs?.data?.meta?.liveJobs || 0}
+        cancelledJobs={allJobs?.data?.meta?.cancelledJobs || 0}
         status={status}
         setStatus={setStatus}
       />

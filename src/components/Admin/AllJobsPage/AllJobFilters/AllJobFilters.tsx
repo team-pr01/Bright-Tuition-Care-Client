@@ -13,12 +13,14 @@ import {
   FaListAlt,
   FaTimesCircle,
 } from "react-icons/fa";
+import { MdLock } from "react-icons/md";
 
 type TAllJobFiltersProps = TFiltersProps & {
   totalJobs: number;
   liveJobs: number;
   closedJobs: number;
   pendingJobs: number;
+  cancelledJobs: number;
 };
 const AllJobFilters: React.FC<TAllJobFiltersProps> = ({
   keyword,
@@ -45,6 +47,7 @@ const AllJobFilters: React.FC<TAllJobFiltersProps> = ({
   liveJobs,
   closedJobs,
   pendingJobs,
+  cancelledJobs,
   status,
   setStatus,
 }) => {
@@ -144,9 +147,10 @@ const AllJobFilters: React.FC<TAllJobFiltersProps> = ({
   return (
     <>
       <div className="flex flex-col 2xl:flex-row items-start 2xl:items-center justify-between gap-6 2xl:gap-0">
+        {/* Status counter */}
         <div className="flex items-center gap-4">
           {/* Total Jobs */}
-          <div className="flex items-center gap-1.5">
+          <div className="flex flex-col md:flex-row items-center gap-1.5">
             <FaListAlt className="text-primary-50 text-xl sm:text-2xl" />
             <h1 className="text-xs sm:text-sm md:text-base font-semibold text-primary-50">
               {totalJobs} Total
@@ -154,7 +158,7 @@ const AllJobFilters: React.FC<TAllJobFiltersProps> = ({
           </div>
 
           {/* Live Jobs */}
-          <div className="flex items-center gap-1.5">
+          <div className="flex flex-col md:flex-row items-center gap-1.5">
             <FaCheckCircle className="text-green-500 text-xl sm:text-2xl" />
             <h1 className="text-xs sm:text-sm md:text-base font-semibold text-primary-50">
               {liveJobs} Live
@@ -162,7 +166,7 @@ const AllJobFilters: React.FC<TAllJobFiltersProps> = ({
           </div>
 
           {/* Pending Jobs */}
-          <div className="flex items-center gap-1.5">
+          <div className="flex flex-col md:flex-row items-center gap-1.5">
             <FaHourglassHalf className="text-yellow-500 text-xl sm:text-2xl" />
             <h1 className="text-xs sm:text-sm md:text-base font-semibold text-primary-50">
               {pendingJobs} Pending
@@ -170,10 +174,18 @@ const AllJobFilters: React.FC<TAllJobFiltersProps> = ({
           </div>
 
           {/* Closed Jobs */}
-          <div className="flex items-center gap-1.5">
-            <FaTimesCircle className="text-red-500 text-xl sm:text-2xl" />
+          <div className="flex flex-col md:flex-row items-center gap-1.5">
+            <MdLock className="text-purple-500 text-xl sm:text-2xl" />
             <h1 className="text-xs sm:text-sm md:text-base font-semibold text-primary-50">
               {closedJobs} Closed
+            </h1>
+          </div>
+
+          {/* Cancelled Jobs */}
+          <div className="flex flex-col md:flex-row items-center gap-1.5">
+            <FaTimesCircle className="text-red-500 text-xl sm:text-2xl" />
+            <h1 className="text-xs sm:text-sm md:text-base font-semibold text-primary-50">
+              {cancelledJobs} Cancelled
             </h1>
           </div>
         </div>
@@ -195,6 +207,8 @@ const AllJobFilters: React.FC<TAllJobFiltersProps> = ({
               <option value="">All</option>
               <option value="pending">Pending</option>
               <option value="live">Live</option>
+              <option value="closed">Closed</option>
+              <option value="cancelled">Cancelled</option>
             </select>
           </div>
 

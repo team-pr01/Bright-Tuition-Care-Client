@@ -88,13 +88,13 @@ const AdminDashboardHome = () => {
           icon={<FaChalkboardTeacher className="text-[#10B981]" />} // Green
         />
 
-        {/* Posted Jobs */}
+        {/* All Jobs */}
         <DashboardOverviewCard
-          title="Posted"
+          title="All"
           additionalTitle="Jobs"
           value={adminStats?.data?.totalJobs || 0}
           textColor="text-neutral-10"
-          path="/dashboard/admin/posted-jobs"
+          path="/dashboard/admin/all-jobs"
           icon={<FaBriefcase className="text-[#F59E0B]" />} // Amber/Yellow
         />
 

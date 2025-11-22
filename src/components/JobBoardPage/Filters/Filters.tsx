@@ -36,7 +36,7 @@ export type TFiltersProps = {
   selectedTuitionType: string[];
   setSelectedTuitionType: React.Dispatch<React.SetStateAction<string[]>>;
 
-  totalJobs: number;
+  liveJobs: number;
 
   status?:string;
   setStatus?:React.Dispatch<React.SetStateAction<string>>;
@@ -63,7 +63,7 @@ const Filters: React.FC<TFiltersProps> = ({
   setSelectedStudentGender,
   selectedTuitionType,
   setSelectedTuitionType,
-  totalJobs,
+  liveJobs,
 }) => {
   const [isAccordingOpen, setIsAccordingOpen] = useState<boolean>(false);
   const handleResetFilters = () => {
@@ -164,7 +164,7 @@ const Filters: React.FC<TFiltersProps> = ({
         <div className="flex items-center gap-3">
           <img src={ICONS.liveJobs} alt="" className="size-8" />
           <h1 className="text-xl md:text-2xl lg:text-4xl font-semibold leading-11 text-primary-50">
-            {totalJobs} Live Jobs
+            {liveJobs} Live Jobs
           </h1>
         </div>
 

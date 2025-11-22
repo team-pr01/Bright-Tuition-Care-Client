@@ -46,6 +46,7 @@ const JobBoard = () => {
     preferredTutorGender: selectedTutorGender.join(",") || undefined,
     studentGender: selectedStudentGender.join(",") || undefined,
     tuitionType: selectedTuitionType.join(",") || undefined,
+    status : "live",
     skip,
   });
 
@@ -136,7 +137,7 @@ const JobBoard = () => {
             setSelectedStudentGender={setSelectedStudentGender}
             selectedTuitionType={selectedTuitionType}
             setSelectedTuitionType={setSelectedTuitionType}
-            totalJobs={allJobs?.data?.meta?.total || 0}
+            liveJobs={allJobs?.data?.meta?.liveJobs || 0}
           />
         </div>
 
