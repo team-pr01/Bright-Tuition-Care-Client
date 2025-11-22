@@ -2,12 +2,12 @@
 import { useState } from "react";
 import {
   useGetMyApplicationsQuery,
-  useWithdrawApplicationMutation,
 } from "../../../../redux/Features/Tutor/tutorApi";
 import type { TableHead } from "../../../../components/Reusable/Table/Table";
 import Table from "../../../../components/Reusable/Table/Table";
 import toast from "react-hot-toast";
 import { useParams } from "react-router-dom";
+import { useReApplyMutation, useWithdrawApplicationMutation } from "../../../../redux/Features/Application/applicationApi";
 
 const MyApplications = () => {
   const { status } = useParams();
@@ -17,6 +17,9 @@ const MyApplications = () => {
   const [statusFilter, setStatusFilter] = useState<string>(
     status ? status : ""
   );
+
+  const [reApply, { isLoading: isReApplyOnJobLoading }] =
+    useReApplyMutation();
   const { data, isLoading, isFetching } = useGetMyApplicationsQuery({
     page,
     limit,
@@ -69,13 +72,27 @@ const MyApplications = () => {
         </div>
       ),
       action: (
-        <button
-          onClick={() => handleWithdrawApplication(app._id)}
-          className="text-primary-10 hover:underline cursor-pointer disabled:cursor-not-allowed"
-          disabled={isWithdrawingApplication}
-        >
-          {isWithdrawingApplication ? "Please wait..." : "Withdraw Application"}
-        </button>
+        <>
+          {app?.status === "withdrawn" ? (
+            <button
+              onClick={() => handleReApplyOnJob(app?._id)}
+              className="text-primary-10 hover:underline cursor-pointer disabled:cursor-not-allowed"
+              disabled={isReApplyOnJobLoading}
+            >
+              {isReApplyOnJobLoading ? "Please wait..." : "Re-Apply"}
+            </button>
+          ) : (
+            <button
+              onClick={() => handleWithdrawApplication(app._id)}
+              className="text-primary-10 hover:underline cursor-pointer disabled:cursor-not-allowed"
+              disabled={isWithdrawingApplication}
+            >
+              {isWithdrawingApplication
+                ? "Please wait..."
+                : "Withdraw Application"}
+            </button>
+          )}
+        </>
       ),
     })) || [];
 
@@ -93,6 +110,19 @@ const MyApplications = () => {
       toast.error(
         error?.data?.message ||
           "Error withdrawing application. Please try again."
+      );
+    }
+  };
+
+  const handleReApplyOnJob = async (id: string) => {
+    try {
+      const response = await reApply(id).unwrap();
+      if (response?.success) {
+        toast.success(response.message || "Re-applied on job successfully.");
+      }
+    } catch (error: any) {
+      toast.error(
+        error?.data?.message || "Error applying on job. Please try again."
       );
     }
   };

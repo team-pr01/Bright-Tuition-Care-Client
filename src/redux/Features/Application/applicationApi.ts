@@ -65,8 +65,25 @@ const applicationApi = baseApi.injectEndpoints({
       invalidatesTags: ["application"],
     }),
 
+    withdrawApplication: builder.mutation({
+      query: (id) => ({
+        url: `/application/withdraw/${id}`,
+        method: "PATCH",
+      }),
+      invalidatesTags: ["application", "tutor"],
+    }),
+
+    reApply: builder.mutation<any, any>({
+      query: (id) => ({
+        url: `/application/re-apply/${id}`,
+        method: "PATCH",
+        credentials: "include",
+      }),
+      invalidatesTags: ["application", "tutor"],
+    }),
+
     shortlistTutor: builder.mutation<any, any>({
-      query: ({id, data}) => ({
+      query: ({ id, data }) => ({
         url: `/application/shortlist/${id}`,
         method: "PATCH",
         body: data,
@@ -76,7 +93,7 @@ const applicationApi = baseApi.injectEndpoints({
     }),
 
     appointTutor: builder.mutation<any, any>({
-      query: ({id, data}) => ({
+      query: ({ id, data }) => ({
         url: `/application/appoint/${id}`,
         method: "PATCH",
         body: data,
@@ -86,7 +103,7 @@ const applicationApi = baseApi.injectEndpoints({
     }),
 
     confirmTutor: builder.mutation<any, any>({
-      query: ({id, data}) => ({
+      query: ({ id, data }) => ({
         url: `/application/confirm/${id}`,
         method: "PATCH",
         body: data,
@@ -94,7 +111,6 @@ const applicationApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ["application"],
     }),
-
   }),
 });
 
@@ -104,7 +120,9 @@ export const {
   useGetSingleApplicationByIdQuery,
   useGetAllApplicationsByJobIdQuery,
   useApplyOnJobMutation,
+  useWithdrawApplicationMutation,
+  useReApplyMutation,
   useShortlistTutorMutation,
   useAppointTutorMutation,
-  useConfirmTutorMutation
+  useConfirmTutorMutation,
 } = applicationApi;

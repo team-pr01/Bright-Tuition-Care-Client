@@ -72,15 +72,6 @@ const tutorApi = baseApi.injectEndpoints({
       },
       providesTags: ["tutor"],
     }),
-
-    withdrawApplication: builder.mutation({
-      query: (id) => ({
-        url: `/application/withdraw/${id}`,
-        method: "PATCH",
-      }),
-      invalidatesTags: ["tutor"],
-    }),
-
     toggleTutorProfileStatus: builder.mutation({
       query: (tutorId) => ({
         url: `/tutor/profile-lock/${tutorId}`,
@@ -105,7 +96,6 @@ export const {
   useGetSingleTutorByIdQuery,
   useGetMyTutorProfileQuery,
   useGetMyApplicationsQuery,
-  useWithdrawApplicationMutation,
   useToggleTutorProfileStatusMutation,
   useUpdateIdentityInfoMutation,
 } = tutorApi;

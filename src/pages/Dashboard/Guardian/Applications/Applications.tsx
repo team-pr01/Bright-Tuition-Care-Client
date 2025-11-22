@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Link, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import type { TableHead } from "../../../../components/Reusable/Table/Table";
 import { useState } from "react";
 import Table from "../../../../components/Reusable/Table/Table";
@@ -9,6 +9,7 @@ import { formatDate } from "../../../../utils/formatDate";
 import { useSelector } from "react-redux";
 import { useCurrentUser } from "../../../../redux/Features/Auth/authSlice";
 import type { TLoggedInUser } from "../../../../types/loggedinUser.types";
+import toast from "react-hot-toast";
 
 type Application = {
   id: number;
@@ -40,6 +41,7 @@ const Applications = () => {
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [page, setPage] = useState<number>(1);
   const [limit, setLimit] = useState<number>(10);
+  const navigate = useNavigate();
 
   const {
     data: applications,
@@ -69,15 +71,24 @@ const Applications = () => {
         // phoneNumber: application.userPhoneNumber,
         location: `${application.userArea}, ${application.userCity}`,
         appliedDate: formatDate(application.createdAt),
-        status: (<span className="capitalize">{application.status}</span>),
+        status: <span className="capitalize">{application.status}</span>,
         appliedOn: new Date(application.appliedOn).toLocaleDateString(),
         cv: (
-          <Link
-            to={`/dashboard/${path}/application/${application._id}/resume/${application.tutorId}`}
+          <button
+            onClick={() => {
+              if (application.status === "withdrawn") {
+                toast.error("Cannot view CV. Application is withdrawn.");
+                return;
+              }
+
+              navigate(
+                `/dashboard/${path}/application/${application._id}/resume/${application.tutorId}`
+              );
+            }}
             className="text-primary-10 cursor-pointer flex items-center gap-1 hover:underline"
           >
             <FiEye className="size-4" /> View CV
-          </Link>
+          </button>
         ),
       };
     }) || [];
