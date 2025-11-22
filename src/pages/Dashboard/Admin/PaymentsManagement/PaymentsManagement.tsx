@@ -123,8 +123,8 @@ const PaymentsManagement = () => {
         updatePaymentStatus({ id: payment?.id, data: payload }).unwrap(),
         {
           loading: "Loading...",
-          success: "Notice deleted successfully!",
-          error: "Failed to delete notice. Please try again.",
+          success: "Payment approved successfully!",
+          error: "Failed to approve payment. Please try again.",
         }
       );
     } catch (err) {

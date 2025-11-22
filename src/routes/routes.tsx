@@ -54,6 +54,7 @@ import AdminAuthLayout from "../layouts/AdminAuthLayout";
 import AdminOrStaffLogin from "../pages/Auth/AdminOrStaffLogin/AdminOrStaffLogin";
 import TutorGuidelines from "../pages/Dashboard/Shared/TutorGuidelines/TutorGuidelines";
 import GuardianGuidelines from "../pages/Dashboard/Guardian/GurdianGuidelines/GuardianGuidelines";
+import AllJobs from "../pages/Dashboard/Admin/AllJobs/AllJobs";
 
 export const router = createBrowserRouter([
   // Main layout routes
@@ -336,8 +337,8 @@ export const router = createBrowserRouter([
         element: <TutorsResume />,
       },
       {
-        path: "posted-jobs",
-        element: <PostedJobs />,
+        path: "all-jobs",
+        element: <AllJobs />,
       },
       {
         path: "edit-job/:jobId",

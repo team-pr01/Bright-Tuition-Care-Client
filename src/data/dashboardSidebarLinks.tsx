@@ -163,8 +163,8 @@ export const adminDashboardLinks: DashboardLink[] = [
     icon: <LuUserRoundSearch />,
   },
   {
-    label: "Posted Jobs",
-    path: "/dashboard/admin/posted-jobs",
+    label: "All Jobs",
+    path: "/dashboard/admin/all-jobs",
     icon: <BsBriefcase />,
   },
   {

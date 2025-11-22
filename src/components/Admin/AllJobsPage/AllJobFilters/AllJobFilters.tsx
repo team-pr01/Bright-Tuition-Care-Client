@@ -1,48 +1,26 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import { ICONS } from "../../../assets";
 import { useState, useEffect } from "react";
-import MultiSelectDropdown from "../../Reusable/MultiSelectDropdown/MultiSelectDropdown";
-import { filterData } from "../../../constants/filterData";
-import SearchInput from "../../Reusable/SearchBar/SearchBar";
-import SelectDropdown from "../../Reusable/SelectDropdown/SelectDropdown";
+import type { TFiltersProps } from "../../../JobBoardPage/Filters/Filters";
+import { filterData } from "../../../../constants/filterData";
+import { ICONS } from "../../../../assets";
+import SearchInput from "../../../Reusable/SearchBar/SearchBar";
+import MultiSelectDropdown from "../../../Reusable/MultiSelectDropdown/MultiSelectDropdown";
+import SelectDropdown from "../../../Reusable/SelectDropdown/SelectDropdown";
+import { Link } from "react-router-dom";
+import { RxArrowTopRight } from "react-icons/rx";
+import {
+  FaCheckCircle,
+  FaHourglassHalf,
+  FaListAlt,
+  FaTimesCircle,
+} from "react-icons/fa";
 
-// Filters.types.ts (optional file)
-export type TFiltersProps = {
-  keyword: string;
-  setKeyword: React.Dispatch<React.SetStateAction<string>>;
-  selectedCities: string[];
-  setSelectedCities: React.Dispatch<React.SetStateAction<string[]>>;
-
-  selectedAreas: string[];
-  setSelectedAreas: React.Dispatch<React.SetStateAction<string[]>>;
-  areaOptions: string[];
-  setAreaOptions: React.Dispatch<React.SetStateAction<string[]>>;
-
-  selectedCategory: string;
-  setSelectedCategory: React.Dispatch<React.SetStateAction<string>>;
-
-  selectedDays: string[];
-  setSelectedDays: React.Dispatch<React.SetStateAction<string[]>>;
-
-  selectedClass: string;
-  setSelectedClass: React.Dispatch<React.SetStateAction<string>>;
-
-  selectedTutorGender: string[];
-  setSelectedTutorGender: React.Dispatch<React.SetStateAction<string[]>>;
-
-  selectedStudentGender: string[];
-  setSelectedStudentGender: React.Dispatch<React.SetStateAction<string[]>>;
-
-  selectedTuitionType: string[];
-  setSelectedTuitionType: React.Dispatch<React.SetStateAction<string[]>>;
-
+type TAllJobFiltersProps = TFiltersProps & {
   totalJobs: number;
-
-  status?:string;
-  setStatus?:React.Dispatch<React.SetStateAction<string>>;
+  liveJobs: number;
+  closedJobs: number;
+  pendingJobs: number;
 };
-
-const Filters: React.FC<TFiltersProps> = ({
+const AllJobFilters: React.FC<TAllJobFiltersProps> = ({
   keyword,
   setKeyword,
   selectedCities,
@@ -64,6 +42,11 @@ const Filters: React.FC<TFiltersProps> = ({
   selectedTuitionType,
   setSelectedTuitionType,
   totalJobs,
+  liveJobs,
+  closedJobs,
+  pendingJobs,
+  status,
+  setStatus,
 }) => {
   const [isAccordingOpen, setIsAccordingOpen] = useState<boolean>(false);
   const handleResetFilters = () => {
@@ -86,7 +69,7 @@ const Filters: React.FC<TFiltersProps> = ({
     }
 
     const locations = selectedCities.flatMap((cityName) => {
-      const cityObj = filterData.cityCorporationWithLocation.find(
+      const cityObj = filterData?.cityCorporationWithLocation.find(
         (city) => city.name === cityName
       );
       return cityObj ? cityObj.locations : [];
@@ -160,27 +143,77 @@ const Filters: React.FC<TFiltersProps> = ({
 
   return (
     <>
-      <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-3 md:gap-0">
-        <div className="flex items-center gap-3">
-          <img src={ICONS.liveJobs} alt="" className="size-8" />
-          <h1 className="text-xl md:text-2xl lg:text-4xl font-semibold leading-11 text-primary-50">
-            {totalJobs} Live Jobs
-          </h1>
+      <div className="flex flex-col 2xl:flex-row items-start 2xl:items-center justify-between gap-6 2xl:gap-0">
+        <div className="flex items-center gap-4">
+          {/* Total Jobs */}
+          <div className="flex items-center gap-1.5">
+            <FaListAlt className="text-primary-50 text-xl sm:text-2xl" />
+            <h1 className="text-xs sm:text-sm md:text-base font-semibold text-primary-50">
+              {totalJobs} Total
+            </h1>
+          </div>
+
+          {/* Live Jobs */}
+          <div className="flex items-center gap-1.5">
+            <FaCheckCircle className="text-green-500 text-xl sm:text-2xl" />
+            <h1 className="text-xs sm:text-sm md:text-base font-semibold text-primary-50">
+              {liveJobs} Live
+            </h1>
+          </div>
+
+          {/* Pending Jobs */}
+          <div className="flex items-center gap-1.5">
+            <FaHourglassHalf className="text-yellow-500 text-xl sm:text-2xl" />
+            <h1 className="text-xs sm:text-sm md:text-base font-semibold text-primary-50">
+              {pendingJobs} Pending
+            </h1>
+          </div>
+
+          {/* Closed Jobs */}
+          <div className="flex items-center gap-1.5">
+            <FaTimesCircle className="text-red-500 text-xl sm:text-2xl" />
+            <h1 className="text-xs sm:text-sm md:text-base font-semibold text-primary-50">
+              {closedJobs} Closed
+            </h1>
+          </div>
         </div>
 
-        <div className="flex items-center gap-3">
-          <SearchInput
-            value={keyword}
-            onChange={(e: any) => setKeyword(e.target.value)}
-            placeholder="Search by job title or id..."
-          />
-          <button
-            onClick={() => setIsAccordingOpen(!isAccordingOpen)}
-            className="flex items-center justify-center gap-[10px] px-3 py-2 bg-white border border-primary-30 rounded-lg cursor-pointer w-[145px]"
-          >
-            <img src={ICONS.filter} alt="" className="size-5" />
-            <h1 className="font-medium leading-6 text-primary-50">Filters</h1>
-          </button>
+        <div className="flex flex-col md:flex-row items-start md:items-center gap-3">
+          <div className="flex items-center gap-3">
+            <SearchInput
+              value={keyword}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                setKeyword(e.target.value)
+              }
+              placeholder="Search by job title or id..."
+            />
+            <select
+              value={status}
+              onChange={(e) => setStatus && setStatus(e.target.value)}
+              className="px-3 py-2 bg-white border border-primary-30 rounded-lg cursor-pointer focus:outline-none focus:border-primary-30"
+            >
+              <option value="">All</option>
+              <option value="pending">Pending</option>
+              <option value="live">Live</option>
+            </select>
+          </div>
+
+          <div className="flex items-center gap-3">
+            <button
+              onClick={() => setIsAccordingOpen(!isAccordingOpen)}
+              className="flex items-center justify-center gap-[10px] px-3 py-2 bg-white border border-primary-30 rounded-lg cursor-pointer w-[145px]"
+            >
+              <img src={ICONS.filter} alt="" className="size-5" />
+              <h1 className="font-medium leading-6 text-primary-50">Filters</h1>
+            </button>
+
+            <Link
+              to="/dashboard/admin/hire-a-tutor"
+              className={`bg-primary-10 hover:bg-primary-20 hover:text-primary-10 transition duration-300 font-semibold text-white rounded-lg flex items-center gap-2 px-3 py-2 pointer`}
+            >
+              Hire a Tutor <RxArrowTopRight className="text-lg" />
+            </Link>
+          </div>
         </div>
       </div>
 
@@ -314,4 +347,4 @@ const Filters: React.FC<TFiltersProps> = ({
   );
 };
 
-export default Filters;
+export default AllJobFilters;
