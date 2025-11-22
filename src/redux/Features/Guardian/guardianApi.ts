@@ -37,74 +37,15 @@ const guardianApi = baseApi.injectEndpoints({
       providesTags: ["guardian"],
     }),
 
-    getSingleTestimonialById: builder.query({
+    setGuardianOfTheMonth: builder.mutation({
       query: (id) => ({
-        url: `/testimonial/${id}`,
-        method: "GET",
-        credentials: "include",
-      }),
-      providesTags: ["testimonial"],
-    }),
-
-    getAllTutorsTestimonials: builder.query<any, { role?: string }>({
-      query: () => {
-        return {
-          url: `/testimonial/tutors`,
-          method: "GET",
-          credentials: "include",
-        };
-      },
-      providesTags: ["testimonial"],
-    }),
-
-    getAllGuardiansTestimonials: builder.query<any, { role?: string }>({
-      query: () => {
-        return {
-          url: `/testimonial/guardians`,
-          method: "GET",
-          credentials: "include",
-        };
-      },
-      providesTags: ["testimonial"],
-    }),
-
-    addTestimonial: builder.mutation<any, any>({
-      query: (data) => ({
-        url: `/testimonial/add`,
-        method: "POST",
-        body: data,
-        credentials: "include",
-      }),
-      invalidatesTags: ["testimonial"],
-    }),
-
-    deleteTestimonial: builder.mutation<any, string>({
-      query: (id) => ({
-        url: `/testimonial/delete/${id}`,
-        method: "DELETE",
-        credentials: "include",
-      }),
-      invalidatesTags: ["testimonial"],
-    }),
-
-    updateTestimonial: builder.mutation<any, any>({
-      query: ({ id, data }) => ({
-        url: `/testimonial/update/${id}`,
+        url: `/guardian/guardian-of-the-month/${id}`,
         method: "PATCH",
-        body: data,
-        credentials: "include",
       }),
-      invalidatesTags: ["testimonial"],
+      invalidatesTags: ["guardian"],
     }),
   }),
 });
 
-export const {
-  useGetAllGuardiansQuery,
-  useGetSingleTestimonialByIdQuery,
-  useGetAllTutorsTestimonialsQuery,
-  useGetAllGuardiansTestimonialsQuery,
-  useAddTestimonialMutation,
-  useDeleteTestimonialMutation,
-  useUpdateTestimonialMutation,
-} = guardianApi;
+export const { useGetAllGuardiansQuery, useSetGuardianOfTheMonthMutation } =
+  guardianApi;

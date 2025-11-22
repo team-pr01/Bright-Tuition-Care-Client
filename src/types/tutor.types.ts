@@ -107,4 +107,5 @@ export type TTutor = {
   tuitionPreference: TTuitionPreference;
   experience: TExperience[];
   identityInformation: TIdentityInformation[];
+  tutorOfTheMonth: boolean;
 };

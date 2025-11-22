@@ -88,6 +88,14 @@ const tutorApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ["users"],
     }),
+
+    setTutorOfTheMonth: builder.mutation({
+      query: (id) => ({
+        url: `/tutor/tutor-of-the-month/${id}`,
+        method: "PATCH",
+      }),
+      invalidatesTags: ["tutor"],
+    }),
   }),
 });
 
@@ -98,4 +106,5 @@ export const {
   useGetMyApplicationsQuery,
   useToggleTutorProfileStatusMutation,
   useUpdateIdentityInfoMutation,
+  useSetTutorOfTheMonthMutation,
 } = tutorApi;

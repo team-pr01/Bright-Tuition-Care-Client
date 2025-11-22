@@ -6,11 +6,15 @@ import Table, {
 import { FiEye, FiSlash } from "react-icons/fi";
 import { useNavigate } from "react-router-dom";
 import SuspendUserModal from "../../../../components/Admin/SharedAdmin/SuspendUserModal/SuspendUserModal";
-import { useGetAllGuardiansQuery } from "../../../../redux/Features/Guardian/guardianApi";
+import {
+  useGetAllGuardiansQuery,
+  useSetGuardianOfTheMonthMutation,
+} from "../../../../redux/Features/Guardian/guardianApi";
 import { formatDate } from "../../../../utils/formatDate";
 import { HiOutlineUserCircle } from "react-icons/hi";
 import toast from "react-hot-toast";
 import { useActiveUserMutation } from "../../../../redux/Features/User/userApi";
+import { IMAGES } from "../../../../assets";
 
 export type TableAction<T> = {
   label: any;
@@ -43,6 +47,7 @@ const Guardians = () => {
     { key: "role", label: "Role" },
     { key: "registeredOn", label: "Registered On" },
     { key: "status", label: "Status" },
+    { key: "guardianOfTheMonth", label: "Guardian of the Month" },
   ];
 
   const { data, isLoading, isFetching } = useGetAllGuardiansQuery({
@@ -53,6 +58,7 @@ const Guardians = () => {
     limit,
   });
   const [activeUser] = useActiveUserMutation();
+  const [setGuardianOfTheMonth] = useSetGuardianOfTheMonthMutation();
 
   const handleActiveUser = async (id: string) => {
     try {
@@ -63,6 +69,18 @@ const Guardians = () => {
       });
     } catch (err) {
       console.error("Error deleting notice:", err);
+    }
+  };
+
+  const handleSetGuardianOfTheMonth = async (id: string) => {
+    try {
+      await toast.promise(setGuardianOfTheMonth(id).unwrap(), {
+        loading: "Please wait...",
+        success: "Guardian set as Guardian of the Month successfully!",
+        error: "Failed. Please try again.",
+      });
+    } catch (err: any) {
+      toast.error(err?.data?.message || "Failed. Please try again.");
     }
   };
 
@@ -97,9 +115,9 @@ const Guardians = () => {
     name: (
       <div className="flex items-center gap-2 capitalize">
         <img
-          src={guardian.imageUrl}
+          src={guardian.imageUrl || IMAGES.dummyAvatar}
           alt={guardian?.name}
-          className="w-8 h-8 rounded-full object-cover"
+          className="size-7 rounded-full object-cover"
         />
         <span>{guardian?.name}</span>
       </div>
@@ -120,6 +138,27 @@ const Guardians = () => {
       >
         {guardian.isSuspended ? "Suspended" : "Active"}
       </span>
+    ),
+    guardianOfTheMonth: (
+      <>
+        <span
+          className={`px-3 py-1 rounded-full text-xs font-medium capitalize mr-2 ${
+            guardian?.guardianOfTheMonth
+              ? "bg-green-100 text-green-600"
+              : "bg-red-100 text-orange-500"
+          }`}
+        >
+          {guardian?.guardianOfTheMonth ? "Yes" : "No"}
+        </span>
+        {!guardian.guardianOfTheMonth && (
+          <button
+            onClick={() => handleSetGuardianOfTheMonth(guardian._id)}
+            className="text-xs font-Nunito text-neutral-10 underline cursor-pointer"
+          >
+            Set
+          </button>
+        )}
+      </>
     ),
   }));
 

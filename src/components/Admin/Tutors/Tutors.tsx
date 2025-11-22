@@ -11,6 +11,7 @@ import { VscLock, VscUnlock } from "react-icons/vsc";
 import toast from "react-hot-toast";
 import {
   useGetAllTutorsQuery,
+  useSetTutorOfTheMonthMutation,
   useToggleTutorProfileStatusMutation,
 } from "../../../redux/Features/Tutor/tutorApi";
 import { HiOutlineUserCircle } from "react-icons/hi";
@@ -40,6 +41,7 @@ const Tutors = () => {
   });
   const [activeUser] = useActiveUserMutation();
   const [toggleTutorProfileStatus] = useToggleTutorProfileStatusMutation();
+  const [setTutorOfTheMonth] = useSetTutorOfTheMonthMutation();
 
   const handleActiveTutor = async (id: string) => {
     try {
@@ -69,6 +71,18 @@ const Tutors = () => {
     }
   };
 
+  const handleSetTutorOfTheMonth = async (id: string) => {
+    try {
+      await toast.promise(setTutorOfTheMonth(id).unwrap(), {
+        loading: "Please wait...",
+        success: "Tutor set as Tutor of the Month successfully!",
+        error: "Failed. Please try again.",
+      });
+    } catch (err: any) {
+      toast.error(err?.data?.message || "Failed. Please try again.");
+    }
+  };
+
   // Table headers
   const tutorTheads: TableHead[] = [
     { key: "tutorId", label: "Tutor ID" },
@@ -81,6 +95,7 @@ const Tutors = () => {
     { key: "isVerified", label: "Verification Status" },
     { key: "status", label: "Status" },
     { key: "profileStatus", label: "Profile Status" },
+    { key: "tutorOfTheMonth", label: "Tutor of the Month" },
   ];
 
   // Action Menu
@@ -121,13 +136,13 @@ const Tutors = () => {
   const tableData = data?.data?.tutors?.map((tutor: TTutor) => ({
     _id: tutor._id,
     userId: tutor.userId,
-    tutorId : tutor.tutorId,
+    tutorId: tutor.tutorId,
     name: (
       <div className="flex items-center gap-2 capitalize">
         <img
           src={tutor.imageUrl || IMAGES.dummyAvatar}
           alt={tutor?.name}
-          className="w-8 h-8 rounded-full object-cover"
+          className="size-7 rounded-full object-cover"
         />
         <span>{tutor?.name}</span>
       </div>
@@ -137,7 +152,7 @@ const Tutors = () => {
     city: tutor?.city || "N/A",
     area: tutor?.area || "N/A",
     registeredOn: formatDate(tutor.createdAt),
-    isVerified : tutor.isVerified ? "Verified" : "Not Verified",
+    isVerified: tutor.isVerified ? "Verified" : "Not Verified",
     status: (
       <span
         className={`px-3 py-1 rounded-full text-xs font-medium ${
@@ -159,6 +174,24 @@ const Tutors = () => {
       >
         {tutor.profileStatus}
       </span>
+    ),
+    tutorOfTheMonth: (
+      <>
+        <span
+          className={`px-3 py-1 rounded-full text-xs font-medium capitalize mr-2 ${
+            tutor?.tutorOfTheMonth
+              ? "bg-green-100 text-green-600"
+              : "bg-red-100 text-orange-500"
+          }`}
+        >
+          {tutor?.tutorOfTheMonth ? "Yes" : "No"}
+        </span>
+        {!tutor.tutorOfTheMonth && (
+          <button onClick={() => handleSetTutorOfTheMonth(tutor._id)} className="text-xs font-Nunito text-neutral-10 underline cursor-pointer">
+            Set
+          </button>
+        )}
+      </>
     ),
   }));
 
