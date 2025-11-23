@@ -41,7 +41,9 @@ const UpdateTuitionRelatedInfoModal = ({
     string[]
   >([]);
   const [selectedCategory, setSelectedCategory] = useState<string[]>([]);
-  const [selectedClass, setSelectedClass] = useState<string[]>([]);
+  const [selectedClasses, setSelectedClasses] = useState<string[]>([]);
+  const [subjectOptions, setSubjectOptions] = useState<string[]>([]);
+  const [selectedSubjects, setSelectedSubjects] = useState<string[]>([]);
   const [selectedPlaceOfTuition, setSelectedPlaceOfTuition] = useState<
     string[]
   >([]);
@@ -53,6 +55,7 @@ const UpdateTuitionRelatedInfoModal = ({
     formState: { errors },
   } = useForm<TTuitionRelatedInfoProps["tuitionRelatedInfo"]>();
 
+  // Setting default values
   useEffect(() => {
     if (defaultValues) {
       setValue("tutoringMethod", defaultValues.tutoringMethod);
@@ -76,7 +79,8 @@ const UpdateTuitionRelatedInfoModal = ({
       setSelectedDays(defaultValues.availableDays);
       setSelectedTutoringStyles(defaultValues.tutoringStyles);
       setSelectedCategory(defaultValues?.preferences?.preferredCategories);
-      setSelectedClass(defaultValues?.preferences?.preferredClasses);
+      setSelectedClasses(defaultValues?.preferences?.preferredClasses);
+      setSelectedSubjects(defaultValues?.preferences?.preferredSubjects);
       setSelectedPlaceOfTuition(defaultValues?.preferences?.placeOfTuition);
     }
   }, [defaultValues, setValue]);
@@ -91,8 +95,8 @@ const UpdateTuitionRelatedInfoModal = ({
           tuitionStyle: selectedTutoringStyles,
           availableDays: selectedDays,
           preferredCategories: selectedCategory,
-          preferredClasses: selectedClass,
-          preferredSubjects: data.preferredSubjects,
+          preferredClasses: selectedClasses,
+          preferredSubjects: selectedSubjects,
           placeOfTuition: selectedPlaceOfTuition,
           preferredLocation: data.preferredLocation,
           expectedSalary: data.expectedSalary,
@@ -118,6 +122,59 @@ const UpdateTuitionRelatedInfoModal = ({
       );
     }
   };
+
+  const [classOptions, setClassOptions] = useState<
+    {
+      [x: string]: any;
+      id: string;
+      name: string;
+    }[]
+  >([]);
+
+  const [subjectsInitialized, setSubjectsInitialized] = useState(false);
+
+  // Build class options whenever category changes
+  useEffect(() => {
+    const classes = filterData.tutoringCatalog
+      .filter((cat) => selectedCategory.includes(cat.category))
+      .flatMap((cat) => cat.classes);
+
+    setClassOptions(classes);
+  }, [selectedCategory]);
+
+  // After class options loaded, apply default classes only once
+  useEffect(() => {
+    if (!defaultValues) return;
+    if (classOptions.length === 0) return;
+
+    setSelectedClasses(defaultValues.preferences?.preferredClasses || []);
+  }, [classOptions, defaultValues]);
+
+  // Build subject options
+  useEffect(() => {
+    if (selectedClasses.length === 0) {
+      setSubjectOptions([]);
+      setSelectedSubjects([]);
+      return;
+    }
+
+    const subjects = classOptions
+      .filter((cls) => selectedClasses.includes(cls.name))
+      .flatMap((cls) => cls.subjects);
+
+    setSubjectOptions([...new Set(subjects)]);
+  }, [selectedClasses, classOptions]);
+
+  // Apply default subjects only once
+  useEffect(() => {
+    if (!defaultValues) return;
+    if (subjectsInitialized) return;
+
+    if (subjectOptions.length > 0) {
+      setSelectedSubjects(defaultValues.preferences?.preferredSubjects || []);
+      setSubjectsInitialized(true);
+    }
+  }, [subjectOptions, defaultValues, subjectsInitialized]);
 
   return (
     <form onSubmit={handleSubmit(handleUpdateInfo)} className="space-y-5 mt-6">
@@ -189,12 +246,23 @@ const UpdateTuitionRelatedInfoModal = ({
 
         {/* Preferred Classes */}
         <MultiSelectDropdown
-          label="Preferred Classes"
+          label="Classes"
           name="preferences.preferredClasses"
-          options={filterData.class}
-          value={selectedClass}
-          onChange={setSelectedClass}
+          options={classOptions.map((c) => c.name)} // only names as strings
+          value={selectedClasses}
+          onChange={setSelectedClasses}
           isRequired={false}
+        />
+
+        {/* Subjects based on selected classes */}
+        <MultiSelectDropdown
+          label="Subjects"
+          name="preferences.preferredSubjects"
+          options={subjectOptions}
+          value={selectedSubjects}
+          onChange={setSelectedSubjects}
+          isRequired={false}
+          noDataMessage={"Select class first"}
         />
 
         {/* Place of Tutoring */}
@@ -225,14 +293,6 @@ const UpdateTuitionRelatedInfoModal = ({
           {...register("expectedSalary", {
             required: "Expected salary is required",
           })}
-          isRequired={false}
-        />
-        {/* Preferred Subjects */}
-        <TextInput
-          label="Preferred Subjects"
-          placeholder="Enter preferred subjects (comma separated)"
-          error={errors?.preferredSubjects as any}
-          {...register("preferredSubjects")}
           isRequired={false}
         />
       </div>

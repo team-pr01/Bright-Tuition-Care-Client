@@ -14,14 +14,22 @@ const OtherLinks = ({
     {
       label: "Share The App",
       path: `/dashboard/${
-        user?.role === "tutor" ? "tutor" : "guardian"
+        user?.role === "tutor"
+          ? "tutor"
+          : user?.role === "guardian"
+          ? "guardian"
+          : "admin"
       }/share-app`,
       icon: <LuShare2 />,
     },
     {
       label: "Terms & Conditions",
       path: `/dashboard/${
-        user?.role === "tutor" ? "tutor" : "guardian"
+        user?.role === "tutor"
+          ? "tutor"
+          : user?.role === "guardian"
+          ? "guardian"
+          : "admin"
       }/terms-and-conditions`,
       icon: <LuFileText />,
     },

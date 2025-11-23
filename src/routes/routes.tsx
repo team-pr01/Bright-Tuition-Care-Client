@@ -310,7 +310,9 @@ export const router = createBrowserRouter([
     path: "dashboard/admin",
     element: (
       <ProtectedRoute>
-        <DashboardLayout />
+        <UserProvider>
+          <DashboardLayout />
+        </UserProvider>
       </ProtectedRoute>
     ),
     errorElement: <NotFound />,
@@ -394,6 +396,14 @@ export const router = createBrowserRouter([
       {
         path: "settings",
         element: <Settings />,
+      },
+      {
+        path: "share-app",
+        element: <ShareThisApp />,
+      },
+      {
+        path: "terms-and-conditions",
+        element: <TermsAndConditionsDashboard />,
       },
     ],
   },
