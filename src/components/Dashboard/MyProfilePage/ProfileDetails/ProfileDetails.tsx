@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { ICONS, IMAGES } from "../../../../assets";
 import Button from "../../../Reusable/Button/Button";
 import { useCurrentUser } from "../../../../redux/Features/Auth/authSlice";
-import { FaUpload, FaPen, FaCheck } from "react-icons/fa";
+import { FaUpload, FaPen } from "react-icons/fa";
 import type { TLoggedInUser } from "../../../../types/loggedinUser.types";
 import { Link } from "react-router-dom";
 import { useUpdateProfileMutation } from "../../../../redux/Features/User/userApi";
@@ -169,15 +169,15 @@ const ProfileDetails = ({
           </div>
         </div>
 
-        <div className="flex items-center gap-1 mt-4">
+        <div className="flex items-center mt-4">
           <h1 className="text-neutral-5e font-semibold text-center text-xl">
             {data?.userId?.name}
           </h1>
           {/* VERIFIED TICK - Top right corner */}
           {data?.isVerified && (
-            <div className="bg-primary-10 shadow-2xl size-5 rounded-full flex items-center justify-center border-2 border-white">
-              <FaCheck className="text-white text-[10px]" />
-            </div>
+            <div className="size-7 rounded-full flex items-center justify-center">
+            <img src={ICONS.blueVerifiedBlue} alt="verified" />
+          </div>
           )}
         </div>
         <h2 className="text-neutral-5e text-sm text-center mt-2 capitalize">

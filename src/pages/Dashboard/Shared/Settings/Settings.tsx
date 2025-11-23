@@ -12,8 +12,13 @@ import { BsTrash } from "react-icons/bs";
 import { useSelector } from "react-redux";
 import { useCurrentUser } from "../../../../redux/Features/Auth/authSlice";
 import type { TLoggedInUser } from "../../../../types/loggedinUser.types";
+import { useUser } from "../../../../contexts/UserContext";
 
 const Settings = () => {
+  const { user: myProfile , isLoading } = useUser();
+  const profileStatus = myProfile?.profileStatus;
+  const isVerified = myProfile?.isVerified;
+
   const user = useSelector(useCurrentUser) as TLoggedInUser;
   const [activeTab, setActiveTab] = useState<string>(
     user?.role === "admin" ? "Change Password" : "Contact Info"
@@ -102,8 +107,8 @@ const Settings = () => {
       <div className="bg-white rounded-2xl border border-primary-40/10 mt-10 py-7 px-5">
         {activeTab === "Contact Info" && <UpdateContactInfoForm />}
         {activeTab === "Change Password" && <ChangePasswordForm />}
-        {activeTab === "Profile Verification" && <ProfileVerificationForm />}
-        {activeTab === "Profile Lock/Unlock" && <ProfileStatusForm />}
+        {activeTab === "Profile Verification" && <ProfileVerificationForm isVerified={isVerified} />}
+        {activeTab === "Profile Lock/Unlock" && <ProfileStatusForm profileStatus={profileStatus}  isLoading={isLoading}/>}
         {activeTab === "Delete Account" && <DeleteAccount />}
       </div>
     </div>

@@ -62,7 +62,7 @@ const applicationApi = baseApi.injectEndpoints({
         body: data,
         credentials: "include",
       }),
-      invalidatesTags: ["application"],
+      invalidatesTags: ["application", "jobs"],
     }),
 
     withdrawApplication: builder.mutation({

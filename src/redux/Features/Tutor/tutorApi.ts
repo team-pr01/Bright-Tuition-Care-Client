@@ -46,15 +46,6 @@ const tutorApi = baseApi.injectEndpoints({
       providesTags: ["tutor"],
     }),
 
-    getMyTutorProfile: builder.query({
-      query: () => ({
-        url: `/tutor/me`,
-        method: "GET",
-        credentials: "include",
-      }),
-      providesTags: ["tutor"],
-    }),
-
     getMyApplications: builder.query<any, any | void>({
       query: ({ keyword, status, page = 1, limit = 10 } = {}) => {
         const params = new URLSearchParams();
@@ -102,7 +93,6 @@ const tutorApi = baseApi.injectEndpoints({
 export const {
   useGetAllTutorsQuery,
   useGetSingleTutorByIdQuery,
-  useGetMyTutorProfileQuery,
   useGetMyApplicationsQuery,
   useToggleTutorProfileStatusMutation,
   useUpdateIdentityInfoMutation,

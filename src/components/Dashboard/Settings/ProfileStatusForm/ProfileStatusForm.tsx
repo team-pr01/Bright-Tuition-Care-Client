@@ -1,12 +1,9 @@
 import { Link } from "react-router-dom";
 import { ICONS } from "../../../../assets";
 import Button from "../../../Reusable/Button/Button";
-import { useGetMyTutorProfileQuery } from "../../../../redux/Features/Tutor/tutorApi";
 
-const ProfileStatusForm = () => {
-  const { data, isLoading } = useGetMyTutorProfileQuery({});
-  const profileStatus = data?.data?.profileStatus;
-
+const ProfileStatusForm = ({profileStatus, isLoading} : {profileStatus: string, isLoading: boolean}) => {
+  
   if (isLoading) {
     return (
       <div className="font-Nunito animate-pulse">

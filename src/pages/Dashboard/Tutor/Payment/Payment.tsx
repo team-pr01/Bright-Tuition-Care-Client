@@ -8,9 +8,11 @@ import SelectedPaymentMethod from "../../../../components/Dashboard/Payment/Sele
 import type { TLoggedInUser } from "../../../../types/loggedinUser.types";
 import { useCurrentUser } from "../../../../redux/Features/Auth/authSlice";
 import { useSelector } from "react-redux";
+import { useUser } from "../../../../contexts/UserContext";
 
 const Payment = () => {
   const user = useSelector(useCurrentUser) as TLoggedInUser;
+  const { user: myProfile } = useUser();
   const [paidFor, setPaidFor] = useState<string>("");
   const [isPaymentModalOpen, setIsPaymentModalOpen] = useState<boolean>(false);
   const [paymentModalType, setPaymentModalType] = useState<
@@ -30,14 +32,16 @@ const Payment = () => {
       amount: 500,
       icon: ICONS.platformCharge,
       description:
-        "After finalizing a job to a tutor, we ask for (55%-Home Tutoring; 55%-Online Tutoring; 35%-Package Tutoring; 55%-Group Tutoring) advance of his/her first month's payment only once for each tuition job.",
+        "After confirming a tutor for a job, we take a one-time platform charge as a service fee for using our platform. This fee is collected only once for each tuition job.",
+      isPaid: myProfile?.hasPaidPlatformCharge || false,
     },
     {
       title: "Verification Charge",
       amount: 500,
       icon: ICONS.verificationCharge,
       description:
-        "A one-time verification fee to verify your tutor profile, academic documents, and identity for ensuring trust and authenticity.",
+        "A one-time verification fee that covers the review of your tutor profile, academic documents, and identity to ensure maximum trust, safety, and authenticity across our platform.",
+      isPaid: myProfile?.isVerified || false,
     },
   ];
 
@@ -66,14 +70,15 @@ const Payment = () => {
 
             <Button
               type="button"
-              label="Pay Now"
-              variant="tertiary"
+              label={charge?.isPaid ? "Paid" : "Pay Now"}
+              variant={charge?.isPaid ? "primary" : "tertiary"}
+              isDisabled={charge?.isPaid}
               className="py-2 lg:py-2"
               onClick={() => {
-                setSelectedAmount(charge.amount);
+                setSelectedAmount(charge?.amount);
                 setIsPaymentModalOpen(true);
                 setPaymentModalType("selectPaymentMethod");
-                setPaidFor(charge.title);
+                setPaidFor(charge?.title);
               }}
             />
           </div>

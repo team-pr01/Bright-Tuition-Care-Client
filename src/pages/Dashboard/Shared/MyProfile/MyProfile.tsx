@@ -181,8 +181,7 @@ const MyProfile = () => {
                   isActive
                     ? "bg-gradient-to-r from-blue-500 to-primary-10 border-primary-10 text-white"
                     : "bg-white border border-primary-40/10 text-neutral-10 hover:bg-neutral-50/20"
-                }`}
-              >
+                }`}>
                 {/* Tick mark above */}
                 {isActive && (
                   <div className="size-6 rounded-full bg-gradient-to-r from-blue-500 to-primary-10 border border-white flex items-center justify-center absolute -top-3 -right-2">

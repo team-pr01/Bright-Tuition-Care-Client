@@ -3,9 +3,11 @@ import { ICONS, IMAGES } from "../../../../assets";
 import { formatDate } from "../../../../utils/formatDate";
 import { useCurrentUser } from "../../../../redux/Features/Auth/authSlice";
 import type { TLoggedInUser } from "../../../../types/loggedinUser.types";
+import { useUser } from "../../../../contexts/UserContext";
 
 const UserProfilePhoto = () => {
   const user = useSelector(useCurrentUser) as TLoggedInUser;
+  const { user: myProfile } = useUser();
 
   return (
     <div className="font-Nunito flex flex-col items-center justify-center">
@@ -22,9 +24,9 @@ const UserProfilePhoto = () => {
           )}
         </div>
 
-        {user && user?.isVerified && (
-          <div className="bg-green-500 shadow-2xl size-7 rounded-full flex items-center justify-center absolute right-3 bottom-1">
-            <img src={ICONS.tickMark} alt="verified" />
+        {myProfile && !myProfile?.isVerified && (
+          <div className="size-9 rounded-full flex items-center justify-center absolute -right-1 bottom-1">
+            <img src={ICONS.blueVerifiedWhite} alt="verified" />
           </div>
         )}
       </div>

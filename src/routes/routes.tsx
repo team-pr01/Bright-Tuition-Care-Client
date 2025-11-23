@@ -55,6 +55,7 @@ import AdminOrStaffLogin from "../pages/Auth/AdminOrStaffLogin/AdminOrStaffLogin
 import TutorGuidelines from "../pages/Dashboard/Shared/TutorGuidelines/TutorGuidelines";
 import GuardianGuidelines from "../pages/Dashboard/Guardian/GurdianGuidelines/GuardianGuidelines";
 import AllJobs from "../pages/Dashboard/Admin/AllJobs/AllJobs";
+import { UserProvider } from "../contexts/UserProvider";
 
 export const router = createBrowserRouter([
   // Main layout routes
@@ -134,7 +135,9 @@ export const router = createBrowserRouter([
     path: "dashboard/tutor",
     element: (
       <ProtectedRoute>
-        <DashboardLayout />
+        <UserProvider>
+          <DashboardLayout />
+        </UserProvider>
       </ProtectedRoute>
     ),
     errorElement: <NotFound />,
