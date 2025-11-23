@@ -31,6 +31,11 @@ const TutorsResume = () => {
     useGetSingleApplicationByIdQuery(applicationId);
   const application = applicationData?.data;
 
+  const isContactDetailsHidden =
+    location?.pathname.startsWith("/dashboard/tutor/view") ||
+    (location?.pathname.startsWith("/dashboard/guardian/application") &&
+      application?.status === "pending");
+
   const educationData = educationDetails?.map((item: TEducation) => [
     { label: "Institute Name", value: item.instituteName || "N/A" },
     { label: "Degree", value: item.degree || "N/A" },
@@ -117,7 +122,9 @@ const TutorsResume = () => {
     },
     {
       label: "Additional Phone",
-      value: personalInfo?.additionalPhoneNumber || "N/A",
+      value: isContactDetailsHidden
+        ? "N/A"
+        : personalInfo?.additionalPhoneNumber || "N/A",
     },
     { label: "Address", value: personalInfo?.address || "N/A" },
   ];
@@ -171,10 +178,6 @@ const TutorsResume = () => {
       );
     }
   };
-
-  const isContactDetailsHidden =
-    location?.pathname.startsWith("/dashboard/guardian/application") &&
-    application?.status === "pending";
 
   const buttonStyle = "py-[6px] lg:py-[6px] px-3 lg:px-2 text-sm lg:text-sm";
 

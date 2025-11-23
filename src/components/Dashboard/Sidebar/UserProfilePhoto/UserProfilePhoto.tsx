@@ -7,17 +7,21 @@ import { useUser } from "../../../../contexts/UserContext";
 
 const UserProfilePhoto = () => {
   const user = useSelector(useCurrentUser) as TLoggedInUser;
-  const { user: myProfile } = useUser();
+  const { user: myProfile, isLoading } = useUser();
 
   return (
     <div className="font-Nunito flex flex-col items-center justify-center">
       <div className="size-28 rounded-full relative">
         <div className="bg-white/40 rounded-full p-[2px] size-full">
-          {!user ? (
+          {isLoading ? (
             <div className="size-full rounded-full bg-white/20 animate-pulse" />
           ) : (
             <img
-              src={user?.profilePicture || IMAGES.dummyAvatar}
+              src={
+                user?.profilePicture ||
+                myProfile?.imageUrl ||
+                IMAGES.dummyAvatar
+              }
               alt="Profile Picture"
               className="size-full object-cover rounded-full"
             />
@@ -25,7 +29,7 @@ const UserProfilePhoto = () => {
         </div>
 
         {myProfile && myProfile?.isVerified && (
-          <div className="size-9 rounded-full flex items-center justify-center absolute -right-1 bottom-1">
+          <div className="size-9 rounded-full flex items-center justify-center absolute -right-1 bottom-1 shadow-2xl">
             <img src={ICONS.blueVerifiedWhite} alt="verified" />
           </div>
         )}

@@ -10,12 +10,13 @@ import { useDispatch } from "react-redux";
 import { logout, setUser } from "../../../../redux/Features/Auth/authSlice";
 import Cookies from "js-cookie";
 import type { TLoggedInUser } from "../../../../types/loggedinUser.types";
+import { useUser } from "../../../../contexts/UserContext";
 
-const UserProfileDropdown = ({user} : {user:TLoggedInUser}) => {
-  
+const UserProfileDropdown = ({ user }: { user: TLoggedInUser }) => {
+  const { user: myProfile } = useUser();
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
-    const dispatch = useDispatch();
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   // Close dropdown when clicking outside
@@ -58,9 +59,10 @@ const UserProfileDropdown = ({user} : {user:TLoggedInUser}) => {
 
   const MotionLink = motion(Link);
 
-  const path = user?.role === "tutor" ? "/dashboard/tutor" : "/dashboard/guardian";
+  const path =
+    user?.role === "tutor" ? "/dashboard/tutor" : "/dashboard/guardian";
 
-   const handleLogout = async () => {
+  const handleLogout = async () => {
     dispatch(setUser({ user: null, token: null }));
     Cookies.remove("accessToken");
     Cookies.remove("role");
@@ -77,7 +79,9 @@ const UserProfileDropdown = ({user} : {user:TLoggedInUser}) => {
       >
         <div className="p-[2px] bg-white rounded-full w-full h-full">
           <img
-            src={user?.profilePicture || IMAGES.dummyAvatar}
+            src={
+              user?.profilePicture || myProfile?.imageUrl || IMAGES.dummyAvatar
+            }
             className="w-full h-full object-cover rounded-full"
             alt={user?.name}
           />
@@ -106,10 +110,10 @@ const UserProfileDropdown = ({user} : {user:TLoggedInUser}) => {
                   alt={user?.name}
                 />
                 <div>
-                  <p className="font-semibold text-neutral-90">
-                    {user?.name}
+                  <p className="font-semibold text-neutral-90">{user?.name}</p>
+                  <p className="text-sm text-neutral-45 capitalize">
+                    {user?.role} Id: {user?.roleBasedId}
                   </p>
-                  <p className="text-sm text-neutral-45 capitalize">{user?.role} Id: {user?.roleBasedId}</p>
                 </div>
               </motion.div>
 
