@@ -70,7 +70,7 @@ const GuardianProfile = () => {
               />
             </div>
             <div className="bg-primary-10 shadow-2xl size-5 rounded-full flex items-center justify-center absolute right-4 bottom-1">
-              <img src={ICONS.tickMark} alt="" className="" />
+              <img src={ICONS.blueVerifiedBlue} alt="" className="" />
             </div>
           </div>
           <div>

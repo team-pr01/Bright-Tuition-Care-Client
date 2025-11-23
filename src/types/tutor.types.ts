@@ -100,6 +100,8 @@ export type TTutor = {
   resume: string;
   overview: string;
   profileStatus: "locked" | "unlocked";
+  hasAppliedForUnlock?: boolean;
+  unlockRequestReason?: string | null;
   isVerified?: boolean;
   personalInformation: TPersonalInformation;
   emergencyInformation: TEmergencyInformation;

@@ -12,13 +12,16 @@ import toast from "react-hot-toast";
 import {
   useGetAllTutorsQuery,
   useSetTutorOfTheMonthMutation,
-  useToggleTutorProfileStatusMutation,
 } from "../../../redux/Features/Tutor/tutorApi";
 import { HiOutlineUserCircle } from "react-icons/hi";
 import type { TTutor } from "../../../types/tutor.types";
 import { formatDate } from "../../../utils/formatDate";
-import { useActiveUserMutation } from "../../../redux/Features/User/userApi";
+import {
+  useActiveUserMutation,
+  useToggleProfileStatusMutation,
+} from "../../../redux/Features/User/userApi";
 import { IMAGES } from "../../../assets";
+import UnlockRequestReasonModal from "./UnlockRequestReasonModal";
 
 const Tutors = () => {
   const navigate = useNavigate();
@@ -31,6 +34,9 @@ const Tutors = () => {
   const [selectedTutorId, setSelectedTutorId] = useState<string | null>(null);
   const [isSuspendUserModalOpen, setIsSuspendUserModalOpen] =
     useState<boolean>(false);
+  const [unlockReason, setUnlockReason] = useState<string>("");
+  const [isUnlockRequestReasonModalOpen, setIsUnlockRequestReasonModalOpen] =
+    useState<boolean>(false);
 
   const { data, isLoading, isFetching } = useGetAllTutorsQuery({
     city: selectedCity,
@@ -40,7 +46,7 @@ const Tutors = () => {
     limit,
   });
   const [activeUser] = useActiveUserMutation();
-  const [toggleTutorProfileStatus] = useToggleTutorProfileStatusMutation();
+  const [toggleProfileStatus] = useToggleProfileStatusMutation();
   const [setTutorOfTheMonth] = useSetTutorOfTheMonthMutation();
 
   const handleActiveTutor = async (id: string) => {
@@ -59,7 +65,7 @@ const Tutors = () => {
 
   const handleToggleTutorProfile = async (id: string) => {
     try {
-      await toast.promise(toggleTutorProfileStatus(id).unwrap(), {
+      await toast.promise(toggleProfileStatus(id).unwrap(), {
         loading: "Loading...",
         success: "Status changed successfully!",
         error: "Failed to change status. Please try again.",
@@ -87,8 +93,6 @@ const Tutors = () => {
   const tutorTheads: TableHead[] = [
     { key: "tutorId", label: "Tutor ID" },
     { key: "name", label: "Name" },
-    { key: "email", label: "Email" },
-    { key: "phoneNumber", label: "Phone Number" },
     { key: "city", label: "City" },
     { key: "area", label: "Area" },
     { key: "registeredOn", label: "Registered On" },
@@ -96,6 +100,7 @@ const Tutors = () => {
     { key: "status", label: "Status" },
     { key: "profileStatus", label: "Profile Status" },
     { key: "tutorOfTheMonth", label: "Tutor of the Month" },
+    { key: "hasAppliedForUnlock", label: "Applied to Unlock Profile" },
   ];
 
   // Action Menu
@@ -123,32 +128,35 @@ const Tutors = () => {
     {
       label: "Lock Profile",
       icon: <VscLock className="inline mr-2" />,
-      onClick: (row) => handleToggleTutorProfile(row._id),
+      onClick: (row) => handleToggleTutorProfile(row?.userId),
     },
     {
       label: "Unlock Profile",
       icon: <VscUnlock className="inline mr-2" />,
-      onClick: (row) => handleToggleTutorProfile(row._id),
+      onClick: (row) => handleToggleTutorProfile(row?.userId),
     },
   ];
 
+  console.log(data?.data?.tutors);
   // Formatted table data
   const tableData = data?.data?.tutors?.map((tutor: TTutor) => ({
     _id: tutor._id,
     userId: tutor.userId,
     tutorId: tutor.tutorId,
     name: (
-      <div className="flex items-center gap-2 capitalize">
+      <div className="flex gap-2">
         <img
           src={tutor.imageUrl || IMAGES.dummyAvatar}
           alt={tutor?.name}
           className="size-7 rounded-full object-cover"
         />
-        <span>{tutor?.name}</span>
+        <div>
+          <p className="capitalize">{tutor?.name}</p>
+        <p>{tutor?.phoneNumber || "N/A"}</p>
+        <p>{tutor?.email || "N/A"}</p>
+        </div>
       </div>
     ),
-    email: tutor?.email || "N/A",
-    phoneNumber: tutor?.phoneNumber || "N/A",
     city: tutor?.city || "N/A",
     area: tutor?.area || "N/A",
     registeredOn: formatDate(tutor.createdAt),
@@ -187,11 +195,29 @@ const Tutors = () => {
           {tutor?.tutorOfTheMonth ? "Yes" : "No"}
         </span>
         {!tutor.tutorOfTheMonth && (
-          <button onClick={() => handleSetTutorOfTheMonth(tutor._id)} className="text-xs font-Nunito text-neutral-10 underline cursor-pointer">
+          <button
+            onClick={() => handleSetTutorOfTheMonth(tutor._id)}
+            className="text-xs font-Nunito text-neutral-10 underline cursor-pointer"
+          >
             Set
           </button>
         )}
       </>
+    ),
+    hasAppliedForUnlock: (
+      <button
+        onClick={() => {
+          setIsUnlockRequestReasonModalOpen(true);
+          setUnlockReason(tutor.unlockRequestReason || "No reason provided");
+        }}
+        className={`${
+          tutor.hasAppliedForUnlock
+            ? "text-blue-600 underline"
+            : "text-neutral-500"
+        } text-xs font-Nunito cursor-pointer`}
+      >
+        {tutor.hasAppliedForUnlock ? "Yes" : "No"}
+      </button>
     ),
   }));
 
@@ -226,6 +252,14 @@ const Tutors = () => {
         isSuspendUserModalOpen={isSuspendUserModalOpen}
         setIsSuspendUserModalOpen={setIsSuspendUserModalOpen}
       />
+
+      {isUnlockRequestReasonModalOpen && (
+        <UnlockRequestReasonModal
+          unlockReason={unlockReason}
+          isUnlockRequestReasonModalOpen={isUnlockRequestReasonModalOpen}
+          setIsUnlockRequestReasonModalOpen={setIsUnlockRequestReasonModalOpen}
+        />
+      )}
     </div>
   );
 };

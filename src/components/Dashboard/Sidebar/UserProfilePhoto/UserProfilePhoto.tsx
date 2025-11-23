@@ -24,7 +24,7 @@ const UserProfilePhoto = () => {
           )}
         </div>
 
-        {myProfile && !myProfile?.isVerified && (
+        {myProfile && myProfile?.isVerified && (
           <div className="size-9 rounded-full flex items-center justify-center absolute -right-1 bottom-1">
             <img src={ICONS.blueVerifiedWhite} alt="verified" />
           </div>

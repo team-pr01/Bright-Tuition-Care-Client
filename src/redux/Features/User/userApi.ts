@@ -45,7 +45,24 @@ const userApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ["users", "tutor", "guardian"],
     }),
+
+    requestToUnlockProfile: builder.mutation({
+      query: (data) => ({
+        url: `/user/request-to-unlock-profile`,
+        method: "PATCH",
+        body: data,
+      }),
+      invalidatesTags: ["tutor", "guardian", "users"],
+    }),
+
+    toggleProfileStatus: builder.mutation({
+      query: (id) => ({
+        url: `/user/profile-lock/${id}`,
+        method: "PATCH",
+      }),
+      invalidatesTags: ["tutor", "guardian", "users"],
+    }),
   }),
 });
 
-export const {  useGetMeQuery, useUpdateProfileMutation, useDeleteAccountMutation, useSuspendUserMutation, useActiveUserMutation } = userApi;
+export const {  useGetMeQuery, useUpdateProfileMutation, useDeleteAccountMutation, useSuspendUserMutation, useActiveUserMutation, useRequestToUnlockProfileMutation, useToggleProfileStatusMutation } = userApi;

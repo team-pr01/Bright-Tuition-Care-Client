@@ -1,9 +1,18 @@
 import { Link } from "react-router-dom";
 import { ICONS } from "../../../../assets";
 import Button from "../../../Reusable/Button/Button";
+import { useState } from "react";
+import RequestToUnlockProfileModal from "./RequestToUnlockProfileModal";
 
-const ProfileStatusForm = ({profileStatus, isLoading} : {profileStatus: string, isLoading: boolean}) => {
-  
+const ProfileStatusForm = ({
+  profileStatus,
+  isLoading,
+}: {
+  profileStatus: string;
+  isLoading: boolean;
+}) => {
+  const [isRequestUnlockModalOpen, setIsRequestUnlockModalOpen] =
+    useState<boolean>(false);
   if (isLoading) {
     return (
       <div className="font-Nunito animate-pulse">
@@ -28,7 +37,10 @@ const ProfileStatusForm = ({profileStatus, isLoading} : {profileStatus: string, 
       </p>
 
       {profileStatus === "unlocked" && (
-        <Link to="/dashboard/tutor/my-profile" className="flex justify-start mt-7">
+        <Link
+          to="/dashboard/tutor/my-profile"
+          className="flex justify-start mt-7"
+        >
           <Button
             type="button"
             label={"Edit Profile"}
@@ -37,6 +49,24 @@ const ProfileStatusForm = ({profileStatus, isLoading} : {profileStatus: string, 
             className="py-2 lg:py-2"
           />
         </Link>
+      )}
+
+      {profileStatus === "locked" && (
+        <Button
+          type="button"
+          label="Request to Unlock"
+          variant="primary"
+          iconWithoutBg={ICONS.topRightArrowWhite}
+          className="py-2 lg:py-2 mt-7"
+          onClick={() => setIsRequestUnlockModalOpen(true)}
+        />
+      )}
+
+      {isRequestUnlockModalOpen && (
+        <RequestToUnlockProfileModal
+          isRequestUnlockModalOpen={isRequestUnlockModalOpen}
+          setIsRequestUnlockModalOpen={setIsRequestUnlockModalOpen}
+        />
       )}
     </div>
   );

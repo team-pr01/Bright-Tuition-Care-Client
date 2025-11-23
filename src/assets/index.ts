@@ -72,7 +72,6 @@ import search from "../assets/Icons/search.svg";
 import requirements from "../assets/Icons/requirements.svg";
 import gender from "../assets/Icons/gender.svg";
 import notification from "../assets/Icons/notification.svg";
-import tickMark from "../assets/Icons/tick-mark.svg";
 import blueVerifiedBlue from "../assets/Icons/blueVerified-blue.svg";
 import blueVerifiedWhite from "../assets/Icons/blueVerified-white.svg";
 import notice from "../assets/Icons/disclaimer.gif";
@@ -226,7 +225,6 @@ export const ICONS = {
   requirements,
   gender,
   notification,
-  tickMark,
   blueVerifiedBlue,
   blueVerifiedWhite,
   notice,
