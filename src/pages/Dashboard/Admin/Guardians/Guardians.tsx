@@ -13,8 +13,10 @@ import {
 import { formatDate } from "../../../../utils/formatDate";
 import { HiOutlineUserCircle } from "react-icons/hi";
 import toast from "react-hot-toast";
-import { useActiveUserMutation } from "../../../../redux/Features/User/userApi";
+import { useActiveUserMutation, useToggleProfileStatusMutation } from "../../../../redux/Features/User/userApi";
 import { IMAGES } from "../../../../assets";
+import { VscLock, VscUnlock } from "react-icons/vsc";
+import UnlockRequestReasonModal from "../../../../components/Admin/Tutors/UnlockRequestReasonModal";
 
 export type TableAction<T> = {
   label: any;
@@ -35,19 +37,22 @@ const Guardians = () => {
   );
   const [isSuspendUserModalOpen, setIsSuspendUserModalOpen] =
     useState<boolean>(false);
+    const [unlockReason, setUnlockReason] = useState<string>("");
+  const [isUnlockRequestReasonModalOpen, setIsUnlockRequestReasonModalOpen] =
+    useState<boolean>(false);
 
   // Updated table heads
   const guardianTheads: TableHead[] = [
     { key: "_id", label: "Guardian ID" },
     { key: "name", label: "Name" },
-    { key: "email", label: "Email" },
-    { key: "phoneNumber", label: "Phone Number" },
     { key: "city", label: "City" },
     { key: "area", label: "Area" },
     { key: "role", label: "Role" },
     { key: "registeredOn", label: "Registered On" },
     { key: "status", label: "Status" },
+    { key: "profileStatus", label: "Profile Status" },
     { key: "guardianOfTheMonth", label: "Guardian of the Month" },
+    { key: "hasAppliedForUnlock", label: "Applied to Unlock Profile" },
   ];
 
   const { data, isLoading, isFetching } = useGetAllGuardiansQuery({
@@ -58,6 +63,7 @@ const Guardians = () => {
     limit,
   });
   const [activeUser] = useActiveUserMutation();
+  const [toggleProfileStatus] = useToggleProfileStatusMutation();
   const [setGuardianOfTheMonth] = useSetGuardianOfTheMonthMutation();
 
   const handleActiveUser = async (id: string) => {
@@ -84,6 +90,20 @@ const Guardians = () => {
     }
   };
 
+    const handleToggleGuardianProfile = async (id: string) => {
+      try {
+        await toast.promise(toggleProfileStatus(id).unwrap(), {
+          loading: "Loading...",
+          success: "Status changed successfully!",
+          error: "Failed to change status. Please try again.",
+        });
+      } catch (err: any) {
+        toast.error(
+          err?.data?.message || "Failed to change status. Please try again."
+        );
+      }
+    };
+
   // Action Menu
   const actions: TableAction<any>[] = [
     {
@@ -106,6 +126,16 @@ const Guardians = () => {
         handleActiveUser(row.userId);
       },
     },
+    {
+      label: "Lock Profile",
+      icon: <VscLock className="inline mr-2" />,
+      onClick: (row) => handleToggleGuardianProfile(row?.userId),
+    },
+    {
+      label: "Unlock Profile",
+      icon: <VscUnlock className="inline mr-2" />,
+      onClick: (row) => handleToggleGuardianProfile(row?.userId),
+    },
   ];
 
   // Formatted table data
@@ -113,17 +143,19 @@ const Guardians = () => {
     _id: guardian.guardianId,
     userId: guardian.userId,
     name: (
-      <div className="flex items-center gap-2 capitalize">
+      <div className="flex gap-2">
         <img
           src={guardian.imageUrl || IMAGES.dummyAvatar}
           alt={guardian?.name}
           className="size-7 rounded-full object-cover"
         />
-        <span>{guardian?.name}</span>
+        <div>
+          <p className="capitalize">{guardian?.name}</p>
+          <p>{guardian?.phoneNumber}</p>
+          <p>{guardian?.email}</p>
+        </div>
       </div>
     ),
-    email: guardian?.email || "N/A",
-    phoneNumber: guardian?.phoneNumber || "N/A",
     city: guardian?.city || "N/A",
     area: guardian?.area || "N/A",
     role: guardian?.role || "N/A",
@@ -137,6 +169,17 @@ const Guardians = () => {
         }`}
       >
         {guardian.isSuspended ? "Suspended" : "Active"}
+      </span>
+    ),
+    profileStatus: (
+      <span
+        className={`px-3 py-1 rounded-full text-xs font-medium capitalize ${
+          guardian.profileStatus === "locked"
+            ? "bg-red-100 text-red-600"
+            : "bg-green-100 text-green-600"
+        }`}
+      >
+        {guardian?.profileStatus}
       </span>
     ),
     guardianOfTheMonth: (
@@ -159,6 +202,21 @@ const Guardians = () => {
           </button>
         )}
       </>
+    ),
+    hasAppliedForUnlock: (
+      <button
+        onClick={() => {
+          setIsUnlockRequestReasonModalOpen(true);
+          setUnlockReason(guardian?.unlockRequestReason || "No reason provided");
+        }}
+        className={`${
+          guardian?.hasAppliedForUnlock
+            ? "text-blue-600 underline"
+            : "text-neutral-500"
+        } text-xs font-Nunito cursor-pointer`}
+      >
+        {guardian?.hasAppliedForUnlock ? "Yes" : "No"}
+      </button>
     ),
   }));
 
@@ -193,6 +251,13 @@ const Guardians = () => {
         isSuspendUserModalOpen={isSuspendUserModalOpen}
         setIsSuspendUserModalOpen={setIsSuspendUserModalOpen}
       />
+      {isUnlockRequestReasonModalOpen && (
+        <UnlockRequestReasonModal
+          unlockReason={unlockReason}
+          isUnlockRequestReasonModalOpen={isUnlockRequestReasonModalOpen}
+          setIsUnlockRequestReasonModalOpen={setIsUnlockRequestReasonModalOpen}
+        />
+      )}
     </div>
   );
 };
