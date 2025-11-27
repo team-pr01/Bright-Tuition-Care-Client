@@ -31,28 +31,28 @@ const TutorDashboardHome = () => {
           additionalTitle="Jobs"
           value="5"
           textColor="text-white md:text-primary-10"
-          path="/dashboard/tutor/job-applications/shortlisted"
+          path="/dashboard/tutor/my-applications/shortlisted"
           icon={<FaClipboardCheck />}
         />
         <DashboardOverviewCard
           title="Appointed"
           value="2"
           textColor="text-white md:text-[#9C9700]"
-          path="/dashboard/tutor/job-applications/appointed"
+          path="/dashboard/tutor/my-applications/appointed"
           icon={<FaUserCheck />}
         />
         <DashboardOverviewCard
           title="Confirmed"
           value="1"
           textColor="text-white md:text-green-500"
-          path="/dashboard/tutor/job-applications/confirmed"
+          path="/dashboard/tutor/my-applications/confirmed"
           icon={<FaCheckCircle />}
         />
         <DashboardOverviewCard
           title="Cancelled"
           value="6"
           textColor="text-white md:text-rose-500"
-          path="/dashboard/tutor/job-applications/cancelled"
+          path="/dashboard/tutor/my-applications/cancelled"
           icon={<FaTimesCircle />}
         />
       </div>
@@ -142,12 +142,12 @@ const TutorDashboardHome = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           <DashboardDataCard
-            title={"Profile Status"}
+            title={"Status"}
             description={"Get better response by verifying your profile."}
             icon={ICONS.profileUnverified}
-            value={"Not"}
+            value={"Not Verified"}
             titleColor={"text-primary-10"}
-            valueColor={"text-primary-10"}
+            valueColor={"text-accent-20"}
             btnLabel={"Verify Now"}
             path={""}
           />
