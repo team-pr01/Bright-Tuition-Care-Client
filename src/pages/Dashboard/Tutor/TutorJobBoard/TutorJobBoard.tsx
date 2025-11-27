@@ -99,7 +99,7 @@ const TutorJobBoard = () => {
       };
     }, [allJobs, isFetching, allJobs?.data?.meta?.hasMore]);
   return (
-    <div className="z-[9999] relative">
+    <div className="relative">
       <Filters
         keyword={keyword}
         setKeyword={setKeyword}

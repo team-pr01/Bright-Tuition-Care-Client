@@ -62,7 +62,7 @@ const ReferAndEarn = () => {
         ))}
       </div>
 
-      <div className="flex items-center justify-between w-full">
+      <div className="flex flex-col-reverse md:flex-row items-center justify-between gap-3 md:gap-0 w-full">
         <Link to={"/dashboard/tutor/my-leads"}>
           <Button
             type="button"

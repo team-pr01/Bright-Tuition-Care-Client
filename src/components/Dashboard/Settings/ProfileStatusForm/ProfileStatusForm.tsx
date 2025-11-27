@@ -16,10 +16,10 @@ const ProfileStatusForm = ({
   if (isLoading) {
     return (
       <div className="font-Nunito animate-pulse">
-        <div className="h-6 w-48 bg-neutral-200 dark:bg-neutral-700 rounded-md"></div>
-        <div className="mt-3 h-4 w-full bg-neutral-200 dark:bg-neutral-700 rounded-md"></div>
-        <div className="mt-2 h-4 w-[80%] bg-neutral-200 dark:bg-neutral-700 rounded-md"></div>
-        <div className="mt-7 h-10 w-32 bg-neutral-200 dark:bg-neutral-700 rounded-md"></div>
+        <div className="h-6 w-48 bg-neutral-200 rounded-md"></div>
+        <div className="mt-3 h-4 w-full bg-neutral-200 rounded-md"></div>
+        <div className="mt-2 h-4 w-[80%] bg-neutral-200 rounded-md"></div>
+        <div className="mt-7 h-10 w-32 bg-neutral-200 rounded-md"></div>
       </div>
     );
   }

@@ -112,9 +112,7 @@ const ShareThisApp = () => {
 
         {/* Copy link box */}
         <div className="flex items-center gap-5 w-fit bg-neutral-50/30 border border-neutral-50/30 rounded-md px-3 py-2 justify-between">
-          <span className="text-sm truncate text-gray-700 dark:text-gray-300">
-            {link}
-          </span>
+          <span className="text-sm truncate text-gray-700">{link}</span>
           <button
             onClick={handleCopy}
             className={`ml-2 px-3 py-1 text-xs rounded hover:bg-primary-10/90 transition duration-300 cursor-pointer ${

@@ -153,9 +153,9 @@ useEffect(() => {
 
   return (
     <div
-      className={`w-full bg-white dark:bg-slate-900 rounded-lg shadow-sm p-4 font-Nunito ${className}`}
+      className={`w-full bg-white rounded-lg shadow-sm p-4 font-Nunito ${className}`}
     >
-      <div className="flex items-start justify-between gap-4 mb-4">
+      <div className="flex flex-col lg:flex-row items-start justify-between gap-4 mb-4">
         <div>
           {title && <h3 className="text-xl font-semibold">{title}</h3>}
           {description && (
@@ -163,7 +163,7 @@ useEffect(() => {
           )}
         </div>
 
-        <div className="flex items-center gap-3">
+        <div className="flex flex-wrap items-center gap-3">
           {
             onSearch &&
             <div>
