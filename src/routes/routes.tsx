@@ -233,7 +233,9 @@ export const router = createBrowserRouter([
     path: "dashboard/guardian",
     element: (
       <ProtectedRoute>
-        <DashboardLayout />
+        <UserProvider>
+          <DashboardLayout />
+        </UserProvider>
       </ProtectedRoute>
     ),
     errorElement: <NotFound />,

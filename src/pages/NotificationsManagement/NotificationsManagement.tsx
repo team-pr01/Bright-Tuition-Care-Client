@@ -5,8 +5,8 @@ import { Link } from "react-router-dom";
 
 const NotificationsManagement = () => {
   return (
-   <div className="font-Nunito flex flex-col gap-4">
-     <div className="flex items-center justify-between border-b border-neutral-30/20 pb-3">
+    <div className="font-Nunito flex flex-col gap-4">
+      <div className="flex items-center justify-between border-b border-neutral-30/20 pb-3">
         <div className="relative w-full lg:w-[400px]">
           <input
             placeholder={"Search by user name..."}
@@ -19,19 +19,19 @@ const NotificationsManagement = () => {
           />
         </div>
 
-          <Link
-            to="/dashboard/admin/send-notification"
-            className={`bg-primary-10 hover:bg-primary-20 hover:text-primary-10 transition duration-300 font-semibold text-white rounded-lg flex items-center gap-2 px-3 py-2 pointer`}
-          >
-            Send Notification <RxArrowTopRight className="text-lg" />
-          </Link>
+        <Link
+          to="/dashboard/admin/send-notification"
+          className={`bg-primary-10 hover:bg-primary-20 hover:text-primary-10 transition duration-300 font-semibold text-white rounded-lg flex items-center gap-2 px-3 py-2 pointer`}
+        >
+          Send Notification <RxArrowTopRight className="text-lg" />
+        </Link>
       </div>
-    <div className="flex flex-col gap-4">
-      {[1, 2, 3].map((_, index:number) => (
-        <NotificationCard key={index} />
-      ))}
+      <div className="flex flex-col gap-4">
+        {[1, 2, 3].map((_, index: number) => (
+          <NotificationCard key={index} />
+        ))}
+      </div>
     </div>
-   </div>
   );
 };
 
