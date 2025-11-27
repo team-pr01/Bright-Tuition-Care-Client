@@ -26,11 +26,11 @@ const RoleTab = ({
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-6">
       {roles?.map((role) => {
-        const isActive = role?.key === activeTab; // compare by key
+        const isActive = role?.key === activeTab;
         return (
           <button
             key={role?.key}
-            onClick={() => setActiveTab(role?.key)} // set by key
+            onClick={() => setActiveTab(role?.key)}
             type="button"
             className={`relative border py-2 px-3 rounded-xl text-start flex items-center justify-between gap-6 cursor-pointer transform duration-300 ${
               isActive
@@ -53,7 +53,7 @@ const RoleTab = ({
               <p className="text-sm mt-[3px]">{role?.description}</p>
             </div>
             <div className="size-16 rounded-full bg-neutral-20/10 flex items-center justify-center">
-              <img src={role?.icon} alt="" className="size-11" />
+              <img src={role?.icon} alt="" className="w-11" />
             </div>
           </button>
         );

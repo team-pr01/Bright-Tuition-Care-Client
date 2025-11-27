@@ -112,6 +112,8 @@ import hire from "../assets/Icons/hire.png";
 import applications from "../assets/Icons/applications.svg";
 import threeDots from "../assets/Icons/three-dots.svg";
 import suspend from "../assets/Icons/suspend.svg";
+import teacher from "../assets/Icons/teacher.webp";
+import guardian from "../assets/Icons/guardians.webp";
 
 
 import aboutUs from "../assets/Images/about-us.jpg";
@@ -122,8 +124,6 @@ import heroImg3 from "../assets/Images/hero-images/hero-img-3.png";
 import heroImg4 from "../assets/Images/hero-images/hero-img-4.png";
 import dummyAvatar from "../assets/Images/dummy-avatar.jpg";  //dummy, please remove after integrating api
 import contactUs from "../assets/Images/contact-us.webp";
-import teacher from "../assets/Images/teacher.png";
-import guardian from "../assets/Images/guardian.svg";
 import forgotPassword from "../assets/Images/forgot-password.webp";
 import resetPassword from "../assets/Images/reset-password.webp";
 import verifyOtp from "../assets/Images/verify-otp.png";
