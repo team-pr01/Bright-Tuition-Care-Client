@@ -9,7 +9,7 @@ const TermsAndConditionHero = () => {
         alt=""
         className="w-full h-full top-0 left-0 absolute bottom-0 right-0 object-cover"
       />
-      <div className="bg-primary-50 opacity-80 w-full h-full top-0 left-0 absolute bottom-0 right-0"></div>
+      <div className="bg-primary-50 opacity-20 w-full h-full top-0 left-0 absolute bottom-0 right-0"></div>
       <div className="w-full h-full flex items-center justify-center">
         <Container>
           <div className="flex flex-col items-center justify-center relative z-10 h-full">
