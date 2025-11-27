@@ -1,7 +1,9 @@
 import { io } from 'socket.io-client';
 
 // http://192.168.0.102:5000    Local ip
-export const socket = io('http://localhost:5000', {
+// https://bright-tuition-care-server.onrender.com
+// http://localhost:5000
+export const socket = io('https://bright-tuition-care-server.onrender.com', {
   transports: ['websocket'],
   reconnectionAttempts: 5,
   reconnectionDelay: 1000,
