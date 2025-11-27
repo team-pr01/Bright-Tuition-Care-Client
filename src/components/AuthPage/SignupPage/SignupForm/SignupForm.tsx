@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import AuthHeading from "../../../Reusable/AuthHeading/AuthHeading";
 import RoleTab from "./RoleTab";
@@ -9,7 +9,6 @@ import PasswordInput from "../../../Reusable/PasswordInput/PasswordInput";
 import { Link, useNavigate } from "react-router-dom";
 import Button from "../../../Reusable/Button/Button";
 import { ICONS } from "../../../../assets";
-import { filterData } from "../../../../constants/filterData";
 import { useSignupMutation } from "../../../../redux/Features/Auth/authApi";
 import toast from "react-hot-toast";
 
@@ -17,10 +16,8 @@ type TFormData = {
   name: string;
   phoneNumber: string;
   email: string;
+  role: string;
   gender: string;
-  city: string;
-  role:string;
-  area: string;
   password: string;
   confirmPassword: string;
 };
@@ -35,8 +32,6 @@ const SignupForm = ({
   const [checked, setChecked] = useState<boolean>(false);
   const [fieldErrors, setFieldErrors] = useState<any>({
     gender: "",
-    city: "",
-    area: "",
   });
   const [signup, { isLoading }] = useSignupMutation();
   const navigate = useNavigate();
@@ -61,40 +56,9 @@ const SignupForm = ({
   } = useForm<TFormData>();
 
   const password = watch("password");
-  const [areaOptions, setAreaOptions] = useState<string[]>([]);
-  const selectedCity = watch("city");
   const selectedGender = watch("gender");
-  const selectedArea = watch("area");
-
-  // Update area options when city changes
-  useEffect(() => {
-    if (!selectedCity) {
-      setAreaOptions([]);
-      setValue("area", "");
-      return;
-    }
-
-    const cityObj = filterData.cityCorporationWithLocation.find(
-      (city) => city.name === selectedCity
-    );
-    const locations = cityObj?.locations || [];
-    setAreaOptions(locations);
-    setValue("area", "");
-  }, [selectedCity, setValue]);
 
   const handleSignup = async (data: TFormData) => {
-    if (!selectedCity) {
-      setFieldErrors((prev: any) => ({
-        ...prev,
-        city: "City is required",
-      }));
-    }
-    if (!selectedArea) {
-      setFieldErrors((prev: any) => ({
-        ...prev,
-        area: "Area is required",
-      }));
-    }
     if (!selectedGender) {
       setFieldErrors((prev: any) => ({
         ...prev,
@@ -104,14 +68,14 @@ const SignupForm = ({
     try {
       const payload = {
         ...data,
-        role: activeTab==="Guardian/Student"?"guardian":"tutor",
-      }
+        role: activeTab === "Guardian/Student" ? "guardian" : "tutor",
+      };
       const res = await signup(payload).unwrap();
       if (res?.success) {
         localStorage.setItem("signupEmail", data.email);
         navigate("/verify-otp");
         reset();
-        setFieldErrors({ gender: "", city: "", area: "" });
+        setFieldErrors({ gender: "" });
       }
     } catch (err: any) {
       const errorMessage =
@@ -183,28 +147,6 @@ const SignupForm = ({
             onChange={(value) => setValue("gender", value.toLocaleLowerCase())}
             isRequired={true}
             error={fieldErrors.gender}
-          />
-
-          {/* City Dropdown */}
-          <SelectDropdownWithSearch
-            label="City"
-            name="city"
-            options={filterData.cityCorporationWithLocation.map((c) => c.name)}
-            value={selectedCity}
-            onChange={(value) => setValue("city", value)}
-            isRequired={true}
-            error={fieldErrors.city}
-          />
-
-          {/* Area Dropdown */}
-          <SelectDropdownWithSearch
-            label="Location"
-            name="area"
-            options={areaOptions}
-            value={watch("area")}
-            onChange={(value) => setValue("area", value)}
-            isRequired={true}
-            error={fieldErrors.area}
           />
 
           <PasswordInput
