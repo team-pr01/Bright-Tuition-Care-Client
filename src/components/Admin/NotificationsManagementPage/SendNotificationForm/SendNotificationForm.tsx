@@ -171,11 +171,14 @@ const SendNotificationForm = () => {
       : {
           page,
           limit,
-          totalPages: Math.max(
-            tutors?.meta?.totalPages || 1,
-            guardian?.meta?.totalPages || 1
-          ),
+          totalPages:
+            Math.max(
+              tutors?.meta?.totalPages || 1,
+              guardian?.meta?.totalPages || 1
+            ) || 1,
         };
+
+  const totalPages = meta?.totalPages ?? 1;
 
   return (
     <div className="flex flex-col gap-3">
@@ -340,24 +343,24 @@ const SendNotificationForm = () => {
                 onClick={() => setPage((p) => Math.max(1, p - 1))}
                 disabled={page === 1}
                 className={`px-3 py-1 rounded-md border border-neutral-55/60 
-          disabled:opacity-50 disabled:cursor-not-allowed
-          ${page > 1 ? "cursor-pointer bg-primary-10 text-white" : ""}`}
+        disabled:opacity-50 disabled:cursor-not-allowed
+        ${page > 1 ? "cursor-pointer bg-primary-10 text-white" : ""}`}
               >
                 Prev
               </button>
 
               {/* Page Numbers */}
-              {Array.from({ length: meta.totalPages }, (_, i) => i + 1).map(
+              {Array.from({ length: totalPages }, (_, i) => i + 1).map(
                 (pageNum) => (
                   <button
                     key={pageNum}
                     onClick={() => setPage(pageNum)}
                     className={`px-3 py-1 rounded-md border border-neutral-55/60
-              ${
-                page === pageNum
-                  ? "bg-primary-10 text-white"
-                  : "hover:bg-primary-10 hover:text-white cursor-pointer"
-              }`}
+            ${
+              page === pageNum
+                ? "bg-primary-10 text-white"
+                : "hover:bg-primary-10 hover:text-white cursor-pointer"
+            }`}
                   >
                     {pageNum}
                   </button>
@@ -366,15 +369,11 @@ const SendNotificationForm = () => {
 
               {/* Next Button */}
               <button
-                onClick={() => setPage((p) => Math.min(meta.totalPages, p + 1))}
-                disabled={page === meta.totalPages}
+                onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
+                disabled={page === totalPages}
                 className={`px-3 py-1 rounded-md border border-neutral-55/60 
-          disabled:opacity-50 disabled:cursor-not-allowed
-          ${
-            page < meta.totalPages
-              ? "cursor-pointer bg-primary-10 text-white"
-              : ""
-          }`}
+        disabled:opacity-50 disabled:cursor-not-allowed
+        ${page < totalPages ? "cursor-pointer bg-primary-10 text-white" : ""}`}
               >
                 Next
               </button>

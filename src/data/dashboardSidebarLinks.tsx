@@ -194,9 +194,14 @@ export const adminDashboardLinks: DashboardLink[] = [
   },
   {
     label: "Notifications",
-    path: "/dashboard/admin/notifications-management",
+    path: "/dashboard/admin/send-notification",
     icon: <IoNotificationsOutline />,
   },
+  // {
+  //   label: "Notifications",
+  //   path: "/dashboard/admin/notifications-management",
+  //   icon: <IoNotificationsOutline />,
+  // },
   {
     label: "Leads",
     path: "/dashboard/admin/lead-management",
