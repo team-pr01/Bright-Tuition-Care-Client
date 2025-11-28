@@ -10,8 +10,8 @@ import toast from "react-hot-toast";
 import { usePostJobMutation } from "../../../redux/Features/Job/jobApi";
 import { useSelector } from "react-redux";
 import { useCurrentUser } from "../../../redux/Features/Auth/authSlice";
-import { useNavigate } from "react-router-dom";
 import type { TLoggedInUser } from "../../../types/loggedinUser.types";
+import SuccessMessage from "./SuccessMessage";
 
 interface FormValues {
   // Job Details
@@ -38,11 +38,16 @@ interface FormValues {
   address: string;
 }
 
-const steps = ["Job Details", "Tutor Preferences", "Student Info", "Preview"];
+const steps = [
+  "Job Details",
+  "Tutor Preferences",
+  "Student Info",
+  "Preview",
+  "Thank You",
+];
 
 const HireTutorForm = () => {
   const user = useSelector(useCurrentUser) as TLoggedInUser;
-  const navigate = useNavigate();
   const [postJob, { isLoading: isPostingJob }] = usePostJobMutation();
   const methods = useForm<FormValues>({ mode: "onBlur" });
   const { handleSubmit } = methods;
@@ -60,10 +65,7 @@ const HireTutorForm = () => {
       const response = await postJob(payload).unwrap();
       if (response?.success) {
         toast.success("Job posted successfully!");
-        if (user?.role === "admin") navigate("/dashboard/admin/posted-jobs");
-        else if (user?.role === "guardian")
-          navigate("/dashboard/guardian/posted-jobs");
-        else navigate("/dashboard/staff/posted-jobs");
+        setCurrentStep(4); // Move to thank you step
       }
     } catch (err: any) {
       toast.error(err?.data?.message || "Submission failed. Please try again.");
@@ -72,72 +74,80 @@ const HireTutorForm = () => {
 
   return (
     <FormProvider {...methods}>
-      {/* remove handleSubmit from form */}
       <form className="space-y-6 mt-5">
-        {/* Progress Bar */}
-        <div className="relative w-full h-3 bg-gray-200 rounded-full overflow-hidden">
-          <div
-            className="h-full bg-primary-10 transition-all duration-500 ease-in-out relative"
-            style={{ width: `${((currentStep + 1) / steps.length) * 100}%` }}
-          >
-            <span className="absolute right-1 top-1/2 -translate-y-1/2 text-xs font-medium text-white">
-              {Math.round(((currentStep + 1) / steps.length) * 100)}%
-            </span>
+        {/* Progress Bar - Hide on thank you step */}
+        {currentStep !== 4 && (
+          <div className="relative w-full h-3 bg-gray-200 rounded-full overflow-hidden">
+            <div
+              className="h-full bg-primary-10 transition-all duration-500 ease-in-out relative"
+              style={{ width: `${((currentStep + 1) / steps.length) * 100}%` }}
+            >
+              <span className="absolute right-1 top-1/2 -translate-y-1/2 text-xs font-medium text-white">
+                {Math.round(((currentStep + 1) / steps.length) * 100)}%
+              </span>
+            </div>
           </div>
-        </div>
+        )}
 
         {/* Step Content */}
         {currentStep === 0 && <JobDetailsForm />}
         {currentStep === 1 && <StudentInfoForm />}
         {currentStep === 2 && <LocationForm />}
         {currentStep === 3 && <Preview />}
+        {currentStep === 4 && <SuccessMessage />}
 
-        {/* Navigation */}
-        <div className="flex justify-between mt-4">
-          <button
-            type="button"
-            onClick={() => setCurrentStep(currentStep - 1)}
-            className="px-4 py-2 bg-gray-300 rounded cursor-pointer disabled:cursor-not-allowed disabled:bg-gray-500/50"
-            disabled={currentStep === 0}
-          >
-            Previous
-          </button>
-
-          {currentStep < 3 ? (
+        {/* Navigation - Hide on thank you step */}
+        {currentStep !== 4 && (
+          <div className="flex justify-between mt-4">
             <button
               type="button"
-              onClick={() => setCurrentStep(currentStep + 1)}
-              className="px-4 py-2 bg-primary-10 text-white rounded cursor-pointer flex items-center gap-2"
+              onClick={() => setCurrentStep(currentStep - 1)}
+              className="px-4 py-2 bg-gray-300 rounded cursor-pointer disabled:cursor-not-allowed disabled:bg-gray-500/50"
+              disabled={currentStep === 0}
             >
-              {currentStep === 2 ? (
-                <>
-                  Show Preview
-                  <img src={ICONS.eyeWhite} alt="eye-icon" className="size-4" />
-                </>
-              ) : (
-                <>
-                  Next
-                  <img
-                    src={ICONS.rightArrow}
-                    alt="right-arrow"
-                    className="size-4"
-                  />
-                </>
-              )}
+              Previous
             </button>
-          ) : (
-            currentStep === 3 && (
+
+            {currentStep < 3 ? (
               <button
                 type="button"
-                onClick={() => handleSubmit(onSubmit)()}
-                className="px-4 py-2 bg-primary-10 disabled:bg-primary-10/50 disabled:cursor-not-allowed text-white rounded cursor-pointer"
-                disabled={isPostingJob}
+                onClick={() => setCurrentStep(currentStep + 1)}
+                className="px-4 py-2 bg-primary-10 text-white rounded cursor-pointer flex items-center gap-2"
               >
-                {isPostingJob ? "Submitting..." : "Submit"}
+                {currentStep === 2 ? (
+                  <>
+                    Show Preview
+                    <img
+                      src={ICONS.eyeWhite}
+                      alt="eye-icon"
+                      className="size-4"
+                    />
+                  </>
+                ) : (
+                  <>
+                    Next
+                    <img
+                      src={ICONS.rightArrow}
+                      alt="right-arrow"
+                      className="size-4"
+                    />
+                  </>
+                )}
               </button>
-            )
-          )}
-        </div>
+            ) : (
+              currentStep === 3 && (
+                <button
+                  type="button"
+                  onClick={() => handleSubmit(onSubmit)()}
+                  className="px-4 py-2 bg-primary-10 disabled:bg-primary-10/50 disabled:cursor-not-allowed text-white rounded cursor-pointer"
+                  disabled={isPostingJob}
+                >
+                  {isPostingJob ? "Submitting..." : "Submit"}
+                </button>
+              )
+            )}
+          </div>
+        )}
       </form>
     </FormProvider>
   );

@@ -190,10 +190,9 @@ const UpdatePersonalInfoModal = ({
         />
 
         {/* Religion */}
-        <TextInput
+        <SelectDropdown
           label="Religion"
-          placeholder="Enter religion"
-          error={errors.religion}
+          options={filterData.religions}
           {...register("religion")}
           isRequired={false}
         />

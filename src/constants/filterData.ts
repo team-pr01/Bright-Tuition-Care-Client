@@ -2884,4 +2884,11 @@ export const filterData = {
   studentGender: ["male", "female"],
   tutorGender: ["male", "female", "any"],
   placeOfTuition: ["Student's Home", "My Home", "Online"],
+  religions: [
+    "Islam",
+    "Hinduism",
+    "Buddhism",
+    "Christianity",
+    "Indigenous / Tribal Religions",
+  ],
 };
