@@ -32,6 +32,7 @@ interface FormValues {
   studentGender: string[];
   class: string[];
   noOfStudents: string;
+  studentsInstituteName?: string;
   city: string[];
   area: string[];
   address: string;

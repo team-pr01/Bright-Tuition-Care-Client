@@ -82,7 +82,7 @@ export const contactInfo = [
   },
   {
     icon: <IoLocationOutline className="text-xl" />,
-    label: "House-P23,Noorjahan Road, Mohammadpur, Dhaka-1207",
+    label: "Noorjahan Road, Mohammadpur, Dhaka-1207",
   },
 ];
 

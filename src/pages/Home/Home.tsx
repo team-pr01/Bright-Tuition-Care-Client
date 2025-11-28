@@ -27,8 +27,8 @@ const Home = () => {
       <TuitionMethods />
       <StudentSteps />
       <Testimonials
-        title="What Students / Guardian Say About Us"
-        description="Real stories from real tutors who found success through our platform."
+        title="What Our Happy Guardians/Students Think About Us"
+        description="Get started learning with verified tutors!"
         buttonText="Hire A Tutor"
         navigatePath="/hire-a-tutor"
         data={allGuardianTestimonials?.data}
@@ -37,11 +37,11 @@ const Home = () => {
       <TutorSteps />
 
       <Testimonials
-        title="What Tutors Say About Us"
-        description="Real stories from real tutors who found success through our platform."
+        title="What Our Happy Tutors Think About Us"
+        description="Become a tutor today and start earning!"
         variant="primary"
         buttonText="Become A Tutor"
-        navigatePath="/signup"
+        navigatePath="/signup/tutor"
         data={allTutorsTestimonials?.data}
         isLoading={isGuardianTestimonialLoading}
       />

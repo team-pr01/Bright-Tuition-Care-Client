@@ -14,7 +14,7 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ image, title }) => {
         className="w-full object-cover h-[235px] rounded-t-3xl"
       />
       <div className="px-3 pb-4">
-        <h3 className="text-2xl font-semibold text-neutral-10 text-center">
+        <h3 className="text-2xl font-semibold text-primary-50 text-center">
           {title}
         </h3>
       </div>

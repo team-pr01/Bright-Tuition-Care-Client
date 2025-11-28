@@ -62,36 +62,35 @@ const JobDetailsForm = ({ defaultValues }: { defaultValues?: TJobs }) => {
   }, [selectedCategory, setValue, defaultValues]);
 
   useEffect(() => {
-  if (!selectedClass || !selectedCategory) return;
+    if (!selectedClass || !selectedCategory) return;
 
-  const categoryData = filterData?.tutoringCatalog.find(
-    (item) => item.category === selectedCategory
-  );
+    const categoryData = filterData?.tutoringCatalog.find(
+      (item) => item.category === selectedCategory
+    );
 
-  const classData = categoryData?.classes.find(
-    (cls) => cls.name === selectedClass
-  );
+    const classData = categoryData?.classes.find(
+      (cls) => cls.name === selectedClass
+    );
 
-  if (classData) {
-    // Always set all subjects for this class
-    setSubjectOptions(classData.subjects);
+    if (classData) {
+      // Always set all subjects for this class
+      setSubjectOptions(classData.subjects);
 
-    // If defaultValues exist for this class, preselect them
-    if (defaultValues?.class === selectedClass && defaultValues?.subjects) {
-      setSelectedSubjects(defaultValues.subjects);
-      setValue("subjects", defaultValues.subjects);
+      // If defaultValues exist for this class, preselect them
+      if (defaultValues?.class === selectedClass && defaultValues?.subjects) {
+        setSelectedSubjects(defaultValues.subjects);
+        setValue("subjects", defaultValues.subjects);
+      } else {
+        setSelectedSubjects([]);
+        setValue("subjects", []);
+      }
     } else {
+      // No class found: reset subjects
+      setSubjectOptions([]);
       setSelectedSubjects([]);
       setValue("subjects", []);
     }
-  } else {
-    // No class found: reset subjects
-    setSubjectOptions([]);
-    setSelectedSubjects([]);
-    setValue("subjects", []);
-  }
-}, [selectedClass, selectedCategory, defaultValues, filterData, setValue]);
-
+  }, [selectedClass, selectedCategory, defaultValues, filterData, setValue]);
 
   // ---------- UPDATE SUBJECTS IN RHF ----------
   useEffect(() => {
@@ -165,9 +164,10 @@ const JobDetailsForm = ({ defaultValues }: { defaultValues?: TJobs }) => {
         <TextInput
           label="Salary (BDT)"
           type="number"
-          placeholder="Enter salary"
+          placeholder="Enter salary or skip if not applicable"
           error={errors.salary}
-          {...register("salary", { required: "Salary is required" })}
+          {...register("salary")}
+          isRequired={false}
         />
       </div>
     </div>

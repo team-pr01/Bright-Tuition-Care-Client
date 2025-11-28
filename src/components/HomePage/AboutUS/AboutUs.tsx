@@ -5,7 +5,6 @@ import Container from "../../Reusable/Container/Container";
 import { ICONS, IMAGES } from "../../../assets";
 import Heading from "../../Reusable/Heading/Heading";
 import Button from "../../Reusable/Button/Button";
-import { Link } from "react-router-dom";
 
 const AboutUs = () => {
   const ref = useRef(null);
@@ -64,30 +63,30 @@ const AboutUs = () => {
         >
           <div>
             <Heading titleParts={[{ text: "About Bright Tuition Care" }]} />
-            <div className="flex flex-col gap-2 mt-2 lg:mt-4 text-neutral-45 text-lg leading-6 text-center lg:text-start">
+            <div className="flex flex-col gap-2 mt-2 lg:mt-4 text-neutral-45 text-lg leading-6 text-start">
               <p className="text-justify">
                 At Bright Tuition Care, we connect students with qualified tutors and provide tutoring jobs based on each tutor’s skills. We believe that every student needs <strong>quality tutors</strong> suited to their goals and learning style. That’s why we have created a trusted platform where finding <strong>the right tutor</strong> is fast, reliable, and hassle-free.
               </p>
-              <p>
+              <p className="text-justify">
                 Our commitment is to empower students to achieve their full potential by providing them with expert tutors in both academic subjects and specialized skills.
               </p>
             </div>
             <div className="flex flex-row gap-4 mt-8 items-center justify-center lg:justify-start">
-              <Link to={"/hire-a-tutor"}>
+              <a href={"/hire-a-tutor"}>
                 <Button
                   label="Hire A Tutor"
                   variant="primary"
                   icon={ICONS.topRightArrow}
                 />
-              </Link>
-              <Link to={"/signup"}>
+              </a>
+              <a href={"/signup/tutor"}>
                 <Button
                   label="Become A Tutor"
                   variant="secondary"
                   icon={ICONS.topRightArrowWhite}
                   iconBg="#0D99FF"
                 />
-              </Link>
+              </a>
             </div>
           </div>
         </motion.div>

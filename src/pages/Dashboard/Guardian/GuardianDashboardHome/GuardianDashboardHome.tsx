@@ -67,7 +67,7 @@ const GuardianDashboardHome = () => {
             titleColor={"text-primary-10"}
             valueColor={"text-primary-10"}
             btnLabel={"Hire Now"}
-            path={""}
+            path={"/dashboard/guardian/hire-a-tutor"}
           />
           <DashboardDataCard
             title={"Confirmation Letters"}

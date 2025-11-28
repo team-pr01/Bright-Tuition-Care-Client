@@ -40,90 +40,95 @@ const TutorJobBoard = () => {
     preferredTutorGender: selectedTutorGender.join(",") || undefined,
     studentGender: selectedStudentGender.join(",") || undefined,
     tuitionType: selectedTuitionType.join(",") || undefined,
-    status : "live",
+    status: "live",
     skip,
   });
 
   // Update jobs when new data arrives
-    useEffect(() => {
-      if (allJobs?.data?.jobs) {
-        if (skip === 0) {
-          setJobs(allJobs.data.jobs);
-        } else {
-          setJobs((prev) => {
-            const newJobs = allJobs.data.jobs.filter(
-              (job: any) => !prev.some((p) => p._id === job._id)
-            );
-            return [...prev, ...newJobs];
-          });
-        }
+  useEffect(() => {
+    if (allJobs?.data?.jobs) {
+      if (skip === 0) {
+        setJobs(allJobs.data.jobs);
+      } else {
+        setJobs((prev) => {
+          const newJobs = allJobs.data.jobs.filter(
+            (job: any) => !prev.some((p) => p._id === job._id)
+          );
+          return [...prev, ...newJobs];
+        });
       }
-    }, [allJobs]);
-  
-    // Reset pagination when filters or search change
-    useEffect(() => {
-      setSkip(0);
-    }, [
-      debouncedKeyword,
-      selectedCities,
-      selectedAreas,
-      selectedCategory,
-      selectedDays,
-      selectedClass,
-      selectedTutorGender,
-      selectedStudentGender,
-      selectedTuitionType,
-    ]);
-  
-    // Infinite Scroll Observer
-    const loaderRef = useRef<HTMLDivElement | null>(null);
-  
-    useEffect(() => {
-      const observer = new IntersectionObserver(
-        (entries) => {
-          if (
-            entries[0].isIntersecting &&
-            !isFetching &&
-            allJobs?.data?.meta?.hasMore
-          ) {
-            setSkip((prev) => prev + limit);
-          }
-        },
-        { threshold: 1 }
-      );
-  
-      const node = loaderRef.current;
-      if (node) observer.observe(node);
-      return () => {
-        if (node) observer.unobserve(node);
-      };
-    }, [allJobs, isFetching, allJobs?.data?.meta?.hasMore]);
+    }
+  }, [allJobs]);
+
+  // Reset pagination when filters or search change
+  useEffect(() => {
+    setSkip(0);
+  }, [
+    debouncedKeyword,
+    selectedCities,
+    selectedAreas,
+    selectedCategory,
+    selectedDays,
+    selectedClass,
+    selectedTutorGender,
+    selectedStudentGender,
+    selectedTuitionType,
+  ]);
+
+  // Infinite Scroll Observer
+  const loaderRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (
+          entries[0].isIntersecting &&
+          !isFetching &&
+          allJobs?.data?.meta?.hasMore
+        ) {
+          setSkip((prev) => prev + limit);
+        }
+      },
+      { threshold: 1 }
+    );
+
+    const node = loaderRef.current;
+    if (node) observer.observe(node);
+    return () => {
+      if (node) observer.unobserve(node);
+    };
+  }, [allJobs, isFetching, allJobs?.data?.meta?.hasMore]);
   return (
     <div className="relative">
-      <Filters
-        keyword={keyword}
-        setKeyword={setKeyword}
-        selectedCities={selectedCities}
-        setSelectedCities={setSelectedCities}
-        selectedAreas={selectedAreas}
-        setSelectedAreas={setSelectedAreas}
-        areaOptions={areaOptions}
-        setAreaOptions={setAreaOptions}
-        selectedCategory={selectedCategory}
-        setSelectedCategory={setSelectedCategory}
-        selectedDays={selectedDays}
-        setSelectedDays={setSelectedDays}
-        selectedClass={selectedClass}
-        setSelectedClass={setSelectedClass}
-        selectedTutorGender={selectedTutorGender}
-        setSelectedTutorGender={setSelectedTutorGender}
-        selectedStudentGender={selectedStudentGender}
-        setSelectedStudentGender={setSelectedStudentGender}
-        selectedTuitionType={selectedTuitionType}
-        setSelectedTuitionType={setSelectedTuitionType}
-        liveJobs={allJobs?.data?.meta?.liveJobs || 0}
-      />
-      <Jobs allJobs={jobs} isLoading={isLoading || isFetching} variant="tutorJobCard" />
+        <Filters
+          keyword={keyword}
+          setKeyword={setKeyword}
+          selectedCities={selectedCities}
+          setSelectedCities={setSelectedCities}
+          selectedAreas={selectedAreas}
+          setSelectedAreas={setSelectedAreas}
+          areaOptions={areaOptions}
+          setAreaOptions={setAreaOptions}
+          selectedCategory={selectedCategory}
+          setSelectedCategory={setSelectedCategory}
+          selectedDays={selectedDays}
+          setSelectedDays={setSelectedDays}
+          selectedClass={selectedClass}
+          setSelectedClass={setSelectedClass}
+          selectedTutorGender={selectedTutorGender}
+          setSelectedTutorGender={setSelectedTutorGender}
+          selectedStudentGender={selectedStudentGender}
+          setSelectedStudentGender={setSelectedStudentGender}
+          selectedTuitionType={selectedTuitionType}
+          setSelectedTuitionType={setSelectedTuitionType}
+          liveJobs={allJobs?.data?.meta?.liveJobs || 0}
+        />
+        <div className="mt-6">
+          <Jobs
+          allJobs={jobs}
+          isLoading={isLoading || isFetching}
+          variant="tutorJobCard"
+        />
         <div ref={loaderRef} className="h-10"></div>
 
         {allJobs?.data?.meta?.hasMore && isFetching && (
@@ -138,6 +143,7 @@ const TutorJobBoard = () => {
             No more jobs to load.
           </p>
         )}
+        </div>
     </div>
   );
 };

@@ -18,6 +18,7 @@ const StudentInfoForm = ({defaultValues} : { defaultValues?: TJobs }) => {
       setValue("studentGender", defaultValues.studentGender || "");
       setValue("preferredTutorGender", defaultValues.preferredTutorGender || "");
       setValue("numberOfStudents", defaultValues.numberOfStudents || "");
+      setValue("studentsInstituteName", defaultValues.studentsInstituteName || "");
       setValue("otherRequirements", defaultValues.otherRequirements || "");
     }
   }, [defaultValues, setValue]);
@@ -43,9 +44,17 @@ const StudentInfoForm = ({defaultValues} : { defaultValues?: TJobs }) => {
 
         <TextInput
           label="Number of Students"
-          placeholder="Enter number"
+          placeholder="Enter number of students"
           error={errors.numberOfStudents}
           {...register("numberOfStudents")}
+          isRequired={false}
+        />
+
+        <TextInput
+          label="Institute Name"
+          placeholder="Enter student's institute name"
+          error={errors.studentsInstituteName}
+          {...register("studentsInstituteName")}
           isRequired={false}
         />
       </div>

@@ -134,7 +134,7 @@ const TutorDashboardHome = () => {
             value={"35+"}
             titleColor={"text-primary-10/80"}
             valueColor={"text-primary-10"}
-            btnLabel={"View Details"}
+            btnLabel={"View All"}
             path={""}
           />
 
@@ -160,7 +160,7 @@ const TutorDashboardHome = () => {
             value={"2"}
             titleColor={"text-primary-10"}
             valueColor={"text-primary-10"}
-            btnLabel={"Confirm Now"}
+            btnLabel={"View All"}
             path={"/dashboard/tutor/confirmation-letters"}
           />
          
@@ -171,7 +171,7 @@ const TutorDashboardHome = () => {
             value={"3"}
             titleColor={"text-primary-10/80"}
             valueColor={"text-primary-10"}
-            btnLabel={"Pay Now"}
+            btnLabel={"View All"}
             path={"/dashboard/tutor/invoice"}
           />
         </div>

@@ -30,7 +30,7 @@ const HowItWorks = () => {
               <div className="bg-primary-20 w-fit px-4 py-[10px] flex items-center justify-center rounded font-normal">
                 Step {item.step}
               </div>
-              <h3 className="text-lg lg:text-xl font-bold text-neutral-10 mt-3 lg:mt-5">
+              <h3 className="text-lg lg:text-xl font-bold text-primary-50 mt-3 lg:mt-5">
                 {item.title}
               </h3>
               <p className="text-neutral-30 leading-2 lg:leading-6">

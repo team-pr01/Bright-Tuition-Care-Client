@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import Container from "../../Reusable/Container/Container";
 import { ICONS } from "../../../assets";
+import { FaArrowRight } from "react-icons/fa";
 
 const WhyChooseUs = () => {
   const [ref, inView] = useInView({
@@ -231,7 +232,7 @@ const WhyChooseUs = () => {
                   </motion.div>
 
                   {/* Content */}
-                  <h3 className="text-2xl font-bold text-neutral-10 mt-3 mb-2">
+                  <h3 className="text-2xl font-bold text-primary-50 mt-3 mb-2">
                     {feature.title}
                   </h3>
 
@@ -244,6 +245,7 @@ const WhyChooseUs = () => {
           </motion.div>
 
           {/* CTA Section */}
+
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
@@ -259,9 +261,22 @@ const WhyChooseUs = () => {
             >
               <a
                 href="/hire-a-tutor"
-                className="inline-block bg-gradient-to-r from-cyan-500 to-blue-500 text-white px-6 py-4 md:px-12 md:py-4 rounded-2xl font-semibold text-base md:text-lg shadow-2xl transition-all duration-300 relative overflow-hidden group w-full sm:w-auto text-center"
+                className="inline-flex items-center justify-center gap-3 bg-gradient-to-r from-cyan-500 to-blue-500 text-white px-6 py-4 md:px-12 md:py-4 rounded-2xl font-semibold text-base md:text-lg shadow-2xl transition-all duration-300 relative overflow-hidden group w-full sm:w-auto text-center"
               >
                 Find Your Perfect Tutor Today
+                <motion.span
+                  animate={{
+                    x: [0, 4, 0],
+                  }}
+                  transition={{
+                    duration: 1.5,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                  }}
+                  className="inline-flex items-center"
+                >
+                  <FaArrowRight className="text-lg" />
+                </motion.span>
               </a>
             </motion.div>
           </motion.div>

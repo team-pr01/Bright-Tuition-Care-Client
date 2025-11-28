@@ -214,6 +214,16 @@ const Preview = () => {
           isRequired={false}
         />
 
+        <TextInput
+          label="Institute Name"
+          placeholder="Enter student's institute name"
+          error={errors.studentsInstituteName}
+          value={watch("studentsInstituteName")}
+          {...register("studentsInstituteName")}
+          isRequired={false}
+          isDisabled={!isEditEnable}
+        />
+
         <MultiSelectDropdown
           label="City"
           name="city"

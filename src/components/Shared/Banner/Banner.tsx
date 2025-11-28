@@ -3,7 +3,6 @@ import React, { useRef } from "react";
 import { motion } from "framer-motion";
 import { RxArrowTopRight } from "react-icons/rx";
 import Container from "../../Reusable/Container/Container";
-import { Link } from "react-router-dom";
 
 const Banner: React.FC = () => {
   const ref = useRef<HTMLDivElement>(null);
@@ -64,19 +63,19 @@ const Banner: React.FC = () => {
           variants={itemVariants}
           className="flex flex-col sm:flex-row items-center gap-4 justify-center mt-8"
         >
-          <Link
-            to="/signup/guardian"
+          <a
+            href="/signup/guardian"
             className={`bg-white hover:bg-transparent border border-white hover:text-white text-primary-10 ${buttonCommonClassNames}`}
           >
             Join as A Guardian{" "}
             <RxArrowTopRight className="text-2xl font-black" />
-          </Link>
-          <Link
-            to="/signup/tutor"
+          </a>
+          <a
+            href="/signup/tutor"
             className={`hover:bg-white border border-white hover:text-primary-10 text-white ${buttonCommonClassNames}`}
           >
             Become A Tutor <RxArrowTopRight className="text-2xl font-black" />
-          </Link>
+          </a>
         </motion.div>
 
         {/* Shapes */}

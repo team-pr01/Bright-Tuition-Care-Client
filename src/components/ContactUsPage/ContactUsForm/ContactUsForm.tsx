@@ -10,7 +10,6 @@ type TFormData = {
   role: string;
   name: string;
   phoneNumber: string;
-  email: string;
   message: string;
 };
 
@@ -96,14 +95,6 @@ const ContactUsForm = () => {
         placeholder="Enter your phone number"
         error={errors.phoneNumber}
         {...register("phoneNumber")}
-      />
-      <TextInput
-        label="Email"
-        placeholder="Enter your email"
-        error={errors.email}
-        {...register("email")}
-        type="email"
-        isRequired={false}
       />
       <Textarea
         label="Message"

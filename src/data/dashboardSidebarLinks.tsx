@@ -1,6 +1,10 @@
 import React from "react";
 import { BsBriefcase } from "react-icons/bs";
-import { FaChalkboardTeacher, FaRegFileAlt, FaUserShield } from "react-icons/fa";
+import {
+  FaChalkboardTeacher,
+  FaRegFileAlt,
+  FaUserShield,
+} from "react-icons/fa";
 import {
   FiCreditCard,
   FiFileText,
@@ -16,11 +20,9 @@ import {
   LuUser,
   LuCreditCard,
   LuSettings,
-  LuAward,
   LuUserRoundSearch,
 } from "react-icons/lu";
 import { MdOutlineMail } from "react-icons/md";
-import { RiFacebookFill } from "react-icons/ri";
 import { TbSettingsQuestion } from "react-icons/tb";
 
 export interface DashboardLink {
@@ -75,16 +77,6 @@ export const tutorDashboardLinks: DashboardLink[] = [
     path: "/dashboard/tutor/settings",
     icon: <LuSettings />,
   },
-  {
-    label: "Join Community",
-    path: "/dashboard/tutor/community",
-    icon: <RiFacebookFill />,
-  },
-  {
-    label: "Refer And Earn",
-    path: "/dashboard/tutor/refer-and-earn",
-    icon: <LuAward />,
-  },
 ];
 
 export const guardianDashboardLinks: DashboardLink[] = [
@@ -128,11 +120,6 @@ export const guardianDashboardLinks: DashboardLink[] = [
     label: "Settings",
     path: "/dashboard/guardian/settings",
     icon: <LuSettings />,
-  },
-  {
-    label: "Join Community",
-    path: "/dashboard/guardian/community",
-    icon: <RiFacebookFill />,
   },
 ];
 
@@ -213,5 +200,3 @@ export const adminDashboardLinks: DashboardLink[] = [
     icon: <LuSettings />,
   },
 ];
-
-

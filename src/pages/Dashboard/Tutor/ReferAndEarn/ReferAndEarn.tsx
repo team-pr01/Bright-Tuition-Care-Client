@@ -54,7 +54,7 @@ const ReferAndEarn = () => {
             <div className="bg-primary-10 size-10 rounded-full text-white font-semibold flex items-center justify-center">
               {index + 1}
             </div>
-            <h1 className="text-neutral-10 text-lg md:text-xl font-bold leading-6 mt-4">
+            <h1 className="text-primary-50 text-lg md:text-xl font-bold leading-6 mt-4">
               {step?.title}
             </h1>
             <p className="text-neutral-45 text-sm mt-2">{step?.description}</p>

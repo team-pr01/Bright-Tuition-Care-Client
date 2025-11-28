@@ -38,8 +38,8 @@ export type TFiltersProps = {
 
   liveJobs: number;
 
-  status?:string;
-  setStatus?:React.Dispatch<React.SetStateAction<string>>;
+  status?: string;
+  setStatus?: React.Dispatch<React.SetStateAction<string>>;
 };
 
 const Filters: React.FC<TFiltersProps> = ({
@@ -184,132 +184,132 @@ const Filters: React.FC<TFiltersProps> = ({
         </div>
       </div>
 
-      <div
-        className={`w-full bg-primary-65 border border-primary-10/20 rounded-xl p-6 transition-all duration-300 ease-in-out ${
-          isAccordingOpen
-            ? "grid-rows-[1fr] opacity-100 mt-4 mb-6"
-            : "grid-rows-[0fr] opacity-0 h-0"
-        }`}
-      >
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-          {/* City Dropdown */}
-          <MultiSelectDropdown
-            label="City"
-            name="city"
-            options={filterData.cityCorporationWithLocation.map((c) => c.name)}
-            value={selectedCities}
-            onChange={setSelectedCities}
-            isRequired={false}
-          />
+      {isAccordingOpen && (
+        <div
+          className={`w-full bg-primary-65 border border-primary-10/20 rounded-xl p-6 transition-all duration-300 ease-in-out mt-4`}
+        >
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+            {/* City Dropdown */}
+            <MultiSelectDropdown
+              label="City"
+              name="city"
+              options={filterData.cityCorporationWithLocation.map(
+                (c) => c.name
+              )}
+              value={selectedCities}
+              onChange={setSelectedCities}
+              isRequired={false}
+            />
 
-          {/* Area Dropdown */}
-          <MultiSelectDropdown
-            label="Area"
-            name="area"
-            options={areaOptions}
-            value={selectedAreas}
-            onChange={setSelectedAreas}
-            isRequired={false}
-          />
+            {/* Area Dropdown */}
+            <MultiSelectDropdown
+              label="Area"
+              name="area"
+              options={areaOptions}
+              value={selectedAreas}
+              onChange={setSelectedAreas}
+              isRequired={false}
+            />
 
-          {/* Days Per Week */}
-          <MultiSelectDropdown
-            label="Days Per Week"
-            name="daysPerWeek"
-            options={filterData.daysPerWeek}
-            value={selectedDays}
-            onChange={setSelectedDays}
-            isRequired={false}
-          />
+            {/* Days Per Week */}
+            <MultiSelectDropdown
+              label="Days Per Week"
+              name="daysPerWeek"
+              options={filterData.daysPerWeek}
+              value={selectedDays}
+              onChange={setSelectedDays}
+              isRequired={false}
+            />
 
-          {/* Category */}
-          <SelectDropdown
-            label="Category"
-            options={filterData.category}
-            value={selectedCategory}
-            onChange={setSelectedCategory}
-          />
+            {/* Category */}
+            <SelectDropdown
+              label="Category"
+              options={filterData.category}
+              value={selectedCategory}
+              onChange={setSelectedCategory}
+            />
 
-          {/* IF CATEGORY = ENGLISH MEDIUM SHOW CURRICULUM */}
-          {selectedCategory === "English Medium" && (
-            <SelectDropdown label="Curriculum" options={curriculumOptions} />
-          )}
+            {/* IF CATEGORY = ENGLISH MEDIUM SHOW CURRICULUM */}
+            {selectedCategory === "English Medium" && (
+              <SelectDropdown label="Curriculum" options={curriculumOptions} />
+            )}
 
-          {/* CLASS */}
-          <SelectDropdown
-            label="Class"
-            options={classOptions}
-            value={selectedClass}
-            onChange={setSelectedClass}
-            isDisabled={!selectedCategory}
-          />
+            {/* CLASS */}
+            <SelectDropdown
+              label="Class"
+              options={classOptions}
+              value={selectedClass}
+              onChange={setSelectedClass}
+              isDisabled={!selectedCategory}
+            />
 
-          {/* SUBJECTS */}
-          <MultiSelectDropdown
-            label="Subjects"
-            name="subjects"
-            options={subjectOptions}
-            value={selectedSubjects}
-            onChange={setSelectedSubjects}
-            noDataMessage="Please select class first"
-            isDisabled={!selectedClass}
-          />
+            {/* SUBJECTS */}
+            <MultiSelectDropdown
+              label="Subjects"
+              name="subjects"
+              options={subjectOptions}
+              value={selectedSubjects}
+              onChange={setSelectedSubjects}
+              noDataMessage="Please select class first"
+              isDisabled={!selectedClass}
+            />
 
-          {/* Tuition Type */}
-          <MultiSelectDropdown
-            label="Tuition Type"
-            name="tuitionType"
-            options={filterData.tuitionType}
-            value={selectedTuitionType}
-            onChange={setSelectedTuitionType}
-            isRequired={false}
-          />
+            {/* Tuition Type */}
+            <MultiSelectDropdown
+              label="Tuition Type"
+              name="tuitionType"
+              options={filterData.tuitionType}
+              value={selectedTuitionType}
+              onChange={setSelectedTuitionType}
+              isRequired={false}
+            />
 
-          {/* Tutor Gender */}
-          <MultiSelectDropdown
-            label="Tutor Gender"
-            name="tutorGender"
-            options={filterData.tutorGender}
-            value={selectedTutorGender}
-            onChange={setSelectedTutorGender}
-            isRequired={false}
-          />
+            {/* Tutor Gender */}
+            <MultiSelectDropdown
+              label="Tutor Gender"
+              name="tutorGender"
+              options={filterData.tutorGender}
+              value={selectedTutorGender}
+              onChange={setSelectedTutorGender}
+              isRequired={false}
+            />
 
-          {/* Student Gender */}
-          <MultiSelectDropdown
-            label="Student Gender"
-            name="studentGender"
-            options={filterData.studentGender}
-            value={selectedStudentGender}
-            onChange={setSelectedStudentGender}
-            isRequired={false}
-          />
-        </div>
-        <div className="mt-10 flex items-center justify-between">
-          <button
-            onClick={handleResetFilters}
-            className="flex items-center gap-2 cursor-pointer hover:underline"
-          >
-            <img src={ICONS.reset} alt="" className="size-4" />
-            <h1 className="font-medium leading-6 text-primary-10">Reset</h1>
-          </button>
-
-          <div className="flex items-center gap-5 justify-end">
+            {/* Student Gender */}
+            <MultiSelectDropdown
+              label="Student Gender"
+              name="studentGender"
+              options={filterData.studentGender}
+              value={selectedStudentGender}
+              onChange={setSelectedStudentGender}
+              isRequired={false}
+            />
+          </div>
+          <div className="mt-10 flex items-center justify-between">
             <button
-              onClick={() => setIsAccordingOpen(!isAccordingOpen)}
-              className={`border border-primary-10 text-primary-10 hover:bg-primary-10 hover:text-white w-fit ${buttonCommonClassNames}`}
+              onClick={handleResetFilters}
+              className="flex items-center gap-2 cursor-pointer hover:underline"
             >
-              Close
+              <img src={ICONS.reset} alt="" className="size-4" />
+              <h1 className="font-medium leading-6 text-primary-10">Reset</h1>
             </button>
-            <button
-              onClick={() => setIsAccordingOpen(!isAccordingOpen)}
-              className={`bg-primary-10 hover:bg-transparent border border-primary-10 text-white hover:text-primary-10 w-fit ${buttonCommonClassNames}`}
-            >
-              Apply
-            </button>
+
+            <div className="flex items-center gap-5 justify-end">
+              <button
+                onClick={() => setIsAccordingOpen(!isAccordingOpen)}
+                className={`border border-primary-10 text-primary-10 hover:bg-primary-10 hover:text-white w-fit ${buttonCommonClassNames}`}
+              >
+                Close
+              </button>
+              <button
+                onClick={() => setIsAccordingOpen(!isAccordingOpen)}
+                className={`bg-primary-10 hover:bg-transparent border border-primary-10 text-white hover:text-primary-10 w-fit ${buttonCommonClassNames}`}
+              >
+                Apply
+              </button>
+            </div>
           </div>
         </div>
-      </div>
+      )}
     </>
   );
 };

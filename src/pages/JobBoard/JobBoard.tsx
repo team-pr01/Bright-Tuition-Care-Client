@@ -10,9 +10,11 @@ import JobCardSkeleton from "../../components/JobBoardPage/Jobs/JobCard/JobCardS
 import { useParams } from "react-router-dom";
 
 const JobBoard = () => {
-   const { city } = useParams();
+  const { city } = useParams();
   const [keyword, setKeyword] = useState<string>("");
-  const [selectedCities, setSelectedCities] = useState<string[]>(city ? [city] : []);
+  const [selectedCities, setSelectedCities] = useState<string[]>(
+    city ? [city] : []
+  );
   const [selectedAreas, setSelectedAreas] = useState<string[]>([]);
   const [areaOptions, setAreaOptions] = useState<string[]>([]);
   const [selectedCategory, setSelectedCategory] = useState<string>("");
@@ -46,7 +48,7 @@ const JobBoard = () => {
     preferredTutorGender: selectedTutorGender.join(",") || undefined,
     studentGender: selectedStudentGender.join(",") || undefined,
     tuitionType: selectedTuitionType.join(",") || undefined,
-    status : "live",
+    status: "live",
     skip,
   });
 
@@ -130,7 +132,9 @@ const JobBoard = () => {
             selectedDays={selectedDays}
             setSelectedDays={setSelectedDays}
             selectedClass={selectedClass || ""}
-            setSelectedClass={setSelectedClass as React.Dispatch<React.SetStateAction<string>>}
+            setSelectedClass={
+              setSelectedClass as React.Dispatch<React.SetStateAction<string>>
+            }
             selectedTutorGender={selectedTutorGender}
             setSelectedTutorGender={setSelectedTutorGender}
             selectedStudentGender={selectedStudentGender}
@@ -141,21 +145,27 @@ const JobBoard = () => {
           />
         </div>
 
-        <Jobs allJobs={jobs} isLoading={isLoading || isFetching} variant="tutorJobCard" />
-        <div ref={loaderRef} className="h-10"></div>
+        <div className="mt-8">
+          <Jobs
+            allJobs={jobs}
+            isLoading={isLoading || isFetching}
+            variant="tutorJobCard"
+          />
+          <div ref={loaderRef} className="h-10"></div>
 
-        {allJobs?.data?.meta?.hasMore && isFetching && (
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            {Array.from({ length: 3 }).map((_, i) => (
-              <JobCardSkeleton key={i} />
-            ))}
-          </div>
-        )}
-        {!allJobs?.data?.meta?.hasMore && !isFetching && (
-          <p className="text-center mt-4 text-gray-400">
-            No more jobs to load.
-          </p>
-        )}
+          {allJobs?.data?.meta?.hasMore && isFetching && (
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+              {Array.from({ length: 3 }).map((_, i) => (
+                <JobCardSkeleton key={i} />
+              ))}
+            </div>
+          )}
+          {!allJobs?.data?.meta?.hasMore && !isFetching && (
+            <p className="text-center mt-4 text-gray-400">
+              No more jobs to load.
+            </p>
+          )}
+        </div>
       </div>
     </Container>
   );

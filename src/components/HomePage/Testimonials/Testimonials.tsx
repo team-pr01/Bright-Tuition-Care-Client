@@ -9,7 +9,6 @@ import { Navigation, Pagination, Autoplay } from "swiper/modules";
 import { ICONS } from "../../../assets";
 import { FaChevronRight } from "react-icons/fa";
 import Button from "../../Reusable/Button/Button";
-import { Link } from "react-router-dom";
 import type { TTestimonial } from "../../../types/testimonial.types";
 
 interface TestimonialsProps {
@@ -40,14 +39,14 @@ const Testimonials: React.FC<TestimonialsProps> = ({
             description={description}
             align="center"
           />
-          <Link to={navigatePath}>
+          <a href={navigatePath}>
             {" "}
             <Button
               label={buttonText}
               variant="primary"
               icon={ICONS.topRightArrow}
             />
-          </Link>
+          </a>
         </div>
 
         <div className="relative">

@@ -1,7 +1,8 @@
 import { Link } from "react-router-dom";
 import type { DashboardLink } from "../../../data/dashboardSidebarLinks";
-import { LuFileText, LuShare2 } from "react-icons/lu";
+import { LuAward, LuFileText, LuShare2 } from "react-icons/lu";
 import type { TLoggedInUser } from "../../../types/loggedinUser.types";
+import { RiFacebookFill } from "react-icons/ri";
 
 const OtherLinks = ({
   user,
@@ -10,7 +11,18 @@ const OtherLinks = ({
   user: TLoggedInUser;
   setIsHamburgerOpen?: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
-  const otherLinks = [
+  const otherGuardianLinks = [
+    {
+      label: "Terms & Conditions",
+      path: `/dashboard/${
+        user?.role === "tutor"
+          ? "tutor"
+          : user?.role === "guardian"
+          ? "guardian"
+          : "admin"
+      }/terms-and-conditions`,
+      icon: <LuFileText />,
+    },
     {
       label: "Share The App",
       path: `/dashboard/${
@@ -23,6 +35,13 @@ const OtherLinks = ({
       icon: <LuShare2 />,
     },
     {
+      label: "Join Community",
+      path: "/dashboard/guardian/community",
+      icon: <RiFacebookFill />,
+    },
+  ];
+  const otherTutorLinks = [
+    {
       label: "Terms & Conditions",
       path: `/dashboard/${
         user?.role === "tutor"
@@ -33,7 +52,31 @@ const OtherLinks = ({
       }/terms-and-conditions`,
       icon: <LuFileText />,
     },
+    {
+      label: "Refer And Earn",
+      path: "/dashboard/tutor/refer-and-earn",
+      icon: <LuAward />,
+    },
+    {
+      label: "Share The App",
+      path: `/dashboard/${
+        user?.role === "tutor"
+          ? "tutor"
+          : user?.role === "guardian"
+          ? "guardian"
+          : "admin"
+      }/share-app`,
+      icon: <LuShare2 />,
+    },
+    {
+      label: "Join Community",
+      path: "/dashboard/tutor/community",
+      icon: <RiFacebookFill />,
+    },
   ];
+
+  const otherLinks =
+    user?.role === "guardian" ? otherGuardianLinks : otherTutorLinks;
   return (
     <div className="flex flex-col gap-2">
       {otherLinks?.map((link: DashboardLink) => (

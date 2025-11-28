@@ -20,6 +20,7 @@ export type TJobs = {
   otherRequirements?: string;
   preferredTutorGender: "male" | "female" | "any";
   numberOfStudents: number;
+  studentsInstituteName: string;
   studentGender: "male" | "female" | "any";
   class: string;
   curriculum?: string;
