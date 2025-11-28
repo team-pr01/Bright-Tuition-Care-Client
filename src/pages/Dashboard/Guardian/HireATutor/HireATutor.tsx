@@ -17,16 +17,7 @@ const HireATutor = () => {
       width="w-[50%]"
     >
       <div className="font-Nunito">
-        <div className="flex flex-col gap-6 max-w-[1000px] mx-auto">
-          {/* Heading */}
-          <div className="flex flex-col items-center justify-center">
-            <h1 className="font-bold text-xl text-neutral-10">Hire a Tutor</h1>
-            <p className="text-sm mt-[6px] text-neutral-10">
-              Find expert tutors easily for personalized learning and academic
-              success.
-            </p>
-          </div>
-
+        <div className="max-w-[1000px] mx-auto">
           <HireTutorForm />
         </div>
       </div>

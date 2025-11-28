@@ -75,9 +75,19 @@ const HireTutorForm = () => {
   return (
     <FormProvider {...methods}>
       <form className="space-y-6 mt-5">
+        {/* Heading */}
+        {currentStep !== 4 && (
+          <div className="flex flex-col items-center justify-center  mb-9">
+            <h1 className="font-bold text-xl text-neutral-10">Hire a Tutor</h1>
+            <p className="text-sm mt-[6px] text-neutral-10">
+              Find expert tutors easily for personalized learning and academic
+              success.
+            </p>
+          </div>
+        )}
         {/* Progress Bar - Hide on thank you step */}
         {currentStep !== 4 && (
-          <div className="relative w-full h-3 bg-gray-200 rounded-full overflow-hidden">
+          <div className="relative w-full h-3 bg-gray-200 rounded-full overflow-hidden mb-4">
             <div
               className="h-full bg-primary-10 transition-all duration-500 ease-in-out relative"
               style={{ width: `${((currentStep + 1) / steps.length) * 100}%` }}
@@ -88,6 +98,8 @@ const HireTutorForm = () => {
             </div>
           </div>
         )}
+
+        <div className="mt-10"></div>
 
         {/* Step Content */}
         {currentStep === 0 && <JobDetailsForm />}
