@@ -38,104 +38,119 @@ const Accordion = ({ activeTab }: { activeTab: string }) => {
 
   const faqForTutor: FAQItem[] = [
     {
-      title: "How can I create a Tutor Account in Bright Tuition Care?",
+      title: "How can I create tutor account in Bright Tuition Care?",
       description: (
         <p>
-          Click <strong>“Become a Tutor”</strong> button, complete the signup
-          form, and fill in your{" "}
-          <strong>Personal, Education, Credential,</strong> and
-          <strong> Tuition</strong> details to achieve{" "}
+          Click the <strong>“Become a Tutor”</strong> button, complete the
+          signup form, and fill in your{" "}
+          <strong>Personal, Education, Credential,</strong> and{" "}
+          <strong>Tuition</strong> details to achieve{" "}
           <strong>100% profile completion.</strong>
           <br />
-          You can view your profile anytime from the <strong>
-            Profile
-          </strong>{" "}
-          section to see exactly how it appears to students and guardians.
+          You can view your profile anytime from the{" "}
+          <strong>profile section</strong> to see exactly how it appears to
+          students and guardians.
         </p>
       ),
     },
     {
-      title: "Can I Update My Profile After Registration?",
-      description:
-        "Yes, you can update your profile anytime. However, if you are a verified tutor, you’ll need to send us an unlock request before editing your profile.",
+      title: "Can I update my profile after registration?",
+      description: (
+        <p>
+          Yes, you can update your profile anytime. However, if you are a
+          verified tutor, you’ll need to send us an{" "}
+          <strong>unlock request</strong> before <strong>edit</strong> your
+          profile.
+        </p>
+      ),
     },
     {
-      title: "What Should I Do Before Applying?",
-      description:
-        "Make your CV minimum 80% complete before applying. Then choose the tuition job that best matches your CV from the job board. If the location, days, time, and salary match your preferences, click the apply button.",
+      title: "What should I do before applying?",
+      description: (
+        <p>
+          Make your CV minimum <strong>80% complete</strong> before applying.
+          Then, choose the tuition job that best matches your CV from the{" "}
+          <strong>job board</strong>. If the location, days, time and salary
+          match your preferences, click the <strong>apply</strong> button.
+        </p>
+      ),
     },
     {
-      title: "How Can I Apply?",
+      title: "How can I apply?",
       description: (
         <p>
           From your tutor account, go to <strong>“Job Board”</strong>, select
-          your city and tutoring type to find home tuition opportunities in your
-          area.
+          your <strong>city</strong> and <strong>tutoring type</strong> to find
+          home tuition opportunities in your area.
           <br />
-          For online tutoring, location matching is not required—if the job
-          category fits your profile, you can apply for positions anywhere in
-          Bangladesh or abroad.
+          For <strong>online tutoring</strong>, location matching is not
+          required—if the job category fits your profile, you can apply for
+          positions anywhere in Bangladesh or abroad.
         </p>
       ),
     },
     {
-      title: "What Should I Do After Applying?",
+      title: "What should I do after applying?",
       description: (
         <p>
-          After applying, your CV will be reviewed by our system. If your
-          profile matches the tuition requirements, our Customer Care Team will
-          contact you.
+          After applying, your <strong>CV</strong> will be reviewed by our
+          system. If your profile matches the tuition requirements, our{" "}
+          <strong>Customer Care Team</strong> will contact you.
           <br />
-          If you agree to our <strong>Terms & Conditions</strong>, you will be
-          shortlisted and your CV will be shared with the guardian. If the
-          guardian likes your CV, you will be appointed and receive the
-          guardian’s contact number to communicate directly and update us
-          afterward.
+          And if you agree to our <strong>Terms & Conditions</strong>, you will
+          be shortlisted. Your CV will then be shared with the guardian. If the
+          guardian likes your <strong>CV</strong> you will be appointed and you
+          will receive the guardian’s <strong>Contact number</strong> to
+          communicate directly and update us afterward.
         </p>
       ),
     },
     {
-      title: "Do I Have to Pay Any Charges for Getting Tuition Jobs?",
+      title:
+        "Do I have to pay any charges for getting tuition jobs through Bright Tuition Care?",
       description: (
         <div>
           <p>
             Yes. For each confirmed tuition job, we charge a one-time service
-            fee of <strong>60% of the tutor’s first month’s salary</strong>,
-            payable within <strong>10 days</strong> of confirmation.
+            fee of <strong>60%</strong> of the tutor’s first month’s salary,{" "}
+            <strong>payable within 10 days of confirmation.</strong>
           </p>
-          <ul className="list-disc space-y-1 pl-5 mt-2">
+          <ul className="list-disc pl-5 mt-2 space-y-1">
             <li>
-              For short-term tuition jobs (2–3 months), the service charge
-              percentage will be set through mutual negotiation.
+              For <strong>short-term tuition jobs (2–3 months)</strong>, the
+              service charge percentage will be set through mutual negotiation.
             </li>
             <li>
-              For online tutoring, the service charge remains 60%. We collect
-              the full first month’s salary from the guardian/student in advance
-              on your behalf. After the first month ends, we deduct the service
-              charge and transfer the remaining amount to you.
+              For <strong>online tutoring</strong> the service charge remains{" "}
+              <strong>60%</strong>. We collect the full first month’s salary
+              from the guardian/student in advance on your behalf. After the
+              first month ends, we deduct the service charge and transfer the
+              remaining amount to you.
             </li>
             <li>
-              From the second month onward, the guardian/student will pay you
-              directly in advance within the first week of each month.
+              From the <strong>second month onward</strong>, the
+              guardian/student will pay you directly in advance within the first
+              week of each month.
             </li>
           </ul>
         </div>
       ),
     },
+
     {
-      title: "What Is the Refund Policy of Bright Tuition Care?",
+      title: "What is the refund policy of Bright Tuition Care?",
       description: (
         <div>
           <p>
-            At Bright Tuition Care, we maintain a clear and fair refund policy
-            for tutors. If a tutor loses a tuition job for a valid reason, they
-            may apply for a partial refund of the paid service charge under the
-            following conditions:
+            At Bright Tuition Care, we maintain a clear and fair{" "}
+            <strong>refund policy</strong> for our tutors. If a tutor loses a
+            tuition job for a valid reason, they may apply for a partial refund
+            of the paid service charge under the following conditions:
           </p>
-          <ul className="list-disc space-y-1 pl-5 mt-2">
+          <ul className="list-disc pl-5 mt-2 space-y-1">
             <li>
-              <strong>Valid Reason:</strong> Discontinuation must be due to a
-              genuine issue from the guardian/student’s side.
+              <strong>Valid Reason:</strong> The discontinuation must be due to
+              a genuine issue from the guardian/student’s side
             </li>
             <li>
               <strong>Refund Amount:</strong> If a confirmed tuition is canceled
@@ -148,184 +163,258 @@ const Accordion = ({ activeTab }: { activeTab: string }) => {
               <strong>09617-785588</strong>
             </li>
             <li>
-              <strong>Investigation Process:</strong> If cancellation occurs due
-              to the tutor’s fault, negligence, or failure to fulfill
-              responsibilities, no refund will be issued.
+              <strong>Investigation Process:</strong> Our team will review the
+              case. If cancellation occurs due to the tutor’s fault, negligence,
+              or failure to fulfill responsibilities no refund will be issued.
             </li>
           </ul>
         </div>
       ),
     },
     {
-      title: "How Do I Get Paid?",
+      title: "How do I get paid?",
       description: (
         <div>
           <p>
             <strong>Offline Tuition:</strong>
           </p>
           <p>
-            After a tuition is confirmed through Bright Tuition Care, the tutor
+            When a tuition is confirmed through Bright Tuition Care, the tutor
             provides lessons for one full month. After that, the guardian
-            directly pays the agreed tuition fee to the tutor. Bright Tuition
-            Care will not be involved in any financial transactions.
+            directly pays the agreed tuition fee to the tutor.
+            <br />
+            In this case, Bright Tuition Care will{" "}
+            <strong>not involved in any financial transactions</strong> between
+            the guardian and the tutor.
           </p>
-          <p className="mt-2">
+          <p className="mt-3">
             <strong>Online Tuition:</strong>
           </p>
           <p>
             For online tuition, the guardian must pay the agreed tuition fee to
-            Bright Tuition Care within 7 days of confirmation via bKash or
-            Nagad. We deduct the applicable service charge and transfer the
-            remaining amount to the tutor. From the following month, the
-            guardian pays the tutor directly during the first week of each
-            month.
+            Bright Tuition Care within <strong>7 days of confirmation</strong>{" "}
+            via bKash or Nagad. We deduct the applicable service charge and
+            transfer the remaining amount to the tutor. From the following month
+            the guardian pays the <strong>tutor directly</strong> during the{" "}
+            <strong>first week of each month.</strong>
           </p>
         </div>
       ),
     },
     {
       title:
-        "What Actions Will Be Taken If a Tutor Does Anything Harmful or Unethical?",
+        "What actions will be taken if a tutor does anything harmful to the platform or guardians/students?",
       description: (
         <div>
           <p>
-            <strong>Ban Policy for Unethical Conduct:</strong> Bright Tuition
-            Care is committed to maintaining a safe, professional, and ethical
-            environment.
+            <strong>Ban Policy for Unethical Conduct:</strong>
+            <br />
+            Bright Tuition Care is committed to maintaining a{" "}
+            <strong>safe, professional, and ethical environment.</strong>
           </p>
-          <ul className="list-disc space-y-1 pl-5 mt-2">
+          <ul className="list-disc pl-5 mt-2 space-y-1">
             <li>
-              The tutor will be permanently banned from the Bright Tuition Care
-              platform.
+              The tutor will be <strong>permanently banned</strong> from the
+              Bright Tuition Care platform.
             </li>
             <li>
-              A formal complaint will be recorded affecting future access to
-              tutoring platforms.
+              A <strong>formal complaint</strong> will be recorded to their
+              future access to other tuition platforms.
             </li>
             <li>
-              Bright Tuition Care will provide full assistance to any guardian
-              or student who raises a complaint.
+              Bright Tuition Care will provide full <strong>assistance</strong>{" "}
+              to any guardian or student who raises a complaint against the
+              connected tutor.
             </li>
             <li>
-              We take strict action to protect the safety and trust of all
-              users.
+              The safety and trust of our users are our top priorities, and we
+              are committed to taking strict action against any form of
+              unethical conduct.
             </li>
           </ul>
         </div>
       ),
     },
+
     {
-      title: "How Can I Deactivate My Account?",
-      description:
-        'To deactivate your tutor account, kindly send your "Tutor ID" to support@brighttuitioncare.com or contact our helpline at 09617-785588.',
+      title: "How can I deactivate my account?",
+      description: (
+        <p>
+          To deactivate your tutor account, kindly send us your{" "}
+          <strong>"Tutor Id"</strong> at{" "}
+          <strong>support@brighttuitioncare.com</strong> or contact our helpline
+          at <strong>(09617785588)</strong>.
+        </p>
+      ),
     },
     {
-      title: "Why Do I Need to Upload Credentials?",
+      title: "Why do I need to upload credentials?",
       description: (
         <div>
           <p>
-            <strong>Security & Background Verification Policy:</strong> We
-            collect documents to verify tutor identities and ensure platform
-            safety.
+            <strong>Security & Background Verification Policy:</strong>
+          </p>
+          <p>
+            At Bright Tuition Care, we collect certain documents to verify tutor
+            identities and ensure safety on our platform.
           </p>
           <p className="mt-2">
             <strong>Required Documents:</strong>
           </p>
-          <ul className="list-disc space-y-1 pl-5 mt-2">
+          <ul className="list-disc pl-5 mt-2 space-y-1">
             <li>National ID / Birth Certificate / Passport</li>
-            <li>Student ID / Pay slip of current educational institution</li>
+            <li>Student ID/ Pay slip of the current educational institution</li>
           </ul>
           <p className="mt-2">
-            These documents are mandatory for applying to tuition jobs and
-            cannot be deleted once a tuition is confirmed.
+            These documents are <strong>mandatory</strong> for applying to{" "}
+            <strong>tuition</strong> jobs and <strong>can not</strong> be
+            deleted once a tuition is confirmed.
           </p>
           <p className="mt-2">
-            <strong>Privacy:</strong> All information is stored with the highest
-            level of security and confidentiality.
+            <strong>Privacy:</strong>
+            <br />
+            All information is stored with the highest level of security and
+            confidentiality. Bright Tuition Care is deeply committed to
+            protecting <strong>tutors privacy and safety.</strong>
           </p>
         </div>
       ),
     },
     {
-      title: "How Can I Benefit by Verifying My Profile?",
+      title: "How can I Benefited by verifying my profile?",
       description: (
         <div>
           <p>
             Verifying your profile assures guardians and students that your
-            information is authentic and trustworthy. After verification, a
-            verification badge will appear on your profile.
+            information is <strong>authentic and trustworthy.</strong>
+            <br />
+            After verification, a <strong>verification badge</strong> will
+            appear on your profile.
           </p>
-          <ul className="list-disc space-y-1 pl-5 mt-2">
-            <li>Increased Credibility</li>
-            <li>Higher Shortlisting Chances</li>
-            <li>Secure and Trusted Profile Status</li>
+          <p className="mt-2">
+            <strong>Benefits of the Verification Badge:</strong>
+          </p>
+          <ul className="list-disc pl-5 mt-2 space-y-1">
+            <li>
+              <strong>Increased Credibility:</strong> Guardians trust verified
+              profiles more.
+            </li>
+            <li>
+              <strong>Higher Shortlisting Chances:</strong> Verified profiles
+              are more likely to be shortlisted, giving you a competitive
+              advantage in receiving tuition offers.
+            </li>
+            <li>
+              <strong>Secure Profile Status:</strong> Your profile is marked as
+              trusted and authentic.
+            </li>
           </ul>
           <p className="mt-2">
-            A verified profile boosts your tuition opportunities and
-            professional reputation.
+            A verified profile not only boosts your chances of getting tuition
+            jobs but also enhances your professional reputation.
           </p>
         </div>
       ),
     },
     {
-      title: "Is Profile Verification Mandatory for Getting Tuition Jobs?",
+      title: "Is profile verification mandatory for getting tuition jobs?",
       description:
-        "Profile verification is not mandatory to apply for tuition jobs, but it provides significant advantages. Once a tuition job is confirmed, profile verification becomes compulsory.",
+        "Profile verification is not mandatory to apply for tuition jobs, but it provides significant advantages.",
     },
+
     {
-      title: "Why Do I Need a Confirmation Letter?",
+      title: "Why do I need a confirmation letter?",
       description:
         "A confirmation letter acts as a written agreement between you and the guardian/student. It helps prevent misunderstandings and ensures transparency in your tuition arrangement.",
     },
     {
-      title: "How Can I Become “The Best Tutor of the Month”?",
-      description:
-        "Each month, tutors are shortlisted based on cooperation, professionalism, punctuality, guardian feedback, and profile rating. One tutor is selected through a lottery and awarded a certificate and a gift.",
+      title: "How can I become “The Best Tutor of the Month”?",
+      description: (
+        <p>
+          Each month, tutors who confirm tuition jobs are shortlisted based on{" "}
+          <strong>cooperation</strong>, <strong>professionalism</strong>,{" "}
+          <strong>punctuality</strong>, <strong>guardian feedback</strong>, and{" "}
+          <strong>profile rating</strong>. From the shortlisted tutors, one is
+          selected through a lottery as the{" "}
+          <strong>“Best Tutor of the Month”</strong> and is awarded a
+          certificate and a gift.
+        </p>
+      ),
     },
     {
-      title: "Is It Safe to Share My Personal Information?",
-      description:
-        "Yes. All tutor information is stored on secure servers. Personal details are shared only after tuition confirmation and never with third parties. Accurate information is mandatory for verification and platform security.",
+      title:
+        "Is it safe to share my personal information with Bright Tuition Care?",
+      description: (
+        <p>
+          Yes. Bright Tuition Care stores all tutor information on a{" "}
+          <strong>secure, protected server.</strong> Your basic details (such as
+          phone number or student ID card) are shared only after a{" "}
+          <strong>tuition</strong> is confirmed and never with any third party.
+          Providing accurate information is <strong>mandatory</strong> for
+          verification and maintaining platform integrity.
+        </p>
+      ),
     },
   ];
 
   const faqForGuardianOrStudents: FAQItem[] = [
     {
-      title: "How to Post a Tutor Request on Bright Tuition Care?",
-      description:
-        "Guardians or students can easily post their tutor request. Simply click “Hire a Tutor” button on our homepage, enter your contact number, then fill in your requirements, and hit on the “Submit” button — done!",
+      title: "How to post a tutor request on Bright Tuition Care?",
+      description: (
+        <p>
+          Guardians or students can easily post their tutor request. Simply
+          click <strong>“Hire a Tutor”</strong> button on our homepage, enter
+          your contact number, then fill in your requirements, and click on the{" "}
+          <strong>“Submit”</strong> button — done!
+        </p>
+      ),
     },
     {
-      title: "What’s Next After Your Request?",
-      description:
-        "Our expert team will review your requirements and publish them on our job board. Within 24 hours, our smart system will shortlist the top 3 best-matched tutors and deliver their CVs straight to your account.",
+      title: "What’s next after your request?",
+      description: (
+        <p>
+          Our expert team will review your requirements and publish them on our
+          job board. Within 24 hours, our smart system will shortlist the{" "}
+          <strong>top 3 best-matched tutors</strong> and deliver their CVs
+          straight to your account.
+        </p>
+      ),
     },
     {
-      title: "How to Choose the Best Tutor? ",
-      description:
-        "Review each tutor’s profile, teaching method, education, and experience. Shortlist your preferred tutor and arrange two trial classes. If their expertise meets your expectations, confirm the hiring. Always maintain respect and professionalism throughout the service period.",
+      title: "How to choose the best tutor?",
+      description: (
+        <p>
+          Review each tutor’s profile, teaching method, education, and
+          experience. Shortlist your preferred tutor and arrange{" "}
+          <strong>two trial classes</strong>. If their expertise meets your
+          expectations, confirm the hiring. Always maintain respect and
+          professionalism throughout the service period.
+        </p>
+      ),
     },
     {
-      title: "Does Bright Tuition Care Verify Tutor Profiles?",
+      title: "Does Bright Tuition Care verify tutor profiles?",
       description:
         "Yes. We verify each tutor’s profile to ensure data authenticity. If you wish, you may request a photocopy of their latest or current educational qualification, which you can keep for the entire service period.",
     },
     {
-      title: "What is a Confirmation Letter & Is It Necessary?",
+      title: "What is a Confirmation letter & Is it necessary?",
       description:
         "A Confirmation Letter is like an appointment letter for your tutor — a written agreement confirming that you will take tuition services from your chosen tutor. This document helps both parties avoid any confusion regarding the service terms.",
     },
     {
-      title: "Does Bright Tuition Care Only Help with Academic Tutors?",
+      title: "Does Bright Tuition Care only help with Academic tutors?",
       description: (
         <div>
           <p>
-            No. We connect learners with verified tutors in 13 categories,
-            including English Medium, Bangla Medium, English Version, Arts,
-            Religious Studies, Test Preparation, Admission Test, Professional
-            Skills, Special Skills, Language Learning, Madrasa Medium,
-            University Help, and Special Child Education.
-            <br />
+            No. We connect learners with verified tutors in{" "}
+            <strong>13 categories</strong>, including English Medium, Bangla
+            Medium, English Version, Arts, Religious Studies, Test Preparation,
+            Admission Test, Professional Skills, Special Skills, Language
+            Learning, Madrasa Medium, University Help, and Special Child
+            Education.
+          </p>
+          <p className="mt-2">
             Bright Tuition Care is an online tutor-matching platform that helps
             you find the right tutor for any learning need. Just post your
             requirements and start learning!
@@ -334,16 +423,22 @@ const Accordion = ({ activeTab }: { activeTab: string }) => {
       ),
     },
     {
-      title: "Do I Need To Pay Any Platform Charge?",
-      description:
-        "No — guardians and students can hire tutors through our platform free of charge. You only pay the agreed tuition fee directly to the tutor, based on the salary you set when posting your requirements on our job board.",
+      title: "Do I need to pay any Platform charge?",
+      description: (
+        <p>
+          No — guardians and students can hire tutors through our platform{" "}
+          <strong>free of charge.</strong> You only pay the agreed tuition fee
+          directly to the tutor, based on the salary you set when posting your
+          requirements on our job board.
+        </p>
+      ),
     },
     {
-      title: "What Is The Payment Process After Hiring A Tutor In Bangladesh?",
+      title: "What is the Payment Process after Hiring a tutor in Bangladesh?",
       description: (
         <div>
           <p>Payment Policy (Bangladesh)</p>
-          <ol className="list-disc space-y-1 pl-5 mt-2">
+          <ul className="list-disc space-y-1 pl-5 mt-2">
             <li>
               The tutor’s salary will be calculated from the date of hiring.
             </li>
@@ -360,19 +455,19 @@ const Accordion = ({ activeTab }: { activeTab: string }) => {
               directly to the tutor in advance between the 1st and 10th of each
               month.
             </li>
-          </ol>
+          </ul>
         </div>
       ),
     },
     {
       title:
-        "What Is The Payment Method After Hiring A Tutor? (For Guardians/Students Living Abroad)",
+        "What is the Payment Method after Hiring a tutor?  I am from Abroad.",
       description: (
         <div>
           <p>
             Guardian/Students who are living abroad (Bangladeshi descent) and
             confirm a tutor by using our platform, must pay the assigned tutor's
-            salary in advance for every month.
+            salary <strong>in advance for every month.</strong>
           </p>
           <ul className="list-disc space-y-1 pl-5 mt-2">
             <li>
@@ -391,7 +486,7 @@ const Accordion = ({ activeTab }: { activeTab: string }) => {
       ),
     },
     {
-      title: "How Can I Become the “Best Guardian of the Month”?",
+      title: "How can I become the “Best Guardian of the Month”?",
       description: (
         <div>
           <p>
@@ -408,16 +503,20 @@ const Accordion = ({ activeTab }: { activeTab: string }) => {
           </ul>
           <p className="mt-2">
             From this special group, one lucky guardian is chosen through a fun
-            lottery draw to be named the “Best Guardian of the Month”. The
-            winner receives a beautiful certificate and exciting gifts as a
-            token of appreciation! So, keep being supportive, communicative, and
-            professional — your efforts could be rewarded next!
+            lottery draw to be named the{" "}
+            <strong>“Best Guardian of the Month”</strong>. The winner receives a
+            beautiful <strong>certificate and exciting gifts</strong> as a token
+            of appreciation!
+          </p>
+          <p className="mt-2">
+            So, keep being supportive, communicative, and professional — your
+            efforts could be rewarded next!
           </p>
         </div>
       ),
     },
     {
-      title: "When Can a Student or Guardian Get Banned from the Platform?",
+      title: "When can a Student/Guardian get banned from the Platform?",
       description: (
         <div>
           <p>
@@ -426,7 +525,7 @@ const Accordion = ({ activeTab }: { activeTab: string }) => {
             thorough investigation of any complaints. Once banned, their tutor
             requests will no longer be approved or posted on our job board.
           </p>
-          <p className="mt-2">Common reasons for banning include:</p>
+          <p className="mt-2">Common reasons for banning include :</p>
           <ul className="list-disc space-y-1 pl-5 mt-2">
             <li>Lack of consistent cooperation with Bright Tuition Care</li>
             <li>Misbehavior toward tutors</li>
@@ -440,8 +539,9 @@ const Accordion = ({ activeTab }: { activeTab: string }) => {
             </li>
           </ul>
           <p className="mt-2">
-            We are committed to maintaining a respectful, safe, and professional
-            environment for both tutors and guardians/students.
+            We are committed to maintaining a{" "}
+            <strong>respectful, safe and professional environment</strong> for
+            both tutors and guardians/students.
           </p>
         </div>
       ),
