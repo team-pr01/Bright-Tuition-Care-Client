@@ -121,7 +121,8 @@ const JobDetailsForm = ({ defaultValues }: { defaultValues?: TJobs }) => {
             label="Curriculum"
             options={curriculumOptions}
             error={errors.curriculum}
-            {...register("curriculum", { required: "Curriculum is required" })}
+            {...register("curriculum")}
+            isRequired={false}
           />
         )}
 
