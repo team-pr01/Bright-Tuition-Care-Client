@@ -1101,17 +1101,35 @@ export const filterData = {
       id: "english_medium",
       category: "English Medium",
       classes: [
-        // ---------- PRE-SCHOOLING / PLAY / NURSERY / KG ----------
+        // PRE-SCHOOLING
         {
-          id: "pre_schooling_play_nursery_kg",
-          name: "Pre-Schooling / Play / Nursery / KG (Class / Course)",
+          id: "pre_schooling",
+          name: "Pre-Schooling",
+          subjects: ["All", "Bangla", "English", "Math", "Islamic Studies"],
+        },
+        // PLAY
+        {
+          id: "play",
+          name: "Play",
+          subjects: ["All", "Bangla", "English", "Math", "Islamic Studies"],
+        },
+        // NURSERY
+        {
+          id: "nursery",
+          name: "Nursery",
+          subjects: ["All", "Bangla", "English", "Math", "Islamic Studies"],
+        },
+        // KG
+        {
+          id: "kg",
+          name: "KG",
           subjects: ["All", "Bangla", "English", "Math", "Islamic Studies"],
         },
 
         // ---------- STANDARD 1–3 ----------
         {
           id: "standard_1_2_3",
-          name: "Standard 1/ Standard 2/ Standard 3 (Class / Course)",
+          name: "Standard 1/ Standard 2/ Standard 3",
           subjects: [
             "All",
             "Bangla",
@@ -1129,7 +1147,7 @@ export const filterData = {
         // ---------- STANDARD 4 ----------
         {
           id: "standard_4",
-          name: "Standard 4 (Class / Course)",
+          name: "Standard 4",
           subjects: [
             "All",
             "Bangla",
@@ -1149,7 +1167,7 @@ export const filterData = {
         // ---------- STANDARD 5 ----------
         {
           id: "standard_5",
-          name: "Standard 5 (Class / Course)",
+          name: "Standard 5",
           subjects: [
             "All",
             "Bangla",
@@ -1170,7 +1188,7 @@ export const filterData = {
         // ---------- STANDARD 6 ----------
         {
           id: "standard_6",
-          name: "Standard 6 (Class / Course)",
+          name: "Standard 6",
           subjects: [
             "All",
             "Bangla",
@@ -1195,7 +1213,7 @@ export const filterData = {
         // ---------- STANDARD 7 ----------
         {
           id: "standard_7",
-          name: "Standard 7 (Class / Course)",
+          name: "Standard 7",
           subjects: [
             "All",
             "Bangla",
@@ -1221,7 +1239,7 @@ export const filterData = {
         // ---------- STANDARD 8 ----------
         {
           id: "standard_8",
-          name: "Standard 8 (Class / Course)",
+          name: "Standard 8",
           subjects: [
             "All",
             "Bangla",
@@ -1251,7 +1269,7 @@ export const filterData = {
         // ---------- STANDARD 9 ----------
         {
           id: "standard_9",
-          name: "Standard 9 (Class / Course)",
+          name: "Standard 9",
           subjects: [
             "All",
             "Bangla",
@@ -1280,7 +1298,7 @@ export const filterData = {
         // ---------- O LEVEL ----------
         {
           id: "o_level",
-          name: "O level (Class / Course)",
+          name: "O level",
           subjects: [
             "All",
             "Bangla",
@@ -1313,7 +1331,7 @@ export const filterData = {
         // ---------- A LEVEL (AS) ----------
         {
           id: "a_level_as",
-          name: "A Level (AS) (Class / Course)",
+          name: "A Level (AS)",
           subjects: [
             "All",
             "Bangla",
@@ -1349,7 +1367,7 @@ export const filterData = {
         // ---------- A LEVEL (A2) ----------
         {
           id: "a_level_a2",
-          name: "A Level (A2) (Class / Course)",
+          name: "A Level (A2)",
           subjects: [
             "All",
             "Bangla",
@@ -2055,7 +2073,7 @@ export const filterData = {
         // ---------- PLAY ----------
         {
           id: "play",
-          name: "Play (Class / Course)",
+          name: "Play",
           subjects: [
             "All",
             "Arabic",
@@ -2070,7 +2088,7 @@ export const filterData = {
         // ---------- NURSERY ----------
         {
           id: "nursery",
-          name: "Nursery (Class / Course)",
+          name: "Nursery",
           subjects: [
             "All",
             "Arabic",
@@ -2085,7 +2103,7 @@ export const filterData = {
         // ---------- CLASS 1 ----------
         {
           id: "class_1",
-          name: "Class 1 (Class / Course)",
+          name: "Class 1",
           subjects: [
             "All",
             "Arabic",
@@ -2100,7 +2118,7 @@ export const filterData = {
         // ---------- CLASS 2 ----------
         {
           id: "class_2",
-          name: "Class 2 (Class / Course)",
+          name: "Class 2",
           subjects: [
             "All",
             "Arabic",
@@ -2115,7 +2133,7 @@ export const filterData = {
         // ---------- CLASS 3 ----------
         {
           id: "class_3",
-          name: "Class 3 (Class / Course)",
+          name: "Class 3",
           subjects: [
             "All",
             "Arabic",
@@ -2131,7 +2149,7 @@ export const filterData = {
         // ---------- CLASS 4 ----------
         {
           id: "class_4",
-          name: "Class 4 (Class / Course)",
+          name: "Class 4",
           subjects: [
             "All",
             "Arabic",
@@ -2147,7 +2165,7 @@ export const filterData = {
         // ---------- CLASS 5 ----------
         {
           id: "class_5",
-          name: "Class 5 (Class / Course)",
+          name: "Class 5",
           subjects: [
             "All",
             "Arabic",
@@ -2163,7 +2181,7 @@ export const filterData = {
         // ---------- CLASS 6 ----------
         {
           id: "class_6",
-          name: "Class 6 (Class / Course)",
+          name: "Class 6",
           subjects: [
             "All",
             "Arabic",
@@ -2180,7 +2198,7 @@ export const filterData = {
         // ---------- CLASS 7 ----------
         {
           id: "class_7",
-          name: "Class 7 (Class / Course)",
+          name: "Class 7",
           subjects: [
             "All",
             "Arabic",
@@ -2198,7 +2216,7 @@ export const filterData = {
         // ---------- CLASS 8 ----------
         {
           id: "class_8",
-          name: "Class 8 (Class / Course)",
+          name: "Class 8",
           subjects: [
             "All",
             "Arabic",
@@ -2216,7 +2234,7 @@ export const filterData = {
         // ---------- CLASS 9 ----------
         {
           id: "class_9",
-          name: "Class 9 (Class / Course)",
+          name: "Class 9",
           subjects: [
             "All",
             "Arabic",
@@ -2234,7 +2252,7 @@ export const filterData = {
         // ---------- CLASS 10 ----------
         {
           id: "class_10",
-          name: "Class 10 (Class / Course)",
+          name: "Class 10",
           subjects: [
             "All",
             "Arabic",
@@ -2252,7 +2270,7 @@ export const filterData = {
         // ---------- ALIM 1ST YEAR ----------
         {
           id: "alim_1st_year",
-          name: "Alim 1st Year (Class / Course)",
+          name: "Alim 1st Year",
           subjects: [
             "All",
             "Arabic",
@@ -2270,7 +2288,7 @@ export const filterData = {
         // ---------- ALIM 2ND YEAR ----------
         {
           id: "alim_2nd_year",
-          name: "Alim 2nd Year (Class / Course)",
+          name: "Alim 2nd Year",
           subjects: [
             "All",
             "Arabic",
@@ -2294,7 +2312,7 @@ export const filterData = {
         // ---------- ISLAMIC STUDIES ----------
         {
           id: "islamic_studies",
-          name: "Islamic Studies (Class / Course)",
+          name: "Islamic Studies",
           subjects: [
             "Quran for Beginner",
             "Quran for Adult",
@@ -2306,7 +2324,7 @@ export const filterData = {
         // ---------- HINDUISM STUDIES ----------
         {
           id: "hinduism_studies",
-          name: "Hinduism Studies (Class / Course)",
+          name: "Hinduism Studies",
           subjects: [
             "Shri Bhagavad Gita for Beginner",
             "Shri Bhagavad Gita for Adult",
@@ -2316,14 +2334,14 @@ export const filterData = {
         // ---------- BUDDHISM STUDIES ----------
         {
           id: "buddhism_studies",
-          name: "Buddhism Studies (Class / Course)",
+          name: "Buddhism Studies",
           subjects: ["Tripitaka for Beginner", "Tripitaka for Adult"],
         },
 
         // ---------- CHRISTIANITY STUDIES ----------
         {
           id: "christianity_studies",
-          name: "Christianity Studies (Class / Course)",
+          name: "Christianity Studies",
           subjects: ["Bible for Beginner", "Bible for Adult"],
         },
       ],
@@ -2336,7 +2354,7 @@ export const filterData = {
         // ---------- PUBLIC UNIVERSITY ----------
         {
           id: "public_university_admission_test",
-          name: "Public University Admission Test (Class / Course)",
+          name: "Public University Admission Test",
           subjects: [
             "Bangla",
             "English",
@@ -2361,7 +2379,7 @@ export const filterData = {
         // ---------- PRIVATE UNIVERSITY ----------
         {
           id: "private_university_admission_test",
-          name: "Private University Admission Test (Class / Course)",
+          name: "Private University Admission Test",
           subjects: [
             "Bangla",
             "English",
@@ -2381,7 +2399,7 @@ export const filterData = {
         // ---------- MEDICAL COLLEGE ----------
         {
           id: "medical_college_admission_test",
-          name: "Medical College Admission Test (Class / Course)",
+          name: "Medical College Admission Test",
           subjects: [
             "English",
             "Physics",
@@ -2394,7 +2412,7 @@ export const filterData = {
         // ---------- ENGINEERING UNIVERSITY ----------
         {
           id: "engineering_university_admission_test",
-          name: "Engineering University Admission Test (Class / Course)",
+          name: "Engineering University Admission Test",
           subjects: [
             "Math",
             "Physics",
@@ -2407,7 +2425,7 @@ export const filterData = {
         // ---------- SCHOOL ADMISSION TEST ----------
         {
           id: "school_admission_test",
-          name: "School Admission Test (Class / Course)",
+          name: "School Admission Test",
           subjects: [
             "All",
             "Bangla",
@@ -2430,14 +2448,14 @@ export const filterData = {
         // ---------- DRAWING & PAINTING ----------
         {
           id: "drawing_and_painting",
-          name: "Drawing & Painting (Class / Course)",
+          name: "Drawing & Painting",
           subjects: ["line Drawing", "Sketch", "Water Color", "Oil Painting"],
         },
 
         // ---------- HANDWRITTING ----------
         {
           id: "handwritting",
-          name: "Handwritting (Class / Course)",
+          name: "Handwritting",
           subjects: [
             "Bangla Handwritting",
             "English Handwritting",
@@ -2454,7 +2472,7 @@ export const filterData = {
         // ---------- MUSIC ----------
         {
           id: "music",
-          name: "Music (Class / Course)",
+          name: "Music",
           subjects: [
             "Music for Beginner",
             "Islamic Sangeet",
@@ -2472,7 +2490,7 @@ export const filterData = {
         // ---------- INSTRUMENTAL MUSIC ----------
         {
           id: "instrumental_music",
-          name: "Instrumental Music (Class / Course)",
+          name: "Instrumental Music",
           subjects: [
             "Tabla",
             "Guitar",
@@ -2497,7 +2515,7 @@ export const filterData = {
         // ---------- DANCE ----------
         {
           id: "dance",
-          name: "Dance (Class / Course)",
+          name: "Dance",
           subjects: [
             "Classical Dance",
             "Folk Dance",
@@ -2511,7 +2529,7 @@ export const filterData = {
         // ---------- CRAFTING ----------
         {
           id: "crafting",
-          name: "Crafting (Class / Course)",
+          name: "Crafting",
           subjects: [
             "Paper Crafts",
             "Flower Crafts",
@@ -2531,77 +2549,77 @@ export const filterData = {
         // ---------- ENGLISH ----------
         {
           id: "english_language",
-          name: "English (Class / Course)",
+          name: "English",
           subjects: ["English Language learning", "Business Communication"],
         },
 
         // ---------- ARABIC ----------
         {
           id: "arabic_language",
-          name: "Arabic (Class / Course)",
+          name: "Arabic",
           subjects: ["Arabic Language learning"],
         },
 
         // ---------- JAPANESE ----------
         {
           id: "japanese_language",
-          name: "Japanese (Class / Course)",
+          name: "Japanese",
           subjects: ["Japanese Language learning"],
         },
 
         // ---------- TURKISH ----------
         {
           id: "turkish_language",
-          name: "Turkish (Class / Course)",
+          name: "Turkish",
           subjects: ["Turkish Language learning"],
         },
 
         // ---------- GERMAN ----------
         {
           id: "german_language",
-          name: "German (Class / Course)",
+          name: "German",
           subjects: ["German Language learning"],
         },
 
         // ---------- FRENCH ----------
         {
           id: "french_language",
-          name: "French (Class / Course)",
+          name: "French",
           subjects: ["French Language learning"],
         },
 
         // ---------- SPANISH ----------
         {
           id: "spanish_language",
-          name: "Spanish (Class / Course)",
+          name: "Spanish",
           subjects: ["Spanish Language learning"],
         },
 
         // ---------- CHINESE ----------
         {
           id: "chinese_language",
-          name: "Chinese (Class / Course)",
+          name: "Chinese",
           subjects: ["Chinese Language learning"],
         },
 
         // ---------- KOREAN ----------
         {
           id: "korean_language",
-          name: "Korean (Class / Course)",
+          name: "Korean",
           subjects: ["Korean Language learning"],
         },
 
         // ---------- BANGLA ----------
         {
           id: "bangla_language",
-          name: "Bangla (Class / Course)",
+          name: "Bangla",
           subjects: ["Bangla Language learning"],
         },
 
         // ---------- RUSSIAN ----------
         {
           id: "russian_language",
-          name: "Russian (Class / Course)",
+          name: "Russian",
           subjects: ["Russian Language learning"],
         },
       ],
@@ -2614,21 +2632,21 @@ export const filterData = {
         // ---------- IELTS ----------
         {
           id: "ielts",
-          name: "IELTS (Class / Course)",
+          name: "IELTS",
           subjects: ["Speaking", "Listening", "Reading", "Writing"],
         },
 
         // ---------- TOEFL ----------
         {
           id: "toefl",
-          name: "TOEFL (Class / Course)",
+          name: "TOEFL",
           subjects: ["Speaking", "Listening", "Reading", "Writing"],
         },
 
         // ---------- GMAT ----------
         {
           id: "gmat",
-          name: "GMAT (Class / Course)",
+          name: "GMAT",
           subjects: [
             "Analytical Writing Assessment",
             "Integrated Reasoning",
@@ -2640,7 +2658,7 @@ export const filterData = {
         // ---------- GRE ----------
         {
           id: "gre",
-          name: "GRE (Class / Course)",
+          name: "GRE",
           subjects: [
             "Analytical Writing",
             "Verbal Reasoning",
@@ -2651,7 +2669,7 @@ export const filterData = {
         // ---------- GED ----------
         {
           id: "ged",
-          name: "GED (Class / Course)",
+          name: "GED",
           subjects: [
             "Science",
             "Math",
@@ -2664,7 +2682,7 @@ export const filterData = {
         // ---------- SAT ----------
         {
           id: "sat",
-          name: "SAT (Class / Course)",
+          name: "SAT",
           subjects: ["Math", "Writing", "Critical Reading"],
         },
       ],
@@ -2677,7 +2695,7 @@ export const filterData = {
         // ---------- WEB DESIGN ----------
         {
           id: "web_design",
-          name: "Web Design (Class / Course)",
+          name: "Web Design",
           subjects: [
             "Website Logo",
             "Website Template",
@@ -2688,7 +2706,7 @@ export const filterData = {
         // ---------- WEB DEVELOPMENT ----------
         {
           id: "web_development",
-          name: "Web Development (Class / Course)",
+          name: "Web Development",
           subjects: [
             "CSS",
             "HTML",
@@ -2704,7 +2722,7 @@ export const filterData = {
         // ---------- COMPUTER PROGRAMMING ----------
         {
           id: "computer_programming",
-          name: "Computer Programming (Class / Course)",
+          name: "Computer Programming",
           subjects: [
             "Java",
             "Python",
@@ -2720,7 +2738,7 @@ export const filterData = {
         // ---------- ADOBE ILLUSTRATOR ----------
         {
           id: "adobe_illustrator",
-          name: "Adobe Illustrator (Class / Course)",
+          name: "Adobe Illustrator",
           subjects: [
             "Adobe Illustrator in Basic Level",
             "Adobe Illustrator in Advanced Level",
@@ -2730,7 +2748,7 @@ export const filterData = {
         // ---------- ADOBE PHOTOSHOP ----------
         {
           id: "adobe_photoshop",
-          name: "Adobe Photoshop (Class / Course)",
+          name: "Adobe Photoshop",
           subjects: [
             "Adobe Photoshop in Basic Level",
             "Adobe Photoshop in Advanced Level",
@@ -2740,7 +2758,7 @@ export const filterData = {
         // ---------- MICROSOFT OFFICE ----------
         {
           id: "microsoft_office",
-          name: "Microsoft Office (Class / Course)",
+          name: "Microsoft Office",
           subjects: [
             "Microsoft Office Word",
             "Microsoft Office Access",
@@ -2752,7 +2770,7 @@ export const filterData = {
         // ---------- VIDEO EDITING ----------
         {
           id: "video_editing",
-          name: "Video Editing (Class / Course)",
+          name: "Video Editing",
           subjects: [
             "Video Editing in Basic Level",
             "Video Editing in Advanced Level",
@@ -2762,7 +2780,7 @@ export const filterData = {
         // ---------- FASHION DESIGN ----------
         {
           id: "fashion_design",
-          name: "Fashion Design (Class / Course)",
+          name: "Fashion Design",
           subjects: [
             "Fashion Design in Basic Level",
             "Fashion Design in Advanced Level",
@@ -2772,14 +2790,14 @@ export const filterData = {
         // ---------- FASHION DRAWING ----------
         {
           id: "fashion_drawing",
-          name: "Fashion Drawing (Class / Course)",
+          name: "Fashion Drawing",
           subjects: ["Elements of Design", "Illustration-1", "Illustration-2"],
         },
 
         // ---------- DIGITAL MARKETING ----------
         {
           id: "digital_marketing",
-          name: "Digital Marketing (Class / Course)",
+          name: "Digital Marketing",
           subjects: [
             "Search Engine Optimization (SEO)",
             "Search Engine Marketing (SEM)",
@@ -2796,7 +2814,7 @@ export const filterData = {
         // ---------- SEWING & TAILORING ----------
         {
           id: "sewing_and_tailoring",
-          name: "Sewing & Tailoring (Class / Course)",
+          name: "Sewing & Tailoring",
           subjects: ["Cutting", "Sewing", "Embroidery", "Printmaking"],
         },
       ],
@@ -2809,14 +2827,14 @@ export const filterData = {
         // ---------- PHOTOGRAPHY ----------
         {
           id: "photography",
-          name: "Photography (Class / Course)",
+          name: "Photography",
           subjects: ["Photography Primary Level", "Photography Advanced Level"],
         },
 
         // ---------- COOKING ----------
         {
           id: "cooking",
-          name: "Cooking (Class / Course)",
+          name: "Cooking",
           subjects: [
             "Bangla Food",
             "Thai Food",
@@ -2829,21 +2847,21 @@ export const filterData = {
         // ---------- YOGA ----------
         {
           id: "yoga",
-          name: "Yoga (Class / Course)",
+          name: "Yoga",
           subjects: ["Yoga - Beginner Level", "Yoga - Advanced Level"],
         },
 
         // ---------- GYM ----------
         {
           id: "gym",
-          name: "Gym (Class / Course)",
+          name: "Gym",
           subjects: ["Gym - Beginner Level", "Gym - Advanced Level"],
         },
 
         // ---------- DRIVING / RIDING ----------
         {
           id: "driving_riding",
-          name: "Driving/ Riding (Class / Course)",
+          name: "Driving/ Riding",
           subjects: [
             "Car Driving - Beginner Level",
             "Car Driving - Intermediate Level",
@@ -2857,7 +2875,7 @@ export const filterData = {
         // ---------- KARATE ----------
         {
           id: "karate",
-          name: "Karate (Class / Course)",
+          name: "Karate",
           subjects: ["Karate for Beginners", "Karate for Self Defense"],
         },
       ],

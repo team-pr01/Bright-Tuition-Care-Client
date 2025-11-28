@@ -75,7 +75,7 @@ const Hero = () => {
     <Container>
       <motion.div
         ref={ref}
-        className="flex flex-col gap-8 lg:gap-[44px] lg:flex-row font-Nunito h-fit justify-between py-5 lg:py-[84px]"
+        className="flex flex-col gap-8 lg:gap-[44px] lg:flex-row font-Nunito h-fit justify-between py-5 lg:py-[84px] z-0"
         variants={containerVariants}
         initial="hidden"
         animate={isInView ? "visible" : "hidden"}

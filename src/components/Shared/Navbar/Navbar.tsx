@@ -11,6 +11,7 @@ import type { TLoggedInUser } from "../../../types/loggedinUser.types";
 const Navbar = () => {
   const user = useSelector(useCurrentUser) as TLoggedInUser;
   const location = useLocation();
+
   const dashboardPath =
     user?.role === "tutor"
       ? "tutor"
@@ -21,69 +22,73 @@ const Navbar = () => {
       : "staff";
 
   return (
-    <div
-      className={`py-4 lg:py-5 sticky top-0 z-50 transition-all duration-300 border-b border-neutral-45/15 backdrop-blur-none lg:backdrop-blur-md bg-neutral-50/10 shadow-sm`}
-    >
-      <Container>
-        <nav className="flex items-center font-Nunito justify-between">
-          {/* Logo and Brand */}
-          <Link to="/">
-            <img src={ICONS.logo} alt="Logo" className="w-56" />
-          </Link>
+    <div className="sticky top-0 z-[9999]">
+      {/* Backdrop Blur Layer */}
+      <div className="absolute inset-0 backdrop-blur-md bg-neutral-50/10 border-b border-neutral-45/15"></div>
 
-          {/* Nav Links */}
-          <div className="hidden lg:flex gap-6">
-            {navLinks.map((link) => (
-              <Link
-                key={link.path}
-                to={link.path}
-                className={`text-lg font-Nunito hover:text-primary-40 transition-all duration-300 ${
-                  location.pathname === link.path
-                    ? "text-primary-40 font-bold"
-                    : "text-neutral-10 font-semibold"
-                }`}
-              >
-                {link.label}
-              </Link>
-            ))}
-          </div>
+      {/* Navbar Content */}
+      <div className="relative py-4 lg:py-5 shadow-sm">
+        <Container>
+          <nav className="flex items-center justify-between font-Nunito min-h-[50px]">
+            {/* Logo */}
+            <Link to="/">
+              <img src={ICONS.logo} alt="Logo" className="w-56" />
+            </Link>
 
-          {/* Auth Buttons */}
-          <div className="hidden lg:flex">
-            {!user && (
-              <div className="hidden lg:flex items-center gap-5">
-                <Link to={"/signin"}>
-                  <Button
-                    label="Sign In"
-                    variant="tertiary"
-                    className="text-sm"
-                  />
+            {/* Nav Links */}
+            <div className="hidden lg:flex gap-6">
+              {navLinks.map((link) => (
+                <Link
+                  key={link.path}
+                  to={link.path}
+                  className={`text-lg transition-all duration-300 ${
+                    location.pathname === link.path
+                      ? "text-primary-40 font-bold"
+                      : "text-neutral-10 font-semibold hover:text-primary-40"
+                  }`}
+                >
+                  {link.label}
                 </Link>
-                <Link to={"/signup/tutor"}>
+              ))}
+            </div>
+
+            {/* Auth Buttons */}
+            <div className="hidden lg:flex">
+              {!user ? (
+                <div className="flex items-center gap-5">
+                  <Link to="/signin">
+                    <Button
+                      label="Sign In"
+                      variant="tertiary"
+                      className="text-sm"
+                    />
+                  </Link>
+                  <Link to="/signup/tutor">
+                    <Button
+                      label="Become A Tutor"
+                      variant="quaternary"
+                      className="text-sm"
+                    />
+                  </Link>
+                </div>
+              ) : (
+                <Link to={`/dashboard/${dashboardPath}/home`}>
                   <Button
-                    label="Become A Tutor"
+                    label="Dashboard"
                     variant="quaternary"
                     className="text-sm"
                   />
                 </Link>
-              </div>
-            )}
-            {user && (
-              <Link to={`/dashboard/${dashboardPath}/home`}>
-                <Button
-                  label="Dashboard"
-                  variant="quaternary"
-                  className="text-sm"
-                />
-              </Link>
-            )}
-          </div>
-          <div className="flex lg:hidden items-center gap-3">
-            {/* <Button label="Sign In" variant="primary" className="text-sm" /> */}
-            <HamburgerMenu />
-          </div>
-        </nav>
-      </Container>
+              )}
+            </div>
+
+            {/* Hamburger */}
+            <div className="flex lg:hidden items-center gap-3">
+              <HamburgerMenu />
+            </div>
+          </nav>
+        </Container>
+      </div>
     </div>
   );
 };

@@ -127,10 +127,10 @@ const JobDetailsForm = ({ defaultValues }: { defaultValues?: TJobs }) => {
 
         {/* CLASS */}
         <SelectDropdown
-          label="Class"
+          label="Class/Course"
           options={classOptions}
           error={errors.class}
-          {...register("class", { required: "Class is required" })}
+          {...register("class", { required: "Class/Course is required" })}
           isDisabled={!selectedCategory}
         />
 
