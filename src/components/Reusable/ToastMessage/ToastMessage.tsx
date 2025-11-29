@@ -1,15 +1,23 @@
 import { motion } from "framer-motion";
 import { FaCheckCircle } from "react-icons/fa";
 
-const ToastMessage = ({title,subTitle}) => {
+type ToastMessageProps = {
+  title: string;
+  subTitle: string;
+};
+
+const ToastMessage: React.FC<ToastMessageProps> = ({
+  title,
+  subTitle,
+}) => {
   return (
-    <div className="flex items-start gap-3 p-4 bg-white rounded-xl shadow-lg border border-primary-10 w-[340px]">
+    <div className="flex flex-col items-center text-center gap-3 p-5 bg-white rounded-xl shadow-lg border border-primary-10 w-[340px]">
       {/* Animated Tick */}
       <motion.div
         initial={{ scale: 0, rotate: -90 }}
         animate={{ scale: 1, rotate: 0 }}
         transition={{ type: "spring", stiffness: 200 }}
-        className="text-green-500 text-3xl mt-1"
+        className="text-green-500 text-4xl"
       >
         <FaCheckCircle />
       </motion.div>

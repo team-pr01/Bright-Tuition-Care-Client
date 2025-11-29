@@ -55,8 +55,7 @@ const Footer: React.FC = () => {
                   <img src={ICONS.logoWhite} alt="Bright Tuition Care" className="w-56 md:w-full" />
                 </Link>
               <p className="text-sm md:text-base text-neutral-50 mt-8">
-                Bright Tuition Care connects students with verified tutors
-                online. We offer a trusted space for connections.
+                Bright Tuition Care is Bangladesh's first and most trusted platform for "guardians, students and tutors" to connect with verified tutors and find tuition jobs across the country. We are dedicated to bridging the educational gap between students and tutors. Our mission is to "provide a trusted platform" where guardians, students and tutors can connect easily.
               </p>
             </motion.div>
 

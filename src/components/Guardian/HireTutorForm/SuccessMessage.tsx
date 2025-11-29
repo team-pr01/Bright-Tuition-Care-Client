@@ -13,12 +13,11 @@ const SuccessMessage = () => {
       </motion.div>
 
       <h2 className="text-2xl md:text-3xl font-bold text-gray-800 mb-4">
-        Job Posted Successfully!
+        Submitted Successfully!
       </h2>
 
       <p className="text-lg md:text-xl text-gray-600 mb-8 max-w-2xl mx-auto leading-relaxed">
-        Thank you for posting your job. Our executive will review it soon and
-        get back to you.
+       Thank you for submitting your tutor request. One of our executives  will contact you within 24 hours to verify your requirements and publish it on our job board.
       </p>
 
       <div className="bg-blue-50 border border-blue-200 rounded-xl p-6 mb-8 max-w-md mx-auto">

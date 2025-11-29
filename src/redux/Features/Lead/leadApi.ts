@@ -58,6 +58,18 @@ const leadApi = baseApi.injectEndpoints({
       providesTags: ["lead"],
     }),
 
+    // For guardian
+    requestForTutor: builder.mutation<any, any>({
+      query: (data) => ({
+        url: `/lead/request-tutor`,
+        method: "POST",
+        body: data,
+        credentials: "include",
+      }),
+      invalidatesTags: ["lead"],
+    }),
+
+    // For tutor
     addLead: builder.mutation<any, any>({
       query: (data) => ({
         url: `/lead/add`,
@@ -93,6 +105,7 @@ export const {
   useGetAllLeadsQuery,
   useGetSingleLeadByIdQuery,
   useGetMyLeadsQuery,
+  useRequestForTutorMutation,
   useAddLeadMutation,
   useDeleteLeadMutation,
   useUpdateLeadInfoMutation,
