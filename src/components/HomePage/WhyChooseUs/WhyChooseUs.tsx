@@ -220,7 +220,7 @@ const WhyChooseUs = () => {
 
                 {/* Main Card */}
                 <div
-                  className={`relative bg-gray-50 bg-opacity-10 backdrop-blur-lg rounded-2xl border border-white border-opacity-20 p-8 h-full transform-gpu hover:border-opacity-40 transition-all duration-300`}
+                  className={`relative bg-gray-200 bg-opacity-10 backdrop-blur-lg rounded-2xl border border-white border-opacity-20 p-8 h-full transform-gpu hover:border-opacity-40 transition-all duration-300`}
                 >
                   {/* Icon Container */}
                   <motion.div
