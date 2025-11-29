@@ -13,6 +13,7 @@ import { useDispatch } from "react-redux";
 import { setUser } from "../../../../redux/Features/Auth/authSlice";
 import Cookies from "js-cookie";
 import toast from "react-hot-toast";
+import ToastMessage from "../../../Reusable/ToastMessage/ToastMessage";
 
 type TFormData = {
   email: string;
@@ -37,33 +38,40 @@ const SignInForm = ({
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const handleSigIn = async (data: TFormData) => {
+    console.log(activeTab);
     try {
       const payload = {
+        role : activeTab,
         email: data.email,
         password: data.password,
       };
       const res = await login(payload).unwrap();
       if (res?.success) {
+        toast.custom(() => (
+          <ToastMessage
+            title="Welcome Back!"
+            subTitle="You have successfully signed in. Thank you for choosing Bright Tuition Care."
+          />
+        ));
+
         Cookies.set("accessToken", res?.data?.accessToken, {
-          expires: 7, 
+          expires: 7,
           secure: true,
           sameSite: "strict",
         });
         dispatch(
           setUser({ user: res?.data?.user, token: res?.data?.accessToken })
         );
-      };
-      if(res?.data?.user?.role==="admin"){
+      }
+      if (res?.data?.user?.role === "admin") {
         navigate("/dashboard/admin/home");
-      }
-      else if(res?.data?.user?.role==="tutor"){
+      } else if (res?.data?.user?.role === "tutor") {
         navigate("/dashboard/tutor/home");
-      }
-      else{
+      } else {
         navigate("/dashboard/guardian/home");
       }
       reset();
-    } catch (error :any) {
+    } catch (error: any) {
       toast.error(error?.data?.message || "Login failed. Please try again.");
     }
   };

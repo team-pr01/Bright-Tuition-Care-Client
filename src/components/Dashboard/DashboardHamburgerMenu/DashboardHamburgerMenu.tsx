@@ -13,6 +13,8 @@ import {
 import OtherLinks from "../Sidebar/OtherLinks";
 import RoleBasedNavlinks from "../Sidebar/RoleBasedNavlinks/RoleBasedNavlinks";
 import type { TLoggedInUser } from "../../../types/loggedinUser.types";
+import toast from "react-hot-toast";
+import ToastMessage from "../../Reusable/ToastMessage/ToastMessage";
 
 const DashboardHamburgerMenu = () => {
   const user = useSelector(useCurrentUser) as TLoggedInUser;
@@ -46,6 +48,12 @@ const DashboardHamburgerMenu = () => {
     Cookies.remove("role");
     dispatch(logout());
     localStorage.clear();
+     toast.custom(() => (
+      <ToastMessage
+        title="Logged Out Successfully!"
+        subTitle="You have successfully logged out. You can log in anytime to access our services or receive further assistance."
+      />
+    ));
     navigate("/signin");
   };
 

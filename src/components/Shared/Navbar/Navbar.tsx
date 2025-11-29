@@ -56,20 +56,20 @@ const Navbar = () => {
             <div className="hidden lg:flex">
               {!user ? (
                 <div className="flex items-center gap-5">
-                  <Link to="/signin">
+                  <a href="/signin">
                     <Button
                       label="Sign In"
                       variant="tertiary"
                       className="text-sm"
                     />
-                  </Link>
-                  <Link to="/signup/tutor">
+                  </a>
+                  <a href="/signup/tutor">
                     <Button
                       label="Become A Tutor"
                       variant="quaternary"
                       className="text-sm"
                     />
-                  </Link>
+                  </a>
                 </div>
               ) : (
                 <Link to={`/dashboard/${dashboardPath}/home`}>

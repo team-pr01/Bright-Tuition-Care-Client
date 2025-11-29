@@ -37,7 +37,7 @@ export const socialLinks = [
   },
   {
     icon: <SiWhatsapp className="text-[22px]" />,
-    href: "https://wa.me/8801616012365",
+    href: "https://wa.me/8801988603820",
   },
 ];
 

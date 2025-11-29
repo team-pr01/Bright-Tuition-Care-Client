@@ -11,6 +11,7 @@ import Button from "../../../Reusable/Button/Button";
 import { ICONS } from "../../../../assets";
 import { useSignupMutation } from "../../../../redux/Features/Auth/authApi";
 import toast from "react-hot-toast";
+import ToastMessage from "../../../Reusable/ToastMessage/ToastMessage";
 
 type TFormData = {
   name: string;
@@ -72,6 +73,14 @@ const SignupForm = ({
       };
       const res = await signup(payload).unwrap();
       if (res?.success) {
+        toast.custom(() => (
+          <ToastMessage
+            title={"Sign Up Successful!"}
+            subTitle={
+              "Your account has been successfully created. Welcome to Bright Tuition Care."
+            }
+          />
+        ));
         localStorage.setItem("signupEmail", data.email);
         navigate("/verify-otp");
         reset();

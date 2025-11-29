@@ -12,6 +12,8 @@ import { ICONS, IMAGES } from "../../../assets";
 import Cookies from "js-cookie";
 import OtherLinks from "./OtherLinks";
 import RoleBasedNavlinks from "./RoleBasedNavlinks/RoleBasedNavlinks";
+import ToastMessage from "../../Reusable/ToastMessage/ToastMessage";
+import toast from "react-hot-toast";
 
 const Sidebar = () => {
   const user = useSelector(useCurrentUser) as TLoggedInUser;
@@ -23,6 +25,12 @@ const Sidebar = () => {
     Cookies.remove("role");
     dispatch(logout());
     localStorage.clear();
+    toast.custom(() => (
+      <ToastMessage
+        title="Logged Out Successfully!"
+        subTitle="You have successfully logged out. You can log in anytime to access our services or receive further assistance."
+      />
+    ));
     navigate("/signin");
   };
 
