@@ -85,13 +85,13 @@ const HamburgerMenu = () => {
           </div>
 
           {/* Auth Buttons */}
-          <div className="flex flex-col gap-3 w-full">
-            <button className="py-2 px-4 border border-primary-10 rounded-md text-primary-40 font-medium">
-              Sign Up
-            </button>
-            <button className="py-2 px-4 bg-primary-10 text-white rounded-md font-medium">
+          <div className="flex flex-col gap-3 w-full text-center">
+            <a href="/signin" className="py-2 px-4 border border-primary-10 rounded-md text-primary-40 font-medium">
+              Sign In
+            </a>
+            <a href="/signup/tutor" className="py-2 px-4 bg-primary-10 text-white rounded-md font-medium">
               Become A Tutor
-            </button>
+            </a>
           </div>
         </div>
       </div>

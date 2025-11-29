@@ -59,6 +59,10 @@ export const quickLinks = [
     path: "/signup",
   },
   {
+    label: "Tutorial",
+    path: "/tutorial",
+  },
+  {
     label: "Terms & Conditions",
     path: "/terms-and-conditions",
   },
