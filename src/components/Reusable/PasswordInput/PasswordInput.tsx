@@ -65,12 +65,12 @@ const PasswordInput = forwardRef<HTMLInputElement, PasswordInputProps>(
           {isPasswordVisible ? (
             <IoEyeOffOutline
               onClick={() => setIsPasswordVisible(false)}
-              className="absolute right-3 top-1/2 -translate-y-1/2 text-neutral-70 cursor-pointer"
+              className="absolute right-3 top-1/2 -translate-y-1/2 text-neutral-70 cursor-pointer text-primary-10"
             />
           ) : (
             <IoEyeOutline
               onClick={() => setIsPasswordVisible(true)}
-              className="absolute right-3 top-1/2 -translate-y-1/2 text-neutral-70 cursor-pointer"
+              className="absolute right-3 top-1/2 -translate-y-1/2 text-neutral-70 cursor-pointer text-primary-10"
             />
           )}
         </div>
