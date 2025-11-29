@@ -28,6 +28,8 @@ export type TJobs = {
   area: string;
   address: string;
   locationDirection: string;
+  guardianName?: string;
+  guardianPhoneNumber?: string;
   status?: "pending" | "live" | "closed" | "cancelled";
   applications: string[];
   postedBy: string;

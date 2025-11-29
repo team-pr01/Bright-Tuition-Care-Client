@@ -21,6 +21,8 @@ interface FormValues {
   tutoringTime: string;
   category: string[];
   subjects: string[];
+  guardianName: string;
+  guardianPhoneNumber: string;
   otherRequirements: string;
 
   // Tutor Preference
@@ -102,7 +104,7 @@ const HireTutorForm = () => {
         <div className="mt-10"></div>
 
         {/* Step Content */}
-        {currentStep === 0 && <JobDetailsForm />}
+        {currentStep === 0 && <JobDetailsForm user={user} />}
         {currentStep === 1 && <StudentInfoForm />}
         {currentStep === 2 && <LocationForm />}
         {currentStep === 3 && <Preview />}

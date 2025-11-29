@@ -6,8 +6,9 @@ import SelectDropdown from "../../Reusable/SelectDropdown/SelectDropdown";
 import MultiSelectDropdown from "../../Reusable/MultiSelectDropdown/MultiSelectDropdown";
 import { useEffect, useState } from "react";
 import type { TJobs } from "../../../types/job.types";
+import type { TLoggedInUser } from "../../../types/loggedinUser.types";
 
-const JobDetailsForm = ({ defaultValues }: { defaultValues?: TJobs }) => {
+const JobDetailsForm = ({ defaultValues, user }: { defaultValues?: TJobs, user?:TLoggedInUser }) => {
   const {
     register,
     formState: { errors },
@@ -24,6 +25,8 @@ const JobDetailsForm = ({ defaultValues }: { defaultValues?: TJobs }) => {
       setValue("class", defaultValues.class || "");
       setValue("curriculum", defaultValues.curriculum || "");
       setValue("subjects", defaultValues.subjects || []);
+      setValue("guardianName", defaultValues.guardianName || "");
+      setValue("guardianPhoneNumber", defaultValues.guardianPhoneNumber || "");
     }
   }, [defaultValues, setValue]);
 
@@ -169,6 +172,25 @@ const JobDetailsForm = ({ defaultValues }: { defaultValues?: TJobs }) => {
           {...register("salary")}
           isRequired={false}
         />
+
+        {user?.role === "admin" && (
+          <TextInput
+            label="Guardian name"
+            placeholder="Enter guardian name"
+            error={errors.guardianName}
+            {...register("guardianName")}
+            isRequired={false}
+          />
+        )}
+
+        {user?.role === "admin" && (
+          <TextInput
+            label="Guardian Phone Number"
+            placeholder="Enter guardian phone number"
+            error={errors.guardianPhoneNumber}
+            {...register("guardianPhoneNumber")}
+          />
+        )}
       </div>
     </div>
   );

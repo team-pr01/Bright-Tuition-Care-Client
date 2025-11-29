@@ -32,6 +32,7 @@ const AdminOrStaffLogin = () => {
   const handleSigIn = async (data: TFormData) => {
     try {
       const payload = {
+        role: "admin",
         email: data.email,
         password: data.password,
       };
