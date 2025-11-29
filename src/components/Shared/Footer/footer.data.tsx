@@ -13,31 +13,31 @@ import { SiWhatsapp } from "react-icons/si";
 export const socialLinks = [
   {
     icon: <FaFacebookF className="text-2xl" />,
-    href: "https://www.facebook.com/",
+    href: "https://www.facebook.com/brightcaretuition",
   },
   {
     icon: <FaInstagram className="text-2xl" />,
-    href: "https://www.facebook.com/",
+    href: "https://www.instagram.com/brighttuitioncare?igsh=eDkweG9taGwycG56",
   },
   {
     icon: <FaLinkedinIn className="text-2xl" />,
-    href: "https://www.facebook.com/",
+    href: "https://www.linkedin.com/in/bright-tuition-care-bd-ba38b5372",
   },
   {
     icon: <FaYoutube className="text-2xl" />,
-    href: "https://www.facebook.com/",
+    href: "https://www.youtube.com/@BrightTuitionCare",
   },
   {
     icon: <FaTwitter className="text-2xl" />,
-    href: "https://www.facebook.com/",
+    href: "https://x.com/tuition85435?t=fRRlZarWV7BCM1gwSzrfrQ&s=09",
   },
   {
     icon: <IoLogoTiktok className="text-2xl" />,
-    href: "https://www.facebook.com/",
+    href: "https://www.tiktok.com/@bright.tuition.ca?_r=1&_t=ZS-91mdCCXGuuG",
   },
   {
     icon: <SiWhatsapp className="text-[22px]" />,
-    href: "https://www.facebook.com/",
+    href: "https://wa.me/8801616012365",
   },
 ];
 
@@ -66,7 +66,6 @@ export const quickLinks = [
     label: "FAQs",
     path: "/faqs",
   },
-
 ];
 
 export const contactInfo = [

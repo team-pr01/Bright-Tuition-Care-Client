@@ -124,6 +124,7 @@ const Footer: React.FC = () => {
                 <a
                   key={index}
                   href={item?.href}
+                  target="_blank"
                   className="hover:text-primary-10 text-neutral-100 transition duration-300 cursor-pointer"
                 >
                   {item?.icon}
