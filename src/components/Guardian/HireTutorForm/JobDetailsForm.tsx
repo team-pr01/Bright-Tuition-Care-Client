@@ -175,7 +175,7 @@ const JobDetailsForm = ({ defaultValues, user }: { defaultValues?: TJobs, user?:
 
         {user?.role === "admin" && (
           <TextInput
-            label="Guardian name"
+            label="Guardian Name"
             placeholder="Enter guardian name"
             error={errors.guardianName}
             {...register("guardianName")}

@@ -22,7 +22,7 @@ import {
 } from "react-icons/fa";
 import { useGetAdminStatsQuery } from "../../../../redux/Features/Admin/adminApi";
 
-// --- Custom Tooltip Components ---
+// --- Custom Tooltip ---
 const CustomTooltip = ({ active, payload, label }: any) => {
   if (active && payload && payload.length) {
     return (
@@ -39,99 +39,91 @@ const CustomTooltip = ({ active, payload, label }: any) => {
   return null;
 };
 
-// ---Chart Card Component ---
-
+// --- Chart Card ---
 interface ChartCardProps {
   title: string;
   children: React.ReactNode;
 }
 
 const ChartCard: React.FC<ChartCardProps> = ({ title, children }) => (
-  <div className="bg-white p-5 rounded-xl shadow-lg border border-gray-100 min-h-[400px]">
-    <h2 className="text-lg font-semibold text-gray-800 mb-4">{title}</h2>
+  <div className="bg-white py-5 rounded-xl shadow-lg border border-gray-100 min-h-[400px]">
+    <h2 className="text-lg font-semibold text-gray-800 mb-4 pl-5">{title}</h2>
     <div className="h-[300px] w-full">{children}</div>
   </div>
 );
 
-// --- Main Dashboard Component ---
-
+// --- Main Component ---
 const AdminDashboardHome = () => {
   const { data: adminStats } = useGetAdminStatsQuery({});
-  const tutorColor = "#3B82F6"; // Blue for Tutor
-  const guardianColor = "#10B981"; // Green for Guardian
+  console.log(adminStats);
 
-  const jobsAreaColor = "#6366F1";
-  const jobsGradientStop1 = "#818CF8";
-  const jobsGradientStop2 = "#ffffff";
+  const tutorColor = "#3B82F6";
+  const guardianColor = "#10B981";
+
+  // Job chart colors
+  const jobsAreaColor = "#6366F1"; // Jobs posted
+  const confirmedColor = "#10B981"; // ✅ Green
+  const cancelledColor = "#EF4444"; // ❌ Red
 
   return (
     <div className="font-Nunito flex flex-col gap-6">
       {/* Overview Cards */}
       <div className="grid grid-cols-5 gap-6">
-        {/* Total Guardians */}
         <DashboardOverviewCard
           title="Total"
           additionalTitle="Guardians"
           value={adminStats?.data?.totalGuardians || 0}
           textColor="text-neutral-10"
           path="/dashboard/admin/guardians"
-          icon={<FaUserFriends className="text-[#3B82F6]" />} // Blue
+          icon={<FaUserFriends className="text-[#3B82F6]" />}
         />
 
-        {/* Registered Tutors */}
         <DashboardOverviewCard
           title="Registered"
           additionalTitle="Tutors"
           value={adminStats?.data?.totalTutors || 0}
           textColor="text-neutral-10"
           path="/dashboard/admin/tutors"
-          icon={<FaChalkboardTeacher className="text-[#10B981]" />} // Green
+          icon={<FaChalkboardTeacher className="text-[#10B981]" />}
         />
 
-        {/* All Jobs */}
         <DashboardOverviewCard
           title="All"
           additionalTitle="Jobs"
           value={adminStats?.data?.totalJobs || 0}
           textColor="text-neutral-10"
           path="/dashboard/admin/all-jobs"
-          icon={<FaBriefcase className="text-[#F59E0B]" />} // Amber/Yellow
+          icon={<FaBriefcase className="text-[#F59E0B]" />}
         />
 
-        {/* Pending Jobs */}
         <DashboardOverviewCard
           title="Pending"
           additionalTitle="Jobs"
           value={adminStats?.data?.pendingJobs || 0}
           textColor="text-neutral-10"
           path="/dashboard/admin/posted-jobs"
-          icon={<FaClock className="text-[#EF4444]" />} // Red
+          icon={<FaClock className="text-[#EF4444]" />}
         />
 
-        {/* Total Payment Received */}
         <DashboardOverviewCard
           title="Total"
           additionalTitle="Payment"
           value={`৳${adminStats?.data?.totalPayment || 0}`}
           textColor="text-neutral-10"
           path="/dashboard/admin/payments-management"
-          icon={<FaDollarSign className="text-[#8B5CF6]" />} // Purple
+          icon={<FaDollarSign className="text-[#8B5CF6]" />}
         />
       </div>
 
-      {/* Graphs */}
+      {/* Charts */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-        {/* --- Card 1: Monthly Registrations (Line Chart) --- */}
+        {/* Monthly Registrations */}
         <ChartCard title="Monthly Registrations">
           <ResponsiveContainer width="100%" height="100%">
-            <LineChart
-              data={adminStats?.data?.monthlyRegData || []}
-              margin={{ top: 5, right: 20, left: 0, bottom: 5 }} // reduce left margin
-            >
-              <CartesianGrid strokeDasharray="3 3" stroke="#e0e0e0" />
-              <XAxis dataKey="name" stroke="#6b7280" />
-              <YAxis width={40} domain={[0, 80]} stroke="#6b7280" />{" "}
-              {/* fixed width */}
+            <LineChart data={adminStats?.data?.monthlyRegData || []}>
+              <CartesianGrid strokeDasharray="3 3" />
+              <XAxis dataKey="name" />
+              <YAxis width={40} />
               <Tooltip content={<CustomTooltip />} />
               <Legend />
               <Line
@@ -140,7 +132,6 @@ const AdminDashboardHome = () => {
                 stroke={tutorColor}
                 strokeWidth={3}
                 dot={false}
-                activeDot={{ r: 6, fill: tutorColor, strokeWidth: 2 }}
               />
               <Line
                 type="monotone"
@@ -148,51 +139,52 @@ const AdminDashboardHome = () => {
                 stroke={guardianColor}
                 strokeWidth={3}
                 dot={false}
-                activeDot={{ r: 6, fill: guardianColor, strokeWidth: 2 }}
               />
             </LineChart>
           </ResponsiveContainer>
         </ChartCard>
 
-        {/* --- Card 2: Jobs Posted (Area Chart) --- */}
-        <ChartCard title="Jobs Posted Per Month">
+        {/* ✅ Jobs Posted / Confirmed / Cancelled */}
+        <ChartCard title="Jobs Status Per Month">
           <ResponsiveContainer width="100%" height="100%">
-            <AreaChart
-              data={adminStats?.data?.jobPostData || []}
-              margin={{ top: 10, right: 20, left: -10, bottom: 0 }}
-            >
-              <defs>
-                <linearGradient id="colorJobs" x1="0" y1="0" x2="0" y2="1">
-                  <stop
-                    offset="5%"
-                    stopColor={jobsGradientStop1}
-                    stopOpacity={0.8}
-                  />
-                  <stop
-                    offset="95%"
-                    stopColor={jobsGradientStop2}
-                    stopOpacity={0}
-                  />
-                </linearGradient>
-              </defs>
-              <CartesianGrid strokeDasharray="3 3" stroke="#e0e0e0" />
-              <XAxis dataKey="name" stroke="#6b7280" />
-              <YAxis stroke="#6b7280" domain={[0, 450]} />
+            <AreaChart data={adminStats?.data?.jobPostData || []}>
+              <CartesianGrid strokeDasharray="3 3" />
+              <XAxis dataKey="name" />
+              <YAxis />
               <Tooltip content={<CustomTooltip />} />
               <Legend />
+
+              {/* All Jobs */}
               <Area
                 type="monotone"
-                dataKey="JobsPosted"
+                dataKey="Posted"
                 stroke={jobsAreaColor}
+                fill={jobsAreaColor}
+                fillOpacity={0.1}
                 strokeWidth={3}
-                fill="url(#colorJobs)"
                 dot={false}
-                activeDot={{
-                  r: 6,
-                  fill: jobsAreaColor,
-                  stroke: "white",
-                  strokeWidth: 2,
-                }}
+              />
+
+              {/* ✅ Confirmed Jobs */}
+              <Area
+                type="monotone"
+                dataKey="Confirmed"
+                stroke={confirmedColor}
+                fill={confirmedColor}
+                fillOpacity={0.15}
+                strokeWidth={3}
+                dot={false}
+              />
+
+              {/* ❌ Cancelled Jobs */}
+              <Area
+                type="monotone"
+                dataKey="Cancelled"
+                stroke={cancelledColor}
+                fill={cancelledColor}
+                fillOpacity={0.15}
+                strokeWidth={3}
+                dot={false}
               />
             </AreaChart>
           </ResponsiveContainer>

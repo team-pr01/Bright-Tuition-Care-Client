@@ -102,6 +102,25 @@ const Preview = () => {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 lg:gap-5">
+        {user?.role === "admin" && (
+          <TextInput
+            label="Guardian Name"
+            placeholder="Enter guardian name"
+            error={errors.guardianName}
+            {...register("guardianName")}
+            isRequired={false}
+          />
+        )}
+
+        {user?.role === "admin" && (
+          <TextInput
+            label="Guardian Phone Number"
+            placeholder="Enter guardian phone number"
+            error={errors.guardianPhoneNumber}
+            {...register("guardianPhoneNumber")}
+          />
+        )}
+        
         <SelectDropdown
           label="Tuition Type"
           options={filterData.tuitionType}
