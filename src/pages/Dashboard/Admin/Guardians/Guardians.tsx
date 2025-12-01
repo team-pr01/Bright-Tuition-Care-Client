@@ -3,8 +3,7 @@ import { useState } from "react";
 import Table, {
   type TableHead,
 } from "../../../../components/Reusable/Table/Table";
-import { FiEye, FiSlash } from "react-icons/fi";
-import { useNavigate } from "react-router-dom";
+import { FiSlash } from "react-icons/fi";
 import SuspendUserModal from "../../../../components/Admin/SharedAdmin/SuspendUserModal/SuspendUserModal";
 import {
   useGetAllGuardiansQuery,
@@ -28,7 +27,7 @@ export type TableAction<T> = {
 };
 
 const Guardians = () => {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const [page, setPage] = useState<number>(1);
   const [limit, setLimit] = useState<number>(10);
   const [searchQuery, setSearchQuery] = useState<string>("");
@@ -109,11 +108,11 @@ const Guardians = () => {
 
   // Action Menu
   const actions: TableAction<any>[] = [
-    {
-      label: "View Profile",
-      icon: <FiEye className="inline mr-2" />,
-      onClick: (row) => navigate(`/dashboard/admin/guardian/${row._id}`),
-    },
+    // {
+    //   label: "View Profile",
+    //   icon: <FiEye className="inline mr-2" />,
+    //   onClick: (row) => navigate(`/dashboard/admin/guardian/${row._id}`),
+    // },
     {
       label: "Deactivate User",
       icon: <FiSlash className="inline mr-2" />,

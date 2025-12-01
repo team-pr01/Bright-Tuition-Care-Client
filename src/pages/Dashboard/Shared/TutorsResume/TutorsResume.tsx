@@ -22,7 +22,6 @@ const TutorsResume = () => {
   const { tutorId, applicationId } = useParams();
   const { data } = useGetSingleTutorByIdQuery(tutorId);
   const profile = data?.data;
-  const profileStatus = "locked";
   const educationDetails = data?.data?.educationalInformation || [];
   const tuitionPreference = profile?.tuitionPreference;
   const personalInfo = profile?.personalInformation || {};
@@ -210,20 +209,6 @@ const TutorsResume = () => {
 
               {/* Admin controlls */}
               <div className="flex items-center gap-3">
-                {location.pathname.startsWith("/dashboard/admin/tutor/") &&
-                  (profileStatus === "locked" ? (
-                    <Button
-                      label="Unlock Profile"
-                      variant="tertiary"
-                      className={buttonStyle}
-                    />
-                  ) : (
-                    <Button
-                      label="Lock Profile"
-                      variant="tertiary"
-                      className={buttonStyle}
-                    />
-                  ))}
 
                 {location.pathname.startsWith(
                   "/dashboard/admin/application"

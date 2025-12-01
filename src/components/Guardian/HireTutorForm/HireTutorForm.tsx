@@ -108,7 +108,7 @@ const HireTutorForm = () => {
         {currentStep === 1 && <StudentInfoForm />}
         {currentStep === 2 && <LocationForm />}
         {currentStep === 3 && <Preview />}
-        {currentStep === 4 && <SuccessMessage />}
+        {currentStep === 4 && <SuccessMessage user={user} />}
 
         {/* Navigation - Hide on thank you step */}
         {currentStep !== 4 && (

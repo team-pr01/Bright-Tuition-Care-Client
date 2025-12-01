@@ -87,11 +87,6 @@ const OtherLinks = ({
       icon: <LuFileText />,
     },
     {
-      label: "Refer And Earn",
-      path: "/dashboard/tutor/refer-and-earn",
-      icon: <LuAward />,
-    },
-    {
       label: "Share The App",
       path: `/dashboard/${
         user?.role === "tutor"
@@ -101,11 +96,6 @@ const OtherLinks = ({
           : "admin"
       }/share-app`,
       icon: <LuShare2 />,
-    },
-    {
-      label: "Join Community",
-      path: "/dashboard/tutor/community",
-      icon: <RiFacebookFill />,
     },
   ];
 
