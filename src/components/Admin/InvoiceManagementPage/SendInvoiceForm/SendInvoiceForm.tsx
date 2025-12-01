@@ -30,7 +30,7 @@ const SendInvoiceForm = ({
     setValue,
     formState: { errors },
   } = useForm<TFormData>();
-
+  const [activeTab, setActiveTab] = useState<string>("");
   const [sendInvoice, { isLoading: isSending }] = useSendInvoiceMutation();
   const [jobIdInput, setJobIdInput] = useState("");
   const [jobId, setJobId] = useState("");
@@ -54,11 +54,13 @@ const SendInvoiceForm = ({
   }, [jobData, setValue]);
 
   const handleSendInvoice = async (data: TFormData) => {
+    console.log(data);
     try {
       const payload = {
-        jobId: jobId,
+        invoiceType : activeTab === "Verification Charge" ? "verificationCharge" : "platformCharge",
+        jobId: jobId ? jobId : null,
         tutorId: data.tutorId,
-        amount: data.amount,
+        amount: activeTab === "Verification Charge" ? 500 : data.amount,
         dueDate: data.dueDate,
       };
       const response = await sendInvoice(payload).unwrap();
@@ -73,29 +75,82 @@ const SendInvoiceForm = ({
     }
   };
 
+
+  const tabButtons = ["Verification Charge", "Platform Charge"];
+
   return (
     <div className="space-y-4 mt-5">
-      <form className="flex items-center gap-3">
-        <TextInput
-          name="jobId"
-          label="Job Id"
-          placeholder="Enter job id to get details"
-          onChange={(e) => setJobIdInput(e.target.value)}
-        />
+      <div className="flex flex-col lg:flex-row items-center gap-4 mb-2">
+        {tabButtons?.map((button) => (
+          <button
+            key={button}
+            onClick={() => setActiveTab(button)}
+            type="button"
+            className={`text-sm md:text-base rounded-3xl px-3 py-2 flex items-center gap-3 border cursor-pointer ${
+              button === activeTab
+                ? "bg-primary-10/5 text-primary-10 border-primary-10/80"
+                : "bg-white text-neutral-20 border-neutral-45/20"
+            }`}
+          >
+            {button}
+          </button>
+        ))}
+      </div>
 
-        <Button
-          type="button"
-          label="Get Data"
-          variant="primary"
-          className="py-[14px] lg:py-[14px] mt-[26px] text-nowrap text-xs lg:text-xs"
-          onClick={() => {
-            if (!jobIdInput.trim()) return;
-            setJobId(jobIdInput);
-          }}
-          isDisabled={isLoading || isFetching}
-          isLoading={isLoading || isFetching}
-        />
-      </form>
+      {activeTab === "Platform Charge" && (
+        <form className="flex items-center gap-3 mt-5">
+          <TextInput
+            name="jobId"
+            label="Job Id"
+            placeholder="Enter job id to get details"
+            onChange={(e) => setJobIdInput(e.target.value)}
+          />
+
+          <Button
+            type="button"
+            label="Get Data"
+            variant="primary"
+            className="py-[14px] lg:py-[14px] mt-[26px] text-nowrap text-xs lg:text-xs"
+            onClick={() => {
+              if (!jobIdInput.trim()) return;
+              setJobId(jobIdInput);
+            }}
+            isDisabled={isLoading || isFetching}
+            isLoading={isLoading || isFetching}
+          />
+        </form>
+      )}
+
+      {activeTab === "Verification Charge" && (
+        <form onSubmit={handleSubmit(handleSendInvoice)} className="flex flex-col items-center gap-3 mt-10">
+          <TextInput
+            label="Tutor Id"
+            placeholder="Enter tutor id"
+           {...register("tutorId", {
+              required: "Tutor Id is required",
+            })}
+          />
+
+          {/* Due Date */}
+          <TextInput
+            label="Due Date"
+            error={errors.dueDate}
+            type="date"
+            {...register("dueDate", {
+              required: "Due Date is required",
+            })}
+          />
+
+          <Button
+            type="submit"
+            label="Send"
+            variant="primary"
+            className="py-[14px] lg:py-[14px] mt-2 text-nowrap text-xs lg:text-xs"
+            isDisabled={isLoading || isFetching}
+            isLoading={isLoading || isFetching}
+          />
+        </form>
+      )}
 
       <form onSubmit={handleSubmit(handleSendInvoice)} className="space-y-4">
         {jobData?.data && (

@@ -98,14 +98,16 @@ const InvoicePreview = ({
 
         <div className="mt-4">
           <p className="font-semibold">Invoice Details:</p>
-          <p>{invoice.jobId?.title}</p>
+          <p>{invoice.jobId?.title || "Verification Charge"}</p>
         </div>
 
         <div className="mt-4">
-          <p>
-            <span className="font-semibold">Job ID:</span>{" "}
-            {invoice.jobId?.jobId}
-          </p>
+          {invoice.jobId?.jobId && (
+            <p>
+              <span className="font-semibold">Job ID:</span>{" "}
+              {invoice.jobId?.jobId}
+            </p>
+          )}
           <p>
             <span className="font-semibold">Invoice ID:</span> {invoice._id}
           </p>

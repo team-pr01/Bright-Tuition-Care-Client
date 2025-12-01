@@ -36,7 +36,7 @@ const ForgotPasswordForm = () => {
     navigate("/verify-otp",{state:{from:"forgot-password"}});
    }
   }catch(err:any){
-    toast.error("Failed to send OTP. Please try again.");
+    toast.error(err?.data?.message || "Failed to send OTP. Please try again.");
   }
    
   };
