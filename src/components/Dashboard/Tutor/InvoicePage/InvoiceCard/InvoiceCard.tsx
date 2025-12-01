@@ -13,6 +13,9 @@ const InvoiceCard = ({ invoice, onSelect }: InvoiceCardProps) => {
       <div className="flex flex-col gap-2">
         <p className="font-semibold flex items-center gap-2">
           <FiFileText size={20} /> {invoice.id}
+          {invoice?.invoiceType === "verificationCharge"
+            ? "Verification Charge"
+            : "Platform Charge"}
         </p>
         <p className="text-sm text-gray-600 mt-1">
           Due Date: {formatDate(invoice.dueDate || "N/A")}

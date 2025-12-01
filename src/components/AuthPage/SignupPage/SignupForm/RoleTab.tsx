@@ -35,7 +35,7 @@ const RoleTab = ({
             className={`relative border py-2 px-3 rounded-xl text-start flex items-center justify-between gap-6 cursor-pointer transform duration-300 ${
               isActive
                 ? "bg-blue-100/80 text-neutral-10 border-2 border-primary-10"
-                : "bg-white text-neutral-10 hover:bg-neutral-50/40 border-white"
+                : "bg-neutral-50/40 text-neutral-10 hover:bg-neutral-50/80 border-white"
             }`}
           >
             {/* Tick mark positioned above */}

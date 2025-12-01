@@ -1,10 +1,5 @@
-import { useState } from "react";
 import { ICONS } from "../../../../assets";
 import SupportBar from "../../../../components/Dashboard/SupportBar/SupportBar";
-import Button from "../../../../components/Reusable/Button/Button";
-import Modal from "../../../../components/Reusable/Modal/Modal";
-import SelectPaymentMethod from "../../../../components/Dashboard/Payment/SelectPaymentMethod/SelectPaymentMethod";
-import SelectedPaymentMethod from "../../../../components/Dashboard/Payment/SelectedPaymentMethod/SelectedPaymentMethod";
 import type { TLoggedInUser } from "../../../../types/loggedinUser.types";
 import { useCurrentUser } from "../../../../redux/Features/Auth/authSlice";
 import { useSelector } from "react-redux";
@@ -13,23 +8,22 @@ import { useUser } from "../../../../contexts/UserContext";
 const Payment = () => {
   const user = useSelector(useCurrentUser) as TLoggedInUser;
   const { user: myProfile } = useUser();
-  const [paidFor, setPaidFor] = useState<string>("");
-  const [isPaymentModalOpen, setIsPaymentModalOpen] = useState<boolean>(false);
-  const [paymentModalType, setPaymentModalType] = useState<
-    "selectPaymentMethod" | "addPaymentDetails" | "paymentSuccess"
-  >("selectPaymentMethod");
+  // const [paidFor, setPaidFor] = useState<string>("");
+  // const [isPaymentModalOpen, setIsPaymentModalOpen] = useState<boolean>(false);
+  // const [paymentModalType, setPaymentModalType] = useState<
+  //   "selectPaymentMethod" | "addPaymentDetails" | "paymentSuccess"
+  // >("selectPaymentMethod");
 
-  const [selectedPaymentMethod, setSelectedPaymentMethod] = useState<
-    "bankTransfer" | "bKash" | "nagad" | string
-  >("");
+  // const [selectedPaymentMethod, setSelectedPaymentMethod] = useState<
+  //   "bankTransfer" | "bKash" | "nagad" | string
+  // >("");
 
-  const [selectedAmount, setSelectedAmount] = useState<number>(0);
+  // const [selectedAmount, setSelectedAmount] = useState<number>(0);
 
   // Charge details
   const charges = [
     {
       title: "Platform Charge",
-      amount: 500,
       icon: ICONS.platformCharge,
       description:
         "After confirming a tutor for a job, we take a one-time platform charge as a service fee for using our platform. This fee is collected only once for each tuition job.",
@@ -37,7 +31,6 @@ const Payment = () => {
     },
     {
       title: "Verification Charge",
-      amount: 500,
       icon: ICONS.verificationCharge,
       description:
         "A one-time verification fee that covers the review of your tutor profile, academic documents, and identity to ensure maximum trust, safety, and authenticity across our platform.",
@@ -61,14 +54,11 @@ const Payment = () => {
             <img src={charge.icon} alt={charge.title} className="size-20" />
 
             <div className="text-neutral-10 text-center">
-              <h1 className="font-bold text-xl">
-                {charge.title}{" "}
-                <span className="text-primary-10">{charge.amount} BDT</span>
-              </h1>
+              <h1 className="font-bold text-xl">{charge.title} </h1>
               <p className="text-sm mt-[6px]">{charge.description}</p>
             </div>
 
-            <Button
+            {/* <Button
               type="button"
               label={charge?.isPaid ? "Paid" : "Pay Now"}
               variant={charge?.isPaid ? "primary" : "tertiary"}
@@ -80,7 +70,7 @@ const Payment = () => {
                 setPaymentModalType("selectPaymentMethod");
                 setPaidFor(charge?.title);
               }}
-            />
+            /> */}
           </div>
         ))}
       </div>
@@ -88,7 +78,7 @@ const Payment = () => {
       <SupportBar />
 
       {/* Payment Modal */}
-      <Modal
+      {/* <Modal
         isModalOpen={isPaymentModalOpen}
         setIsModalOpen={setIsPaymentModalOpen}
         width="w-[90%] md:w-auto max-h-[600px] overflow-y-auto"
@@ -107,7 +97,7 @@ const Payment = () => {
             paidFor={paidFor}
           />
         )}
-      </Modal>
+      </Modal> */}
     </div>
   );
 };

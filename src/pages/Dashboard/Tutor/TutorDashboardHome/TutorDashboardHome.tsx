@@ -147,7 +147,7 @@ const TutorDashboardHome = () => {
             icon={ICONS.profileUnverified}
             value={"Not Verified"}
             titleColor={"text-primary-10"}
-            valueColor={"text-accent-20"}
+            valueColor={"text-primary-10"}
             btnLabel={"Verify Now"}
             path={""}
           />
