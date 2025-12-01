@@ -17,28 +17,30 @@ type TFormData = {
 };
 
 const ForgotPasswordForm = () => {
-  const [forgotPassword,{isLoading}]= useForgotPasswordMutation();
+  const [forgotPassword, { isLoading }] = useForgotPasswordMutation();
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<TFormData>();
-  const navigate= useNavigate();
-  const handleForgotPassword =async (data: TFormData) => {
-    try{const payload={
-    phoneNumber:data.phoneNumber
-   }
-   if (data.phoneNumber) {
-     localStorage.setItem("forgetPasswordPhNo", data.phoneNumber);
-   }
-   const res= await forgotPassword(payload).unwrap();
-   if(res.success){
-    navigate("/verify-otp",{state:{from:"forgot-password"}});
-   }
-  }catch(err:any){
-    toast.error(err?.data?.message || "Failed to send OTP. Please try again.");
-  }
-   
+  const navigate = useNavigate();
+  const handleForgotPassword = async (data: TFormData) => {
+    try {
+      const payload = {
+        phoneNumber: data.phoneNumber,
+      };
+      if (data.phoneNumber) {
+        localStorage.setItem("forgetPasswordPhNo", data.phoneNumber);
+      }
+      const res = await forgotPassword(payload).unwrap();
+      if (res.success) {
+        navigate("/verify-otp", { state: { from: "forgot-password" } });
+      }
+    } catch (err: any) {
+      toast.error(
+        err?.data?.message || "Failed to send OTP. Please try again."
+      );
+    }
   };
 
   const [activeTab, setActiveTab] = useState<string>("phone");
@@ -87,17 +89,18 @@ const ForgotPasswordForm = () => {
           ))}
         </div>
 
-        
-          <TextInput
-            label="Phone Number"
-            placeholder="Enter your registered phone number"
-            type="number"
-            error={errors.phoneNumber}
-            {...register("phoneNumber", {
-              required: "Phone number is required",
-            })}
-          />
-        
+        <TextInput
+          label="Phone Number"
+          placeholder="Enter your registered phone number"
+          type="text"
+          error={errors.phoneNumber}
+          {...register("phoneNumber", {
+            required: "Phone number is required",
+            validate: (value) =>
+              /^(01)\d{9}$/.test(String(value)) ||
+              "Phone number must start with 01 and be exactly 11 digits",
+          })}
+        />
 
         <div className="flex md:gap-0 items-center justify-between">
           <Button

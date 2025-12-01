@@ -76,8 +76,14 @@ const TuitionRequestForm = () => {
           error={errors.guardianPhoneNumber}
           {...register("guardianPhoneNumber", {
             required: "Phone number is required",
+            pattern: {
+              value: /^(01)\d{9}$/,
+              message:
+                "Phone number must start with 01 and be exactly 11 digits",
+            },
           })}
         />
+
         <TextInput
           label="Student's Class/Grade (Optional)"
           placeholder="Enter student's class/grade"

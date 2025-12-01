@@ -137,13 +137,14 @@ const SignupForm = ({
           <TextInput
             label="Phone Number"
             placeholder="Enter your phone number"
-            type="number"
+            type="text"
             error={errors.phoneNumber}
             {...register("phoneNumber", {
               required: "Phone number is required",
               pattern: {
-                value: /^[0-9]{10,15}$/,
-                message: "Invalid phone number",
+                value: /^(01)\d{9}$/,
+                message:
+                  "Phone number must start with 01 and be exactly 11 digits",
               },
             })}
           />
@@ -152,7 +153,7 @@ const SignupForm = ({
           <SelectDropdownWithSearch
             label="Gender"
             name="gender"
-            options={["Male", "Female", "Other"]}
+            options={["Male", "Female"]}
             onChange={(value) => setValue("gender", value.toLocaleLowerCase())}
             isRequired={true}
             error={fieldErrors.gender}

@@ -8,7 +8,13 @@ import { useEffect, useState } from "react";
 import type { TJobs } from "../../../types/job.types";
 import type { TLoggedInUser } from "../../../types/loggedinUser.types";
 
-const JobDetailsForm = ({ defaultValues, user }: { defaultValues?: TJobs, user?:TLoggedInUser }) => {
+const JobDetailsForm = ({
+  defaultValues,
+  user,
+}: {
+  defaultValues?: TJobs;
+  user?: TLoggedInUser;
+}) => {
   const {
     register,
     formState: { errors },
@@ -186,9 +192,15 @@ const JobDetailsForm = ({ defaultValues, user }: { defaultValues?: TJobs, user?:
         {user?.role === "admin" && (
           <TextInput
             label="Guardian Phone Number"
-            placeholder="Enter guardian phone number"
+            placeholder="Enter guardian's phone number"
             error={errors.guardianPhoneNumber}
-            {...register("guardianPhoneNumber")}
+            {...register("guardianPhoneNumber", {
+              pattern: {
+                value: /^(01)\d{9}$/,
+                message:
+                  "Phone number must start with 01 and be exactly 11 digits",
+              },
+            })}
           />
         )}
       </div>
