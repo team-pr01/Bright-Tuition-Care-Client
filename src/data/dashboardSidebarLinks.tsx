@@ -151,7 +151,7 @@ export const adminDashboardLinks: DashboardLink[] = [
   },
   {
     label: "All Jobs",
-    path: "/dashboard/admin/all-jobs",
+    path: "/dashboard/admin/all-jobs/all",
     icon: <BsBriefcase />,
   },
   {

@@ -9,8 +9,12 @@ import Textarea from "../../Reusable/TextArea/TextArea";
 import { ICONS } from "../../../assets";
 import { useEffect, useState } from "react";
 import SelectDropdown from "../../Reusable/SelectDropdown/SelectDropdown";
+import { useSelector } from "react-redux";
+import type { TLoggedInUser } from "../../../types/loggedinUser.types";
+import { useCurrentUser } from "../../../redux/Features/Auth/authSlice";
 
 const Preview = () => {
+  const user = useSelector(useCurrentUser) as TLoggedInUser;
   const [isEditEnable, setIsEditEnable] = useState<boolean>(false);
   const {
     register,

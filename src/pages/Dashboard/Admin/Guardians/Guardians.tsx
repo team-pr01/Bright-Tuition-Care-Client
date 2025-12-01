@@ -13,7 +13,10 @@ import {
 import { formatDate } from "../../../../utils/formatDate";
 import { HiOutlineUserCircle } from "react-icons/hi";
 import toast from "react-hot-toast";
-import { useActiveUserMutation, useToggleProfileStatusMutation } from "../../../../redux/Features/User/userApi";
+import {
+  useActiveUserMutation,
+  useToggleProfileStatusMutation,
+} from "../../../../redux/Features/User/userApi";
 import { IMAGES } from "../../../../assets";
 import { VscLock, VscUnlock } from "react-icons/vsc";
 import UnlockRequestReasonModal from "../../../../components/Admin/Tutors/UnlockRequestReasonModal";
@@ -37,7 +40,7 @@ const Guardians = () => {
   );
   const [isSuspendUserModalOpen, setIsSuspendUserModalOpen] =
     useState<boolean>(false);
-    const [unlockReason, setUnlockReason] = useState<string>("");
+  const [unlockReason, setUnlockReason] = useState<string>("");
   const [isUnlockRequestReasonModalOpen, setIsUnlockRequestReasonModalOpen] =
     useState<boolean>(false);
 
@@ -90,19 +93,19 @@ const Guardians = () => {
     }
   };
 
-    const handleToggleGuardianProfile = async (id: string) => {
-      try {
-        await toast.promise(toggleProfileStatus(id).unwrap(), {
-          loading: "Loading...",
-          success: "Status changed successfully!",
-          error: "Failed to change status. Please try again.",
-        });
-      } catch (err: any) {
-        toast.error(
-          err?.data?.message || "Failed to change status. Please try again."
-        );
-      }
-    };
+  const handleToggleGuardianProfile = async (id: string) => {
+    try {
+      await toast.promise(toggleProfileStatus(id).unwrap(), {
+        loading: "Loading...",
+        success: "Status changed successfully!",
+        error: "Failed to change status. Please try again.",
+      });
+    } catch (err: any) {
+      toast.error(
+        err?.data?.message || "Failed to change status. Please try again."
+      );
+    }
+  };
 
   // Action Menu
   const actions: TableAction<any>[] = [
@@ -112,7 +115,7 @@ const Guardians = () => {
       onClick: (row) => navigate(`/dashboard/admin/guardian/${row._id}`),
     },
     {
-      label: "Suspend",
+      label: "Deactivate User",
       icon: <FiSlash className="inline mr-2" />,
       onClick: (row) => {
         setSelectedGuardianId(row.userId);
@@ -168,7 +171,7 @@ const Guardians = () => {
             : "bg-green-100 text-green-600"
         }`}
       >
-        {guardian.isSuspended ? "Suspended" : "Active"}
+        {guardian.isSuspended ? "Deactivated" : "Active"}
       </span>
     ),
     profileStatus: (
@@ -207,7 +210,9 @@ const Guardians = () => {
       <button
         onClick={() => {
           setIsUnlockRequestReasonModalOpen(true);
-          setUnlockReason(guardian?.unlockRequestReason || "No reason provided");
+          setUnlockReason(
+            guardian?.unlockRequestReason || "No reason provided"
+          );
         }}
         className={`${
           guardian?.hasAppliedForUnlock

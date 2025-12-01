@@ -7,22 +7,8 @@ import MultiSelectDropdown from "../../../Reusable/MultiSelectDropdown/MultiSele
 import SelectDropdown from "../../../Reusable/SelectDropdown/SelectDropdown";
 import { Link } from "react-router-dom";
 import { RxArrowTopRight } from "react-icons/rx";
-import {
-  FaCheckCircle,
-  FaHourglassHalf,
-  FaListAlt,
-  FaTimesCircle,
-} from "react-icons/fa";
-import { MdLock } from "react-icons/md";
 
-type TAllJobFiltersProps = TFiltersProps & {
-  totalJobs: number;
-  liveJobs: number;
-  closedJobs: number;
-  pendingJobs: number;
-  cancelledJobs: number;
-};
-const AllJobFilters: React.FC<TAllJobFiltersProps> = ({
+const AllJobFilters: React.FC<TFiltersProps> = ({
   keyword,
   setKeyword,
   selectedCities,
@@ -43,13 +29,6 @@ const AllJobFilters: React.FC<TAllJobFiltersProps> = ({
   setSelectedStudentGender,
   selectedTuitionType,
   setSelectedTuitionType,
-  totalJobs,
-  liveJobs,
-  closedJobs,
-  pendingJobs,
-  cancelledJobs,
-  status,
-  setStatus,
 }) => {
   const [isAccordingOpen, setIsAccordingOpen] = useState<boolean>(false);
   const handleResetFilters = () => {
@@ -146,51 +125,8 @@ const AllJobFilters: React.FC<TAllJobFiltersProps> = ({
 
   return (
     <>
-      <div className="flex flex-col 2xl:flex-row items-start 2xl:items-center justify-between gap-6 2xl:gap-0">
-        {/* Status counter */}
-        <div className="flex items-center gap-4">
-          {/* Total Jobs */}
-          <div className="flex flex-col md:flex-row items-center gap-1.5">
-            <FaListAlt className="text-primary-50 text-xl sm:text-2xl" />
-            <h1 className="text-xs sm:text-sm md:text-base font-semibold text-primary-50">
-              {totalJobs} Total
-            </h1>
-          </div>
-
-          {/* Live Jobs */}
-          <div className="flex flex-col md:flex-row items-center gap-1.5">
-            <FaCheckCircle className="text-green-500 text-xl sm:text-2xl" />
-            <h1 className="text-xs sm:text-sm md:text-base font-semibold text-primary-50">
-              {liveJobs} Live
-            </h1>
-          </div>
-
-          {/* Pending Jobs */}
-          <div className="flex flex-col md:flex-row items-center gap-1.5">
-            <FaHourglassHalf className="text-yellow-500 text-xl sm:text-2xl" />
-            <h1 className="text-xs sm:text-sm md:text-base font-semibold text-primary-50">
-              {pendingJobs} Pending
-            </h1>
-          </div>
-
-          {/* Closed Jobs */}
-          <div className="flex flex-col md:flex-row items-center gap-1.5">
-            <MdLock className="text-purple-500 text-xl sm:text-2xl" />
-            <h1 className="text-xs sm:text-sm md:text-base font-semibold text-primary-50">
-              {closedJobs} Closed
-            </h1>
-          </div>
-
-          {/* Cancelled Jobs */}
-          <div className="flex flex-col md:flex-row items-center gap-1.5">
-            <FaTimesCircle className="text-red-500 text-xl sm:text-2xl" />
-            <h1 className="text-xs sm:text-sm md:text-base font-semibold text-primary-50">
-              {cancelledJobs} Cancelled
-            </h1>
-          </div>
-        </div>
-
-        <div className="flex flex-col md:flex-row items-start md:items-center gap-3">
+      <div className="flex flex-col 2xl:flex-row items-start 2xl:items-center justify-between gap-6 2xl:gap-0 mt-10">
+        <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-3 w-full">
           <div className="flex items-center gap-3">
             <SearchInput
               value={keyword}
@@ -199,20 +135,6 @@ const AllJobFilters: React.FC<TAllJobFiltersProps> = ({
               }
               placeholder="Search by job title or id..."
             />
-            <select
-              value={status}
-              onChange={(e) => setStatus && setStatus(e.target.value)}
-              className="px-3 py-2 bg-white border border-primary-30 rounded-lg cursor-pointer focus:outline-none focus:border-primary-30"
-            >
-              <option value="">All</option>
-              <option value="pending">Pending</option>
-              <option value="live">Live</option>
-              <option value="closed">Closed</option>
-              <option value="cancelled">Cancelled</option>
-            </select>
-          </div>
-
-          <div className="flex items-center gap-3">
             <button
               onClick={() => setIsAccordingOpen(!isAccordingOpen)}
               className="flex items-center justify-center gap-[10px] px-3 py-2 bg-white border border-primary-30 rounded-lg cursor-pointer w-[145px]"
@@ -220,14 +142,13 @@ const AllJobFilters: React.FC<TAllJobFiltersProps> = ({
               <img src={ICONS.filter} alt="" className="size-5" />
               <h1 className="font-medium leading-6 text-primary-50">Filters</h1>
             </button>
-
-            <Link
-              to="/dashboard/admin/hire-a-tutor"
-              className={`bg-primary-10 hover:bg-primary-20 hover:text-primary-10 transition duration-300 font-semibold text-white rounded-lg flex items-center gap-2 px-3 py-2 pointer`}
-            >
-              Hire a Tutor <RxArrowTopRight className="text-lg" />
-            </Link>
           </div>
+          <Link
+            to="/dashboard/admin/hire-a-tutor"
+            className={`bg-primary-10 hover:bg-primary-20 hover:text-primary-10 transition duration-300 font-semibold text-white rounded-lg flex items-center gap-2 px-3 py-2 pointer`}
+          >
+            Hire a Tutor <RxArrowTopRight className="text-lg" />
+          </Link>
         </div>
       </div>
 

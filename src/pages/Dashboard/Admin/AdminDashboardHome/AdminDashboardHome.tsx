@@ -21,6 +21,7 @@ import {
   FaDollarSign,
 } from "react-icons/fa";
 import { useGetAdminStatsQuery } from "../../../../redux/Features/Admin/adminApi";
+import { MdVerified } from "react-icons/md";
 
 // --- Custom Tooltip ---
 const CustomTooltip = ({ active, payload, label }: any) => {
@@ -103,6 +104,15 @@ const AdminDashboardHome = () => {
           textColor="text-neutral-10"
           path="/dashboard/admin/posted-jobs"
           icon={<FaClock className="text-[#EF4444]" />}
+        />
+
+        <DashboardOverviewCard
+          title="Verification"
+          additionalTitle="Requests"
+          value={adminStats?.data?.pendingJobs || 0}
+          textColor="text-neutral-10"
+          path="/dashboard/admin/posted-jobs"
+          icon={<MdVerified className="text-primary-10" />}
         />
 
         <DashboardOverviewCard

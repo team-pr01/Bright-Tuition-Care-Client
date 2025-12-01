@@ -15,6 +15,9 @@ import toast from "react-hot-toast";
 import { useSelector } from "react-redux";
 import { useCurrentUser } from "../../../../redux/Features/Auth/authSlice";
 import type { TLoggedInUser } from "../../../../types/loggedinUser.types";
+import { LuUser } from "react-icons/lu";
+import { SlPhone } from "react-icons/sl";
+import { formatDate } from "../../../../utils/formatDate";
 
 type TJobCardProps = {
   variant?: string;
@@ -156,7 +159,7 @@ const JobCard: React.FC<TJobCardProps> = ({
             Job Id : <span className="font-semibold">{job?.jobId}</span>
           </p>
           <p>
-            Posted Date : <span className="font-semibold">August 15, 2025</span>
+            Posted Date : <span className="font-semibold">{formatDate(job?.createdAt as string)}</span>
           </p>
         </div>
 
@@ -196,6 +199,33 @@ const JobCard: React.FC<TJobCardProps> = ({
             </p>
           </div>
         </div>
+
+        {variant === "admin" && (
+          <div className="flex items-center gap-3 mt-5">
+            <div className="flex gap-2">
+              <LuUser className="text-primary-10 text-xl mt-1" />
+              <div>
+                <p className="text-neutral-45 text-sm leading-normal">
+                  Guardian Name
+                </p>
+                <p className="text-neutral-10 font-medium leading-6 mt-1">
+                  {job?.guardianName || "N/A"}
+                </p>
+              </div>
+            </div>
+            <div className="flex gap-2">
+              <SlPhone className="text-primary-10 text-lg mt-1" />
+              <div>
+                <p className="text-neutral-45 text-sm leading-normal">
+                  Guardian Phone Number
+                </p>
+                <p className="text-neutral-10 font-medium leading-6 mt-1">
+                  {job?.guardianPhoneNumber || "N/A"}
+                </p>
+              </div>
+            </div>
+          </div>
+        )}
 
         {variant === "status" && (
           <div className="flex items-center gap-5 text-neutral-10 text-xs md:text-sm">

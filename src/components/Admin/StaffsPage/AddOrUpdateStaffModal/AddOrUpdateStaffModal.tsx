@@ -62,7 +62,6 @@ const AddOrUpdateStaffModal: React.FC<TAddOrUpdateStaffModalProps> = ({
   } = useForm<TFormData>();
 
   const selectedCity = watch("city");
-  const [areaOptions, setAreaOptions] = useState<string[]>([]);
   const selectedGender = watch("gender");
   const selectedArea = watch("area");
 
@@ -79,30 +78,6 @@ const AddOrUpdateStaffModal: React.FC<TAddOrUpdateStaffModalProps> = ({
       reset();
     }
   }, [defaultValues, modalType, reset, setValue]);
-
-  useEffect(() => {
-    if (!selectedCity) {
-      setAreaOptions([]);
-      setValue("area", "");
-      return;
-    }
-
-    const cityObj = filterData.cityCorporationWithLocation.find(
-      (city) => city.name === selectedCity
-    );
-    const locations = cityObj?.locations || [];
-    setAreaOptions(locations);
-    if (modalType === "add") {
-      setValue("area", "");
-    }
-
-    if (modalType === "edit" && defaultValues?.userId?.area) {
-      const exists = locations.includes(defaultValues.userId.area);
-      if (exists) {
-        setValue("area", defaultValues.userId.area);
-      }
-    }
-  }, [selectedCity, setValue, defaultValues, modalType]);
 
   const handleSubmitStaff = async (data: TFormData) => {
     if (!selectedCity) {
@@ -206,7 +181,7 @@ const AddOrUpdateStaffModal: React.FC<TAddOrUpdateStaffModalProps> = ({
               })}
             />
 
-            {/* Phone */}
+            {/* Job Role */}
             <TextInput
               label="Job Role"
               placeholder="Enter job role"
@@ -221,7 +196,7 @@ const AddOrUpdateStaffModal: React.FC<TAddOrUpdateStaffModalProps> = ({
               label="Gender"
               name="gender"
               value={selectedGender}
-              options={["male", "female", "other"]}
+              options={["male", "female"]}
               onChange={(value) => setValue("gender", value)}
               isRequired={true}
               error={fieldErrors.gender}
@@ -241,14 +216,14 @@ const AddOrUpdateStaffModal: React.FC<TAddOrUpdateStaffModalProps> = ({
             />
 
             {/* Area Dropdown */}
-            <SelectDropdownWithSearch
+            {/* Phone */}
+            <TextInput
               label="Location"
-              name="area"
-              options={areaOptions}
-              value={watch("area")}
-              onChange={(value) => setValue("area", value)}
-              isRequired={true}
-              error={fieldErrors.area}
+              placeholder="Enter staff location"
+              error={errors.area}
+              {...register("area", {
+                required: "Location is required",
+              })}
             />
 
             {/* Password */}

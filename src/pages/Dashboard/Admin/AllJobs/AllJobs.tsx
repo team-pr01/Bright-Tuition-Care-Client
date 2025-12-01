@@ -5,10 +5,22 @@ import { useDebounce } from "../../../../hooks/useDebounce";
 import { useGetAllJobsQuery } from "../../../../redux/Features/Job/jobApi";
 import Jobs from "../../../../components/JobBoardPage/Jobs/Jobs";
 import JobCardSkeleton from "../../../../components/JobBoardPage/Jobs/JobCard/JobCardSkeleton";
+import {
+  FaBriefcase,
+  FaClock,
+  FaBullhorn,
+  FaListUl,
+  FaUserCheck,
+  FaCheckCircle,
+  FaTimesCircle,
+} from "react-icons/fa";
+import DashboardOverviewCard from "../../../../components/Dashboard/DashboardOverviewCard/DashboardOverviewCard";
+import { useParams } from "react-router-dom";
 
 const AllJobs = () => {
+  const { jobStatus } = useParams();
   const [keyword, setKeyword] = useState<string>("");
-    const [status, setStatus] = useState<string>("");
+  const [status, setStatus] = useState<string>(jobStatus || "");
   const [selectedCities, setSelectedCities] = useState<string[]>([]);
   const [selectedAreas, setSelectedAreas] = useState<string[]>([]);
   const [areaOptions, setAreaOptions] = useState<string[]>([]);
@@ -44,6 +56,10 @@ const AllJobs = () => {
     status: status === "" ? undefined : status,
     skip,
   });
+
+  useEffect(() => {
+    if (jobStatus) setStatus(jobStatus);
+  }, [jobStatus]);
 
   // Update jobs when new data arrives
   useEffect(() => {
@@ -100,8 +116,84 @@ const AllJobs = () => {
     };
   }, [allJobs, isFetching, allJobs?.data?.meta?.hasMore]);
 
+  const jobsData = allJobs?.data || [];
+  const jobStats = {
+    totalJobs: jobsData?.meta?.total || 0,
+    pendingJobs: jobsData?.meta?.pendingJobs || 0,
+    liveJobs: jobsData?.meta?.liveJobs || 0,
+    shortlistedJobs: jobsData?.meta?.shortlistedJobs || 0,
+    appointedJobs: jobsData?.meta?.appointedJobs || 0,
+    totalConfirmedJob: jobsData?.meta?.closedJobs || 0,
+    totalCancelledJob: jobsData?.meta?.cancelledJobs || 0,
+  };
+
   return (
     <div>
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
+        <DashboardOverviewCard
+          title="All"
+          additionalTitle="Jobs"
+          value={jobStats.totalJobs}
+          textColor="text-neutral-10"
+          path="/dashboard/admin/all-jobs/all"
+          icon={<FaBriefcase className="text-[#6366F1]" />}
+        />
+
+        <DashboardOverviewCard
+          title="Pending"
+          additionalTitle="Jobs"
+          value={jobStats.pendingJobs}
+          textColor="text-neutral-10"
+          path="/dashboard/admin/all-jobs/pending"
+          icon={<FaClock className="text-[#F59E0B]" />}
+        />
+
+        <DashboardOverviewCard
+          title="Live"
+          additionalTitle="Jobs"
+          value={jobStats.liveJobs}
+          textColor="text-neutral-10"
+          path="/dashboard/admin/all-jobs/live"
+          icon={<FaBullhorn className="text-[#3B82F6]" />}
+        />
+
+        <DashboardOverviewCard
+          title="Shortlisted"
+          additionalTitle="Jobs"
+          value={jobStats.shortlistedJobs}
+          textColor="text-neutral-10"
+          path="/dashboard/admin/all-jobs/all"
+          icon={<FaListUl className="text-[#8B5CF6]" />}
+        />
+
+        <DashboardOverviewCard
+          title="Appointed"
+          additionalTitle="Jobs"
+          value={jobStats.appointedJobs}
+          textColor="text-neutral-10"
+          path="/dashboard/admin/all-jobs/all"
+          icon={<FaUserCheck className="text-[#10B981]" />}
+        />
+
+        <DashboardOverviewCard
+          title="Confirmed"
+          additionalTitle="Jobs"
+          value={jobStats.totalConfirmedJob}
+          textColor="text-neutral-10"
+          path="/dashboard/admin/all-jobs/closed"
+          icon={<FaCheckCircle className="text-[#22C55E]" />}
+        />
+
+        <DashboardOverviewCard
+          title="Cancelled"
+          additionalTitle="Jobs"
+          value={jobStats.totalCancelledJob}
+          textColor="text-neutral-10"
+          path="/dashboard/admin/all-jobs/cancelled"
+          icon={<FaTimesCircle className="text-[#EF4444]" />}
+        />
+      </div>
+
       <AllJobFilters
         keyword={keyword}
         setKeyword={setKeyword}
@@ -123,30 +215,28 @@ const AllJobs = () => {
         setSelectedStudentGender={setSelectedStudentGender}
         selectedTuitionType={selectedTuitionType}
         setSelectedTuitionType={setSelectedTuitionType}
-        totalJobs={allJobs?.data?.meta?.total || 0}
-        pendingJobs={allJobs?.data?.meta?.pendingJobs || 0}
-        closedJobs={allJobs?.data?.meta?.closedJobs || 0}
         liveJobs={allJobs?.data?.meta?.liveJobs || 0}
-        cancelledJobs={allJobs?.data?.meta?.cancelledJobs || 0}
         status={status}
         setStatus={setStatus}
       />
 
-      <Jobs allJobs={jobs} isLoading={isLoading || isFetching} variant="admin" />
-        <div ref={loaderRef} className="h-10"></div>
+      <Jobs
+        allJobs={jobs}
+        isLoading={isLoading || isFetching}
+        variant="admin"
+      />
+      <div ref={loaderRef} className="h-10"></div>
 
-        {allJobs?.data?.meta?.hasMore && isFetching && (
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            {Array.from({ length: 3 }).map((_, i) => (
-              <JobCardSkeleton key={i} />
-            ))}
-          </div>
-        )}
-        {!allJobs?.data?.meta?.hasMore && !isFetching && (
-          <p className="text-center mt-4 text-gray-400">
-            No more jobs to load.
-          </p>
-        )}
+      {allJobs?.data?.meta?.hasMore && isFetching && (
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          {Array.from({ length: 3 }).map((_, i) => (
+            <JobCardSkeleton key={i} />
+          ))}
+        </div>
+      )}
+      {!allJobs?.data?.meta?.hasMore && !isFetching && (
+        <p className="text-center mt-4 text-gray-400">No more jobs to load.</p>
+      )}
     </div>
   );
 };

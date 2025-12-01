@@ -344,7 +344,7 @@ export const router = createBrowserRouter([
         element: <TutorsResume />,
       },
       {
-        path: "all-jobs",
+        path: "all-jobs/:jobStatus",
         element: <AllJobs />,
       },
       {

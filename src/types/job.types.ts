@@ -34,4 +34,6 @@ export type TJobs = {
   applications: string[];
   postedBy: string;
   postedByModel: "User" | "Guardian";
+  createdAt: string;
+  updatedAt: string;
 };

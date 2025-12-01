@@ -16,7 +16,7 @@ const SuccessMessage = () => {
         Submitted Successfully!
       </h2>
 
-      <p className="text-lg md:text-xl text-gray-600 mb-8 max-w-2xl mx-auto leading-relaxed">
+      <p className="text-base text-gray-600 mb-8 max-w-2xl mx-auto leading-relaxed">
        Thank you for submitting your tutor request. One of our executives  will contact you within 24 hours to verify your requirements and publish it on our job board.
       </p>
 

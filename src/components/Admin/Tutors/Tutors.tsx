@@ -111,7 +111,7 @@ const Tutors = () => {
       onClick: (row) => navigate(`/dashboard/admin/tutor/${row._id}`),
     },
     {
-      label: "Suspend",
+      label: "Deactivate",
       icon: <FiSlash className="inline mr-2" />,
       onClick: (row) => {
         setSelectedTutorId(row.userId);
@@ -168,7 +168,7 @@ const Tutors = () => {
             : "bg-green-100 text-green-600"
         }`}
       >
-        {tutor.isSuspended ? "Suspended" : "Active"}
+        {tutor.isSuspended ? "Deactivated" : "Active"}
       </span>
     ),
     profileStatus: (

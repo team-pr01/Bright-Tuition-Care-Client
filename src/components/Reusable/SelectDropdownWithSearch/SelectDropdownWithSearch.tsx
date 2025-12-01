@@ -109,7 +109,7 @@ const SelectDropdownWithSearch = forwardRef<
                 filteredOptions.map((option) => (
                   <div
                     key={option}
-                    className={`px-4 py-2 cursor-pointer hover:bg-neutral-98 ${
+                    className={`px-4 py-2 cursor-pointer hover:bg-neutral-98 capitalize ${
                       selectedValue === option
                         ? "bg-neutral-98 font-medium"
                         : ""

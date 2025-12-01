@@ -74,9 +74,43 @@ const OtherLinks = ({
       icon: <RiFacebookFill />,
     },
   ];
+  const otherAdminLinks = [
+    {
+      label: "Terms & Conditions",
+      path: `/dashboard/${
+        user?.role === "tutor"
+          ? "tutor"
+          : user?.role === "guardian"
+          ? "guardian"
+          : "admin"
+      }/terms-and-conditions`,
+      icon: <LuFileText />,
+    },
+    {
+      label: "Refer And Earn",
+      path: "/dashboard/tutor/refer-and-earn",
+      icon: <LuAward />,
+    },
+    {
+      label: "Share The App",
+      path: `/dashboard/${
+        user?.role === "tutor"
+          ? "tutor"
+          : user?.role === "guardian"
+          ? "guardian"
+          : "admin"
+      }/share-app`,
+      icon: <LuShare2 />,
+    },
+    {
+      label: "Join Community",
+      path: "/dashboard/tutor/community",
+      icon: <RiFacebookFill />,
+    },
+  ];
 
   const otherLinks =
-    user?.role === "guardian" ? otherGuardianLinks : otherTutorLinks;
+    user?.role === "guardian" ? otherGuardianLinks : user?.role === "admin" ? otherAdminLinks : otherTutorLinks;
   return (
     <div className="flex flex-col gap-2">
       {otherLinks?.map((link: DashboardLink) => (
