@@ -64,6 +64,7 @@ const JobApplyConfirmationModal = ({
               variant="secondary"
               iconBg="#0D99FF"
               className="border border-neutral-55 min-w-[100px] flex items-center justify-center"
+              onClick={() => setIsJobApplyConfirmationModalOpen(false)}
             />
             <Button
               label="Apply Now"

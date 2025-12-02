@@ -6,6 +6,9 @@ import { useState } from "react";
 import SelectPaymentMethod from "../../../Payment/SelectPaymentMethod/SelectPaymentMethod";
 import SelectedPaymentMethod from "../../../Payment/SelectedPaymentMethod/SelectedPaymentMethod";
 import { formatDate } from "../../../../../utils/formatDate";
+import { useSelector } from "react-redux";
+import { useCurrentUser } from "../../../../../redux/Features/Auth/authSlice";
+import type { TLoggedInUser } from "../../../../../types/loggedinUser.types";
 
 const InvoicePreview = ({
   invoice,
@@ -14,7 +17,7 @@ const InvoicePreview = ({
   invoice: any;
   onBack: () => void;
 }) => {
-  const user = { role: "tutor" };
+  const user = useSelector(useCurrentUser) as TLoggedInUser;
   const [isPaymentModalOpen, setIsPaymentModalOpen] = useState<boolean>(false);
   const [paymentModalType, setPaymentModalType] = useState<
     "selectPaymentMethod" | "addPaymentDetails" | "paymentSuccess"

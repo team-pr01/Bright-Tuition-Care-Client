@@ -77,6 +77,11 @@ const AddLeadFormModal = ({
           error={errors.guardianPhoneNumber}
           {...register("guardianPhoneNumber", {
             required: "Guardian/Student number is required",
+            pattern: {
+              value: /^(01)\d{9}$/,
+              message:
+                "Phone number must start with 01 and be exactly 11 digits",
+            },
           })}
         />
         {/*Address */}

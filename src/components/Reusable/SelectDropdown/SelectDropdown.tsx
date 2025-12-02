@@ -14,21 +14,22 @@ interface DropdownProps {
 }
 
 const SelectDropdown = forwardRef<HTMLSelectElement, DropdownProps>(
-  ({ 
-    label, 
-    options, 
-    error, 
-    isRequired = true, 
-    isDisabled, 
-    value,
-    onChange,
-    ...rest 
-  }, ref) => {
-    
+  (
+    {
+      label,
+      options,
+      error,
+      isRequired = true,
+      isDisabled,
+      value,
+      onChange,
+      ...rest
+    },
+    ref
+  ) => {
     const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-  onChange?.(e);
-};
-
+      onChange?.(e.target.value);
+    };
 
     return (
       <div className="flex flex-col gap-2 font-Nunito w-full">
@@ -48,12 +49,10 @@ const SelectDropdown = forwardRef<HTMLSelectElement, DropdownProps>(
           onChange={handleChange}
           className={`w-full px-4 py-[11px] rounded-lg border leading-[18px] focus:outline-none focus:border-primary-10 transition duration-300 capitalize disabled:cursor-not-allowed ${
             isDisabled
-                ? "cursor-not-allowed bg-neutral-50/20"
-                : "bg-white cursor-pointer"
-            }
-           } ${
-            error ? "border-red-500" : "border-neutral-45/20"
-          }`}
+              ? "cursor-not-allowed bg-neutral-50/20"
+              : "bg-white cursor-pointer"
+          }
+           } ${error ? "border-red-500" : "border-neutral-45/20"}`}
           {...rest}
         >
           <option value="" disabled selected>

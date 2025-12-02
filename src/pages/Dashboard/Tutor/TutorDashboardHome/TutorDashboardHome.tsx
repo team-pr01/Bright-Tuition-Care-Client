@@ -13,8 +13,8 @@ import {
 } from "react-icons/fa";
 
 const TutorDashboardHome = () => {
-// const { user, isLoading } = useUser();
-// console.log(user);
+  // const { user, isLoading } = useUser();
+  // console.log(user);
   return (
     <div className="flex flex-col gap-4 md:gap-0 font-Nunito">
       <div className="flex items-center overflow-x-auto w-full gap-3 md:gap-6 bg-primary-10 md:bg-[#F2F5FC] py-5 px-3 lg:px-6 rounded-b-3xl md:rounded-b-none">
@@ -127,7 +127,7 @@ const TutorDashboardHome = () => {
             </div>
           </div>
 
-           <DashboardDataCard
+          <DashboardDataCard
             title={"Nearby Jobs"}
             description={"Because you have not confirmed any tuition job"}
             icon={ICONS.animatedLocation}
@@ -137,7 +137,6 @@ const TutorDashboardHome = () => {
             btnLabel={"View All"}
             path={""}
           />
-
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -152,7 +151,6 @@ const TutorDashboardHome = () => {
             path={""}
           />
 
-          
           <DashboardDataCard
             title={"Confirmation Letters"}
             description={"Because you have not confirmed any tuition job"}
@@ -163,7 +161,7 @@ const TutorDashboardHome = () => {
             btnLabel={"View All"}
             path={"/dashboard/tutor/confirmation-letters"}
           />
-         
+
           <DashboardDataCard
             title={"Invoice"}
             description={"Because you have not confirmed any tuition job"}

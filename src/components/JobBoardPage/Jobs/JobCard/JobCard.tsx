@@ -142,7 +142,7 @@ const JobCard: React.FC<TJobCardProps> = ({
       )}
 
       {/* Job Card */}
-      <div className="px-3 py-3 md:px-5 border border-primary-30 bg-white shadow-job-card rounded-xl font-Nunito transform transition-transform duration-300 hover:-translate-y-2 z-0 relative">
+      <div className="px-3 py-3 md:px-5 border border-primary-30 bg-white shadow-job-card rounded-xl font-Nunito transform transition-transform duration-300 hover:-translate-y-2 relative">
         <div className="flex justify-between gap-3">
           <button
             onClick={() => setShowDrawer(true)}
@@ -378,7 +378,8 @@ const JobCard: React.FC<TJobCardProps> = ({
                 <p className="hidden md:block">Share</p>
               </button>
             </div>
-            {status === "applied" && (
+
+            {pathname !== "/dashboard/tutor/my-applications" && (
               <Button
                 label={isApplied ? "Applied" : "Apply Now"}
                 variant="primary"

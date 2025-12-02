@@ -58,7 +58,7 @@ const TutorJobBoard = () => {
         });
       }
     }
-  }, [allJobs]);
+  }, [allJobs, skip]);
 
   // Reset pagination when filters or search change
   useEffect(() => {
@@ -99,7 +99,7 @@ const TutorJobBoard = () => {
     };
   }, [allJobs, isFetching, allJobs?.data?.meta?.hasMore]);
   return (
-    <div className="relative">
+    <div>
       <Filters
         keyword={keyword}
         setKeyword={setKeyword}

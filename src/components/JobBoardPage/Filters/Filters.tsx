@@ -96,7 +96,7 @@ const Filters: React.FC<TFiltersProps> = ({
     const uniqueLocations = [...new Set(locations)];
     setAreaOptions(uniqueLocations);
     setSelectedAreas([]);
-  }, [selectedCities]);
+  }, [selectedCities, setAreaOptions ,setSelectedAreas]);
 
   const [classOptions, setClassOptions] = useState<string[]>([]);
   const [subjectOptions, setSubjectOptions] = useState<string[]>([]);
@@ -124,7 +124,7 @@ const Filters: React.FC<TFiltersProps> = ({
     setSubjectOptions([]);
     setSelectedSubjects([]);
     setSelectedClass(""); // Reset class when category changes
-  }, [selectedCategory]);
+  }, [selectedCategory, setSelectedClass]);
 
   // ---------- UPDATE SUBJECT OPTIONS WHEN CLASS CHANGES ----------
   useEffect(() => {

@@ -153,7 +153,7 @@ const PaymentsManagement = () => {
       />
 
       {isProofModalOpen && selectedPaymentProof && (
-        <div className="fixed inset-0 bg-black bg-opacity-90 flex justify-center items-center z-50">
+        <div className="fixed inset-0 bg-black bg-opacity-90 flex justify-center items-center z-9999">
           {/* Close Button */}
           <button
             onClick={() => setIsProofModalOpen(false)}

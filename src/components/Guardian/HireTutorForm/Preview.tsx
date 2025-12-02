@@ -113,6 +113,7 @@ const Preview = () => {
             error={errors.guardianName}
             {...register("guardianName")}
             isRequired={false}
+            isDisabled={!isEditEnable}
           />
         )}
 
@@ -122,6 +123,7 @@ const Preview = () => {
             placeholder="Enter guardian phone number"
             error={errors.guardianPhoneNumber}
             {...register("guardianPhoneNumber")}
+            isDisabled={!isEditEnable}
           />
         )}
         

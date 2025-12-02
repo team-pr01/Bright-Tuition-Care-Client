@@ -8,7 +8,7 @@ import UserProfileDropdown from "./UserProfileDropdown/UserProfileDropdown";
 const DashboardHeader = () => {
   const user = useSelector(useCurrentUser) as TLoggedInUser;
   return (
-    <div className="px-3 lg:px-6 py-3 font-Nunito flex items-center justify-between sticky top-0 bg-white z-10 border-b border-neutral-50/40">
+    <div className="px-3 lg:px-6 py-3 font-Nunito flex items-center justify-between sticky top-0 bg-white border-b border-neutral-50/40">
       <DashboardHamburgerMenu />
       <div className="hidden xl:flex flex-col">
         <h1
