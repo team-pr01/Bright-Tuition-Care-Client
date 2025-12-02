@@ -1,11 +1,11 @@
 type TTutorialCardProps = {
   title: string;
-  description: string;
+  forUser: string;
   videoUrl: string;
 };
 const TutorialCard: React.FC<TTutorialCardProps> = ({
   title,
-  description,
+  forUser,
   videoUrl,
 }) => {
   return (
@@ -25,7 +25,7 @@ const TutorialCard: React.FC<TTutorialCardProps> = ({
           {title}
         </h1>
         <p className="text-neutral-5 text-sm mt-2">
-          {description}
+          {forUser}
         </p>
       </div>
     </div>

@@ -6,9 +6,9 @@ import JobDetails from "../../JobDetails/JobDetails";
 import JobApplyConfirmationModal from "../JobApplyConfirmationModal";
 import ShareJobModal from "../../ShareJobModal";
 import DeleteJobConfirmationModal from "../../../Reusable/DeleteJobConfirmationModal/DeleteJobConfirmationModal";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { TbMenuDeep } from "react-icons/tb";
-import { FiCheckCircle, FiX, FiXCircle } from "react-icons/fi";
+import { FiCheckCircle, FiInfo, FiX, FiXCircle } from "react-icons/fi";
 import type { TJobs } from "../../../../types/job.types";
 import { useUpdateJobMutation } from "../../../../redux/Features/Job/jobApi";
 import toast from "react-hot-toast";
@@ -24,13 +24,16 @@ type TJobCardProps = {
   status?: string;
   detailsWidth?: string;
   job?: TJobs;
+  appliedData?: any;
 };
 const JobCard: React.FC<TJobCardProps> = ({
   variant,
   status,
   detailsWidth = "max-w-full 2xl:max-w-[80%]",
   job,
+  appliedData,
 }) => {
+  const pathname = useLocation().pathname;
   const user = useSelector(useCurrentUser) as TLoggedInUser;
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement | null>(null);
@@ -124,6 +127,8 @@ const JobCard: React.FC<TJobCardProps> = ({
       {/* Smooth Overlay & Drawer */}
       {showDrawer && (
         <JobDetails
+          job={job}
+          status={status}
           setShowDrawer={setShowDrawer}
           setIsJobApplyConfirmationModalOpen={
             setIsJobApplyConfirmationModalOpen
@@ -131,6 +136,8 @@ const JobCard: React.FC<TJobCardProps> = ({
           isShareJobModalOpen={isShareJobModalOpen}
           setIsShareJobModalOpen={setIsShareJobModalOpen}
           link={shareUrl}
+          isApplied={isApplied}
+          applicationId={appliedData?._id}
         />
       )}
 
@@ -154,12 +161,21 @@ const JobCard: React.FC<TJobCardProps> = ({
           />
         </div>
 
-        <div className="flex items-center gap-5 text-neutral-10 text-xs sm:text-sm md:text-base mt-3 md:mt-0">
+        <div className="flex flex-wrap items-center gap-3 lg:gap-5 text-neutral-10 text-xs sm:text-sm md:text-base mt-3 md:mt-0">
           <p>
             Job Id : <span className="font-semibold">{job?.jobId}</span>
           </p>
           <p>
-            Posted Date : <span className="font-semibold">{formatDate(job?.createdAt as string)}</span>
+            Posted Date :{" "}
+            <span className="font-semibold">
+              {formatDate(job?.createdAt as string)}
+            </span>
+          </p>
+          <p>
+            Applied date :{" "}
+            <span className="font-semibold">
+              {formatDate(appliedData?.appliedOn as string)}
+            </span>
           </p>
         </div>
 
@@ -199,6 +215,26 @@ const JobCard: React.FC<TJobCardProps> = ({
             </p>
           </div>
         </div>
+
+        {pathname === "/dashboard/tutor/my-applications" && (
+          <div className="flex gap-2 mt-4">
+            <FiInfo className="text-primary-10 text-xl" />
+            <div>
+              <p className="text-neutral-45 text-sm leading-normal">Status</p>
+              <p
+                className={`font-medium leading-6 mt-1 capitalize ${
+                  job?.status === "live"
+                    ? "text-green-500"
+                    : job?.status === "closed"
+                    ? "text-red-500"
+                    : "text-neutral-10"
+                }`}
+              >
+                {job?.status}
+              </p>
+            </div>
+          </div>
+        )}
 
         {variant === "admin" && (
           <div className="flex items-center gap-3 mt-5">
@@ -342,20 +378,22 @@ const JobCard: React.FC<TJobCardProps> = ({
                 <p className="hidden md:block">Share</p>
               </button>
             </div>
-            <Button
-              label={isApplied ? "Applied" : "Apply Now"}
-              variant="primary"
-              icon={ICONS.topRightArrowWhite}
-              iconBg="#0D99FF"
-              onClick={() => {
-                if (!user) {
-                  toast.error("Please login to apply for a job.");
-                } else {
-                  setIsJobApplyConfirmationModalOpen(true);
-                }
-              }}
-              isDisabled={isApplied}
-            />
+            {status === "applied" && (
+              <Button
+                label={isApplied ? "Applied" : "Apply Now"}
+                variant="primary"
+                icon={ICONS.topRightArrowWhite}
+                iconBg="#0D99FF"
+                onClick={() => {
+                  if (!user) {
+                    toast.error("Please login to apply for a job.");
+                  } else {
+                    setIsJobApplyConfirmationModalOpen(true);
+                  }
+                }}
+                isDisabled={isApplied}
+              />
+            )}
           </div>
         )}
       </div>

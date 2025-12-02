@@ -1,15 +1,24 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { ICONS } from "../../../assets";
 import { motion, AnimatePresence } from "framer-motion";
 import Button from "../../Reusable/Button/Button";
 import ShareJobModal from "../ShareJobModal";
+import toast from "react-hot-toast";
+import { useWithdrawApplicationMutation } from "../../../redux/Features/Application/applicationApi";
 
 const JobDetails = ({
+  // job,
+  status,
   link,
   setShowDrawer,
   setIsJobApplyConfirmationModalOpen,
   isShareJobModalOpen,
   setIsShareJobModalOpen,
+  isApplied,
+  applicationId,
 }: {
+  job: any;
+  status?: string;
   link: string;
   setShowDrawer: React.Dispatch<React.SetStateAction<boolean>>;
   setIsJobApplyConfirmationModalOpen: React.Dispatch<
@@ -17,9 +26,11 @@ const JobDetails = ({
   >;
   isShareJobModalOpen: boolean;
   setIsShareJobModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  isApplied?: boolean;
+  applicationId?: string;
 }) => {
   const jobDetail2 = [
-     {
+    {
       icon: ICONS.tutoringDays,
       title: "Tutoring Days",
       value: "3 Days / Week",
@@ -30,13 +41,44 @@ const JobDetails = ({
     { icon: ICONS.numberOfStudents, title: "No. Of Students", value: "2" },
     { icon: ICONS.time, title: "Tutoring Time", value: "6:00 - 7:00 PM" },
     { icon: ICONS.tuitionType, title: "Tuition Type", value: "Home Tutoring" },
-   
+
     // { icon: ICONS.subject, title: "Subject", value: "All" },
 
     // { icon: ICONS.location, title: "Location", value: "Mohammodpur" },
     { icon: ICONS.preferedClass, title: "Class", value: "10" },
     { icon: ICONS.category, title: "Category", value: "Bangla Media" },
   ];
+
+  const [withdrawApplication, { isLoading: isWithdrawingApplication }] =
+    useWithdrawApplicationMutation();
+  // const [reApply, { isLoading: isReApplyOnJobLoading }] = useReApplyMutation();
+
+  const handleWithdrawApplication = async () => {
+    try {
+      const res = await withdrawApplication(applicationId).unwrap();
+      if (res?.success) {
+        toast.success("Application withdrawn successfully.");
+      }
+    } catch (error: any) {
+      toast.error(
+        error?.data?.message ||
+          "Error withdrawing application. Please try again."
+      );
+    }
+  };
+
+  // const handleReApplyOnJob = async (id: string) => {
+  //   try {
+  //     const response = await reApply(id).unwrap();
+  //     if (response?.success) {
+  //       toast.success(response.message || "Re-applied on job successfully.");
+  //     }
+  //   } catch (error: any) {
+  //     toast.error(
+  //       error?.data?.message || "Error applying on job. Please try again."
+  //     );
+  //   }
+  // };
   return (
     <AnimatePresence>
       <>
@@ -52,7 +94,7 @@ const JobDetails = ({
 
         {/* Drawer */}
         <motion.div
-          className="fixed top-0 left-0 w-full z-50 bg-white rounded-b-xl shadow-lg max-h-[95vh] overflow-y-auto p-5 md:p-8"
+          className="fixed top-0 left-0 w-full bg-white rounded-b-xl shadow-lg max-h-[95vh] overflow-y-auto p-5 md:p-8 z-9999"
           initial={{ y: "-100%" }}
           animate={{ y: 0 }}
           exit={{ y: "-100%" }}
@@ -147,12 +189,27 @@ const JobDetails = ({
                 iconBg="#0D99FF"
                 className="border border-neutral-55"
               />
-              <Button
-                label="Apply Now"
-                variant="primary"
-                iconBg="#0D99FF"
-                onClick={() => setIsJobApplyConfirmationModalOpen(true)}
-              />
+              {isApplied && (
+                <Button
+                  label={
+                    isWithdrawingApplication
+                      ? "Please wait..."
+                      : "Withdraw Application"
+                  }
+                  variant="primary"
+                  iconBg="#0D99FF"
+                  onClick={handleWithdrawApplication}
+                />
+              )}
+
+              {!status && (
+                <Button
+                  label={"Apply Now"}
+                  variant="primary"
+                  iconBg="#0D99FF"
+                  onClick={() => setIsJobApplyConfirmationModalOpen(true)}
+                />
+              )}
             </div>
           </div>
           <button

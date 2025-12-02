@@ -4,42 +4,115 @@ import { motion } from "framer-motion";
 
 const Tutorials = () => {
   const tutorialVideos = [
-    {
-      _id: 1,
-      title: "How to send tutor request",
-      description:
-        "Learn how to send a detailed tutor request to find the best educator for your needs.",
-      videoUrl: "https://www.youtube.com/embed/FzOGKQK-1PU?si=EYGmNjIx97WWJ6Tr",
-    },
-    {
-      _id: 2,
-      title: "Getting Started with Online Learning",
-      description:
-        "A beginner’s guide to navigating the online learning platform effectively.",
-      videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
-    },
-    {
-      _id: 3,
-      title: "Top 5 Tips for Effective Study",
-      description:
-        "Boost your learning productivity with these essential study tips.",
-      videoUrl: "https://www.youtube.com/embed/9bZkp7q19f0",
-    },
-    {
-      _id: 4,
-      title: "How to Choose the Right Tutor",
-      description:
-        "Understand key factors to consider when selecting a tutor for your academic goals.",
-      videoUrl: "https://www.youtube.com/embed/3JZ_D3ELwOQ",
-    },
-    {
-      _id: 5,
-      title: "Navigating the Student Dashboard",
-      description:
-        "Step-by-step tutorial on how to use your dashboard to access courses and track progress.",
-      videoUrl: "https://www.youtube.com/embed/L_jWHffIx5E",
-    },
-  ];
+  // ✅ For Students / Guardians
+  {
+    _id: 1,
+    title: "How to submit a tutor request",
+    videoUrl: "https://www.youtube.com/embed/FzOGKQK-1PU",
+    forUser: "For Students/Guardians",
+  },
+  {
+    _id: 2,
+    title: "How to sign in to an account",
+    videoUrl: "https://www.youtube.com/embed/FzOGKQK-1PU",
+    forUser: "For Students/Guardians",
+  },
+  {
+    _id: 3,
+    title: "How to update your profile",
+    videoUrl: "https://www.youtube.com/embed/FzOGKQK-1PU",
+    forUser: "For Students/Guardians",
+  },
+  {
+    _id: 4,
+    title: "How to reset your account password",
+    videoUrl: "https://www.youtube.com/embed/FzOGKQK-1PU",
+    forUser: "For Students/Guardians",
+  },
+  {
+    _id: 5,
+    title: "How to check your confirmation letter",
+    videoUrl: "https://www.youtube.com/embed/FzOGKQK-1PU",
+    forUser: "For Students/Guardians",
+  },
+  {
+    _id: 6,
+    title: "How to send profile unlock request",
+    videoUrl: "https://www.youtube.com/embed/FzOGKQK-1PU",
+    forUser: "For Students/Guardians",
+  },
+
+  // ✅ For Tutors
+  {
+    _id: 7,
+    title: "How to sign in to an account",
+    videoUrl: "https://www.youtube.com/embed/FzOGKQK-1PU",
+    forUser: "For Tutors",
+  },
+  {
+    _id: 8,
+    title: "How to update your profile",
+    videoUrl: "https://www.youtube.com/embed/FzOGKQK-1PU",
+    forUser: "For Tutors",
+  },
+  {
+    _id: 9,
+    title: "How to reset your account password",
+    videoUrl: "https://www.youtube.com/embed/FzOGKQK-1PU",
+    forUser: "For Tutors",
+  },
+  {
+    _id: 10,
+    title: "How to check your confirmation letter",
+    videoUrl: "https://www.youtube.com/embed/FzOGKQK-1PU",
+    forUser: "For Tutors",
+  },
+  {
+    _id: 11,
+    title: "Payment methods for tutors",
+    videoUrl: "https://www.youtube.com/embed/FzOGKQK-1PU",
+    forUser: "For Tutors",
+  },
+  {
+    _id: 12,
+    title: "How to submit a profile unlock request",
+    videoUrl: "https://www.youtube.com/embed/FzOGKQK-1PU",
+    forUser: "For Tutors",
+  },
+  {
+    _id: 13,
+    title: "How to send a profile verification request",
+    videoUrl: "https://www.youtube.com/embed/FzOGKQK-1PU",
+    forUser: "For Tutors",
+  },
+  {
+    _id: 14,
+    title: "How to apply for a tuition job",
+    videoUrl: "https://www.youtube.com/embed/FzOGKQK-1PU",
+    forUser: "For Tutors",
+  },
+
+  // ✅ For All
+  {
+    _id: 15,
+    title: "How to sign in to an account",
+    videoUrl: "https://www.youtube.com/embed/FzOGKQK-1PU",
+    forUser: "For All",
+  },
+  {
+    _id: 16,
+    title: "How to update your profile",
+    videoUrl: "https://www.youtube.com/embed/FzOGKQK-1PU",
+    forUser: "For All",
+  },
+  {
+    _id: 17,
+    title: "How to reset your account password",
+    videoUrl: "https://www.youtube.com/embed/FzOGKQK-1PU",
+    forUser: "For All",
+  },
+];
+
 
   const [activeTab, setActiveTab] = useState("For All");
   const tabButtons = ["For All", "For Tutors", "For Students/Guardians"];

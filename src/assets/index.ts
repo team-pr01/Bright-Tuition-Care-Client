@@ -3,7 +3,7 @@ import plus from "../assets/Icons/plus.svg";
 import topRightArrow from "../assets/Icons/top-right-arrow.svg";
 import topRightArrowWhite from "../assets/Icons/top-right-arrow-white.svg";
 import testimonials from "../assets/Icons/testimonials.svg";
-import stepLine from "../assets/Images/steps-line.png"
+import stepLine from "../assets/Images/steps-line.png";
 import logo from "../assets/Icons/logo.png";
 import logoWhite from "../assets/Icons/logo-white.png";
 import logoWhiteVertical from "../assets/Images/logo-white.png";
@@ -22,8 +22,8 @@ import batchTutoring from "../assets/Icons/batch-tutoring.svg";
 import packageTutoring from "../assets/Icons/package-tutoring.svg";
 
 // stores
-import appStore from "../assets/DownloadStore/app-store.svg"
-import playStore from "../assets/DownloadStore/play-store.svg"
+import appStore from "../assets/DownloadStore/app-store.svg";
+import playStore from "../assets/DownloadStore/play-store.svg";
 
 // service categories
 import admissionTest from "../assets/Images/serviceCatagories/Admission-Test.png";
@@ -38,13 +38,13 @@ import specialChildEducation from "../assets/Images/serviceCatagories/Special-Ch
 import specialSkillDevelopment from "../assets/Images/serviceCatagories/Special-Skill-Develepment.png";
 import testPreparation from "../assets/Images/serviceCatagories/Test-Preparation.png";
 import uniHelp from "../assets/Images/serviceCatagories/Uni-Help.png";
-import termsAndConditionHero from "../assets/Images/terms-and-condition-hero.webp"; 
+import termsAndConditionHero from "../assets/Images/terms-and-condition-hero.webp";
 
 // students steps
-import send from "../assets/Icons/StudentSteps/send.svg"
-import getStarted from "../assets/Icons/StudentSteps/get-started.svg"
-import choose from "../assets/Icons/StudentSteps/choose.svg"
-import receive from "../assets/Icons/StudentSteps/receive.svg"
+import send from "../assets/Icons/StudentSteps/send.svg";
+import getStarted from "../assets/Icons/StudentSteps/get-started.svg";
+import choose from "../assets/Icons/StudentSteps/choose.svg";
+import receive from "../assets/Icons/StudentSteps/receive.svg";
 
 import tutorCommunity from "../assets/Icons/tutor-community.svg";
 import guardianCommunity from "../assets/Icons/guardians-community.svg";
@@ -115,14 +115,13 @@ import suspend from "../assets/Icons/suspend.svg";
 import teacher from "../assets/Icons/teacher.webp";
 import guardian from "../assets/Icons/guardians.webp";
 
-
 import aboutUs from "../assets/Images/about-us.jpg";
 import appDownload from "../assets/Images/app-download.svg";
 import heroImg1 from "../assets/Images/hero-images/hero-img-1.png";
 import heroImg2 from "../assets/Images/hero-images/hero-img-2.png";
 import heroImg3 from "../assets/Images/hero-images/hero-img-3.png";
 import heroImg4 from "../assets/Images/hero-images/hero-img-4.png";
-import dummyAvatar from "../assets/Images/dummy-avatar.jpg";  //dummy, please remove after integrating api
+import dummyAvatar from "../assets/Images/dummy-avatar.jpg"; //dummy, please remove after integrating api
 import contactUs from "../assets/Images/contact-us.webp";
 import forgotPassword from "../assets/Images/forgot-password.webp";
 import resetPassword from "../assets/Images/reset-password.webp";
@@ -135,8 +134,6 @@ import fastAndReliable from "../assets/Icons/rocket.svg";
 import customizedTuition from "../assets/Icons/customized-tuition.svg";
 import efficient from "../assets/Icons/efficient.svg";
 import customerSupport from "../assets/Icons/customer-support.svg";
-
-
 
 export const IMAGES = {
   logoWhiteVertical,
@@ -153,7 +150,7 @@ export const IMAGES = {
   banglaMedium,
   drawing,
   englishMedium,
-  englishVersion, 
+  englishVersion,
   languageLearning,
   professionalSkillDevelopment,
   specialChildEducation,
@@ -190,7 +187,7 @@ export const ICONS = {
   playStore,
 
   homeTutoring,
-  onlineTutoring, 
+  onlineTutoring,
   batchTutoring,
   packageTutoring,
 
@@ -205,7 +202,7 @@ export const ICONS = {
   appStoreCard,
   liveJobs,
   filter,
-   postedDate,
+  postedDate,
   jobId,
   share,
   jobDetails,
@@ -272,5 +269,5 @@ export const ICONS = {
   fastAndReliable,
   customizedTuition,
   efficient,
-  customerSupport
+  customerSupport,
 };

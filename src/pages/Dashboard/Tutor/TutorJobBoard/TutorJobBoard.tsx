@@ -100,31 +100,31 @@ const TutorJobBoard = () => {
   }, [allJobs, isFetching, allJobs?.data?.meta?.hasMore]);
   return (
     <div className="relative">
-        <Filters
-          keyword={keyword}
-          setKeyword={setKeyword}
-          selectedCities={selectedCities}
-          setSelectedCities={setSelectedCities}
-          selectedAreas={selectedAreas}
-          setSelectedAreas={setSelectedAreas}
-          areaOptions={areaOptions}
-          setAreaOptions={setAreaOptions}
-          selectedCategory={selectedCategory}
-          setSelectedCategory={setSelectedCategory}
-          selectedDays={selectedDays}
-          setSelectedDays={setSelectedDays}
-          selectedClass={selectedClass}
-          setSelectedClass={setSelectedClass}
-          selectedTutorGender={selectedTutorGender}
-          setSelectedTutorGender={setSelectedTutorGender}
-          selectedStudentGender={selectedStudentGender}
-          setSelectedStudentGender={setSelectedStudentGender}
-          selectedTuitionType={selectedTuitionType}
-          setSelectedTuitionType={setSelectedTuitionType}
-          liveJobs={allJobs?.data?.meta?.liveJobs || 0}
-        />
-        <div className="mt-6">
-          <Jobs
+      <Filters
+        keyword={keyword}
+        setKeyword={setKeyword}
+        selectedCities={selectedCities}
+        setSelectedCities={setSelectedCities}
+        selectedAreas={selectedAreas}
+        setSelectedAreas={setSelectedAreas}
+        areaOptions={areaOptions}
+        setAreaOptions={setAreaOptions}
+        selectedCategory={selectedCategory}
+        setSelectedCategory={setSelectedCategory}
+        selectedDays={selectedDays}
+        setSelectedDays={setSelectedDays}
+        selectedClass={selectedClass}
+        setSelectedClass={setSelectedClass}
+        selectedTutorGender={selectedTutorGender}
+        setSelectedTutorGender={setSelectedTutorGender}
+        selectedStudentGender={selectedStudentGender}
+        setSelectedStudentGender={setSelectedStudentGender}
+        selectedTuitionType={selectedTuitionType}
+        setSelectedTuitionType={setSelectedTuitionType}
+        liveJobs={allJobs?.data?.meta?.liveJobs || 0}
+      />
+      <div className="mt-6">
+        <Jobs
           allJobs={jobs}
           isLoading={isLoading || isFetching}
           variant="tutorJobCard"
@@ -143,7 +143,7 @@ const TutorJobBoard = () => {
             No more jobs to load.
           </p>
         )}
-        </div>
+      </div>
     </div>
   );
 };

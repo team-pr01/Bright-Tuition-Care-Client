@@ -164,7 +164,7 @@ const Filters: React.FC<TFiltersProps> = ({
         <div className="flex items-center gap-3">
           <img src={ICONS.liveJobs} alt="" className="size-8" />
           <h1 className="text-xl md:text-2xl lg:text-4xl font-semibold leading-11 text-primary-50">
-            {liveJobs} Live Jobs
+            {liveJobs < 10 ? 0 : ""}{liveJobs} Live Job{liveJobs > 1 ? "s" : ""}
           </h1>
         </div>
 

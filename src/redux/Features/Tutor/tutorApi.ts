@@ -47,12 +47,11 @@ const tutorApi = baseApi.injectEndpoints({
     }),
 
     getMyApplications: builder.query<any, any | void>({
-      query: ({ keyword, status, page = 1, limit = 10 } = {}) => {
+      query: ({ status, skip = 0, limit = 10 } = {}) => {
         const params = new URLSearchParams();
 
-        if (keyword) params.append("keyword", keyword);
         if (status) params.append("status", status);
-        if (page) params.append("page", page.toString());
+        if (skip) params.append("skip", skip.toString());
         if (limit) params.append("limit", limit.toString());
 
         return {
