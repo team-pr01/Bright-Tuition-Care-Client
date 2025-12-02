@@ -11,6 +11,7 @@ interface DropdownProps {
   isDisabled?: boolean;
   value?: string;
   onChange?: any;
+  onChangeEvent?: any;
 }
 
 const SelectDropdown = forwardRef<HTMLSelectElement, DropdownProps>(
@@ -23,12 +24,14 @@ const SelectDropdown = forwardRef<HTMLSelectElement, DropdownProps>(
       isDisabled,
       value,
       onChange,
+      onChangeEvent,
       ...rest
     },
     ref
   ) => {
     const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-      onChange?.(e.target.value);
+      onChange?.(e);
+      onChangeEvent?.(e.target.value);
     };
 
     return (

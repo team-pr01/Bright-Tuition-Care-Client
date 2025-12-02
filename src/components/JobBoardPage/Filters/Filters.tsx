@@ -226,7 +226,7 @@ const Filters: React.FC<TFiltersProps> = ({
               label="Category"
               options={filterData.category}
               value={selectedCategory}
-              onChange={setSelectedCategory}
+              onChangeEvent={setSelectedCategory}
             />
 
             {/* IF CATEGORY = ENGLISH MEDIUM SHOW CURRICULUM */}
@@ -239,7 +239,7 @@ const Filters: React.FC<TFiltersProps> = ({
               label="Class"
               options={classOptions}
               value={selectedClass}
-              onChange={setSelectedClass}
+              onChangeEvent={setSelectedClass}
               isDisabled={!selectedCategory}
             />
 

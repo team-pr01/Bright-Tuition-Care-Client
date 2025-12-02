@@ -126,7 +126,7 @@ const Preview = () => {
             isDisabled={!isEditEnable}
           />
         )}
-        
+
         <SelectDropdown
           label="Tuition Type"
           options={filterData.tuitionType}
@@ -209,6 +209,7 @@ const Preview = () => {
           value={watch("salary")}
           isDisabled={!isEditEnable}
           {...register("salary")}
+          isRequired={false}
         />
 
         <SelectDropdown

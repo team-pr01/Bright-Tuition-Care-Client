@@ -8,16 +8,19 @@ const leadApi = baseApi.injectEndpoints({
         keyword,
         limit,
         page,
+        addedBy
       }: {
         keyword?: string;
         limit?: number;
         page?: number;
+        addedBy?: string
       } = {}) => {
         const params = new URLSearchParams();
 
         if (keyword) params.append("keyword", keyword);
         if (typeof limit === "number") params.append("limit", limit.toString());
         if (typeof page === "number") params.append("page", page.toString());
+        if (addedBy) params.append("addedBy", addedBy);
 
         return {
           url: `/lead?${params.toString()}`,

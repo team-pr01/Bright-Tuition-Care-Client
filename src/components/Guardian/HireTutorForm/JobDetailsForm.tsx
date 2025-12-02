@@ -37,6 +37,7 @@ const JobDetailsForm = ({
   }, [defaultValues, setValue]);
 
   const selectedCategory = watch("category");
+  console.log(selectedCategory);
   const selectedClass = watch("class");
   const selectedSubject = watch("subjects");
 
@@ -121,6 +122,7 @@ const JobDetailsForm = ({
           label="Category"
           options={filterData.category}
           {...register("category", { required: "Category is required" })}
+          // onChangeEvent={se}
         />
 
         {/* IF CATEGORY = ENGLISH MEDIUM SHOW CURRICULUM */}

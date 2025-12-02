@@ -16,14 +16,15 @@ import toast from "react-hot-toast";
 
 const LeadManagement = () => {
   const [page, setPage] = useState<number>(1);
-  const [limit, setLimit] = useState<number>(10);
+  const [limit, setLimit] = useState<number>(5);
   const [searchQuery, setSearchQuery] = useState<string>("");
+  const [addedBy, setAddedBy] = useState("all");
 
   const {
     data: allLeads,
     isLoading,
     isFetching,
-  } = useGetAllLeadsQuery({ keyword: searchQuery, page, limit });
+  } = useGetAllLeadsQuery({ keyword: searchQuery, page, limit, addedBy });
 
   //   Table heads
   const leadTheads: TableHead[] = [
@@ -43,6 +44,9 @@ const LeadManagement = () => {
     ...lead,
     _id: lead?._id || "N/A",
     tutorId: lead?.tutorId?.tutorId || "N/A",
+    class: lead?.class || "N/A",
+    address: lead?.address || "N/A",
+    details: lead?.details || "N/A",
     addedBy: (
       <p>
         {lead?.userId?.name ? lead?.userId?.name : "N/A"}
@@ -114,6 +118,18 @@ const LeadManagement = () => {
     setSearchQuery(q);
   };
 
+  const roleBasedFilterDropdown = (
+    <select
+      value={addedBy}
+      onChange={(e) => setAddedBy(e.target.value)}
+      className="input input-sm px-3 py-2 border border-neutral-55/60 focus:border-primary-10 transition duration-300 focus:outline-none rounded-md text-sm shadow-sm cursor-pointer"
+    >
+      <option value="all">All Leads</option>
+      <option value="guardian">Leads from Guardian</option>
+      <option value="tutor">Leads from Tutor</option>
+    </select>
+  );
+
   return (
     <div>
       <Table<any>
@@ -131,6 +147,7 @@ const LeadManagement = () => {
         setLimit={setLimit}
         selectedCity={null}
         selectedArea={null}
+        children={roleBasedFilterDropdown}
       />
     </div>
   );
