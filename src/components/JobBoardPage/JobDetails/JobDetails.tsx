@@ -84,7 +84,7 @@ const JobDetails = ({
       <>
         {/* Overlay */}
         <motion.div
-          className="fixed inset-0 z-50 bg-black/30 backdrop-blur-sm"
+          className="fixed inset-0  bg-black/30 backdrop-blur-sm z-50"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
@@ -94,7 +94,7 @@ const JobDetails = ({
 
         {/* Drawer */}
         <motion.div
-          className="fixed top-0 left-0 w-full bg-white rounded-b-xl shadow-lg max-h-[95vh] overflow-y-auto p-5 md:p-8 z-9999"
+          className="fixed top-0 left-0 w-full bg-white rounded-b-xl shadow-lg max-h-[95vh] overflow-y-auto p-5 md:p-8 z-[999999]"
           initial={{ y: "-100%" }}
           animate={{ y: 0 }}
           exit={{ y: "-100%" }}
