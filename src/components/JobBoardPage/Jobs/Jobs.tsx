@@ -25,7 +25,7 @@ const Jobs = ({
     );
   }
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 relative z-0 overflow-visible">
+    <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 overflow-visible">
       {allJobs?.map((job: TJobs, index: number) => (
         <AnimatedJobCard key={index}>
           <JobCard variant={variant} job={job} status={job?.status}/>
@@ -63,7 +63,7 @@ const AnimatedJobCard = ({ children }: { children: React.ReactNode }) => {
       initial="hidden"
       animate={controls}
       variants={variants}
-    >
+    >  
       {children}
     </motion.div>
   );
