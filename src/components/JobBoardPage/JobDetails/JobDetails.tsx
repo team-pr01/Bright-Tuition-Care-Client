@@ -43,7 +43,7 @@ const JobDetails = ({
         job?.preferredTutorGender === "male"
           ? ICONS.male
           : job?.preferredTutorGender === "female"
-          ? ICONS.female
+          ? ICONS.preferredTutor
           : ICONS.gender,
       title: "Prefer Tutor",
       value: job?.preferredTutorGender,

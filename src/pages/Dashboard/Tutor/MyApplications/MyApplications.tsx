@@ -225,17 +225,17 @@ const MyApplications = () => {
         </div>
         <div ref={loaderRef} className="h-10"></div>
 
-        {isLoading ||
-          (isFetching && (
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-              {Array.from({ length: 3 }).map((_, i) => (
-                <JobCardSkeleton key={i} />
-              ))}
-            </div>
-          ))}
+        {(isLoading || isFetching) && (
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            {Array.from({ length: 3 }).map((_, i) => (
+              <JobCardSkeleton key={i} />
+            ))}
+          </div>
+        )}
+
         {!data?.data?.meta?.hasMore && !isFetching && (
           <p className="text-center mt-4 text-gray-400">
-            No more jobs to load.
+            No applications.
           </p>
         )}
       </div>
