@@ -30,7 +30,7 @@ const refundRequestApi = baseApi.injectEndpoints({
     }),
 
     requestToRefund: builder.mutation<any, any>({
-      query: (data ) => ({
+      query: (data) => ({
         url: `/refund-request/request-to-refund`,
         method: "POST",
         body: data,
@@ -40,10 +40,9 @@ const refundRequestApi = baseApi.injectEndpoints({
     }),
 
     acceptRefundRequest: builder.mutation<any, any>({
-      query: ({ id, data }) => ({
+      query: (id) => ({
         url: `/refund-request/accept/${id}`,
         method: "PATCH",
-        body: data,
         credentials: "include",
       }),
       invalidatesTags: ["refundRequest"],
@@ -56,7 +55,7 @@ const refundRequestApi = baseApi.injectEndpoints({
         body: data,
         credentials: "include",
       }),
-      invalidatesTags: ["payment"],
+      invalidatesTags: ["refundRequest"],
     }),
   }),
 });

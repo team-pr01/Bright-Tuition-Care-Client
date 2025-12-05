@@ -1,5 +1,5 @@
 import React from "react";
-import { BsBriefcase } from "react-icons/bs";
+import { BsArrowCounterclockwise, BsBriefcase } from "react-icons/bs";
 import {
   FaChalkboardTeacher,
   FaRegFileAlt,
@@ -158,6 +158,11 @@ export const adminDashboardLinks: DashboardLink[] = [
     label: "Payments",
     path: "/dashboard/admin/payments-management",
     icon: <FiCreditCard />,
+  },
+  {
+    label: "Refund Request",
+    path: "/dashboard/admin/refund-requests",
+    icon: <BsArrowCounterclockwise />,
   },
   {
     label: "Invoice",

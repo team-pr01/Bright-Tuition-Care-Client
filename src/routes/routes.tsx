@@ -56,6 +56,7 @@ import TutorGuidelines from "../pages/Dashboard/Shared/TutorGuidelines/TutorGuid
 import GuardianGuidelines from "../pages/Dashboard/Guardian/GurdianGuidelines/GuardianGuidelines";
 import AllJobs from "../pages/Dashboard/Admin/AllJobs/AllJobs";
 import { UserProvider } from "../contexts/UserProvider";
+import RefundRequests from "../pages/Dashboard/Admin/RefundRequests/RefundRequests";
 
 export const router = createBrowserRouter([
   // Main layout routes
@@ -366,6 +367,10 @@ export const router = createBrowserRouter([
       {
         path: "payments-management",
         element: <PaymentsManagement />,
+      },
+      {
+        path: "refund-requests",
+        element: <RefundRequests />,
       },
       {
         path: "invoice-management",
