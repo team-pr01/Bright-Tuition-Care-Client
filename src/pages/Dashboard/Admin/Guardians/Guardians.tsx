@@ -49,8 +49,8 @@ const Guardians = () => {
     { key: "name", label: "Name" },
     { key: "city", label: "City" },
     { key: "area", label: "Area" },
-    { key: "role", label: "Role" },
     { key: "registeredOn", label: "Registered On" },
+    { key: "isVerified", label: "Verification Status" },
     { key: "status", label: "Status" },
     { key: "profileStatus", label: "Profile Status" },
     { key: "guardianOfTheMonth", label: "Guardian of the Month" },
@@ -160,8 +160,18 @@ const Guardians = () => {
     ),
     city: guardian?.city || "N/A",
     area: guardian?.area || "N/A",
-    role: guardian?.role || "N/A",
     registeredOn: formatDate(guardian.createdAt),
+    isVerified: (
+      <span
+        className={`px-3 py-1 rounded-full text-xs font-medium ${
+          !guardian?.isVerified
+            ? "bg-red-100 text-red-600"
+            : "bg-green-100 text-green-600"
+        }`}
+      >
+        {guardian?.isVerified ? "Verified" : "Not Verified"}
+      </span>
+    ),
     status: (
       <span
         className={`px-3 py-1 rounded-full text-xs font-medium ${

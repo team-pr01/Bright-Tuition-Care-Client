@@ -1,4 +1,5 @@
 import React from "react";
+import { AiOutlineSound } from "react-icons/ai";
 import { BsArrowCounterclockwise, BsBriefcase } from "react-icons/bs";
 import {
   FaChalkboardTeacher,
@@ -8,7 +9,6 @@ import {
 import {
   FiCreditCard,
   FiFileText,
-  FiInfo,
   FiStar,
   FiUserPlus,
 } from "react-icons/fi";
@@ -177,7 +177,7 @@ export const adminDashboardLinks: DashboardLink[] = [
   {
     label: "Notice Board",
     path: "/dashboard/admin/notice-board-management",
-    icon: <FiInfo />,
+    icon: <AiOutlineSound />,
   },
   {
     label: "Testimonials",

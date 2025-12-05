@@ -68,7 +68,8 @@ export const baseApi = createApi({
     "notification",
     "application",
     "payment",
-    "refundRequest"
+    "refundRequest",
+    "verificationRequest",
   ],
   endpoints: () => ({}),
 });

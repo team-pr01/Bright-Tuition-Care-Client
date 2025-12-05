@@ -17,8 +17,8 @@ import {
   FaUserFriends,
   FaChalkboardTeacher,
   FaBriefcase,
-  FaClock,
   FaDollarSign,
+  FaUsers,
 } from "react-icons/fa";
 import { useGetAdminStatsQuery } from "../../../../redux/Features/Admin/adminApi";
 import { MdVerified } from "react-icons/md";
@@ -98,18 +98,18 @@ const AdminDashboardHome = () => {
         />
 
         <DashboardOverviewCard
-          title="Pending"
-          additionalTitle="Jobs"
-          value={adminStats?.data?.pendingJobs || 0}
+          title="Total"
+          additionalTitle="Leads"
+          value={adminStats?.data?.totalLeads || 0}
           textColor="text-neutral-10"
           path="/dashboard/admin/posted-jobs"
-          icon={<FaClock className="text-[#EF4444]" />}
+          icon={<FaUsers className="text-green-500" />}
         />
 
         <DashboardOverviewCard
           title="Verification"
           additionalTitle="Requests"
-          value={adminStats?.data?.pendingJobs || 0}
+          value={adminStats?.data?.verificationRequests || 0}  //adasdiuy T8AS            dummy here
           textColor="text-neutral-10"
           path="/dashboard/admin/posted-jobs"
           icon={<MdVerified className="text-primary-10" />}

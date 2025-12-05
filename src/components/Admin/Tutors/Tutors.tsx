@@ -159,7 +159,18 @@ const Tutors = () => {
     city: tutor?.city || "N/A",
     area: tutor?.area || "N/A",
     registeredOn: formatDate(tutor.createdAt),
-    isVerified: tutor.isVerified ? "Verified" : "Not Verified",
+    isVerified: 
+    (
+      <span
+        className={`px-3 py-1 rounded-full text-xs font-medium ${
+          !tutor.isVerified
+            ? "bg-red-100 text-red-600"
+            : "bg-green-100 text-green-600"
+        }`}
+      >
+        {tutor.isVerified ? "Verified" : "Not Verified"}
+      </span>
+    ),
     status: (
       <span
         className={`px-3 py-1 rounded-full text-xs font-medium ${
