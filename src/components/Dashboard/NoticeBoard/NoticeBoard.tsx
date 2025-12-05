@@ -1,13 +1,8 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState, useRef } from "react";
 import { ICONS } from "../../../assets";
 
-const NoticeBoard = () => {
-  const notices = [
-    "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Qui eius fuga obcaecati vitae, officiis sapiente voluptate veritatis mollitia, quasi totam impedit consequatur odit illo illum similique quae itaque? Quibusdam facere itaque aliquam quidem cumque ab tempore? Odit eaque atque, voluptatum neque id nesciunt doloremque enim qui dolorem pariatur perspiciatis similique. Lorem ipsum dolor sit amet consectetur",
-    "Reprehenderit beatae deleniti totam voluptat. Quisquam, adipisci. Doloremque unde repellendus architecto ipsam tempora magni.",
-    "Aliquam id neque a nisi blanditiis, impedit laudantium aspernatur iusto delectus nemo vel praesentium laborum cum.",
-  ];
-
+const NoticeBoard = ({ notices } : any) => {
   const [current, setCurrent] = useState(0);
   const touchStartX = useRef(0);
   const touchEndX = useRef(0);
@@ -26,10 +21,10 @@ const NoticeBoard = () => {
     if (Math.abs(diff) > 50) {
       if (diff > 0) {
         // swipe left
-        setCurrent((prev) => (prev + 1) % notices.length);
+        setCurrent((prev) => (prev + 1) % notices?.length);
       } else {
         // swipe right
-        setCurrent((prev) => (prev === 0 ? notices.length - 1 : prev - 1));
+        setCurrent((prev) => (prev === 0 ? notices?.length - 1 : prev - 1));
       }
     }
   };
@@ -61,18 +56,21 @@ const NoticeBoard = () => {
           <div
             className="flex transition-transform duration-700 ease-in-out"
             style={{
-              width: `${notices.length * 100}%`,
-              transform: `translateX(-${current * (100 / notices.length)}%)`,
+              width: `${notices?.length * 100}%`,
+              transform: `translateX(-${current * (100 / notices?.length)}%)`,
             }}
           >
-            {notices.map((text, i) => (
+            {notices?.map((notice:any, index:number) => (
               <div
-                key={i}
+                key={index}
                 className="w-full flex-shrink-0 px-1"
-                style={{ width: `${100 / notices.length}%` }}
+                style={{ width: `${100 / notices?.length}%` }}
               >
-                <p className="text-neutral-20 text-xs md:text-base xl:text-lg leading-6">
-                  {text}
+                <p className="text-neutral-10 text-base xl:text-xl font-bold">
+                  {notice?.title}
+                </p>
+                <p className="text-neutral-20 text-xs lg:text-sm leading-6 mt-1">
+                  {notice?.description}
                 </p>
               </div>
             ))}
@@ -81,7 +79,7 @@ const NoticeBoard = () => {
 
         {/* ✅ Dots */}
         <div className="flex justify-center mt-3 space-x-2">
-          {notices.map((_, i) => (
+          {notices?.map((_:any, i:number) => (
             <span
               key={i}
               onClick={() => setCurrent(i)}

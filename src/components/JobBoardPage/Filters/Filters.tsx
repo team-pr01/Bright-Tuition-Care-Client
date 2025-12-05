@@ -77,11 +77,10 @@ const Filters: React.FC<TFiltersProps> = ({
     setSelectedTuitionType([]);
   };
 
-  // Update area options when city changes
   useEffect(() => {
     if (selectedCities.length === 0) {
       setAreaOptions([]);
-      setSelectedAreas([]);
+      setSelectedAreas([]); // ✅ only clear when no city is selected
       return;
     }
 
@@ -92,11 +91,14 @@ const Filters: React.FC<TFiltersProps> = ({
       return cityObj ? cityObj.locations : [];
     });
 
-    // Remove duplicates and update state
     const uniqueLocations = [...new Set(locations)];
     setAreaOptions(uniqueLocations);
-    setSelectedAreas([]);
-  }, [selectedCities, setAreaOptions ,setSelectedAreas]);
+
+    // ✅ Keep only areas that still exist for the selected cities
+    setSelectedAreas((prev) =>
+      prev.filter((area) => uniqueLocations.includes(area))
+    );
+  }, [selectedCities, setAreaOptions, setSelectedAreas]);
 
   const [classOptions, setClassOptions] = useState<string[]>([]);
   const [subjectOptions, setSubjectOptions] = useState<string[]>([]);
@@ -164,7 +166,8 @@ const Filters: React.FC<TFiltersProps> = ({
         <div className="flex items-center gap-3">
           <img src={ICONS.liveJobs} alt="" className="size-8" />
           <h1 className="text-xl md:text-2xl lg:text-4xl font-semibold leading-11 text-primary-50">
-            {liveJobs < 10 ? 0 : ""}{liveJobs} Live Job{liveJobs > 1 ? "s" : ""}
+            {liveJobs < 10 ? 0 : ""}
+            {liveJobs} Live Job{liveJobs > 1 ? "s" : ""}
           </h1>
         </div>
 
@@ -199,6 +202,7 @@ const Filters: React.FC<TFiltersProps> = ({
               value={selectedCities}
               onChange={setSelectedCities}
               isRequired={false}
+              dropdownDirection="top-full"
             />
 
             {/* Area Dropdown */}
@@ -209,6 +213,7 @@ const Filters: React.FC<TFiltersProps> = ({
               value={selectedAreas}
               onChange={setSelectedAreas}
               isRequired={false}
+              dropdownDirection="top-full"
             />
 
             {/* Days Per Week */}

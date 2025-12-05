@@ -23,12 +23,12 @@ export type VerificationStatus =
 
 interface VerificationStepsProps {
   currentStep: VerificationStatus;
-  addressVerificationCode: string
+  addressVerificationCode: string;
 }
 
 const VerificationSteps: React.FC<VerificationStepsProps> = ({
   currentStep,
-  addressVerificationCode
+  addressVerificationCode,
 }) => {
   const steps = [
     {
@@ -89,6 +89,10 @@ const VerificationSteps: React.FC<VerificationStepsProps> = ({
 
   const getStepStatus = (stepIndex: number) => {
     const currentIndex = getCurrentStepIndex();
+    if (currentStep === "verified") {
+      return stepIndex <= currentIndex ? "completed" : "pending";
+    }
+
     if (stepIndex < currentIndex) return "completed";
     if (stepIndex === currentIndex) return "current";
     return "pending";
@@ -220,7 +224,9 @@ const VerificationSteps: React.FC<VerificationStepsProps> = ({
         ) : currentStep === "invoiceDue" ? (
           <PayVerificationFeeForm />
         ) : currentStep === "addressVerification" ? (
-          <AddressVerificationForm addressVerificationCode={addressVerificationCode} />
+          <AddressVerificationForm
+            addressVerificationCode={addressVerificationCode}
+          />
         ) : currentStep === "verified" ? (
           <VerificationSuccess />
         ) : null}

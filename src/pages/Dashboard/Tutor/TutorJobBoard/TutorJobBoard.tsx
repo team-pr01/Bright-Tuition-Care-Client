@@ -5,8 +5,13 @@ import Jobs from "../../../../components/JobBoardPage/Jobs/Jobs";
 import { useGetAllJobsQuery } from "../../../../redux/Features/Job/jobApi";
 import { useDebounce } from "../../../../hooks/useDebounce";
 import JobCardSkeleton from "../../../../components/JobBoardPage/Jobs/JobCard/JobCardSkeleton";
+import { useSearchParams } from "react-router-dom";
 
 const TutorJobBoard = () => {
+  const [searchParams] = useSearchParams();
+  const city = searchParams.get("city");
+  const area = searchParams.get("area");
+
   const [keyword, setKeyword] = useState<string>("");
   const [selectedCities, setSelectedCities] = useState<string[]>([]);
   const [selectedAreas, setSelectedAreas] = useState<string[]>([]);
@@ -20,6 +25,23 @@ const TutorJobBoard = () => {
   );
   const [selectedTuitionType, setSelectedTuitionType] = useState<string[]>([]);
   const debouncedKeyword = useDebounce(keyword, 500);
+
+// Clear areas when no city is selected
+useEffect(() => {
+  if (selectedCities.length === 0) {
+    setSelectedAreas([]);
+  }
+}, [selectedCities]);
+
+// Sync city & area from URL params
+useEffect(() => {
+  if (city) setSelectedCities([city]);
+  if (area) setSelectedAreas([area]);
+}, [city, area]);
+
+
+  console.log(selectedCities);
+  console.log(selectedAreas);
 
   // Pagination states
   const [skip, setSkip] = useState(0);

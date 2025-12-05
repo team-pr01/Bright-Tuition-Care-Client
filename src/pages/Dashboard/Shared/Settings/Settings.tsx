@@ -121,7 +121,10 @@ const Settings = () => {
 
         <div id="Profile Verification">
           {activeTab === "Profile Verification" && (
-            <ProfileVerificationForm isVerified={isVerified} hasRequestedToVerify={myProfile?.hasRequestedToVerify} />
+            <ProfileVerificationForm
+              isVerified={isVerified}
+              hasRequestedToVerify={myProfile?.hasRequestedToVerify}
+            />
           )}
         </div>
 

@@ -3,6 +3,15 @@ import { baseApi } from "../../API/baseApi";
 
 const tutorApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
+    getTutorDashboardStats: builder.query({
+      query: () => ({
+        url: `/tutor/stats`,
+        method: "GET",
+        credentials: "include",
+      }),
+      providesTags: ["tutor"],
+    }),
+
     getAllTutors: builder.query<
       any,
       {
@@ -62,7 +71,6 @@ const tutorApi = baseApi.injectEndpoints({
       },
       providesTags: ["tutor"],
     }),
-    
 
     updateIdentityInfo: builder.mutation({
       query: (data) => ({
@@ -84,6 +92,7 @@ const tutorApi = baseApi.injectEndpoints({
 });
 
 export const {
+  useGetTutorDashboardStatsQuery,
   useGetAllTutorsQuery,
   useGetSingleTutorByIdQuery,
   useGetMyApplicationsQuery,
