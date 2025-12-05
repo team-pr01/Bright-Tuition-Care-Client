@@ -13,27 +13,27 @@ const ReferAndEarn = () => {
     {
       title: "Get Your Referral Link",
       description:
-        "Log in to your account and go to the 'Refer & Earn' or 'Referral Program' section. Copy your unique referral link provided there.",
+        "Sign in to your account and go to the “Refer & Earn” section. From there, copy your referral link.",
     },
     {
       title: "Share Your Referral Link",
       description:
-        "Share your referral link on platforms like Facebook, WhatsApp, Instagram, TikTok, YouTube, or any other platform where your audience is.",
+        "Share your referral link across Facebook, WhatsApp, Instagram, TikTok, YouTube, or any other platform where your audience is active.",
     },
     {
       title: "Submit Leads Manually",
       description:
-        "You can manually submit a tutor request on behalf of someone using the 'Lead' option. Make sure the person is genuinely interested in hiring a tutor.",
+        "If someone is interested in hiring a tutor, you can submit their details using the “Lead Submission” option. Please ensure the lead is genuine and the person is truly looking for a tutor.",
     },
     {
       title: "Lead Confirmation Process",
       description:
-        "If your referred student or guardian hires a tutor and the tutor successfully completes platform enrollment with payment, your lead will be considered a 'Confirmed Lead'.",
+        'Your lead will be marked as a "Confirmed Lead" when the student or guardian you referred successfully hires a tutor and the tutor completes the payment of the platform charges for that tuition job.',
     },
     {
       title: "Receive Your 10% Commission",
       description:
-        "For every confirmed lead, you will earn 10% of the tutor’s platform enrollment fee. The commission will be sent to you via your chosen payment method like bKash, Nagad, Rocket, or bank transfer.",
+        "For each confirmed lead, you will receive 10% commission of the fee set for that tuition job. Your commission will be sent to your preferred payment method — bKash, Nagad, or Rocket (personal account).",
     },
   ];
 

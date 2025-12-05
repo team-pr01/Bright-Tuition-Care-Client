@@ -6,10 +6,14 @@ import { toast } from "react-hot-toast";
 import TextInput from "../../../Reusable/TextInput/TextInput";
 import { useState, type Dispatch, type SetStateAction } from "react";
 import { useRequestToRefundMutation } from "../../../../redux/Features/RefundRequest/refundRequestApi";
+import SelectDropdown from "../../../Reusable/SelectDropdown/SelectDropdown";
 
 type TFormData = {
   jobId: string;
   amount: number;
+  paymentMethod: string;
+  bankName?: string;
+  accountNumber: string;
   refundReason: string;
 };
 
@@ -25,20 +29,27 @@ const SendRefundRequest = ({
     register,
     handleSubmit,
     reset,
+    watch,
     formState: { errors },
   } = useForm<TFormData>();
+
+  const paymentMethod = watch("paymentMethod");
 
   const handleRequestToRefund = async (data: TFormData) => {
     try {
       const response = await requestToRefund({
         jobId: data.jobId,
         amount: data.amount,
+        paymentMethod: data.paymentMethod,
+        bankName: data?.bankName,
+        accountNumber: data.accountNumber,
         refundReason: data.refundReason,
       }).unwrap();
 
       if (response?.success) {
         setIsRefundRequestModalOpen(false);
         toast.success(response?.message || "Refund request sent successfully");
+        setError(null);
       }
 
       reset();
@@ -62,8 +73,6 @@ const SendRefundRequest = ({
         onSubmit={handleSubmit(handleRequestToRefund)}
         className="w-full flex flex-col gap-6 mt-6"
       >
-        {error && <p className="text-red-500 text-sm">{error}</p>}
-
         {/* Job ID */}
         <TextInput
           label="Job ID"
@@ -90,6 +99,37 @@ const SendRefundRequest = ({
           })}
         />
 
+        {/* Payment Method */}
+        <SelectDropdown
+          label="Payment Method"
+          options={["bKash", "Nagad", "Rocket", "Bank Transfer"]}
+          error={errors.paymentMethod}
+          {...register("paymentMethod", {
+            required: "Payment method is required",
+          })}
+        />
+
+        {paymentMethod === "Bank Transfer" && (
+          <TextInput
+            label="Bank Name"
+            placeholder="Enter bank name"
+            error={errors.bankName}
+            {...register("bankName", {
+              required: "Bank name is required",
+            })}
+          />
+        )}
+
+        {/* Account Number */}
+        <TextInput
+          label="Account Number"
+          placeholder="Enter account number"
+          error={errors.accountNumber}
+          {...register("accountNumber", {
+            required: "Account number is required",
+          })}
+        />
+
         {/* Refund Reason */}
         <Textarea
           label="Reason for refund"
@@ -105,13 +145,19 @@ const SendRefundRequest = ({
           isRequired
         />
 
+        {error && <p className="text-red-500 text-sm">{error}</p>}
+
         <div className="flex items-center justify-end gap-3">
           <Button
             type="button"
             label="Cancel"
             variant="tertiary"
             className="py-2"
-            onClick={() => setIsRefundRequestModalOpen(false)}
+            onClick={() => {
+              setIsRefundRequestModalOpen(false);
+              reset();
+              setError(null);
+            }}
           />
           <Button
             type="submit"

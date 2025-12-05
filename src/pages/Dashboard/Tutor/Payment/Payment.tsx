@@ -7,12 +7,13 @@ import { useUser } from "../../../../contexts/UserContext";
 import Button from "../../../../components/Reusable/Button/Button";
 import { useState } from "react";
 import Modal from "../../../../components/Reusable/Modal/Modal";
-import SendRefundRequest from './../../../../components/Dashboard/Payment/SendRefundRequest/SendRefundRequest';
+import SendRefundRequest from "./../../../../components/Dashboard/Payment/SendRefundRequest/SendRefundRequest";
 
 const Payment = () => {
   const user = useSelector(useCurrentUser) as TLoggedInUser;
   const { user: myProfile } = useUser();
-  const [isRefundRequestModalOpen, setIsRefundRequestModalOpen] = useState<boolean>(false);
+  const [isRefundRequestModalOpen, setIsRefundRequestModalOpen] =
+    useState<boolean>(false);
   // const [paidFor, setPaidFor] = useState<string>("");
   // const [paymentModalType, setPaymentModalType] = useState<
   //   "selectPaymentMethod" | "addPaymentDetails" | "paymentSuccess"
@@ -27,25 +28,25 @@ const Payment = () => {
   // Charge details
   const charges = [
     {
-      title: "Platform Charge",
+      title: "Platform Charges",
       icon: ICONS.platformCharge,
       description:
-        "After confirming a tutor for a job, we take a one-time platform charge as a service fee for using our platform. This fee is collected only once for each tuition job.",
+        "A one-time platform fee is applicable after a tutor successfully confirms a tuition job. This fee is charged separately for each tuition job processed through the platform.",
       isPaid: myProfile?.hasPaidPlatformCharge || false,
     },
     {
-      title: "Verification Charge",
+      title: "Verification Charges",
       icon: ICONS.verificationCharge,
       description:
-        "A one-time verification fee that covers the review of your tutor profile, academic documents, and identity to ensure maximum trust, safety, and authenticity across our platform.",
+        "A one-time fee of BDT 500 is required to complete the profile verification process, ensuring authenticity and trustworthiness on our platform.",
       isPaid: myProfile?.isVerified || false,
     },
     {
       title: "Refund",
       icon: ICONS.refund,
       description:
-        "A one-time verification fee that covers the review of your tutor profile, academic documents, and identity to ensure maximum trust, safety, and authenticity across our platform.",
-      isPaid: myProfile?.isVerified || false,
+        "If a tutor pays the platform charge in advance but subsequently loses the tuition job for a valid reason, the payment will be refunded in accordance with our refund policy.",
+      isPaid: false,
     },
   ];
 
@@ -60,7 +61,7 @@ const Payment = () => {
         {chargesToShow?.map((charge, index) => (
           <div
             key={index}
-            className="bg-white border border-primary-40/10 rounded-2xl py-7 px-5 flex flex-col items-center gap-5"
+            className="bg-white border border-primary-40/10 rounded-2xl py-7 px-5 flex flex-col justify-between items-center gap-5"
           >
             <img src={charge.icon} alt={charge.title} className="w-20" />
 
@@ -72,9 +73,13 @@ const Payment = () => {
             <Button
               type="button"
               label={charge?.title === "Refund" ? "Apply" : "Click Here"}
-              variant={charge?.title  === "Refund" ? "primary" : "tertiary"}
+              variant={charge?.title === "Refund" ? "primary" : "tertiary"}
               className="py-[7px] lg:py-[7px]"
-              onClick={charge?.title === "Refund" ? () => setIsRefundRequestModalOpen(true) : undefined}
+              onClick={
+                charge?.title === "Refund"
+                  ? () => setIsRefundRequestModalOpen(true)
+                  : undefined
+              }
             />
           </div>
         ))}
@@ -88,7 +93,9 @@ const Payment = () => {
         setIsModalOpen={setIsRefundRequestModalOpen}
         width="w-[90%] md:w-auto max-h-[600px] overflow-y-auto"
       >
-        <SendRefundRequest setIsRefundRequestModalOpen={setIsRefundRequestModalOpen}/>
+        <SendRefundRequest
+          setIsRefundRequestModalOpen={setIsRefundRequestModalOpen}
+        />
       </Modal>
     </div>
   );

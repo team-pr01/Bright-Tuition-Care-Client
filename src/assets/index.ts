@@ -85,7 +85,7 @@ import support from "../assets/Icons/support.svg";
 import sendWhite from "../assets/Icons/send.svg";
 import warning from "../assets/Icons/warning.svg";
 import platformCharge from "../assets/Icons/platform-charge.webp";
-import verificationCharge from "../assets/Icons/verification-charge.svg";
+import verificationCharge from "../assets/Icons/verification-charge.webp";
 import refund from "../assets/Icons/refund.svg";
 import bkash from "../assets/Icons/bkash.svg";
 import nagad from "../assets/Icons/nagad.svg";
