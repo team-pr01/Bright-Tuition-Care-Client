@@ -2,17 +2,17 @@
 import { useState } from "react";
 import InvoicePreview from "../../../../components/Dashboard/Tutor/InvoicePage/InvoicePreview/InvoicePreview";
 import InvoiceCard from "../../../../components/Dashboard/Tutor/InvoicePage/InvoiceCard/InvoiceCard";
-import { useGetAllTutorsInvoicesQuery } from "../../../../redux/Features/Invoice/invoiceApi";
 import Loader from "../../../../components/Reusable/Loader/Loader";
 import type { TInvoice } from "../../../../types/invoice.types";
 import NoData from "../../../../components/Reusable/NoData/NoData";
+import { useGetMyInvoicesQuery } from "../../../../redux/Features/Invoice/invoiceApi";
 
 const Invoice = () => {
   const {
     data: allInvoicesData,
     isLoading,
     isFetching,
-  } = useGetAllTutorsInvoicesQuery({});
+  } = useGetMyInvoicesQuery({});
   const [selectedInvoice, setSelectedInvoice] = useState<any | null>(null);
 
   return (

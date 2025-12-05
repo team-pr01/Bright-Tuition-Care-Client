@@ -12,15 +12,15 @@ const InvoiceCard = ({ invoice, onSelect }: InvoiceCardProps) => {
     <div className="border border-neutral-55/50 p-4 rounded-lg bg-white flex justify-between">
       <div className="flex flex-col gap-2">
         <p className="font-semibold flex items-center gap-2">
-          <FiFileText size={20} /> {invoice.id}
+          <FiFileText size={20} /> {invoice?.id}
           {invoice?.invoiceType === "verificationCharge"
             ? "Verification Charge"
             : "Platform Charge"}
         </p>
         <p className="text-sm text-gray-600 mt-1">
-          Due Date: {formatDate(invoice.dueDate || "N/A")}
+          Due Date: {formatDate(invoice?.dueDate || "N/A")}
         </p>
-        <p className="text-sm text-gray-500">Amount: ৳ {invoice.amount}</p>
+        <p className="text-sm text-gray-500">Amount: ৳ {invoice?.amount}</p>
 
         <button
           onClick={() => onSelect(invoice)}
@@ -32,10 +32,10 @@ const InvoiceCard = ({ invoice, onSelect }: InvoiceCardProps) => {
 
       <div
         className={`${
-          invoice.status === "paid" ? "bg-green-600" : "bg-red-500"
+          invoice?.status === "paid" ? "bg-green-600" : "bg-red-500"
         } font-medium px-3 py-1 rounded-md text-sm text-white h-fit capitalize`}
       >
-        {invoice.status}
+        {invoice?.status}
       </div>
     </div>
   );

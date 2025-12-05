@@ -59,24 +59,24 @@ const InvoicePreview = ({
         <h3 className="text-center font-semibold mb-4">Bill To</h3>
 
         <p>
-          <span className="font-semibold">Name:</span> {invoice.tutorId.name}
+          <span className="font-semibold">Name:</span> {invoice?.userId?.name}
         </p>
         <p>
-          <span className="font-semibold">Email:</span> {invoice.tutorId.email}
+          <span className="font-semibold">Email:</span> {invoice?.userId?.email}
         </p>
         <p>
           <span className="font-semibold">Phone:</span>{" "}
-          {invoice.tutorId.phoneNumber}
+          {invoice?.userId?.phoneNumber}
         </p>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
           <p>
             <span className="font-semibold">Issue Date:</span>{" "}
-            {formatDate(invoice.createdAt)}
+            {formatDate(invoice?.createdAt)}
           </p>
           <p>
             <span className="font-semibold">Due Date:</span>{" "}
-            {formatDate(invoice.dueDate || "N/A")}
+            {formatDate(invoice?.dueDate || "N/A")}
           </p>
         </div>
 
@@ -85,41 +85,41 @@ const InvoicePreview = ({
             <span className="font-semibold">Payment Status:</span>{" "}
             <span
               className={`${
-                invoice.status === "paid" ? "text-green-600" : "text-red-500"
+                invoice?.status === "paid" ? "text-green-600" : "text-red-500"
               } font-semibold text-sm h-fit w-fit`}
             >
-              {invoice.status}
+              {invoice?.status}
             </span>
           </p>
-          {invoice.paidDate && (
+          {invoice?.paidDate && (
             <p>
               <span className="font-semibold">Paid Date:</span>{" "}
-              {formatDate(invoice.paidDate)}
+              {formatDate(invoice?.paidDate)}
             </p>
           )}
         </div>
 
         <div className="mt-4">
           <p className="font-semibold">Invoice Details:</p>
-          <p>{invoice.jobId?.title || "Verification Charge"}</p>
+          <p>{invoice?.jobId?.title || "Verification Charge"}</p>
         </div>
 
         <div className="mt-4">
-          {invoice.jobId?.jobId && (
+          {invoice?.jobId?.jobId && (
             <p>
               <span className="font-semibold">Job ID:</span>{" "}
-              {invoice.jobId?.jobId}
+              {invoice?.jobId?.jobId}
             </p>
           )}
           <p>
-            <span className="font-semibold">Invoice ID:</span> {invoice._id}
+            <span className="font-semibold">Invoice ID:</span> {invoice?._id}
           </p>
           <p className="font-bold mt-2">
-            <span className="font-semibold">Amount:</span> ৳{invoice.amount}
+            <span className="font-semibold">Amount:</span> ৳{invoice?.amount}
           </p>
         </div>
 
-        {invoice?.status === "pending" && user.role === "tutor" && (
+        {invoice?.status === "pending" && user.role !== "admin" && (
           <div className="mt-6 flex items-center justify-center">
             <Button
               type="submit"

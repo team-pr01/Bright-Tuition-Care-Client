@@ -112,6 +112,11 @@ export const guardianDashboardLinks: DashboardLink[] = [
     icon: <LuCreditCard />,
   },
   {
+    label: "Invoice",
+    path: "/dashboard/guardian/invoice",
+    icon: <FiFileText />,
+  },
+  {
     label: "Confirmation Letters",
     path: "/dashboard/guardian/confirmation-letters",
     icon: <MdOutlineMail />,

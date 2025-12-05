@@ -8,9 +8,11 @@ import Button from "../../../../components/Reusable/Button/Button";
 import { useState } from "react";
 import Modal from "../../../../components/Reusable/Modal/Modal";
 import SendRefundRequest from "./../../../../components/Dashboard/Payment/SendRefundRequest/SendRefundRequest";
+import { useNavigate } from "react-router-dom";
 
 const Payment = () => {
   const user = useSelector(useCurrentUser) as TLoggedInUser;
+  const navigate = useNavigate();
   const { user: myProfile } = useUser();
   const [isRefundRequestModalOpen, setIsRefundRequestModalOpen] =
     useState<boolean>(false);
@@ -33,6 +35,12 @@ const Payment = () => {
       description:
         "A one-time platform fee is applicable after a tutor successfully confirms a tuition job. This fee is charged separately for each tuition job processed through the platform.",
       isPaid: myProfile?.hasPaidPlatformCharge || false,
+      onclick: () =>
+        navigate(
+          user?.role === "tutor"
+            ? "/dashboard/tutor/invoice"
+            : "/dashboard/guardian/invoice"
+        ),
     },
     {
       title: "Verification Charges",
@@ -40,6 +48,12 @@ const Payment = () => {
       description:
         "A one-time fee of BDT 500 is required to complete the profile verification process, ensuring authenticity and trustworthiness on our platform.",
       isPaid: myProfile?.isVerified || false,
+      onclick: () =>
+        navigate(
+          user?.role === "tutor"
+            ? "/dashboard/tutor/invoice"
+            : "/dashboard/guardian/invoice"
+        ),
     },
     {
       title: "Refund",
@@ -53,7 +67,7 @@ const Payment = () => {
   const chargesToShow =
     user?.role === "tutor"
       ? charges
-      : charges?.filter((charge) => charge.title === "Verification Charge");
+      : charges?.filter((charge) => charge.title === "Verification Charges");
 
   return (
     <div className="font-Nunito flex flex-col justify-between gap-5 h-full">
@@ -78,7 +92,7 @@ const Payment = () => {
               onClick={
                 charge?.title === "Refund"
                   ? () => setIsRefundRequestModalOpen(true)
-                  : undefined
+                  : charge?.onclick
               }
             />
           </div>

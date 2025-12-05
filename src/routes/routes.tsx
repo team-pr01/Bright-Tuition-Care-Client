@@ -299,6 +299,10 @@ export const router = createBrowserRouter([
         element: <Payment />,
       },
       {
+        path: "invoice",
+        element: <Invoice />,
+      },
+      {
         path: "settings",
         element: <Settings />,
       },

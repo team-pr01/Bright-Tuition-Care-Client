@@ -37,10 +37,10 @@ const invoiceApi = baseApi.injectEndpoints({
       providesTags: ["invoice"],
     }),
 
-    getAllTutorsInvoices: builder.query<any, any>({
+    getMyInvoices: builder.query<any, any>({
       query: () => {
         return {
-          url: `/invoice/tutor`,
+          url: `/invoice/my`,
           method: "GET",
           credentials: "include",
         };
@@ -64,6 +64,6 @@ export const {
   useGetJobDetailsForInvoiceQuery,
   useGetAllInvoicesQuery,
   useGetSingleInvoiceByIdQuery,
-  useGetAllTutorsInvoicesQuery,
+  useGetMyInvoicesQuery,
   useSendInvoiceMutation,
 } = invoiceApi;

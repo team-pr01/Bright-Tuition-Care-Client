@@ -12,7 +12,7 @@ import toast from "react-hot-toast";
 type TFormData = {
   jobId: string;
   tutorName: string;
-  tutorId: string;
+  userId: string;
   phoneNumber: string;
   jobTitle: string;
   dueDate: string;
@@ -46,7 +46,7 @@ const SendInvoiceForm = ({
   useEffect(() => {
     if (jobData?.data) {
       setValue("tutorName", jobData.data.tutor?.name || "");
-      setValue("tutorId", jobData.data.tutor?._id || "");
+      setValue("userId", jobData.data.tutor?._id || "");
       setValue("phoneNumber", jobData.data.tutor?.phoneNumber || "");
       setValue("jobTitle", jobData.data.job?.title || "");
       setValue("amount", jobData.data.amount?.toString() || "");
@@ -59,7 +59,7 @@ const SendInvoiceForm = ({
       const payload = {
         invoiceType : activeTab === "Verification Charge" ? "verificationCharge" : "platformCharge",
         jobId: jobId ? jobId : null,
-        tutorId: data.tutorId,
+        userId: data.userId,
         amount: activeTab === "Verification Charge" ? 500 : data.amount,
         dueDate: data.dueDate,
       };
@@ -124,10 +124,10 @@ const SendInvoiceForm = ({
       {activeTab === "Verification Charge" && (
         <form onSubmit={handleSubmit(handleSendInvoice)} className="flex flex-col items-center gap-3 mt-10">
           <TextInput
-            label="Tutor Id"
-            placeholder="Enter tutor id"
-           {...register("tutorId", {
-              required: "Tutor Id is required",
+            label="Tutor/Guardian Id"
+            placeholder="Enter tutor/guardian id"
+           {...register("userId", {
+              required: "Tutor/Guardian Id is required",
             })}
           />
 
