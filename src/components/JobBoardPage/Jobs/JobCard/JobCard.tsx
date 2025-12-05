@@ -36,6 +36,7 @@ const JobCard: React.FC<TJobCardProps> = ({
   const pathname = useLocation().pathname;
   const user = useSelector(useCurrentUser) as TLoggedInUser;
   const [isOpen, setIsOpen] = useState(false);
+  const [actionType, setActionType] = useState<"apply" | "undo">("apply");
   const dropdownRef = useRef<HTMLDivElement | null>(null);
 
   // Close dropdown if clicked outside
@@ -120,7 +121,12 @@ const JobCard: React.FC<TJobCardProps> = ({
     }
   };
 
-  const isApplied = job?.applications?.some((app) => app === user?._id);
+  const appliedApplication = job?.applications?.find(
+    (app) => app?.userId?.toString() === user?._id?.toString()
+  );
+
+  const isApplied = Boolean(appliedApplication);
+  const applicationId = appliedApplication?.applicationId;
 
   return (
     <>
@@ -137,7 +143,7 @@ const JobCard: React.FC<TJobCardProps> = ({
           setIsShareJobModalOpen={setIsShareJobModalOpen}
           link={shareUrl}
           isApplied={isApplied}
-          applicationId={appliedData?._id}
+          applicationId={applicationId}
         />
       )}
 
@@ -171,12 +177,14 @@ const JobCard: React.FC<TJobCardProps> = ({
               {formatDate(job?.createdAt as string)}
             </span>
           </p>
-          <p>
-            Applied date :{" "}
-            <span className="font-semibold">
-              {formatDate(appliedData?.appliedOn as string)}
-            </span>
-          </p>
+          {appliedData && (
+            <p>
+              Applied date :{" "}
+              <span className="font-semibold">
+                {formatDate(appliedData?.appliedOn as string)}
+              </span>
+            </p>
+          )}
         </div>
 
         <div className="flex gap-2 mt-4">
@@ -380,20 +388,39 @@ const JobCard: React.FC<TJobCardProps> = ({
             </div>
 
             {pathname !== "/dashboard/tutor/my-applications" && (
-              <Button
-                label={isApplied ? "Applied" : "Apply Now"}
-                variant="primary"
-                icon={ICONS.topRightArrowWhite}
-                iconBg="#0D99FF"
-                onClick={() => {
-                  if (!user) {
-                    toast.error("Please login to apply for a job.");
-                  } else {
-                    setIsJobApplyConfirmationModalOpen(true);
-                  }
-                }}
-                isDisabled={isApplied}
-              />
+              <>
+                {!isApplied && (
+                  <Button
+                    label={"Apply"}
+                    variant="primary"
+                    icon={ICONS.topRightArrowWhite}
+                    iconBg="#0D99FF"
+                    onClick={() => {
+                      if (!user) {
+                        toast.error("Please login to apply for a job.");
+                      } else {
+                        setActionType("apply");
+                        setIsJobApplyConfirmationModalOpen(true);
+                      }
+                    }}
+                    animation={true}
+                  />
+                )}
+                {isApplied && (
+                  <Button
+                    label={"Undo Apply"}
+                    variant="tertiary"
+                    onClick={() => {
+                      if (!user) {
+                        toast.error("Please login to apply for a job.");
+                      } else {
+                        setActionType("undo");
+                        setIsJobApplyConfirmationModalOpen(true);
+                      }
+                    }}
+                  />
+                )}
+              </>
             )}
           </div>
         )}
@@ -402,6 +429,8 @@ const JobCard: React.FC<TJobCardProps> = ({
         isJobApplyConfirmationModalOpen={isJobApplyConfirmationModalOpen}
         setIsJobApplyConfirmationModalOpen={setIsJobApplyConfirmationModalOpen}
         jobId={job?._id as string}
+        action={actionType}
+        applicationId={applicationId}
       />
 
       <ShareJobModal

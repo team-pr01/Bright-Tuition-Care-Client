@@ -64,7 +64,8 @@ const MyApplications = () => {
     <div>
       <div className="flex items-center justify-between font-Nunito">
         <h1 className="text-xl md:text-2xl font-bold leading-11 text-primary-50">
-          Applied Job{jobs?.length > 1 ? "s" : ""} : {jobs?.length < 10 ? 0 : ""}
+          Applied Job{jobs?.length > 1 ? "s" : ""} :{" "}
+          {jobs?.length < 10 ? 0 : ""}
           {jobs?.length}
         </h1>
 

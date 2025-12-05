@@ -184,7 +184,7 @@ const UpdatePersonalInfoModal = ({
         {/* Gender */}
         <SelectDropdown
           label="Gender"
-          options={filterData.tutorGender}
+          options={["male", "female"]}
           {...register("gender")}
           isRequired={false}
         />
@@ -291,7 +291,7 @@ const UpdatePersonalInfoModal = ({
       {user?.role !== "guardian" && (
         <Textarea
           label="Personal Overview"
-          placeholder="Write about yourself"
+          placeholder="E.g., I am a dedicated tutor with over 5 years of teaching experience…"
           error={errors.overview}
           {...register("overview")}
           isRequired={false}

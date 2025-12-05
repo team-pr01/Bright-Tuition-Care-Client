@@ -70,7 +70,7 @@ const applicationApi = baseApi.injectEndpoints({
         url: `/application/withdraw/${id}`,
         method: "PATCH",
       }),
-      invalidatesTags: ["application", "tutor"],
+      invalidatesTags: ["application", "jobs", "tutor"],
     }),
 
     reApply: builder.mutation<any, any>({

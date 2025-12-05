@@ -75,8 +75,17 @@ export const quickLinks = [
 export const contactInfo = [
   {
     icon: <FiPhone className="text-xl" />,
-    label: "09617-785588",
-    href: "tel:09617-785588",
+    label: (
+      <div className="flex gap-1">
+        <a href="tel:09617785588" className="hover:underline">
+          09617-785588
+        </a>
+        or
+        <a href="tel:+8801610785588" className="hover:underline">
+          +880 1610-785588
+        </a>
+      </div>
+    ),
   },
   {
     icon: <HiOutlineMail className="text-xl" />,

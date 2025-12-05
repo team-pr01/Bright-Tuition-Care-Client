@@ -208,6 +208,7 @@ const JobDetails = ({
                   variant="primary"
                   iconBg="#0D99FF"
                   onClick={() => setIsJobApplyConfirmationModalOpen(true)}
+                  animation={true}
                 />
               )}
             </div>

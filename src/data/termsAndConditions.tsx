@@ -192,7 +192,7 @@ export const termsData = {
     },
     {
       heading: "9. Breach of Terms",
-      descriptions: "We may suspend or terminate your account if you:",
+      description: "We may suspend or terminate your account if you:",
       points: [
         "Breach these Terms.",
         "Provide unverifiable or false information.",

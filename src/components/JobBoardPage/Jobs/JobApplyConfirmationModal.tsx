@@ -1,6 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import toast from "react-hot-toast";
-import { useApplyOnJobMutation } from "../../../redux/Features/Application/applicationApi";
+import {
+  useApplyOnJobMutation,
+  useWithdrawApplicationMutation,
+} from "../../../redux/Features/Application/applicationApi";
 import Button from "../../Reusable/Button/Button";
 import { useSelector } from "react-redux";
 import { useCurrentUser } from "../../../redux/Features/Auth/authSlice";
@@ -10,16 +13,22 @@ const JobApplyConfirmationModal = ({
   isJobApplyConfirmationModalOpen,
   setIsJobApplyConfirmationModalOpen,
   jobId,
+  action,
+  applicationId,
 }: {
   isJobApplyConfirmationModalOpen: boolean;
   setIsJobApplyConfirmationModalOpen: React.Dispatch<
     React.SetStateAction<boolean>
   >;
   jobId: string;
+  action: "apply" | "undo";
+  applicationId?: string;
 }) => {
   const user = useSelector(useCurrentUser) as TLoggedInUser;
   const [applyOnJob, { isLoading: isApplyOnJobLoading }] =
     useApplyOnJobMutation();
+  const [withdrawApplication, { isLoading: isWithdrawingApplication }] =
+    useWithdrawApplicationMutation();
 
   const handleApplyOnJob = async () => {
     try {
@@ -29,12 +38,29 @@ const JobApplyConfirmationModal = ({
       };
       const response = await applyOnJob(payload).unwrap();
       if (response?.success) {
-        toast.success(response.message || "Applied on job successfully.");
+        toast.success(
+          response?.message || "You have successfully Applied on job."
+        );
         setIsJobApplyConfirmationModalOpen(false);
       }
     } catch (error: any) {
       toast.error(
         error?.data?.message || "Error applying on job. Please try again."
+      );
+    }
+  };
+
+  const handleWithdrawApplication = async () => {
+    try {
+      const res = await withdrawApplication(applicationId).unwrap();
+      if (res?.success) {
+        toast.success("Application withdrawn successfully.");
+        setIsJobApplyConfirmationModalOpen(false);
+      }
+    } catch (error: any) {
+      toast.error(
+        error?.data?.message ||
+          "Error withdrawing application. Please try again."
       );
     }
   };
@@ -53,10 +79,12 @@ const JobApplyConfirmationModal = ({
       >
         <div className="w-full flex items-center justify-center flex-col text-center">
           <h1 className="text-neutral-10 text-xl md:text-4xl font-bold leading-6">
-            Apply
+            {action === "apply" ? "Apply" : "Undo Apply"}
           </h1>
           <p className="text-neutral-20 text-sm md:text-lg leading-6 mt-1 md:mt-3">
-            Are you sure you want to apply for this job?
+            {action === "apply"
+              ? "Are you sure you want to apply for this job?"
+              : "Are you sure you want to undo your application for this job?"}
           </p>
           <div className="mt-8 flex justify-center gap-5">
             <Button
@@ -66,14 +94,26 @@ const JobApplyConfirmationModal = ({
               className="border border-neutral-55 min-w-[100px] flex items-center justify-center"
               onClick={() => setIsJobApplyConfirmationModalOpen(false)}
             />
-            <Button
-              label="Apply Now"
-              variant="primary"
-              iconBg="#0D99FF"
-              onClick={handleApplyOnJob}
-              isLoading={isApplyOnJobLoading}
-              isDisabled={isApplyOnJobLoading}
-            />
+            {action === "apply" && (
+              <Button
+                label="Yes"
+                variant="primary"
+                iconBg="#0D99FF"
+                className="min-w-[100px] flex items-center justify-center"
+                onClick={handleApplyOnJob}
+                isLoading={isApplyOnJobLoading}
+              />
+            )}
+            {action === "undo" && (
+              <Button
+                label="Yes"
+                variant="primary"
+                iconBg="#0D99FF"
+                className="min-w-[100px] flex items-center justify-center"
+                onClick={handleWithdrawApplication}
+                isLoading={isWithdrawingApplication}
+              />
+            )}
           </div>
         </div>
       </div>

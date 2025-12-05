@@ -31,7 +31,10 @@ export type TJobs = {
   guardianName?: string;
   guardianPhoneNumber?: string;
   status?: "pending" | "live" | "closed" | "cancelled";
-  applications: string[];
+  applications: {
+    userId : string;
+    applicationId: string;
+  }[];
   postedBy: string;
   postedByModel: "User" | "Guardian";
   createdAt: string;

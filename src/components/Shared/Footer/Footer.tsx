@@ -94,9 +94,9 @@ const Footer: React.FC = () => {
             <motion.div variants={itemVariants}>
               <h1 className={linkHeadingClassNames}>Contact Info</h1>
               <div className="flex flex-col gap-4 mt-5">
-                {contactInfo?.map((item) => (
+                {contactInfo?.map((item, id) => (
                   <a
-                    key={item?.label}
+                    key={id}
                     href={item?.href ? item?.href : ""}
                     className={`text-sm md:text-base text-neutral-50 leading-6 w-fit flex gap-2 ${
                       item?.href
