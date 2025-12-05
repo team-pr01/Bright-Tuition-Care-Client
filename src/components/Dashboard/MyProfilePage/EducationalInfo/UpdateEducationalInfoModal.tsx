@@ -9,8 +9,8 @@ import { FiTrash2 } from "react-icons/fi";
 import { useUpdateProfileMutation } from "../../../../redux/Features/User/userApi";
 
 type Degree =
-  | "SSC / O Level"
-  | "HSC / A Level"
+  | "SSC / O Level / Dakhil"
+  | "HSC / A Level / Alim"
   | "Diploma"
   | "Bachelor"
   | "Honours"
@@ -18,14 +18,16 @@ type Degree =
   | "Doctorate";
 
 const degreeOptions: Degree[] = [
-  "SSC / O Level",
-  "HSC / A Level",
+  "SSC / O Level / Dakhil",
+  "HSC / A Level / Alim",
   "Diploma",
   "Bachelor",
   "Honours",
   "Masters",
   "Doctorate",
 ];
+
+const mediumOptions = ["Bangla", "English"];
 
 type FormEducation = Omit<any, "from" | "to"> & {
   from?: string | null;
@@ -75,7 +77,7 @@ const UpdateEducationalInfoModal = ({
       const mapped: FormEducation[] = defaultValues?.map((edu: any) => ({
         degree: edu.degree ?? "Bachelor",
         instituteName: edu.instituteName ?? "",
-        medium: edu.medium ?? "",
+        medium: edu.medium ?? "Bangla",
         group: edu.group ?? "",
         department: edu.department ?? "",
         semester: edu.semester ?? undefined,
@@ -186,13 +188,13 @@ const UpdateEducationalInfoModal = ({
                   isRequired={false}
                 />
 
-                <TextInput
+                {/* Medium */}
+                <SelectDropdown
                   label="Medium"
-                  placeholder="e.g., Bangla / English"
+                  options={mediumOptions}
                   {...register(
                     `educationalInformation.${index}.medium` as const
                   )}
-                  error={undefined}
                   isRequired={false}
                 />
 

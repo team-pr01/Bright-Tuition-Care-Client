@@ -177,14 +177,6 @@ const JobCard: React.FC<TJobCardProps> = ({
               {formatDate(job?.createdAt as string)}
             </span>
           </p>
-          {appliedData && (
-            <p>
-              Applied date :{" "}
-              <span className="font-semibold">
-                {formatDate(appliedData?.appliedOn as string)}
-              </span>
-            </p>
-          )}
         </div>
 
         <div className="flex gap-2 mt-4">
@@ -272,14 +264,21 @@ const JobCard: React.FC<TJobCardProps> = ({
         )}
 
         {variant === "status" && (
-          <div className="flex items-center gap-5 text-neutral-10 text-xs md:text-sm">
-            <div className="flex items-center gap-1 md:gap-2 mt-4">
-              <img src={ICONS.jobStatus} alt="" className="size-4 md:size-5" />
+          <div className="flex items-center gap-5 text-neutral-10 text-xs md:text-sm mt-4">
+            <button
+              onClick={() => setShowDrawer(true)}
+              className="text-neutral-10 flex items-center gap-2 w-fit font-semibold transition-all duration-300 text-sm md:text-base cursor-pointer"
+            >
+              <img src={ICONS.jobDetails} alt="" className="size-5" />
+              <p className="hidden md:block">Details</p>
+            </button>
+            <div className="flex items-center gap-1 md:gap-2">
               <p className="font-bold">Applied On:</p>
-              <p className="text-primary-10">15 Aug, 2025</p>
+              <p className="text-primary-10">
+                {formatDate(appliedData?.appliedOn as string)}
+              </p>
             </div>
-            <div className="flex items-center gap-1 md:gap-2 mt-4">
-              <img src={ICONS.jobStatus} alt="" className="size-4 md:size-5" />
+            <div className="flex items-center gap-1 md:gap-2">
               <p className="font-bold">Status:</p>
               <p className={`capitalize ${statusTextColor}`}>{status}</p>
             </div>
@@ -425,6 +424,7 @@ const JobCard: React.FC<TJobCardProps> = ({
           </div>
         )}
       </div>
+
       <JobApplyConfirmationModal
         isJobApplyConfirmationModalOpen={isJobApplyConfirmationModalOpen}
         setIsJobApplyConfirmationModalOpen={setIsJobApplyConfirmationModalOpen}

@@ -49,7 +49,7 @@ export const tutorDashboardLinks: DashboardLink[] = [
   },
   {
     label: "My Applications",
-    path: "/dashboard/tutor/my-applications",
+    path: "/dashboard/tutor/my-applications/applied",
     icon: <FaRegFileAlt />,
   },
   {

@@ -5,9 +5,10 @@ import Button from "../../Reusable/Button/Button";
 import ShareJobModal from "../ShareJobModal";
 import toast from "react-hot-toast";
 import { useWithdrawApplicationMutation } from "../../../redux/Features/Application/applicationApi";
+import { formatDate } from "../../../utils/formatDate";
 
 const JobDetails = ({
-  // job,
+  job,
   status,
   link,
   setShowDrawer,
@@ -33,20 +34,24 @@ const JobDetails = ({
     {
       icon: ICONS.tutoringDays,
       title: "Tutoring Days",
-      value: "3 Days / Week",
+      value: job?.tutoringDays,
     },
-    { icon: ICONS.salary, title: "Salary", value: "5000" },
-    { icon: ICONS.gender, title: "Student Gender", value: "Bangla Media" },
-    { icon: ICONS.preferredTutor, title: "Prefer Tutor", value: "Female" },
-    { icon: ICONS.numberOfStudents, title: "No. Of Students", value: "2" },
-    { icon: ICONS.time, title: "Tutoring Time", value: "6:00 - 7:00 PM" },
-    { icon: ICONS.tuitionType, title: "Tuition Type", value: "Home Tutoring" },
+    { icon: ICONS.salary, title: "Salary", value: job?.salary },
+    { icon: ICONS.gender, title: "Student Gender", value: job?.studentGender },
+    {
+      icon: ICONS.preferredTutor,
+      title: "Prefer Tutor",
+      value: job?.preferredTutorGender,
+    },
+    {
+      icon: ICONS.numberOfStudents,
+      title: "No. Of Students",
+      value: job?.numberOfStudents,
+    },
+    { icon: ICONS.time, title: "Tutoring Time", value: job?.tutoringTime },
 
     // { icon: ICONS.subject, title: "Subject", value: "All" },
-
     // { icon: ICONS.location, title: "Location", value: "Mohammodpur" },
-    { icon: ICONS.preferedClass, title: "Class", value: "10" },
-    { icon: ICONS.category, title: "Category", value: "Bangla Media" },
   ];
 
   const [withdrawApplication, { isLoading: isWithdrawingApplication }] =
@@ -103,7 +108,7 @@ const JobDetails = ({
           <div className="bg-white border-0 md:border md:border-neutral-55 rounded-xl lg:rounded-3xl p-0 md:p-8 max-w-[895px] mx-auto font-Nunito relative overflow-visible md:overflow-hidden">
             <div className="bg-primary-10/40 blur-[150px] size-32 rounded-full absolute top-0 right-0"></div>
             <h1 className="text-neutral-10 text-lg md:text-2xl lg:text-3xl font-bold leading-6 text-start md:text-center">
-              Advanced Mathematics Tutor{" "}
+              {job?.title}{" "}
               {/* <span className="text-primary-10 font-normal text-sm leading-0">
                 Home Tutoring
               </span> */}
@@ -119,12 +124,14 @@ const JobDetails = ({
             {/* Date and job id */}
             <div className="flex flex-wrap items-center justify-start md:justify-center gap-2 mt-3 lg:mt-5 text-xs md:text-base">
               <p>
-                Job Id : <span className="font-semibold">#12345</span>
+                Job Id : <span className="font-semibold">{job?.jobId}</span>
               </p>
               <p>|</p>
               <p>
                 Posted Date :{" "}
-                <span className="font-semibold">August 15, 2025</span>
+                <span className="font-semibold">
+                  {formatDate(job?.createdAt as string)}
+                </span>
               </p>
               {/* <button className="text-neutral-10 md:hidden flex items-center gap-2 leading-[24px] w-fit font-semibold transition-all duration-300 text-xs md:text-base">
                 <img src={ICONS.share} alt="" className="size-4" />
@@ -144,7 +151,7 @@ const JobDetails = ({
                 <div>
                   <p className="text-neutral-45 text-sm">Subjects</p>
                   <p className="text-neutral-10 font-medium">
-                    Physics, Chemistry, Math
+                    {job?.subjects?.join(", ")}
                   </p>
                 </div>
               </div>
@@ -166,7 +173,7 @@ const JobDetails = ({
                 <div>
                   <p className="text-neutral-45 text-sm">Location</p>
                   <p className="text-neutral-10 font-medium">
-                    Mohammodpur, Dhaka
+                    {job?.area} {job?.city}{" "}
                   </p>
                 </div>
               </div>
@@ -175,8 +182,7 @@ const JobDetails = ({
                 <div>
                   <p className="text-neutral-45 text-sm">Other Requirements</p>
                   <p className="text-neutral-10 font-medium">
-                    Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                    Ullam nam.
+                    {job?.otherRequirements}
                   </p>
                 </div>
               </div>
