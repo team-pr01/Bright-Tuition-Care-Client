@@ -11,7 +11,7 @@ const ToastMessage: React.FC<ToastMessageProps> = ({
   subTitle,
 }) => {
   return (
-    <div className="flex flex-col items-center text-center gap-3 p-5 bg-white rounded-xl shadow-lg border border-primary-10 w-[340px]">
+    <div className="flex flex-col items-center text-center gap-3 p-5 bg-white z-[999999] top-0 rounded-xl shadow-lg border border-primary-10 w-[340px]">
       {/* Animated Tick */}
       <motion.div
         initial={{ scale: 0, rotate: -90 }}

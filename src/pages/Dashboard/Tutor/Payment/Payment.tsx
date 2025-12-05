@@ -4,12 +4,16 @@ import type { TLoggedInUser } from "../../../../types/loggedinUser.types";
 import { useCurrentUser } from "../../../../redux/Features/Auth/authSlice";
 import { useSelector } from "react-redux";
 import { useUser } from "../../../../contexts/UserContext";
+import Button from "../../../../components/Reusable/Button/Button";
+import { useState } from "react";
+import Modal from "../../../../components/Reusable/Modal/Modal";
+import SendRefundRequest from './../../../../components/Dashboard/Payment/SendRefundRequest/SendRefundRequest';
 
 const Payment = () => {
   const user = useSelector(useCurrentUser) as TLoggedInUser;
   const { user: myProfile } = useUser();
+  const [isRefundRequestModalOpen, setIsRefundRequestModalOpen] = useState<boolean>(false);
   // const [paidFor, setPaidFor] = useState<string>("");
-  // const [isPaymentModalOpen, setIsPaymentModalOpen] = useState<boolean>(false);
   // const [paymentModalType, setPaymentModalType] = useState<
   //   "selectPaymentMethod" | "addPaymentDetails" | "paymentSuccess"
   // >("selectPaymentMethod");
@@ -36,6 +40,13 @@ const Payment = () => {
         "A one-time verification fee that covers the review of your tutor profile, academic documents, and identity to ensure maximum trust, safety, and authenticity across our platform.",
       isPaid: myProfile?.isVerified || false,
     },
+    {
+      title: "Refund",
+      icon: ICONS.refund,
+      description:
+        "A one-time verification fee that covers the review of your tutor profile, academic documents, and identity to ensure maximum trust, safety, and authenticity across our platform.",
+      isPaid: myProfile?.isVerified || false,
+    },
   ];
 
   const chargesToShow =
@@ -51,26 +62,20 @@ const Payment = () => {
             key={index}
             className="bg-white border border-primary-40/10 rounded-2xl py-7 px-5 flex flex-col items-center gap-5"
           >
-            <img src={charge.icon} alt={charge.title} className="size-20" />
+            <img src={charge.icon} alt={charge.title} className="w-20" />
 
             <div className="text-neutral-10 text-center">
               <h1 className="font-bold text-xl">{charge.title} </h1>
               <p className="text-sm mt-[6px]">{charge.description}</p>
             </div>
 
-            {/* <Button
+            <Button
               type="button"
-              label={charge?.isPaid ? "Paid" : "Pay Now"}
-              variant={charge?.isPaid ? "primary" : "tertiary"}
-              isDisabled={charge?.isPaid}
-              className="py-2 lg:py-2"
-              onClick={() => {
-                setSelectedAmount(charge?.amount);
-                setIsPaymentModalOpen(true);
-                setPaymentModalType("selectPaymentMethod");
-                setPaidFor(charge?.title);
-              }}
-            /> */}
+              label={charge?.title === "Refund" ? "Apply" : "Click Here"}
+              variant={charge?.title  === "Refund" ? "primary" : "tertiary"}
+              className="py-[7px] lg:py-[7px]"
+              onClick={charge?.title === "Refund" ? () => setIsRefundRequestModalOpen(true) : undefined}
+            />
           </div>
         ))}
       </div>
@@ -78,26 +83,13 @@ const Payment = () => {
       <SupportBar />
 
       {/* Payment Modal */}
-      {/* <Modal
-        isModalOpen={isPaymentModalOpen}
-        setIsModalOpen={setIsPaymentModalOpen}
+      <Modal
+        isModalOpen={isRefundRequestModalOpen}
+        setIsModalOpen={setIsRefundRequestModalOpen}
         width="w-[90%] md:w-auto max-h-[600px] overflow-y-auto"
       >
-        {paymentModalType === "selectPaymentMethod" ? (
-          <SelectPaymentMethod
-            selectedPaymentMethod={selectedPaymentMethod}
-            setSelectedPaymentMethod={setSelectedPaymentMethod}
-            setPaymentModalType={setPaymentModalType}
-          />
-        ) : (
-          <SelectedPaymentMethod
-            setIsPaymentModalOpen={setIsPaymentModalOpen}
-            selectedPaymentMethod={selectedPaymentMethod}
-            amount={selectedAmount}
-            paidFor={paidFor}
-          />
-        )}
-      </Modal> */}
+        <SendRefundRequest setIsRefundRequestModalOpen={setIsRefundRequestModalOpen}/>
+      </Modal>
     </div>
   );
 };

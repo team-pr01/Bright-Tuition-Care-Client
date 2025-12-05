@@ -29,7 +29,7 @@ const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
     ref
   ) => {
     return (
-      <div className="flex flex-col gap-2 font-Nunito">
+      <div className="flex flex-col gap-2 font-Nunito w-full">
         <label className="flex flex-row items-center w-full justify-between text-neutral-65">
           <span className="text-neutral-10 leading-[18px] text-[15px] font-medium tracking-[-0.16] ">
             {label}{" "}

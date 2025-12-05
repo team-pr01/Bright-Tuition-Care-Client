@@ -113,7 +113,7 @@ const ContactUsForm = () => {
           icon={ICONS.topRightArrow}
         />
         <p className="text-neutral-5 font-semibold">Or</p>
-        <a href="tel:+8801616012365">
+        <a href="tel:09617-785588">
           <Button
             label="Call Now"
             variant="secondary"

@@ -85,7 +85,7 @@ const TuitionRequestForm = () => {
         />
 
         <TextInput
-          label="Student's Class/Grade (Optional)"
+          label="Student's Class/Grade"
           placeholder="Enter student's class/grade"
           {...register("class")}
           isRequired={false}

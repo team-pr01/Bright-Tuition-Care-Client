@@ -10,7 +10,7 @@ const SupportBar = () => {
       >
         09617-785588{" "}
         <span className="text-[10px] md:text-sm font-normal">
-          (10:00 AM - 10:00PM)
+          (09:00 AM - 10:00PM)
         </span>
       </a>
       <img

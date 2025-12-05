@@ -84,8 +84,9 @@ import profileUnverified from "../assets/Icons/profile-unverified.webp";
 import support from "../assets/Icons/support.svg";
 import sendWhite from "../assets/Icons/send.svg";
 import warning from "../assets/Icons/warning.svg";
-import platformCharge from "../assets/Icons/platform-charge.svg";
+import platformCharge from "../assets/Icons/platform-charge.webp";
 import verificationCharge from "../assets/Icons/verification-charge.svg";
+import refund from "../assets/Icons/refund.svg";
 import bkash from "../assets/Icons/bkash.svg";
 import nagad from "../assets/Icons/nagad.svg";
 import rocket from "../assets/Icons/rocket.png";
@@ -236,6 +237,7 @@ export const ICONS = {
   warning,
   platformCharge,
   verificationCharge,
+  refund,
   bkash,
   nagad,
   rocket,
