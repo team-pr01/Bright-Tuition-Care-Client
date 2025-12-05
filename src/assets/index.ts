@@ -59,6 +59,8 @@ import jobDetails from "../assets/Icons/job-details.svg";
 import location from "../assets/Icons/location.svg";
 import location2 from "../assets/Icons/location2.svg";
 import preferredTutor from "../assets/Icons/prefered-tutor.svg";
+import male from "../assets/Icons/male.svg";
+import female from "../assets/Icons/female.svg";
 import subject from "../assets/Icons/subject.svg";
 import tuitionType from "../assets/Icons/tuition-type.svg";
 import tutoringDays from "../assets/Icons/tutoringDays.svg";
@@ -210,6 +212,8 @@ export const ICONS = {
   location,
   location2,
   preferredTutor,
+  male,
+  female,
   subject,
   tuitionType,
   tutoringDays,

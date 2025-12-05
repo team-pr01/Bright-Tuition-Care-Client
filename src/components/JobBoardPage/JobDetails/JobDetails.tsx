@@ -39,7 +39,12 @@ const JobDetails = ({
     { icon: ICONS.salary, title: "Salary", value: job?.salary },
     { icon: ICONS.gender, title: "Student Gender", value: job?.studentGender },
     {
-      icon: ICONS.preferredTutor,
+      icon:
+        job?.preferredTutorGender === "male"
+          ? ICONS.male
+          : job?.preferredTutorGender === "female"
+          ? ICONS.female
+          : ICONS.gender,
       title: "Prefer Tutor",
       value: job?.preferredTutorGender,
     },
@@ -108,7 +113,10 @@ const JobDetails = ({
           <div className="bg-white border-0 md:border md:border-neutral-55 rounded-xl lg:rounded-3xl p-0 md:p-8 max-w-[895px] mx-auto font-Nunito relative overflow-visible md:overflow-hidden">
             <div className="bg-primary-10/40 blur-[150px] size-32 rounded-full absolute top-0 right-0"></div>
             <h1 className="text-neutral-10 text-lg md:text-2xl lg:text-3xl font-bold leading-6 text-start md:text-center">
-              {job?.title}{" "}
+              {job?.title} -{" "}
+              <span className="text-primary-10 font-normal text-sm">
+                {job?.tuitionType}
+              </span>
               {/* <span className="text-primary-10 font-normal text-sm leading-0">
                 Home Tutoring
               </span> */}

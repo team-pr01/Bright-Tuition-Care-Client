@@ -70,7 +70,12 @@ const JobCard: React.FC<TJobCardProps> = ({
     },
     { icon: ICONS.salary, title: "Salary", value: `${job?.salary} BDT` },
     {
-      icon: ICONS.preferredTutor,
+      icon:
+        job?.preferredTutorGender === "male"
+          ? ICONS.male
+          : job?.preferredTutorGender === "female"
+          ? ICONS.preferredTutor
+          : ICONS.gender,
       title: "Prefer Tutor",
       value: job?.preferredTutorGender,
     },
