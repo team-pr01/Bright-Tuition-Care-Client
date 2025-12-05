@@ -29,14 +29,13 @@ const verificationRequestApi = baseApi.injectEndpoints({
       providesTags: ["refundRequest"],
     }),
 
-    requestToRefund: builder.mutation<any, any>({
-      query: (data) => ({
-        url: `/refund-request/request-to-refund`,
-        method: "POST",
-        body: data,
+     getMyVerificationRequest: builder.query({
+      query: () => ({
+        url: `/profile-verification/my-request`,
+        method: "GET",
         credentials: "include",
       }),
-      invalidatesTags: ["refundRequest"],
+      providesTags: ["testimonial"],
     }),
 
     sendVerificationRequest: builder.mutation<any, any>({
@@ -48,21 +47,21 @@ const verificationRequestApi = baseApi.injectEndpoints({
       invalidatesTags: ["verificationRequest"],
     }),
 
-    rejectRefundRequest: builder.mutation<any, any>({
-      query: ({ id, data }) => ({
-        url: `/refund-request/reject/${id}`,
+    submitAddressCode: builder.mutation<any, any>({
+      query: (data) => ({
+        url: `/profile-verification/submit-address-code`,
         method: "PATCH",
         body: data,
         credentials: "include",
       }),
-      invalidatesTags: ["refundRequest"],
+      invalidatesTags: ["verificationRequest"],
     }),
   }),
 });
 
 export const {
   useGetAllRefundRequestsQuery,
-  useRequestToRefundMutation,
+  useGetMyVerificationRequestQuery,
   useSendVerificationRequestMutation,
-  useRejectRefundRequestMutation,
+  useSubmitAddressCodeMutation,
 } = verificationRequestApi;

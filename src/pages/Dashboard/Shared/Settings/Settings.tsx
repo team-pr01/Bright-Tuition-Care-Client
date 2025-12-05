@@ -16,7 +16,6 @@ import { useUser } from "../../../../contexts/UserContext";
 
 const Settings = () => {
   const { user: myProfile, isLoading } = useUser();
-  console.log(myProfile);
   const profileStatus = myProfile?.profileStatus;
   const isVerified = myProfile?.isVerified;
 
