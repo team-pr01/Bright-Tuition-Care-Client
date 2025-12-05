@@ -3,6 +3,15 @@ import { baseApi } from "../../API/baseApi";
 
 const guardianApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
+    getGuardianDashboardStats: builder.query({
+      query: () => ({
+        url: `/guardian/stats`,
+        method: "GET",
+        credentials: "include",
+      }),
+      providesTags: ["guardian"],
+    }),
+
     getAllGuardians: builder.query<
       any,
       {
@@ -47,5 +56,5 @@ const guardianApi = baseApi.injectEndpoints({
   }),
 });
 
-export const { useGetAllGuardiansQuery, useSetGuardianOfTheMonthMutation } =
+export const { useGetGuardianDashboardStatsQuery, useGetAllGuardiansQuery, useSetGuardianOfTheMonthMutation } =
   guardianApi;

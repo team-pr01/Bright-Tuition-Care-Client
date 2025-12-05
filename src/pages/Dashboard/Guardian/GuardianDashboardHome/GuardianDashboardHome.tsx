@@ -1,9 +1,9 @@
 import {
-  FaUserCheck,
   FaCheckCircle,
   FaTimesCircle,
   FaHourglassHalf,
   FaRegDotCircle,
+  FaLayerGroup,
 } from "react-icons/fa";
 import DashboardOverviewCard from "../../../../components/Dashboard/DashboardOverviewCard/DashboardOverviewCard";
 import NoticeBoard from "../../../../components/Dashboard/NoticeBoard/NoticeBoard";
@@ -11,52 +11,61 @@ import { Link } from "react-router-dom";
 import DashboardDataCard from "../../../../components/Dashboard/DashboardDataCard/DashboardDataCard";
 import { ICONS } from "../../../../assets";
 import SupportBar from "../../../../components/Dashboard/SupportBar/SupportBar";
+import { useGetGuardianDashboardStatsQuery } from "../../../../redux/Features/Guardian/guardianApi";
 const GuardianDashboardHome = () => {
+  const { data } = useGetGuardianDashboardStatsQuery({});
+  const guardianStats = data?.data || {};
+  const applications = guardianStats?.jobs || {};
+
+  const radius = 58;
+  const circumference = 2 * Math.PI * radius;
+  const progress = guardianStats?.profileCompleted || 0;
   return (
     <div className="flex flex-col gap-5 md:gap-0 font-Nunito">
       <div className="flex items-center overflow-x-auto w-full gap-3 md:gap-6 bg-primary-10 md:bg-[#F2F5FC] py-5 px-3 lg:px-6 rounded-b-3xl md:rounded-b-none">
         <DashboardOverviewCard
+          title="All"
+          additionalTitle="Jobs"
+          value={applications?.total || 0}
+          textColor="text-white md:text-neutral-10"
+          path="/dashboard/guardian/posted-jobs"
+          icon={<FaLayerGroup />}
+        />
+        <DashboardOverviewCard
           title="Pending"
           additionalTitle="Jobs"
-          value="7"
+          value={applications?.pending || 0}
           textColor="text-white md:text-neutral-10"
-          path="/dashboard/tutor/job-applications/pending"
+          path="/dashboard/guardian/posted-jobs?jobStatus=pending"
           icon={<FaHourglassHalf />}
         />
 
         <DashboardOverviewCard
           title="Live"
           additionalTitle="Jobs"
-          value="5"
+          value={applications?.live || 0}
           textColor="text-white md:text-primary-10"
-          path="/dashboard/tutor/job-applications/live"
+          path="/dashboard/guardian/posted-jobs?jobStatus=live"
           icon={<FaRegDotCircle />}
         />
         <DashboardOverviewCard
-          title="Appointed"
-          value="2"
-          textColor="text-white md:text-[#9C9700]"
-          path="/dashboard/tutor/job-applications/appointed"
-          icon={<FaUserCheck />}
-        />
-        <DashboardOverviewCard
           title="Confirmed"
-          value="1"
+          value={applications?.closed || 0}
           textColor="text-white md:text-green-500"
-          path="/dashboard/tutor/job-applications/confirmed"
+          path="/dashboard/guardian/posted-jobs?jobStatus=confirmed"
           icon={<FaCheckCircle />}
         />
         <DashboardOverviewCard
           title="Cancelled"
-          value="6"
+          value={applications?.cancelled || 0}
           textColor="text-white md:text-rose-500"
-          path="/dashboard/tutor/job-applications/cancelled"
+          path="/dashboard/guardian/posted-jobs?jobStatus=cancelled"
           icon={<FaTimesCircle />}
         />
       </div>
 
       <div className="px-3 lg:px-6 flex flex-col gap-4 lg:gap-7">
-        <NoticeBoard />
+        <NoticeBoard notices={guardianStats?.notices} />
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           <DashboardDataCard
@@ -71,9 +80,9 @@ const GuardianDashboardHome = () => {
           />
           <DashboardDataCard
             title={"Confirmation Letters"}
-            description={"Because you have not confirmed any tuition job"}
+            description={"Check out your confirmation letters"}
             icon={ICONS.confirmationLetter}
-            value={"2"}
+            value={guardianStats?.confirmationLetterCount || 0}
             titleColor={"text-primary-10"}
             valueColor={"text-primary-10"}
             btnLabel={"View All"}
@@ -86,43 +95,46 @@ const GuardianDashboardHome = () => {
             {/* Progress Circle */}
             <div className="relative size-32">
               <svg className="size-full transform -rotate-90">
-                {/* Background Fill */}
+                {/* Background fill */}
                 <circle
-                  className="text-neutral-100"
                   fill="currentColor"
-                  r="58"
+                  className="text-neutral-100"
+                  r={radius}
                   cx="64"
                   cy="64"
                 />
 
                 {/* Track */}
                 <circle
+                  stroke="currentColor"
                   className="text-gray-200"
                   strokeWidth="6"
-                  stroke="currentColor"
                   fill="transparent"
-                  r="58"
+                  r={radius}
                   cx="64"
                   cy="64"
                 />
 
                 {/* Progress */}
                 <circle
-                  className="text-primary-10"
-                  strokeWidth="6"
-                  strokeDasharray={2 * Math.PI * 58}
-                  strokeDashoffset={2 * Math.PI * 58 * (1 - 0.5)} // 50%
-                  strokeLinecap="round"
                   stroke="currentColor"
+                  className="text-primary-10 transition-all duration-700 ease-out"
+                  strokeWidth="6"
+                  strokeDasharray={circumference}
+                  strokeDashoffset={circumference * (1 - progress / 100)}
+                  strokeLinecap="round"
                   fill="transparent"
-                  r="58"
+                  r={radius}
                   cx="64"
                   cy="64"
                 />
               </svg>
 
+              {/* Center text */}
               <div className="absolute inset-0 flex items-center justify-center">
-                <span className="text-xl font-bold text-primary-10">50%</span>
+                <span className="text-xl font-bold text-primary-10">
+                  {progress}%
+                </span>
               </div>
             </div>
 
@@ -131,31 +143,36 @@ const GuardianDashboardHome = () => {
               <h1 className="text-xl lg:text-[28px] font-semibold text-primary-10">
                 Profile Completed{" "}
                 <span className="text-2xl md:text-[33px] font-bold text-primary-10">
-                  50%
+                  {progress}%
                 </span>
               </h1>
               <p className="mb-5 md:mb-8 text-sm md:text-base mt-2 md:mt-0">
-                A complete and well organized profile can help you to get better
-                response.
+                Complete your profile to get better response from tutors
               </p>
 
               <Link
-                to={""}
+                to={"/dashboard/guardian/my-profile"}
                 className="bg-gradient-to-r from-cyan-500 to-primary-10 text-white text-sm py-2 px-4 rounded-md mt-5"
               >
-                Complete Profile
+                {guardianStats?.profileCompleted === 100
+                  ? "Profile Completed"
+                  : "Complete Profile"}
               </Link>
             </div>
           </div>
           <DashboardDataCard
             title={"Profile Status"}
             description={"Get better response by verifying your profile."}
-            icon={ICONS.profileUnverified}
-            value={"Not"}
+            icon={
+              guardianStats?.isVerified
+                ? ICONS.profileVerified
+                : ICONS.profileUnverified
+            }
+            value={guardianStats?.isVerified ? "Verified" : "Not Verified"}
             titleColor={"text-primary-10"}
             valueColor={"text-primary-10"}
-            btnLabel={"Verify Now"}
-            path={""}
+            btnLabel={guardianStats?.isVerified ? "Verified" : "Verify Now"}
+            path={"/dashboard/guardian/settings"}
           />
         </div>
 

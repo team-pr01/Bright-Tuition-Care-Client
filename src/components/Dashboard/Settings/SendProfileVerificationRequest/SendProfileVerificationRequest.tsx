@@ -20,6 +20,7 @@ const SendProfileVerificationRequest = ({
       if (res?.success) {
         toast.success("Verification request sent successfully");
         setIsVerificationModalOpen(false);
+        window.location.reload();
       }
     } catch (error: any) {
       toast.error(error?.data?.message || "Error sending verification request");

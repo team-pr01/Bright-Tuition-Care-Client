@@ -26,22 +26,18 @@ const TutorJobBoard = () => {
   const [selectedTuitionType, setSelectedTuitionType] = useState<string[]>([]);
   const debouncedKeyword = useDebounce(keyword, 500);
 
-// Clear areas when no city is selected
-useEffect(() => {
-  if (selectedCities.length === 0) {
-    setSelectedAreas([]);
-  }
-}, [selectedCities]);
+  // Clear areas when no city is selected
+  useEffect(() => {
+    if (selectedCities.length === 0) {
+      setSelectedAreas([]);
+    }
+  }, [selectedCities]);
 
-// Sync city & area from URL params
-useEffect(() => {
-  if (city) setSelectedCities([city]);
-  if (area) setSelectedAreas([area]);
-}, [city, area]);
-
-
-  console.log(selectedCities);
-  console.log(selectedAreas);
+  // Sync city & area from URL params
+  useEffect(() => {
+    if (city) setSelectedCities([city]);
+    if (area) setSelectedAreas([area]);
+  }, [city, area]);
 
   // Pagination states
   const [skip, setSkip] = useState(0);

@@ -17,7 +17,6 @@ const TutorDashboardHome = () => {
   const { data } = useGetTutorDashboardStatsQuery({});
   const tutorStats = data?.data || {};
   const applications = tutorStats?.applications || {};
-  console.log(tutorStats);
 
   const radius = 58;
   const circumference = 2 * Math.PI * radius;
@@ -120,7 +119,7 @@ const TutorDashboardHome = () => {
               <h1 className="text-xl lg:text-[28px] font-semibold text-primary-10">
                 Profile Completed{" "}
                 <span className="text-2xl md:text-[33px] font-bold text-primary-10">
-                  50%
+                 {progress === 100 ? "" : `(${progress}%)`}
                 </span>
               </h1>
               <p className="mb-5 md:mb-8 text-sm md:text-base mt-2 md:mt-0">
@@ -132,7 +131,7 @@ const TutorDashboardHome = () => {
                 to={"/dashboard/tutor/my-profile"}
                 className="bg-gradient-to-r from-cyan-500 to-primary-10 text-white text-sm py-2 px-4 rounded-md mt-5"
               >
-                {tutorStats?.profileCompleted ? "Profile Completed" : "Complete Profile"}
+                {tutorStats?.profileCompleted === 100 ? "Profile Completed" : "Complete Profile"}
               </Link>
             </div>
           </div>

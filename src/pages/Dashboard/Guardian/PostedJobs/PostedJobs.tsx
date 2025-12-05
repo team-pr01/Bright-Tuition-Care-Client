@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { RxArrowTopRight } from "react-icons/rx";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import { ICONS } from "../../../../assets";
 import { useEffect, useRef, useState } from "react";
 import { useGetMyPostedJobsQuery } from "../../../../redux/Features/Job/jobApi";
@@ -12,10 +12,16 @@ import Jobs from "../../../../components/JobBoardPage/Jobs/Jobs";
 import type { TLoggedInUser } from "../../../../types/loggedinUser.types";
 
 const PostedJobs = () => {
+  const [searchParams] = useSearchParams();
+  const jobStatus = searchParams.get("jobStatus");
   const user = useSelector(useCurrentUser) as TLoggedInUser;
   const [keyword, setKeyword] = useState<string>("");
   const [status, setStatus] = useState<string>("");
   const debouncedKeyword = useDebounce(keyword, 500);
+
+  useEffect(() => {
+    setStatus(jobStatus || "");
+  }, [jobStatus])
 
   // Pagination states
   const [skip, setSkip] = useState(0);
@@ -112,6 +118,8 @@ const PostedJobs = () => {
             <option value="">All</option>
             <option value="pending">Pending</option>
             <option value="live">Live</option>
+            <option value="closed">Confirmed</option>
+            <option value="cancelled">Cancelled</option>
           </select>
 
           <Link
