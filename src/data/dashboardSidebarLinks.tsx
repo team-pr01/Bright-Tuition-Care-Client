@@ -12,6 +12,7 @@ import {
   FiStar,
   FiUserPlus,
 } from "react-icons/fi";
+import { GoVerified } from "react-icons/go";
 import { HiOutlineUser } from "react-icons/hi";
 import { IoNotificationsOutline } from "react-icons/io5";
 import {
@@ -165,7 +166,12 @@ export const adminDashboardLinks: DashboardLink[] = [
     icon: <FiCreditCard />,
   },
   {
-    label: "Refund Request",
+    label: "Verification Requests",
+    path: "/dashboard/admin/verification-requests",
+    icon: <GoVerified />,
+  },
+  {
+    label: "Refund Requests",
     path: "/dashboard/admin/refund-requests",
     icon: <BsArrowCounterclockwise />,
   },

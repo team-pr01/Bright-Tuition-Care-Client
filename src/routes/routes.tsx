@@ -57,6 +57,7 @@ import GuardianGuidelines from "../pages/Dashboard/Guardian/GurdianGuidelines/Gu
 import AllJobs from "../pages/Dashboard/Admin/AllJobs/AllJobs";
 import { UserProvider } from "../contexts/UserProvider";
 import RefundRequests from "../pages/Dashboard/Admin/RefundRequests/RefundRequests";
+import VerificationRequests from "../pages/Dashboard/Admin/VerificationRequests/VerificationRequests";
 
 export const router = createBrowserRouter([
   // Main layout routes
@@ -371,6 +372,10 @@ export const router = createBrowserRouter([
       {
         path: "payments-management",
         element: <PaymentsManagement />,
+      },
+      {
+        path: "verification-requests",
+        element: <VerificationRequests />,
       },
       {
         path: "refund-requests",

@@ -3,7 +3,7 @@ import { baseApi } from "../../API/baseApi";
 
 const verificationRequestApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
-    getAllRefundRequests: builder.query<
+    getAllVerificationRequests: builder.query<
       any,
       {
         page?: number;
@@ -21,12 +21,12 @@ const verificationRequestApi = baseApi.injectEndpoints({
         if (keyword) params.append("keyword", keyword);
 
         return {
-          url: `/refund-request?${params.toString()}`,
+          url: `/profile-verification?${params.toString()}`,
           method: "GET",
           credentials: "include",
         };
       },
-      providesTags: ["refundRequest"],
+      providesTags: ["verificationRequest"],
     }),
 
      getMyVerificationRequest: builder.query({
@@ -35,7 +35,7 @@ const verificationRequestApi = baseApi.injectEndpoints({
         method: "GET",
         credentials: "include",
       }),
-      providesTags: ["testimonial"],
+      providesTags: ["verificationRequest"],
     }),
 
     sendVerificationRequest: builder.mutation<any, any>({
@@ -56,12 +56,63 @@ const verificationRequestApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ["verificationRequest"],
     }),
+
+    // For admin
+    acceptRequest: builder.mutation<any, any>({
+      query: (id) => ({
+        url: `/profile-verification/status/accepted/${id}`,
+        method: "PATCH",
+        credentials: "include",
+      }),
+      invalidatesTags: ["verificationRequest"],
+    }),
+
+    reviewRequest: builder.mutation<any, any>({
+      query: (id) => ({
+        url: `/profile-verification/status/reviewing/${id}`,
+        method: "PATCH",
+        credentials: "include",
+      }),
+      invalidatesTags: ["verificationRequest"],
+    }),
+
+    markAsInvoiceDue: builder.mutation<any, any>({
+      query: (id) => ({
+        url: `/profile-verification/status/invoice-due/${id}`,
+        method: "PATCH",
+        credentials: "include",
+      }),
+      invalidatesTags: ["verificationRequest"],
+    }),
+
+    markAsAddressVerificationLetterSent: builder.mutation<any, any>({
+      query: (id) => ({
+        url: `/profile-verification/status/address-verification/${id}`,
+        method: "PATCH",
+        credentials: "include",
+      }),
+      invalidatesTags: ["verificationRequest"],
+    }),
+
+    markAsVerified: builder.mutation<any, any>({
+      query: (id) => ({
+        url: `/profile-verification/status/verified/${id}`,
+        method: "PATCH",
+        credentials: "include",
+      }),
+      invalidatesTags: ["verificationRequest"],
+    }),
   }),
 });
 
 export const {
-  useGetAllRefundRequestsQuery,
+  useGetAllVerificationRequestsQuery,
   useGetMyVerificationRequestQuery,
   useSendVerificationRequestMutation,
   useSubmitAddressCodeMutation,
+  useAcceptRequestMutation,
+  useReviewRequestMutation,
+  useMarkAsInvoiceDueMutation,
+  useMarkAsAddressVerificationLetterSentMutation,
+  useMarkAsVerifiedMutation
 } = verificationRequestApi;
