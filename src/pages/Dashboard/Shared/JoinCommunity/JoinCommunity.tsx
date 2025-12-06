@@ -5,8 +5,8 @@ import { useLocation } from "react-router-dom";
 
 const JoinCommunity = () => {
   const location = useLocation();
-  const guardianCommunity = "https://www.facebook.com/groups/5212120622136650/";
-  const tutorCommunity = "https://www.facebook.com/groups/100567064353666/";
+  const guardianCommunity = "https://www.facebook.com/groups/248374924778212";
+  const tutorCommunity = "https://www.facebook.com/groups/252670130864095";
 
   const communityLink =
     location.pathname === "/dashboard/tutor/community"
