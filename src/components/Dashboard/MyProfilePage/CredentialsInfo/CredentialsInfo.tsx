@@ -3,6 +3,7 @@ import ProfileTabHeading from "../../../Reusable/ProfileTabHeading/ProfileTabHea
 import Modal from "../../../Reusable/Modal/Modal";
 import UpdateCredentialsInfoModal from "./UpdateEducationalInfoModal";
 import { FaFile, FaTimes } from "react-icons/fa";
+import NoData from "../../../Reusable/NoData/NoData";
 
 type TCredential = {
   documentType: string;
@@ -42,11 +43,10 @@ const CredentialsInfo: React.FC<TCredentialsInfoProps> = ({
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-4">
         {identityInformation?.length === 0 ? (
-          <div className="col-span-full text-center py-8">
-            <h2 className="text-red-500 text-sm md:text-base">
-              No Credentials Found
-            </h2>
-          </div>
+          <NoData
+            title="No identity information submitted."
+            description="Add your identity details to complete your profile."
+          />
         ) : (
           identityInformation.map((info: TCredential) => (
             <div
@@ -91,7 +91,7 @@ const CredentialsInfo: React.FC<TCredentialsInfoProps> = ({
 
       {/* Fullscreen Black View Modal */}
       {selectedDocument && (
-        <div className="fixed inset-0 z-50 bg-black flex items-center justify-center p-4">
+        <div className="fixed inset-0 z-99999 bg-black flex items-center justify-center p-4">
           {/* Close Button */}
           <button
             onClick={handleCloseViewModal}

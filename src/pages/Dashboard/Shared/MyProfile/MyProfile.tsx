@@ -243,7 +243,7 @@ const MyProfile = () => {
           {activeTab === "educationalInfo" &&
             location.pathname.startsWith("/dashboard/tutor") && (
               <EducationalInfo
-                educationalInfo={profile.educationalInfo}
+                educationalInfo={profile?.educationalInfo}
                 isProfileLocked={myProfile?.profileStatus === "locked"}
               />
             )}
@@ -256,7 +256,7 @@ const MyProfile = () => {
           {activeTab === "credentialInfo" &&
             location.pathname.startsWith("/dashboard/tutor") && (
               <CredentialsInfo
-                identityInformation={profile.identityInformation}
+                identityInformation={profile?.identityInformation}
                 isProfileLocked={myProfile?.profileStatus === "locked"}
               />
             )}

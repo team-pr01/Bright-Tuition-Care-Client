@@ -30,6 +30,7 @@ const EmergencyInfo: React.FC<TEmergencyInfoProps> = ({ emergencyInfo, isProfile
     { label: "Number", value: emergencyInfo?.number },
     { label: "Address", value: emergencyInfo?.address },
   ];
+  const allNotProvided = details?.every((item) => !isProvided(item.value));
 
   return (
     <div className="font-Nunito">
@@ -37,6 +38,7 @@ const EmergencyInfo: React.FC<TEmergencyInfoProps> = ({ emergencyInfo, isProfile
         heading="Emergency Information"
         onClick={() => setIsFormModalOpen(!isFormModalOpen)}
         isProfileLocked={isProfileLocked}
+        btnText={allNotProvided ? "Add Emergency Info" : "Edit Info"}
       />
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-2 mt-4">

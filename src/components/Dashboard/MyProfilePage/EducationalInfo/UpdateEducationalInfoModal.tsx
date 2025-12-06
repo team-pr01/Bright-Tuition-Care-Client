@@ -8,30 +8,164 @@ import SelectDropdown from "../../../Reusable/SelectDropdown/SelectDropdown";
 import { FiTrash2 } from "react-icons/fi";
 import { useUpdateProfileMutation } from "../../../../redux/Features/User/userApi";
 
-type Degree =
-  | "SSC / O Level / Dakhil"
-  | "HSC / A Level / Alim"
-  | "Diploma"
-  | "Bachelor"
-  | "Honours"
-  | "Masters"
-  | "Doctorate";
-
-const degreeOptions: Degree[] = [
-  "SSC / O Level / Dakhil",
-  "HSC / A Level / Alim",
-  "Diploma",
-  "Bachelor",
-  "Honours",
-  "Masters",
-  "Doctorate",
+const degreeOptions: string[] = [
+  "SSC  / Dakhil/ O Level",
+  "HSC / Alim / A Level / Fazil / Kamil",
+  "Diploma (Polytechnic)",
+  "Honours/ Masters",
+  "BBA / MBA",
+  "BSc / MSc",
+  "BA / MA/ Bsc Engineering /  Diploma Engineering",
+  "Medical MBBS / Medical BDS/ BSS / MSS",
 ];
 
-const mediumOptions = ["Bangla", "English"];
+const levelOfEducationOptions: string[] = [
+  "Secondary",
+  "Higher Secondary",
+  "Diploma",
+  "Bachelor",
+  "Honors",
+  "Masters",
+  "Doctoral",
+];
 
-type FormEducation = Omit<any, "from" | "to"> & {
-  from?: string | null;
-  to?: string | null;
+const curriculumTypes: string[] = [
+  "Bangla Medium",
+  "English Version",
+  "Cambridge",
+  "Ed-Excel",
+  "IB",
+];
+
+const academicGroups: string[] = [
+  "Science",
+  "Business Studies",
+  "Commerce",
+  "Humanities",
+  "Arts",
+  "Home Economics",
+  "Mujabbid",
+  "Hifjul Qur’an",
+  "Islamic Studies",
+];
+
+const educationBoards: string[] = [
+  "Dhaka Board",
+  "Chattogram Board",
+  "Rajshahi Board",
+  "Cumilla Board",
+  "Jashore Board",
+  "Barishal Board",
+  "Sylhet Board",
+  "Dinajpur Board",
+  "Mymensingh Board",
+  "Bangladesh Madrasah Education Board",
+  "Bangladesh Technical Education Board",
+];
+
+const departmentsOrSubjects: string[] = [
+  // Engineering & Technology
+  "Computer Science & Engineering (CSE)",
+  "Software Engineering",
+  "Information Technology",
+  "Electrical & Electronic Engineering (EEE)",
+  "Civil Engineering",
+  "Mechanical Engineering",
+  "Industrial & Production Engineering (IPE)",
+  "Electronics & Communication Engineering (ECE)",
+  "Architecture",
+  "Management Information Systems (MIS)",
+  "Medical Technology",
+  "Agricultural Engineering",
+
+  // Science
+  "Physics",
+  "Chemistry",
+  "Mathematics",
+  "Statistics",
+  "Applied Mathematics",
+  "Environmental Science",
+  "Biotechnology",
+  "Genetic Engineering",
+  "Microbiology",
+  "Biochemistry",
+  "Molecular Biology",
+  "Botany",
+  "Zoology",
+  "Food & Nutrition",
+  "Public Health",
+  "Pharmacy",
+
+  // Business & Management
+  "Accounting",
+  "Finance",
+  "Marketing",
+  "Management",
+  "HRM (Human Resource Management)",
+  "Banking & Insurance",
+  "International Business",
+  "Tourism & Hospitality Management",
+  "Supply Chain Management",
+
+  // Arts & Humanities
+  "English",
+  "Bangla",
+  "History",
+  "Philosophy",
+  "Islamic History & Culture",
+  "Arabic",
+  "Islamic Studies",
+  "World Religion",
+  "Fine Arts",
+  "Theatre & Performance Studies",
+  "Music",
+
+  // Social Sciences
+  "Economics",
+  "Political Science",
+  "Sociology",
+  "Anthropology",
+  "Public Administration",
+  "Social Work",
+  "International Relations (IR)",
+  "Criminology",
+  "Peace & Conflict Studies",
+  "Development Studies",
+  "Mass Communication & Journalism",
+
+  // Law
+  "LLB",
+  "LLM",
+
+  // Agriculture & Allied
+  "Agriculture",
+  "Agronomy",
+  "Fisheries",
+  "Animal Science",
+  "Horticulture",
+  "Forestry",
+];
+
+export type FormEducation = {
+  levelOfEducation?: string;
+  instituteName?: string;
+  curriculum?: string;
+  degree?: string;
+
+  group?: string;
+  board?: string;
+
+  department?: string;
+  idCardNo?: number;
+  semester?: number;
+
+  result?: string;
+  passingYear?: string;
+
+  from?: string;
+  to?: string;
+
+  isCurrentInstitute?: boolean;
 };
 
 type TFormData = {
@@ -39,17 +173,23 @@ type TFormData = {
 };
 
 const emptyEducation = (): FormEducation => ({
-  degree: "Bachelor",
+  levelOfEducation: "",
   instituteName: "",
-  medium: "",
+  curriculum: "",
+  degree: "",
+
   group: "",
+  board: "",
+
   department: "",
+  idCardNo: undefined,
   semester: undefined,
-  year: "",
+
   result: "",
+  passingYear: "",
   from: "",
   to: "",
-  passingYear: "",
+
   isCurrentInstitute: false,
 });
 
@@ -58,7 +198,7 @@ const UpdateEducationalInfoModal = ({
   defaultValues,
 }: {
   setIsFormModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
-  defaultValues?: any; // expected to be TTutor-like with educationalInformation: TEducation[]
+  defaultValues?: any;
 }) => {
   const [updateProfile, { isLoading }] = useUpdateProfileMutation();
 
@@ -73,66 +213,54 @@ const UpdateEducationalInfoModal = ({
 
   // Pre-fill when defaultValues provided
   useEffect(() => {
-    if (defaultValues && Array.isArray(defaultValues)) {
-      const mapped: FormEducation[] = defaultValues?.map((edu: any) => ({
-        degree: edu.degree ?? "Bachelor",
+    if (Array.isArray(defaultValues)) {
+      const mapped: FormEducation[] = defaultValues.map((edu) => ({
+        levelOfEducation: edu.levelOfEducation ?? "",
         instituteName: edu.instituteName ?? "",
-        medium: edu.medium ?? "Bangla",
+        curriculum: edu.curriculum ?? "",
+        degree: edu.degree ?? "",
+
         group: edu.group ?? "",
+        board: edu.board ?? "",
+
         department: edu.department ?? "",
-        semester: edu.semester ?? undefined,
-        year: edu.year ?? "",
+        idCardNo: edu.idCardNo ?? "",
+        semester: edu.semester ?? "",
+
         result: edu.result ?? "",
-        // convert Date -> HH:MM string (works if edu.from/to are Date or ISO strings)
-        from: edu.from,
-        to: edu.to,
         passingYear: edu.passingYear ?? "",
+
+        from: edu.from ?? "",
+        to: edu.to ?? "",
+
         isCurrentInstitute: !!edu.isCurrentInstitute,
       }));
+
       reset({
         educationalInformation: mapped.length ? mapped : [emptyEducation()],
       });
     }
   }, [defaultValues, reset]);
 
-  const onSubmit = async (formData: TFormData) => {
-    try {
-      // map formData (time strings) to TEducation[] with Date objects for from/to
-      const payloadEducational: any[] = formData.educationalInformation.map(
-        (edu) => ({
-          degree: edu.degree,
-          instituteName: edu.instituteName,
-          medium: edu.medium,
-          group: edu.group,
-          department: edu.department,
-          semester: edu.semester,
-          year: edu.year,
-          result: edu.result,
-          from: edu.from,
-          to: edu.to,
-          passingYear: edu.passingYear,
-          isCurrentInstitute: !!edu.isCurrentInstitute,
-        })
-      );
+  /* -------- SUBMIT -------- */
 
+  const onSubmit = async (data: TFormData) => {
+    try {
       const payload = {
-        educationalInformation: payloadEducational,
+        educationalInformation: data.educationalInformation,
         profileCompleted: 20,
       };
 
-      const response = await updateProfile(payload).unwrap();
-      if (response.success) {
-        toast.success(
-          response.message || "Educational info updated successfully"
-        );
+      const res = await updateProfile(payload).unwrap();
+
+      if (res?.success) {
+        toast.success(res?.message || "Education updated successfully");
         setIsFormModalOpen(false);
       } else {
-        toast.error(response.message || "Something went wrong");
+        toast.error(res?.message || "Something went wrong");
       }
-    } catch (error: any) {
-      toast.error(
-        error?.data?.message || "Error updating info. Please try again."
-      );
+    } catch (err: any) {
+      toast.error(err?.data?.message || "Update failed");
     }
   };
 
@@ -144,13 +272,23 @@ const UpdateEducationalInfoModal = ({
       <div className="space-y-4">
         {fields.map((field, index) => {
           const isCurrent = watched?.[index]?.isCurrentInstitute;
+          const currentLevelOfEducation = watched?.[index]?.levelOfEducation;
+
+          const shouldShowHigherEducationFields =
+            currentLevelOfEducation !== "Secondary" &&
+            currentLevelOfEducation !== "Higher Secondary";
+
+          const shouldShowSchoolLevelFields =
+            currentLevelOfEducation === "Secondary" ||
+            currentLevelOfEducation === "Higher Secondary";
+
           return (
             <div
               key={field.id}
               className="p-4 border border-neutral-30/30 rounded-md bg-white"
             >
               <div className="flex items-center justify-between mb-3">
-                <h3 className="font-medium">Education #{index + 1}</h3>
+                <h3 className="font-medium"></h3>
                 <div className="flex gap-2">
                   {fields.length > 1 && (
                     <button
@@ -167,10 +305,10 @@ const UpdateEducationalInfoModal = ({
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                 <SelectDropdown
-                  label="Degree"
-                  options={degreeOptions}
+                  label="Level of Education"
+                  options={levelOfEducationOptions}
                   {...register(
-                    `educationalInformation.${index}.degree` as const
+                    `educationalInformation.${index}.levelOfEducation` as const
                   )}
                   isRequired={false}
                 />
@@ -187,58 +325,83 @@ const UpdateEducationalInfoModal = ({
                   error={undefined}
                   isRequired={false}
                 />
-
-                {/* Medium */}
                 <SelectDropdown
-                  label="Medium"
-                  options={mediumOptions}
+                  label="Curriculum"
+                  options={curriculumTypes}
                   {...register(
-                    `educationalInformation.${index}.medium` as const
+                    `educationalInformation.${index}.curriculum` as const
                   )}
                   isRequired={false}
                 />
 
-                <TextInput
-                  label="Group"
-                  placeholder="e.g., Science / Arts"
+                <SelectDropdown
+                  label="Exam / Degree Title"
+                  options={degreeOptions}
                   {...register(
-                    `educationalInformation.${index}.group` as const
+                    `educationalInformation.${index}.degree` as const
                   )}
-                  error={undefined}
                   isRequired={false}
                 />
 
-                <TextInput
-                  label="Department"
-                  placeholder="Department"
-                  {...register(
-                    `educationalInformation.${index}.department` as const
-                  )}
-                  error={undefined}
-                  isRequired={false}
-                />
+                {shouldShowSchoolLevelFields && (
+                  <SelectDropdown
+                    label="Group"
+                    options={academicGroups}
+                    {...register(
+                      `educationalInformation.${index}.group` as const
+                    )}
+                    isRequired={false}
+                  />
+                )}
 
-                <TextInput
-                  label="Semester (number)"
-                  placeholder="e.g., 5"
-                  type="number"
-                  {...register(
-                    `educationalInformation.${index}.semester` as const,
-                    {
-                      valueAsNumber: true,
-                    }
-                  )}
-                  error={undefined}
-                  isRequired={false}
-                />
+                {shouldShowSchoolLevelFields && (
+                  <SelectDropdown
+                    label="Board"
+                    options={educationBoards}
+                    {...register(
+                      `educationalInformation.${index}.board` as const
+                    )}
+                    isRequired={false}
+                  />
+                )}
 
-                <TextInput
-                  label="Year"
-                  placeholder="e.g., 3rd"
-                  {...register(`educationalInformation.${index}.year` as const)}
-                  error={undefined}
-                  isRequired={false}
-                />
+                {shouldShowHigherEducationFields && (
+                  <SelectDropdown
+                    label="Department / Subject"
+                    options={departmentsOrSubjects}
+                    {...register(
+                      `educationalInformation.${index}.department` as const
+                    )}
+                    isRequired={false}
+                  />
+                )}
+
+                {shouldShowHigherEducationFields && (
+                  <TextInput
+                    label="ID Card No"
+                    placeholder="e.g., 12345"
+                    {...register(
+                      `educationalInformation.${index}.idCardNo` as const,
+                      { valueAsNumber: true }
+                    )}
+                    error={undefined}
+                    isRequired={false}
+                  />
+                )}
+
+                {shouldShowHigherEducationFields && (
+                  <TextInput
+                    label="Year / Semester"
+                    placeholder="e.g., 5"
+                    type="number"
+                    {...register(
+                      `educationalInformation.${index}.semester` as const,
+                      { valueAsNumber: true }
+                    )}
+                    error={undefined}
+                    isRequired={false}
+                  />
+                )}
 
                 <TextInput
                   label="Result"

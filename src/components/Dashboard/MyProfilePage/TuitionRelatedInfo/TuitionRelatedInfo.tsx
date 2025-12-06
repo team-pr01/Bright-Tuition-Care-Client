@@ -27,7 +27,7 @@ type TTuitionRelatedInfoProps = {
 
 const TuitionRelatedInfo = ({
   tuitionRelatedInfo,
-  isProfileLocked
+  isProfileLocked,
 }: TTuitionRelatedInfoProps) => {
   const [isFormModalOpen, setIsFormModalOpen] = useState<boolean>(false);
   const details = [
@@ -69,16 +69,19 @@ const TuitionRelatedInfo = ({
     return val !== null && val !== undefined;
   };
 
+  const allNotProvided = details?.every((item) => !isProvided(item.value));
+
   return (
     <div className="font-Nunito">
       <ProfileTabHeading
         heading="Tuition Related Information"
         onClick={() => setIsFormModalOpen(!isFormModalOpen)}
         isProfileLocked={isProfileLocked}
+        btnText={allNotProvided ? "Add Tuition Preferences" : "Edit Info"}
       />
 
       <div className="flex flex-col gap-2 mt-4">
-        {details.map((item, index) => {
+        {details?.map((item, index) => {
           const provided = isProvided(item.value);
 
           return (
