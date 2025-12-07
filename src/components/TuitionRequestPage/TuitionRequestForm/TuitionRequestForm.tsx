@@ -93,7 +93,7 @@ const TuitionRequestForm = () => {
 
         <div className="flex justify-end">
           <Button
-            label="Next"
+            label="Submit"
             type="submit"
             variant="primary"
             className="py-2 lg:py-2 px-3 lg:px-6"

@@ -37,7 +37,6 @@ const JobDetailsForm = ({
   }, [defaultValues, setValue]);
 
   const selectedCategory = watch("category");
-  console.log(selectedCategory);
   const selectedClass = watch("class");
   const selectedSubject = watch("subjects");
 

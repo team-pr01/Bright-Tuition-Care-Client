@@ -28,6 +28,7 @@ const LeadManagement = () => {
 
   //   Table heads
   const leadTheads: TableHead[] = [
+    { key: "leadId", label: "Lead ID" },
     { key: "tutorId", label: "Tutor ID" },
     { key: "addedBy", label: "Added By" },
     { key: "guardianPhoneNumber", label: "Guardian Phone Number" },
@@ -42,6 +43,7 @@ const LeadManagement = () => {
   // Format table data
   const tableData = allLeads?.data?.leads?.map((lead: TLead) => ({
     ...lead,
+    leadId: lead?.leadId || "N/A",
     _id: lead?._id || "N/A",
     tutorId: lead?.tutorId?.tutorId || "N/A",
     class: lead?.class || "N/A",

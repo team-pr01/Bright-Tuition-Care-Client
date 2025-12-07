@@ -1,5 +1,6 @@
 export type TLead = {
   _id: string;
+  leadId ?: string;
   userId: {
     _id: string;
     name: string;

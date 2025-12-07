@@ -61,6 +61,8 @@ const HireTutorForm = () => {
     try {
       const payload = {
         ...data,
+        guardianName: user?.role === "guardian" ? user?.name  : data.guardianName,
+        guardianPhoneNumber: user?.role === "guardian" ? user?.phoneNumber : data.guardianPhoneNumber,
         postedBy: user?._id,
         postedByModel: user?.role === "admin" ? "User" : "Guardian",
       };
