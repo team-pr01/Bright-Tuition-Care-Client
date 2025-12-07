@@ -6,7 +6,7 @@ import { ICONS } from "../../../assets";
 interface ButtonProps {
   label?: any;
   variant?: "primary" | "secondary" | "tertiary" | "quaternary" | string;
-  onClick?: () => void;
+  onClick?: any;
   icon?: React.ReactNode;
   iconBg?: string;
   className?: string;

@@ -155,7 +155,7 @@ const TuitionRelatedInfo = ({
         heading="Update Tuition Information"
         isModalOpen={isFormModalOpen}
         setIsModalOpen={setIsFormModalOpen}
-        width="w-[90%] md:w-[35%] max-h-[600px] overflow-y-auto"
+        width="w-[90%] xl:w-[35%] max-h-[600px] overflow-y-auto"
       >
         <UpdateTuitionRelatedInfoModal
           setIsFormModalOpen={setIsFormModalOpen}
