@@ -62,7 +62,16 @@ const userApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ["tutor", "guardian", "users"],
     }),
+
+    giveRating: builder.mutation({
+      query: ({data, id}) => ({
+        url: `/user/give-rating/${id}`,
+        body: data,
+        method: "PATCH",
+      }),
+      invalidatesTags: ["tutor", "guardian", "users"],
+    }),
   }),
 });
 
-export const {  useGetMeQuery, useUpdateProfileMutation, useDeleteAccountMutation, useSuspendUserMutation, useActiveUserMutation, useRequestToUnlockProfileMutation, useToggleProfileStatusMutation } = userApi;
+export const {  useGetMeQuery, useUpdateProfileMutation, useDeleteAccountMutation, useSuspendUserMutation, useActiveUserMutation, useRequestToUnlockProfileMutation, useToggleProfileStatusMutation , useGiveRatingMutation} = userApi;

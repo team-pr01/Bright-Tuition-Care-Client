@@ -94,7 +94,7 @@ export type TTutor = {
   isSuspended: boolean;
   createdAt: string;
   tutorId: string | any;
-  rating: number;
+  rating: string;
   imageUrl?: string;
   profileCompleted: number; // %
   resume: string;

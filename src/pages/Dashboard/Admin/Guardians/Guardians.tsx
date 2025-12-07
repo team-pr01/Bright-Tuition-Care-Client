@@ -3,7 +3,7 @@ import { useState } from "react";
 import Table, {
   type TableHead,
 } from "../../../../components/Reusable/Table/Table";
-import { FiSlash } from "react-icons/fi";
+import { FiEye, FiSlash } from "react-icons/fi";
 import SuspendUserModal from "../../../../components/Admin/SharedAdmin/SuspendUserModal/SuspendUserModal";
 import {
   useGetAllGuardiansQuery,
@@ -19,6 +19,8 @@ import {
 import { IMAGES } from "../../../../assets";
 import { VscLock, VscUnlock } from "react-icons/vsc";
 import UnlockRequestReasonModal from "../../../../components/Admin/Tutors/UnlockRequestReasonModal";
+import { useNavigate } from "react-router-dom";
+import RateUserModal from "../../../../components/Admin/SharedAdmin/RateUserModal/RateUserModal";
 
 export type TableAction<T> = {
   label: any;
@@ -27,7 +29,7 @@ export type TableAction<T> = {
 };
 
 const Guardians = () => {
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
   const [page, setPage] = useState<number>(1);
   const [limit, setLimit] = useState<number>(10);
   const [searchQuery, setSearchQuery] = useState<string>("");
@@ -37,8 +39,12 @@ const Guardians = () => {
   const [selectedGuardianId, setSelectedGuardianId] = useState<string | null>(
     null
   );
+  const [selectedGuardianRating, setSelectedGuardianRating] = useState<string | null>(
+    null
+  );
   const [isSuspendUserModalOpen, setIsSuspendUserModalOpen] =
     useState<boolean>(false);
+  const [isRatingModalOpen, setIsRatingModalOpen] = useState<boolean>(false);
   const [unlockReason, setUnlockReason] = useState<string>("");
   const [isUnlockRequestReasonModalOpen, setIsUnlockRequestReasonModalOpen] =
     useState<boolean>(false);
@@ -51,6 +57,7 @@ const Guardians = () => {
     { key: "area", label: "Area" },
     { key: "registeredOn", label: "Registered On" },
     { key: "isVerified", label: "Verification Status" },
+    { key: "rating", label: "Rating" },
     { key: "status", label: "Status" },
     { key: "profileStatus", label: "Profile Status" },
     { key: "guardianOfTheMonth", label: "Guardian of the Month" },
@@ -108,16 +115,16 @@ const Guardians = () => {
 
   // Action Menu
   const actions: TableAction<any>[] = [
-    // {
-    //   label: "View Profile",
-    //   icon: <FiEye className="inline mr-2" />,
-    //   onClick: (row) => navigate(`/dashboard/admin/guardian/${row._id}`),
-    // },
+    {
+      label: "View Profile",
+      icon: <FiEye className="inline mr-2" />,
+      onClick: (row) => navigate(`/dashboard/admin/guardian/${row._id}`),
+    },
     {
       label: "Deactivate User",
       icon: <FiSlash className="inline mr-2" />,
       onClick: (row) => {
-        setSelectedGuardianId(row.userId);
+        setSelectedGuardianId(row?.userId);
         setIsSuspendUserModalOpen(true);
       },
     },
@@ -172,6 +179,32 @@ const Guardians = () => {
         {guardian?.isVerified ? "Verified" : "Not Verified"}
       </span>
     ),
+    rating:
+      guardian?.rating !== null ? (
+        <div className="flex items-center gap-2">
+          <span>{guardian?.rating ?? 0} / 5</span>
+          <button
+            onClick={() => {
+              setSelectedGuardianId(guardian?.userId);
+              setIsRatingModalOpen(true);
+              setSelectedGuardianRating(guardian?.rating);
+            }}
+            className="text-primary-10 underline cursor-pointer"
+          >
+            Edit
+          </button>
+        </div>
+      ) : (
+        <button
+          onClick={() => {
+            setSelectedGuardianId(guardian?.userId);
+            setIsRatingModalOpen(true);
+          }}
+          className="text-primary-10 underline cursor-pointer"
+        >
+          Rate
+        </button>
+      ),
     status: (
       <span
         className={`px-3 py-1 rounded-full text-xs font-medium ${
@@ -270,6 +303,16 @@ const Guardians = () => {
           unlockReason={unlockReason}
           isUnlockRequestReasonModalOpen={isUnlockRequestReasonModalOpen}
           setIsUnlockRequestReasonModalOpen={setIsUnlockRequestReasonModalOpen}
+        />
+      )}
+
+      {isRatingModalOpen && (
+        <RateUserModal
+          isRatingModalOpen={isRatingModalOpen}
+          setIsRatingModalOpen={setIsRatingModalOpen}
+          selectedUserId={selectedGuardianId}
+          defaultValue={selectedGuardianRating as string}
+          setSelectedUserRating={setSelectedGuardianRating}
         />
       )}
     </div>

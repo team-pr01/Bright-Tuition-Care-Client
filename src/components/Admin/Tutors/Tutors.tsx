@@ -22,6 +22,7 @@ import {
 } from "../../../redux/Features/User/userApi";
 import { IMAGES } from "../../../assets";
 import UnlockRequestReasonModal from "./UnlockRequestReasonModal";
+import RateUserModal from "../SharedAdmin/RateUserModal/RateUserModal";
 
 const Tutors = () => {
   const navigate = useNavigate();
@@ -32,8 +33,12 @@ const Tutors = () => {
   const [selectedArea, setSelectedArea] = useState<string>("");
   const [areaOptions, setAreaOptions] = useState<string[]>([]);
   const [selectedTutorId, setSelectedTutorId] = useState<string | null>(null);
+  const [selectedTutorRating, setSelectedTutorRating] = useState<string | null>(
+    null
+  );
   const [isSuspendUserModalOpen, setIsSuspendUserModalOpen] =
     useState<boolean>(false);
+  const [isRatingModalOpen, setIsRatingModalOpen] = useState<boolean>(false);
   const [unlockReason, setUnlockReason] = useState<string>("");
   const [isUnlockRequestReasonModalOpen, setIsUnlockRequestReasonModalOpen] =
     useState<boolean>(false);
@@ -97,6 +102,7 @@ const Tutors = () => {
     { key: "area", label: "Area" },
     { key: "registeredOn", label: "Registered On" },
     { key: "isVerified", label: "Verification Status" },
+    { key: "rating", label: "Rating" },
     { key: "status", label: "Status" },
     { key: "profileStatus", label: "Profile Status" },
     { key: "tutorOfTheMonth", label: "Tutor of the Month" },
@@ -159,8 +165,7 @@ const Tutors = () => {
     city: tutor?.city || "N/A",
     area: tutor?.area || "N/A",
     registeredOn: formatDate(tutor.createdAt),
-    isVerified: 
-    (
+    isVerified: (
       <span
         className={`px-3 py-1 rounded-full text-xs font-medium ${
           !tutor.isVerified
@@ -171,6 +176,32 @@ const Tutors = () => {
         {tutor.isVerified ? "Verified" : "Not Verified"}
       </span>
     ),
+    rating:
+      tutor?.rating !== null ? (
+        <div className="flex items-center gap-2">
+          <span>{tutor?.rating ?? 0} / 5</span>
+          <button
+            onClick={() => {
+              setSelectedTutorId(tutor?.userId);
+              setIsRatingModalOpen(true);
+              setSelectedTutorRating(tutor?.rating);
+            }}
+            className="text-primary-10 underline cursor-pointer"
+          >
+            Edit
+          </button>
+        </div>
+      ) : (
+        <button
+          onClick={() => {
+            setSelectedTutorId(tutor?.userId);
+            setIsRatingModalOpen(true);
+          }}
+          className="text-primary-10 underline cursor-pointer"
+        >
+          Rate
+        </button>
+      ),
     status: (
       <span
         className={`px-3 py-1 rounded-full text-xs font-medium ${
@@ -268,6 +299,15 @@ const Tutors = () => {
           unlockReason={unlockReason}
           isUnlockRequestReasonModalOpen={isUnlockRequestReasonModalOpen}
           setIsUnlockRequestReasonModalOpen={setIsUnlockRequestReasonModalOpen}
+        />
+      )}
+      {isRatingModalOpen && (
+        <RateUserModal
+          isRatingModalOpen={isRatingModalOpen}
+          setIsRatingModalOpen={setIsRatingModalOpen}
+          selectedUserId={selectedTutorId}
+          defaultValue={selectedTutorRating as string}
+          setSelectedUserRating={setSelectedTutorRating}
         />
       )}
     </div>
