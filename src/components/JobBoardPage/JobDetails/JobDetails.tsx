@@ -160,18 +160,16 @@ const JobDetails = ({
             {status === "appointed" && user?.role === "tutor" && (
               <div className="bg-[#F2F5FC]/70 border-l-3 border-primary-10 rounded-lg p-3 flex gap-4 items-center mt-5 max-w-full lg:max-w-fit mx-auto">
                 {/* Image */}
-                <div className="flex-shrink-0 rounded-lg border border-neutral-30/10 bg-[#F2F5FC]/40 w-20 h-[90px] flex items-center justify-center">
-                  <img
-                    src={IMAGES.dummyAvatar}
-                    alt=""
-                    className="object-cover rounded-lg w-full h-full"
-                  />
-                </div>
+                <img
+                  src={IMAGES.dummyAvatar}
+                  alt=""
+                  className="object-cover rounded-full size-20"
+                />
 
                 {/* Text + Button */}
                 <div className="flex-1">
                   <h2 className="text-neutral-10 text-lg font-bold break-words">
-                    MD. Ahad Khandakar
+                    {job?.postedBy?.name}
                   </h2>
                   <motion.div
                     whileHover={{ scale: 1.05 }}
@@ -179,7 +177,7 @@ const JobDetails = ({
                     className="inline-block mt-2"
                   >
                     <a
-                      href="/hire-a-tutor"
+                      href={`tel:${job?.postedBy?.phoneNumber}`}
                       className="inline-flex items-center justify-center gap-3 bg-primary-10 text-white px-3 py-2 rounded font-semibold md:text-lg shadow-2xl transition-all duration-300 relative overflow-hidden group w-full sm:w-auto text-center text-sm"
                     >
                       Call Guardian/Student
