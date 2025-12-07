@@ -276,16 +276,6 @@ const Preview = () => {
           isDisabled={!isEditEnable}
           {...register("address")}
         />
-
-        {/* Hidden field to store location URL */}
-        <TextInput
-          label="Location URL"
-          error={errors.locationDirection}
-          value={watch("locationDirection")}
-          isDisabled={!isEditEnable}
-          {...register("locationDirection")}
-          isRequired={false}
-        />
       </div>
 
       <Textarea

@@ -242,12 +242,14 @@ const JobDetails = ({
             </div>
 
             <div className="mt-8 flex justify-center gap-5">
-              <Button
+              <a href={job?.locationDirection} target="_blank">
+                <Button
                 label="Direction"
-                variant="secondary"
+                variant="tertiary"
                 iconBg="#0D99FF"
                 className="border border-neutral-55"
               />
+              </a>
               {isApplied && (
                 <Button
                   label={
