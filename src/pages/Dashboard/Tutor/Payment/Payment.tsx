@@ -16,6 +16,8 @@ const Payment = () => {
   const { user: myProfile } = useUser();
   const [isRefundRequestModalOpen, setIsRefundRequestModalOpen] =
     useState<boolean>(false);
+  const [isRefundPolicyModalOpen, setIsRefundPolicyModalOpen] =
+    useState<boolean>(false);
   // const [paidFor, setPaidFor] = useState<string>("");
   // const [paymentModalType, setPaymentModalType] = useState<
   //   "selectPaymentMethod" | "addPaymentDetails" | "paymentSuccess"
@@ -58,8 +60,19 @@ const Payment = () => {
     {
       title: "Refund",
       icon: ICONS.refund,
-      description:
-        "If a tutor pays the platform charge in advance but subsequently loses the tuition job for a valid reason, the payment will be refunded in accordance with our refund policy.",
+      description: (
+        <span>
+          If a tutor pays the platform charge in advance but subsequently loses
+          the tuition job for a valid reason, the payment will be refunded in
+          accordance with our{" "}
+          <button
+            onClick={() => setIsRefundPolicyModalOpen(true)}
+            className="text-primary-10 font-semibold underline"
+          >
+            Refund Policy.
+          </button>
+        </span>
+      ),
       isPaid: false,
     },
   ];
@@ -105,11 +118,54 @@ const Payment = () => {
       <Modal
         isModalOpen={isRefundRequestModalOpen}
         setIsModalOpen={setIsRefundRequestModalOpen}
-        width="w-[90%] md:w-auto max-h-[600px] overflow-y-auto"
+        width="w-[90%] md:w-[70%] xl:w-[60%] 2xl:w-[30%] max-h-[600px] overflow-y-auto"
       >
         <SendRefundRequest
           setIsRefundRequestModalOpen={setIsRefundRequestModalOpen}
         />
+      </Modal>
+
+      {/* Refund Policy details Modal */}
+      <Modal
+        isModalOpen={isRefundPolicyModalOpen}
+        setIsModalOpen={setIsRefundPolicyModalOpen}
+        width="w-[90%] md:w-[70%] xl:w-[60%] 2xl:w-[30%] max-h-[600px] overflow-y-auto"
+      >
+        <div className="">
+          {/* Subheading */}
+          <h3 className="text-lg font-semibold mb-4">3.3 Refunds for Tutors</h3>
+
+          {/* Description */}
+          <p className="text-sm text-gray-700 mb-4">
+            At Bright Tuition Care, we maintain a clear and fair refund policy
+            for our tutors. If a tutor loses a tuition job for a valid reason,
+            they may apply for a partial refund of the paid service charge under
+            the following conditions:
+          </p>
+
+          {/* Conditions */}
+          <ul className="list-disc list-inside space-y-2 text-sm text-gray-700">
+            <li>
+              Tutor must lose the tuition for a valid guardian-side reason.
+            </li>
+            <li>
+              Refund Amount: 30% of the paid 60% service charge if canceled
+              within first month.
+            </li>
+            <li>
+              Tutor must inform the team within 24 hours (
+              <a
+                href="tel:09617785588"
+                className="text-primary-10 font-semibold underline"
+              >
+                09617-785588
+              </a>
+              ).
+            </li>
+
+            <li>If cancellation is tutor’s fault, no refund.</li>
+          </ul>
+        </div>
       </Modal>
     </div>
   );
