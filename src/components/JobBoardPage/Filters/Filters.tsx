@@ -5,6 +5,7 @@ import MultiSelectDropdown from "../../Reusable/MultiSelectDropdown/MultiSelectD
 import { filterData } from "../../../constants/filterData";
 import SearchInput from "../../Reusable/SearchBar/SearchBar";
 import SelectDropdown from "../../Reusable/SelectDropdown/SelectDropdown";
+import { useLocation } from "react-router-dom";
 
 // Filters.types.ts (optional file)
 export type TFiltersProps = {
@@ -65,6 +66,7 @@ const Filters: React.FC<TFiltersProps> = ({
   setSelectedTuitionType,
   liveJobs,
 }) => {
+  const pathname = useLocation().pathname;
   const [isAccordingOpen, setIsAccordingOpen] = useState<boolean>(false);
   const handleResetFilters = () => {
     setSelectedCities([]);
@@ -77,28 +79,27 @@ const Filters: React.FC<TFiltersProps> = ({
     setSelectedTuitionType([]);
   };
 
-useEffect(() => {
-  if (selectedCities.length === 0) {
-    setAreaOptions([]);
-    setSelectedAreas([]);
-    return;
-  }
+  useEffect(() => {
+    if (selectedCities.length === 0) {
+      setAreaOptions([]);
+      setSelectedAreas([]);
+      return;
+    }
 
-  const locations = selectedCities.flatMap((cityName) => {
-    const cityObj = filterData.cityCorporationWithLocation.find(
-      (city) => city.name === cityName
+    const locations = selectedCities.flatMap((cityName) => {
+      const cityObj = filterData.cityCorporationWithLocation.find(
+        (city) => city.name === cityName
+      );
+      return cityObj ? cityObj.locations : [];
+    });
+
+    const uniqueLocations = [...new Set(locations)];
+    setAreaOptions(uniqueLocations);
+
+    setSelectedAreas((prev) =>
+      prev.filter((area) => uniqueLocations.includes(area))
     );
-    return cityObj ? cityObj.locations : [];
-  });
-
-  const uniqueLocations = [...new Set(locations)];
-  setAreaOptions(uniqueLocations);
-
-  setSelectedAreas((prev) =>
-    prev.filter((area) => uniqueLocations.includes(area))
-  );
-}, [selectedCities]);
-
+  }, [selectedCities]);
 
   const [classOptions, setClassOptions] = useState<string[]>([]);
   const [subjectOptions, setSubjectOptions] = useState<string[]>([]);
@@ -162,159 +163,179 @@ useEffect(() => {
 
   return (
     <>
-      <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-3 md:gap-0">
-        <div className="flex items-center gap-3">
-          <img src={ICONS.liveJobs} alt="" className="size-8" />
-          <h1 className="text-xl md:text-2xl lg:text-4xl font-semibold leading-11 text-primary-50">
-            {liveJobs < 10 ? 0 : ""}
-            {liveJobs} Live Job{liveJobs > 1 ? "s" : ""}
-          </h1>
-        </div>
+      {/* Sticky header + filter panel wrapper */}
+      <div
+        className={`${
+          pathname !== "/job-board" &&
+          "sticky top-0 z-15 px-3 lg:px-6 pt-6 pb-2 bg-[#F2F5FC]"
+        }`}
+      >
+        <div className="relative">
+          {/* Header row */}
+          <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-3 md:gap-0">
+            <div className="flex items-center gap-3">
+              <img src={ICONS.liveJobs} alt="" className="size-8" />
+              <h1 className="text-xl md:text-2xl lg:text-4xl font-semibold leading-11 text-primary-50">
+                {liveJobs < 10 ? 0 : ""}
+                {liveJobs} Live Job{liveJobs > 1 ? "s" : ""}
+              </h1>
+            </div>
 
-        <div className="flex items-center gap-3">
-          <SearchInput
-            value={keyword}
-            onChange={(e: any) => setKeyword(e.target.value)}
-            placeholder="Search by job title or id..."
-          />
-          <button
-            onClick={() => setIsAccordingOpen(!isAccordingOpen)}
-            className="flex items-center justify-center gap-[10px] px-3 py-2 bg-white border border-primary-30 rounded-lg cursor-pointer w-[145px]"
-          >
-            <img src={ICONS.filter} alt="" className="size-5" />
-            <h1 className="font-medium leading-6 text-primary-50">Filters</h1>
-          </button>
-        </div>
-      </div>
-
-      {isAccordingOpen && (
-        <div
-          className={`w-full bg-primary-65 border border-primary-10/20 rounded-xl p-6 transition-all duration-300 ease-in-out mt-4`}
-        >
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-            {/* City Dropdown */}
-            <MultiSelectDropdown
-              label="City"
-              name="city"
-              options={filterData.cityCorporationWithLocation.map(
-                (c) => c.name
-              )}
-              value={selectedCities}
-              onChange={setSelectedCities}
-              isRequired={false}
-              dropdownDirection="top-full"
-            />
-
-            {/* Area Dropdown */}
-            <MultiSelectDropdown
-              label="Area"
-              name="area"
-              options={areaOptions}
-              value={selectedAreas}
-              onChange={setSelectedAreas}
-              isRequired={false}
-              dropdownDirection="top-full"
-            />
-
-            {/* Days Per Week */}
-            <MultiSelectDropdown
-              label="Days Per Week"
-              name="daysPerWeek"
-              options={filterData.daysPerWeek}
-              value={selectedDays}
-              onChange={setSelectedDays}
-              isRequired={false}
-            />
-
-            {/* Category */}
-            <SelectDropdown
-              label="Category"
-              options={filterData.category}
-              value={selectedCategory}
-              onChangeEvent={setSelectedCategory}
-            />
-
-            {/* IF CATEGORY = ENGLISH MEDIUM SHOW CURRICULUM */}
-            {selectedCategory === "English Medium" && (
-              <SelectDropdown label="Curriculum" options={curriculumOptions} />
-            )}
-
-            {/* CLASS */}
-            <SelectDropdown
-              label="Class"
-              options={classOptions}
-              value={selectedClass}
-              onChangeEvent={setSelectedClass}
-              isDisabled={!selectedCategory}
-            />
-
-            {/* SUBJECTS */}
-            <MultiSelectDropdown
-              label="Subjects"
-              name="subjects"
-              options={subjectOptions}
-              value={selectedSubjects}
-              onChange={setSelectedSubjects}
-              noDataMessage="Please select class first"
-              isDisabled={!selectedClass}
-            />
-
-            {/* Tuition Type */}
-            <MultiSelectDropdown
-              label="Tuition Type"
-              name="tuitionType"
-              options={filterData.tuitionType}
-              value={selectedTuitionType}
-              onChange={setSelectedTuitionType}
-              isRequired={false}
-            />
-
-            {/* Tutor Gender */}
-            <MultiSelectDropdown
-              label="Tutor Gender"
-              name="tutorGender"
-              options={filterData.tutorGender}
-              value={selectedTutorGender}
-              onChange={setSelectedTutorGender}
-              isRequired={false}
-            />
-
-            {/* Student Gender */}
-            <MultiSelectDropdown
-              label="Student Gender"
-              name="studentGender"
-              options={filterData.studentGender}
-              value={selectedStudentGender}
-              onChange={setSelectedStudentGender}
-              isRequired={false}
-            />
-          </div>
-          <div className="mt-10 flex items-center justify-between">
-            <button
-              onClick={handleResetFilters}
-              className="flex items-center gap-2 cursor-pointer hover:underline"
-            >
-              <img src={ICONS.reset} alt="" className="size-4" />
-              <h1 className="font-medium leading-6 text-primary-10">Reset</h1>
-            </button>
-
-            <div className="flex items-center gap-5 justify-end">
+            <div className="flex items-center gap-3">
+              <SearchInput
+                value={keyword}
+                onChange={(e: any) => setKeyword(e.target.value)}
+                placeholder="Search by job title or id..."
+              />
               <button
-                onClick={() => setIsAccordingOpen(!isAccordingOpen)}
-                className={`border border-primary-10 text-primary-10 hover:bg-primary-10 hover:text-white w-fit ${buttonCommonClassNames}`}
+                onClick={() => setIsAccordingOpen((prev) => !prev)}
+                className="flex items-center justify-center gap-[10px] px-3 py-2 bg-white border border-primary-30 rounded-lg cursor-pointer w-[145px]"
               >
-                Close
-              </button>
-              <button
-                onClick={() => setIsAccordingOpen(!isAccordingOpen)}
-                className={`bg-primary-10 hover:bg-transparent border border-primary-10 text-white hover:text-primary-10 w-fit ${buttonCommonClassNames}`}
-              >
-                Apply
+                <img src={ICONS.filter} alt="" className="size-5" />
+                <h1 className="font-medium leading-6 text-primary-50">
+                  Filters
+                </h1>
               </button>
             </div>
           </div>
+
+          {/* Filter accordion – overlays content, attached to header */}
+          {isAccordingOpen && (
+            <div className="absolute left-0 right-0 mt-3 w-full bg-primary-65 shadow-2xl border border-primary-10/20 rounded-xl p-6 transition-all duration-300 ease-in-out z-50">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                {/* City Dropdown */}
+                <MultiSelectDropdown
+                  label="City"
+                  name="city"
+                  options={filterData.cityCorporationWithLocation.map(
+                    (c) => c.name
+                  )}
+                  value={selectedCities}
+                  onChange={setSelectedCities}
+                  isRequired={false}
+                  dropdownDirection="top-full"
+                />
+
+                {/* Area Dropdown */}
+                <MultiSelectDropdown
+                  label="Area"
+                  name="area"
+                  options={areaOptions}
+                  value={selectedAreas}
+                  onChange={setSelectedAreas}
+                  isRequired={false}
+                  dropdownDirection="top-full"
+                />
+
+                {/* Days Per Week */}
+                <MultiSelectDropdown
+                  label="Days Per Week"
+                  name="daysPerWeek"
+                  options={filterData.daysPerWeek}
+                  value={selectedDays}
+                  onChange={setSelectedDays}
+                  isRequired={false}
+                />
+
+                {/* Category */}
+                <SelectDropdown
+                  label="Category"
+                  options={filterData.category}
+                  value={selectedCategory}
+                  onChangeEvent={setSelectedCategory}
+                />
+
+                {/* IF CATEGORY = ENGLISH MEDIUM SHOW CURRICULUM */}
+                {selectedCategory === "English Medium" && (
+                  <SelectDropdown
+                    label="Curriculum"
+                    options={curriculumOptions}
+                  />
+                )}
+
+                {/* CLASS */}
+                <SelectDropdown
+                  label="Class"
+                  options={classOptions}
+                  value={selectedClass}
+                  onChangeEvent={setSelectedClass}
+                  isDisabled={!selectedCategory}
+                />
+
+                {/* SUBJECTS */}
+                <MultiSelectDropdown
+                  label="Subjects"
+                  name="subjects"
+                  options={subjectOptions}
+                  value={selectedSubjects}
+                  onChange={setSelectedSubjects}
+                  noDataMessage="Please select class first"
+                  isDisabled={!selectedClass}
+                />
+
+                {/* Tuition Type */}
+                <MultiSelectDropdown
+                  label="Tuition Type"
+                  name="tuitionType"
+                  options={filterData.tuitionType}
+                  value={selectedTuitionType}
+                  onChange={setSelectedTuitionType}
+                  isRequired={false}
+                />
+
+                {/* Tutor Gender */}
+                <MultiSelectDropdown
+                  label="Tutor Gender"
+                  name="tutorGender"
+                  options={filterData.tutorGender}
+                  value={selectedTutorGender}
+                  onChange={setSelectedTutorGender}
+                  isRequired={false}
+                />
+
+                {/* Student Gender */}
+                <MultiSelectDropdown
+                  label="Student Gender"
+                  name="studentGender"
+                  options={filterData.studentGender}
+                  value={selectedStudentGender}
+                  onChange={setSelectedStudentGender}
+                  isRequired={false}
+                />
+              </div>
+
+              <div className="mt-10 flex items-center justify-between">
+                <button
+                  onClick={handleResetFilters}
+                  className="flex items-center gap-2 cursor-pointer hover:underline"
+                >
+                  <img src={ICONS.reset} alt="" className="size-4" />
+                  <h1 className="font-medium leading-6 text-primary-10">
+                    Reset
+                  </h1>
+                </button>
+
+                <div className="flex items-center gap-5 justify-end">
+                  <button
+                    onClick={() => setIsAccordingOpen(false)}
+                    className={`border border-primary-10 text-primary-10 hover:bg-primary-10 hover:text-white w-fit ${buttonCommonClassNames}`}
+                  >
+                    Close
+                  </button>
+                  <button
+                    onClick={() => setIsAccordingOpen(false)}
+                    className={`bg-primary-10 hover:bg-transparent border border-primary-10 text-white hover:text-primary-10 w-fit ${buttonCommonClassNames}`}
+                  >
+                    Apply
+                  </button>
+                </div>
+              </div>
+            </div>
+          )}
         </div>
-      )}
+      </div>
+
+      {/* Your job list / rest of page here */}
     </>
   );
 };

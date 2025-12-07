@@ -142,7 +142,7 @@ const PostedJobs = () => {
   return (
     <div className="font-Nunito">
       {/* Tabs Bar */}
-      <div className="border-b border-blue-300 bg-blue-50/40">
+      <div className="border-b border-blue-300 sticky top-0 z-15 bg-[#F2F5FC] px-3 lg:px-6 pt-6 pb-2">
         <div className="flex w-full overflow-x-auto overflow-y-hidden gap-6 md:gap-10">
           {jobTabs.map((tab) => {
             const isActive = activeTab === tab.key;
@@ -199,7 +199,7 @@ const PostedJobs = () => {
           </Link> */}
       </div>
 
-      <div className="mt-5 ">
+      <div className="px-3 lg:px-6 py-6">
         <Jobs
           allJobs={jobs}
           isLoading={isLoading || isFetching}

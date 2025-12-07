@@ -142,7 +142,7 @@ const TutorJobBoard = () => {
         setSelectedTuitionType={setSelectedTuitionType}
         liveJobs={allJobs?.data?.meta?.liveJobs || 0}
       />
-      <div className="mt-6">
+      <div className="mt-6 px-3 lg:px-6 pb-6">
         <Jobs
           allJobs={jobs}
           isLoading={isLoading || isFetching}

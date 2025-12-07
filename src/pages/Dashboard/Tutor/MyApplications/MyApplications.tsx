@@ -131,7 +131,7 @@ const MyApplications = () => {
   return (
     <div>
       {/* Tabs Bar */}
-      <div className="border-b border-blue-300 bg-blue-50/40">
+      <div className="border-b border-blue-300 sticky top-0 z-15 bg-[#F2F5FC] px-3 lg:px-6 pt-6 pb-2">
         <div className="flex w-full overflow-x-auto overflow-y-hidden gap-6 md:gap-10">
           {jobTabs.map((tab) => {
             const isActive = activeTab === tab.key;
@@ -203,8 +203,8 @@ const MyApplications = () => {
         </select>
       </div> */}
 
-      <div className="mt-6">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 relative z-0 overflow-visible">
+      <div className="px-3 lg:px-6 py-6">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 relative overflow-visible">
           {jobs?.map((application) => {
             return (
               <JobCard
@@ -231,9 +231,7 @@ const MyApplications = () => {
         )}
 
         {!data?.data?.meta?.hasMore && !isFetching && (
-          <p className="text-center mt-4 text-gray-400">
-            No applications.
-          </p>
+          <p className="text-center mt-4 text-gray-400">No applications.</p>
         )}
       </div>
     </div>
