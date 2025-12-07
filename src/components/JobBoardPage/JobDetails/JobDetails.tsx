@@ -23,16 +23,16 @@ const JobDetails = ({
 }: {
   job: any;
   status?: string;
-  link: string;
-  setShowDrawer: React.Dispatch<React.SetStateAction<boolean>>;
-  setIsJobApplyConfirmationModalOpen: React.Dispatch<
+  link?: string;
+  setShowDrawer?: React.Dispatch<React.SetStateAction<boolean>>;
+  setIsJobApplyConfirmationModalOpen?: React.Dispatch<
     React.SetStateAction<boolean>
   >;
-  isShareJobModalOpen: boolean;
-  setIsShareJobModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  isShareJobModalOpen?: boolean;
+  setIsShareJobModalOpen?: React.Dispatch<React.SetStateAction<boolean>>;
   isApplied?: boolean;
   applicationId?: string;
-  user: TLoggedInUser;
+  user?: TLoggedInUser;
 }) => {
   const jobDetail2 = [
     {
@@ -103,7 +103,7 @@ const JobDetails = ({
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.3 }}
-          onClick={() => setShowDrawer(false)}
+          onClick={() => setShowDrawer && setShowDrawer(false)}
         />
 
         {/* Drawer */}
@@ -126,7 +126,7 @@ const JobDetails = ({
               </span> */}
             </h1>
             <button
-              onClick={() => setIsShareJobModalOpen(true)}
+              onClick={() => setIsShareJobModalOpen && setIsShareJobModalOpen(true)}
               className="text-neutral-10 hidden md:flex items-center gap-2 leading-[24px] w-fit font-semibold transition-all duration-300 text-sm md:text-base absolute bottom-5 md:bottom-8 xl:bottom-12  right-5 md:right-8 xl:right-8 cursor-pointer"
             >
               <img src={ICONS.share} alt="" className="size-5" />
@@ -244,11 +244,11 @@ const JobDetails = ({
             <div className="mt-8 flex justify-center gap-5">
               <a href={job?.locationDirection} target="_blank">
                 <Button
-                label="Direction"
-                variant="tertiary"
-                iconBg="#0D99FF"
-                className="border border-neutral-55"
-              />
+                  label="Direction"
+                  variant="tertiary"
+                  iconBg="#0D99FF"
+                  className="border border-neutral-55"
+                />
               </a>
               {isApplied && (
                 <Button
@@ -268,14 +268,14 @@ const JobDetails = ({
                   label={"Apply Now"}
                   variant="primary"
                   iconBg="#0D99FF"
-                  onClick={() => setIsJobApplyConfirmationModalOpen(true)}
+                  onClick={() => setIsJobApplyConfirmationModalOpen && setIsJobApplyConfirmationModalOpen(true)}
                   animation={true}
                 />
               )}
             </div>
           </div>
           <button
-            onClick={() => setShowDrawer(false)}
+            onClick={() => setShowDrawer && setShowDrawer(false)}
             className="absolute top-[13px] md:top-8 right-3 md:right-10 text-neutral-45 text-2xl font-bold cursor-pointer"
           >
             ×
@@ -284,9 +284,9 @@ const JobDetails = ({
       </>
 
       <ShareJobModal
-        isShareJobModalOpen={isShareJobModalOpen}
-        setIsShareJobModalOpen={setIsShareJobModalOpen}
-        link={link}
+        isShareJobModalOpen={isShareJobModalOpen as boolean}
+        setIsShareJobModalOpen={setIsShareJobModalOpen as React.Dispatch<React.SetStateAction<boolean>>}
+        link={link as string}
       />
     </AnimatePresence>
   );

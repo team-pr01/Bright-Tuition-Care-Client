@@ -83,7 +83,7 @@ const JobCard: React.FC<TJobCardProps> = ({
     // { icon: ICONS.location, title: "Location", value: "Mohammodpur" },
   ];
 
-  const shareUrl = "https://yourwebsite.com/job/123"; // Replace with actual job URL
+const shareUrl = `http://localhost:5173/job-board/${job?.jobId}`;
 
   const statusTextColor =
     status === "applied"

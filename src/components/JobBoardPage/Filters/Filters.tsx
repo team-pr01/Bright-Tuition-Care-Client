@@ -166,7 +166,7 @@ const Filters: React.FC<TFiltersProps> = ({
       {/* Sticky header + filter panel wrapper */}
       <div
         className={`${
-          pathname !== "/job-board" &&
+          !pathname.startsWith("/job-board") &&
           "sticky top-0 z-15 px-3 lg:px-6 pt-6 pb-2 bg-[#F2F5FC]"
         }`}
       >

@@ -76,6 +76,11 @@ export const router = createBrowserRouter([
         element: <JobBoard />,
       },
       {
+        // if visited by link
+        path: "/job-board/:id",
+        element: <JobBoard />,
+      },
+      {
         // for city based navigation
         path: "/job-board/:city",
         element: <JobBoard />,

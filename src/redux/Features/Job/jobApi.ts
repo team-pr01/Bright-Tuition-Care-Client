@@ -61,6 +61,15 @@ const jobApi = baseApi.injectEndpoints({
       providesTags: ["jobs"],
     }),
 
+    getSingleJobByCustomJobId: builder.query({
+      query: (id) => ({
+        url: `/job/single/${id}`,
+        method: "GET",
+        credentials: "include",
+      }),
+      providesTags: ["jobs"],
+    }),
+
     getCounterStats: builder.query({
       query: () => ({
         url: `/job/counter-stats`,
@@ -132,6 +141,7 @@ const jobApi = baseApi.injectEndpoints({
 export const {
   useGetAllJobsQuery,
   useGetSingleJobByIdQuery,
+  useGetSingleJobByCustomJobIdQuery,
   useGetCounterStatsQuery,
   useGetMyPostedJobsQuery,
   usePostJobMutation,

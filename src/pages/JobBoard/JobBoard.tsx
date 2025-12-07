@@ -4,13 +4,17 @@ import Filters from "../../components/JobBoardPage/Filters/Filters";
 import Jobs from "../../components/JobBoardPage/Jobs/Jobs";
 import Container from "../../components/Reusable/Container/Container";
 import Heading from "../../components/Reusable/Heading/Heading";
-import { useGetAllJobsQuery } from "../../redux/Features/Job/jobApi";
+import {
+  useGetAllJobsQuery,
+  useGetSingleJobByCustomJobIdQuery,
+} from "../../redux/Features/Job/jobApi";
 import { useDebounce } from "../../hooks/useDebounce";
 import JobCardSkeleton from "../../components/JobBoardPage/Jobs/JobCard/JobCardSkeleton";
 import { useParams } from "react-router-dom";
+import JobDetails from "../../components/JobBoardPage/JobDetails/JobDetails";
 
 const JobBoard = () => {
-  const { city } = useParams();
+  const { city, id } = useParams();
   const [keyword, setKeyword] = useState<string>("");
   const [selectedCities, setSelectedCities] = useState<string[]>(
     city ? [city] : []
@@ -26,7 +30,14 @@ const JobBoard = () => {
   );
   const [selectedTuitionType, setSelectedTuitionType] = useState<string[]>([]);
 
+  const { data: singleJob } = useGetSingleJobByCustomJobIdQuery(id);
+  const shareUrl = `http://localhost:5173/job-board/${singleJob?.data?.jobId}`;
   const debouncedKeyword = useDebounce(keyword, 500);
+  const [showDrawer, setShowDrawer] = useState<boolean>(false);
+
+  useEffect(() => {
+    setShowDrawer(true);
+  }, []);
 
   // Pagination states
   const [skip, setSkip] = useState(0);
@@ -108,66 +119,76 @@ const JobBoard = () => {
   }, [allJobs, isFetching, allJobs?.data?.meta?.hasMore]);
 
   return (
-    <Container>
-      <div className="relative mt-10 mb-72">
-        <Heading
-          titleParts={[{ text: "Available Tuition Job" }]}
-          description="Find the perfect tutoring opportunity that matches your expertise and schedule."
-          align="center"
-          headingClassName="text-center"
+    <>
+      {id && showDrawer && (
+        <JobDetails
+          job={singleJob?.data}
+          setShowDrawer={setShowDrawer}
+          link={shareUrl}
         />
+      )}
 
-        <div className="mt-10 md:mt-16">
-          <Filters
-            keyword={keyword}
-            setKeyword={setKeyword}
-            selectedCities={selectedCities}
-            setSelectedCities={setSelectedCities}
-            selectedAreas={selectedAreas}
-            setSelectedAreas={setSelectedAreas}
-            areaOptions={areaOptions}
-            setAreaOptions={setAreaOptions}
-            selectedCategory={selectedCategory}
-            setSelectedCategory={setSelectedCategory}
-            selectedDays={selectedDays}
-            setSelectedDays={setSelectedDays}
-            selectedClass={selectedClass || ""}
-            setSelectedClass={
-              setSelectedClass as React.Dispatch<React.SetStateAction<string>>
-            }
-            selectedTutorGender={selectedTutorGender}
-            setSelectedTutorGender={setSelectedTutorGender}
-            selectedStudentGender={selectedStudentGender}
-            setSelectedStudentGender={setSelectedStudentGender}
-            selectedTuitionType={selectedTuitionType}
-            setSelectedTuitionType={setSelectedTuitionType}
-            liveJobs={allJobs?.data?.meta?.liveJobs || 0}
+      <Container>
+        <div className="relative mt-10 mb-72">
+          <Heading
+            titleParts={[{ text: "Available Tuition Job" }]}
+            description="Find the perfect tutoring opportunity that matches your expertise and schedule."
+            align="center"
+            headingClassName="text-center"
           />
-        </div>
 
-        <div className="mt-8">
-          <Jobs
-            allJobs={jobs}
-            isLoading={isLoading || isFetching}
-            variant="tutorJobCard"
-          />
-          <div ref={loaderRef} className="h-10"></div>
+          <div className="mt-10 md:mt-16">
+            <Filters
+              keyword={keyword}
+              setKeyword={setKeyword}
+              selectedCities={selectedCities}
+              setSelectedCities={setSelectedCities}
+              selectedAreas={selectedAreas}
+              setSelectedAreas={setSelectedAreas}
+              areaOptions={areaOptions}
+              setAreaOptions={setAreaOptions}
+              selectedCategory={selectedCategory}
+              setSelectedCategory={setSelectedCategory}
+              selectedDays={selectedDays}
+              setSelectedDays={setSelectedDays}
+              selectedClass={selectedClass || ""}
+              setSelectedClass={
+                setSelectedClass as React.Dispatch<React.SetStateAction<string>>
+              }
+              selectedTutorGender={selectedTutorGender}
+              setSelectedTutorGender={setSelectedTutorGender}
+              selectedStudentGender={selectedStudentGender}
+              setSelectedStudentGender={setSelectedStudentGender}
+              selectedTuitionType={selectedTuitionType}
+              setSelectedTuitionType={setSelectedTuitionType}
+              liveJobs={allJobs?.data?.meta?.liveJobs || 0}
+            />
+          </div>
 
-          {allJobs?.data?.meta?.hasMore && isFetching && (
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-              {Array.from({ length: 3 }).map((_, i) => (
-                <JobCardSkeleton key={i} />
-              ))}
-            </div>
-          )}
-          {!allJobs?.data?.meta?.hasMore && !isFetching && (
-            <p className="text-center mt-4 text-gray-400">
-              No more jobs to load.
-            </p>
-          )}
+          <div className="mt-8">
+            <Jobs
+              allJobs={jobs}
+              isLoading={isLoading || isFetching}
+              variant="tutorJobCard"
+            />
+            <div ref={loaderRef} className="h-10"></div>
+
+            {allJobs?.data?.meta?.hasMore && isFetching && (
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                {Array.from({ length: 3 }).map((_, i) => (
+                  <JobCardSkeleton key={i} />
+                ))}
+              </div>
+            )}
+            {!allJobs?.data?.meta?.hasMore && !isFetching && (
+              <p className="text-center mt-4 text-gray-400">
+                No more jobs to load.
+              </p>
+            )}
+          </div>
         </div>
-      </div>
-    </Container>
+      </Container>
+    </>
   );
 };
 
