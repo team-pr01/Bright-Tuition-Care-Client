@@ -35,9 +35,18 @@ const CredentialsInfo: React.FC<TCredentialsInfoProps> = ({
   };
 
   const credentialStatusBars = [
-    { label: "Credential 1", isFilled: identityInformation?.length > 0 ? true : false },
-    { label: "Credential 2", isFilled: identityInformation?.length > 1 ? true : false },
-    { label: "Credential 3", isFilled: identityInformation?.length > 2 ? true : false },
+    {
+      label: "Credential 1",
+      isFilled: identityInformation?.length > 0 ? true : false,
+    },
+    {
+      label: "Credential 2",
+      isFilled: identityInformation?.length > 1 ? true : false,
+    },
+    {
+      label: "Credential 3",
+      isFilled: identityInformation?.length > 2 ? true : false,
+    },
   ];
 
   return (
