@@ -1,11 +1,13 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { ICONS } from "../../../assets";
+import { ICONS, IMAGES } from "../../../assets";
 import { motion, AnimatePresence } from "framer-motion";
 import Button from "../../Reusable/Button/Button";
 import ShareJobModal from "../ShareJobModal";
 import toast from "react-hot-toast";
 import { useWithdrawApplicationMutation } from "../../../redux/Features/Application/applicationApi";
 import { formatDate } from "../../../utils/formatDate";
+import { VscCallOutgoing } from "react-icons/vsc";
+import type { TLoggedInUser } from "../../../types/loggedinUser.types";
 
 const JobDetails = ({
   job,
@@ -17,6 +19,7 @@ const JobDetails = ({
   setIsShareJobModalOpen,
   isApplied,
   applicationId,
+  user,
 }: {
   job: any;
   status?: string;
@@ -29,6 +32,7 @@ const JobDetails = ({
   setIsShareJobModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
   isApplied?: boolean;
   applicationId?: string;
+  user: TLoggedInUser;
 }) => {
   const jobDetail2 = [
     {
@@ -152,6 +156,49 @@ const JobDetails = ({
               alt="Category Icon"
               className="size-20 md:size-[100px] lg:size-[130px] mx-auto mt-5 lg:mt-11"
             />
+
+            {status === "appointed" && user?.role === "tutor" && (
+              <div className="bg-[#F2F5FC]/70 border-l-3 border-primary-10 rounded-lg p-3 flex gap-4 items-center mt-5 max-w-full lg:max-w-fit mx-auto">
+                {/* Image */}
+                <div className="flex-shrink-0 rounded-lg border border-neutral-30/10 bg-[#F2F5FC]/40 w-20 h-[90px] flex items-center justify-center">
+                  <img
+                    src={IMAGES.dummyAvatar}
+                    alt=""
+                    className="object-cover rounded-lg w-full h-full"
+                  />
+                </div>
+
+                {/* Text + Button */}
+                <div className="flex-1">
+                  <h2 className="text-neutral-10 text-lg font-bold break-words">
+                    MD. Ahad Khandakar
+                  </h2>
+                  <motion.div
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    className="inline-block mt-2"
+                  >
+                    <a
+                      href="/hire-a-tutor"
+                      className="inline-flex items-center justify-center gap-3 bg-primary-10 text-white px-3 py-2 rounded font-semibold md:text-lg shadow-2xl transition-all duration-300 relative overflow-hidden group w-full sm:w-auto text-center text-sm"
+                    >
+                      Call Guardian/Student
+                      <motion.span
+                        animate={{ x: [0, 4, 0] }}
+                        transition={{
+                          duration: 1.5,
+                          repeat: Infinity,
+                          ease: "easeInOut",
+                        }}
+                        className="inline-flex items-center"
+                      >
+                        <VscCallOutgoing className="text-lg" />
+                      </motion.span>
+                    </a>
+                  </motion.div>
+                </div>
+              </div>
+            )}
 
             <div className="flex flex-col gap-6 items-start justify-center max-w-full lg:max-w-[70%] mx-0 lg:mx-auto">
               <div className="flex gap-2 mt-6 lg:mt-11">

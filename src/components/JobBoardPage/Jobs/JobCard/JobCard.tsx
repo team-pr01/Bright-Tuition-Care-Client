@@ -149,6 +149,7 @@ const JobCard: React.FC<TJobCardProps> = ({
           link={shareUrl}
           isApplied={isApplied}
           applicationId={applicationId}
+          user={user}
         />
       )}
 
