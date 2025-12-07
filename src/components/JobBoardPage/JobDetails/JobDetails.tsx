@@ -55,9 +55,13 @@ const JobDetails = ({
     {
       icon: ICONS.numberOfStudents,
       title: "No. Of Students",
-      value: job?.numberOfStudents,
+      value: job?.numberOfStudents || "N/A",
     },
-    { icon: ICONS.time, title: "Tutoring Time", value: job?.tutoringTime },
+    {
+      icon: ICONS.time,
+      title: "Tutoring Time",
+      value: job?.tutoringTime || "N/A",
+    },
 
     // { icon: ICONS.subject, title: "Subject", value: "All" },
     // { icon: ICONS.location, title: "Location", value: "Mohammodpur" },
@@ -126,7 +130,9 @@ const JobDetails = ({
               </span> */}
             </h1>
             <button
-              onClick={() => setIsShareJobModalOpen && setIsShareJobModalOpen(true)}
+              onClick={() =>
+                setIsShareJobModalOpen && setIsShareJobModalOpen(true)
+              }
               className="text-neutral-10 hidden md:flex items-center gap-2 leading-[24px] w-fit font-semibold transition-all duration-300 text-sm md:text-base absolute bottom-5 md:bottom-8 xl:bottom-12  right-5 md:right-8 xl:right-8 cursor-pointer"
             >
               <img src={ICONS.share} alt="" className="size-5" />
@@ -214,7 +220,7 @@ const JobDetails = ({
                     <img src={details.icon} alt="" className="size-5" />
                     <div>
                       <p className="text-neutral-45 text-sm">{details.title}</p>
-                      <p className="text-neutral-10 font-medium">
+                      <p className="text-neutral-10 font-medium capitalize">
                         {details.value}
                       </p>
                     </div>
@@ -235,7 +241,7 @@ const JobDetails = ({
                 <div>
                   <p className="text-neutral-45 text-sm">Other Requirements</p>
                   <p className="text-neutral-10 font-medium">
-                    {job?.otherRequirements}
+                    {job?.otherRequirements || "N/A"}
                   </p>
                 </div>
               </div>
@@ -268,7 +274,10 @@ const JobDetails = ({
                   label={"Apply Now"}
                   variant="primary"
                   iconBg="#0D99FF"
-                  onClick={() => setIsJobApplyConfirmationModalOpen && setIsJobApplyConfirmationModalOpen(true)}
+                  onClick={() =>
+                    setIsJobApplyConfirmationModalOpen &&
+                    setIsJobApplyConfirmationModalOpen(true)
+                  }
                   animation={true}
                 />
               )}
@@ -285,7 +294,11 @@ const JobDetails = ({
 
       <ShareJobModal
         isShareJobModalOpen={isShareJobModalOpen as boolean}
-        setIsShareJobModalOpen={setIsShareJobModalOpen as React.Dispatch<React.SetStateAction<boolean>>}
+        setIsShareJobModalOpen={
+          setIsShareJobModalOpen as React.Dispatch<
+            React.SetStateAction<boolean>
+          >
+        }
         link={link as string}
       />
     </AnimatePresence>

@@ -77,7 +77,7 @@ export const router = createBrowserRouter([
       },
       {
         // if visited by link
-        path: "/job-board/:id",
+        path: "/job-board",
         element: <JobBoard />,
       },
       {

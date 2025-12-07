@@ -4,39 +4,54 @@ import Modal from "../../../../components/Reusable/Modal/Modal";
 import type { TConfirmationLetter } from "../../../../types/confirmationLetter.types";
 import ConfirmationLetterPreview from "../../../../components/Dashboard/Tutor/ConfirmationLettersPage/ConfirmationLetterPreview/ConfirmationLetterPreview";
 import { useGetAllTutorsConfirmationLettersQuery } from "../../../../redux/Features/ConfirmationLetter/confirmationLetterApi";
-import Loader from "../../../../components/Reusable/Loader/Loader";
 import NoData from "../../../../components/Reusable/NoData/NoData";
+import LogoLoader from "../../../../components/Reusable/LogoLoader/LogoLoader";
 
 const ConfirmationLetters = () => {
   const { data: allTutorsConfirmationLetters, isLoading } =
     useGetAllTutorsConfirmationLettersQuery({});
+
   const [selectedLetterId, setSelectedLetterId] = useState<string | null>(null);
   const [isLetterPreviewOpen, setIsLetterPreviewOpen] =
     useState<boolean>(false);
-  return (
-    <div className="">
-      {isLoading ? (
-        <div className="py-10">
-          <Loader size="lg" text="Please wait..." />
-        </div>
-      ) : allTutorsConfirmationLetters?.data &&
-        allTutorsConfirmationLetters.data.length > 0 ? (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {allTutorsConfirmationLetters.data.map(
-            (letter: TConfirmationLetter) => (
-              <ConfirmationLetterCard
-                key={letter?._id}
-                letter={letter}
-                setSelectedLetterId={setSelectedLetterId}
-                setIsLetterPreviewOpen={setIsLetterPreviewOpen}
-              />
-            )
-          )}
-        </div>
-      ) : (
-        <NoData />
-      )}
 
+  const hasLetters = allTutorsConfirmationLetters?.data?.length > 0;
+
+  // Loader centered
+  if (isLoading) {
+    return (
+      <div className="min-h-[70vh] flex items-center justify-center">
+        <LogoLoader />
+      </div>
+    );
+  }
+
+  // No data centered
+  if (!hasLetters) {
+    return (
+      <div className="min-h-[70vh] flex items-center justify-center">
+        <NoData />
+      </div>
+    );
+  }
+
+  return (
+    <div>
+      {/* Data grid */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {allTutorsConfirmationLetters.data.map(
+          (letter: TConfirmationLetter) => (
+            <ConfirmationLetterCard
+              key={letter._id}
+              letter={letter}
+              setSelectedLetterId={setSelectedLetterId}
+              setIsLetterPreviewOpen={setIsLetterPreviewOpen}
+            />
+          )
+        )}
+      </div>
+
+      {/* Preview modal */}
       <Modal
         isModalOpen={isLetterPreviewOpen}
         setIsModalOpen={setIsLetterPreviewOpen}

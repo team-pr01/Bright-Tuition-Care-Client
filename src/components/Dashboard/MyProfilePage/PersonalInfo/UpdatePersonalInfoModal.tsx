@@ -206,6 +206,35 @@ const UpdatePersonalInfoModal = ({
           isRequired={false}
         />
 
+        {/* City Dropdown */}
+        <SelectDropdownWithSearch
+          label="City"
+          name="city"
+          options={filterData.cityCorporationWithLocation.map((c) => c.name)}
+          value={selectedCity}
+          onChange={(value) => setValue("city", value)}
+          isRequired={false}
+        />
+
+        {/* Area Dropdown */}
+        <SelectDropdownWithSearch
+          label="Location"
+          name="area"
+          options={areaOptions}
+          value={watch("area")}
+          onChange={(value) => setValue("area", value)}
+          isRequired={false}
+        />
+
+        {/* Address */}
+        <TextInput
+          label="Address"
+          placeholder="Enter address"
+          error={errors.address}
+          {...register("address")}
+          isRequired={false}
+        />
+
         {user?.role !== "guardian" && (
           <>
             {/* Father's Name */}
@@ -247,35 +276,6 @@ const UpdatePersonalInfoModal = ({
             />
           </>
         )}
-
-        {/* City Dropdown */}
-        <SelectDropdownWithSearch
-          label="City"
-          name="city"
-          options={filterData.cityCorporationWithLocation.map((c) => c.name)}
-          value={selectedCity}
-          onChange={(value) => setValue("city", value)}
-          isRequired={false}
-        />
-
-        {/* Area Dropdown */}
-        <SelectDropdownWithSearch
-          label="Location"
-          name="area"
-          options={areaOptions}
-          value={watch("area")}
-          onChange={(value) => setValue("area", value)}
-          isRequired={false}
-        />
-
-        {/* Address */}
-        <TextInput
-          label="Address"
-          placeholder="Enter address"
-          error={errors.address}
-          {...register("address")}
-          isRequired={false}
-        />
       </div>
       {/* Facebook */}
       <TextInput

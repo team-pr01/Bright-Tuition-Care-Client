@@ -17,9 +17,10 @@ import { useLocation } from "react-router-dom";
 import TutorResumePDF from "../TutorsResume/TutorResumePDF";
 import { pdf } from "@react-pdf/renderer";
 import { useGetMeQuery } from "../../../../redux/Features/User/userApi";
+import LogoLoader from "../../../../components/Reusable/LogoLoader/LogoLoader";
 
 const MyProfile = () => {
-  const { data } = useGetMeQuery({});
+  const { data, isLoading } = useGetMeQuery({});
   const myProfile = data?.data;
   const personalInformation = myProfile?.personalInformation;
   const socialMediaInformation = myProfile?.socialMediaInformation;
@@ -35,10 +36,14 @@ const MyProfile = () => {
       tutoringMethod: tuitionPreference?.tutoringMethod,
       tutoringStyles: tuitionPreference?.tuitionStyle, // []
       availableDays: tuitionPreference?.availableDays, // []
-      time: `${tuitionPreference?.availableTime?.from} - ${tuitionPreference?.availableTime?.to}`,
+      time:
+        (tuitionPreference?.availableTime?.from &&
+          tuitionPreference?.availableTime?.to &&
+          `${tuitionPreference?.availableTime?.from} - ${tuitionPreference?.availableTime?.to}`) ||
+        "",
       availableTime: {
-        from: tuitionPreference?.availableTime?.from,
-        to: tuitionPreference?.availableTime?.to,
+        from: tuitionPreference?.availableTime?.from || "",
+        to: tuitionPreference?.availableTime?.to || "",
       },
       expectedSalary: tuitionPreference?.expectedSalary,
       preferences: {
@@ -155,6 +160,14 @@ const MyProfile = () => {
       setIsGenerating(false);
     }
   };
+
+  if (isLoading) {
+    return (
+      <div className="min-h-[70vh] flex items-center justify-center font-Nunito">
+        <LogoLoader />
+      </div>
+    );
+  }
 
   return (
     <div className="flex flex-col lg:flex-row gap-5 font-Nunito w-full">

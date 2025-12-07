@@ -12,29 +12,41 @@ import DashboardDataCard from "../../../../components/Dashboard/DashboardDataCar
 import { ICONS } from "../../../../assets";
 import SupportBar from "../../../../components/Dashboard/SupportBar/SupportBar";
 import { useGetGuardianDashboardStatsQuery } from "../../../../redux/Features/Guardian/guardianApi";
+import LogoLoader from "../../../../components/Reusable/LogoLoader/LogoLoader";
 const GuardianDashboardHome = () => {
-  const { data } = useGetGuardianDashboardStatsQuery({});
+  const { data, isLoading } = useGetGuardianDashboardStatsQuery({});
   const guardianStats = data?.data || {};
   const applications = guardianStats?.jobs || {};
+
+  const formatCount = (value?: number) => String(value ?? 0).padStart(2, "0");
 
   const radius = 58;
   const circumference = 2 * Math.PI * radius;
   const progress = guardianStats?.profileCompleted || 0;
+
+  if (isLoading) {
+    return (
+      <div className="min-h-[70vh] flex items-center justify-center font-Nunito">
+        <LogoLoader />
+      </div>
+    );
+  }
   return (
     <div className="flex flex-col gap-5 md:gap-0 font-Nunito">
       <div className="flex items-center overflow-x-auto w-full gap-3 md:gap-6 bg-primary-10 md:bg-[#F2F5FC] py-5 px-3 lg:px-6 rounded-b-3xl md:rounded-b-none">
         <DashboardOverviewCard
           title="All"
           additionalTitle="Jobs"
-          value={applications?.total || 0}
+          value={formatCount(applications?.total)}
           textColor="text-white md:text-neutral-10"
           path="/dashboard/guardian/posted-jobs"
           icon={<FaLayerGroup />}
         />
+
         <DashboardOverviewCard
           title="Pending"
           additionalTitle="Jobs"
-          value={applications?.pending || 0}
+          value={formatCount(applications?.pending)}
           textColor="text-white md:text-neutral-10"
           path="/dashboard/guardian/posted-jobs?jobStatus=pending"
           icon={<FaHourglassHalf />}
@@ -43,21 +55,23 @@ const GuardianDashboardHome = () => {
         <DashboardOverviewCard
           title="Live"
           additionalTitle="Jobs"
-          value={applications?.live || 0}
+          value={formatCount(applications?.live)}
           textColor="text-white md:text-primary-10"
           path="/dashboard/guardian/posted-jobs?jobStatus=live"
           icon={<FaRegDotCircle />}
         />
+
         <DashboardOverviewCard
           title="Confirmed"
-          value={applications?.closed || 0}
+          value={formatCount(applications?.closed)}
           textColor="text-white md:text-green-500"
           path="/dashboard/guardian/posted-jobs?jobStatus=confirmed"
           icon={<FaCheckCircle />}
         />
+
         <DashboardOverviewCard
           title="Cancelled"
-          value={applications?.cancelled || 0}
+          value={formatCount(applications?.cancelled)}
           textColor="text-white md:text-rose-500"
           path="/dashboard/guardian/posted-jobs?jobStatus=cancelled"
           icon={<FaTimesCircle />}

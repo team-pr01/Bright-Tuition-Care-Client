@@ -7,6 +7,7 @@ import stepLine from "../assets/Images/steps-line.png";
 import logo from "../assets/Icons/logo.png";
 import logoWhite from "../assets/Icons/logo-white.png";
 import logoWhiteVertical from "../assets/Images/logo-white.png";
+import logoBlueVertical from "../assets/Icons/logo-blue-vertical.webp";
 import menu from "../assets/Icons/menu.svg";
 
 // counter icons
@@ -139,6 +140,7 @@ import customerSupport from "../assets/Icons/customer-support.svg";
 
 export const IMAGES = {
   logoWhiteVertical,
+  logoBlueVertical,
   heroImg1,
   heroImg2,
   heroImg3,

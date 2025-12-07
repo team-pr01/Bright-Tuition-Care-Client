@@ -30,9 +30,7 @@ const PostedJobs = () => {
   const limit = 6;
   const [jobs, setJobs] = useState<any[]>([]);
 
-  const [activeTab, setActiveTab] = useState<string>(
-    status ? status : ""
-  );
+  const [activeTab, setActiveTab] = useState<string>(status ? status : "");
 
   // API Call
   const {
@@ -191,7 +189,7 @@ const PostedJobs = () => {
           })}
         </div>
 
-         {/* <Link
+        {/* <Link
             to="/dashboard/guardian/hire-a-tutor"
             className={`bg-primary-10 hover:bg-primary-20 hover:text-primary-10 transition duration-300 font-semibold text-white rounded-lg flex items-center gap-2 px-3 py-2 pointer`}
           >

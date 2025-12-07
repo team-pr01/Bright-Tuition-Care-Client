@@ -67,7 +67,7 @@ const Payment = () => {
           accordance with our{" "}
           <button
             onClick={() => setIsRefundPolicyModalOpen(true)}
-            className="text-primary-10 font-semibold underline"
+            className="text-primary-10 font-semibold underline cursor-pointer"
           >
             Refund Policy.
           </button>

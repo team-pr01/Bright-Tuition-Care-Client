@@ -3,7 +3,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { ICONS } from "../../../assets";
 import { filterData } from "../../../constants/filterData";
 import NoData from "../NoData/NoData";
-import Loader from "../Loader/Loader";
+import LogoLoader from "../LogoLoader/LogoLoader";
 
 export type TableHead = {
   key: string;
@@ -231,7 +231,7 @@ useEffect(() => {
         {/* Loader overlay */}
         {isLoading && (
           <div className="absolute inset-0 z-20 flex items-center justify-center bg-white/80">
-            <Loader size={"lg"} />
+            <LogoLoader />
           </div>
         )}
 

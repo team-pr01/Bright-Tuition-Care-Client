@@ -12,9 +12,10 @@ import {
   FaTimesCircle,
 } from "react-icons/fa";
 import { useGetTutorDashboardStatsQuery } from "../../../../redux/Features/Tutor/tutorApi";
+import LogoLoader from "../../../../components/Reusable/LogoLoader/LogoLoader";
 
 const TutorDashboardHome = () => {
-  const { data } = useGetTutorDashboardStatsQuery({});
+  const { data, isLoading } = useGetTutorDashboardStatsQuery({});
   const tutorStats = data?.data || {};
   const applications = tutorStats?.applications || {};
 
@@ -38,6 +39,16 @@ const TutorDashboardHome = () => {
 
     return `/dashboard/tutor/job-board?${params.toString()}`;
   };
+
+  const formatCount = (value?: number) => String(value ?? 0).padStart(2, "0");
+
+  if (isLoading) {
+    return (
+      <div className="min-h-[70vh] flex items-center justify-center font-Nunito">
+        <LogoLoader />
+      </div>
+    );
+  }
   return (
     <div className="flex flex-col gap-4 md:gap-0 font-Nunito">
       {/* Status cards */}
@@ -45,36 +56,40 @@ const TutorDashboardHome = () => {
         <DashboardOverviewCard
           title="Applied"
           additionalTitle="Jobs"
-          value={applications?.applied || 0}
+          value={formatCount(applications?.applied)}
           textColor="text-white md:text-neutral-10"
           path="/dashboard/tutor/my-applications/applied"
           icon={<FaBriefcase />}
         />
+
         <DashboardOverviewCard
           title="Shortlisted"
           additionalTitle="Jobs"
-          value={applications?.shortlisted || 0}
+          value={formatCount(applications?.shortlisted)}
           textColor="text-white md:text-primary-10"
           path="/dashboard/tutor/my-applications/shortlisted"
           icon={<FaClipboardCheck />}
         />
+
         <DashboardOverviewCard
           title="Appointed"
-          value={applications?.shortlisted || 0}
+          value={formatCount(applications?.appointed)}
           textColor="text-white md:text-[#9C9700]"
           path="/dashboard/tutor/my-applications/appointed"
           icon={<FaUserCheck />}
         />
+
         <DashboardOverviewCard
           title="Confirmed"
-          value={applications?.confirmed || 0}
+          value={formatCount(applications?.confirmed)}
           textColor="text-white md:text-green-500"
           path="/dashboard/tutor/my-applications/confirmed"
           icon={<FaCheckCircle />}
         />
+
         <DashboardOverviewCard
           title="Cancelled"
-          value={applications?.cancelled || 0}
+          value={formatCount(applications?.cancelled)}
           textColor="text-white md:text-rose-500"
           path="/dashboard/tutor/my-applications/cancelled"
           icon={<FaTimesCircle />}
@@ -204,7 +219,11 @@ const TutorDashboardHome = () => {
                   }. Please click here to view and sign your confirmation letters to avoid any future complications.`
             }
             icon={ICONS.confirmationLetter}
-            value={tutorStats?.confirmationLetterCount || 0}
+            value={
+              tutorStats?.confirmationLetterCount < 10
+                ? `0${tutorStats?.confirmationLetterCount}`
+                : tutorStats?.confirmationLetterCount || "00"
+            }
             titleColor={"text-primary-10"}
             valueColor={"text-primary-10"}
             btnLabel={"View All"}
@@ -219,7 +238,11 @@ const TutorDashboardHome = () => {
                 : `You have ${tutorStats?.invoiceCount} invoices for your confirmed tuition jobs. Please visit the Payment section to view and complete the payments.`
             }
             icon={ICONS.invoice}
-            value={tutorStats?.invoiceCount || 0}
+            value={
+              tutorStats?.invoiceCount < 10
+                ? `0${tutorStats?.invoiceCount}`
+                : tutorStats?.invoiceCount || "00"
+            }
             titleColor={"text-primary-10/80"}
             valueColor={"text-primary-10"}
             btnLabel={"View All"}

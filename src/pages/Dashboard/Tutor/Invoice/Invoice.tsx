@@ -2,10 +2,10 @@
 import { useState } from "react";
 import InvoicePreview from "../../../../components/Dashboard/Tutor/InvoicePage/InvoicePreview/InvoicePreview";
 import InvoiceCard from "../../../../components/Dashboard/Tutor/InvoicePage/InvoiceCard/InvoiceCard";
-import Loader from "../../../../components/Reusable/Loader/Loader";
 import type { TInvoice } from "../../../../types/invoice.types";
 import NoData from "../../../../components/Reusable/NoData/NoData";
 import { useGetMyInvoicesQuery } from "../../../../redux/Features/Invoice/invoiceApi";
+import LogoLoader from "../../../../components/Reusable/LogoLoader/LogoLoader";
 
 const Invoice = () => {
   const {
@@ -13,28 +13,40 @@ const Invoice = () => {
     isLoading,
     isFetching,
   } = useGetMyInvoicesQuery({});
+
   const [selectedInvoice, setSelectedInvoice] = useState<any | null>(null);
+
+  const isLoadingState = isLoading || isFetching;
+  const hasInvoices = allInvoicesData?.data?.length > 0;
+
+  if (isLoadingState) {
+    return (
+      <div className="min-h-[70vh] flex items-center justify-center font-Nunito">
+        <LogoLoader />
+      </div>
+    );
+  }
+
+  if (!selectedInvoice && !hasInvoices) {
+    return (
+      <div className="min-h-[70vh] flex items-center justify-center font-Nunito">
+        <NoData />
+      </div>
+    );
+  }
 
   return (
     <div className="font-Nunito">
-      {isLoading || isFetching ? (
-        <div className="py-10">
-          <Loader size="lg" text="Please wait..." />
+      {!selectedInvoice ? (
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+          {allInvoicesData.data.map((invoice: TInvoice) => (
+            <InvoiceCard
+              key={invoice._id}
+              invoice={invoice}
+              onSelect={setSelectedInvoice}
+            />
+          ))}
         </div>
-      ) : !selectedInvoice ? (
-        allInvoicesData?.data && allInvoicesData.data.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-            {allInvoicesData.data.map((invoice: TInvoice) => (
-              <InvoiceCard
-                key={invoice._id}
-                invoice={invoice}
-                onSelect={setSelectedInvoice}
-              />
-            ))}
-          </div>
-        ) : (
-          <NoData />
-        )
       ) : (
         <InvoicePreview
           invoice={selectedInvoice}
