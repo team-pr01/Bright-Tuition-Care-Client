@@ -253,7 +253,7 @@ const JobDetails = ({
                   label={
                     isWithdrawingApplication
                       ? "Please wait..."
-                      : "Withdraw Application"
+                      : "Undo Application"
                   }
                   variant="primary"
                   iconBg="#0D99FF"

@@ -1,9 +1,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { RxCross1 } from "react-icons/rx";
+import { FiCheckCircle } from "react-icons/fi";
 import { ICONS } from "../../../../assets";
 import Button from "../../../Reusable/Button/Button";
 import { useSendVerificationRequestMutation } from "../../../../redux/Features/VerificationRequest/verificationRequestApi";
 import toast from "react-hot-toast";
+import { useState } from "react";
 
 const SendProfileVerificationRequest = ({
   isVerificationModalOpen,
@@ -12,21 +14,28 @@ const SendProfileVerificationRequest = ({
   isVerificationModalOpen: boolean;
   setIsVerificationModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
-  const [sendVerificationRequest, {isLoading}] = useSendVerificationRequestMutation();
+  const [sendVerificationRequest, { isLoading }] =
+    useSendVerificationRequestMutation();
+  const [isSuccess, setIsSuccess] = useState<boolean>(false);
 
   const handleSendVerificationRequest = async () => {
     try {
       const res = await sendVerificationRequest({}).unwrap();
       if (res?.success) {
+        setIsSuccess(true); // Show success UI
         toast.success("Verification request sent successfully");
-        setIsVerificationModalOpen(false);
-        window.location.reload();
       }
     } catch (error: any) {
       toast.error(error?.data?.message || "Error sending verification request");
       setIsVerificationModalOpen(false);
     }
   };
+
+  const handleClose = () => {
+    setIsVerificationModalOpen(false);
+    window.location.reload(); // reload the page
+  };
+
   return (
     <div
       className={`${
@@ -42,35 +51,57 @@ const SendProfileVerificationRequest = ({
       >
         <RxCross1
           className="text-lg dark:text-[#abc2d3]/70 cursor-pointer absolute top-5 right-4"
-          onClick={() => setIsVerificationModalOpen(false)}
+          onClick={handleClose}
         />
 
         <div className="w-full flex flex-col items-center gap-6">
-          <img src={ICONS.warning} alt="warning icon" className="size-28" />
-          <div className="text-center text-neutral-900">
-            <h1 className="text-xl font-semibold ">Verification</h1>
-            <p className="text-sm mt-2">
-              Are you sure want to send Verification Request?
-            </p>
-          </div>
+          {!isSuccess ? (
+            <>
+              <img src={ICONS.warning} alt="warning icon" className="size-28" />
+              <div className="text-center text-neutral-900">
+                <h1 className="text-xl font-semibold ">Verification</h1>
+                <p className="text-sm mt-2">
+                  Are you sure want to send Verification Request?
+                </p>
+              </div>
 
-          <div className="flex items-center justify-center gap-3">
-            <Button
-              type="submit"
-              label="Yes"
-              variant="primary"
-              className="py-2 lg:py-2"
-              onClick={handleSendVerificationRequest}
-              isLoading={isLoading}
-            />
-            <Button
-              type="button"
-              label="No"
-              variant="tertiary"
-              className="py-2 lg:py-2"
-              onClick={() => setIsVerificationModalOpen(false)}
-            />
-          </div>
+              <div className="flex items-center justify-center gap-3">
+                <Button
+                  type="submit"
+                  label="Yes"
+                  variant="primary"
+                  className="py-2 lg:py-2"
+                  onClick={handleSendVerificationRequest}
+                  isLoading={isLoading}
+                />
+                <Button
+                  type="button"
+                  label="No"
+                  variant="tertiary"
+                  className="py-2 lg:py-2"
+                  onClick={() => setIsVerificationModalOpen(false)}
+                />
+              </div>
+            </>
+          ) : (
+            <>
+              <FiCheckCircle className="text-6xl text-green-600" />
+              <div className="text-center text-neutral-900">
+                <h1 className="text-xl font-semibold mt-2">Request Received</h1>
+                <p className="text-sm mt-2">
+                  We have received your verification request. We will review it
+                  and notify you once it's processed.
+                </p>
+              </div>
+              <Button
+                type="button"
+                label="Close"
+                variant="primary"
+                className="py-2 lg:py-2 mt-4"
+                onClick={handleClose}
+              />
+            </>
+          )}
         </div>
       </div>
     </div>

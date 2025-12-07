@@ -13,7 +13,7 @@ const AppliedSuccessModal = () => {
           </p>
           <div className="mt-4 lg:mt-8 flex justify-center gap-5">
             <Button
-              label="Withdraw Application"
+              label="Undo Application"
               variant="secondary"
               iconBg="#0D99FF"
               className="border border-neutral-55"
