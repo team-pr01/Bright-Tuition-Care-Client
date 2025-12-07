@@ -53,9 +53,9 @@ const Banner: React.FC = () => {
           variants={itemVariants}
           className="text-xs md:text-base leading-5 lg:leading-6 text-center font-medium mt-4 text-white max-w-[655px] mx-auto"
         >
-          With one easy registration, guardians connect with verified tutors,
+          With one easy registration, guardians can connect with verified tutors
           and tutors access genuine students on a trusted platform. Join Bright
-          Tuition Care to make learning and tutoring simple, effective, and
+          Tuition Care to make learning and tutoring simple, effective and
           rewarding!
         </motion.p>
 

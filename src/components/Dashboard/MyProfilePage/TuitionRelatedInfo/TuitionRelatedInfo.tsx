@@ -30,11 +30,20 @@ const TuitionRelatedInfo = ({
   isProfileLocked,
 }: TTuitionRelatedInfoProps) => {
   const [isFormModalOpen, setIsFormModalOpen] = useState<boolean>(false);
-  const details = [
+
+  const accessibilityInfo = [
     { label: "Tutoring Method", value: tuitionRelatedInfo?.tutoringMethod },
     { label: "Tutoring Styles", value: tuitionRelatedInfo?.tutoringStyles },
     { label: "Available Days", value: tuitionRelatedInfo?.availableDays },
     { label: "Time", value: tuitionRelatedInfo?.time },
+    { label: "Expected Salary", value: tuitionRelatedInfo?.expectedSalary },
+    {
+      label: "Preferred Locations",
+      value: tuitionRelatedInfo?.preferences?.preferredLocation,
+    },
+  ];
+
+  const additionalInfo = [
     {
       label: "Preferred Categories",
       value: tuitionRelatedInfo?.preferences?.preferredCategories,
@@ -51,11 +60,7 @@ const TuitionRelatedInfo = ({
       label: "Place of Tutoring",
       value: tuitionRelatedInfo?.preferences?.placeOfTuition,
     },
-    {
-      label: "Preferred Locations",
-      value: tuitionRelatedInfo?.preferences?.preferredLocation,
-    },
-    { label: "Expected Salary", value: tuitionRelatedInfo?.expectedSalary },
+
     { label: "Total Experience", value: tuitionRelatedInfo?.experience?.total },
     {
       label: "Experience Details",
@@ -69,7 +74,9 @@ const TuitionRelatedInfo = ({
     return val !== null && val !== undefined;
   };
 
-  const allNotProvided = details?.every((item) => !isProvided(item.value));
+  const allInfo = [...accessibilityInfo, ...additionalInfo];
+
+  const allNotProvided = allInfo.every((item) => !isProvided(item.value));
 
   return (
     <div className="font-Nunito">
@@ -80,33 +87,69 @@ const TuitionRelatedInfo = ({
         btnText={allNotProvided ? "Add Tuition Preferences" : "Edit Info"}
       />
 
-      <div className="flex flex-col gap-2 mt-4">
-        {details?.map((item, index) => {
-          const provided = isProvided(item.value);
+      <div className="mt-4 flex flex-col gap-5">
+        <div className="flex flex-col gap-2 border border-neutral-30/20 bg-[#F2F5FC]/10 rounded-lg p-3">
+          <h2 className="text-neutral-5 font-semibold text-lg md:text-xl mb-1">
+            Accessibility Information
+          </h2>
+          {accessibilityInfo?.map((item, index) => {
+            const provided = isProvided(item.value);
 
-          return (
-            <div
-              key={index}
-              className="flex text-[13px] md:text-sm lg:text-base"
-            >
-              <span className="text-neutral-5 font-medium min-w-[140px] md:max-w-[160px] lg:min-w-[200px]">
-                {item.label}
-              </span>
-              <span className="text-neutral-5 font-medium">:</span>
-              <span
-                className={`ml-2 ${
-                  provided ? "text-neutral-45" : "text-red-500"
-                }`}
+            return (
+              <div
+                key={index}
+                className="flex text-[13px] md:text-sm lg:text-base"
               >
-                {provided
-                  ? Array.isArray(item.value)
-                    ? (item.value as string[]).join(", ")
-                    : item.value
-                  : "Not Provided"}
-              </span>
-            </div>
-          );
-        })}
+                <span className="text-neutral-5 font-medium min-w-[140px] md:max-w-[160px] lg:min-w-[200px]">
+                  {item.label}
+                </span>
+                <span className="text-neutral-5 font-medium">:</span>
+                <span
+                  className={`ml-2 ${
+                    provided ? "text-neutral-45" : "text-red-500"
+                  }`}
+                >
+                  {provided
+                    ? Array.isArray(item.value)
+                      ? (item.value as string[]).join(", ")
+                      : item.value
+                    : "Not Provided"}
+                </span>
+              </div>
+            );
+          })}
+        </div>
+        <div className="flex flex-col gap-2 border border-neutral-30/20 bg-[#F2F5FC]/10 rounded-lg p-3">
+          <h2 className="text-neutral-5 font-semibold text-lg md:text-xl mb-1">
+            Additional Information
+          </h2>
+          {additionalInfo?.map((item, index) => {
+            const provided = isProvided(item.value);
+
+            return (
+              <div
+                key={index}
+                className="flex text-[13px] md:text-sm lg:text-base"
+              >
+                <span className="text-neutral-5 font-medium min-w-[140px] md:max-w-[160px] lg:min-w-[200px]">
+                  {item.label}
+                </span>
+                <span className="text-neutral-5 font-medium">:</span>
+                <span
+                  className={`ml-2 ${
+                    provided ? "text-neutral-45" : "text-red-500"
+                  }`}
+                >
+                  {provided
+                    ? Array.isArray(item.value)
+                      ? (item.value as string[]).join(", ")
+                      : item.value
+                    : "Not Provided"}
+                </span>
+              </div>
+            );
+          })}
+        </div>
       </div>
       <Modal
         heading="Update Tuition Information"

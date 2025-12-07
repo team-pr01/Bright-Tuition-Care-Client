@@ -1,32 +1,38 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { RxArrowTopRight } from "react-icons/rx";
-import { Link, useSearchParams } from "react-router-dom";
-import { ICONS } from "../../../../assets";
-import { useEffect, useRef, useState } from "react";
+import { useSearchParams } from "react-router-dom";
+import React, { useEffect, useRef, useState } from "react";
 import { useGetMyPostedJobsQuery } from "../../../../redux/Features/Job/jobApi";
 import { useSelector } from "react-redux";
 import { useCurrentUser } from "../../../../redux/Features/Auth/authSlice";
-import { useDebounce } from "../../../../hooks/useDebounce";
 import JobCardSkeleton from "../../../../components/JobBoardPage/Jobs/JobCard/JobCardSkeleton";
 import Jobs from "../../../../components/JobBoardPage/Jobs/Jobs";
 import type { TLoggedInUser } from "../../../../types/loggedinUser.types";
+import {
+  FiSend,
+  FiStar,
+  FiCheckCircle,
+  FiXCircle,
+  FiCornerUpLeft,
+} from "react-icons/fi";
 
 const PostedJobs = () => {
   const [searchParams] = useSearchParams();
   const jobStatus = searchParams.get("jobStatus");
   const user = useSelector(useCurrentUser) as TLoggedInUser;
-  const [keyword, setKeyword] = useState<string>("");
   const [status, setStatus] = useState<string>("");
-  const debouncedKeyword = useDebounce(keyword, 500);
 
   useEffect(() => {
     setStatus(jobStatus || "");
-  }, [jobStatus])
+  }, [jobStatus]);
 
   // Pagination states
   const [skip, setSkip] = useState(0);
   const limit = 6;
   const [jobs, setJobs] = useState<any[]>([]);
+
+  const [activeTab, setActiveTab] = useState<string>(
+    status ? status : ""
+  );
 
   // API Call
   const {
@@ -34,8 +40,7 @@ const PostedJobs = () => {
     isLoading,
     isFetching,
   } = useGetMyPostedJobsQuery({
-    keyword: debouncedKeyword,
-    status: status,
+    status: activeTab === "" ? "" : activeTab,
     skip,
   });
 
@@ -65,8 +70,7 @@ const PostedJobs = () => {
   // Reset pagination when filters or search change - FIXED
   useEffect(() => {
     setSkip(0);
-    // Don't setJobs([]) here - let the useEffect above handle it
-  }, [debouncedKeyword, status]);
+  }, [status]);
 
   // Infinite Scroll Observer - FIXED DEPENDENCIES
   const loaderRef = useRef<HTMLDivElement | null>(null);
@@ -93,42 +97,106 @@ const PostedJobs = () => {
     };
   }, [allJobs?.data?.meta?.hasMore, isFetching]);
 
+  const counts = allJobs?.data?.meta?.counts || {};
+
+  const jobTabs = [
+    {
+      id: 1,
+      key: "",
+      title: "All Jobs",
+      count: counts?.totalJobs || 0,
+      icon: <FiSend />,
+    },
+    {
+      id: 2,
+      key: "pending",
+      title: "Pending Jobs",
+      count: counts?.pendingJobs || 0,
+      icon: <FiCornerUpLeft />,
+    },
+    {
+      id: 3,
+      key: "live",
+      title: "Live Jobs",
+      count: counts?.liveJobs || 0,
+      icon: <FiStar />,
+    },
+    {
+      id: 5,
+      key: "closed",
+      title: "Confirmed Jobs",
+      count: counts?.closedJobs || 0,
+      icon: <FiCheckCircle />,
+    },
+    {
+      id: 6,
+      key: "cancelled",
+      title: "Cancelled Jobs",
+      count: counts?.cancelledJobs || 0,
+      icon: <FiXCircle />,
+    },
+  ];
+
+  console.log(allJobs);
+
   return (
     <div className="font-Nunito">
-      <div className="flex items-center justify-between border-b border-neutral-30/20 pb-3">
-        <div className="relative w-full lg:w-[400px]">
-          <input
-            placeholder={"Search by job title or id..."}
-            value={keyword}
-            onChange={(e: any) => setKeyword(e.target.value)}
-            className={`w-full pl-8 pr-2 py-[10px] rounded-lg bg-white border border-primary-30 leading-[18px] focus:outline-none focus:border-primary-10 transition duration-300`}
-          />
-          <img
-            src={ICONS.search}
-            alt=""
-            className="size-5 absolute top-3 bottom-0 left-2"
-          />
-        </div>
-        <div className="flex items-center gap-4">
-          <select
-            value={status}
-            onChange={(e) => setStatus(e.target.value)}
-            className="px-3 py-2 bg-white border border-primary-30 rounded-lg cursor-pointer focus:outline-none focus:border-primary-30"
-          >
-            <option value="">All</option>
-            <option value="pending">Pending</option>
-            <option value="live">Live</option>
-            <option value="closed">Confirmed</option>
-            <option value="cancelled">Cancelled</option>
-          </select>
+      {/* Tabs Bar */}
+      <div className="border-b border-blue-300 bg-blue-50/40">
+        <div className="flex w-full overflow-x-auto overflow-y-hidden gap-6 md:gap-10">
+          {jobTabs.map((tab) => {
+            const isActive = activeTab === tab.key;
 
-          <Link
+            return (
+              <button
+                key={tab.key}
+                type="button"
+                onClick={() => setActiveTab?.(tab.key)}
+                className={`
+                  relative py-3 text-xs md:text-sm lg:text-base flex items-center gap-1 md:gap-2
+                  font-medium transition-colors duration-200 cursor-pointer
+                  ${
+                    isActive
+                      ? "text-primary-10"
+                      : "text-slate-500 hover:text-primary-500"
+                  }
+                `}
+              >
+                {/* Icon */}
+                <span className="flex items-center justify-center">
+                  {React.cloneElement(
+                    tab.icon as React.ReactElement,
+                    {
+                      className: `size-3 md:size-4 ${
+                        isActive ? "opacity-100" : "opacity-70"
+                      }`,
+                    } as any
+                  )}
+                </span>
+
+                {/* Label + count */}
+                <span className="whitespace-nowrap text-xs md:text-sm lg:text-base">
+                  {tab.title}{" "}
+                  <span className={isActive ? "font-semibold" : "font-normal"}>
+                    {String(tab.count).padStart(2, "0")}
+                  </span>
+                </span>
+
+                {/* Active underline */}
+                {isActive && (
+                  <span className="absolute left-0 right-0 -bottom-[1px] h-[3px] rounded-full bg-primary-500" />
+                )}
+              </button>
+            );
+          })}
+        </div>
+
+         {/* <Link
             to="/dashboard/guardian/hire-a-tutor"
             className={`bg-primary-10 hover:bg-primary-20 hover:text-primary-10 transition duration-300 font-semibold text-white rounded-lg flex items-center gap-2 px-3 py-2 pointer`}
           >
             Hire a Tutor <RxArrowTopRight className="text-lg" />
-          </Link>
-        </div>
+          </Link> */}
       </div>
 
       <div className="mt-5 ">

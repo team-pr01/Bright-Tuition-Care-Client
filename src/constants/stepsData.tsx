@@ -20,7 +20,7 @@ export const studentOrGuardianSteps = [
     icon: ICONS.receive,
     title: "Receive the Best Tutor CVs",
     description:
-      "TWithin 24 hours, you will get up to 3 CVs of the best tutors who applied your posted tuition job.",
+      "Within 24 hours, you will get up to 3 CVs of the best tutors who applied your posted tuition job.",
   },
   {
     step : 3,

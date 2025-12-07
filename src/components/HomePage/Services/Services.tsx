@@ -17,7 +17,7 @@ const categories = [
   },
   {
     image: IMAGES.arbi,
-    title: "Madarsa Medium",
+    title: "Madrasa Medium",
   },
   {
     image: IMAGES.banglaMedium,
@@ -45,15 +45,15 @@ const categories = [
   },
   {
     image: IMAGES.specialChildEducation,
-    title: "Special Education",
+    title: "Special Child Education",
   },
   {
     image: IMAGES.specialSkillDevelopment,
-    title: "Special Skills & Hobbies",
+    title: "Special Skills",
   },
   {
     image: IMAGES.testPreparation,
-    title: "Standardized Test Prep",
+    title: "Test Preparation",
   },
   {
     image: IMAGES.uniHelp,

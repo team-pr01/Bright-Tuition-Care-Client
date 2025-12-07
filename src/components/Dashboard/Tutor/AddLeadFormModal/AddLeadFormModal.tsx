@@ -98,9 +98,8 @@ const AddLeadFormModal = ({
           label="Details"
           placeholder="Enter details of lead"
           error={errors.details}
-          {...register("details", {
-            required: "Details is required",
-          })}
+          {...register("details")}
+          isRequired={false}
         />
         <Button
           type="submit"

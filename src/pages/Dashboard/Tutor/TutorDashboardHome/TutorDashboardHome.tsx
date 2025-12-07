@@ -23,6 +23,7 @@ const TutorDashboardHome = () => {
   const progress = tutorStats?.profileCompleted || 0;
   return (
     <div className="flex flex-col gap-4 md:gap-0 font-Nunito">
+      {/* Status cards */}
       <div className="flex items-center overflow-x-auto w-full gap-3 md:gap-6 bg-primary-10 md:bg-[#F2F5FC] py-5 px-3 lg:px-6 rounded-b-3xl md:rounded-b-none">
         <DashboardOverviewCard
           title="Applied"
@@ -119,25 +120,28 @@ const TutorDashboardHome = () => {
               <h1 className="text-xl lg:text-[28px] font-semibold text-primary-10">
                 Profile Completed{" "}
                 <span className="text-2xl md:text-[33px] font-bold text-primary-10">
-                 {progress === 100 ? "" : `(${progress}%)`}
+                  {progress === 100 ? "" : `(${progress}%)`}
                 </span>
               </h1>
               <p className="mb-5 md:mb-8 text-sm md:text-base mt-2 md:mt-0">
-                A complete and well organized profile can help you to get better
-                response.
+                {progress === 100
+                  ? "Please check the job board regularly and apply for tuition jobs that best match your profile. "
+                  : "A complete and well-organized profile improves your chances of being selected by guardians. Complete your tutor profile for the best responses."}
               </p>
 
               <Link
-                to={"/dashboard/tutor/my-profile"}
+                to={progress === 100 ? "/dashboard/tutor/job-board" : "/dashboard/tutor/my-profile"}
                 className="bg-gradient-to-r from-cyan-500 to-primary-10 text-white text-sm py-2 px-4 rounded-md mt-5"
               >
-                {tutorStats?.profileCompleted === 100 ? "Profile Completed" : "Complete Profile"}
+                {tutorStats?.profileCompleted === 100
+                  ? "Apply Now"
+                  : "Complete Profile"}
               </Link>
             </div>
           </div>
 
           <DashboardDataCard
-            title={"Nearby Jobs"}
+            title={"Jobs Near You"}
             description={"Check out your nearby tuition jobs."}
             icon={ICONS.animatedLocation}
             value={""}
@@ -166,7 +170,15 @@ const TutorDashboardHome = () => {
 
           <DashboardDataCard
             title={"Confirmation Letters"}
-            description={"Because you have not confirmed any tuition job"}
+            description={
+              tutorStats?.confirmationLetterCount === 0
+                ? "You have not confirmed any tutors yet."
+                : `You have successfully confirmed ${
+                    tutorStats?.confirmationLetterCount
+                  } tutor${
+                    tutorStats?.confirmationLetterCount > 1 ? "s" : ""
+                  }. Please click here to view and sign your confirmation letters to avoid any future complications.`
+            }
             icon={ICONS.confirmationLetter}
             value={tutorStats?.confirmationLetterCount || 0}
             titleColor={"text-primary-10"}
@@ -177,7 +189,7 @@ const TutorDashboardHome = () => {
 
           <DashboardDataCard
             title={"Invoice"}
-            description={"Because you have not confirmed any tuition job"}
+            description={tutorStats?.invoiceCount === 0 ? "No invoice is available because you have not confirmed any tuition jobs yet." : `You have ${tutorStats?.invoiceCount} invoices for your confirmed tuition jobs. Please visit the Payment section to view and complete the payments.`}
             icon={ICONS.invoice}
             value={tutorStats?.invoiceCount || 0}
             titleColor={"text-primary-10/80"}

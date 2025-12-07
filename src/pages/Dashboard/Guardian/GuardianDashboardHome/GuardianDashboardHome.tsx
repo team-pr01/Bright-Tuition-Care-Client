@@ -69,18 +69,26 @@ const GuardianDashboardHome = () => {
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           <DashboardDataCard
-            title={"Hire A Tutor"}
-            description={"Find expert tutors online for personalized learning"}
+            title={"Looking for a tutor?"}
+            description={"Submit your requirements to find expert and verified tutors."}
             icon={ICONS.hire}
             value={""}
             titleColor={"text-primary-10"}
             valueColor={"text-primary-10"}
-            btnLabel={"Hire Now"}
+            btnLabel={"Submit Now"}
             path={"/dashboard/guardian/hire-a-tutor"}
           />
           <DashboardDataCard
             title={"Confirmation Letters"}
-            description={"Check out your confirmation letters"}
+            description={
+              guardianStats?.confirmationLetterCount === 0
+                ? "You have not confirmed any tutors yet."
+                : `You have successfully confirmed ${
+                    guardianStats?.confirmationLetterCount
+                  } tutor${
+                    guardianStats?.confirmationLetterCount > 1 ? "s" : ""
+                  }. Please click here to view and sign your confirmation letters to avoid any future complications.`
+            }
             icon={ICONS.confirmationLetter}
             value={guardianStats?.confirmationLetterCount || 0}
             titleColor={"text-primary-10"}
@@ -147,7 +155,9 @@ const GuardianDashboardHome = () => {
                 </span>
               </h1>
               <p className="mb-5 md:mb-8 text-sm md:text-base mt-2 md:mt-0">
-                Complete your profile to get better response from tutors
+                {progress === 100
+                  ? "Your profile is now fully completed."
+                  : "Complete your profile to become one of the most trusted members on the platform."}
               </p>
 
               <Link
@@ -162,7 +172,11 @@ const GuardianDashboardHome = () => {
           </div>
           <DashboardDataCard
             title={"Profile Status"}
-            description={"Get better response by verifying your profile."}
+            description={
+              guardianStats?.isVerified
+                ? "Your profile is verified."
+                : "Submit a verification request to become a trusted member on the platform."
+            }
             icon={
               guardianStats?.isVerified
                 ? ICONS.profileVerified

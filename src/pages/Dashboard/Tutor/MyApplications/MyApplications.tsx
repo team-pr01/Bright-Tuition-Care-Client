@@ -74,7 +74,6 @@ const MyApplications = () => {
 
   // Infinite Scroll Observer
   const loaderRef = useRef<HTMLDivElement | null>(null);
-  console.log(data);
 
   const counts = data?.data?.meta?.counts || {};
 
@@ -128,8 +127,6 @@ const MyApplications = () => {
       icon: <FiXCircle />,
     },
   ];
-
-  console.log(jobs);
 
   return (
     <div>

@@ -4,6 +4,7 @@ import Modal from "../../../Reusable/Modal/Modal";
 import UpdateCredentialsInfoModal from "./UpdateEducationalInfoModal";
 import { FaFile, FaTimes } from "react-icons/fa";
 import NoData from "../../../Reusable/NoData/NoData";
+import ProgressBars from "../EducationalInfo/ProgrerssBar";
 
 type TCredential = {
   documentType: string;
@@ -33,22 +34,35 @@ const CredentialsInfo: React.FC<TCredentialsInfoProps> = ({
     setSelectedDocument(null);
   };
 
+  const credentialStatusBars = [
+    { label: "Credential 1", isFilled: identityInformation?.length > 0 ? true : false },
+    { label: "Credential 2", isFilled: identityInformation?.length > 1 ? true : false },
+    { label: "Credential 3", isFilled: identityInformation?.length > 2 ? true : false },
+  ];
+
   return (
-    <div className="font-Nunito">
+    <div className="font-Nunito flex flex-col gap-5">
       <ProfileTabHeading
         heading="Credentials Information"
         onClick={() => setIsFormModalOpen(!isFormModalOpen)}
         isProfileLocked={isProfileLocked}
+        btnText={
+          identityInformation?.length < 1
+            ? "Add Credentials Info"
+            : "Add More Credentials"
+        }
       />
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-4">
+      <ProgressBars bars={credentialStatusBars} />
+
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {identityInformation?.length === 0 ? (
           <NoData
             title="No identity information submitted."
             description="Add your identity details to complete your profile."
           />
         ) : (
-          identityInformation.map((info: TCredential) => (
+          identityInformation?.map((info: TCredential) => (
             <div
               key={info?.documentType}
               className="bg-white rounded-xl border border-gray-200 hover:shadow-xl transition-all duration-300 hover:border-blue-300 overflow-hidden"

@@ -4,6 +4,7 @@ import ProfileTabHeading from "../../../Reusable/ProfileTabHeading/ProfileTabHea
 import Modal from "../../../Reusable/Modal/Modal";
 import UpdateEducationalInfoModal from "./UpdateEducationalInfoModal";
 import NoData from "../../../Reusable/NoData/NoData";
+import ProgressBars from "./ProgrerssBar";
 
 // Type for each educational record
 type TEducationInfoItem = {
@@ -34,8 +35,25 @@ const EducationalInfo: React.FC<TEducationalInfoProps> = ({
 }) => {
   const [isFormModalOpen, setIsFormModalOpen] = useState<boolean>(false);
 
+  const educationStatusBars = [
+    {
+      label: "Education 1",
+      isFilled: educationalInfo?.length > 0 ? true : false,
+    },
+    {
+      label: "Education 2",
+      isFilled: educationalInfo?.length > 1 ? true : false,
+    },
+    {
+      label: "Education 3",
+      isFilled: educationalInfo?.length > 2 ? true : false,
+    },
+  ];
+
+  console.log(educationalInfo);
+
   return (
-    <div className="font-Nunito">
+    <div className="font-Nunito flex flex-col gap-5">
       <ProfileTabHeading
         heading="Educational Information"
         onClick={() => setIsFormModalOpen(!isFormModalOpen)}
@@ -47,13 +65,15 @@ const EducationalInfo: React.FC<TEducationalInfoProps> = ({
         }
       />
 
+      <ProgressBars bars={educationStatusBars} />
+
       {educationalInfo?.length < 1 ? (
         <NoData
           title="No educational information added."
           description="Please add your educational details to complete your profile information."
         />
       ) : (
-        <div className="flex flex-col gap-4 mt-4">
+        <div className="flex flex-col gap-4">
           {educationalInfo?.map((edu, eduIndex) => {
             const levelOfEducation = edu.levelOfEducation;
             const isSchoolLevel =
@@ -65,7 +85,7 @@ const EducationalInfo: React.FC<TEducationalInfoProps> = ({
             return (
               <div
                 key={edu._id || eduIndex}
-                className="border-b border-neutral-30/20 pb-4"
+                className="border border-neutral-30/20 bg-[#F2F5FC]/10 rounded-lg p-3"
               >
                 {/* Degree heading */}
                 {edu.degree && (

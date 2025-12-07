@@ -34,6 +34,8 @@ const SignupForm = ({
   const [fieldErrors, setFieldErrors] = useState<any>({
     gender: "",
   });
+
+  const [checkedError, setCheckedError] = useState<string>("");
   const [signup, { isLoading }] = useSignupMutation();
   const navigate = useNavigate();
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -60,6 +62,10 @@ const SignupForm = ({
   const selectedGender = watch("gender");
 
   const handleSignup = async (data: TFormData) => {
+    if (!checked) {
+      setCheckedError("Please accept terms and conditions");
+      return;
+    }
     if (!selectedGender) {
       setFieldErrors((prev: any) => ({
         ...prev,
@@ -85,6 +91,7 @@ const SignupForm = ({
         navigate("/verify-otp");
         reset();
         setFieldErrors({ gender: "" });
+        setCheckedError("");
       }
     } catch (err: any) {
       const errorMessage =
@@ -271,6 +278,10 @@ const SignupForm = ({
           </p>
         </label>
 
+        {checkedError !== "" && (
+          <p className="text-red-500 text-xs">{checkedError}</p>
+        )}
+
         <div className="flex flex-col md:flex-row gap-5 md:gap-0 items-center justify-between">
           <Button
             type="submit"
@@ -278,7 +289,7 @@ const SignupForm = ({
             variant="primary"
             icon={ICONS.topRightArrow}
             className="py-2 lg:py-2"
-            isDisabled={!checked || isLoading}
+            isDisabled={isLoading}
             isLoading={isLoading}
           />
 
