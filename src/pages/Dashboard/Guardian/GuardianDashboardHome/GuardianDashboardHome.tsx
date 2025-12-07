@@ -70,7 +70,9 @@ const GuardianDashboardHome = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           <DashboardDataCard
             title={"Looking for a tutor?"}
-            description={"Submit your requirements to find expert and verified tutors."}
+            description={
+              "Submit your requirements to find expert and verified tutors."
+            }
             icon={ICONS.hire}
             value={""}
             titleColor={"text-primary-10"}
@@ -101,40 +103,40 @@ const GuardianDashboardHome = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div className="bg-white rounded-2xl border border-primary-40/10 p-5 flex flex-col md:flex-row items-center md:items-start gap-3 md:gap-6">
             {/* Progress Circle */}
-            <div className="relative size-32">
-              <svg className="size-full transform -rotate-90">
+            <div className="relative size-32 flex-shrink-0">
+              <svg viewBox="0 0 128 128" className="size-full -rotate-90">
                 {/* Background fill */}
                 <circle
-                  fill="currentColor"
-                  className="text-neutral-100"
-                  r={radius}
                   cx="64"
                   cy="64"
+                  r={radius}
+                  fill="currentColor"
+                  className="text-neutral-100"
                 />
 
                 {/* Track */}
                 <circle
-                  stroke="currentColor"
-                  className="text-gray-200"
-                  strokeWidth="6"
-                  fill="transparent"
-                  r={radius}
                   cx="64"
                   cy="64"
+                  r={radius}
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="6"
+                  className="text-gray-200"
                 />
 
                 {/* Progress */}
                 <circle
-                  stroke="currentColor"
-                  className="text-primary-10 transition-all duration-700 ease-out"
-                  strokeWidth="6"
-                  strokeDasharray={circumference}
-                  strokeDashoffset={circumference * (1 - progress / 100)}
-                  strokeLinecap="round"
-                  fill="transparent"
-                  r={radius}
                   cx="64"
                   cy="64"
+                  r={radius}
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="6"
+                  strokeLinecap="round"
+                  strokeDasharray={circumference}
+                  strokeDashoffset={circumference * (1 - progress / 100)}
+                  className="text-primary-10 transition-all duration-700 ease-out"
                 />
               </svg>
 
@@ -147,13 +149,14 @@ const GuardianDashboardHome = () => {
             </div>
 
             {/* Text Section */}
-            <div>
+            <div className="flex-1">
               <h1 className="text-xl lg:text-[28px] font-semibold text-primary-10">
                 Profile Completed{" "}
                 <span className="text-2xl md:text-[33px] font-bold text-primary-10">
                   {progress}%
                 </span>
               </h1>
+
               <p className="mb-5 md:mb-8 text-sm md:text-base mt-2 md:mt-0">
                 {progress === 100
                   ? "Your profile is now fully completed."
@@ -162,7 +165,7 @@ const GuardianDashboardHome = () => {
 
               <Link
                 to={"/dashboard/guardian/my-profile"}
-                className="bg-gradient-to-r from-cyan-500 to-primary-10 text-white text-sm py-2 px-4 rounded-md mt-5"
+                className="inline-block bg-gradient-to-r from-cyan-500 to-primary-10 text-white text-sm py-2 px-4 rounded-md mt-5"
               >
                 {guardianStats?.profileCompleted === 100
                   ? "Profile Completed"

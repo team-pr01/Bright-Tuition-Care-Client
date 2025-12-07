@@ -46,7 +46,8 @@ const MyProfile = () => {
         preferredClasses: tuitionPreference?.preferredClasses, // []
         preferredSubjects: tuitionPreference?.preferredSubjects,
         placeOfTuition: tuitionPreference?.placeOfTuition, // []
-        preferredLocation: tuitionPreference?.preferredLocation,
+        preferredCities: tuitionPreference?.preferredCities, // []
+        preferredLocations: tuitionPreference?.preferredLocations, // []
       },
       experience: {
         total: experience?.totalExperience,

@@ -17,9 +17,9 @@ type TTuitionRelatedInfoProps = {
     preferredCategories?: string[] | string;
     preferredClasses?: string[] | string;
     preferredSubjects?: string;
-    preferredLocation?: string;
+    preferredCities?: string[];
+    preferredLocations?: string[];
     placeOfTutoring?: string;
-    preferredLocations: string[];
     expectedSalary: string | number;
     totalExperience: string;
     experienceDetails: string;
@@ -47,6 +47,32 @@ const UpdateTuitionRelatedInfoModal = ({
   const [selectedPlaceOfTuition, setSelectedPlaceOfTuition] = useState<
     string[]
   >([]);
+  const [selectedCities, setSelectedCities] = useState<string[]>([]);
+  const [selectedAreas, setSelectedAreas] = useState<string[]>([]);
+  const [areaOptions, setAreaOptions] = useState<string[]>([]);
+
+  useEffect(() => {
+    if (selectedCities.length === 0) {
+      setAreaOptions([]);
+      setSelectedAreas([]); // ✅ only clear when no city is selected
+      return;
+    }
+
+    const locations = selectedCities.flatMap((cityName) => {
+      const cityObj = filterData.cityCorporationWithLocation.find(
+        (city) => city.name === cityName
+      );
+      return cityObj ? cityObj.locations : [];
+    });
+
+    const uniqueLocations = [...new Set(locations)];
+    setAreaOptions(uniqueLocations);
+
+    // ✅ Keep only areas that still exist for the selected cities
+    setSelectedAreas((prev) =>
+      prev.filter((area) => uniqueLocations.includes(area))
+    );
+  }, [selectedCities, setAreaOptions, setSelectedAreas]);
 
   const {
     register,
@@ -63,9 +89,10 @@ const UpdateTuitionRelatedInfoModal = ({
         "preferredSubjects",
         defaultValues.preferences?.preferredSubjects
       );
+      setValue("preferredCities", defaultValues.preferences?.preferredCities);
       setValue(
-        "preferredLocation",
-        defaultValues.preferences?.preferredLocation
+        "preferredLocations",
+        defaultValues.preferences?.preferredLocations
       );
       setValue("expectedSalary", defaultValues.expectedSalary);
       setValue("totalExperience", defaultValues?.experience?.totalExperience);
@@ -98,7 +125,8 @@ const UpdateTuitionRelatedInfoModal = ({
           preferredClasses: selectedClasses,
           preferredSubjects: selectedSubjects,
           placeOfTuition: selectedPlaceOfTuition,
-          preferredLocation: data.preferredLocation,
+          preferredCities: selectedCities,
+          preferredLocations: selectedAreas,
           expectedSalary: data.expectedSalary,
           availableTime: {
             from: data.from,
@@ -136,7 +164,7 @@ const UpdateTuitionRelatedInfoModal = ({
   // Build class options whenever category changes
   useEffect(() => {
     const classes = filterData.tutoringCatalog
-      .filter((cat) => selectedCategory.includes(cat.category))
+      .filter((cat) => selectedCategory?.includes(cat.category))
       .flatMap((cat) => cat.classes);
 
     setClassOptions(classes);
@@ -152,14 +180,14 @@ const UpdateTuitionRelatedInfoModal = ({
 
   // Build subject options
   useEffect(() => {
-    if (selectedClasses.length === 0) {
+    if (selectedClasses?.length === 0) {
       setSubjectOptions([]);
       setSelectedSubjects([]);
       return;
     }
 
     const subjects = classOptions
-      .filter((cls) => selectedClasses.includes(cls.name))
+      .filter((cls) => selectedClasses?.includes(cls.name))
       .flatMap((cls) => cls.subjects);
 
     setSubjectOptions([...new Set(subjects)]);
@@ -275,13 +303,27 @@ const UpdateTuitionRelatedInfoModal = ({
           isRequired={false}
         />
 
-        {/* Preferred Location */}
-        <TextInput
-          label="Preferred Location"
-          placeholder="Ex: Dhaka, Banani"
-          error={errors?.preferredLocation}
-          {...register("preferredLocation")}
+        {/* Preferred Locations */}
+        {/* City Dropdown */}
+        <MultiSelectDropdown
+          label="Preferred Cities"
+          name="preferredCities"
+          options={filterData.cityCorporationWithLocation.map((c) => c.name)}
+          value={selectedCities}
+          onChange={setSelectedCities}
           isRequired={false}
+          dropdownDirection="top-full"
+        />
+
+        {/* Preferred Locations Dropdown */}
+        <MultiSelectDropdown
+          label="Preferred Locations"
+          name="preferredLocations"
+          options={areaOptions}
+          value={selectedAreas}
+          onChange={setSelectedAreas}
+          isRequired={false}
+          dropdownDirection="top-full"
         />
 
         {/* Expected Salary */}
@@ -290,21 +332,19 @@ const UpdateTuitionRelatedInfoModal = ({
           type="text"
           placeholder="Enter expected salary"
           error={errors.expectedSalary}
-          {...register("expectedSalary", {
-            required: "Expected salary is required",
-          })}
+          {...register("expectedSalary")}
+          isRequired={false}
+        />
+
+        {/* Total Experience */}
+        <TextInput
+          label="Total Experience"
+          placeholder="Enter total experience (e.g. 2 years)"
+          error={errors.totalExperience}
+          {...register("totalExperience")}
           isRequired={false}
         />
       </div>
-
-      {/* Total Experience */}
-      <TextInput
-        label="Total Experience"
-        placeholder="Enter total experience (e.g. 2 years)"
-        error={errors.totalExperience}
-        {...register("totalExperience")}
-        isRequired={false}
-      />
 
       {/* Experience Details */}
       <Textarea

@@ -14,7 +14,8 @@ type TTuitionRelatedInfoProps = {
       preferredClasses?: string[] | string;
       preferredSubjects?: string[] | string;
       placeOfTuition?: string[];
-      preferredLocation: string[];
+      preferredCities: string[];
+      preferredLocations: string[];
     };
     expectedSalary: string | number;
     experience: {
@@ -38,8 +39,12 @@ const TuitionRelatedInfo = ({
     { label: "Time", value: tuitionRelatedInfo?.time },
     { label: "Expected Salary", value: tuitionRelatedInfo?.expectedSalary },
     {
+      label: "Preferred Cities",
+      value: tuitionRelatedInfo?.preferences?.preferredCities,
+    },
+    {
       label: "Preferred Locations",
-      value: tuitionRelatedInfo?.preferences?.preferredLocation,
+      value: tuitionRelatedInfo?.preferences?.preferredLocations,
     },
   ];
 

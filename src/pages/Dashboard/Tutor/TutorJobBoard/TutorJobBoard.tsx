@@ -9,8 +9,9 @@ import { useSearchParams } from "react-router-dom";
 
 const TutorJobBoard = () => {
   const [searchParams] = useSearchParams();
-  const city = searchParams.get("city");
-  const area = searchParams.get("area");
+
+  const cities = searchParams.getAll("city");
+  const areas = searchParams.getAll("area");
 
   const [keyword, setKeyword] = useState<string>("");
   const [selectedCities, setSelectedCities] = useState<string[]>([]);
@@ -35,9 +36,9 @@ const TutorJobBoard = () => {
 
   // Sync city & area from URL params
   useEffect(() => {
-    if (city) setSelectedCities([city]);
-    if (area) setSelectedAreas([area]);
-  }, [city, area]);
+    if (cities.length > 0) setSelectedCities(cities);
+    if (areas.length > 0) setSelectedAreas(areas);
+  }, []);
 
   // Pagination states
   const [skip, setSkip] = useState(0);

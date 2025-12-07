@@ -21,6 +21,23 @@ const TutorDashboardHome = () => {
   const radius = 58;
   const circumference = 2 * Math.PI * radius;
   const progress = tutorStats?.profileCompleted || 0;
+
+  const buildJobBoardPath = (tutorStats?: {
+    preferredCities?: string[];
+    preferredLocations?: string[];
+  }) => {
+    const params = new URLSearchParams();
+
+    tutorStats?.preferredCities?.forEach((city) => {
+      if (city) params.append("city", city);
+    });
+
+    tutorStats?.preferredLocations?.forEach((loc) => {
+      if (loc) params.append("area", loc);
+    });
+
+    return `/dashboard/tutor/job-board?${params.toString()}`;
+  };
   return (
     <div className="flex flex-col gap-4 md:gap-0 font-Nunito">
       {/* Status cards */}
@@ -70,44 +87,44 @@ const TutorDashboardHome = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           <div className="bg-white rounded-2xl border border-primary-40/10 p-5 flex flex-col md:flex-row items-center md:items-start gap-3 md:gap-6">
             {/* Progress Circle */}
-            <div className="relative size-32">
-              <svg className="size-full transform -rotate-90">
-                {/* Background fill */}
+            <div className="relative size-32 flex-shrink-0">
+              <svg viewBox="0 0 128 128" className="size-full -rotate-90">
+                {/* Background Fill */}
                 <circle
-                  fill="currentColor"
-                  className="text-neutral-100"
-                  r={radius}
                   cx="64"
                   cy="64"
+                  r={radius}
+                  fill="currentColor"
+                  className="text-neutral-100"
                 />
 
                 {/* Track */}
                 <circle
-                  stroke="currentColor"
-                  className="text-gray-200"
-                  strokeWidth="6"
-                  fill="transparent"
-                  r={radius}
                   cx="64"
                   cy="64"
+                  r={radius}
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="6"
+                  className="text-gray-200"
                 />
 
                 {/* Progress */}
                 <circle
-                  stroke="currentColor"
-                  className="text-primary-10 transition-all duration-700 ease-out"
-                  strokeWidth="6"
-                  strokeDasharray={circumference}
-                  strokeDashoffset={circumference * (1 - progress / 100)}
-                  strokeLinecap="round"
-                  fill="transparent"
-                  r={radius}
                   cx="64"
                   cy="64"
+                  r={radius}
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="6"
+                  strokeLinecap="round"
+                  strokeDasharray={circumference}
+                  strokeDashoffset={circumference * (1 - progress / 100)}
+                  className="text-primary-10 transition-all duration-700 ease-out"
                 />
               </svg>
 
-              {/* Center text */}
+              {/* Center Text */}
               <div className="absolute inset-0 flex items-center justify-center">
                 <span className="text-xl font-bold text-primary-10">
                   {progress}%
@@ -116,22 +133,29 @@ const TutorDashboardHome = () => {
             </div>
 
             {/* Text Section */}
-            <div>
+            <div className="flex-1">
               <h1 className="text-xl lg:text-[28px] font-semibold text-primary-10">
                 Profile Completed{" "}
-                <span className="text-2xl md:text-[33px] font-bold text-primary-10">
-                  {progress === 100 ? "" : `(${progress}%)`}
-                </span>
+                {progress !== 100 && (
+                  <span className="text-2xl md:text-[33px] font-bold text-primary-10">
+                    ({progress}%)
+                  </span>
+                )}
               </h1>
+
               <p className="mb-5 md:mb-8 text-sm md:text-base mt-2 md:mt-0">
                 {progress === 100
-                  ? "Please check the job board regularly and apply for tuition jobs that best match your profile. "
+                  ? "Please check the job board regularly and apply for tuition jobs that best match your profile."
                   : "A complete and well-organized profile improves your chances of being selected by guardians. Complete your tutor profile for the best responses."}
               </p>
 
               <Link
-                to={progress === 100 ? "/dashboard/tutor/job-board" : "/dashboard/tutor/my-profile"}
-                className="bg-gradient-to-r from-cyan-500 to-primary-10 text-white text-sm py-2 px-4 rounded-md mt-5"
+                to={
+                  progress === 100
+                    ? "/dashboard/tutor/job-board"
+                    : "/dashboard/tutor/my-profile"
+                }
+                className="inline-block bg-gradient-to-r from-cyan-500 to-primary-10 text-white text-sm py-2 px-4 rounded-md"
               >
                 {tutorStats?.profileCompleted === 100
                   ? "Apply Now"
@@ -148,7 +172,7 @@ const TutorDashboardHome = () => {
             titleColor={"text-primary-10/80"}
             valueColor={"text-primary-10"}
             btnLabel={"View All"}
-            path={`/dashboard/tutor/job-board?city=${tutorStats?.city}&area=${tutorStats?.area}`}
+            path={buildJobBoardPath(tutorStats)}
           />
         </div>
 
@@ -189,7 +213,11 @@ const TutorDashboardHome = () => {
 
           <DashboardDataCard
             title={"Invoice"}
-            description={tutorStats?.invoiceCount === 0 ? "No invoice is available because you have not confirmed any tuition jobs yet." : `You have ${tutorStats?.invoiceCount} invoices for your confirmed tuition jobs. Please visit the Payment section to view and complete the payments.`}
+            description={
+              tutorStats?.invoiceCount === 0
+                ? "No invoice is available because you have not confirmed any tuition jobs yet."
+                : `You have ${tutorStats?.invoiceCount} invoices for your confirmed tuition jobs. Please visit the Payment section to view and complete the payments.`
+            }
             icon={ICONS.invoice}
             value={tutorStats?.invoiceCount || 0}
             titleColor={"text-primary-10/80"}

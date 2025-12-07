@@ -77,28 +77,28 @@ const Filters: React.FC<TFiltersProps> = ({
     setSelectedTuitionType([]);
   };
 
-  useEffect(() => {
-    if (selectedCities.length === 0) {
-      setAreaOptions([]);
-      setSelectedAreas([]); // ✅ only clear when no city is selected
-      return;
-    }
+useEffect(() => {
+  if (selectedCities.length === 0) {
+    setAreaOptions([]);
+    setSelectedAreas([]);
+    return;
+  }
 
-    const locations = selectedCities.flatMap((cityName) => {
-      const cityObj = filterData.cityCorporationWithLocation.find(
-        (city) => city.name === cityName
-      );
-      return cityObj ? cityObj.locations : [];
-    });
-
-    const uniqueLocations = [...new Set(locations)];
-    setAreaOptions(uniqueLocations);
-
-    // ✅ Keep only areas that still exist for the selected cities
-    setSelectedAreas((prev) =>
-      prev.filter((area) => uniqueLocations.includes(area))
+  const locations = selectedCities.flatMap((cityName) => {
+    const cityObj = filterData.cityCorporationWithLocation.find(
+      (city) => city.name === cityName
     );
-  }, [selectedCities, setAreaOptions, setSelectedAreas]);
+    return cityObj ? cityObj.locations : [];
+  });
+
+  const uniqueLocations = [...new Set(locations)];
+  setAreaOptions(uniqueLocations);
+
+  setSelectedAreas((prev) =>
+    prev.filter((area) => uniqueLocations.includes(area))
+  );
+}, [selectedCities]);
+
 
   const [classOptions, setClassOptions] = useState<string[]>([]);
   const [subjectOptions, setSubjectOptions] = useState<string[]>([]);
