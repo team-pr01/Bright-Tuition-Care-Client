@@ -99,19 +99,19 @@ const VerificationSteps: React.FC<VerificationStepsProps> = ({
   };
 
   return (
-    <div className="max-w-4xl mx-auto p-6 bg-white rounded-2xl shadow-lg">
+    <div className="max-w-4xl mx-auto p-0 lg:p-6 bg-none lg:bg-white rounded-2xl shadow-none lg:shadow-lg">
       {/* Header */}
       <div className="mb-8">
         <div className="flex items-center justify-between mb-4">
           <div>
-            <h1 className="text-2xl font-bold text-neutral-10 flex items-center gap-2">
-              <FiUserCheck className="w-6 h-6 text-primary-10" />
+            <h1 className=" text-lg lg:text-2xl font-bold text-neutral-10 flex items-center gap-2">
+              <FiUserCheck className="text-lg md:text-2xl text-primary-10" />
               Profile Verification
             </h1>
             <div className="flex items-center gap-2 mt-2">
               <div
                 className={`
-                px-3 py-1 rounded-full text-sm font-medium flex items-center gap-1 capitalize
+                p-2 md:px-3 py-1 rounded-full text-sm font-medium flex items-center gap-1 capitalize
                 ${
                   currentStep === "verified"
                     ? "bg-green-100 text-green-700"
@@ -121,12 +121,12 @@ const VerificationSteps: React.FC<VerificationStepsProps> = ({
               >
                 {currentStep === "verified" ? (
                   <>
-                    <FiCheckCircle className="w-4 h-4" />
+                    <FiCheckCircle className="text-xs md:text-base" />
                     Verified
                   </>
                 ) : (
                   <>
-                    <FiAlertCircle className="w-4 h-4" />
+                    <FiAlertCircle className="text-xs md:text-base" />
                     {currentStep === "invoiceDue"
                       ? "Invoice Due"
                       : currentStep === "addressVerification"
@@ -142,12 +142,12 @@ const VerificationSteps: React.FC<VerificationStepsProps> = ({
           </div>
 
           {/* Progress circle */}
-          <div className="w-20 h-20 rounded-full border-8 border-primary-10 flex items-center justify-center">
+          <div className="size-15 md:size-20 rounded-full border-4 md:border-8 border-primary-10 flex items-center justify-center">
             <div className="text-center">
-              <div className="text-2xl font-bold text-gray-800">
+              <div className="text-lg md:text-2xl font-bold text-gray-800">
                 {getCurrentStepIndex() + 1}/{steps.length}
               </div>
-              <div className="text-xs text-gray-500">Steps</div>
+              <div className="text-[10px] md:text-xs text-gray-500">Steps</div>
             </div>
           </div>
         </div>
@@ -167,7 +167,7 @@ const VerificationSteps: React.FC<VerificationStepsProps> = ({
               <div key={step.id} className="text-center">
                 <div
                   className={`
-                  w-8 h-8 rounded-full flex items-center justify-center mx-auto mb-1
+                  size-6 md:size-8 rounded-full flex items-center justify-center mx-auto mb-1
                   ${
                     getStepStatus(index) === "completed"
                       ? "bg-primary-10 text-white"
@@ -178,9 +178,9 @@ const VerificationSteps: React.FC<VerificationStepsProps> = ({
                 `}
                 >
                   {getStepStatus(index) === "completed" ? (
-                    <FiCheck className="w-4 h-4" />
+                    <FiCheck className="text-xs md:text-base" />
                   ) : (
-                    <div className="w-4 h-4 text-primary-10">{step.icon}</div>
+                    <div className="text-xs md:text-base text-primary-10">{step.icon}</div>
                   )}
                 </div>
                 <span
