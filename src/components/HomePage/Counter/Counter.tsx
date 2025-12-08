@@ -20,22 +20,22 @@ const Counter = () => {
   const stats = [
     {
       icon: ICONS.briefcase,
-      value: allStats?.availableJobs || 0,
+      value: allStats?.availableJobs ?? 0,
       label: "Available Tuition Job",
     },
     {
       icon: ICONS.user,
-      value: allStats?.activeTutors || 0,
+      value: 12000 + (allStats?.activeTutors ?? 0),
       label: "Active Tutors",
     },
     {
       icon: ICONS.smiley,
-      value: allStats?.happyGuardians || 0,
+      value: 25000 + (allStats?.happyGuardians ?? 0),
       label: "Happy Guardians/Students",
     },
     {
       icon: ICONS.trophy,
-      value: allStats?.averageRating || 0,
+      value: 4.9,
       label: "Ratings",
     },
   ];
