@@ -17,7 +17,7 @@ const DashboardHeader = () => {
           Dashboard
         </h1>
         <p className="text-neutral-45 text-sm md:text-base">
-          Welcome back, John! Here's your tutoring overview.
+          Welcome back, {user?.name}!
         </p>
       </div>
 

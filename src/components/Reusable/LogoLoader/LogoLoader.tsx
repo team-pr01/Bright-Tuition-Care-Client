@@ -81,7 +81,7 @@ const LogoLoader = ({
           <div className="relative flex flex-col items-center">
             {/* Subtle background glow */}
             <motion.div
-              className="absolute inset-0 rounded-lg bg-blue-50"
+              className="absolute inset-0"
               animate={{
                 opacity: [0.4, 0.6, 0.4]
               }}

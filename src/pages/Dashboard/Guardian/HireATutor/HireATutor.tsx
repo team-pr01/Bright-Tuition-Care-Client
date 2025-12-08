@@ -14,7 +14,7 @@ const HireATutor = () => {
       isModalOpen={isHireTutorModalOpen}
       setIsModalOpen={setIsHireTutorModalOpen}
       heading={``}
-      width="w-[50%]"
+      width="w-[90%] md:w-[80%] lg:w-[70%] xl:w-[50%]"
     >
       <div className="font-Nunito">
         <div className="max-w-[1000px] mx-auto">

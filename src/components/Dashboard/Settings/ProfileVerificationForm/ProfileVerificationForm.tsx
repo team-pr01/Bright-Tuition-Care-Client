@@ -6,6 +6,7 @@ import VerificationSteps, {
   type VerificationStatus,
 } from "./VerificationSteps";
 import { useGetMyVerificationRequestQuery } from "../../../../redux/Features/VerificationRequest/verificationRequestApi";
+import LogoLoader from "../../../Reusable/LogoLoader/LogoLoader";
 
 const ProfileVerificationForm = ({
   isVerified,
@@ -14,7 +15,8 @@ const ProfileVerificationForm = ({
   isVerified: boolean;
   hasRequestedToVerify: boolean;
 }) => {
-  const { data: myVerificationRequest } = useGetMyVerificationRequestQuery({});
+  const { data: myVerificationRequest, isLoading } =
+    useGetMyVerificationRequestQuery({});
   const [isVerificationModalOpen, setIsVerificationModalOpen] =
     useState<boolean>(false);
 
@@ -24,6 +26,13 @@ const ProfileVerificationForm = ({
     setCurrentStep(myVerificationRequest?.data?.status);
   }, [myVerificationRequest]);
 
+  if (isLoading) {
+    return (
+      <div className="min-h-[70vh] flex items-center justify-center font-Nunito">
+        <LogoLoader />
+      </div>
+    );
+  }
   return (
     <div className="font-Nunito">
       {!hasRequestedToVerify && (
@@ -58,7 +67,12 @@ const ProfileVerificationForm = ({
       )} */}
 
       {hasRequestedToVerify && (
-        <VerificationSteps currentStep={currentStep as VerificationStatus} addressVerificationCode={myVerificationRequest?.data?.addressVerificationCode} />
+        <VerificationSteps
+          currentStep={currentStep as VerificationStatus}
+          addressVerificationCode={
+            myVerificationRequest?.data?.addressVerificationCode
+          }
+        />
       )}
 
       <SendProfileVerificationRequest

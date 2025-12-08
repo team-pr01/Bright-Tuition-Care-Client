@@ -110,4 +110,6 @@ export type TTutor = {
   experience: TExperience[];
   identityInformation: TIdentityInformation[];
   tutorOfTheMonth: boolean;
+  hasRequestedToVerify?: boolean;
+  hasConfirmedAnyJob?: boolean;
 };

@@ -13,9 +13,9 @@ import {
 } from "react-icons/fa";
 import { useGetTutorDashboardStatsQuery } from "../../../../redux/Features/Tutor/tutorApi";
 import LogoLoader from "../../../../components/Reusable/LogoLoader/LogoLoader";
-
 const TutorDashboardHome = () => {
   const { data, isLoading } = useGetTutorDashboardStatsQuery({});
+  console.log(data);
   const tutorStats = data?.data || {};
   const applications = tutorStats?.applications || {};
 
@@ -49,6 +49,15 @@ const TutorDashboardHome = () => {
       </div>
     );
   }
+
+  // const exampleTutor = {
+  //   id: "738219",
+  //   name: "John Smith",
+  //   rating: 4.9,
+  //   title: "Senior Mathematics Tutor",
+  //   month: "November",
+  //   year: "2024",
+  // };
   return (
     <div className="flex flex-col gap-4 md:gap-0 font-Nunito">
       {/* Status cards */}
@@ -99,7 +108,9 @@ const TutorDashboardHome = () => {
       <div className="px-3 lg:px-6 flex flex-col gap-4 lg:gap-7">
         <NoticeBoard notices={tutorStats?.notices} />
         {/* bg-gradient-to-r from-slate-50 to-sky-50 */}
+
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          {/* <TutorOfTheMonth tutor={exampleTutor} /> */}
           <div className="bg-white rounded-2xl border border-primary-40/10 p-5 flex flex-col md:flex-row items-center md:items-start gap-3 md:gap-6">
             {/* Progress Circle */}
             <div className="relative size-32 flex-shrink-0">
@@ -203,6 +214,11 @@ const TutorDashboardHome = () => {
             value={tutorStats?.isVerified ? "Verified" : "Not Verified"}
             titleColor={"text-primary-10"}
             valueColor={"text-primary-10"}
+            badgeText={
+              tutorStats?.hasConfirmedAnyJob && !tutorStats?.isVerified
+                ? "Recommended"
+                : null
+            }
             btnLabel={tutorStats?.isVerified ? "Verified" : "Verify Now"}
             path={"/dashboard/tutor/settings"}
           />

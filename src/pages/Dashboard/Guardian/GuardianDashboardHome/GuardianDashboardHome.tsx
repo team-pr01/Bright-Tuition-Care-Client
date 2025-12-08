@@ -203,6 +203,11 @@ const GuardianDashboardHome = () => {
             titleColor={"text-primary-10"}
             valueColor={"text-primary-10"}
             btnLabel={guardianStats?.isVerified ? "Verified" : "Verify Now"}
+            badgeText={
+              guardianStats?.hasPostedAnyJob && !guardianStats?.isVerified
+                ? "Recommended"
+                : null
+            }
             path={"/dashboard/guardian/settings"}
           />
         </div>
