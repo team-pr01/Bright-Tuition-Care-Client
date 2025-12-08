@@ -20,7 +20,7 @@ const TestimonialCard: React.FC<TestimonialCardProps> = ({
       <div
         className={`flex flex-col ${
           variant === "default" ? "" : ""
-        } items-center justify-between gap-3 rounded-xl w-full lg:w-[80%] mx-auto pt-32 relative z-50`}
+        } items-center justify-between gap-3 rounded-xl w-full lg:w-[80%] mx-auto pt-32 relative z-9999`}
       >
         <div className="flex flex-col items-start gap-3 bg-gray-100 p-5 rounded-2xl relative w-full animate-pulse">
           {/* Profile skeleton */}
@@ -53,7 +53,7 @@ const TestimonialCard: React.FC<TestimonialCardProps> = ({
     <div
       className={`flex flex-col ${
         variant === "default" ? "" : ""
-      } font-Nunito items-center justify-between gap-3 rounded-xl w-full lg:w-[80%] mx-auto overflow-y-visible pt-20 relative z-50`}
+      } font-Nunito items-center justify-between gap-3 rounded-xl w-full lg:w-[80%] mx-auto overflow-y-visible pt-20 relative z-9999`}
     >
       <div className="flex flex-col items-start gap-3 bg-primary-10/10 p-5 rounded-2xl relative w-full">
         {/* Profile */}

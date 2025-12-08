@@ -18,7 +18,7 @@ interface TestimonialsProps {
   buttonText: string;
   navigatePath: string;
   data?: TTestimonial[];
-  isLoading: boolean
+  isLoading: boolean;
 }
 
 const Testimonials: React.FC<TestimonialsProps> = ({
@@ -28,7 +28,7 @@ const Testimonials: React.FC<TestimonialsProps> = ({
   buttonText,
   navigatePath,
   data,
-  isLoading
+  isLoading,
 }) => {
   return (
     <div className="py-12 w-full font-Nunito overflow-hidden">
@@ -77,16 +77,16 @@ const Testimonials: React.FC<TestimonialsProps> = ({
           </Swiper>
 
           {/* Desktop navigation */}
-          <div className="hidden lg:flex items-center justify-between w-full absolute top-0 bottom-0 z-20 px-2">
+          <div className="hidden lg:flex items-center justify-between w-full absolute top-0 bottom-0 z-20 px-2 pointer-events-none">
             <button
               id="prevButton"
-              className="size-[50px] rounded-full bg-primary-10 hover:bg-primary-10/80 transition duration-300 flex items-center justify-center text-white text-2xl cursor-pointer"
+              className="pointer-events-auto size-[50px] rounded-full bg-primary-10 hover:bg-primary-10/80 transition duration-300 flex items-center justify-center text-white text-2xl cursor-pointer"
             >
               <FaChevronRight className="rotate-180" />
             </button>
             <button
               id="nextButton"
-              className="size-[50px] rounded-full bg-primary-10 hover:bg-primary-10/80 transition duration-300 flex items-center justify-center text-white text-2xl cursor-pointer"
+              className="pointer-events-auto size-[50px] rounded-full bg-primary-10 hover:bg-primary-10/80 transition duration-300 flex items-center justify-center text-white text-2xl cursor-pointer"
             >
               <FaChevronRight />
             </button>
