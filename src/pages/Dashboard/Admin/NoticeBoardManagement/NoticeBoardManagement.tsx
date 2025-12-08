@@ -9,6 +9,8 @@ import {
 import type { TNotice } from "../../../../types/noticeBoard.types";
 import Loader from "../../../../components/Reusable/Loader/Loader";
 import NoData from "../../../../components/Reusable/NoData/NoData";
+import LogoLoader from "../../../../components/Reusable/LogoLoader/LogoLoader";
+import ErrorComponent from "../../../../components/Reusable/ErrorComponent/ErrorComponent";
 
 export type Notice = {
   _id: string;
@@ -29,7 +31,24 @@ const NoticeBoardManagement = () => {
     data: singleNotice,
     isLoading: isSingleNoticeLoading,
     isFetching: isSingleNoticeFetching,
+    isError,
   } = useGetSingleNoticeByIdQuery(selectedNoticeId);
+
+  if (isLoading) {
+    return (
+      <div className="min-h-[70vh] flex items-center justify-center font-Nunito">
+        <LogoLoader />
+      </div>
+    );
+  }
+
+  if (isError) {
+    return (
+      <div className="min-h-[70vh] flex items-center justify-center font-Nunito">
+        <ErrorComponent />
+      </div>
+    );
+  }
   return (
     <div className="flex flex-col gap-5">
       <div className="flex items-center justify-end border-b border-neutral-30/20 pb-3">

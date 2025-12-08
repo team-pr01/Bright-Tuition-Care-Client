@@ -58,13 +58,14 @@ import AllJobs from "../pages/Dashboard/Admin/AllJobs/AllJobs";
 import { UserProvider } from "../contexts/UserProvider";
 import RefundRequests from "../pages/Dashboard/Admin/RefundRequests/RefundRequests";
 import VerificationRequests from "../pages/Dashboard/Admin/VerificationRequests/VerificationRequests";
+import ErrorComponent from "../components/Reusable/ErrorComponent/ErrorComponent";
 
 export const router = createBrowserRouter([
   // Main layout routes
   {
     path: "/",
     element: <MainLayout />,
-    errorElement: <NotFound />,
+    errorElement: <ErrorComponent/>,
     children: [
       {
         path: "/",
@@ -135,6 +136,10 @@ export const router = createBrowserRouter([
         path: "hire-a-tutor",
         element: <TuitionRequest />,
       },
+      {
+        path: "*",
+        element: <NotFound />,
+      },
     ],
   },
   // Tutor dashboard routes
@@ -147,7 +152,7 @@ export const router = createBrowserRouter([
         </UserProvider>
       </ProtectedRoute>
     ),
-    errorElement: <NotFound />,
+    errorElement: <ErrorComponent/>,
     children: [
       {
         path: "home",
@@ -233,6 +238,10 @@ export const router = createBrowserRouter([
         path: "terms-and-conditions",
         element: <TermsAndConditionsDashboard />,
       },
+      {
+        path: "*",
+        element: <NotFound />,
+      },
     ],
   },
   // Guardian dashboard routes
@@ -245,7 +254,7 @@ export const router = createBrowserRouter([
         </UserProvider>
       </ProtectedRoute>
     ),
-    errorElement: <NotFound />,
+    errorElement: <ErrorComponent/>,
     children: [
       {
         path: "home",
@@ -316,6 +325,10 @@ export const router = createBrowserRouter([
         path: "important-guidelines",
         element: <GuardianGuidelines />,
       },
+      {
+        path: "*",
+        element: <NotFound />,
+      },
     ],
   },
   // Admin dashboard routes
@@ -328,7 +341,7 @@ export const router = createBrowserRouter([
         </UserProvider>
       </ProtectedRoute>
     ),
-    errorElement: <NotFound />,
+    errorElement: <ErrorComponent/>,
     children: [
       {
         path: "home",
@@ -426,17 +439,25 @@ export const router = createBrowserRouter([
         path: "terms-and-conditions",
         element: <TermsAndConditionsDashboard />,
       },
+      {
+        path: "*",
+        element: <NotFound />,
+      },
     ],
   },
   // Admin/Staff login
   {
     path: "admin",
     element: <AdminAuthLayout />,
-    errorElement: <NotFound />,
+    errorElement: <ErrorComponent/>,
     children: [
       {
         path: "",
         element: <AdminOrStaffLogin />,
+      },
+      {
+        path: "*",
+        element: <NotFound />,
       },
     ],
   },

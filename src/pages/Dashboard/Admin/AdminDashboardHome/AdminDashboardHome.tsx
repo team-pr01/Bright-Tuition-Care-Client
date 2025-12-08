@@ -22,6 +22,8 @@ import {
 } from "react-icons/fa";
 import { useGetAdminStatsQuery } from "../../../../redux/Features/Admin/adminApi";
 import { MdVerified } from "react-icons/md";
+import LogoLoader from "../../../../components/Reusable/LogoLoader/LogoLoader";
+import ErrorComponent from "../../../../components/Reusable/ErrorComponent/ErrorComponent";
 
 // --- Custom Tooltip ---
 const CustomTooltip = ({ active, payload, label }: any) => {
@@ -55,8 +57,7 @@ const ChartCard: React.FC<ChartCardProps> = ({ title, children }) => (
 
 // --- Main Component ---
 const AdminDashboardHome = () => {
-  const { data: adminStats } = useGetAdminStatsQuery({});
-  console.log(adminStats);
+  const { data: adminStats, isLoading, isError } = useGetAdminStatsQuery({});
 
   const tutorColor = "#3B82F6";
   const guardianColor = "#10B981";
@@ -65,6 +66,22 @@ const AdminDashboardHome = () => {
   const jobsAreaColor = "#6366F1"; // Jobs posted
   const confirmedColor = "#10B981"; // ✅ Green
   const cancelledColor = "#EF4444"; // ❌ Red
+
+  if (isLoading) {
+    return (
+      <div className="min-h-[70vh] flex items-center justify-center font-Nunito">
+        <LogoLoader />
+      </div>
+    );
+  };
+
+  if (isError) {
+    return (
+      <div className="min-h-[70vh] flex items-center justify-center font-Nunito">
+        <ErrorComponent />
+      </div>
+    );
+  };
 
   return (
     <div className="font-Nunito flex flex-col gap-6">
@@ -109,7 +126,7 @@ const AdminDashboardHome = () => {
         <DashboardOverviewCard
           title="Verification"
           additionalTitle="Requests"
-          value={adminStats?.data?.verificationRequests || 0}  //adasdiuy T8AS            dummy here
+          value={adminStats?.data?.verificationRequests || 0} //adasdiuy T8AS            dummy here
           textColor="text-neutral-10"
           path="/dashboard/admin/posted-jobs"
           icon={<MdVerified className="text-primary-10" />}

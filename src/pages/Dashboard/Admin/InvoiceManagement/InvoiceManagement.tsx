@@ -9,6 +9,8 @@ import { useGetAllInvoicesQuery } from "../../../../redux/Features/Invoice/invoi
 import type { TInvoice } from "../../../../types/invoice.types";
 import Loader from "../../../../components/Reusable/Loader/Loader";
 import NoData from "../../../../components/Reusable/NoData/NoData";
+import LogoLoader from "../../../../components/Reusable/LogoLoader/LogoLoader";
+import ErrorComponent from "../../../../components/Reusable/ErrorComponent/ErrorComponent";
 
 const InvoiceManagement = () => {
   const [isSendInvoiceModalOpen, setIsSendInvoiceModalOpen] =
@@ -20,7 +22,24 @@ const InvoiceManagement = () => {
     data: allInvoicesData,
     isLoading,
     isFetching,
+    isError,
   } = useGetAllInvoicesQuery({ status });
+
+  if (isLoading) {
+    return (
+      <div className="min-h-[70vh] flex items-center justify-center font-Nunito">
+        <LogoLoader />
+      </div>
+    );
+  }
+
+  if (isError) {
+    return (
+      <div className="min-h-[70vh] flex items-center justify-center font-Nunito">
+        <ErrorComponent />
+      </div>
+    );
+  }
   return (
     <div className="font-Nunito flex flex-col gap-5">
       <div className="flex items-center justify-between">
