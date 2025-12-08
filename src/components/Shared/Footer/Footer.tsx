@@ -12,6 +12,10 @@ import {
   quickLinks,
   socialLinks,
 } from "./footer.data";
+import {
+  guardianCommunity,
+  tutorCommunity,
+} from "../../../data/community-facebook-links";
 
 const Footer: React.FC = () => {
   const ref = useRef<HTMLDivElement>(null);
@@ -51,11 +55,20 @@ const Footer: React.FC = () => {
           <div className="flex flex-col xl:flex-row gap-10 justify-between">
             {/* Left side details */}
             <motion.div variants={itemVariants} className="max-w-[350px]">
-                <Link to="/">
-                  <img src={ICONS.logoWhite} alt="Bright Tuition Care" className="w-56 md:w-full" />
-                </Link>
+              <Link to="/">
+                <img
+                  src={ICONS.logoWhite}
+                  alt="Bright Tuition Care"
+                  className="w-56 md:w-full"
+                />
+              </Link>
               <p className="text-sm md:text-base text-neutral-50 mt-8">
-                Bright Tuition Care is Bangladesh's first and most trusted platform for "guardians, students and tutors" to connect with verified tutors and find tuition jobs across the country. We are dedicated to bridging the educational gap between students and tutors. Our mission is to "provide a trusted platform" where guardians, students and tutors can connect easily.
+                Bright Tuition Care is Bangladesh's first and most trusted
+                platform for "guardians, students and tutors" to connect with
+                verified tutors and find tuition jobs across the country. We are
+                dedicated to bridging the educational gap between students and
+                tutors. Our mission is to "provide a trusted platform" where
+                guardians, students and tutors can connect easily.
               </p>
             </motion.div>
 
@@ -116,21 +129,21 @@ const Footer: React.FC = () => {
             variants={itemVariants}
             className="flex flex-col-reverse xl:flex-row items-center gap-8 xl:gap-[150px] mt-12"
           >
-             <div>
-               <h1 className={linkHeadingClassNames}>Follow Us</h1>
-            <div className="flex items-center gap-5 mt-5">
-              {socialLinks?.map((item, index) => (
-                <a
-                  key={index}
-                  href={item?.href}
-                  target="_blank"
-                  className="hover:text-primary-10 text-neutral-100 transition duration-300 cursor-pointer"
-                >
-                  {item?.icon}
-                </a>
-              ))}
+            <div>
+              <h1 className={linkHeadingClassNames}>Follow Us</h1>
+              <div className="flex items-center gap-5 mt-5">
+                {socialLinks?.map((item, index) => (
+                  <a
+                    key={index}
+                    href={item?.href}
+                    target="_blank"
+                    className="hover:text-primary-10 text-neutral-100 transition duration-300 cursor-pointer"
+                  >
+                    {item?.icon}
+                  </a>
+                ))}
+              </div>
             </div>
-             </div>
             <div className="flex flex-col md:flex-row items-center gap-5 md:gap-9">
               <div>
                 <h1
@@ -139,8 +152,15 @@ const Footer: React.FC = () => {
                   Join Our Community
                 </h1>
                 <div className="flex items-center gap-5 lg:gap-8 mt-5">
-                  <img src={ICONS.tutorCommunity} alt="Tutor Community" />
-                  <img src={ICONS.guardianCommunity} alt="Guardian Community" />
+                  <a href={tutorCommunity} target="_blank">
+                    <img src={ICONS.tutorCommunity} alt="Tutor Community" />
+                  </a>
+                  <a href={guardianCommunity} target="_blank">
+                    <img
+                      src={ICONS.guardianCommunity}
+                      alt="Guardian Community"
+                    />
+                  </a>
                 </div>
               </div>
               <div>

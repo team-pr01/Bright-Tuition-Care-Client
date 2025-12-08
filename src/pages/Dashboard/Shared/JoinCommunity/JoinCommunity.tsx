@@ -2,12 +2,11 @@ import { RxArrowTopRight } from "react-icons/rx";
 import { IMAGES } from "../../../../assets";
 import Heading from "../../../../components/Reusable/Heading/Heading";
 import { useLocation } from "react-router-dom";
+import { guardianCommunity, tutorCommunity } from "../../../../data/community-facebook-links";
 
 const JoinCommunity = () => {
   const location = useLocation();
-  const guardianCommunity = "https://www.facebook.com/groups/248374924778212";
-  const tutorCommunity = "https://www.facebook.com/groups/252670130864095";
-
+  
   const communityLink =
     location.pathname === "/dashboard/tutor/community"
       ? tutorCommunity
