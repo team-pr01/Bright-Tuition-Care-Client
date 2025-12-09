@@ -1,11 +1,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useForm } from "react-hook-form";
 import Button from "../../../Reusable/Button/Button";
-import SelectDropdown from "../../../Reusable/SelectDropdown/SelectDropdown";
 import Modal from "../../../Reusable/Modal/Modal";
 import { useGiveRatingMutation } from "../../../../redux/Features/User/userApi";
 import { useEffect } from "react";
 import toast from "react-hot-toast";
+import TextInput from "../../../Reusable/TextInput/TextInput";
 
 type TFormData = {
   rating: string;
@@ -64,11 +64,11 @@ const RateUserModal = ({
         className="flex flex-col gap-6 font-Nunito mt-5"
       >
         {/* Rating */}
-        <SelectDropdown
+        <TextInput
           label="Rating"
-          options={["1", "2", "3", "4", "5"]}
+          placeholder="Ex: 4.5"
           error={errors.rating}
-          {...register("rating", { required: "Rating is required" })}
+          {...register("rating")}
         />
 
         <div className="flex justify-end">

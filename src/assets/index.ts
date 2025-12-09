@@ -119,7 +119,7 @@ import teacher from "../assets/Icons/teacher.webp";
 import guardian from "../assets/Icons/guardians.webp";
 
 import aboutUs from "../assets/Images/about-us.jpg";
-import appDownload from "../assets/Images/app-download.svg";
+import appDownload from "../assets/Images/app-download.webp";
 import heroImg1 from "../assets/Images/hero-images/hero-img-1.png";
 import heroImg2 from "../assets/Images/hero-images/hero-img-2.png";
 import heroImg3 from "../assets/Images/hero-images/hero-img-3.png";

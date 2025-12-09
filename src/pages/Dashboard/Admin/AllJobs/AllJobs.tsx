@@ -129,6 +129,9 @@ const AllJobs = () => {
 
   return (
     <div>
+      <div className="sticky top-0 z-15 px-3 lg:px-6 pt-6 bg-[#F2F5FC]">
+
+      
       <div className="grid grid-cols-5 md:grid-cols-3 xl:grid-cols-4 gap-5">
         <DashboardOverviewCard
           title="All"
@@ -219,24 +222,29 @@ const AllJobs = () => {
         status={status}
         setStatus={setStatus}
       />
+      </div>
 
-      <Jobs
-        allJobs={jobs}
-        isLoading={isLoading || isFetching}
-        variant="admin"
-      />
-      <div ref={loaderRef} className="h-10"></div>
+      <div className="px-3 lg:px-6 pb-6">
+        <Jobs
+          allJobs={jobs}
+          isLoading={isLoading || isFetching}
+          variant="admin"
+        />
+        <div ref={loaderRef} className="h-10"></div>
 
-      {allJobs?.data?.meta?.hasMore && isFetching && (
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          {Array.from({ length: 3 }).map((_, i) => (
-            <JobCardSkeleton key={i} />
-          ))}
-        </div>
-      )}
-      {!allJobs?.data?.meta?.hasMore && !isFetching && (
-        <p className="text-center mt-4 text-gray-400">No more jobs to load.</p>
-      )}
+        {allJobs?.data?.meta?.hasMore && isFetching && (
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            {Array.from({ length: 3 }).map((_, i) => (
+              <JobCardSkeleton key={i} />
+            ))}
+          </div>
+        )}
+        {!allJobs?.data?.meta?.hasMore && !isFetching && (
+          <p className="text-center mt-4 text-gray-400">
+            No more jobs to load.
+          </p>
+        )}
+      </div>
     </div>
   );
 };

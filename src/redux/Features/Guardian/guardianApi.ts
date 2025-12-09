@@ -46,6 +46,24 @@ const guardianApi = baseApi.injectEndpoints({
       providesTags: ["guardian"],
     }),
 
+     getSingleGuardianById: builder.query({
+      query: (id) => ({
+        url: `/guardian/${id}`,
+        method: "GET",
+        credentials: "include",
+      }),
+      providesTags: ["guardian"],
+    }),
+
+     getSingleGuardianByCustomGuardianId: builder.query({
+      query: (id) => ({
+        url: `/guardian/single/${id}`,
+        method: "GET",
+        credentials: "include",
+      }),
+      providesTags: ["guardian"],
+    }),
+
     setGuardianOfTheMonth: builder.mutation({
       query: (id) => ({
         url: `/guardian/guardian-of-the-month/${id}`,
@@ -56,5 +74,5 @@ const guardianApi = baseApi.injectEndpoints({
   }),
 });
 
-export const { useGetGuardianDashboardStatsQuery, useGetAllGuardiansQuery, useSetGuardianOfTheMonthMutation } =
+export const { useGetGuardianDashboardStatsQuery, useGetAllGuardiansQuery, useGetSingleGuardianByIdQuery, useGetSingleGuardianByCustomGuardianIdQuery, useSetGuardianOfTheMonthMutation } =
   guardianApi;

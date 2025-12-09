@@ -97,6 +97,8 @@ const JobDetails = ({
   //     );
   //   }
   // };
+
+  console.log(status, isApplied);
   return (
     <AnimatePresence>
       <>
@@ -256,31 +258,35 @@ const JobDetails = ({
                   className="border border-neutral-55"
                 />
               </a>
-              {isApplied && (
-                <Button
-                  label={
-                    isWithdrawingApplication
-                      ? "Please wait..."
-                      : "Undo Application"
-                  }
-                  variant="primary"
-                  iconBg="#0D99FF"
-                  onClick={handleWithdrawApplication}
-                />
-              )}
+              {isApplied &&
+                status !== "appointed" &&
+                status !== "confirmed" &&
+                status !== "rejected" && (
+                  <Button
+                    label={
+                      isWithdrawingApplication
+                        ? "Please wait..."
+                        : "Undo Application"
+                    }
+                    variant="primary"
+                    iconBg="#0D99FF"
+                    onClick={handleWithdrawApplication}
+                  />
+                )}
 
-              {!status && (
-                <Button
-                  label={"Apply Now"}
-                  variant="primary"
-                  iconBg="#0D99FF"
-                  onClick={() =>
-                    setIsJobApplyConfirmationModalOpen &&
-                    setIsJobApplyConfirmationModalOpen(true)
-                  }
-                  animation={true}
-                />
-              )}
+              {!status ||
+                (!isApplied && (
+                  <Button
+                    label={"Apply Now"}
+                    variant="primary"
+                    iconBg="#0D99FF"
+                    onClick={() =>
+                      setIsJobApplyConfirmationModalOpen &&
+                      setIsJobApplyConfirmationModalOpen(true)
+                    }
+                    animation={true}
+                  />
+                ))}
             </div>
           </div>
           <button

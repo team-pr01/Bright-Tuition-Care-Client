@@ -79,6 +79,7 @@ const jobApi = baseApi.injectEndpoints({
       providesTags: ["jobs"],
     }),
 
+    // Get logged in users posted jobs
     getMyPostedJobs: builder.query({
       query: ({
         keyword,
@@ -104,6 +105,15 @@ const jobApi = baseApi.injectEndpoints({
           credentials: "include",
         };
       },
+      providesTags: ["jobs"],
+    }),
+
+    getAllJobByGuardianId: builder.query({
+      query: (id) => ({
+        url: `/job/guardian-jobs/${id}`,
+        method: "GET",
+        credentials: "include",
+      }),
       providesTags: ["jobs"],
     }),
 
@@ -144,6 +154,7 @@ export const {
   useGetSingleJobByCustomJobIdQuery,
   useGetCounterStatsQuery,
   useGetMyPostedJobsQuery,
+  useGetAllJobByGuardianIdQuery,
   usePostJobMutation,
   useDeleteJobMutation,
   useUpdateJobMutation,

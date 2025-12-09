@@ -83,7 +83,7 @@ const JobCard: React.FC<TJobCardProps> = ({
     // { icon: ICONS.location, title: "Location", value: "Mohammodpur" },
   ];
 
-const shareUrl = `http://localhost:5173/job-board/${job?.jobId}`;
+  const shareUrl = `http://localhost:5173/job-board/${job?.jobId}`;
 
   const statusTextColor =
     status === "applied"
@@ -411,20 +411,23 @@ const shareUrl = `http://localhost:5173/job-board/${job?.jobId}`;
                     animation={true}
                   />
                 )}
-                {isApplied && (
-                  <Button
-                    label={"Undo Apply"}
-                    variant="tertiary"
-                    onClick={() => {
-                      if (!user) {
-                        toast.error("Please login to apply for a job.");
-                      } else {
-                        setActionType("undo");
-                        setIsJobApplyConfirmationModalOpen(true);
-                      }
-                    }}
-                  />
-                )}
+                {isApplied &&
+                  status !== "appointed" &&
+                  status !== "confirmed" &&
+                  status !== "rejected" && (
+                    <Button
+                      label={"Undo Apply"}
+                      variant="tertiary"
+                      onClick={() => {
+                        if (!user) {
+                          toast.error("Please login to apply for a job.");
+                        } else {
+                          setActionType("undo");
+                          setIsJobApplyConfirmationModalOpen(true);
+                        }
+                      }}
+                    />
+                  )}
               </>
             )}
           </div>

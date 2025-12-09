@@ -1,36 +1,38 @@
-import { useParams } from "react-router-dom";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { useNavigate, useParams } from "react-router-dom";
 import { ICONS, IMAGES } from "../../../../assets";
 import Button from "../../../../components/Reusable/Button/Button";
 import JobCard from "../../../../components/JobBoardPage/Jobs/JobCard/JobCard";
-import SuspendGuardianModal from "../../../../components/Admin/SharedAdmin/SuspendUserModal/SuspendUserModal";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { useGetSingleGuardianByCustomGuardianIdQuery } from "../../../../redux/Features/Guardian/guardianApi";
+import { formatDate } from "../../../../utils/formatDate";
+import { useGetAllJobByGuardianIdQuery } from "../../../../redux/Features/Job/jobApi";
+import LogoLoader from "../../../../components/Reusable/LogoLoader/LogoLoader";
 
 const GuardianProfile = () => {
   const { id } = useParams();
-  const [isSuspendGuardianModalOpen, setIsSuspendGuardianModalOpen] =
-    useState<boolean>(false);
+  const navigate = useNavigate();
+  const { data, isLoading: isProfileDataLoading } =
+    useGetSingleGuardianByCustomGuardianIdQuery(id);
+  const guardianInfo = data?.data || {};
+  const {
+    data: guardianPostedJobs,
+    isLoading: isJobsLoading,
+    isFetching,
+  } = useGetAllJobByGuardianIdQuery(guardianInfo?.userId?._id);
 
   const personalInfo = {
-    email: "rahulsd380@gmail.com",
-    phoneNumber: "",
-    additionalNumber: "",
-    city: "",
-    address: "",
-    gender: "Male",
-    dateOfBirth: "",
-    religion: "",
-    identityType: "",
-    nationality: "",
-    socialLinks: {
-      facebook: "",
-      linkedIn: "",
-    },
-    family: {
-      fatherName: "",
-      fatherNumber: "",
-      motherName: "",
-      motherNumber: "",
-    },
+    email: guardianInfo?.userId?.email || "",
+    phoneNumber: guardianInfo?.userId?.phoneNumber || "",
+    additionalNumber:
+      guardianInfo?.personalInformation?.additionalPhoneNumber || "",
+    city: guardianInfo?.userId?.city || "",
+    area: guardianInfo?.userId?.area || "",
+    address: guardianInfo?.personalInformation?.address || "",
+    gender: guardianInfo?.userId?.gender || "",
+    dateOfBirth: guardianInfo?.personalInformation?.dateOfBirth || "",
+    religion: guardianInfo?.personalInformation?.religion || "",
+    nationality: guardianInfo?.personalInformation?.nationality || "",
   };
 
   const details = [
@@ -40,14 +42,9 @@ const GuardianProfile = () => {
     { label: "Additional Number", value: personalInfo?.additionalNumber },
     { label: "City", value: personalInfo?.city },
     { label: "Address", value: personalInfo?.address },
-    { label: "Date of Birth", value: personalInfo?.dateOfBirth },
+    { label: "Date of Birth", value: formatDate(personalInfo?.dateOfBirth) },
     { label: "Religion", value: personalInfo?.religion },
-    { label: "Identity Type", value: personalInfo?.identityType },
     { label: "Nationality", value: personalInfo?.nationality },
-    { label: "Father's Name", value: personalInfo?.family?.fatherName },
-    { label: "Father's Number", value: personalInfo?.family?.fatherNumber },
-    { label: "Mother's Name", value: personalInfo?.family?.motherName },
-    { label: "Mother's Number", value: personalInfo?.family?.motherNumber },
   ];
 
   const isProvided = (val: unknown): boolean => {
@@ -57,6 +54,57 @@ const GuardianProfile = () => {
     return val !== null && val !== undefined;
   };
 
+  const [skip, setSkip] = useState(0);
+  const limit = 6;
+  const [jobs, setJobs] = useState<any[]>([]);
+
+  // Update jobs when new data arrives
+  useEffect(() => {
+    if (guardianPostedJobs?.data?.jobs) {
+      if (skip === 0) {
+        setJobs(guardianPostedJobs.data.jobs);
+      } else {
+        setJobs((prev) => {
+          const newJobs = guardianPostedJobs.data.jobs.filter(
+            (job: any) => !prev.some((p) => p._id === job._id)
+          );
+          return [...prev, ...newJobs];
+        });
+      }
+    }
+  }, [guardianPostedJobs, skip]);
+  // Infinite Scroll Observer
+  const loaderRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (
+          entries[0].isIntersecting &&
+          !isFetching &&
+          guardianPostedJobs?.data?.meta?.hasMore
+        ) {
+          setSkip((prev) => prev + limit);
+        }
+      },
+      { threshold: 1 }
+    );
+
+    const node = loaderRef.current;
+    if (node) observer.observe(node);
+    return () => {
+      if (node) observer.unobserve(node);
+    };
+  }, [guardianPostedJobs, isFetching, guardianPostedJobs?.data?.meta?.hasMore]);
+
+  if (isProfileDataLoading || isJobsLoading || isFetching) {
+    return (
+      <div className="min-h-[70vh] flex items-center justify-center font-Nunito">
+        <LogoLoader />
+      </div>
+    );
+  }
+
   return (
     <div className="font-Nunito">
       <div className="flex flex-col lg:flex-row gap-3 lg:gap-0 items-start lg:items-center justify-between pb-5">
@@ -64,7 +112,7 @@ const GuardianProfile = () => {
           <div className="size-24 lg:size-32 rounded-full relative">
             <div className="bg-white/40 rounded-full p-[2px] size-full">
               <img
-                src={IMAGES.dummyAvatar}
+                src={guardianInfo?.imageUrl || IMAGES.dummyAvatar}
                 alt=""
                 className="size-full object-cover rounded-full"
               />
@@ -75,37 +123,28 @@ const GuardianProfile = () => {
           </div>
           <div>
             <h1 className="text-neutral-5 font-semibold text-2xl mt-2">
-              John Smith
+              {guardianInfo?.userId?.name}
             </h1>
-            <h2 className="text-neutral-5e text-sm mt-2">Tutor Id : {id}</h2>
-            <p className="text-neutral-20 mt-3 max-w-[500px] 2xl:max-w-[800px] hidden lg:block">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui natus
-              incidunt eum asperiores quisquam omnis facilis voluptates iste
-              dolorum nam cumque esse sit doloribus temporibus
-            </p>
+            <h2 className="text-neutral-5e text-sm mt-2">Guardian Id : {id}</h2>
+            <h2 className="text-neutral-5e text-sm mt-2 flex gap-2">
+              Phone Number :{" "}
+              <a
+                href={`tel:${guardianInfo?.userId?.phoneNumber}`}
+                className="text-neutral-20 hidden lg:block underline"
+              >
+                {guardianInfo?.userId?.phoneNumber}
+              </a>
+            </h2>
           </div>
         </div>
 
-        <p className="text-neutral-20 block lg:hidden">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui natus
-          incidunt eum asperiores quisquam omnis facilis voluptates iste dolorum
-          nam cumque esse sit doloribus temporibus
-        </p>
-
         <div className="flex items-center gap-2">
-          <Button
-            type="button"
-            label="Suspend Guardian"
-            variant="quaternary"
-            className="py-2 lg:py-2 px-3 lg:px-3 w-fit flex-row-reverse items-center justify-center hover:bg-primary-10/90 hover:text-white"
-            iconWithoutBg={ICONS.suspend}
-            onClick={() => setIsSuspendGuardianModalOpen(true)}
-          />
           <Button
             type="button"
             label="Go Back"
             variant="tertiary"
             className="py-2 lg:py-2 px-3 lg:px-3 w-fit flex-row-reverse items-center justify-center hover:bg-primary-10/90 hover:text-white"
+            onClick={() => navigate(-1)}
           />
         </div>
       </div>
@@ -145,17 +184,16 @@ const GuardianProfile = () => {
         </div>
 
         <div className="grid grid-cols-1 2xl:grid-cols-2 gap-6 w-full lg:w-[55%] xl:w-[70%]">
-          {[1, 2, 3].map((_, index) => (
-            <JobCard key={index} variant="guardian" status="pending" />
+          {jobs?.map((job, index) => (
+            <JobCard
+              key={index}
+              job={job}
+              status={job?.status}
+              variant="admin"
+            />
           ))}
         </div>
       </div>
-
-      <SuspendGuardianModal
-        selectedGuardianId={id as string}
-        isSuspendUserModalOpen={isSuspendGuardianModalOpen}
-        setIsSuspendUserModalOpen={setIsSuspendGuardianModalOpen}
-      />
     </div>
   );
 };
