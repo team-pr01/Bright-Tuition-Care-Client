@@ -3,16 +3,26 @@ import { baseApi } from "../../API/baseApi";
 
 const noticeBoardApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
-    getAllNotices: builder.query<any, { role?: string }>({
-      query: () => {
+    getAllNotices: builder.query<
+      any,
+      {
+        role?: string;
+      }
+    >({
+      query: (filters) => {
+        const params = new URLSearchParams();
+
+        if (filters.role) params.append("role", filters.role);
+
         return {
-          url: `/notice-board`,
+          url: `/notice-board?${params.toString()}`,
           method: "GET",
           credentials: "include",
         };
       },
       providesTags: ["notice"],
     }),
+
     getAllTutorsNotice: builder.query<any, { role?: string }>({
       query: () => {
         return {

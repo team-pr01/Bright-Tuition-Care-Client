@@ -26,13 +26,15 @@ const NoticeBoardManagement = () => {
   const [isAddNoticeModalOpen, setIsAddNoticeModalOpen] =
     useState<boolean>(false);
 
-  const { data: allNotices, isLoading } = useGetAllNoticesQuery({});
+  const { data: allNotices, isLoading } = useGetAllNoticesQuery({ role: "" });
   const {
     data: singleNotice,
     isLoading: isSingleNoticeLoading,
     isFetching: isSingleNoticeFetching,
     isError,
-  } = useGetSingleNoticeByIdQuery(selectedNoticeId);
+  } = useGetSingleNoticeByIdQuery(selectedNoticeId, {
+    skip: !selectedNoticeId,
+  });
 
   if (isLoading) {
     return (
