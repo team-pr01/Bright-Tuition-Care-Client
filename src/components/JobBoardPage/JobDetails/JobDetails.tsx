@@ -166,7 +166,7 @@ const JobDetails = ({
             />
 
             {status === "appointed" && user?.role === "tutor" && (
-              <div className="bg-[#F2F5FC]/70 border-l-3 border-primary-10 rounded-lg p-3 flex gap-4 items-center mt-5 max-w-full lg:max-w-fit mx-auto">
+              <div className="bg-[#F2F5FC]/70 border-l-3 border-primary-10 rounded-lg p-3 flex gap-4 items-center mt-5 max-w-full md:max-w-fit mx-auto">
                 {/* Image */}
                 <img
                   src={IMAGES.dummyAvatar}
@@ -207,7 +207,7 @@ const JobDetails = ({
             )}
 
             {status === "appointed" && user?.role === "tutor" && (
-              <div className="bg-[#F2F5FC]/70 border-l-3 border-primary-10 rounded-lg p-3 mt-5 flex flex-col gap-2 max-w-full lg:max-w-fit mx-auto">
+              <div className="bg-[#F2F5FC]/70 border-l-3 border-primary-10 rounded-lg p-3 mt-5 flex flex-col gap-2 max-w-full md:max-w-fit mx-auto">
                 <motion.div
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}

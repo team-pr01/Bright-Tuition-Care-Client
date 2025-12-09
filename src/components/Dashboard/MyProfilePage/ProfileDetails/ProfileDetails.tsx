@@ -3,7 +3,13 @@ import { useSelector } from "react-redux";
 import { ICONS, IMAGES } from "../../../../assets";
 import Button from "../../../Reusable/Button/Button";
 import { useCurrentUser } from "../../../../redux/Features/Auth/authSlice";
-import { FaUpload, FaPen, FaStar } from "react-icons/fa";
+import {
+  FaUpload,
+  FaPen,
+  FaStar,
+  FaStarHalfAlt,
+  FaRegStar,
+} from "react-icons/fa";
 import type { TLoggedInUser } from "../../../../types/loggedinUser.types";
 import { Link } from "react-router-dom";
 import { useUpdateProfileMutation } from "../../../../redux/Features/User/userApi";
@@ -120,12 +126,22 @@ const ProfileDetails = ({
   };
 
   const renderStars = (rating: number = 0) => {
-    return Array.from({ length: 5 }, (_, i) => (
-      <FaStar
-        key={i}
-        className={i < rating ? "text-yellow-400" : "text-gray-300"}
-      />
-    ));
+    const stars = [];
+
+    for (let i = 1; i <= 5; i++) {
+      if (rating >= i) {
+        // full star
+        stars.push(<FaStar key={i} className="text-yellow-400" />);
+      } else if (rating >= i - 0.5) {
+        // half star
+        stars.push(<FaStarHalfAlt key={i} className="text-yellow-400" />);
+      } else {
+        // empty star
+        stars.push(<FaRegStar key={i} className="text-gray-300" />);
+      }
+    }
+
+    return stars;
   };
 
   return (
