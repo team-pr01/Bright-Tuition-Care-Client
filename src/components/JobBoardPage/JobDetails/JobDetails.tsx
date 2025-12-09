@@ -206,6 +206,37 @@ const JobDetails = ({
               </div>
             )}
 
+            {status === "appointed" && user?.role === "tutor" && (
+              <div className="bg-[#F2F5FC]/70 border-l-3 border-primary-10 rounded-lg p-3 mt-5 flex flex-col gap-2 max-w-full lg:max-w-fit mx-auto">
+                <motion.div
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="inline-block w-full"
+                >
+                  <a
+                    href={`tel:+880 1610-785588`}
+                    className="inline-flex items-center justify-center gap-3 bg-primary-10 text-white px-3 py-2 rounded font-semibold md:text-lg transition-all duration-300 relative overflow-hidden group w-full text-center text-sm"
+                  >
+                    Give Us Feedback
+                    <motion.span
+                      animate={{ x: [0, 4, 0] }}
+                      transition={{
+                        duration: 1.5,
+                        repeat: Infinity,
+                        ease: "easeInOut",
+                      }}
+                      className="inline-flex items-center"
+                    >
+                      <VscCallOutgoing className="text-lg" />
+                    </motion.span>
+                  </a>
+                </motion.div>
+                <p className="text-primary-10 font-medium text-xs">
+                  After contacting with guardian please give us feedback
+                </p>
+              </div>
+            )}
+
             <div className="flex flex-col gap-6 items-start justify-center max-w-full lg:max-w-[70%] mx-0 lg:mx-auto">
               <div className="flex gap-2 mt-6 lg:mt-11">
                 <img src={ICONS.subject} alt="" className="size-5" />

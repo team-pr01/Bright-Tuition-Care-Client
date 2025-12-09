@@ -135,8 +135,6 @@ const PostedJobs = () => {
     },
   ];
 
-  console.log(allJobs);
-
   return (
     <div className="font-Nunito">
       {/* Tabs Bar */}

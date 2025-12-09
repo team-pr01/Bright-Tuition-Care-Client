@@ -3,8 +3,7 @@ import { useForm } from "react-hook-form";
 import Button from "../../../Reusable/Button/Button";
 import Modal from "../../../Reusable/Modal/Modal";
 import { useGiveRatingMutation } from "../../../../redux/Features/User/userApi";
-import { useEffect } from "react";
-import toast from "react-hot-toast";
+import { useEffect, useState } from "react";
 import TextInput from "../../../Reusable/TextInput/TextInput";
 
 type TFormData = {
@@ -38,6 +37,7 @@ const RateUserModal = ({
   }, [defaultValue, setValue]);
 
   const [giveRating, { isLoading }] = useGiveRatingMutation();
+  const [error, setError] = useState<string | null>(null);
 
   const handleGiveRating = async (data: TFormData) => {
     try {
@@ -48,9 +48,7 @@ const RateUserModal = ({
         setSelectedUserRating(null);
       }
     } catch (error: any) {
-      toast.error(
-        error?.data?.message || "Error rating user. Please try again."
-      );
+      setError(error?.data?.message || "Error rating user. Please try again.");
     }
   };
   return (
@@ -61,7 +59,7 @@ const RateUserModal = ({
     >
       <form
         onSubmit={handleSubmit(handleGiveRating)}
-        className="flex flex-col gap-6 font-Nunito mt-5"
+        className="flex flex-col gap-3 font-Nunito mt-5"
       >
         {/* Rating */}
         <TextInput
@@ -70,8 +68,11 @@ const RateUserModal = ({
           error={errors.rating}
           {...register("rating")}
         />
+        {error !== "" && (
+          <p className="text-red-500 text-xs">{error}</p>
+        )}
 
-        <div className="flex justify-end">
+        <div className="flex justify-end mt-3">
           <Button
             type="submit"
             label={defaultValue ? "Update" : "Submit"}

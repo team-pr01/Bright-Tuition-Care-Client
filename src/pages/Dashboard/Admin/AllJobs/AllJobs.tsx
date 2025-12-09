@@ -9,8 +9,8 @@ import {
   FaBriefcase,
   FaClock,
   FaBullhorn,
-  FaListUl,
-  FaUserCheck,
+  // FaListUl,
+  // FaUserCheck,
   FaCheckCircle,
   FaTimesCircle,
 } from "react-icons/fa";
@@ -130,98 +130,96 @@ const AllJobs = () => {
   return (
     <div>
       <div className="sticky top-0 z-15 px-3 lg:px-6 pt-6 bg-[#F2F5FC]">
+        <div className="grid grid-cols-5 md:grid-cols-3 xl:grid-cols-4 gap-5">
+          <DashboardOverviewCard
+            title="All"
+            additionalTitle="Jobs"
+            value={jobStats.totalJobs}
+            textColor="text-neutral-10"
+            path="/dashboard/admin/all-jobs/all"
+            icon={<FaBriefcase className="text-[#6366F1]" />}
+          />
 
-      
-      <div className="grid grid-cols-5 md:grid-cols-3 xl:grid-cols-4 gap-5">
-        <DashboardOverviewCard
-          title="All"
-          additionalTitle="Jobs"
-          value={jobStats.totalJobs}
-          textColor="text-neutral-10"
-          path="/dashboard/admin/all-jobs/all"
-          icon={<FaBriefcase className="text-[#6366F1]" />}
+          <DashboardOverviewCard
+            title="Pending"
+            additionalTitle="Jobs"
+            value={jobStats.pendingJobs}
+            textColor="text-neutral-10"
+            path="/dashboard/admin/all-jobs/pending"
+            icon={<FaClock className="text-[#F59E0B]" />}
+          />
+
+          <DashboardOverviewCard
+            title="Live"
+            additionalTitle="Jobs"
+            value={jobStats.liveJobs}
+            textColor="text-neutral-10"
+            path="/dashboard/admin/all-jobs/live"
+            icon={<FaBullhorn className="text-[#3B82F6]" />}
+          />
+
+          {/* <DashboardOverviewCard
+            title="Shortlisted"
+            additionalTitle="Jobs"
+            value={jobStats.shortlistedJobs}
+            textColor="text-neutral-10"
+            path="/dashboard/admin/all-jobs/shortlisted"
+            icon={<FaListUl className="text-[#8B5CF6]" />}
+          /> */}
+
+          {/* <DashboardOverviewCard
+            title="Appointed"
+            additionalTitle="Jobs"
+            value={jobStats.appointedJobs}
+            textColor="text-neutral-10"
+            path="/dashboard/admin/all-jobs/all"
+            icon={<FaUserCheck className="text-[#10B981]" />}
+          /> */}
+
+          <DashboardOverviewCard
+            title="Confirmed"
+            additionalTitle="Jobs"
+            value={jobStats.totalConfirmedJob}
+            textColor="text-neutral-10"
+            path="/dashboard/admin/all-jobs/closed"
+            icon={<FaCheckCircle className="text-[#22C55E]" />}
+          />
+
+          <DashboardOverviewCard
+            title="Cancelled"
+            additionalTitle="Jobs"
+            value={jobStats.totalCancelledJob}
+            textColor="text-neutral-10"
+            path="/dashboard/admin/all-jobs/cancelled"
+            icon={<FaTimesCircle className="text-[#EF4444]" />}
+          />
+        </div>
+
+        <AllJobFilters
+          keyword={keyword}
+          setKeyword={setKeyword}
+          selectedCities={selectedCities}
+          setSelectedCities={setSelectedCities}
+          selectedAreas={selectedAreas}
+          setSelectedAreas={setSelectedAreas}
+          areaOptions={areaOptions}
+          setAreaOptions={setAreaOptions}
+          selectedCategory={selectedCategory}
+          setSelectedCategory={setSelectedCategory}
+          selectedDays={selectedDays}
+          setSelectedDays={setSelectedDays}
+          selectedClass={selectedClass}
+          setSelectedClass={setSelectedClass}
+          selectedTutorGender={selectedTutorGender}
+          setSelectedTutorGender={setSelectedTutorGender}
+          selectedStudentGender={selectedStudentGender}
+          setSelectedStudentGender={setSelectedStudentGender}
+          selectedTuitionType={selectedTuitionType}
+          setSelectedTuitionType={setSelectedTuitionType}
+          liveJobs={allJobs?.data?.meta?.liveJobs || 0}
+          status={status}
+          setStatus={setStatus}
         />
-
-        <DashboardOverviewCard
-          title="Pending"
-          additionalTitle="Jobs"
-          value={jobStats.pendingJobs}
-          textColor="text-neutral-10"
-          path="/dashboard/admin/all-jobs/pending"
-          icon={<FaClock className="text-[#F59E0B]" />}
-        />
-
-        <DashboardOverviewCard
-          title="Live"
-          additionalTitle="Jobs"
-          value={jobStats.liveJobs}
-          textColor="text-neutral-10"
-          path="/dashboard/admin/all-jobs/live"
-          icon={<FaBullhorn className="text-[#3B82F6]" />}
-        />
-
-        <DashboardOverviewCard
-          title="Shortlisted"
-          additionalTitle="Jobs"
-          value={jobStats.shortlistedJobs}
-          textColor="text-neutral-10"
-          path="/dashboard/admin/all-jobs/all"
-          icon={<FaListUl className="text-[#8B5CF6]" />}
-        />
-
-        <DashboardOverviewCard
-          title="Appointed"
-          additionalTitle="Jobs"
-          value={jobStats.appointedJobs}
-          textColor="text-neutral-10"
-          path="/dashboard/admin/all-jobs/all"
-          icon={<FaUserCheck className="text-[#10B981]" />}
-        />
-
-        <DashboardOverviewCard
-          title="Confirmed"
-          additionalTitle="Jobs"
-          value={jobStats.totalConfirmedJob}
-          textColor="text-neutral-10"
-          path="/dashboard/admin/all-jobs/closed"
-          icon={<FaCheckCircle className="text-[#22C55E]" />}
-        />
-
-        <DashboardOverviewCard
-          title="Cancelled"
-          additionalTitle="Jobs"
-          value={jobStats.totalCancelledJob}
-          textColor="text-neutral-10"
-          path="/dashboard/admin/all-jobs/cancelled"
-          icon={<FaTimesCircle className="text-[#EF4444]" />}
-        />
-      </div>
-
-      <AllJobFilters
-        keyword={keyword}
-        setKeyword={setKeyword}
-        selectedCities={selectedCities}
-        setSelectedCities={setSelectedCities}
-        selectedAreas={selectedAreas}
-        setSelectedAreas={setSelectedAreas}
-        areaOptions={areaOptions}
-        setAreaOptions={setAreaOptions}
-        selectedCategory={selectedCategory}
-        setSelectedCategory={setSelectedCategory}
-        selectedDays={selectedDays}
-        setSelectedDays={setSelectedDays}
-        selectedClass={selectedClass}
-        setSelectedClass={setSelectedClass}
-        selectedTutorGender={selectedTutorGender}
-        setSelectedTutorGender={setSelectedTutorGender}
-        selectedStudentGender={selectedStudentGender}
-        setSelectedStudentGender={setSelectedStudentGender}
-        selectedTuitionType={selectedTuitionType}
-        setSelectedTuitionType={setSelectedTuitionType}
-        liveJobs={allJobs?.data?.meta?.liveJobs || 0}
-        status={status}
-        setStatus={setStatus}
-      />
       </div>
 
       <div className="px-3 lg:px-6 pb-6">

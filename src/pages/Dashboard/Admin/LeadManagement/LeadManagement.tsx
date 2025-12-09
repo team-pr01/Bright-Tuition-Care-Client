@@ -3,7 +3,7 @@ import Table, {
   type TableAction,
   type TableHead,
 } from "../../../../components/Reusable/Table/Table";
-import { useState } from "react";
+import React, { useState } from "react";
 import { FaCheck, FaMoneyBillWave } from "react-icons/fa";
 import { MdCancel } from "react-icons/md";
 import {
@@ -13,18 +13,28 @@ import {
 import type { TLead } from "../../../../types/lead.types";
 import { formatDate } from "../../../../utils/formatDate";
 import toast from "react-hot-toast";
+import {
+  HiOutlineCollection,
+  HiOutlineUserGroup,
+  HiOutlineAcademicCap,
+} from "react-icons/hi";
 
 const LeadManagement = () => {
   const [page, setPage] = useState<number>(1);
   const [limit, setLimit] = useState<number>(5);
   const [searchQuery, setSearchQuery] = useState<string>("");
-  const [addedBy, setAddedBy] = useState("all");
+  const [activeTab, setActiveTab] = useState<string>("");
 
   const {
     data: allLeads,
     isLoading,
     isFetching,
-  } = useGetAllLeadsQuery({ keyword: searchQuery, page, limit, addedBy });
+  } = useGetAllLeadsQuery({
+    keyword: searchQuery,
+    page,
+    limit,
+    addedBy: activeTab === "" ? "" : activeTab,
+  });
 
   //   Table heads
   const leadTheads: TableHead[] = [
@@ -120,37 +130,108 @@ const LeadManagement = () => {
     setSearchQuery(q);
   };
 
-  const roleBasedFilterDropdown = (
-    <select
-      value={addedBy}
-      onChange={(e) => setAddedBy(e.target.value)}
-      className="input input-sm px-3 py-2 border border-neutral-55/60 focus:border-primary-10 transition duration-300 focus:outline-none rounded-md text-sm shadow-sm cursor-pointer"
-    >
-      <option value="all">All Leads</option>
-      <option value="guardian">Leads from Guardian</option>
-      <option value="tutor">Leads from Tutor</option>
-    </select>
-  );
+  const leadTypes = [
+    {
+      id: 1,
+      key: "",
+      title: "All Leads",
+      // count: counts?.totalJobs || 0,
+      icon: <HiOutlineCollection />,
+    },
+    {
+      id: 2,
+      key: "guardian",
+      title: "Leads from Guardian",
+      // count: counts?.pendingJobs || 0,
+      icon: <HiOutlineUserGroup />,
+    },
+    {
+      id: 3,
+      key: "tutor",
+      title: "Leads from Tutor",
+      // count: counts?.liveJobs || 0,
+      icon: <HiOutlineAcademicCap />,
+    },
+  ];
 
   return (
     <div>
-      <Table<any>
-        title="All Leads & Tuition Requests"
-        description="Manage all leads here."
-        theads={leadTheads}
-        data={tableData || []}
-        actions={actions}
-        totalPages={allLeads?.data?.meta?.totalPages}
-        currentPage={page}
-        onPageChange={(p) => setPage(p)}
-        isLoading={isLoading || isFetching}
-        onSearch={handleSearch}
-        limit={limit}
-        setLimit={setLimit}
-        selectedCity={null}
-        selectedArea={null}
-        children={roleBasedFilterDropdown}
-      />
+      {/* Tabs Bar */}
+      <div className="border-b border-blue-300 sticky top-0 z-15 bg-[#F2F5FC] px-3 lg:px-6 pt-6 pb-2">
+        <div className="flex w-full overflow-x-auto overflow-y-hidden gap-6 md:gap-10">
+          {leadTypes.map((tab) => {
+            const isActive = activeTab === tab.key;
+
+            return (
+              <button
+                key={tab.key}
+                type="button"
+                onClick={() => setActiveTab?.(tab.key)}
+                className={`
+                        relative py-3 text-xs md:text-sm lg:text-base flex items-center gap-1 md:gap-2
+                        font-medium transition-colors duration-200 cursor-pointer
+                        ${
+                          isActive
+                            ? "text-primary-10"
+                            : "text-slate-500 hover:text-primary-500"
+                        }
+                      `}
+              >
+                {/* Icon */}
+                <span className="flex items-center justify-center">
+                  {React.cloneElement(
+                    tab.icon as React.ReactElement,
+                    {
+                      className: `size-3 md:size-4 ${
+                        isActive ? "opacity-100" : "opacity-70"
+                      }`,
+                    } as any
+                  )}
+                </span>
+
+                {/* Label + count */}
+                <span className="whitespace-nowrap text-xs md:text-sm lg:text-base">
+                  {tab.title}{" "}
+                  {/* <span className={isActive ? "font-semibold" : "font-normal"}>
+                    {String(tab.count).padStart(2, "0")}
+                  </span> */}
+                </span>
+
+                {/* Active underline */}
+                {isActive && (
+                  <span className="absolute left-0 right-0 -bottom-[1px] h-[3px] rounded-full bg-primary-500" />
+                )}
+              </button>
+            );
+          })}
+        </div>
+
+        {/* <Link
+                  to="/dashboard/guardian/hire-a-tutor"
+                  className={`bg-primary-10 hover:bg-primary-20 hover:text-primary-10 transition duration-300 font-semibold text-white rounded-lg flex items-center gap-2 px-3 py-2 pointer`}
+                >
+                  Hire a Tutor <RxArrowTopRight className="text-lg" />
+                </Link> */}
+      </div>
+
+      <div className="px-3 lg:px-6 py-6">
+        <Table<any>
+          title="All Leads & Tuition Requests"
+          description="Manage all leads here."
+          theads={leadTheads}
+          data={tableData || []}
+          actions={actions}
+          totalPages={allLeads?.data?.meta?.totalPages}
+          currentPage={page}
+          onPageChange={(p) => setPage(p)}
+          isLoading={isLoading || isFetching}
+          onSearch={handleSearch}
+          limit={limit}
+          setLimit={setLimit}
+          selectedCity={null}
+          selectedArea={null}
+        />
+      </div>
     </div>
   );
 };

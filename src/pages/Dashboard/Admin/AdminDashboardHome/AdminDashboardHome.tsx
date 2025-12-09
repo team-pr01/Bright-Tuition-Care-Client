@@ -73,7 +73,7 @@ const AdminDashboardHome = () => {
         <LogoLoader />
       </div>
     );
-  };
+  }
 
   if (isError) {
     return (
@@ -81,7 +81,7 @@ const AdminDashboardHome = () => {
         <ErrorComponent />
       </div>
     );
-  };
+  }
 
   return (
     <div className="font-Nunito flex flex-col gap-6">
@@ -119,7 +119,7 @@ const AdminDashboardHome = () => {
           additionalTitle="Leads"
           value={adminStats?.data?.totalLeads || 0}
           textColor="text-neutral-10"
-          path="/dashboard/admin/posted-jobs"
+          path="/dashboard/admin/lead-management"
           icon={<FaUsers className="text-green-500" />}
         />
 
@@ -128,7 +128,7 @@ const AdminDashboardHome = () => {
           additionalTitle="Requests"
           value={adminStats?.data?.verificationRequests || 0} //adasdiuy T8AS            dummy here
           textColor="text-neutral-10"
-          path="/dashboard/admin/posted-jobs"
+          path="/dashboard/admin/verification-requests"
           icon={<MdVerified className="text-primary-10" />}
         />
 
