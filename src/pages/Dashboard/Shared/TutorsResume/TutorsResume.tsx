@@ -12,8 +12,12 @@ import {
   useGetSingleApplicationByIdQuery,
   useShortlistTutorMutation,
 } from "../../../../redux/Features/Application/applicationApi";
+import { useSelector } from "react-redux";
+import { useCurrentUser } from "../../../../redux/Features/Auth/authSlice";
+import type { TLoggedInUser } from "../../../../types/loggedinUser.types";
 
 const TutorsResume = () => {
+  const user = useSelector(useCurrentUser) as TLoggedInUser;
   const [shortlistTutor, { isLoading: isShortlisting }] =
     useShortlistTutorMutation();
   const [appointTutor, { isLoading: isAppointing }] = useAppointTutorMutation();
@@ -99,6 +103,8 @@ const TutorsResume = () => {
     (item) => item?.value && item?.value !== ""
   );
 
+  const showPhoneNumbers = user?.role === "admin" || user?.role === "staff"; // Only admin/staff can see the phone numbers
+
   const personalData = [
     { label: "Gender", value: personalInfo?.gender || "N/A" },
     { label: "Religion", value: personalInfo?.religion || "N/A" },
@@ -112,18 +118,22 @@ const TutorsResume = () => {
     { label: "Father's Name", value: personalInfo?.fatherName || "N/A" },
     {
       label: "Father's Phone",
-      value: personalInfo?.fatherPhoneNumber || "N/A",
+      value: showPhoneNumbers
+        ? personalInfo?.fatherPhoneNumber || "N/A"
+        : "N/A",
     },
     { label: "Mother's Name", value: personalInfo?.motherName || "N/A" },
     {
       label: "Mother's Phone",
-      value: personalInfo?.motherPhoneNumber || "N/A",
+      value: showPhoneNumbers
+        ? personalInfo?.motherPhoneNumber || "N/A"
+        : "N/A",
     },
     {
       label: "Additional Phone",
-      value: isContactDetailsHidden
-        ? "N/A"
-        : personalInfo?.additionalPhoneNumber || "N/A",
+      value: showPhoneNumbers
+        ? personalInfo?.additionalPhoneNumber || "N/A"
+        : "N/A",
     },
     { label: "Address", value: personalInfo?.address || "N/A" },
   ];
@@ -209,7 +219,6 @@ const TutorsResume = () => {
 
               {/* Admin controlls */}
               <div className="flex items-center gap-3">
-
                 {location.pathname.startsWith(
                   "/dashboard/admin/application"
                 ) && (

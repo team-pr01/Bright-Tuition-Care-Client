@@ -1128,8 +1128,40 @@ export const filterData = {
 
         // ---------- STANDARD 1–3 ----------
         {
-          id: "standard_1_2_3",
-          name: "Standard 1/ Standard 2/ Standard 3",
+          id: "standard_1",
+          name: "Standard 1",
+          subjects: [
+            "All",
+            "Bangla",
+            "English",
+            "Maths",
+            "Science",
+            "Social Studies",
+            "ICT",
+            "History",
+            "Geography",
+            "Islamic Studies",
+          ],
+        },
+        {
+          id: "standard_2",
+          name: "Standard 2",
+          subjects: [
+            "All",
+            "Bangla",
+            "English",
+            "Maths",
+            "Science",
+            "Social Studies",
+            "ICT",
+            "History",
+            "Geography",
+            "Islamic Studies",
+          ],
+        },
+        {
+          id: "standard_3",
+          name: "Standard 3",
           subjects: [
             "All",
             "Bangla",

@@ -9,14 +9,36 @@ import { FiTrash2 } from "react-icons/fi";
 import { useUpdateProfileMutation } from "../../../../redux/Features/User/userApi";
 
 const degreeOptions: string[] = [
-  "SSC  / Dakhil/ O Level",
-  "HSC / Alim / A Level / Fazil / Kamil",
+  "SSC",
+  "Dakhil",
+  "O Level",
+
+  "HSC",
+  "Alim",
+  "A Level",
+  "Fazil",
+  "Kamil",
+
   "Diploma (Polytechnic)",
-  "Honours/ Masters",
-  "BBA / MBA",
-  "BSc / MSc",
-  "BA / MA/ Bsc Engineering /  Diploma Engineering",
-  "Medical MBBS / Medical BDS/ BSS / MSS",
+
+  "Honours",
+  "Masters",
+
+  "BBA",
+  "MBA",
+
+  "BSc",
+  "MSc",
+
+  "BA",
+  "MA",
+  "BSc Engineering",
+  "Diploma Engineering",
+
+  "Medical MBBS",
+  "Medical BDS",
+  "BSS",
+  "MSS",
 ];
 
 const levelOfEducationOptions: string[] = [

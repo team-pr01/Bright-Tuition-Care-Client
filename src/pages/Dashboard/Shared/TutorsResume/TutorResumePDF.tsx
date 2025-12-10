@@ -8,10 +8,11 @@ import {
   StyleSheet,
   Font,
 } from "@react-pdf/renderer";
-import { IMAGES } from "../../../../assets";
+import { ICONS, IMAGES } from "../../../../assets";
 import type { TEducation } from "../../../../types/tutor.types";
 import NunitoRegular from "../../../../assets/Fonts/Nunito-Regular.ttf";
-import NunitoBold from "../../../../assets/Fonts/Nunito-Bold.ttf"; // You might need to add this
+import NunitoBold from "../../../../assets/Fonts/Nunito-Bold.ttf";
+import blueVerifiedBlue from "../../../../assets/Icons/blueVerified-blue.png";
 
 Font.register({
   family: "Nunito",
@@ -24,10 +25,22 @@ Font.register({
 const styles = StyleSheet.create({
   page: {
     fontFamily: "Nunito",
-    padding: 30,
+    paddingHorizontal: 30,
+    paddingVertical: 15,
     fontSize: 11,
     backgroundColor: "#ffffff",
   },
+  logoWrapper: {
+    alignItems: "center",
+    marginBottom: 20,
+  },
+
+  logo: {
+    width: 150,
+    height: "auto",
+    objectFit: "contain",
+  },
+
   sectionTitle: {
     fontSize: 16,
     fontWeight: "bold",
@@ -41,6 +54,7 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     gap: 3,
     marginTop: 8,
+   width: "100%",
   },
   gridRow: {
     flexDirection: "row",
@@ -53,11 +67,24 @@ const styles = StyleSheet.create({
   },
   value: {
     color: "#374151",
+    flexWrap: "wrap", 
   },
   profileRow: {
     flexDirection: "row",
     gap: 15,
     marginBottom: 15,
+  },
+  profileImageWrapper: {
+    position: "relative",
+    width: 90,
+    height: 90,
+  },
+  verifiedIcon: {
+    position: "absolute",
+    bottom: -9,
+    right: -10,
+    width: 25,
+    height: 25,
   },
   profileImage: {
     width: 90,
@@ -108,6 +135,18 @@ const styles = StyleSheet.create({
     flex: 1,
     color: "#374151",
     fontSize: 10,
+  },
+  thanksNote: {
+    position: "absolute",
+    bottom: 20, // same as page padding
+    left: 0,
+    right: 0,
+    alignItems: "center",
+  },
+
+  thanksText: {
+    fontSize: 10,
+    color: "#111827",
   },
 });
 
@@ -192,7 +231,6 @@ const TutorResumePDF = ({ profile }: { profile: any }) => {
   // For profile image - ensure it's a valid URL or use base64 data
   const getProfileImageSrc = () => {
     if (profile?.imageUrl) {
-      // If it's already a URL or base64 string, use it directly
       return profile.imageUrl;
     }
     return IMAGES.dummyAvatar;
@@ -201,15 +239,28 @@ const TutorResumePDF = ({ profile }: { profile: any }) => {
   return (
     <Document>
       <Page size="A4" style={styles.page}>
+        {/* Logo Section */}
+        <View style={styles.logoWrapper}>
+          <Image src={ICONS.logo} style={styles.logo} />
+        </View>
         {/* Profile Section */}
         <View style={styles.profileRow}>
-          <Image
-            src={getProfileImageSrc()}
-            style={styles.profileImage}
-          />
+          <View style={styles.profileImageWrapper}>
+            <Image src={getProfileImageSrc()} style={styles.profileImage} />
+
+            {!profile?.isVerified && (
+              <Image src={blueVerifiedBlue} style={styles.verifiedIcon} />
+            )}
+          </View>
+
           <View style={styles.tutorInfo}>
             <Text style={styles.tutorName}>{profile?.userId?.name}</Text>
-            <Text>Tutor ID: {profile?.tutorId}</Text>
+            <View style={{ flexDirection: "row" }}>
+              <Text>Tutor ID: {profile?.tutorId}</Text>
+              <Text style={{ marginHorizontal: 6 }}>|</Text>
+              <Text>Rating: {profile?.rating}/5</Text>
+            </View>
+
             <Text>Phone Number: {profile?.userId?.phoneNumber}</Text>
             <Text style={styles.overview}>
               {personalInfo.overview || "No overview available."}
@@ -228,7 +279,9 @@ const TutorResumePDF = ({ profile }: { profile: any }) => {
               <View style={styles.grid}>
                 <View style={styles.educationRow}>
                   <Text style={styles.educationLabel}>Institute</Text>
-                  <Text style={styles.educationValue}>{edu.instituteName || "N/A"}</Text>
+                  <Text style={styles.educationValue}>
+                    {edu.instituteName || "N/A"}
+                  </Text>
                 </View>
                 <View style={styles.educationRow}>
                   <Text style={styles.educationLabel}>Department</Text>
@@ -238,15 +291,21 @@ const TutorResumePDF = ({ profile }: { profile: any }) => {
                 </View>
                 <View style={styles.educationRow}>
                   <Text style={styles.educationLabel}>Curriculum</Text>
-                  <Text style={styles.educationValue}>{edu.medium || "N/A"}</Text>
+                  <Text style={styles.educationValue}>
+                    {edu.medium || "N/A"}
+                  </Text>
                 </View>
                 <View style={styles.educationRow}>
                   <Text style={styles.educationLabel}>Result</Text>
-                  <Text style={styles.educationValue}>{edu.result || "N/A"}</Text>
+                  <Text style={styles.educationValue}>
+                    {edu.result || "N/A"}
+                  </Text>
                 </View>
                 <View style={styles.educationRow}>
                   <Text style={styles.educationLabel}>Passing Year</Text>
-                  <Text style={styles.educationValue}>{edu.passingYear || "N/A"}</Text>
+                  <Text style={styles.educationValue}>
+                    {edu.passingYear || "N/A"}
+                  </Text>
                 </View>
               </View>
             </View>
@@ -273,6 +332,12 @@ const TutorResumePDF = ({ profile }: { profile: any }) => {
               <Text style={styles.value}>{item.value}</Text>
             </View>
           ))}
+        </View>
+        {/* Thanks note */}
+        <View style={styles.thanksNote}>
+          <Text style={styles.thanksText}>
+            Thanks for staying with Bright Tuition Care
+          </Text>
         </View>
       </Page>
     </Document>

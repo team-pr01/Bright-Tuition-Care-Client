@@ -149,7 +149,7 @@ const MyProfile = () => {
       const url = URL.createObjectURL(blob);
       const link = document.createElement("a");
       link.href = url;
-      link.download = `Tutor_Resume_${myProfile?.userId?.name || "resume"}.pdf`;
+      link.download = `Bright_Tuition_Care_${myProfile?.userId?.name || "tutor"}_CV.pdf`;
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
@@ -241,7 +241,7 @@ const MyProfile = () => {
                 >
                   {profile?.personalInfo?.overview}
                 </p>
-              </div>
+              </div>  
 
               <PersonalInfo personalInfo={profile.personalInfo} />
             </>
