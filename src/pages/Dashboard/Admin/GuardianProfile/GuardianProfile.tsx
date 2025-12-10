@@ -1,25 +1,20 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useNavigate, useParams } from "react-router-dom";
 import { ICONS, IMAGES } from "../../../../assets";
 import Button from "../../../../components/Reusable/Button/Button";
-import JobCard from "../../../../components/JobBoardPage/Jobs/JobCard/JobCard";
-import { useEffect, useRef, useState } from "react";
 import { useGetSingleGuardianByCustomGuardianIdQuery } from "../../../../redux/Features/Guardian/guardianApi";
 import { formatDate } from "../../../../utils/formatDate";
-import { useGetAllJobByGuardianIdQuery } from "../../../../redux/Features/Job/jobApi";
 import LogoLoader from "../../../../components/Reusable/LogoLoader/LogoLoader";
+import { useSelector } from "react-redux";
+import { useCurrentUser } from "../../../../redux/Features/Auth/authSlice";
+import type { TLoggedInUser } from "../../../../types/loggedinUser.types";
 
 const GuardianProfile = () => {
   const { id } = useParams();
+  const user = useSelector(useCurrentUser) as TLoggedInUser;
   const navigate = useNavigate();
   const { data, isLoading: isProfileDataLoading } =
     useGetSingleGuardianByCustomGuardianIdQuery(id);
   const guardianInfo = data?.data || {};
-  const {
-    data: guardianPostedJobs,
-    isLoading: isJobsLoading,
-    isFetching,
-  } = useGetAllJobByGuardianIdQuery(guardianInfo?.userId?._id);
 
   const personalInfo = {
     email: guardianInfo?.userId?.email || "",
@@ -54,50 +49,7 @@ const GuardianProfile = () => {
     return val !== null && val !== undefined;
   };
 
-  const [skip, setSkip] = useState(0);
-  const limit = 6;
-  const [jobs, setJobs] = useState<any[]>([]);
-
-  // Update jobs when new data arrives
-  useEffect(() => {
-    if (guardianPostedJobs?.data?.jobs) {
-      if (skip === 0) {
-        setJobs(guardianPostedJobs.data.jobs);
-      } else {
-        setJobs((prev) => {
-          const newJobs = guardianPostedJobs.data.jobs.filter(
-            (job: any) => !prev.some((p) => p._id === job._id)
-          );
-          return [...prev, ...newJobs];
-        });
-      }
-    }
-  }, [guardianPostedJobs, skip]);
-  // Infinite Scroll Observer
-  const loaderRef = useRef<HTMLDivElement | null>(null);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        if (
-          entries[0].isIntersecting &&
-          !isFetching &&
-          guardianPostedJobs?.data?.meta?.hasMore
-        ) {
-          setSkip((prev) => prev + limit);
-        }
-      },
-      { threshold: 1 }
-    );
-
-    const node = loaderRef.current;
-    if (node) observer.observe(node);
-    return () => {
-      if (node) observer.unobserve(node);
-    };
-  }, [guardianPostedJobs, isFetching, guardianPostedJobs?.data?.meta?.hasMore]);
-
-  if (isProfileDataLoading || isJobsLoading || isFetching) {
+  if (isProfileDataLoading) {
     return (
       <div className="min-h-[70vh] flex items-center justify-center font-Nunito">
         <LogoLoader />
@@ -146,6 +98,19 @@ const GuardianProfile = () => {
             className="py-2 lg:py-2 px-3 lg:px-3 w-fit flex-row-reverse items-center justify-center hover:bg-primary-10/90 hover:text-white"
             onClick={() => navigate(-1)}
           />
+          <Button
+            type="button"
+            label="See Guardian Posted Jobs"
+            variant="primary"
+            className="py-2 lg:py-2 px-3 lg:px-3 w-fit flex-row-reverse items-center justify-center hover:bg-primary-10/90 hover:text-white"
+            onClick={() =>
+              navigate(
+                `/dashboard/${
+                  user?.role === "admin" ? "admin" : "staff"
+                }/guardian/jobs/${guardianInfo?.userId?._id}`
+              )
+            }
+          />
         </div>
       </div>
 
@@ -153,8 +118,7 @@ const GuardianProfile = () => {
         Personal and Posted Jobs
       </p>
 
-      <div className="flex flex-col lg:flex-row gap-6 mt-6">
-        <div className="flex flex-col gap-3 bg-white p-5 rounded-2xl shadow-sm w-full lg:w-[45%] xl:w-[30%] h-fit">
+        <div className="flex flex-col gap-3 bg-white p-5 rounded-2xl shadow-sm w-full h-fit mt-6">
           {details.map((item, index) => {
             const provided = isProvided(item.value);
 
@@ -182,18 +146,6 @@ const GuardianProfile = () => {
             );
           })}
         </div>
-
-        <div className="grid grid-cols-1 2xl:grid-cols-2 gap-6 w-full lg:w-[55%] xl:w-[70%]">
-          {jobs?.map((job, index) => (
-            <JobCard
-              key={index}
-              job={job}
-              status={job?.status}
-              variant="admin"
-            />
-          ))}
-        </div>
-      </div>
     </div>
   );
 };

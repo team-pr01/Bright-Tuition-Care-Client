@@ -13,7 +13,7 @@ import { useLocation } from "react-router-dom";
 
 const LocationForm = ({ defaultValues }: { defaultValues?: TJobs }) => {
   const user = useSelector(useCurrentUser) as TLoggedInUser;
-  const pathname = useLocation().pathname;
+  const location = useLocation();
   const {
     watch,
     setValue,
@@ -42,10 +42,11 @@ const LocationForm = ({ defaultValues }: { defaultValues?: TJobs }) => {
   });
 
   const isJobUpdateFieldVisible =
-    pathname.startsWith("//dashboard/admin/edit-job") ||
-    (pathname.startsWith("/dashboard/staff/edit-job") &&
-      user?.role === "staff") ||
-    user?.role === "admin";
+    (location.pathname.startsWith("/dashboard/admin/edit-job") &&
+      user?.role === "admin") ||
+    (location.pathname.startsWith("/dashboard/staff/edit-job") &&
+      user?.role === "staff");
+
   return (
     <div className="flex flex-col gap-4 lg:gap-6">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 lg:gap-6">

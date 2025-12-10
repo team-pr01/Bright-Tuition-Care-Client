@@ -36,11 +36,11 @@ const SuccessMessage = ({ user }: { user: TLoggedInUser }) => {
           </p>
           <div className="flex flex-col">
             <a
-              href="tel:01720000000"
+              href="tel:09617-785588"
               className="inline-flex items-center gap-2 bg-primary-10 hover:bg-primary-10/80 text-white px-6 py-3 rounded-lg font-semibold transition-colors duration-200 w-fit mx-auto"
             >
               <FaPhone className="text-sm" />
-              Call Us: 01720000000
+              Call Us: 09617-785588
             </a>
 
             <a

@@ -109,11 +109,18 @@ const jobApi = baseApi.injectEndpoints({
     }),
 
     getAllJobByGuardianId: builder.query({
-      query: (id) => ({
-        url: `/job/guardian-jobs/${id}`,
-        method: "GET",
-        credentials: "include",
-      }),
+      query: ({ id, status }: { id: any; status?: string }) => {
+  let url = `/job/guardian-jobs/${id}`;
+  if (status) {
+    url += `?status=${status}`;
+  }
+  return {
+    url,
+    method: "GET",
+    credentials: "include",
+  };
+},
+
       providesTags: ["jobs"],
     }),
 

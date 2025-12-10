@@ -8,6 +8,7 @@ export type TStaff = {
     city : string;
     area : string;
   };
+  staffId: string;
   pagesAssigned: string[];
   jobRole: string;
   createdAt: string;

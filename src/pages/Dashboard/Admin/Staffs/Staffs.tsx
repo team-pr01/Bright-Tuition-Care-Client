@@ -48,7 +48,7 @@ const Staffs = () => {
 
   // Table headers
   const staffTheads: TableHead[] = [
-    { key: "_id", label: "ID" },
+    { key: "staffId", label: "ID" },
     { key: "name", label: "Name" },
     { key: "email", label: "Email" },
     { key: "phoneNumber", label: "Phone Number" },
@@ -78,6 +78,7 @@ const Staffs = () => {
 
   const tableData = allStaffs?.data?.staffs?.map((staff: TStaff) => ({
     _id: staff?._id || "N/A",
+    staffId: staff?.staffId || "N/A",
     userId: staff?.userId?._id,
     name: staff?.userId?.name,
     email: staff?.userId?.email,

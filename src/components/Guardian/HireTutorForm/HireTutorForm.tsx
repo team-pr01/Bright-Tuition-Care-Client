@@ -40,13 +40,13 @@ interface FormValues {
   address: string;
 }
 
-const steps = [
-  "Job Details",
-  "Tutor Preferences",
-  "Student Info",
-  "Preview",
-  "Thank You",
-];
+// const steps = [
+//   "Job Details",
+//   "Tutor Preferences",
+//   "Student Info",
+//   "Preview",
+//   "Thank You",
+// ];
 
 const HireTutorForm = () => {
   const user = useSelector(useCurrentUser) as TLoggedInUser;
@@ -61,10 +61,14 @@ const HireTutorForm = () => {
     try {
       const payload = {
         ...data,
-        guardianName: user?.role === "guardian" ? user?.name  : data.guardianName,
-        guardianPhoneNumber: user?.role === "guardian" ? user?.phoneNumber : data.guardianPhoneNumber,
+        guardianName:
+          user?.role === "guardian" ? user?.name : data.guardianName,
+        guardianPhoneNumber:
+          user?.role === "guardian"
+            ? user?.phoneNumber
+            : data.guardianPhoneNumber,
         postedBy: user?._id,
-        postedByModel: user?.role === "admin" ? "User" : "Guardian",
+        postedByModel: user?.role === "guardian" ? "Guardian" : "User",
       };
       const response = await postJob(payload).unwrap();
       if (response?.success) {
@@ -75,6 +79,9 @@ const HireTutorForm = () => {
       toast.error(err?.data?.message || "Submission failed. Please try again.");
     }
   };
+
+  const progressPercentage =
+    currentStep < 3 ? Math.round(((currentStep + 1) / 4) * 100) : 100; // At step 3 (Preview), 100%
 
   return (
     <FormProvider {...methods}>
@@ -94,10 +101,10 @@ const HireTutorForm = () => {
           <div className="relative w-full h-3 bg-gray-200 rounded-full overflow-hidden mb-4">
             <div
               className="h-full bg-primary-10 transition-all duration-500 ease-in-out relative"
-              style={{ width: `${((currentStep + 1) / steps.length) * 100}%` }}
+              style={{ width: `${progressPercentage}%` }}
             >
               <span className="absolute right-1 top-1/2 -translate-y-1/2 text-xs font-medium text-white">
-                {Math.round(((currentStep + 1) / steps.length) * 100)}%
+                {progressPercentage}%
               </span>
             </div>
           </div>

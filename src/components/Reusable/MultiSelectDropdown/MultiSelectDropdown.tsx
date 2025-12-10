@@ -77,7 +77,7 @@ const MultiSelectDropdown = forwardRef<
       selectedValues?.length > 0 ? selectedValues?.join(", ") : placeholder;
 
     return (
-      <div className="flex flex-col gap-2 font-Nunito" ref={dropdownRef}>
+      <div className="flex flex-col gap-2 font-Nunito capitalize" ref={dropdownRef}>
         {label && (
           <label
             htmlFor={name}
@@ -125,7 +125,7 @@ const MultiSelectDropdown = forwardRef<
                 <input
                   type="text"
                   placeholder="Search..."
-                  className="w-full px-3 py-2 text-sm border border-primary-30 rounded-md focus:outline-none focus:border-primary-10"
+                  className="w-full px-3 py-2 text-sm border border-primary-30 rounded-md focus:outline-none focus:border-primary-10 capitalize"
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
                   onClick={(e) => e.stopPropagation()}
