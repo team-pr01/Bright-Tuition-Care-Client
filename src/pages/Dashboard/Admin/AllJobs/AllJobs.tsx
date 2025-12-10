@@ -130,6 +130,34 @@ const AllJobs = () => {
   return (
     <div>
       <div className="sticky top-0 z-15 px-3 lg:px-6 pt-6 bg-[#F2F5FC]">
+        <AllJobFilters
+          keyword={keyword}
+          setKeyword={setKeyword}
+          selectedCities={selectedCities}
+          setSelectedCities={setSelectedCities}
+          selectedAreas={selectedAreas}
+          setSelectedAreas={setSelectedAreas}
+          areaOptions={areaOptions}
+          setAreaOptions={setAreaOptions}
+          selectedCategory={selectedCategory}
+          setSelectedCategory={setSelectedCategory}
+          selectedDays={selectedDays}
+          setSelectedDays={setSelectedDays}
+          selectedClass={selectedClass}
+          setSelectedClass={setSelectedClass}
+          selectedTutorGender={selectedTutorGender}
+          setSelectedTutorGender={setSelectedTutorGender}
+          selectedStudentGender={selectedStudentGender}
+          setSelectedStudentGender={setSelectedStudentGender}
+          selectedTuitionType={selectedTuitionType}
+          setSelectedTuitionType={setSelectedTuitionType}
+          liveJobs={allJobs?.data?.meta?.liveJobs || 0}
+          status={status}
+          setStatus={setStatus}
+        />
+      </div>
+
+      <div className="px-3 lg:px-6 pb-6 space-y-5">
         <div className="grid grid-cols-5 md:grid-cols-3 xl:grid-cols-4 gap-5">
           <DashboardOverviewCard
             title="All"
@@ -195,34 +223,6 @@ const AllJobs = () => {
           />
         </div>
 
-        <AllJobFilters
-          keyword={keyword}
-          setKeyword={setKeyword}
-          selectedCities={selectedCities}
-          setSelectedCities={setSelectedCities}
-          selectedAreas={selectedAreas}
-          setSelectedAreas={setSelectedAreas}
-          areaOptions={areaOptions}
-          setAreaOptions={setAreaOptions}
-          selectedCategory={selectedCategory}
-          setSelectedCategory={setSelectedCategory}
-          selectedDays={selectedDays}
-          setSelectedDays={setSelectedDays}
-          selectedClass={selectedClass}
-          setSelectedClass={setSelectedClass}
-          selectedTutorGender={selectedTutorGender}
-          setSelectedTutorGender={setSelectedTutorGender}
-          selectedStudentGender={selectedStudentGender}
-          setSelectedStudentGender={setSelectedStudentGender}
-          selectedTuitionType={selectedTuitionType}
-          setSelectedTuitionType={setSelectedTuitionType}
-          liveJobs={allJobs?.data?.meta?.liveJobs || 0}
-          status={status}
-          setStatus={setStatus}
-        />
-      </div>
-
-      <div className="px-3 lg:px-6 pb-6">
         <Jobs
           allJobs={jobs}
           isLoading={isLoading || isFetching}

@@ -5,8 +5,15 @@ import TextInput from "../../Reusable/TextInput/TextInput";
 import { filterData } from "../../../constants/filterData";
 import { useEffect } from "react";
 import type { TJobs } from "../../../types/job.types";
+import Textarea from "../../Reusable/TextArea/TextArea";
+import { useSelector } from "react-redux";
+import { useCurrentUser } from "../../../redux/Features/Auth/authSlice";
+import type { TLoggedInUser } from "../../../types/loggedinUser.types";
+import { useLocation } from "react-router-dom";
 
 const LocationForm = ({ defaultValues }: { defaultValues?: TJobs }) => {
+  const user = useSelector(useCurrentUser) as TLoggedInUser;
+  const pathname = useLocation().pathname;
   const {
     watch,
     setValue,
@@ -19,6 +26,7 @@ const LocationForm = ({ defaultValues }: { defaultValues?: TJobs }) => {
       setValue("city", defaultValues.city || []);
       setValue("area", defaultValues.area || []);
       setValue("address", defaultValues.address || "");
+      setValue("jobUpdate", defaultValues.jobUpdate || "");
     }
   }, [defaultValues, setValue]);
 
@@ -33,6 +41,11 @@ const LocationForm = ({ defaultValues }: { defaultValues?: TJobs }) => {
     return cityObj?.locations || [];
   });
 
+  const isJobUpdateFieldVisible =
+    pathname.startsWith("//dashboard/admin/edit-job") ||
+    (pathname.startsWith("/dashboard/staff/edit-job") &&
+      user?.role === "staff") ||
+    user?.role === "admin";
   return (
     <div className="flex flex-col gap-4 lg:gap-6">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 lg:gap-6">
@@ -60,6 +73,19 @@ const LocationForm = ({ defaultValues }: { defaultValues?: TJobs }) => {
         error={errors.address}
         {...register("address", { required: "Address is required" })}
       />
+
+      {isJobUpdateFieldVisible && (
+        <div className="bg-primary-10/10 p-3 rounded-lg">
+          {/* Job Update */}
+          <Textarea
+            label="Job Update"
+            placeholder="Enter job update"
+            error={errors.jobUpdate}
+            {...register("jobUpdate")}
+            isRequired={false}
+          />
+        </div>
+      )}
     </div>
   );
 };

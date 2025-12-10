@@ -18,7 +18,8 @@ const StaffProfile = () => {
         <LogoLoader />
       </div>
     );
-  }
+  };
+  
   return (
     <div className="max-w-4xl mx-auto font-Nunito">
       <div className="bg-white rounded-xl shadow-lg border border-gray-100 overflow-hidden">

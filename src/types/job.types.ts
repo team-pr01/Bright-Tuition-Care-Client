@@ -37,6 +37,7 @@ export type TJobs = {
   }[];
   postedBy: string;
   postedByModel: "User" | "Guardian";
+  jobUpdate?: string;
   createdAt: string;
   updatedAt: string;
 };
