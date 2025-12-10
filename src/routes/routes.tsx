@@ -60,6 +60,7 @@ import VerificationRequests from "../pages/Dashboard/Admin/VerificationRequests/
 import ErrorComponent from "../components/Reusable/ErrorComponent/ErrorComponent";
 import StaffLogin from "../pages/Auth/StaffLogin/StaffLogin";
 import AdminLogin from "../pages/Auth/AdminLogin/AdminLogin";
+import StaffProfile from "../pages/Dashboard/Admin/StaffProfile/StaffProfile";
 
 export const router = createBrowserRouter([
   // Main layout routes
@@ -469,6 +470,10 @@ export const router = createBrowserRouter([
       {
         path: "home",
         element: <AdminDashboardHome />,
+      },
+      {
+        path: "my-profile",
+        element: <StaffProfile />,
       },
       {
         path: "guardians",

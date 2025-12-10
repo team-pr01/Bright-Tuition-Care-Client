@@ -219,6 +219,11 @@ export const staffDashboardLinks: DashboardLink[] = [
     icon: <LuLayoutDashboard />,
   },
   {
+    label: "My Profile",
+    path: "/dashboard/staff/my-profile",
+    icon: <LuUser />,
+  },
+  {
     label: "Guardian/Students",
     path: "/dashboard/staff/guardians",
     icon: <FaUserShield />,
