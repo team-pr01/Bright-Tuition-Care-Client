@@ -164,7 +164,7 @@ const Accordion = ({ activeTab }: { activeTab: string }) => {
             </li>
             <li>
               <strong>Investigation Process:</strong> Our team will review the
-              case. If cancellation occurs due to the tutor’s fault, negligence,
+              case. If cancellation occurs due to the tutor’s fault, negligence
               or failure to fulfill responsibilities no refund will be issued.
             </li>
           </ul>

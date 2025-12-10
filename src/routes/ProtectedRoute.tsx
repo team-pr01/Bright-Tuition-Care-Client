@@ -22,7 +22,7 @@ const ProtectedRoute = ({ children }: ProtectedRouteProps) => {
     tutor: "/dashboard/tutor",
     guardian: "/dashboard/guardian",
     admin: "/dashboard/admin",
-    staff: "/dashboard/admin",
+    staff: "/dashboard/staff",
   };
 
   if (user) {

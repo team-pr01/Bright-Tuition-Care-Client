@@ -80,7 +80,7 @@ const GuardianDashboardHome = () => {
 
       <div className="px-3 lg:px-6 flex flex-col gap-4 lg:gap-7">
         <NoticeBoard notices={guardianStats?.notices} />
-        <div className="mt-2 bg-blue-50 border-l-4 border-blue-400 p-3 rounded text-gray-800">
+        <div className="mt-2 bg-white border-l-4 border-blue-400 p-3 rounded text-gray-800 w-full">
           Need support with submitting your tutor request? Please call us at{" "}
           <a href="tel:0160785588" className="text-primary-10 underline">
             0160785588

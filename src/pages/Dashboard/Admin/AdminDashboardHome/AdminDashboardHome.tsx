@@ -62,6 +62,7 @@ const ChartCard: React.FC<ChartCardProps> = ({ title, children }) => (
 const AdminDashboardHome = () => {
   const user = useSelector(useCurrentUser) as TLoggedInUser;
   const { data: adminStats, isLoading, isError } = useGetAdminStatsQuery({});
+  console.log(adminStats);
 
   const tutorColor = "#3B82F6";
   const guardianColor = "#10B981";
@@ -136,17 +137,16 @@ const AdminDashboardHome = () => {
           icon={<MdVerified className="text-primary-10" />}
         />
 
-        {
-          user?.role === "admin" &&
+        {user?.role === "admin" && (
           <DashboardOverviewCard
-          title="Total"
-          additionalTitle="Payment"
-          value={`৳${adminStats?.data?.totalPayment || 0}`}
-          textColor="text-neutral-10"
-          path="/dashboard/admin/payments-management"
-          icon={<FaDollarSign className="text-[#8B5CF6]" />}
-        />
-        }
+            title="Total"
+            additionalTitle="Payment"
+            value={`৳${adminStats?.data?.totalPayment || 0}`}
+            textColor="text-neutral-10"
+            path="/dashboard/admin/payments-management"
+            icon={<FaDollarSign className="text-[#8B5CF6]" />}
+          />
+        )}
       </div>
 
       {/* Charts */}
@@ -191,7 +191,7 @@ const AdminDashboardHome = () => {
               {/* All Jobs */}
               <Area
                 type="monotone"
-                dataKey="Posted"
+                dataKey="JobsPosted"
                 stroke={jobsAreaColor}
                 fill={jobsAreaColor}
                 fillOpacity={0.1}
@@ -202,7 +202,7 @@ const AdminDashboardHome = () => {
               {/* ✅ Confirmed Jobs */}
               <Area
                 type="monotone"
-                dataKey="Confirmed"
+                dataKey="ConfirmedJobs"
                 stroke={confirmedColor}
                 fill={confirmedColor}
                 fillOpacity={0.15}
@@ -213,7 +213,7 @@ const AdminDashboardHome = () => {
               {/* ❌ Cancelled Jobs */}
               <Area
                 type="monotone"
-                dataKey="Cancelled"
+                dataKey="CancelledJobs"
                 stroke={cancelledColor}
                 fill={cancelledColor}
                 fillOpacity={0.15}

@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React from "react";
 import { IMAGES } from "../../../../assets";
-import { useLocation, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import Button from "../../../../components/Reusable/Button/Button";
 import { useGetSingleTutorByIdQuery } from "../../../../redux/Features/Tutor/tutorApi";
 import type { TEducation } from "../../../../types/tutor.types";
@@ -10,6 +10,7 @@ import {
   useAppointTutorMutation,
   useConfirmTutorMutation,
   useGetSingleApplicationByIdQuery,
+  useRejectTutorMutation,
   useShortlistTutorMutation,
 } from "../../../../redux/Features/Application/applicationApi";
 import { useSelector } from "react-redux";
@@ -18,10 +19,13 @@ import type { TLoggedInUser } from "../../../../types/loggedinUser.types";
 
 const TutorsResume = () => {
   const user = useSelector(useCurrentUser) as TLoggedInUser;
+  const navigate = useNavigate();
   const [shortlistTutor, { isLoading: isShortlisting }] =
     useShortlistTutorMutation();
   const [appointTutor, { isLoading: isAppointing }] = useAppointTutorMutation();
+  const [rejectTutor, { isLoading: isRejecting }] = useRejectTutorMutation();
   const [confirmTutor, { isLoading: isConfirming }] = useConfirmTutorMutation();
+  // const [cancelTutor, { isLoading: isCancelling }] = useCancelTutorMutation();
   const location = useLocation();
   const { tutorId, applicationId } = useParams();
   const { data } = useGetSingleTutorByIdQuery(tutorId);
@@ -170,6 +174,20 @@ const TutorsResume = () => {
     }
   };
 
+  // Handle Reject
+  const handleRejectTutor = async () => {
+    try {
+      const response = await rejectTutor({ id: applicationId }).unwrap();
+      if (response?.success) {
+        toast.success(response.message || "Tutor Rejected.");
+      }
+    } catch (error: any) {
+      toast.error(
+        error?.data?.message || "Error rejecting tutor. Please try again."
+      );
+    }
+  };
+
   // Handle Confirm
   const handleConfirmTutor = async () => {
     try {
@@ -187,6 +205,24 @@ const TutorsResume = () => {
       );
     }
   };
+
+  // Handle Cancel
+  // const handleCancelTutor = async () => {
+  //   try {
+  //     const payload = { selectedTutor: tutorId };
+  //     const response = await cancelTutor({
+  //       id: applicationId,
+  //       data: payload,
+  //     }).unwrap();
+  //     if (response?.success) {
+  //       toast.success(response.message || "Tutor cancelled successfully.");
+  //     }
+  //   } catch (error: any) {
+  //     toast.error(
+  //       error?.data?.message || "Error cancelling tutor. Please try again."
+  //     );
+  //   }
+  // };
 
   const buttonStyle = "py-[6px] lg:py-[6px] px-3 lg:px-2 text-sm lg:text-sm";
 
@@ -219,6 +255,12 @@ const TutorsResume = () => {
 
               {/* Admin controlls */}
               <div className="flex items-center gap-3">
+                <Button
+                  label={"Go Back"}
+                  variant="tertiary"
+                  className={`${buttonStyle}`}
+                  onClick={() => navigate(-1)}
+                />
                 {location.pathname.startsWith(
                   "/dashboard/admin/application"
                 ) && (
@@ -229,7 +271,10 @@ const TutorsResume = () => {
                       className={`${buttonStyle}`}
                       onClick={handleShortlistTutor}
                       isDisabled={
-                        isShortlisting || isAppointing || isConfirming
+                        isShortlisting ||
+                        isAppointing ||
+                        isConfirming ||
+                        isRejecting
                       }
                     />
 
@@ -239,8 +284,19 @@ const TutorsResume = () => {
                       className={`${buttonStyle} border-[#9C9700] hover:bg-[#9C9700] text-[#9C9700] hover:text-white`}
                       onClick={handleAppointTutor}
                       isDisabled={
-                        isShortlisting || isAppointing || isConfirming
+                        isShortlisting ||
+                        isAppointing ||
+                        isConfirming ||
+                        isRejecting
                       }
+                    />
+
+                    <Button
+                      label={isRejecting ? "Please wait..." : "Reject"}
+                      variant="tertiary"
+                      className={`${buttonStyle} border-red-500 hover:bg-red-500 text-red-500 hover:text-white`}
+                      onClick={handleRejectTutor}
+                      isDisabled={isShortlisting || isRejecting || isConfirming}
                     />
 
                     <Button
@@ -249,9 +305,25 @@ const TutorsResume = () => {
                       className={`${buttonStyle} border-green-600 hover:bg-green-600 text-green-600 hover:text-white`}
                       onClick={handleConfirmTutor}
                       isDisabled={
-                        isShortlisting || isAppointing || isConfirming
+                        isShortlisting ||
+                        isAppointing ||
+                        isConfirming ||
+                        isRejecting
                       }
                     />
+                    {/* <Button
+                      label={isCancelling ? "Please wait..." : "Cancel"}
+                      variant="tertiary"
+                      className={`${buttonStyle} border-red-600 hover:bg-red-600 text-red-600 hover:text-white`}
+                      onClick={handleCancelTutor}
+                      isDisabled={
+                        isShortlisting ||
+                        isAppointing ||
+                        isConfirming ||
+                        isRejecting ||
+                        isCancelling
+                      }
+                    /> */}
                   </div>
                 )}
               </div>

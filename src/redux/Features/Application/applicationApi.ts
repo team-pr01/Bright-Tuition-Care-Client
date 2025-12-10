@@ -102,6 +102,16 @@ const applicationApi = baseApi.injectEndpoints({
       invalidatesTags: ["application"],
     }),
 
+    rejectTutor: builder.mutation<any, any>({
+      query: ({ id, data }) => ({
+        url: `/application/reject/${id}`,
+        method: "PATCH",
+        body: data,
+        credentials: "include",
+      }),
+      invalidatesTags: ["application"],
+    }),
+
     confirmTutor: builder.mutation<any, any>({
       query: ({ id, data }) => ({
         url: `/application/confirm/${id}`,
@@ -111,6 +121,16 @@ const applicationApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ["application"],
     }),
+
+    // cancelTutor: builder.mutation<any, any>({
+    //   query: ({ id, data }) => ({
+    //     url: `/application/cancel/${id}`,
+    //     method: "PATCH",
+    //     body: data,
+    //     credentials: "include",
+    //   }),
+    //   invalidatesTags: ["application"],
+    // }),
   }),
 });
 
@@ -124,5 +144,6 @@ export const {
   useReApplyMutation,
   useShortlistTutorMutation,
   useAppointTutorMutation,
+  useRejectTutorMutation,
   useConfirmTutorMutation,
 } = applicationApi;

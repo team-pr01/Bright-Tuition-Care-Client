@@ -133,37 +133,42 @@ const Payment = () => {
       >
         <div className="">
           {/* Subheading */}
-          <h3 className="text-lg font-semibold mb-4">3.3 Refunds for Tutors</h3>
+          <h3 className="text-lg font-semibold text-center mb-4">Refunds for Tutors</h3>
 
           {/* Description */}
           <p className="text-sm text-gray-700 mb-4">
-            At Bright Tuition Care, we maintain a clear and fair refund policy
-            for our tutors. If a tutor loses a tuition job for a valid reason,
-            they may apply for a partial refund of the paid service charge under
-            the following conditions:
+            At Bright Tuition Care, we maintain a clear and fair{" "}
+            <strong>refund policy</strong> for our tutors. If a tutor loses a
+            tuition job for a valid reason, they may apply for a partial refund
+            of the paid service charge under the following conditions:
           </p>
 
           {/* Conditions */}
           <ul className="list-disc list-inside space-y-2 text-sm text-gray-700">
             <li>
-              Tutor must lose the tuition for a valid guardian-side reason.
+              <strong>Valid Reason:</strong> The discontinuation must be due to
+              a genuine issue from the guardian/student’s side.
             </li>
             <li>
-              Refund Amount: 30% of the paid 60% service charge if canceled
-              within first month.
+              <strong>Refund Amount:</strong> If a confirmed tuition is canceled
+              by the guardian within the first month, the tutor may receive{" "}
+              <strong>30%</strong> of the paid service charge.
             </li>
             <li>
-              Tutor must inform the team within 24 hours (
+              <strong>Immediate Notification:</strong> Tutors must inform our
+              team immediately by calling our helpline:
               <a
                 href="tel:09617785588"
                 className="text-primary-10 font-semibold underline"
               >
                 09617-785588
               </a>
-              ).
             </li>
-
-            <li>If cancellation is tutor’s fault, no refund.</li>
+            <li>
+              <strong>Investigation Process:</strong> Our team will review the
+              case. If cancellation occurs due to the tutor’s fault, negligence
+              or failure to fulfill responsibilities, no refund will be issued.
+            </li>
           </ul>
         </div>
       </Modal>
