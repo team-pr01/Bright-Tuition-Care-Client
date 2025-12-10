@@ -21,30 +21,37 @@ const JobBoard = () => {
   );
   const [selectedAreas, setSelectedAreas] = useState<string[]>([]);
   const [areaOptions, setAreaOptions] = useState<string[]>([]);
-  const [selectedCategory, setSelectedCategory] = useState<string>("");
+  const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
+  const [selectedCurriculums, setSelectedCurriculums] = useState<string[]>([]);
+  const [selectedClasses, setSelectedClasses] = useState<string[]>([]);
   const [selectedDays, setSelectedDays] = useState<string[]>([]);
-  const [selectedClass, setSelectedClass] = useState<string>();
   const [selectedTutorGender, setSelectedTutorGender] = useState<string[]>([]);
   const [selectedStudentGender, setSelectedStudentGender] = useState<string[]>(
     []
   );
   const [selectedTuitionType, setSelectedTuitionType] = useState<string[]>([]);
+  const debouncedKeyword = useDebounce(keyword, 500);
 
   const { data: singleJob } = useGetSingleJobByCustomJobIdQuery(id);
   const shareUrl = `http://localhost:5173/job-board/${singleJob?.data?.jobId}`;
-  const debouncedKeyword = useDebounce(keyword, 500);
   const [showDrawer, setShowDrawer] = useState<boolean>(false);
 
   useEffect(() => {
     setShowDrawer(true);
   }, []);
 
+  // Clear areas when no city is selected
+  useEffect(() => {
+    if (selectedCities.length === 0) {
+      setSelectedAreas([]);
+    }
+  }, [selectedCities]);
+
   // Pagination states
   const [skip, setSkip] = useState(0);
   const limit = 6;
   const [jobs, setJobs] = useState<any[]>([]);
 
-  // API Call
   const {
     data: allJobs,
     isLoading,
@@ -53,8 +60,9 @@ const JobBoard = () => {
     keyword: debouncedKeyword || undefined,
     city: selectedCities.join(",") || undefined,
     area: selectedAreas.join(",") || undefined,
-    category: selectedCategory || undefined,
-    class: selectedClass || undefined,
+    category: selectedCategories.join(",") || undefined,
+    class: selectedClasses.join(",") || undefined,
+    curriculum: selectedCurriculums.join(",") || undefined,
     tutoringDays: selectedDays.join(",") || undefined,
     preferredTutorGender: selectedTutorGender.join(",") || undefined,
     studentGender: selectedStudentGender.join(",") || undefined,
@@ -77,7 +85,7 @@ const JobBoard = () => {
         });
       }
     }
-  }, [allJobs]);
+  }, [allJobs, skip]);
 
   // Reset pagination when filters or search change
   useEffect(() => {
@@ -86,9 +94,10 @@ const JobBoard = () => {
     debouncedKeyword,
     selectedCities,
     selectedAreas,
-    selectedCategory,
+    selectedCategories,
+    selectedCurriculums,
     selectedDays,
-    selectedClass,
+    selectedClasses,
     selectedTutorGender,
     selectedStudentGender,
     selectedTuitionType,
@@ -147,14 +156,15 @@ const JobBoard = () => {
               setSelectedAreas={setSelectedAreas}
               areaOptions={areaOptions}
               setAreaOptions={setAreaOptions}
-              selectedCategory={selectedCategory}
-              setSelectedCategory={setSelectedCategory}
+              // 🔁 MULTI-SELECT PROPS
+              selectedCategories={selectedCategories}
+              setSelectedCategories={setSelectedCategories}
+              selectedCurriculums={selectedCurriculums}
+              setSelectedCurriculums={setSelectedCurriculums}
               selectedDays={selectedDays}
               setSelectedDays={setSelectedDays}
-              selectedClass={selectedClass || ""}
-              setSelectedClass={
-                setSelectedClass as React.Dispatch<React.SetStateAction<string>>
-              }
+              selectedClasses={selectedClasses}
+              setSelectedClasses={setSelectedClasses}
               selectedTutorGender={selectedTutorGender}
               setSelectedTutorGender={setSelectedTutorGender}
               selectedStudentGender={selectedStudentGender}

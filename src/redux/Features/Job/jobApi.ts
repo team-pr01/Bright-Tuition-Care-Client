@@ -12,6 +12,7 @@ const jobApi = baseApi.injectEndpoints({
         area?: string;
         category?: string;
         class?: string;
+        curriculum?: string;
         tutoringDays?: string;
         preferredTutorGender?: string;
         studentGender?: string;
@@ -30,6 +31,8 @@ const jobApi = baseApi.injectEndpoints({
         if (filters.area) params.append("area", filters.area);
         if (filters.category) params.append("category", filters.category);
         if (filters.class) params.append("class", filters.class);
+        if (filters.curriculum)
+          params.append("curriculum", filters.curriculum);
         if (filters.tutoringDays)
           params.append("tutoringDays", filters.tutoringDays);
         if (filters.preferredTutorGender)

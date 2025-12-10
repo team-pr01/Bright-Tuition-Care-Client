@@ -4,13 +4,13 @@ import { useState, useEffect } from "react";
 import MultiSelectDropdown from "../../Reusable/MultiSelectDropdown/MultiSelectDropdown";
 import { filterData } from "../../../constants/filterData";
 import SearchInput from "../../Reusable/SearchBar/SearchBar";
-import SelectDropdown from "../../Reusable/SelectDropdown/SelectDropdown";
 import { useLocation } from "react-router-dom";
 
 // Filters.types.ts (optional file)
 export type TFiltersProps = {
   keyword: string;
-  setKeyword: React.Dispatch<React.SetStateAction<string>>;
+  setKeyword: (value: string) => void;
+
   selectedCities: string[];
   setSelectedCities: React.Dispatch<React.SetStateAction<string[]>>;
 
@@ -19,14 +19,18 @@ export type TFiltersProps = {
   areaOptions: string[];
   setAreaOptions: React.Dispatch<React.SetStateAction<string[]>>;
 
-  selectedCategory: string;
-  setSelectedCategory: React.Dispatch<React.SetStateAction<string>>;
+  // 🔁 CATEGORY / CURRICULUM / CLASS ARE NOW ARRAYS
+  selectedCategories: string[];
+  setSelectedCategories: React.Dispatch<React.SetStateAction<string[]>>;
+
+  selectedCurriculums: string[];
+  setSelectedCurriculums: React.Dispatch<React.SetStateAction<string[]>>;
 
   selectedDays: string[];
   setSelectedDays: React.Dispatch<React.SetStateAction<string[]>>;
 
-  selectedClass: string;
-  setSelectedClass: React.Dispatch<React.SetStateAction<string>>;
+  selectedClasses: string[];
+  setSelectedClasses: React.Dispatch<React.SetStateAction<string[]>>;
 
   selectedTutorGender: string[];
   setSelectedTutorGender: React.Dispatch<React.SetStateAction<string[]>>;
@@ -38,9 +42,6 @@ export type TFiltersProps = {
   setSelectedTuitionType: React.Dispatch<React.SetStateAction<string[]>>;
 
   liveJobs: number;
-
-  status?: string;
-  setStatus?: React.Dispatch<React.SetStateAction<string>>;
 };
 
 const Filters: React.FC<TFiltersProps> = ({
@@ -52,12 +53,14 @@ const Filters: React.FC<TFiltersProps> = ({
   setSelectedAreas,
   areaOptions,
   setAreaOptions,
-  selectedCategory,
-  setSelectedCategory,
+  selectedCategories,
+  setSelectedCategories,
+  selectedCurriculums,
+  setSelectedCurriculums,
   selectedDays,
   setSelectedDays,
-  selectedClass,
-  setSelectedClass,
+  selectedClasses,
+  setSelectedClasses,
   selectedTutorGender,
   setSelectedTutorGender,
   selectedStudentGender,
@@ -68,17 +71,24 @@ const Filters: React.FC<TFiltersProps> = ({
 }) => {
   const pathname = useLocation().pathname;
   const [isAccordingOpen, setIsAccordingOpen] = useState<boolean>(false);
+
   const handleResetFilters = () => {
     setSelectedCities([]);
     setSelectedAreas([]);
-    setSelectedCategory("");
+    setAreaOptions([]);
+    setSelectedCategories([]);
+    setSelectedCurriculums([]);
     setSelectedDays([]);
-    setSelectedClass("");
+    setSelectedClasses([]);
     setSelectedTutorGender([]);
     setSelectedStudentGender([]);
     setSelectedTuitionType([]);
+    setSelectedSubjects([]);
+    setSubjectOptions([]);
+    setClassOptions([]);
   };
 
+  // --------- CITY → AREA OPTIONS ----------
   useEffect(() => {
     if (selectedCities.length === 0) {
       setAreaOptions([]);
@@ -99,63 +109,76 @@ const Filters: React.FC<TFiltersProps> = ({
     setSelectedAreas((prev) =>
       prev.filter((area) => uniqueLocations.includes(area))
     );
-  }, [selectedCities]);
+  }, [selectedCities, setAreaOptions, setSelectedAreas]);
 
+  // ---------- CLASS / SUBJECT STATE ----------
   const [classOptions, setClassOptions] = useState<string[]>([]);
   const [subjectOptions, setSubjectOptions] = useState<string[]>([]);
   const [selectedSubjects, setSelectedSubjects] = useState<string[]>([]);
 
   // ---------- UPDATE CLASS OPTIONS WHEN CATEGORY CHANGES ----------
   useEffect(() => {
-    if (!selectedCategory) {
+    if (!selectedCategories.length) {
       setClassOptions([]);
       setSubjectOptions([]);
       setSelectedSubjects([]);
-      setSelectedClass(""); // Reset class when category changes
+      setSelectedClasses([]);
       return;
     }
 
-    const categoryData = filterData?.tutoringCatalog.find(
-      (item) => item.category === selectedCategory
+    const relevantCategories =
+      filterData?.tutoringCatalog.filter((item) =>
+        selectedCategories.includes(item.category)
+      ) || [];
+
+    const allClasses = relevantCategories.flatMap((cat) =>
+      cat.classes.map((cls) => cls.name)
     );
+    const uniqueClasses = Array.from(new Set(allClasses));
 
-    if (categoryData) {
-      const extractedClasses = categoryData.classes.map((cls) => cls.name);
-      setClassOptions(extractedClasses);
-    }
+    setClassOptions(uniqueClasses);
 
+    // Keep only classes that still exist under selected categories
+    setSelectedClasses((prev) => prev.filter((c) => uniqueClasses.includes(c)));
+
+    // Reset subjects because category context changed
     setSubjectOptions([]);
     setSelectedSubjects([]);
-    setSelectedClass(""); // Reset class when category changes
-  }, [selectedCategory, setSelectedClass]);
+  }, [selectedCategories, setSelectedClasses]);
 
-  // ---------- UPDATE SUBJECT OPTIONS WHEN CLASS CHANGES ----------
+  // ---------- UPDATE SUBJECT OPTIONS WHEN CLASS OR CATEGORY CHANGES ----------
   useEffect(() => {
-    if (!selectedClass || !selectedCategory) {
+    if (!selectedCategories.length || !selectedClasses.length) {
       setSubjectOptions([]);
       setSelectedSubjects([]);
       return;
     }
 
-    const categoryData = filterData?.tutoringCatalog.find(
-      (item) => item.category === selectedCategory
+    const relevantCategories =
+      filterData?.tutoringCatalog.filter((item) =>
+        selectedCategories.includes(item.category)
+      ) || [];
+
+    const subjectsSet = new Set<string>();
+
+    relevantCategories.forEach((category) => {
+      category.classes.forEach((cls) => {
+        if (selectedClasses.includes(cls.name)) {
+          cls.subjects.forEach((subj: string) => subjectsSet.add(subj));
+        }
+      });
+    });
+
+    const subjectsArray = Array.from(subjectsSet);
+    setSubjectOptions(subjectsArray);
+
+    // Keep only subjects that exist in new combined subject list
+    setSelectedSubjects((prev) =>
+      prev.filter((subject) => subjectsArray.includes(subject))
     );
+  }, [selectedCategories, selectedClasses]);
 
-    const classData = categoryData?.classes.find(
-      (cls) => cls.name === selectedClass
-    );
-
-    if (classData) {
-      setSubjectOptions(classData.subjects);
-
-      // Keep only subjects that exist in the new class
-      setSelectedSubjects((prev) =>
-        prev.filter((subject) => classData.subjects.includes(subject))
-      );
-    } else {
-      setSelectedSubjects([]);
-    }
-  }, [selectedClass, selectedCategory]);
+  const englishMediumSelected = selectedCategories.includes("English Medium");
 
   const curriculumOptions = ["Ed-Excel", "Cambridge", "IB"];
   const buttonCommonClassNames =
@@ -237,40 +260,53 @@ const Filters: React.FC<TFiltersProps> = ({
                   isRequired={false}
                 />
 
-                {/* Category */}
-                <SelectDropdown
+                {/* 🔁 CATEGORY - NOW MULTI-SELECT */}
+                <MultiSelectDropdown
                   label="Category"
+                  name="category"
                   options={filterData.category}
-                  value={selectedCategory}
-                  onChangeEvent={setSelectedCategory}
+                  value={selectedCategories}
+                  onChange={setSelectedCategories}
                 />
 
-                {/* IF CATEGORY = ENGLISH MEDIUM SHOW CURRICULUM */}
-                {selectedCategory === "English Medium" && (
-                  <SelectDropdown
+                {/* 🔁 CURRICULUM (ONLY IF ENGLISH MEDIUM SELECTED) - MULTI-SELECT */}
+                {englishMediumSelected && (
+                  <MultiSelectDropdown
                     label="Curriculum"
+                    name="curriculum"
                     options={curriculumOptions}
+                    value={selectedCurriculums}
+                    onChange={setSelectedCurriculums}
+                    isRequired={false}
                   />
                 )}
 
-                {/* CLASS */}
-                <SelectDropdown
+                {/* 🔁 CLASS - NOW MULTI-SELECT, DEPENDS ON CATEGORY */}
+                <MultiSelectDropdown
                   label="Class"
+                  name="class"
                   options={classOptions}
-                  value={selectedClass}
-                  onChangeEvent={setSelectedClass}
-                  isDisabled={!selectedCategory}
+                  value={selectedClasses}
+                  onChange={setSelectedClasses}
+                  noDataMessage="Please select category first"
+                  isDisabled={!selectedCategories.length}
                 />
 
-                {/* SUBJECTS */}
+                {/* SUBJECTS (already multi-select; now supports multiple classes/categories) */}
                 <MultiSelectDropdown
                   label="Subjects"
                   name="subjects"
                   options={subjectOptions}
                   value={selectedSubjects}
                   onChange={setSelectedSubjects}
-                  noDataMessage="Please select class first"
-                  isDisabled={!selectedClass}
+                  noDataMessage={
+                    !selectedCategories.length || !selectedClasses.length
+                      ? "Please select category and class first"
+                      : "No subjects found"
+                  }
+                  isDisabled={
+                    !selectedCategories.length || !selectedClasses.length
+                  }
                 />
 
                 {/* Tuition Type */}

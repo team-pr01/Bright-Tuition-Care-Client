@@ -31,8 +31,8 @@ type TFormData = {
   address: string;
   overview: string;
   facebook: string;
-  instagram: string;
-  linkedin: string;
+  // instagram: string;
+  // linkedin: string;
 };
 
 const UpdatePersonalInfoModal = ({
@@ -52,6 +52,7 @@ const UpdatePersonalInfoModal = ({
     formState: { errors },
   } = useForm<TFormData>();
 
+  // Setting default values
   useEffect(() => {
     if (defaultValues) {
       setValue("name", defaultValues.name);
@@ -74,8 +75,8 @@ const UpdatePersonalInfoModal = ({
       setValue("address", defaultValues.address);
       setValue("overview", defaultValues.overview);
       setValue("facebook", defaultValues.socialMediaInformation?.facebook);
-      setValue("instagram", defaultValues.socialMediaInformation?.instagram);
-      setValue("linkedin", defaultValues.socialMediaInformation?.linkedin);
+      // setValue("instagram", defaultValues.socialMediaInformation?.instagram);
+      // setValue("linkedin", defaultValues.socialMediaInformation?.linkedin);
     }
   }, [defaultValues, setValue]);
 
@@ -122,10 +123,10 @@ const UpdatePersonalInfoModal = ({
         },
         socialMediaInformation: {
           facebook: data.facebook,
-          instagram: data.instagram,
-          linkedin: data.linkedin,
+          // instagram: data.instagram,
+          // linkedin: data.linkedin,
         },
-        profileCompleted: 25, // Personal- 20, Qualification- 5
+        profileCompleted: 25, // Personal- 20, Social media- 5
       };
       const response = await updateProfile(payload).unwrap();
       if (response.success) {
@@ -167,7 +168,13 @@ const UpdatePersonalInfoModal = ({
           type="tel"
           placeholder="Enter additional number"
           error={errors.additionalNumber}
-          {...register("additionalNumber")}
+          {...register("additionalNumber", {
+            pattern: {
+              value: /^(01)\d{9}$/,
+              message:
+                "Phone number must start with 01 and be exactly 11 digits",
+            },
+          })}
           isRequired={false}
         />
 

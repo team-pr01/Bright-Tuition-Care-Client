@@ -24,9 +24,11 @@ const AllJobs = () => {
   const [selectedCities, setSelectedCities] = useState<string[]>([]);
   const [selectedAreas, setSelectedAreas] = useState<string[]>([]);
   const [areaOptions, setAreaOptions] = useState<string[]>([]);
-  const [selectedCategory, setSelectedCategory] = useState<string>("");
+  const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
+  const [selectedCurriculums, setSelectedCurriculums] = useState<string[]>([]);
+  const [selectedClasses, setSelectedClasses] = useState<string[]>([]);
+
   const [selectedDays, setSelectedDays] = useState<string[]>([]);
-  const [selectedClass, setSelectedClass] = useState<string>("");
   const [selectedTutorGender, setSelectedTutorGender] = useState<string[]>([]);
   const [selectedStudentGender, setSelectedStudentGender] = useState<string[]>(
     []
@@ -47,8 +49,9 @@ const AllJobs = () => {
     keyword: debouncedKeyword || undefined,
     city: selectedCities.join(",") || undefined,
     area: selectedAreas.join(",") || undefined,
-    category: selectedCategory || undefined,
-    class: selectedClass || undefined,
+    category: selectedCategories.join(",") || undefined,
+    class: selectedClasses.join(",") || undefined,
+    curriculum: selectedCurriculums.join(",") || undefined,
     tutoringDays: selectedDays.join(",") || undefined,
     preferredTutorGender: selectedTutorGender.join(",") || undefined,
     studentGender: selectedStudentGender.join(",") || undefined,
@@ -75,7 +78,7 @@ const AllJobs = () => {
         });
       }
     }
-  }, [allJobs]);
+  }, [allJobs, skip]);
 
   // Reset pagination when filters or search change
   useEffect(() => {
@@ -84,9 +87,10 @@ const AllJobs = () => {
     debouncedKeyword,
     selectedCities,
     selectedAreas,
-    selectedCategory,
+    selectedCategories,
+    selectedCurriculums,
     selectedDays,
-    selectedClass,
+    selectedClasses,
     selectedTutorGender,
     selectedStudentGender,
     selectedTuitionType,
@@ -139,12 +143,14 @@ const AllJobs = () => {
           setSelectedAreas={setSelectedAreas}
           areaOptions={areaOptions}
           setAreaOptions={setAreaOptions}
-          selectedCategory={selectedCategory}
-          setSelectedCategory={setSelectedCategory}
+          selectedCategories={selectedCategories}
+          setSelectedCategories={setSelectedCategories}
+          selectedCurriculums={selectedCurriculums}
+          setSelectedCurriculums={setSelectedCurriculums}
+          selectedClasses={selectedClasses}
+          setSelectedClasses={setSelectedClasses}
           selectedDays={selectedDays}
           setSelectedDays={setSelectedDays}
-          selectedClass={selectedClass}
-          setSelectedClass={setSelectedClass}
           selectedTutorGender={selectedTutorGender}
           setSelectedTutorGender={setSelectedTutorGender}
           selectedStudentGender={selectedStudentGender}

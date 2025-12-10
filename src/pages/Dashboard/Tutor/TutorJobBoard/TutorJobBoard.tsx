@@ -14,17 +14,23 @@ const TutorJobBoard = () => {
   const areas = searchParams.getAll("area");
 
   const [keyword, setKeyword] = useState<string>("");
+
   const [selectedCities, setSelectedCities] = useState<string[]>([]);
   const [selectedAreas, setSelectedAreas] = useState<string[]>([]);
   const [areaOptions, setAreaOptions] = useState<string[]>([]);
-  const [selectedCategory, setSelectedCategory] = useState<string>("");
+
+  // 🔁 NOW MULTI-SELECT
+  const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
+  const [selectedCurriculums, setSelectedCurriculums] = useState<string[]>([]);
+  const [selectedClasses, setSelectedClasses] = useState<string[]>([]);
+
   const [selectedDays, setSelectedDays] = useState<string[]>([]);
-  const [selectedClass, setSelectedClass] = useState<string>("");
   const [selectedTutorGender, setSelectedTutorGender] = useState<string[]>([]);
   const [selectedStudentGender, setSelectedStudentGender] = useState<string[]>(
     []
   );
   const [selectedTuitionType, setSelectedTuitionType] = useState<string[]>([]);
+
   const debouncedKeyword = useDebounce(keyword, 500);
 
   // Clear areas when no city is selected
@@ -34,11 +40,11 @@ const TutorJobBoard = () => {
     }
   }, [selectedCities]);
 
-  // Sync city & area from URL params
+  // Sync city & area from URL params on mount
   useEffect(() => {
     if (cities.length > 0) setSelectedCities(cities);
     if (areas.length > 0) setSelectedAreas(areas);
-  }, []);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   // Pagination states
   const [skip, setSkip] = useState(0);
@@ -53,8 +59,9 @@ const TutorJobBoard = () => {
     keyword: debouncedKeyword || undefined,
     city: selectedCities.join(",") || undefined,
     area: selectedAreas.join(",") || undefined,
-    category: selectedCategory || undefined,
-    class: selectedClass || undefined,
+    category: selectedCategories.join(",") || undefined,
+    class: selectedClasses.join(",") || undefined,
+    curriculum: selectedCurriculums.join(",") || undefined,
     tutoringDays: selectedDays.join(",") || undefined,
     preferredTutorGender: selectedTutorGender.join(",") || undefined,
     studentGender: selectedStudentGender.join(",") || undefined,
@@ -86,9 +93,10 @@ const TutorJobBoard = () => {
     debouncedKeyword,
     selectedCities,
     selectedAreas,
-    selectedCategory,
+    selectedCategories,
+    selectedCurriculums,
     selectedDays,
-    selectedClass,
+    selectedClasses,
     selectedTutorGender,
     selectedStudentGender,
     selectedTuitionType,
@@ -117,6 +125,7 @@ const TutorJobBoard = () => {
       if (node) observer.unobserve(node);
     };
   }, [allJobs, isFetching, allJobs?.data?.meta?.hasMore]);
+
   return (
     <div>
       <Filters
@@ -128,12 +137,15 @@ const TutorJobBoard = () => {
         setSelectedAreas={setSelectedAreas}
         areaOptions={areaOptions}
         setAreaOptions={setAreaOptions}
-        selectedCategory={selectedCategory}
-        setSelectedCategory={setSelectedCategory}
+        // 🔁 MULTI-SELECT PROPS
+        selectedCategories={selectedCategories}
+        setSelectedCategories={setSelectedCategories}
+        selectedCurriculums={selectedCurriculums}
+        setSelectedCurriculums={setSelectedCurriculums}
         selectedDays={selectedDays}
         setSelectedDays={setSelectedDays}
-        selectedClass={selectedClass}
-        setSelectedClass={setSelectedClass}
+        selectedClasses={selectedClasses}
+        setSelectedClasses={setSelectedClasses}
         selectedTutorGender={selectedTutorGender}
         setSelectedTutorGender={setSelectedTutorGender}
         selectedStudentGender={selectedStudentGender}

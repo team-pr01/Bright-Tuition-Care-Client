@@ -167,7 +167,7 @@ const MyProfile = () => {
         <LogoLoader />
       </div>
     );
-  }
+  };
 
   return (
     <div className="flex flex-col lg:flex-row gap-5 font-Nunito w-full">
