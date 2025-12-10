@@ -38,10 +38,19 @@ const TutorsResume = () => {
     useGetSingleApplicationByIdQuery(applicationId);
   const application = applicationData?.data;
 
+  const isTutorOrGuardian = user?.role === "tutor" || user?.role === "guardian";
+
+  const isRestrictedPath = location?.pathname.startsWith(
+    "/dashboard/tutor/view"
+  );
+
+  const isRestrictedStatus =
+    application?.status === "applied" ||
+    application?.status === "withdrawn" ||
+    application?.status === "shortlisted";
+
   const isContactDetailsHidden =
-    location?.pathname.startsWith("/dashboard/tutor/view") ||
-    (location?.pathname.startsWith("/dashboard/guardian/application") &&
-      application?.status === "pending");
+    isTutorOrGuardian && (isRestrictedPath || isRestrictedStatus);
 
   const educationData = educationDetails?.map((item: TEducation) => [
     { label: "Institute Name", value: item.instituteName || "N/A" },
@@ -107,8 +116,6 @@ const TutorsResume = () => {
     (item) => item?.value && item?.value !== ""
   );
 
-  const showPhoneNumbers = user?.role === "admin" || user?.role === "staff"; // Only admin/staff can see the phone numbers
-
   const personalData = [
     { label: "Gender", value: personalInfo?.gender || "N/A" },
     { label: "Religion", value: personalInfo?.religion || "N/A" },
@@ -122,20 +129,20 @@ const TutorsResume = () => {
     { label: "Father's Name", value: personalInfo?.fatherName || "N/A" },
     {
       label: "Father's Phone",
-      value: showPhoneNumbers
+      value: !isContactDetailsHidden
         ? personalInfo?.fatherPhoneNumber || "N/A"
         : "N/A",
     },
     { label: "Mother's Name", value: personalInfo?.motherName || "N/A" },
     {
       label: "Mother's Phone",
-      value: showPhoneNumbers
+      value: !isContactDetailsHidden
         ? personalInfo?.motherPhoneNumber || "N/A"
         : "N/A",
     },
     {
       label: "Additional Phone",
-      value: showPhoneNumbers
+      value: !isContactDetailsHidden
         ? personalInfo?.additionalPhoneNumber || "N/A"
         : "N/A",
     },
@@ -223,6 +230,8 @@ const TutorsResume = () => {
   //     );
   //   }
   // };
+
+  console.log(isContactDetailsHidden);
 
   const buttonStyle = "py-[6px] lg:py-[6px] px-3 lg:px-2 text-sm lg:text-sm";
 
