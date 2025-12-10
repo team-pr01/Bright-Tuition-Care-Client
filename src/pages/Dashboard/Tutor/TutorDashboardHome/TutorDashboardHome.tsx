@@ -220,7 +220,7 @@ const TutorDashboardHome = () => {
                 : null
             }
             btnLabel={tutorStats?.isVerified ? "Verified" : "Verify Now"}
-            path={"/dashboard/tutor/settings"}
+            path={"/dashboard/tutor/settings/profile-verification"}
           />
 
           <DashboardDataCard

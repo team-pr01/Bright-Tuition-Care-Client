@@ -2,15 +2,22 @@ import { Link, useLocation } from "react-router-dom";
 import {
   adminDashboardLinks,
   guardianDashboardLinks,
+  staffDashboardLinks,
   tutorDashboardLinks,
 } from "../../../../data/dashboardSidebarLinks";
 
-const RoleBasedNavlinks = ({setIsHamburgerOpen} : {setIsHamburgerOpen?: React.Dispatch<React.SetStateAction<boolean>>}) => {
+const RoleBasedNavlinks = ({
+  setIsHamburgerOpen,
+}: {
+  setIsHamburgerOpen?: React.Dispatch<React.SetStateAction<boolean>>;
+}) => {
   const location = useLocation();
   const navlinks = location.pathname.startsWith("/dashboard/tutor")
     ? tutorDashboardLinks
     : location.pathname.startsWith("/dashboard/guardian")
     ? guardianDashboardLinks
+    : location?.pathname.startsWith("/dashboard/staff")
+    ? staffDashboardLinks
     : adminDashboardLinks;
   return (
     <div className="flex flex-col gap-2">

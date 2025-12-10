@@ -32,7 +32,7 @@ const DashboardDataCard: React.FC<TDashboardDataCardProps> = ({
             {value}
           </span>{" "}
           {badgeText && (
-            <span className="bg-primary-10 px-2 py-1 text-[10px] text-white rounded-3xl">
+            <span className="bg-primary-10/10 px-2 py-1 text-[10px] text-primary-10 rounded-3xl font-bold">
               {badgeText}
             </span>
           )}

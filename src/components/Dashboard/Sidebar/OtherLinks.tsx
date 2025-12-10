@@ -100,7 +100,7 @@ const OtherLinks = ({
   ];
 
   const otherLinks =
-    user?.role === "guardian" ? otherGuardianLinks : user?.role === "admin" ? otherAdminLinks : otherTutorLinks;
+    user?.role === "guardian" ? otherGuardianLinks : user?.role === "tutor" ? otherTutorLinks : otherAdminLinks;
   return (
     <div className="flex flex-col gap-2">
       {otherLinks?.map((link: DashboardLink) => (

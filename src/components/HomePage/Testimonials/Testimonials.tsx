@@ -56,7 +56,7 @@ const Testimonials: React.FC<TestimonialsProps> = ({
             spaceBetween={20}
             loop={true}
             autoplay={{
-              delay: 3000,
+              delay: 4000,
               disableOnInteraction: false,
             }}
             navigation={{

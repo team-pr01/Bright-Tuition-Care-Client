@@ -18,7 +18,7 @@ type TFormData = {
   email: string;
   password: string;
 };
-const AdminOrStaffLogin = () => {
+const AdminLogin = () => {
   const [isPasswordVisible, setIsPasswordVisible] = useState<boolean>(false);
   const [login, { isLoading }] = useLoginMutation();
   const {
@@ -72,7 +72,7 @@ const AdminOrStaffLogin = () => {
         className="w-full max-w-md bg-white/90 backdrop-blur-sm shadow-lg rounded-2xl p-6 md:p-8 flex flex-col gap-6 font-Nunito border border-primary-10/20"
       >
         <AuthHeading
-          title="Signin as Admin or Staff"
+          title="Signin as Admin"
           description="Please enter your email and password to sign in."
         />
 
@@ -124,4 +124,4 @@ const AdminOrStaffLogin = () => {
   );
 };
 
-export default AdminOrStaffLogin;
+export default AdminLogin;

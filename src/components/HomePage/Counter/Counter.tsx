@@ -25,17 +25,17 @@ const Counter = () => {
     },
     {
       icon: ICONS.user,
-      value: 12000 + (allStats?.activeTutors ?? 0),
+      value: 25000 + (allStats?.activeTutors ?? 0),
       label: "Active Tutors",
     },
     {
       icon: ICONS.smiley,
-      value: 25000 + (allStats?.happyGuardians ?? 0),
+      value: 12000 + (allStats?.happyGuardians ?? 0),
       label: "Happy Guardians/Students",
     },
     {
       icon: ICONS.trophy,
-      value: 4.9,
+      value: 4.7,
       label: "Ratings",
     },
   ];

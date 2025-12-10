@@ -51,7 +51,6 @@ import Signup from "../pages/Auth/Signup/Signup";
 import MyApplications from "../pages/Dashboard/Tutor/MyApplications/MyApplications";
 import ProtectedRoute from "./ProtectedRoute";
 import AdminAuthLayout from "../layouts/AdminAuthLayout";
-import AdminOrStaffLogin from "../pages/Auth/AdminOrStaffLogin/AdminOrStaffLogin";
 import TutorGuidelines from "../pages/Dashboard/Shared/TutorGuidelines/TutorGuidelines";
 import GuardianGuidelines from "../pages/Dashboard/Guardian/GurdianGuidelines/GuardianGuidelines";
 import AllJobs from "../pages/Dashboard/Admin/AllJobs/AllJobs";
@@ -59,6 +58,8 @@ import { UserProvider } from "../contexts/UserProvider";
 import RefundRequests from "../pages/Dashboard/Admin/RefundRequests/RefundRequests";
 import VerificationRequests from "../pages/Dashboard/Admin/VerificationRequests/VerificationRequests";
 import ErrorComponent from "../components/Reusable/ErrorComponent/ErrorComponent";
+import StaffLogin from "../pages/Auth/StaffLogin/StaffLogin";
+import AdminLogin from "../pages/Auth/AdminLogin/AdminLogin";
 
 export const router = createBrowserRouter([
   // Main layout routes
@@ -227,6 +228,10 @@ export const router = createBrowserRouter([
         element: <Settings />,
       },
       {
+        path: "settings/:slug",
+        element: <Settings />,
+      },
+      {
         path: "important-guidelines",
         element: <TutorGuidelines />,
       },
@@ -319,6 +324,10 @@ export const router = createBrowserRouter([
       },
       {
         path: "settings",
+        element: <Settings />,
+      },
+      {
+        path: "settings/:slug",
         element: <Settings />,
       },
       {
@@ -445,7 +454,113 @@ export const router = createBrowserRouter([
       },
     ],
   },
-  // Admin/Staff login
+  // Staff dashboard routes
+  {
+    path: "dashboard/staff",
+    element: (
+      <ProtectedRoute>
+        <UserProvider>
+          <DashboardLayout />
+        </UserProvider>
+      </ProtectedRoute>
+    ),
+    errorElement: <ErrorComponent/>,
+    children: [
+      {
+        path: "home",
+        element: <AdminDashboardHome />,
+      },
+      {
+        path: "guardians",
+        element: <Guardians />,
+      },
+      {
+        path: "guardian/:id",
+        element: <GuardianProfile />,
+      },
+      {
+        path: "tutors",
+        element: <Tutors />,
+      },
+      {
+        path: "tutor/:tutorId",
+        element: <TutorsResume />,
+      },
+      {
+        path: "all-jobs/:jobStatus",
+        element: <AllJobs />,
+      },
+      {
+        path: "edit-job/:jobId",
+        element: <EditJob />,
+      },
+      {
+        path: "applications/:jobId",
+        element: <Applications />,
+      },
+      {
+        path: "application/:applicationId/resume/:tutorId",
+        element: <TutorsResume />,
+      },
+      {
+        path: "hire-a-tutor",
+        element: <HireATutor />,
+      },
+      {
+        path: "verification-requests",
+        element: <VerificationRequests />,
+      },
+      {
+        path: "refund-requests",
+        element: <RefundRequests />,
+      },
+      {
+        path: "invoice-management",
+        element: <InvoiceManagement />,
+      },
+      {
+        path: "confirmation-letters-management",
+        element: <ConfirmationLetterManagement />,
+      },
+      {
+        path: "notice-board-management",
+        element: <NoticeBoardManagement />,
+      },
+      {
+        path: "testimonials-management",
+        element: <TestimonialManagement />,
+      },
+      {
+        path: "notifications-management",
+        element: <NotificationsManagement />,
+      },
+      {
+        path: "send-notification",
+        element: <SendNotification />,
+      },
+      {
+        path: "lead-management",
+        element: <LeadManagement />,
+      },
+      {
+        path: "settings",
+        element: <Settings />,
+      },
+      {
+        path: "share-app",
+        element: <ShareThisApp />,
+      },
+      {
+        path: "terms-and-conditions",
+        element: <TermsAndConditionsDashboard />,
+      },
+      {
+        path: "*",
+        element: <NotFound />,
+      },
+    ],
+  },
+  // Admin login
   {
     path: "admin",
     element: <AdminAuthLayout />,
@@ -453,7 +568,23 @@ export const router = createBrowserRouter([
     children: [
       {
         path: "",
-        element: <AdminOrStaffLogin />,
+        element: <AdminLogin />,
+      },
+      {
+        path: "*",
+        element: <NotFound />,
+      },
+    ],
+  },
+  // Staff login
+  {
+    path: "staff",
+    element: <AdminAuthLayout />,
+    errorElement: <ErrorComponent/>,
+    children: [
+      {
+        path: "",
+        element: <StaffLogin />,
       },
       {
         path: "*",

@@ -13,23 +13,32 @@ const CounterCard: React.FC<CounterCardProps> = ({ icon, value, label }) => {
   const isInView = useInView(cardRef, { once: true, margin: "-100px" });
 
   useEffect(() => {
-    if (isInView && countRef.current) {
-      const stringValue = String(value); // ensure it's a string
-      const numericValue = parseFloat(stringValue.match(/[\d.]+/)?.[0] || "0");
-      const suffix = stringValue.match(/[a-zA-Z+%]+$/)?.[0] || "";
+    if (!isInView || !countRef.current) return;
 
-      const controls = animate(0, numericValue, {
-        duration: 2,
-        ease: "easeOut",
-        onUpdate: (latest) => { // ✅ fixed syntax
-          if (countRef.current) {
-            countRef.current.textContent = Math.round(latest).toString() + suffix;
-          }
-        },
-      });
+    const stringValue = String(value);
 
-      return () => controls.stop();
-    }
+    const numberMatch = stringValue.match(/[\d.]+/);
+    const numericValue = numberMatch ? parseFloat(numberMatch[0]) : 0;
+
+    const suffix = stringValue.match(/[a-zA-Z+%]+$/)?.[0] || "";
+
+    // ✅ detect decimal precision from the original value
+    const decimalPlaces = numberMatch?.[0].includes(".")
+      ? numberMatch[0].split(".")[1].length
+      : 0;
+
+    const controls = animate(0, numericValue, {
+      duration: 2,
+      ease: "easeOut",
+      onUpdate: (latest) => {
+        if (!countRef.current) return;
+
+        const formatted = latest.toFixed(decimalPlaces);
+        countRef.current.textContent = formatted + suffix;
+      },
+    });
+
+    return () => controls.stop();
   }, [isInView, value]);
 
   return (
@@ -38,11 +47,7 @@ const CounterCard: React.FC<CounterCardProps> = ({ icon, value, label }) => {
       className="flex flex-row font-Nunito items-center gap-5 text-center min-w-[200px]"
     >
       {typeof icon === "string" ? (
-        <img
-          src={icon}
-          alt={`${label} icon`}
-          className="w-[56px] h-[56px]"
-        />
+        <img src={icon} alt={`${label} icon`} className="w-[56px] h-[56px]" />
       ) : (
         <div className="w-[56px] h-[56px]">{icon}</div>
       )}

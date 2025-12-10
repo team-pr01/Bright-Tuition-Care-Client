@@ -65,7 +65,7 @@ const AboutUs = () => {
             <Heading titleParts={[{ text: "About Bright Tuition Care" }]} />
             <div className="flex flex-col gap-2 mt-2 lg:mt-4 text-neutral-45 text-lg leading-6 text-start">
               <p className="text-justify">
-                At Bright Tuition Care, we connect students with qualified tutors and provide tutoring jobs based on each tutor’s skills. We believe that every student needs <strong>quality tutors</strong> suited to their goals and learning style. That’s why we have created a trusted platform where finding <strong>the right tutor</strong> is fast, reliable, and hassle-free.
+                At Bright Tuition Care, we connect students with qualified tutors and provide tutoring jobs based on each tutor’s skills. We believe that every student needs <strong>quality tutors</strong> suited to their goals and learning style. That’s why we have created a trusted platform where finding <strong>the right tutor</strong> is fast, reliable and hassle-free.
               </p>
               <p className="text-justify">
                 Our commitment is to empower students to achieve their full potential by providing them with expert tutors in both academic subjects and specialized skills.

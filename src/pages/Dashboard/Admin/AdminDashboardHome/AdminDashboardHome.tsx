@@ -24,6 +24,9 @@ import { useGetAdminStatsQuery } from "../../../../redux/Features/Admin/adminApi
 import { MdVerified } from "react-icons/md";
 import LogoLoader from "../../../../components/Reusable/LogoLoader/LogoLoader";
 import ErrorComponent from "../../../../components/Reusable/ErrorComponent/ErrorComponent";
+import { useSelector } from "react-redux";
+import { useCurrentUser } from "../../../../redux/Features/Auth/authSlice";
+import type { TLoggedInUser } from "../../../../types/loggedinUser.types";
 
 // --- Custom Tooltip ---
 const CustomTooltip = ({ active, payload, label }: any) => {
@@ -57,6 +60,7 @@ const ChartCard: React.FC<ChartCardProps> = ({ title, children }) => (
 
 // --- Main Component ---
 const AdminDashboardHome = () => {
+  const user = useSelector(useCurrentUser) as TLoggedInUser;
   const { data: adminStats, isLoading, isError } = useGetAdminStatsQuery({});
 
   const tutorColor = "#3B82F6";
@@ -110,7 +114,7 @@ const AdminDashboardHome = () => {
           additionalTitle="Jobs"
           value={adminStats?.data?.totalJobs || 0}
           textColor="text-neutral-10"
-          path="/dashboard/admin/all-jobs"
+          path="/dashboard/admin/all-jobs/all"
           icon={<FaBriefcase className="text-[#F59E0B]" />}
         />
 
@@ -132,7 +136,9 @@ const AdminDashboardHome = () => {
           icon={<MdVerified className="text-primary-10" />}
         />
 
-        <DashboardOverviewCard
+        {
+          user?.role === "admin" &&
+          <DashboardOverviewCard
           title="Total"
           additionalTitle="Payment"
           value={`৳${adminStats?.data?.totalPayment || 0}`}
@@ -140,6 +146,7 @@ const AdminDashboardHome = () => {
           path="/dashboard/admin/payments-management"
           icon={<FaDollarSign className="text-[#8B5CF6]" />}
         />
+        }
       </div>
 
       {/* Charts */}

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { ICONS } from "../../../assets";
 import type { TTestimonial } from "../../../types/testimonial.types";
+import ReviewModal from "./ReviewModal";
 
 interface TestimonialCardProps {
   testimonial?: TTestimonial;
@@ -13,7 +14,7 @@ const TestimonialCard: React.FC<TestimonialCardProps> = ({
   variant = "default",
   isLoading = false,
 }) => {
-  const [showFull, setShowFull] = useState(false);
+  const [isReviewModalOpen, setIsReviewModalOpen] = useState<boolean>(false);
 
   if (isLoading) {
     return (
@@ -44,10 +45,9 @@ const TestimonialCard: React.FC<TestimonialCardProps> = ({
     );
   }
 
-  const isLong = (testimonial?.review ?? "").length > 100;
-  const displayText = showFull
-    ? testimonial?.review ?? ""
-    : (testimonial?.review ?? "").slice(0, 100) + (isLong ? "..." : "");
+  const isLong = (testimonial?.review ?? "").length > 150;
+  const displayText =
+    (testimonial?.review ?? "").slice(0, 150) + (isLong ? "..." : "");
 
   return (
     <div
@@ -104,16 +104,21 @@ const TestimonialCard: React.FC<TestimonialCardProps> = ({
             "{displayText}"
             {isLong && (
               <button
-                onClick={() => setShowFull(!showFull)}
+                onClick={() => setIsReviewModalOpen(!isReviewModalOpen)}
                 className="text-primary-10 text-sm underline cursor-pointer pointer-events-auto relative z-[60]"
                 type="button"
               >
-                {showFull ? "See Less" : "See More"}
+                {isLong ? "See Less" : "See More"}
               </button>
             )}
           </p>
         </div>
       </div>
+      <ReviewModal
+        isReviewModalOpen={isReviewModalOpen}
+        setIsReviewModalOpen={setIsReviewModalOpen}
+        review={testimonial?.review}
+      />
     </div>
   );
 };

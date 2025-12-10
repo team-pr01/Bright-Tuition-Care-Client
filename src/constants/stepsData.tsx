@@ -27,7 +27,7 @@ export const studentOrGuardianSteps = [
     icon: ICONS.choose,
     title: "Chose the Right One",
     description:
-      "Browse tutor profiles, compare experience, read reviews, and select the best tutor from the shortlist.",
+      "Browse tutor profiles, compare experience, read reviews and select the best tutor from the shortlist.",
   },
  
   {
@@ -44,7 +44,7 @@ export const tutorSteps = [
     step: 1,
     title: "Create Your Free Account",
     description:
-      "Click the Become A Tutor button & fill out all required information.",
+      'Click the "Become A Tutor" button & fill out all required information.',
     icon: <FaUserPlus />,
     iconBg: "#007bff",
   },

@@ -28,7 +28,7 @@ const baseQueryWithRefreshToken: BaseQueryFn<
   let result = await baseQuery(args, api, extraOptions);
 
   if (result.error?.status === 401) {
-    const res = await fetch("https://bright-tuition-care-server.onrender.com/api/v1/auth/refresh-token", {
+    const res = await fetch("http://localhost:5000/api/v1/auth/refresh-token", {
       credentials: "include",
       method: "POST",
     });

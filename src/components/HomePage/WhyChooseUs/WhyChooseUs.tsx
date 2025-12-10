@@ -263,7 +263,7 @@ const WhyChooseUs = () => {
                 href="/hire-a-tutor"
                 className="inline-flex items-center justify-center gap-3 bg-gradient-to-r from-cyan-500 to-blue-500 text-white px-6 py-4 md:px-12 md:py-4 rounded-2xl font-semibold text-base md:text-lg shadow-2xl transition-all duration-300 relative overflow-hidden group w-full sm:w-auto text-center"
               >
-                Find Your Perfect Tutor Today
+                Find Right Tutor Today
                 <motion.span
                   animate={{
                     x: [0, 4, 0],

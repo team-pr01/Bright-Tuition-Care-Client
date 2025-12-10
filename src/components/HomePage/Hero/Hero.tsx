@@ -111,8 +111,7 @@ const Hero = () => {
             className="text-neutral-10 text-sm lg:text-lg leading-normal lg:leading-6 max-w-full lg:max-w-[600px] mt-4"
             variants={itemVariants}
           >
-            Easily connect with verified, qualified tutors for any subject or
-            class in your area and enhance your learning experience.
+            Easily connect with experienced and verified tutors for any subject or class and ensuring the effective learning support for your child.
           </motion.p>
 
           <motion.div

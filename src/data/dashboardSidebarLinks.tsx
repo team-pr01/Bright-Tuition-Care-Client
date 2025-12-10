@@ -6,12 +6,7 @@ import {
   FaRegFileAlt,
   FaUserShield,
 } from "react-icons/fa";
-import {
-  FiCreditCard,
-  FiFileText,
-  FiStar,
-  FiUserPlus,
-} from "react-icons/fi";
+import { FiCreditCard, FiFileText, FiStar, FiUserPlus } from "react-icons/fi";
 import { GoVerified } from "react-icons/go";
 import { HiOutlineUser } from "react-icons/hi";
 import { IoNotificationsOutline } from "react-icons/io5";
@@ -213,6 +208,79 @@ export const adminDashboardLinks: DashboardLink[] = [
   {
     label: "Settings",
     path: "/dashboard/admin/settings",
+    icon: <LuSettings />,
+  },
+];
+
+export const staffDashboardLinks: DashboardLink[] = [
+  {
+    label: "Dashboard",
+    path: "/dashboard/staff/home",
+    icon: <LuLayoutDashboard />,
+  },
+  {
+    label: "Guardian/Students",
+    path: "/dashboard/staff/guardians",
+    icon: <FaUserShield />,
+  },
+  {
+    label: "Tutors",
+    path: "/dashboard/staff/tutors",
+    icon: <FaChalkboardTeacher />,
+  },
+  {
+    label: "Hire a Tutor",
+    path: "/dashboard/staff/hire-a-tutor",
+    icon: <LuUserRoundSearch />,
+  },
+  {
+    label: "All Jobs",
+    path: "/dashboard/staff/all-jobs/all",
+    icon: <BsBriefcase />,
+  },
+  {
+    label: "Verification Requests",
+    path: "/dashboard/staff/verification-requests",
+    icon: <GoVerified />,
+  },
+  {
+    label: "Refund Requests",
+    path: "/dashboard/staff/refund-requests",
+    icon: <BsArrowCounterclockwise />,
+  },
+  {
+    label: "Invoice",
+    path: "/dashboard/staff/invoice-management",
+    icon: <FiFileText />,
+  },
+  {
+    label: "Confirmation Letters",
+    path: "/dashboard/staff/confirmation-letters-management",
+    icon: <MdOutlineMail />,
+  },
+  {
+    label: "Notice Board",
+    path: "/dashboard/staff/notice-board-management",
+    icon: <AiOutlineSound />,
+  },
+  {
+    label: "Testimonials",
+    path: "/dashboard/staff/testimonials-management",
+    icon: <FiStar />,
+  },
+  {
+    label: "Notifications",
+    path: "/dashboard/staff/send-notification",
+    icon: <IoNotificationsOutline />,
+  },
+  {
+    label: "Leads",
+    path: "/dashboard/staff/lead-management",
+    icon: <HiOutlineUser />,
+  },
+  {
+    label: "Settings",
+    path: "/dashboard/staff/settings",
     icon: <LuSettings />,
   },
 ];
