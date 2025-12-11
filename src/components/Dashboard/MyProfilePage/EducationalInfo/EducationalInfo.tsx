@@ -5,6 +5,9 @@ import Modal from "../../../Reusable/Modal/Modal";
 import UpdateEducationalInfoModal from "./UpdateEducationalInfoModal";
 import NoData from "../../../Reusable/NoData/NoData";
 import ProgressBars from "./ProgrerssBar";
+import AddEducationalInfoModal from "../EmergencyInfo/AddEducationalInfoModal";
+import { BiEditAlt } from "react-icons/bi";
+import { AiOutlineDelete } from "react-icons/ai";
 
 // Type for each educational record
 type TEducationInfoItem = {
@@ -33,6 +36,8 @@ const EducationalInfo: React.FC<TEducationalInfoProps> = ({
   educationalInfo,
   isProfileLocked,
 }) => {
+  const [isAddEducationFormModalOpen, setIsAddEducationFormModalOpen] =
+    useState<boolean>(false);
   const [isFormModalOpen, setIsFormModalOpen] = useState<boolean>(false);
 
   const educationStatusBars = [
@@ -56,7 +61,9 @@ const EducationalInfo: React.FC<TEducationalInfoProps> = ({
     <div className="font-Nunito flex flex-col gap-5">
       <ProfileTabHeading
         heading="Educational Information"
-        onClick={() => setIsFormModalOpen(!isFormModalOpen)}
+        onClick={() =>
+          setIsAddEducationFormModalOpen(!isAddEducationFormModalOpen)
+        }
         isProfileLocked={isProfileLocked}
         btnText={
           educationalInfo?.length < 1
@@ -89,9 +96,19 @@ const EducationalInfo: React.FC<TEducationalInfoProps> = ({
               >
                 {/* Degree heading */}
                 {edu.degree && (
-                  <h2 className="text-neutral-5 font-bold text-sm lg:text-lg mb-2">
-                    {edu.degree}
-                  </h2>
+                  <div className="flex items-center justify-between">
+                    <h2 className="text-neutral-5 font-bold text-sm lg:text-lg mb-2">
+                      {edu.degree}
+                    </h2>
+                    <div className="flex items-center gap-2">
+                      <button className="bg-neutral-50/30 border border-primary-10/10 p-2 rounded-lg flex items-center justify-center text-primary-10 text-lg cursor-pointer">
+                        <BiEditAlt />
+                      </button>
+                      <button className="bg-neutral-50/30 border border-primary-10/10 p-2 rounded-lg flex items-center justify-center text-red-500 text-lg cursor-pointer">
+                        <AiOutlineDelete />
+                      </button>
+                    </div>
+                  </div>
                 )}
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
@@ -216,6 +233,17 @@ const EducationalInfo: React.FC<TEducationalInfoProps> = ({
           })}
         </div>
       )}
+
+      <Modal
+        heading="Add New Education"
+        isModalOpen={isAddEducationFormModalOpen}
+        setIsModalOpen={setIsAddEducationFormModalOpen}
+        width="w-[90%] xl:w-[35%] max-h-[600px] overflow-y-auto"
+      >
+        <AddEducationalInfoModal
+          setIsAddEducationFormModalOpen={setIsAddEducationFormModalOpen}
+        />
+      </Modal>
 
       <Modal
         heading="Update Educational Information"
