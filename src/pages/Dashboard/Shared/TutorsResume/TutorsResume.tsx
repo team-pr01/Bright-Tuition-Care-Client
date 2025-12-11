@@ -16,6 +16,7 @@ import {
 import { useSelector } from "react-redux";
 import { useCurrentUser } from "../../../../redux/Features/Auth/authSlice";
 import type { TLoggedInUser } from "../../../../types/loggedinUser.types";
+import LogoLoader from "../../../../components/Reusable/LogoLoader/LogoLoader";
 
 const TutorsResume = () => {
   const user = useSelector(useCurrentUser) as TLoggedInUser;
@@ -28,13 +29,13 @@ const TutorsResume = () => {
   // const [cancelTutor, { isLoading: isCancelling }] = useCancelTutorMutation();
   const location = useLocation();
   const { tutorId, applicationId } = useParams();
-  const { data } = useGetSingleTutorByIdQuery(tutorId);
+  const { data, isLoading } = useGetSingleTutorByIdQuery(tutorId);
   const profile = data?.data;
   const educationDetails = data?.data?.educationalInformation || [];
   const tuitionPreference = profile?.tuitionPreference;
   const personalInfo = profile?.personalInformation || {};
 
-  const { data: applicationData } =
+  const { data: applicationData, isLoading: isApplicationLoading } =
     useGetSingleApplicationByIdQuery(applicationId);
   const application = applicationData?.data;
 
@@ -230,10 +231,15 @@ const TutorsResume = () => {
   //     );
   //   }
   // };
-
-  console.log(isContactDetailsHidden);
-
   const buttonStyle = "py-[6px] lg:py-[6px] px-3 lg:px-2 text-sm lg:text-sm";
+
+  if (isLoading || isApplicationLoading) {
+    return (
+      <div className="min-h-[70vh] flex items-center justify-center font-Nunito">
+        <LogoLoader />
+      </div>
+    );
+  }
 
   return (
     <div className="bg-white shadow rounded-xl max-w-[1000px] mx-auto p-5 font-Nunito">
@@ -270,6 +276,23 @@ const TutorsResume = () => {
                   className={`${buttonStyle}`}
                   onClick={() => navigate(-1)}
                 />
+                {/* To see all applications for a tutor */}
+                {(location?.pathname?.startsWith("/dashboard/admin/tutor") ||
+                  location?.pathname?.startsWith("/dashboard/staff/tutor")) && (
+                  <Button
+                    label="View Applications"
+                    variant="primary"
+                    className={buttonStyle}
+                    onClick={() =>
+                      navigate(
+                        `/dashboard/${
+                          user?.role === "admin" ? "admin" : "staff"
+                        }/tutor/applications/${profile?.userId?._id}`
+                      )
+                    }
+                  />
+                )}
+
                 {location.pathname.startsWith(
                   "/dashboard/admin/application"
                 ) && (

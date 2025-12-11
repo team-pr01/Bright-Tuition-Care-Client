@@ -149,7 +149,9 @@ const MyProfile = () => {
       const url = URL.createObjectURL(blob);
       const link = document.createElement("a");
       link.href = url;
-      link.download = `Bright_Tuition_Care_${myProfile?.userId?.name || "tutor"}_CV.pdf`;
+      link.download = `Bright_Tuition_Care_${
+        myProfile?.userId?.name || "tutor"
+      }_CV.pdf`;
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
@@ -167,7 +169,7 @@ const MyProfile = () => {
         <LogoLoader />
       </div>
     );
-  };
+  }
 
   return (
     <div className="flex flex-col lg:flex-row gap-5 font-Nunito w-full">
@@ -234,14 +236,16 @@ const MyProfile = () => {
                   onClick={() => setIsFormModalOpen(!isFormModalOpen)}
                   isProfileLocked={myProfile?.profileStatus === "locked"}
                 />
-                <p
-                  className={`text-neutral-45 ${
-                    myProfile?.userId?.role === "tutor" ? "mt-3" : "mt-0"
-                  }`}
-                >
-                  {profile?.personalInfo?.overview}
-                </p>
-              </div>  
+                {myProfile?.userId?.role === "tutor" && (
+                  <p
+                    className={`text-neutral-45 ${
+                      myProfile?.userId?.role === "tutor" ? "mt-3" : "mt-0"
+                    }`}
+                  >
+                    {profile?.personalInfo?.overview || "No Overview Added"}
+                  </p>
+                )}
+              </div>
 
               <PersonalInfo personalInfo={profile.personalInfo} />
             </>

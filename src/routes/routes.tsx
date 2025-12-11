@@ -62,6 +62,7 @@ import StaffLogin from "../pages/Auth/StaffLogin/StaffLogin";
 import AdminLogin from "../pages/Auth/AdminLogin/AdminLogin";
 import StaffProfile from "../pages/Dashboard/Admin/StaffProfile/StaffProfile";
 import GuardianPostedJobs from "../pages/Dashboard/Admin/GuardianProfile/GuardianPostedJobs";
+import TutorApplications from "../pages/Dashboard/Admin/TutorApplications/TutorApplications";
 
 export const router = createBrowserRouter([
   // Main layout routes
@@ -382,6 +383,10 @@ export const router = createBrowserRouter([
         element: <TutorsResume />,
       },
       {
+        path: "tutor/applications/:userId",
+        element: <TutorApplications />,
+      },
+      {
         path: "all-jobs/:jobStatus",
         element: <AllJobs />,
       },
@@ -498,6 +503,10 @@ export const router = createBrowserRouter([
       {
         path: "tutor/:tutorId",
         element: <TutorsResume />,
+      },
+      {
+        path: "tutor/applications/:userId",
+        element: <TutorApplications />,
       },
       {
         path: "all-jobs/:jobStatus",

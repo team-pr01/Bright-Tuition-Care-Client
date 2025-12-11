@@ -47,7 +47,7 @@ const ProfileDetails = ({
     {
       icon: ICONS.locationBlue,
       label: "Address",
-      value: data?.personalInformation?.address,
+      value: data?.personalInformation?.address || "Not added yet",
     },
   ];
 

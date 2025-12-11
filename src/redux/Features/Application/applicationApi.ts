@@ -55,6 +55,21 @@ const applicationApi = baseApi.injectEndpoints({
       providesTags: ["application"],
     }),
 
+    getAllApplicationOfATutor: builder.query<
+      any,
+      { userId: string; page?: number; limit?: number }
+    >({
+      query: ({ userId, page = 1, limit = 10 }) => {
+        const url = `/application/tutor/${userId}?page=${page}&limit=${limit}`;
+        return {
+          url,
+          method: "GET",
+          credentials: "include",
+        };
+      },
+      providesTags: ["application"],
+    }),
+
     applyOnJob: builder.mutation<any, any>({
       query: (data) => ({
         url: `/application/apply`,
@@ -139,6 +154,7 @@ export const {
   useGetAllInvoicesQuery,
   useGetSingleApplicationByIdQuery,
   useGetAllApplicationsByJobIdQuery,
+  useGetAllApplicationOfATutorQuery,
   useApplyOnJobMutation,
   useWithdrawApplicationMutation,
   useReApplyMutation,
