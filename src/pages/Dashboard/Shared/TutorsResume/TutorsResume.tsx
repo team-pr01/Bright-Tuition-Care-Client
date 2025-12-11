@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React from "react";
-import { IMAGES } from "../../../../assets";
+import { ICONS, IMAGES } from "../../../../assets";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import Button from "../../../../components/Reusable/Button/Button";
 import { useGetSingleTutorByIdQuery } from "../../../../redux/Features/Tutor/tutorApi";
@@ -246,11 +246,18 @@ const TutorsResume = () => {
       {/* profile and overview */}
       <div className="flex flex-col lg:flex-row gap-2 lg:gap-5">
         <div className="flex gap-5 w-full">
-          <img
-            src={profile?.imageUrl || IMAGES.dummyAvatar}
-            alt=""
-            className="size-20 lg:size-56 object-cover rounded-xl"
-          />
+          <div className="relative">
+            <img
+              src={profile?.imageUrl || IMAGES.dummyAvatar}
+              alt=""
+              className="size-20 lg:size-56 object-cover rounded-xl"
+            />
+            {profile?.isVerified && (
+              <div className="size-10 rounded-full flex items-center justify-center absolute -right-5 -bottom-4">
+                <img src={ICONS.blueVerifiedBlue} alt="verified" />
+              </div>
+            )}
+          </div>
           <div className="w-full">
             <div className="flex items-start justify-between">
               <div>
@@ -258,7 +265,8 @@ const TutorsResume = () => {
                   {profile?.userId?.name}
                 </h1>
                 <p className="text-neutral-10 mt-1 text-sm md:text-base">
-                  <strong>Tutor Id:</strong> {profile?.tutorId}
+                  <strong>Tutor Id:</strong> {profile?.tutorId} |{" "}
+                  <strong>Rating:</strong> {profile?.rating}/5
                 </p>
                 {!isContactDetailsHidden && (
                   <p className="text-neutral-10 mt-1 text-sm md:text-base">
