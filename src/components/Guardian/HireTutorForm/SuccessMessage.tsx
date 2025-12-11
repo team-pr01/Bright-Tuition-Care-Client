@@ -1,7 +1,9 @@
 import { motion } from "framer-motion";
 import { FaCheckCircle, FaPhone } from "react-icons/fa";
 import type { TLoggedInUser } from "../../../types/loggedinUser.types";
+import { useNavigatePathForAdmin } from "../../../utils/navigatePathForAdmin";
 const SuccessMessage = ({ user }: { user: TLoggedInUser }) => {
+  const navigatePath = useNavigatePathForAdmin();
   return (
     <div className="text-center py-8 px-4">
       <motion.div
@@ -53,18 +55,15 @@ const SuccessMessage = ({ user }: { user: TLoggedInUser }) => {
         </div>
       )}
 
-      {user?.role === "admin" && (
-        <a
-          href={
-            user?.role === "admin"
-              ? "/dashboard/admin/all-jobs/all"
-              : "/dashboard/guardian/home"
-          }
-          className="text-primary-50 underline mt-4"
-        >
-          {user?.role === "admin" ? "See All Jobs" : "Go to Dashboard"}
-        </a>
-      )}
+      {user?.role === "admin" ||
+        (user?.role === "staff" && (
+          <a
+            href={`/dashboard/${navigatePath}/all-jobs/all`}
+            className="text-primary-50 underline mt-4"
+          >
+            See All Jobs
+          </a>
+        ))}
     </div>
   );
 };

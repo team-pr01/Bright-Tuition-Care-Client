@@ -21,6 +21,7 @@ import { VscLock, VscUnlock } from "react-icons/vsc";
 import UnlockRequestReasonModal from "../../../../components/Admin/Tutors/UnlockRequestReasonModal";
 import { useNavigate } from "react-router-dom";
 import RateUserModal from "../../../../components/Admin/SharedAdmin/RateUserModal/RateUserModal";
+import { useNavigatePathForAdmin } from "../../../../utils/navigatePathForAdmin";
 
 export type TableAction<T> = {
   label: any;
@@ -39,9 +40,9 @@ const Guardians = () => {
   const [selectedGuardianId, setSelectedGuardianId] = useState<string | null>(
     null
   );
-  const [selectedGuardianRating, setSelectedGuardianRating] = useState<string | null>(
-    null
-  );
+  const [selectedGuardianRating, setSelectedGuardianRating] = useState<
+    string | null
+  >(null);
   const [isSuspendUserModalOpen, setIsSuspendUserModalOpen] =
     useState<boolean>(false);
   const [isRatingModalOpen, setIsRatingModalOpen] = useState<boolean>(false);
@@ -113,12 +114,15 @@ const Guardians = () => {
     }
   };
 
+  const navigatePath = useNavigatePathForAdmin();
+
   // Action Menu
   const actions: TableAction<any>[] = [
     {
       label: "View Profile",
       icon: <FiEye className="inline mr-2" />,
-      onClick: (row) => navigate(`/dashboard/admin/guardian/${row._id}`),
+      onClick: (row) =>
+        navigate(`/dashboard/${navigatePath}/guardian/${row._id}`),
     },
     {
       label: "Deactivate User",

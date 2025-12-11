@@ -82,6 +82,8 @@ const OtherLinks = ({
           ? "tutor"
           : user?.role === "guardian"
           ? "guardian"
+          : user?.role === "staff"
+          ? "staff"
           : "admin"
       }/terms-and-conditions`,
       icon: <LuFileText />,
@@ -93,6 +95,8 @@ const OtherLinks = ({
           ? "tutor"
           : user?.role === "guardian"
           ? "guardian"
+          : user?.role === "staff"
+          ? "staff"
           : "admin"
       }/share-app`,
       icon: <LuShare2 />,
@@ -100,7 +104,11 @@ const OtherLinks = ({
   ];
 
   const otherLinks =
-    user?.role === "guardian" ? otherGuardianLinks : user?.role === "tutor" ? otherTutorLinks : otherAdminLinks;
+    user?.role === "guardian"
+      ? otherGuardianLinks
+      : user?.role === "tutor"
+      ? otherTutorLinks
+      : otherAdminLinks;
   return (
     <div className="flex flex-col gap-2">
       {otherLinks?.map((link: DashboardLink) => (

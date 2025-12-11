@@ -6,6 +6,7 @@ import SearchInput from "../../../Reusable/SearchBar/SearchBar";
 import MultiSelectDropdown from "../../../Reusable/MultiSelectDropdown/MultiSelectDropdown";
 import { Link } from "react-router-dom";
 import { RxArrowTopRight } from "react-icons/rx";
+import { useNavigatePathForAdmin } from "../../../../utils/navigatePathForAdmin";
 
 const AllJobFilters: React.FC<any> = ({
   keyword,
@@ -56,7 +57,7 @@ const AllJobFilters: React.FC<any> = ({
       return;
     }
 
-    const locations = selectedCities.flatMap((cityName : string) => {
+    const locations = selectedCities.flatMap((cityName: string) => {
       const cityObj = filterData.cityCorporationWithLocation.find(
         (city) => city.name === cityName
       );
@@ -99,7 +100,9 @@ const AllJobFilters: React.FC<any> = ({
     setClassOptions(uniqueClasses);
 
     // Keep only classes that still exist under selected categories
-    setSelectedClasses((prev: string[]) => prev.filter((c) => uniqueClasses.includes(c)));
+    setSelectedClasses((prev: string[]) =>
+      prev.filter((c) => uniqueClasses.includes(c))
+    );
 
     // Reset subjects because category context changed
     setSubjectOptions([]);
@@ -144,6 +147,8 @@ const AllJobFilters: React.FC<any> = ({
   const buttonCommonClassNames =
     "flex items-center justify-center gap-2 leading-[24px] w-fit w-fit rounded-lg font-semibold font-Nunito cursor-pointer transition-all duration-300 py-2 px-3 lg:px-6 text-sm md:text-lg";
 
+  const navigatePath = useNavigatePathForAdmin();
+
   return (
     <>
       <div className="flex flex-col 2xl:flex-row items-start 2xl:items-center justify-between gap-6 2xl:gap-0 py-6">
@@ -165,7 +170,7 @@ const AllJobFilters: React.FC<any> = ({
             </button>
           </div>
           <Link
-            to="/dashboard/admin/hire-a-tutor"
+            to={`/dashboard/${navigatePath}/hire-a-tutor`}
             className={`bg-primary-10 hover:bg-primary-20 hover:text-primary-10 transition duration-300 font-semibold text-white rounded-lg flex items-center gap-2 px-3 py-2 pointer`}
           >
             Hire a Tutor <RxArrowTopRight className="text-lg" />

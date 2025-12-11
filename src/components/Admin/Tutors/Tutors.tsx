@@ -23,6 +23,7 @@ import {
 import { IMAGES } from "../../../assets";
 import UnlockRequestReasonModal from "./UnlockRequestReasonModal";
 import RateUserModal from "../SharedAdmin/RateUserModal/RateUserModal";
+import { useNavigatePathForAdmin } from "../../../utils/navigatePathForAdmin";
 
 const Tutors = () => {
   const navigate = useNavigate();
@@ -109,12 +110,13 @@ const Tutors = () => {
     { key: "hasAppliedForUnlock", label: "Applied to Unlock Profile" },
   ];
 
+    const navigatePath = useNavigatePathForAdmin();
   // Action Menu
   const actions: TableAction<any>[] = [
     {
       label: "View Profile",
       icon: <FiEye className="inline mr-2" />,
-      onClick: (row) => navigate(`/dashboard/admin/tutor/${row._id}`),
+      onClick: (row) => navigate(`/dashboard/${navigatePath}/tutor/${row?._id}`),
     },
     {
       label: "Deactivate",

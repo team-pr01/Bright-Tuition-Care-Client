@@ -16,6 +16,7 @@ import {
 } from "react-icons/fa";
 import DashboardOverviewCard from "../../../../components/Dashboard/DashboardOverviewCard/DashboardOverviewCard";
 import { useParams } from "react-router-dom";
+import { useNavigatePathForAdmin } from "../../../../utils/navigatePathForAdmin";
 
 const AllJobs = () => {
   const { jobStatus } = useParams();
@@ -131,6 +132,8 @@ const AllJobs = () => {
     totalCancelledJob: jobsData?.meta?.cancelledJobs || 0,
   };
 
+  const navigatePath = useNavigatePathForAdmin();
+
   return (
     <div>
       <div className="sticky top-0 z-15 px-3 lg:px-6 pt-6 bg-[#F2F5FC]">
@@ -170,7 +173,7 @@ const AllJobs = () => {
             additionalTitle="Jobs"
             value={jobStats.totalJobs}
             textColor="text-neutral-10"
-            path="/dashboard/admin/all-jobs/all"
+            path={`/dashboard/${navigatePath}/all-jobs/all`}
             icon={<FaBriefcase className="text-[#6366F1]" />}
           />
 
@@ -179,7 +182,7 @@ const AllJobs = () => {
             additionalTitle="Jobs"
             value={jobStats.pendingJobs}
             textColor="text-neutral-10"
-            path="/dashboard/admin/all-jobs/pending"
+            path={`/dashboard/${navigatePath}/all-jobs/pending`}
             icon={<FaClock className="text-[#F59E0B]" />}
           />
 
@@ -188,7 +191,7 @@ const AllJobs = () => {
             additionalTitle="Jobs"
             value={jobStats.liveJobs}
             textColor="text-neutral-10"
-            path="/dashboard/admin/all-jobs/live"
+            path={`/dashboard/${navigatePath}/all-jobs/live`}
             icon={<FaBullhorn className="text-[#3B82F6]" />}
           />
 
@@ -215,7 +218,7 @@ const AllJobs = () => {
             additionalTitle="Jobs"
             value={jobStats.totalConfirmedJob}
             textColor="text-neutral-10"
-            path="/dashboard/admin/all-jobs/closed"
+            path={`/dashboard/${navigatePath}/all-jobs/closed`}
             icon={<FaCheckCircle className="text-[#22C55E]" />}
           />
 
@@ -224,7 +227,7 @@ const AllJobs = () => {
             additionalTitle="Jobs"
             value={jobStats.totalCancelledJob}
             textColor="text-neutral-10"
-            path="/dashboard/admin/all-jobs/cancelled"
+            path={`/dashboard/${navigatePath}/all-jobs/cancelled`}
             icon={<FaTimesCircle className="text-[#EF4444]" />}
           />
         </div>
