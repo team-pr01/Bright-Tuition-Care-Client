@@ -40,6 +40,9 @@ import specialSkillDevelopment from "../assets/Images/serviceCatagories/Special-
 import testPreparation from "../assets/Images/serviceCatagories/Test-Preparation.png";
 import uniHelp from "../assets/Images/serviceCatagories/Uni-Help.png";
 import termsAndConditionHero from "../assets/Images/terms-and-condition-hero.webp";
+import tutorOfTheMonthBg from "../assets/Images/tutor-of-the-month-bg.png";
+import tutorOfTheMonthLabel from "../assets/Images/tutor-of-the-month-label.png";
+import tutorOfTheMonthBadge from "../assets/Images/tutor-of-the-month-badge.png";
 
 // students steps
 import send from "../assets/Icons/StudentSteps/send.svg";
@@ -170,6 +173,10 @@ export const IMAGES = {
   resetPassword,
   verifyOtp,
   community,
+  tutorOfTheMonthBg,
+  tutorOfTheMonthLabel,
+  tutorOfTheMonthBadge,
+
 };
 
 export const ICONS = {

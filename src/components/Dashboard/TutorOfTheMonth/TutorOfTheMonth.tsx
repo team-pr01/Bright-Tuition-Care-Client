@@ -1,6 +1,4 @@
 import React from "react";
-import { FaCalendarAlt, FaStar, FaTrophy } from "react-icons/fa";
-import { MdVerified } from "react-icons/md";
 import { IMAGES } from "../../../assets";
 
 interface TutorOfTheMonthProps {
@@ -8,9 +6,6 @@ interface TutorOfTheMonthProps {
     id: string;
     name: string;
     rating: number;
-    title: string;
-    month: string;
-    year: string;
   };
   className?: string;
 }
@@ -19,70 +14,52 @@ const TutorOfTheMonth: React.FC<TutorOfTheMonthProps> = ({
   tutor,
   className = "",
 }) => {
-  const { id, name, rating, title, month, year } = tutor;
+  const { id, name, rating } = tutor;
 
   return (
     <div
-      className={`bg-gradient-to-r from-primary-10 to-primary-30 rounded-2xl overflow-hidden border border-gray-100 p-4 font-Nunito ${className}`}
+      className={`bg-gradient-to-r from-primary-10 to-primary-30 rounded-2xl overflow-hidden border border-gray-100 font-Nunito relative h-[285px] ${className}`}
     >
-      {/* Header with ribbon */}
-      <div className="bg-white text-primary-10 px-6 py-1.5 rounded-full shadow-lg flex items-center justify-center gap-2 text-center w-fit mx-auto text-xs">
-        <FaTrophy />
-        <span className="font-bold tracking-wide">TUTOR OF THE MONTH</span>
-      </div>
-
-      <div className="flex flex-col lg:flex-row items-center gap-6 mt-2">
-        {/* Left: Avatar & Stats */}
-        <div className="flex-shrink-0">
-          {/* Avatar with crown */}
-          <div className="relative">
-            <div className="size-32 rounded-full flex items-center justify-center text-white bg-gray-100 text-4xl font-bold shadow-lg border-2 border-white">
+      <img
+        src={IMAGES.tutorOfTheMonthBg}
+        alt=""
+        className="absolute w-full h-full"
+      />
+      <div className="relative w-full h-full">
+        <img
+          src={IMAGES.tutorOfTheMonthLabel}
+          alt=""
+          className="absolute w-[130px] top-3 left-1/2 -translate-x-1/2"
+        />
+        {/* Image and badge */}
+        <div className="absolute top-[70px] left-1/2 -translate-x-1/2">
+          <div className="relative w-28">
+            {/* User image */}
+            <div className="flex items-center justify-center border-4 border-primary-10 rounded-full">
               <img src={IMAGES.dummyAvatar} alt="" className="rounded-full" />
             </div>
-
-            {/* Verified badge */}
-            <div className="absolute -bottom-0 right-2 bg-white text-primary-10 p-1.5 rounded-full shadow-lg">
-              <MdVerified className="text-lg" />
-            </div>
+            <img
+              src={IMAGES.tutorOfTheMonthBadge}
+              alt=""
+              className="w-10 -right-4 top-14 absolute"
+            />
           </div>
         </div>
 
-        {/* Right: Details */}
-        <div className="flex-1">
-          {/* Name & Title */}
-          <div className="mb-4">
-            <div className="flex items-center gap-2 mb-1">
-              <h2 className="text-2xl font-bold text-gray-800">{name}</h2>
-              <span className="text-xs bg-white text-primary-10 px-2 py-1 rounded-full font-medium">
-                ID: {id}
-              </span>
-            </div>
-            <div className="text-lg font-semibold text-gray-700">{title}</div>
-          </div>
+        <div className="bg-primary-10 w-fit px-2 py-1 rounded-3xl text-center absolute top-[190px] left-1/2 -translate-x-1/2 z-10">
+          <p className="text-neutral-5 text-sm md:text-base font-bold">{name}</p>
+        </div>
 
-          {/* Month/Year & Rating */}
-          <div className="flex items-center gap-4 text-sm">
-            <div className="inline-flex items-center gap-2 px-3 py-1 bg-purple-50 text-purple-700 rounded-full">
-              <FaCalendarAlt className="text-purple-500" />
-              <span className="font-semibold">
-                {month} {year}
-              </span>
-            </div>
-            <div className="inline-flex items-center gap-2 px-3 py-1 bg-amber-50 text-amber-500 rounded-full">
-              <FaStar />
-              <span className="">{rating.toFixed(1)}</span>
-            </div>
-          </div>
-
-          {/* Quote */}
-          {/* {quote && (
-              <div className="mb-6 p-4 bg-gradient-to-r from-gray-50 to-white rounded-xl border border-gray-200">
-                <div className="flex gap-3">
-                  <FaQuoteLeft className="text-gray-300 text-xl flex-shrink-0 mt-1" />
-                  <p className="text-gray-600 italic">"{quote}"</p>
-                </div>
-              </div>
-            )} */}
+        <div className="rounded-t-4xl border-t-3 rounded-b-2xl border-primary-10 bg-primary-50 w-full h-20 absolute bottom-0 text-center">
+          <p className="text-xs md:text-sm text-gray-200 font-semibold text-center mt-5">
+            Id : {id} | Rating :  {rating}/5
+          </p>
+          <h2 className="text-white text-sm md:text-xl font-bold mt-2 md:mt-0">
+            BEST TUTOR OF THE MONTH{" "}
+            <span className="text-[8px] md:text-[10px] font-normal bg-primary-10 p-1 rounded-xl">
+              December 2025
+            </span>
+          </h2>
         </div>
       </div>
     </div>
