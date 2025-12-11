@@ -1,6 +1,6 @@
 import Modal from "../../Reusable/Modal/Modal";
 
-const ReviewModal = ({ isReviewModalOpen, setIsReviewModalOpen, review }) => {
+const ReviewModal = ({ isReviewModalOpen, setIsReviewModalOpen, review } : { isReviewModalOpen: boolean, setIsReviewModalOpen: React.Dispatch<React.SetStateAction<boolean>>, review: string}) => {
   return (
     <Modal
       isModalOpen={isReviewModalOpen}
