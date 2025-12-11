@@ -13,7 +13,7 @@ import {
 } from "react-icons/fa";
 import { useGetTutorDashboardStatsQuery } from "../../../../redux/Features/Tutor/tutorApi";
 import LogoLoader from "../../../../components/Reusable/LogoLoader/LogoLoader";
-import TutorOfTheMonth from "../../../../components/Dashboard/TutorOfTheMonth/TutorOfTheMonth";
+import TutorOrGuardianOfTheMonth from "../../../../components/Dashboard/TutorOrGuardianOfTheMonth/TutorOrGuardianOfTheMonth";
 const TutorDashboardHome = () => {
   const { data, isLoading } = useGetTutorDashboardStatsQuery({});
   const tutorStats = data?.data || {};
@@ -101,7 +101,7 @@ const TutorDashboardHome = () => {
         <NoticeBoard notices={tutorStats?.notices} />
         {/* bg-gradient-to-r from-slate-50 to-sky-50 */}
         <div className="grid grid-cols-1 lg:grid-cols-2 2xl:grid-cols-3 gap-6">
-          <TutorOfTheMonth tutor={tutorStats?.tutorOfTheMonth || {}} />
+          <TutorOrGuardianOfTheMonth variant="tutor" user={tutorStats?.tutorOfTheMonth || {}} userId={tutorStats?.tutorOfTheMonth?.tutorId || ""} />
 
           {/* Profile Completed card */}
           <div className="bg-white rounded-2xl border border-primary-40/10 p-5 flex flex-col justify-between">

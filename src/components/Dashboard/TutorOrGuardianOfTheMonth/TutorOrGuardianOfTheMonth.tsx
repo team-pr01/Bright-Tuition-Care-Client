@@ -2,18 +2,21 @@
 import React from "react";
 import { IMAGES } from "../../../assets";
 
-interface TutorOfTheMonthProps {
-  tutor: any;
-  className?: string;
+interface TutorOrGuardianOfTheMonthProps {
+  variant : "tutor" | "guardian"
+  user: any;
+  userId: string
 }
 
-const TutorOfTheMonth: React.FC<TutorOfTheMonthProps> = ({
-  tutor,
-  className = "",
+
+const TutorOrGuardianOfTheMonth: React.FC<TutorOrGuardianOfTheMonthProps> = ({
+  variant,
+  user,
+  userId
 }) => {
   return (
     <div
-      className={`bg-gradient-to-r from-primary-10 to-primary-30 rounded-2xl overflow-hidden border border-gray-100 font-Nunito relative h-[285px] ${className}`}
+      className={`bg-gradient-to-r from-primary-10 to-primary-30 rounded-2xl overflow-hidden border border-gray-100 font-Nunito relative h-[285px]`}
     >
       <img
         src={IMAGES.tutorOfTheMonthBg}
@@ -22,7 +25,7 @@ const TutorOfTheMonth: React.FC<TutorOfTheMonthProps> = ({
       />
       <div className="relative w-full h-full">
         <img
-          src={IMAGES.tutorOfTheMonthLabel}
+          src={variant === "tutor" ? IMAGES.tutorOfTheMonthLabel : IMAGES.guardianOfTheMonthLabel}
           alt=""
           className="absolute w-[130px] top-3 left-1/2 -translate-x-1/2"
         />
@@ -32,7 +35,7 @@ const TutorOfTheMonth: React.FC<TutorOfTheMonthProps> = ({
             {/* User image */}
               <div className="rounded-full size-28 border-4 border-primary-10 flex items-center justify-center">
                 <img
-                  src={tutor?.imageUrl || IMAGES.dummyAvatar}
+                  src={user?.imageUrl || IMAGES.dummyAvatar}
                   alt=""
                   className="w-full h-full rounded-full object-cover"
                 />
@@ -46,17 +49,17 @@ const TutorOfTheMonth: React.FC<TutorOfTheMonthProps> = ({
         </div>
 
         <div className="bg-primary-10 w-fit px-2 py-1 rounded-3xl text-center absolute top-[190px] left-1/2 -translate-x-1/2 z-10">
-          <p className="text-neutral-5 text-sm md:text-base font-bold">
-            {tutor?.userId?.name}
+          <p className="text-white text-sm md:text-base font-bold">
+            {user?.userId?.name}
           </p>
         </div>
 
         <div className="rounded-t-4xl border-t-3 rounded-b-2xl border-primary-10 bg-primary-50 w-full h-20 absolute bottom-0 text-center">
           <p className="text-xs md:text-sm text-gray-200 font-semibold text-center mt-5">
-            Id : {tutor?.tutorId} | Rating : {tutor?.rating}/5
+            Id : {userId} | Rating : {user?.rating}/5
           </p>
           <h2 className="text-white text-sm md:text-xl font-bold mt-2 md:mt-0">
-            BEST TUTOR OF THE MONTH{" "}
+            BEST <span className="uppercase">{variant}</span> OF THE MONTH{" "}
             <span className="text-[8px] md:text-[10px] font-normal bg-primary-10 p-1 rounded-xl">
               {new Date().toLocaleString("en-US", {
                 month: "long",
@@ -69,4 +72,4 @@ const TutorOfTheMonth: React.FC<TutorOfTheMonthProps> = ({
     </div>
   );
 };
-export default TutorOfTheMonth;
+export default TutorOrGuardianOfTheMonth;

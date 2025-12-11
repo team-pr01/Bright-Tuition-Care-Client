@@ -64,14 +64,14 @@ const CredentialsInfo: React.FC<TCredentialsInfoProps> = ({
 
       <ProgressBars bars={credentialStatusBars} />
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {identityInformation?.length === 0 ? (
-          <NoData
-            title="No identity information submitted."
-            description="Add your identity details to complete your profile."
-          />
-        ) : (
-          identityInformation?.map((info: TCredential) => (
+      {identityInformation?.length === 0 ? (
+        <NoData
+          title="No identity information submitted."
+          description="Add your identity details to complete your profile."
+        />
+      ) : (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {identityInformation?.map((info: TCredential) => (
             <div
               key={info?.documentType}
               className="bg-white rounded-xl border border-gray-200 hover:shadow-xl transition-all duration-300 hover:border-blue-300 overflow-hidden"
@@ -98,9 +98,9 @@ const CredentialsInfo: React.FC<TCredentialsInfoProps> = ({
                 </div>
               </div>
             </div>
-          ))
-        )}
-      </div>
+          ))}
+        </div>
+      )}
 
       {/* Add/Update Credentials Modal */}
       <Modal

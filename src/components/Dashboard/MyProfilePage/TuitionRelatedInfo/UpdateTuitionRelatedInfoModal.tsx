@@ -54,7 +54,7 @@ const UpdateTuitionRelatedInfoModal = ({
   useEffect(() => {
     if (selectedCities.length === 0) {
       setAreaOptions([]);
-      setSelectedAreas([]); // ✅ only clear when no city is selected
+      setSelectedAreas([]);
       return;
     }
 

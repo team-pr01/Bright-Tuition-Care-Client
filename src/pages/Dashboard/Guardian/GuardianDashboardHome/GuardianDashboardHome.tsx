@@ -13,6 +13,7 @@ import { ICONS } from "../../../../assets";
 import SupportBar from "../../../../components/Dashboard/SupportBar/SupportBar";
 import { useGetGuardianDashboardStatsQuery } from "../../../../redux/Features/Guardian/guardianApi";
 import LogoLoader from "../../../../components/Reusable/LogoLoader/LogoLoader";
+import TutorOrGuardianOfTheMonth from "../../../../components/Dashboard/TutorOrGuardianOfTheMonth/TutorOrGuardianOfTheMonth";
 const GuardianDashboardHome = () => {
   const { data, isLoading } = useGetGuardianDashboardStatsQuery({});
   const guardianStats = data?.data || {};
@@ -88,7 +89,12 @@ const GuardianDashboardHome = () => {
           (9:00 AM - 10:00 PM)
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 lg:grid-cols-2 2xl:grid-cols-3 gap-6">
+          <TutorOrGuardianOfTheMonth
+            variant="guardian"
+            user={guardianStats?.guardianOfTheMonth || {}}
+            userId={guardianStats?.guardianOfTheMonth?.guardianId}
+          />
           <DashboardDataCard
             title={"Looking for a tutor?"}
             description={
@@ -100,24 +106,30 @@ const GuardianDashboardHome = () => {
             valueColor={"text-primary-10"}
             btnLabel={"Submit Now"}
             path={"/dashboard/guardian/hire-a-tutor"}
+            tips="To hire best tutor please share as much details as possible while posting the job."
           />
           <DashboardDataCard
-            title={"Confirmation Letters"}
+            title={"Profile Status"}
             description={
-              guardianStats?.confirmationLetterCount === 0
-                ? "You have not confirmed any tutors yet."
-                : `You have successfully confirmed ${
-                    guardianStats?.confirmationLetterCount
-                  } tutor${
-                    guardianStats?.confirmationLetterCount > 1 ? "s" : ""
-                  }. Please click here to view and sign your confirmation letters to avoid any future complications.`
+              guardianStats?.isVerified
+                ? "Your profile is verified."
+                : "Submit a verification request to become a trusted member on the platform."
             }
-            icon={ICONS.confirmationLetter}
-            value={guardianStats?.confirmationLetterCount || 0}
+            icon={
+              guardianStats?.isVerified
+                ? ICONS.profileVerified
+                : ICONS.profileUnverified
+            }
+            value={guardianStats?.isVerified ? "Verified" : "Not Verified"}
             titleColor={"text-primary-10"}
             valueColor={"text-primary-10"}
-            btnLabel={"View All"}
-            path={"/dashboard/guardian/confirmation-letters"}
+            btnLabel={guardianStats?.isVerified ? "Verified" : "Verify Now"}
+            badgeText={
+              guardianStats?.hasPostedAnyJob && !guardianStats?.isVerified
+                ? "Recommended"
+                : null
+            }
+            path={"/dashboard/guardian/settings"}
           />
         </div>
 
@@ -194,28 +206,24 @@ const GuardianDashboardHome = () => {
               </Link>
             </div>
           </div>
+
           <DashboardDataCard
-            title={"Profile Status"}
+            title={"Confirmation Letters"}
             description={
-              guardianStats?.isVerified
-                ? "Your profile is verified."
-                : "Submit a verification request to become a trusted member on the platform."
+              guardianStats?.confirmationLetterCount === 0
+                ? "You have not confirmed any tutors yet."
+                : `You have successfully confirmed ${
+                    guardianStats?.confirmationLetterCount
+                  } tutor${
+                    guardianStats?.confirmationLetterCount > 1 ? "s" : ""
+                  }. Please click here to view and sign your confirmation letters to avoid any future complications.`
             }
-            icon={
-              guardianStats?.isVerified
-                ? ICONS.profileVerified
-                : ICONS.profileUnverified
-            }
-            value={guardianStats?.isVerified ? "Verified" : "Not Verified"}
+            icon={ICONS.confirmationLetter}
+            value={guardianStats?.confirmationLetterCount || 0}
             titleColor={"text-primary-10"}
             valueColor={"text-primary-10"}
-            btnLabel={guardianStats?.isVerified ? "Verified" : "Verify Now"}
-            badgeText={
-              guardianStats?.hasPostedAnyJob && !guardianStats?.isVerified
-                ? "Recommended"
-                : null
-            }
-            path={"/dashboard/guardian/settings"}
+            btnLabel={"View All"}
+            path={"/dashboard/guardian/confirmation-letters"}
           />
         </div>
 

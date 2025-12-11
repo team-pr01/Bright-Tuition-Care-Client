@@ -43,6 +43,7 @@ import termsAndConditionHero from "../assets/Images/terms-and-condition-hero.web
 import tutorOfTheMonthBg from "../assets/Images/tutor-of-the-month-bg.png";
 import tutorOfTheMonthLabel from "../assets/Images/tutor-of-the-month-label.png";
 import tutorOfTheMonthBadge from "../assets/Images/tutor-of-the-month-badge.png";
+import guardianOfTheMonthLabel from "../assets/Images/guardian-of-the-month-label.png";
 
 // students steps
 import send from "../assets/Icons/StudentSteps/send.svg";
@@ -67,7 +68,7 @@ import male from "../assets/Icons/male.svg";
 import subject from "../assets/Icons/subject.svg";
 import tuitionType from "../assets/Icons/tuition-type.svg";
 import tutoringDays from "../assets/Icons/tutoringDays.svg";
-import salary from "../assets/Icons/sallary.svg";
+import salary from "../assets/Icons/salary.webp";
 import jobCategoryDummyIcon from "../assets/Icons/job-category-dummy-icon.svg";
 import time from "../assets/Icons/time.svg";
 import numberOfStudents from "../assets/Icons/number-of-students.svg";
@@ -176,6 +177,7 @@ export const IMAGES = {
   tutorOfTheMonthBg,
   tutorOfTheMonthLabel,
   tutorOfTheMonthBadge,
+  guardianOfTheMonthLabel,
 
 };
 
