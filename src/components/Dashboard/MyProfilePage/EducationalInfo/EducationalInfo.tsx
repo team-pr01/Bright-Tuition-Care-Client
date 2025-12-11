@@ -5,9 +5,10 @@ import Modal from "../../../Reusable/Modal/Modal";
 import UpdateEducationalInfoModal from "./UpdateEducationalInfoModal";
 import NoData from "../../../Reusable/NoData/NoData";
 import ProgressBars from "./ProgrerssBar";
-import AddEducationalInfoModal from "../EmergencyInfo/AddEducationalInfoModal";
+import AddEducationalInfoModal from "./AddEducationalInfoModal";
 import { BiEditAlt } from "react-icons/bi";
 import { AiOutlineDelete } from "react-icons/ai";
+import DeleteEducationConfirmationModal from "./DeleteEducationConfirmationModal";
 
 // Type for each educational record
 type TEducationInfoItem = {
@@ -39,6 +40,15 @@ const EducationalInfo: React.FC<TEducationalInfoProps> = ({
   const [isAddEducationFormModalOpen, setIsAddEducationFormModalOpen] =
     useState<boolean>(false);
   const [isFormModalOpen, setIsFormModalOpen] = useState<boolean>(false);
+  const [selectedEducation, setSelectedEducation] =
+    useState<TEducationInfoItem | null>(null);
+  const [selectedEducationId, setSelectedEducationId] = useState<string | null>(
+    null
+  );
+  const [
+    isConfirmDeleteEducationModalOpen,
+    setIsConfirmDeleteEducationModalOpen,
+  ] = useState<boolean>(false);
 
   const educationStatusBars = [
     {
@@ -54,8 +64,6 @@ const EducationalInfo: React.FC<TEducationalInfoProps> = ({
       isFilled: educationalInfo?.length > 2 ? true : false,
     },
   ];
-
-  console.log(educationalInfo);
 
   return (
     <div className="font-Nunito flex flex-col gap-5">
@@ -101,10 +109,22 @@ const EducationalInfo: React.FC<TEducationalInfoProps> = ({
                       {edu.degree}
                     </h2>
                     <div className="flex items-center gap-2">
-                      <button className="bg-neutral-50/30 border border-primary-10/10 p-2 rounded-lg flex items-center justify-center text-primary-10 text-lg cursor-pointer">
+                      <button
+                        onClick={() => {
+                          setSelectedEducation(edu);
+                          setIsFormModalOpen(true);
+                        }}
+                        className="bg-neutral-50/30 border border-primary-10/10 p-2 rounded-lg flex items-center justify-center text-primary-10 text-lg cursor-pointer"
+                      >
                         <BiEditAlt />
                       </button>
-                      <button className="bg-neutral-50/30 border border-primary-10/10 p-2 rounded-lg flex items-center justify-center text-red-500 text-lg cursor-pointer">
+                      <button
+                        onClick={() => {
+                          setSelectedEducationId(edu?._id as string);
+                          setIsConfirmDeleteEducationModalOpen(true);
+                        }}
+                        className="bg-neutral-50/30 border border-primary-10/10 p-2 rounded-lg flex items-center justify-center text-red-500 text-lg cursor-pointer"
+                      >
                         <AiOutlineDelete />
                       </button>
                     </div>
@@ -234,6 +254,7 @@ const EducationalInfo: React.FC<TEducationalInfoProps> = ({
         </div>
       )}
 
+      {/* Add Education */}
       <Modal
         heading="Add New Education"
         isModalOpen={isAddEducationFormModalOpen}
@@ -245,6 +266,7 @@ const EducationalInfo: React.FC<TEducationalInfoProps> = ({
         />
       </Modal>
 
+      {/* Update Education */}
       <Modal
         heading="Update Educational Information"
         isModalOpen={isFormModalOpen}
@@ -253,7 +275,19 @@ const EducationalInfo: React.FC<TEducationalInfoProps> = ({
       >
         <UpdateEducationalInfoModal
           setIsFormModalOpen={setIsFormModalOpen}
-          defaultValues={educationalInfo}
+          defaultValues={selectedEducation}
+        />
+      </Modal>
+
+      {/* Delete Education */}
+      <Modal
+        isModalOpen={isConfirmDeleteEducationModalOpen}
+        setIsModalOpen={setIsConfirmDeleteEducationModalOpen}
+        width="w-[90%] xl:w-[35%] max-h-[600px] overflow-y-auto"
+      >
+        <DeleteEducationConfirmationModal
+          setIsConfirmDeleteModalOpen={setIsConfirmDeleteEducationModalOpen}
+          selectedEducationId={selectedEducationId as string}
         />
       </Modal>
     </div>

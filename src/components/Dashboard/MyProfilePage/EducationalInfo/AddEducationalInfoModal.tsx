@@ -1,11 +1,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useForm } from "react-hook-form";
-import { useUpdateProfileMutation } from "../../../../redux/Features/User/userApi";
-import type { FormEducation } from "../EducationalInfo/UpdateEducationalInfoModal";
+import type { FormEducation } from "./UpdateEducationalInfoModal";
 import toast from "react-hot-toast";
 import Button from "../../../Reusable/Button/Button";
 import SelectDropdown from "../../../Reusable/SelectDropdown/SelectDropdown";
 import TextInput from "../../../Reusable/TextInput/TextInput";
+import { useAddNewEducationMutation } from "../../../../redux/Features/Tutor/tutorApi";
 
 const degreeOptions: string[] = [
   "SSC",
@@ -174,7 +174,7 @@ const AddEducationalInfoModal = ({
   setIsAddEducationFormModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
   defaultValues?: any;
 }) => {
-  const [updateProfile, { isLoading }] = useUpdateProfileMutation();
+  const [addNewEducation, { isLoading }] = useAddNewEducationMutation();
 
   const { register, handleSubmit, reset, watch } = useForm<TFormData>({
     defaultValues: { educationalInformation: emptyEducation() },
@@ -187,7 +187,7 @@ const AddEducationalInfoModal = ({
         profileCompleted: 20,
       };
 
-      const res = await updateProfile(payload).unwrap();
+      const res = await addNewEducation(payload).unwrap();
 
       if (res?.success) {
         toast.success(res?.message || "Education updated successfully");

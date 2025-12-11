@@ -72,6 +72,32 @@ const tutorApi = baseApi.injectEndpoints({
       providesTags: ["tutor"],
     }),
 
+    addNewEducation: builder.mutation({
+      query: (data) => ({
+        url: `/user/education/add`,
+        body: data,
+        method: "POST",
+      }),
+      invalidatesTags: ["users", "tutor", "guardian", "staff"],
+    }),
+
+    updateEducation: builder.mutation({
+      query: ({ data, id }) => ({
+        url: `/user/education/update/${id}`,
+        body: data,
+        method: "PUT",
+      }),
+      invalidatesTags: ["users", "tutor", "guardian", "staff"],
+    }),
+
+    deleteEducation: builder.mutation({
+      query: (id) => ({
+        url: `/user/education/delete/${id}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: ["users", "tutor", "guardian", "staff"],
+    }),
+
     updateIdentityInfo: builder.mutation({
       query: (data) => ({
         url: `/tutor/update/identity-info`,
@@ -96,6 +122,9 @@ export const {
   useGetAllTutorsQuery,
   useGetSingleTutorByIdQuery,
   useGetMyApplicationsQuery,
+  useAddNewEducationMutation,
+  useUpdateEducationMutation,
+  useDeleteEducationMutation,
   useUpdateIdentityInfoMutation,
   useSetTutorOfTheMonthMutation,
 } = tutorApi;
