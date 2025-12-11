@@ -16,7 +16,6 @@ import LogoLoader from "../../../../components/Reusable/LogoLoader/LogoLoader";
 import TutorOfTheMonth from "../../../../components/Dashboard/TutorOfTheMonth/TutorOfTheMonth";
 const TutorDashboardHome = () => {
   const { data, isLoading } = useGetTutorDashboardStatsQuery({});
-  console.log(data);
   const tutorStats = data?.data || {};
   const applications = tutorStats?.applications || {};
 
@@ -51,11 +50,6 @@ const TutorDashboardHome = () => {
     );
   }
 
-  const exampleTutor = {
-    id: "738219",
-    name: "John Smith",
-    rating: 4.9,
-  };
   return (
     <div className="flex flex-col gap-4 md:gap-0 font-Nunito">
       {/* Status cards */}
@@ -107,7 +101,7 @@ const TutorDashboardHome = () => {
         <NoticeBoard notices={tutorStats?.notices} />
         {/* bg-gradient-to-r from-slate-50 to-sky-50 */}
         <div className="grid grid-cols-1 lg:grid-cols-2 2xl:grid-cols-3 gap-6">
-          <TutorOfTheMonth tutor={exampleTutor} />
+          <TutorOfTheMonth tutor={tutorStats?.tutorOfTheMonth || {}} />
 
           {/* Profile Completed card */}
           <div className="bg-white rounded-2xl border border-primary-40/10 p-5 flex flex-col justify-between">
