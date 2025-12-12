@@ -27,6 +27,7 @@ const SendConfirmationLetterForm = ({
     data: jobData,
     isLoading,
     isFetching,
+    refetch,
   } = useGetJobDetailsForConfirmationLetterQuery(jobId, {
     skip: !jobId,
   });
@@ -34,6 +35,8 @@ const SendConfirmationLetterForm = ({
   const [sendConfirmationLetter, { isLoading: isSending }] =
     useSendConfirmationLetterMutation();
 
+
+    console.log(jobData);
   const handleSendConfirmationLetter = async () => {
     try {
       const payload: TFormData = {
@@ -71,7 +74,12 @@ const SendConfirmationLetterForm = ({
           className="py-[14px] lg:py-[14px] mt-[26px] text-nowrap text-xs lg:text-xs"
           onClick={() => {
             if (!jobIdInput.trim()) return;
-            setJobId(jobIdInput);
+
+            if (jobIdInput === jobId) {
+              refetch();
+            } else {
+              setJobId(jobIdInput);
+            }
           }}
           isLoading={isLoading || isFetching}
         />

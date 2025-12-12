@@ -57,10 +57,10 @@ const applicationApi = baseApi.injectEndpoints({
 
     getAllApplicationOfATutor: builder.query<
       any,
-      { userId: string; page?: number; limit?: number }
+      { userId: string; skip?: number; limit?: number, status?: string }
     >({
-      query: ({ userId, page = 1, limit = 10 }) => {
-        const url = `/application/tutor/${userId}?page=${page}&limit=${limit}`;
+      query: ({ userId, skip = 0, limit = 10, status }) => {
+        const url = `/application/tutor/${userId}?skip=${skip}&limit=${limit}&status=${status}`;
         return {
           url,
           method: "GET",
