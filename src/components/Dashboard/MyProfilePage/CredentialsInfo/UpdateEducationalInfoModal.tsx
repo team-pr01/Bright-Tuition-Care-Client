@@ -9,10 +9,10 @@ import { FiUploadCloud, FiX, FiFile, FiImage } from "react-icons/fi";
 import { FaFilePdf, FaFileWord, FaFileExcel } from "react-icons/fa";
 
 const fileTypes = [
-  "SSC/Marksheet/Certificate",
-  "HSC/Marksheet/Certificate",
-  "NID/Passport/BirthCertificate",
-  "AdmissionSlip/UniversityId/Certificate",
+  "SSC / Dakhil / O Level - Mark Sheet / Certificate",
+  "HSC / Alim / A Level - Mark Sheet / Certificate",
+  "NID / Passport / Birth Certificate",
+  "Admission Pay Slip / University ID Card / Certificate",
   "Others",
 ];
 

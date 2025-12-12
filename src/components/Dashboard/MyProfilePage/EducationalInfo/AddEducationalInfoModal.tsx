@@ -163,8 +163,6 @@ const emptyEducation = (): FormEducation => ({
   semester: undefined,
   result: "",
   passingYear: "",
-  from: "",
-  to: "",
   isCurrentInstitute: false,
 });
 
@@ -291,8 +289,7 @@ const AddEducationalInfoModal = ({
           {shouldShowHigherEducationFields && (
             <TextInput
               label="Year / Semester"
-              placeholder="e.g., 5"
-              type="number"
+              placeholder="e.g., 5th semester, 3rd year"
               {...register("educationalInformation.semester" as const, {
                 valueAsNumber: true,
               })}
@@ -310,25 +307,6 @@ const AddEducationalInfoModal = ({
             error={undefined}
             isRequired={false}
           />
-
-          {/* Time inputs - hidden/disabled when isCurrentInstitute is true */}
-          {!isCurrent && (
-            <>
-              <TextInput
-                label="From"
-                type="date"
-                {...register("educationalInformation.from" as const)}
-                isRequired={false}
-              />
-
-              <TextInput
-                label="To"
-                type="date"
-                {...register("educationalInformation.to" as const)}
-                isRequired={false}
-              />
-            </>
-          )}
 
           {/* passingYear - hide when current */}
           {!isCurrent && (

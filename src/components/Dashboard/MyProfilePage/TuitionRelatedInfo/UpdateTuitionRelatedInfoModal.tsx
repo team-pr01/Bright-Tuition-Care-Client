@@ -68,12 +68,11 @@ const UpdateTuitionRelatedInfoModal = ({
     const uniqueLocations = [...new Set(locations)];
     setAreaOptions(uniqueLocations);
 
-    // ✅ Keep only areas that still exist for the selected cities
     setSelectedAreas((prev) =>
       prev.filter((area) => uniqueLocations.includes(area))
     );
   }, [selectedCities, setAreaOptions, setSelectedAreas]);
-
+  
   const {
     register,
     handleSubmit,
@@ -89,17 +88,14 @@ const UpdateTuitionRelatedInfoModal = ({
         "preferredSubjects",
         defaultValues.preferences?.preferredSubjects
       );
-      setValue("preferredCities", defaultValues.preferences?.preferredCities);
+      setValue("preferredCities", defaultValues?.preferences?.preferredCities);
       setValue(
         "preferredLocations",
         defaultValues.preferences?.preferredLocations
       );
       setValue("expectedSalary", defaultValues.expectedSalary);
-      setValue("totalExperience", defaultValues?.experience?.totalExperience);
-      setValue(
-        "experienceDetails",
-        defaultValues?.experience?.experienceDetails
-      );
+      setValue("totalExperience", defaultValues?.experience?.total);
+      setValue("experienceDetails", defaultValues?.experience?.details);
       setValue("from", defaultValues.availableTime?.from);
       setValue("to", defaultValues.availableTime?.to);
 
@@ -109,6 +105,8 @@ const UpdateTuitionRelatedInfoModal = ({
       setSelectedClasses(defaultValues?.preferences?.preferredClasses);
       setSelectedSubjects(defaultValues?.preferences?.preferredSubjects);
       setSelectedPlaceOfTuition(defaultValues?.preferences?.placeOfTuition);
+      setSelectedCities(defaultValues?.preferences?.preferredCities);
+      setSelectedAreas(defaultValues?.preferences?.preferredLocations);
     }
   }, [defaultValues, setValue]);
 

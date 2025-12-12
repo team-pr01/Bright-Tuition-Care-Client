@@ -163,9 +163,6 @@ export type FormEducation = {
   result?: string;
   passingYear?: string;
 
-  from?: string;
-  to?: string;
-
   isCurrentInstitute?: boolean;
 };
 
@@ -188,8 +185,6 @@ const emptyEducation = (): FormEducation => ({
 
   result: "",
   passingYear: "",
-  from: "",
-  to: "",
 
   isCurrentInstitute: false,
 });
@@ -219,17 +214,6 @@ const UpdateEducationalInfoModal = ({
         ? defaultValues.educationalInformation
         : defaultValues;
 
-    // helper: convert ISO/full datetime to yyyy-mm-dd (for <input type="date">)
-    const toDateInput = (val: any) => {
-      if (!val) return "";
-      const d = new Date(val);
-      if (Number.isNaN(d.getTime())) return "";
-      const yyyy = d.getFullYear();
-      const mm = String(d.getMonth() + 1).padStart(2, "0");
-      const dd = String(d.getDate()).padStart(2, "0");
-      return `${yyyy}-${mm}-${dd}`;
-    };
-
     const mapped: FormEducation = {
       levelOfEducation: src?.levelOfEducation ?? "",
       instituteName: src?.instituteName ?? "",
@@ -252,8 +236,6 @@ const UpdateEducationalInfoModal = ({
           : undefined),
       result: src?.result ?? "",
       passingYear: src?.passingYear ?? src?.passing_year ?? "",
-      from: toDateInput(src?.from ?? src?.startDate ?? ""),
-      to: toDateInput(src?.to ?? src?.endDate ?? ""),
       isCurrentInstitute: !!src?.isCurrentInstitute,
     };
 
@@ -375,8 +357,7 @@ const UpdateEducationalInfoModal = ({
           {shouldShowHigherEducationFields && (
             <TextInput
               label="Year / Semester"
-              placeholder="e.g., 5"
-              type="number"
+              placeholder="e.g., 5th semester, 3rd year"
               {...register("educationalInformation.semester" as const, {
                 valueAsNumber: true,
               })}
@@ -394,25 +375,6 @@ const UpdateEducationalInfoModal = ({
             error={undefined}
             isRequired={false}
           />
-
-          {/* Time inputs - hidden/disabled when isCurrentInstitute is true */}
-          {!isCurrent && (
-            <>
-              <TextInput
-                label="From"
-                type="date"
-                {...register("educationalInformation.from" as const)}
-                isRequired={false}
-              />
-
-              <TextInput
-                label="To"
-                type="date"
-                {...register("educationalInformation.to" as const)}
-                isRequired={false}
-              />
-            </>
-          )}
 
           {/* passingYear - hide when current */}
           {!isCurrent && (

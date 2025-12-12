@@ -73,7 +73,6 @@ const SendConfirmationLetterForm = ({
             if (!jobIdInput.trim()) return;
             setJobId(jobIdInput);
           }}
-          isDisabled={isLoading || isFetching}
           isLoading={isLoading || isFetching}
         />
       </form>

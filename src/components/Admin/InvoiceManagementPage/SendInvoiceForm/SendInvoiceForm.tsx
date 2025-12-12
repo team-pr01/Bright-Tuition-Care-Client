@@ -8,6 +8,7 @@ import {
   useSendInvoiceMutation,
 } from "../../../../redux/Features/Invoice/invoiceApi";
 import toast from "react-hot-toast";
+import type { FetchBaseQueryError } from "@reduxjs/toolkit/query";
 
 type TFormData = {
   jobId: string;
@@ -28,20 +29,24 @@ const SendInvoiceForm = ({
     register,
     handleSubmit,
     setValue,
+    reset,
     formState: { errors },
   } = useForm<TFormData>();
-  const [activeTab, setActiveTab] = useState<string>("");
+  const [activeTab, setActiveTab] = useState<string | null>(null);
   const [sendInvoice, { isLoading: isSending }] = useSendInvoiceMutation();
-  const [jobIdInput, setJobIdInput] = useState("");
-  const [jobId, setJobId] = useState("");
+  const [jobIdInput, setJobIdInput] = useState<string | null>(null);
+  const [jobId, setJobId] = useState<string | null>(null);
 
   const {
     data: jobData,
     isLoading,
     isFetching,
+    isError,
+    error,
   } = useGetJobDetailsForInvoiceQuery(jobId, {
     skip: !jobId,
   });
+  const baseError = error as FetchBaseQueryError;
 
   useEffect(() => {
     if (jobData?.data) {
@@ -54,19 +59,23 @@ const SendInvoiceForm = ({
   }, [jobData, setValue]);
 
   const handleSendInvoice = async (data: TFormData) => {
-    console.log(data);
     try {
       const payload = {
-        invoiceType : activeTab === "Verification Charge" ? "verificationCharge" : "platformCharge",
-        jobId: jobId ? jobId : null,
-        userId: data.userId,
+        invoiceType:
+          activeTab === "Verification Charge"
+            ? "verificationCharge"
+            : "platformCharge",
+        jobId: jobData?.data.job?._id ?? null,
+        userId: data?.userId || jobData?.data?.tutor?.tutorId,
         amount: activeTab === "Verification Charge" ? 500 : data.amount,
-        dueDate: data.dueDate,
+        dueDate: data?.dueDate,
       };
       const response = await sendInvoice(payload).unwrap();
       if (response?.success) {
-        setJobId("");
-        setJobIdInput("");
+        setJobId(null);
+        setJobIdInput(null);
+        setActiveTab(null);
+        reset();
         toast.success("Invoice sent successfully.");
         setIsSendInvoiceModalOpen(false);
       }
@@ -74,7 +83,6 @@ const SendInvoiceForm = ({
       toast.error(error?.data?.message || "Failed to send invoice.");
     }
   };
-
 
   const tabButtons = ["Verification Charge", "Platform Charge"];
 
@@ -112,7 +120,7 @@ const SendInvoiceForm = ({
             variant="primary"
             className="py-[14px] lg:py-[14px] mt-[26px] text-nowrap text-xs lg:text-xs"
             onClick={() => {
-              if (!jobIdInput.trim()) return;
+              if (!jobIdInput?.trim()) return;
               setJobId(jobIdInput);
             }}
             isDisabled={isLoading || isFetching}
@@ -121,12 +129,21 @@ const SendInvoiceForm = ({
         </form>
       )}
 
+      {isError && (
+        <p className="text-red-500 text-sm mt-1">
+          {(baseError?.data as any)?.message}
+        </p>
+      )}
+
       {activeTab === "Verification Charge" && (
-        <form onSubmit={handleSubmit(handleSendInvoice)} className="flex flex-col items-center gap-3 mt-10">
+        <form
+          onSubmit={handleSubmit(handleSendInvoice)}
+          className="flex flex-col items-center gap-3 mt-10"
+        >
           <TextInput
             label="Tutor/Guardian Id"
             placeholder="Enter tutor/guardian id"
-           {...register("userId", {
+            {...register("userId", {
               required: "Tutor/Guardian Id is required",
             })}
           />
@@ -143,7 +160,7 @@ const SendInvoiceForm = ({
 
           <Button
             type="submit"
-            label="Send"
+            label={isSending ? "Sending..." : "Send Invoice"}
             variant="primary"
             className="py-[14px] lg:py-[14px] mt-2 text-nowrap text-xs lg:text-xs"
             isDisabled={isLoading || isFetching}
