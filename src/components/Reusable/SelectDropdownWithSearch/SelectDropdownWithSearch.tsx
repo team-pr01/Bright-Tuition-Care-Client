@@ -7,9 +7,10 @@ interface SingleSelectDropdownProps {
   options: string[];
   placeholder?: string;
   error?: string;
-  value?: string;
+  value?: string | string[];
   onChange?: (selected: string) => void;
   isRequired?: boolean;
+  dropdownDirection?: string;
 }
 
 const SelectDropdownWithSearch = forwardRef<
@@ -25,14 +26,23 @@ const SelectDropdownWithSearch = forwardRef<
     value = "",
     onChange,
     isRequired = true,
+    dropdownDirection = "bottom-full",
   }) => {
     const [isOpen, setIsOpen] = useState(false);
-    const [selectedValue, setSelectedValue] = useState<string>(value);
+    const [selectedValue, setSelectedValue] = useState<string>("");
+
     const [searchTerm, setSearchTerm] = useState("");
     const dropdownRef = useRef<HTMLDivElement>(null);
 
+    // Normalize incoming `value` (string | string[]) into a single string
     useEffect(() => {
-      setSelectedValue(value);
+      if (Array.isArray(value)) {
+        setSelectedValue(value.length > 0 ? value[0] : "");
+      } else if (typeof value === "string") {
+        setSelectedValue(value);
+      } else {
+        setSelectedValue("");
+      }
     }, [value]);
 
     useEffect(() => {
@@ -82,17 +92,17 @@ const SelectDropdownWithSearch = forwardRef<
             } ${!selectedValue ? "text-neutral-65" : "text-neutral-10"}`}
             onClick={() => setIsOpen((prev) => !prev)}
           >
-            <span className="truncate">{selectedValue || placeholder}</span>
+            <span className="truncate capitalize">
+              {selectedValue || placeholder}
+            </span>
             <FiChevronDown
-              className={`transition-transform duration-200 ${
-                isOpen ? "rotate-180" : ""
-              }`}
+              className={`transition-transform duration-200 ${isOpen ? "rotate-180" : ""}`}
               size={18}
             />
           </button>
 
           {isOpen && (
-            <div className="absolute z-30 bottom-full mb-1 w-full rounded-lg bg-white shadow-lg border border-neutral-45/30 max-h-60 overflow-auto">
+            <div className={`absolute z-30 ${dropdownDirection} mb-1 w-full rounded-lg bg-white shadow-lg border border-neutral-45/30 max-h-60 overflow-auto`}>
               {/* Search input */}
               <div className="sticky top-0 bg-white p-2 border-b border-neutral-45/20">
                 <input
@@ -110,9 +120,7 @@ const SelectDropdownWithSearch = forwardRef<
                   <div
                     key={option}
                     className={`px-4 py-2 cursor-pointer hover:bg-neutral-98 capitalize ${
-                      selectedValue === option
-                        ? "bg-neutral-98 font-medium"
-                        : ""
+                      selectedValue === option ? "bg-neutral-98 font-medium" : ""
                     }`}
                     onClick={() => handleSelect(option)}
                   >

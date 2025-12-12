@@ -55,15 +55,14 @@ const SuccessMessage = ({ user }: { user: TLoggedInUser }) => {
         </div>
       )}
 
-      {user?.role === "admin" ||
-        (user?.role === "staff" && (
-          <a
-            href={`/dashboard/${navigatePath}/all-jobs/all`}
-            className="text-primary-50 underline mt-4"
-          >
-            See All Jobs
-          </a>
-        ))}
+      {(user?.role === "admin" || user?.role === "staff") && (
+        <a
+          href={`/dashboard/${navigatePath}/all-jobs/all`}
+          className="text-primary-50 underline mt-4"
+        >
+          See All Jobs
+        </a>
+      )}
     </div>
   );
 };

@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useFormContext } from "react-hook-form";
-import MultiSelectDropdown from "../../Reusable/MultiSelectDropdown/MultiSelectDropdown";
 import TextInput from "../../Reusable/TextInput/TextInput";
 import { filterData } from "../../../constants/filterData";
 import { useEffect } from "react";
@@ -10,6 +9,7 @@ import { useSelector } from "react-redux";
 import { useCurrentUser } from "../../../redux/Features/Auth/authSlice";
 import type { TLoggedInUser } from "../../../types/loggedinUser.types";
 import { useLocation } from "react-router-dom";
+import SelectDropdownWithSearch from "../../Reusable/SelectDropdownWithSearch/SelectDropdownWithSearch";
 
 const LocationForm = ({ defaultValues }: { defaultValues?: TJobs }) => {
   const user = useSelector(useCurrentUser) as TLoggedInUser;
@@ -30,8 +30,22 @@ const LocationForm = ({ defaultValues }: { defaultValues?: TJobs }) => {
     }
   }, [defaultValues, setValue]);
 
-  const selectedCity = watch("city") || [];
-  const selectedArea = watch("area") || [];
+  // watch raw values
+  const rawCity = watch("city");
+  const rawArea = watch("area");
+
+  // normalize to arrays so .flatMap etc. always works
+  const selectedCity: string[] = Array.isArray(rawCity)
+    ? rawCity
+    : rawCity
+    ? [rawCity]
+    : [];
+
+  const selectedArea: string[] = Array.isArray(rawArea)
+    ? rawArea
+    : rawArea
+    ? [rawArea]
+    : [];
 
   // Dynamically update areas based on city selection
   const areaOptions = selectedCity.flatMap((cityName: string) => {
@@ -50,7 +64,7 @@ const LocationForm = ({ defaultValues }: { defaultValues?: TJobs }) => {
   return (
     <div className="flex flex-col gap-4 lg:gap-6">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 lg:gap-6">
-        <MultiSelectDropdown
+        <SelectDropdownWithSearch
           label="City"
           name="city"
           options={filterData.cityCorporationWithLocation.map((c) => c.name)}
@@ -59,7 +73,7 @@ const LocationForm = ({ defaultValues }: { defaultValues?: TJobs }) => {
           dropdownDirection="top-full"
         />
 
-        <MultiSelectDropdown
+        <SelectDropdownWithSearch
           label="Area"
           name="area"
           options={areaOptions}

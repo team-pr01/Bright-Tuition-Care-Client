@@ -18,6 +18,7 @@ import type { TLoggedInUser } from "../../../../types/loggedinUser.types";
 import { LuUser } from "react-icons/lu";
 import { SlPhone } from "react-icons/sl";
 import { formatDate } from "../../../../utils/formatDate";
+import { FaRegFileAlt } from "react-icons/fa";
 
 type TJobCardProps = {
   variant?: string;
@@ -243,7 +244,9 @@ const JobCard: React.FC<TJobCardProps> = ({
         )}
 
         {variant === "admin" && (
-          <div className="flex items-center gap-3 mt-5">
+          <div className="mt-5 space-y-3">
+
+            <div className="flex items-center gap-3">
             <div className="flex gap-2">
               <LuUser className="text-primary-10 text-xl mt-1" />
               <div>
@@ -263,6 +266,19 @@ const JobCard: React.FC<TJobCardProps> = ({
                 </p>
                 <p className="text-neutral-10 font-medium leading-6 mt-1">
                   {job?.guardianPhoneNumber || "N/A"}
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div className="flex gap-2">
+              <FaRegFileAlt className="text-primary-10 text-xl mt-1" />
+              <div>
+                <p className="text-neutral-45 text-sm leading-normal">
+                  Update
+                </p>
+                <p className="text-neutral-10 font-bold leading-6 mt-1">
+                  {job?.jobUpdate || "N/A"}
                 </p>
               </div>
             </div>

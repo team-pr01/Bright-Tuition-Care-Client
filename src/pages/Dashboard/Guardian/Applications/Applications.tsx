@@ -71,7 +71,7 @@ const Applications = () => {
         // phoneNumber: application.userPhoneNumber,
         location: `${application.userArea}, ${application.userCity}`,
         appliedDate: formatDate(application.createdAt),
-        status: <span className="capitalize">{application.status}</span>,
+        status: <span className="capitalize bg-primary-10/10 text-primary-10 px-3 py-1 rounded-full text-xs font-bold font-Nunito">{application.status}</span>,
         appliedOn: new Date(application.appliedOn).toLocaleDateString(),
         cv: (
           <button

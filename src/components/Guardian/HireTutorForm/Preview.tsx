@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
-//@ts-nocheck
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Controller, useFormContext } from "react-hook-form";
 import { filterData } from "../../../constants/filterData";
@@ -12,6 +10,7 @@ import SelectDropdown from "../../Reusable/SelectDropdown/SelectDropdown";
 import { useSelector } from "react-redux";
 import type { TLoggedInUser } from "../../../types/loggedinUser.types";
 import { useCurrentUser } from "../../../redux/Features/Auth/authSlice";
+import SelectDropdownWithSearch from "../../Reusable/SelectDropdownWithSearch/SelectDropdownWithSearch";
 
 const Preview = () => {
   const user = useSelector(useCurrentUser) as TLoggedInUser;
@@ -24,11 +23,26 @@ const Preview = () => {
     control,
   } = useFormContext<any>();
 
-  const selectedCity = watch("city") || [];
-  const selectedArea = watch("area") || [];
   const selectedCategory = watch("category");
   const selectedClass = watch("class");
   const selectedSubject = watch("subjects") || [];
+
+    // watch raw values
+  const rawCity = watch("city");
+  const rawArea = watch("area");
+
+  // normalize to arrays so .flatMap etc. always works
+  const selectedCity: string[] = Array.isArray(rawCity)
+    ? rawCity
+    : rawCity
+    ? [rawCity]
+    : [];
+
+  const selectedArea: string[] = Array.isArray(rawArea)
+    ? rawArea
+    : rawArea
+    ? [rawArea]
+    : [];
 
   // Dynamically update areas based on city selection
   const areaOptions = selectedCity.flatMap((cityName: string) => {
@@ -250,22 +264,22 @@ const Preview = () => {
           isDisabled={!isEditEnable}
         />
 
-        <MultiSelectDropdown
+        <SelectDropdownWithSearch
           label="City"
           name="city"
           options={filterData.cityCorporationWithLocation.map((c) => c.name)}
           value={selectedCity}
           onChange={(val) => setValue("city", val)}
-          isDisabled={!isEditEnable}
+          dropdownDirection="top-full"
         />
 
-        <MultiSelectDropdown
+        <SelectDropdownWithSearch
           label="Area"
           name="area"
           options={areaOptions}
           value={selectedArea}
           onChange={(val) => setValue("area", val)}
-          isDisabled={!isEditEnable}
+          dropdownDirection="top-full"
         />
 
         <TextInput

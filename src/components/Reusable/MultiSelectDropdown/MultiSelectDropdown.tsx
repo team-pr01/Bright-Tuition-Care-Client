@@ -107,7 +107,7 @@ const MultiSelectDropdown = forwardRef<
             }`}
             onClick={() => setIsOpen(!isOpen)}
           >
-            <span className="truncate">{displayText}</span>
+            <span className="truncate capitalize">{displayText}</span>
             <FiChevronDown
               className={`transition-transform duration-200 ${
                 isOpen ? "transform rotate-180" : ""
@@ -125,7 +125,7 @@ const MultiSelectDropdown = forwardRef<
                 <input
                   type="text"
                   placeholder="Search..."
-                  className="w-full px-3 py-2 text-sm border border-primary-30 rounded-md focus:outline-none focus:border-primary-10 capitalize"
+                  className="w-full px-3 py-2 text-sm border border-primary-30 rounded-md focus:outline-none focus:border-primary-10"
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
                   onClick={(e) => e.stopPropagation()}
@@ -136,7 +136,7 @@ const MultiSelectDropdown = forwardRef<
                 filteredOptions.map((option) => (
                   <div
                     key={option}
-                    className={`px-4 py-2 cursor-pointer hover:bg-neutral-98 ${
+                    className={`px-4 py-2 cursor-pointer hover:bg-neutral-98 capitalize ${
                       selectedValues?.includes(option) ? "bg-neutral-98" : ""
                     }`}
                     onClick={() => toggleOption(option)}
@@ -146,7 +146,7 @@ const MultiSelectDropdown = forwardRef<
                         type="checkbox"
                         checked={selectedValues?.includes(option)}
                         readOnly
-                        className="mr-2 size-4 appearance-none rounded-full border border-neutral-95 checked:bg-primary-10 checked:border-primary-10 focus:ring-2 focus:ring-primary-10"
+                        className="mr-2 size-4 appearance-none rounded-full border border-neutral-95 checked:bg-primary-10 checked:border-primary-10 focus:ring-2 focus:ring-primary-10 capitalize"
                       />
 
                       <span className="text-neutral-10">{option}</span>
