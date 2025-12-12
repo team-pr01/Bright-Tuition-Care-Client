@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Document, Page, Text, View, StyleSheet } from "@react-pdf/renderer";
 import logo from "../../../../../assets/Icons/logo.png"
 import { Image } from "@react-pdf/renderer";
@@ -43,7 +44,7 @@ const styles = StyleSheet.create({
   },
 });
 
-const ConfirmationLetterPdf = () => (
+const ConfirmationLetterPdf = ({data}:any) => (
   <Document>
     <Page size="A4" style={styles.page}>
        {/* Logo */}
@@ -61,17 +62,18 @@ const ConfirmationLetterPdf = () => (
       <Text style={styles.text}>
         Congratulations! We are pleased to let you know that{" "}
         <Text style={{ fontWeight: "bold" }}>Bright Tuition Care</Text> has
-        successfully connected both of you for this tuition. (Job ID: 12345)
+        successfully connected both of you for this tuition. (Job ID: {data?.jobId?.jobId})
       </Text>
 
       {/* Tuition Details */}
       <View style={styles.section}>
         <Text style={{ fontWeight: "bold" }}>Tuition Details</Text>
         <View style={styles.box}>
-          <Text>Subject: Mathematics</Text>
-          <Text>Class: 8</Text>
-          <Text>Schedule: Mon, Wed, Fri - 6 PM</Text>
-          <Text>Location: Dhaka</Text>
+          <Text>Subject: {data?.jobId?.subjects}</Text>
+          <Text>Class: {data?.jobId?.class}</Text>
+          <Text>Schedule: {data?.jobId?.tutoringDays},{" "}
+            {data?.jobId?.tutoringTime}</Text>
+          <Text>Location: {data?.jobId?.city}, {data?.jobId?.area}</Text>
         </View>
       </View>
 
@@ -79,15 +81,15 @@ const ConfirmationLetterPdf = () => (
       <View style={[styles.section, styles.row]}>
         <View style={styles.box}>
           <Text style={{ fontWeight: "bold" }}>Guardian/Student</Text>
-          <Text>Name: John Doe</Text>
-          <Text>ID: G-102</Text>
-          <Text>Phone: 0123456789</Text>
+          <Text>Name: {data?.guardianId?.name || "N/A"}</Text>
+          <Text>Email: {data?.guardianId?.email || "N/A"}</Text>
+          <Text>Phone: {data?.guardianId?.phoneNumber || "N/A"}</Text>
         </View>
         <View style={styles.box}>
           <Text style={{ fontWeight: "bold" }}>Tutor</Text>
-          <Text>Name: Jane Smith</Text>
-          <Text>ID: T-501</Text>
-          <Text>Phone: 0987654321</Text>
+          <Text>Name: {data?.tutorId?.name}</Text>
+          <Text>ID: {data?.tutorId?.email}</Text>
+          <Text>Phone: {data?.tutorId?.phoneNumber}</Text>
         </View>
       </View>
 

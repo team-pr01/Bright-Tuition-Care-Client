@@ -1,7 +1,6 @@
 import { FaFileInvoice } from "react-icons/fa";
 import { FiCalendar } from "react-icons/fi";
 import type { TConfirmationLetter } from "../../../../../types/confirmationLetter.types";
-import toast from "react-hot-toast";
 
 const ConfirmationLetterCard = ({
   letter,
@@ -21,11 +20,11 @@ const ConfirmationLetterCard = ({
         <FaFileInvoice className="text-3xl text-primary-10" />
         <div>
           <h3 className="text-lg font-semibold text-gray-800 flex items-center gap-2">
-            Confirmation Letter -
-            <span className="max-w-[160px] truncate" title={letter?._id}>
+            Confirmation Letter
+            {/* <span className="max-w-[160px] truncate" title={letter?._id}>
               #{letter?._id}
-            </span>
-            <button
+            </span> */}
+            {/* <button
               type="button"
               onClick={() => {
                 navigator.clipboard.writeText(letter?._id || "");
@@ -34,7 +33,7 @@ const ConfirmationLetterCard = ({
               className="text-xs underline text-primary-10 hover:text-blue-600 cursor-pointer"
             >
               Copy
-            </button>
+            </button> */}
           </h3>
 
           <p className="text-sm text-gray-500">
@@ -49,7 +48,7 @@ const ConfirmationLetterCard = ({
         </p>
         <p className="text-sm text-neutral-20">
           <span className="font-medium">Guardian:</span>{" "}
-          {letter?.guardianId?.name}
+          {letter?.guardianId?.name || "N/A"}
         </p>
         <p className="text-sm text-neutral-20">
           <span className="font-medium">Tuition:</span> {letter?.jobId?.title}

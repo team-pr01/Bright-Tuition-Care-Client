@@ -20,7 +20,7 @@ const ConfirmationLetterPreview = ({ letterId }: { letterId: string }) => {
     signOnLetterForGuardian
   ] = useSignOnLetterForGuardianMutation();
   const handleDownloadConfirmationLetterPdf = async () => {
-    const blob = await pdf(<ConfirmationLetterPdf />).toBlob();
+    const blob = await pdf(<ConfirmationLetterPdf data={data?.data} />).toBlob();
     const url = URL.createObjectURL(blob);
     const link = document.createElement("a");
     link.href = url;
@@ -108,9 +108,9 @@ const ConfirmationLetterPreview = ({ letterId }: { letterId: string }) => {
           <h4 className="font-semibold text-neutral-5 mb-1">
             Guardian/Student
           </h4>
-          <p className="capitalize">Name: {data?.data?.guardianId?.name}</p>
-          <p>Email: {data?.data?.guardianId?.email}</p>
-          <p>Phone: {data?.data?.guardianId?.phoneNumber}</p>
+          <p className="capitalize">Name: {data?.data?.guardianId?.name || "N/A"}</p>
+          <p>Email: {data?.data?.guardianId?.email || "N/A"}</p>
+          <p>Phone: {data?.data?.guardianId?.phoneNumber || "N/A"}</p>
         </div>
         <div className="border border-neutral-55/50 rounded-md p-3 text-sm">
           <h4 className="font-semibold text-neutral-5 mb-1">Tutor</h4>

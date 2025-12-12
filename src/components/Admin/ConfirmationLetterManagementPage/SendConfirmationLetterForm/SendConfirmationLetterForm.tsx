@@ -35,8 +35,6 @@ const SendConfirmationLetterForm = ({
   const [sendConfirmationLetter, { isLoading: isSending }] =
     useSendConfirmationLetterMutation();
 
-
-    console.log(jobData);
   const handleSendConfirmationLetter = async () => {
     try {
       const payload: TFormData = {
