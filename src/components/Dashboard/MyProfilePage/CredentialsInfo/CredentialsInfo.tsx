@@ -66,6 +66,12 @@ const CredentialsInfo: React.FC<TCredentialsInfoProps> = ({
     },
   ];
 
+  console.log(identityInformation);
+  const uploadedFileTypes = identityInformation?.map(
+  (item: TCredential) => item?.fileType
+);
+
+
   return (
     <div className="font-Nunito flex flex-col gap-5">
       <ProfileTabHeading
@@ -137,7 +143,7 @@ const CredentialsInfo: React.FC<TCredentialsInfoProps> = ({
         setIsModalOpen={setIsFormModalOpen}
         width="w-[90%] md:w-[35%] max-h-[600px] overflow-y-auto"
       >
-        <UpdateCredentialsInfoModal setIsFormModalOpen={setIsFormModalOpen} />
+        <UpdateCredentialsInfoModal setIsFormModalOpen={setIsFormModalOpen} uploadedFileTypes={uploadedFileTypes as string[]} />
       </Modal>
 
       {/* Fullscreen Black View Modal */}

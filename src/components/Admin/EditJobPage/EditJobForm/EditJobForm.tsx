@@ -37,6 +37,10 @@ interface FormValues {
   city: string[];
   area: string[];
   address: string;
+
+  // Job Update
+  jobUpdate: string;
+  jobUpdatedAt : Date
 }
 
 const EditJobForm = ({ jobId }: { jobId: string }) => {
@@ -51,9 +55,9 @@ const EditJobForm = ({ jobId }: { jobId: string }) => {
     try {
       const payload = {
         ...data,
+        jobUpdatedAt : data?.jobUpdate ? Date.now() : null
       };
       const response = await updateJob({ id: jobId, data: payload }).unwrap();
-      console.log(response);
       if (response?.success) {
         toast.success("Job updated successfully!");
         if (user?.role === "admin") navigate("/dashboard/admin/all-jobs/all");

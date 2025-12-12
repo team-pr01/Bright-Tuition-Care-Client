@@ -38,6 +38,7 @@ export type TJobs = {
   postedBy: string;
   postedByModel: "User" | "Guardian";
   jobUpdate?: string;
+  jobUpdatedAt?: string;
   createdAt: string;
   updatedAt: string;
 };

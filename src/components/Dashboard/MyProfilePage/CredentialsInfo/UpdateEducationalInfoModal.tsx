@@ -23,9 +23,16 @@ type TFormData = {
 
 const UpdateIdentityInfoModal = ({
   setIsFormModalOpen,
+  uploadedFileTypes,
 }: {
   setIsFormModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  uploadedFileTypes: string[];
 }) => {
+  const mappedTypes = fileTypes.filter((type) => {
+    if (type === "Others") return true;
+    return !uploadedFileTypes.includes(type);
+  });
+
   const [updateIdentityInfo, { isLoading }] = useUpdateIdentityInfoMutation();
   const [fileError, setFileError] = useState<string>("");
   const [isDragging, setIsDragging] = useState<boolean>(false);
@@ -144,7 +151,7 @@ const UpdateIdentityInfoModal = ({
         <div className="mb-6">
           <SelectDropdown
             label="File Type"
-            options={fileTypes}
+            options={mappedTypes}
             {...register("fileType", { required: true })}
             isRequired
           />
@@ -192,7 +199,7 @@ const UpdateIdentityInfoModal = ({
                   type="button"
                   label="Browse Files"
                   variant="outline"
-                  onClick={(e:any) => {
+                  onClick={(e: any) => {
                     e.stopPropagation(); // prevent parent div click
                     const input = document.getElementById(
                       "file-upload"
