@@ -33,7 +33,7 @@ const JobBoard = () => {
   const debouncedKeyword = useDebounce(keyword, 500);
 
   const { data: singleJob } = useGetSingleJobByCustomJobIdQuery(id);
-  const shareUrl = `http://localhost:5173/job-board/${singleJob?.data?.jobId}`;
+  const shareUrl = `http://brighttuitioncare.com/job-board/${singleJob?.data?.jobId}`;
   const [showDrawer, setShowDrawer] = useState<boolean>(false);
 
   useEffect(() => {

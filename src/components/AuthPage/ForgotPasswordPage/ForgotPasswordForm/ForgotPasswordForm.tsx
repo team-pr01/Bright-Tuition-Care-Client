@@ -59,7 +59,7 @@ const ForgotPasswordForm = () => {
     >
       <AuthHeading
         title="Forgot Password?"
-        description="Please enter your email address to receive a link to reset your password."
+        description="Please enter your phone number to receive an OTP to reset your password."
       />
       <div className="bg-neutral-50/10 border border-primary-10/30 rounded-2xl p-5 lg:p-7 flex flex-col gap-6">
         {/* Tab buttons */}

@@ -100,7 +100,7 @@ const TestimonialCard: React.FC<TestimonialCardProps> = ({
             src={ICONS.testimonials}
             alt="testimonials"
           />
-          <p className="text-neutral-10 text-base md:text-xl font-medium text-center">
+          <p className="text-neutral-10 text-base md:text-xl font-medium text-justify">
             "{displayText}"
             {isLong && (
               <button

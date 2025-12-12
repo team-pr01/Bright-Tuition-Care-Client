@@ -138,7 +138,7 @@ const CredentialsInfo: React.FC<TCredentialsInfoProps> = ({
 
       {/* Add/Update Credentials Modal */}
       <Modal
-        heading="Add/Update Credential Information"
+        heading="Add / Update Credential Information"
         isModalOpen={isFormModalOpen}
         setIsModalOpen={setIsFormModalOpen}
         width="w-[90%] md:w-[35%] max-h-[600px] overflow-y-auto"

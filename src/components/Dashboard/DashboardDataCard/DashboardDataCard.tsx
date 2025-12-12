@@ -28,7 +28,7 @@ const DashboardDataCard: React.FC<TDashboardDataCardProps> = ({
 }) => {
   return (
     <div
-      className={`bg-white rounded-2xl border border-primary-40/10 p-5 flex flex-col justify-between ${height}`}
+      className={`bg-white rounded-2xl border border-primary-40/10 p-5 flex flex-col items-start justify-between ${height}`}
     >
       <div className="flex flex-col md:flex-row items-center md:items-start gap-3 md:gap-6">
         <img src={icon} alt="" className="w-24" />

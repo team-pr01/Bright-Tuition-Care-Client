@@ -6,7 +6,7 @@ import TextInput from "../../../Reusable/TextInput/TextInput";
 import RoleTab from "../../SignupPage/SignupForm/RoleTab";
 import { useForm } from "react-hook-form";
 import Button from "../../../Reusable/Button/Button";
-import { Link, useNavigate } from "react-router-dom";
+import {useNavigate } from "react-router-dom";
 import { ICONS } from "../../../../assets";
 import { useLoginMutation } from "../../../../redux/Features/Auth/authApi";
 import { useDispatch } from "react-redux";
@@ -122,22 +122,22 @@ const SignInForm = ({
         <div className="flex items-center justify-end md:justify-between">
           <p className="font-lg leading-[24px] text-neutral-20 hidden md:block">
             Don't have an account?{" "}
-            <Link
-              to="/signup"
+            <a
+              href="/signup"
               className="font-semibold bg-gradient-to-r from-primary-10 to-primary-40/60 bg-clip-text text-transparent cursor-pointer"
             >
               Sign Up
-            </Link>
+            </a>
           </p>
-          <Link
-            to="/forgot-password"
-            className="text-primary-10 font-semibold underline text-end text-sm md:text-base"
+          <a
+            href="/forgot-password"
+            className="text-primary-10 font-semibold underline text-end text-sm md:text-base hidden md:block"
           >
             Forgot Password?
-          </Link>
+          </a>
         </div>
 
-        <div className="flex flex-col gap-3 items-center justify-between">
+        <div className="flex flex-col gap-0 md:gap-3 items-center justify-between">
           <Button
             type="submit"
             label="Sign In"
@@ -147,14 +147,20 @@ const SignInForm = ({
             isLoading={isLoading}
             isDisabled={isLoading}
           />
-          <p className="text-sm md:font-lg leading-[24px] text-neutral-20 block md:hidden">
+          <a
+            href="/forgot-password"
+            className="text-primary-10 font-semibold underline text-end text-sm md:text-base block md:hidden mt-3 md:mt-0"
+          >
+            Forgot Password?
+          </a>
+          <p className="text-sm md:font-lg leading-[24px] text-neutral-20 block md:hidden mt-1 md:mt-0">
             Don't have an account?{" "}
-            <Link
-              to="/signup"
+            <a
+              href="/signup"
               className="font-semibold bg-gradient-to-r from-primary-10 to-primary-40/60 bg-clip-text text-transparent cursor-pointer"
             >
               Sign Up
-            </Link>
+            </a>
           </p>
         </div>
       </div>

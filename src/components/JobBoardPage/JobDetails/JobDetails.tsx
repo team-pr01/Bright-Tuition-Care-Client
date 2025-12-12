@@ -97,8 +97,6 @@ const JobDetails = ({
   //     );
   //   }
   // };
-
-  console.log(status, isApplied);
   return (
     <AnimatePresence>
       <>
@@ -122,7 +120,7 @@ const JobDetails = ({
         >
           <div className="bg-white border-0 md:border md:border-neutral-55 rounded-xl lg:rounded-3xl p-0 md:p-8 max-w-[895px] mx-auto font-Nunito relative overflow-visible md:overflow-hidden">
             <div className="bg-primary-10/40 blur-[150px] size-32 rounded-full absolute top-0 right-0"></div>
-            <h1 className="text-neutral-10 text-lg md:text-2xl lg:text-3xl font-bold leading-6 text-start md:text-center">
+            <h1 className="text-neutral-10 text-lg md:text-2xl lg:text-3xl font-bold leading-6 text-start md:text-center mr-2  md:mr-0">
               {job?.title} -{" "}
               <span className="text-primary-10 font-normal text-sm">
                 {job?.tuitionType}
@@ -279,6 +277,15 @@ const JobDetails = ({
                 </div>
               </div>
             </div>
+
+            {isApplied && (
+              <div className="max-w-full lg:max-w-[70%] mx-0 lg:mx-auto mt-5">
+                <p className="text-primary-10 font-medium">
+                  NOTE: You will be shortlisted if your profile strongly aligns
+                  with the job criteria.
+                </p>
+              </div>
+            )}
 
             <div className="mt-8 flex justify-center gap-5">
               <a href={job?.locationDirection} target="_blank">

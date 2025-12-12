@@ -53,12 +53,12 @@ const TutorDashboardHome = () => {
   return (
     <div className="flex flex-col gap-4 md:gap-0 font-Nunito">
       {/* Status cards */}
-      <div className="flex items-center overflow-x-auto w-full gap-3 md:gap-6 bg-primary-10 md:bg-[#F2F5FC] py-5 px-3 lg:px-6 rounded-b-3xl md:rounded-b-none">
+      <div className="flex items-center overflow-x-auto w-full gap-3 md:gap-6 bg-[#e6f4ff] md:bg-[#F2F5FC] py-5 px-3 lg:px-6 rounded-b-3xl md:rounded-b-none">
         <DashboardOverviewCard
           title="Applied"
           additionalTitle="Jobs"
           value={formatCount(applications?.applied)}
-          textColor="text-white md:text-neutral-10"
+          textColor="text-neutral-5 md:text-neutral-10"
           path="/dashboard/tutor/my-applications/applied"
           icon={<FaBriefcase />}
         />
@@ -67,7 +67,7 @@ const TutorDashboardHome = () => {
           title="Shortlisted"
           additionalTitle="Jobs"
           value={formatCount(applications?.shortlisted)}
-          textColor="text-white md:text-primary-10"
+          textColor="text-neutral-5 md:text-primary-10"
           path="/dashboard/tutor/my-applications/shortlisted"
           icon={<FaClipboardCheck />}
         />
@@ -75,7 +75,7 @@ const TutorDashboardHome = () => {
         <DashboardOverviewCard
           title="Appointed"
           value={formatCount(applications?.appointed)}
-          textColor="text-white md:text-[#9C9700]"
+          textColor="text-neutral-5 md:text-[#9C9700]"
           path="/dashboard/tutor/my-applications/appointed"
           icon={<FaUserCheck />}
         />
@@ -83,7 +83,7 @@ const TutorDashboardHome = () => {
         <DashboardOverviewCard
           title="Confirmed"
           value={formatCount(applications?.confirmed)}
-          textColor="text-white md:text-green-500"
+          textColor="text-neutral-5 md:text-green-500"
           path="/dashboard/tutor/my-applications/confirmed"
           icon={<FaCheckCircle />}
         />
@@ -91,7 +91,7 @@ const TutorDashboardHome = () => {
         <DashboardOverviewCard
           title="Cancelled"
           value={formatCount(applications?.cancelled)}
-          textColor="text-white md:text-rose-500"
+          textColor="text-neutral-5 md:text-rose-500"
           path="/dashboard/tutor/my-applications/cancelled"
           icon={<FaTimesCircle />}
         />

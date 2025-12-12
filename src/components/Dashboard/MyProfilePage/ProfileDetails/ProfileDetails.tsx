@@ -342,6 +342,9 @@ const ProfileDetails = ({
           </Link>
         </div>
       )}
+      {/* <div className="bg-[#F2F5FC] border-l-3 border-primary-10 p-2 rounded text-neutral-45 w-full text-sm">
+        <span className="font-semibold text-primary-10">Pro Tip : Your profile is now unlocked, and you can edit it whenever you want.</span> 
+      </div> */}
     </div>
   );
 };
