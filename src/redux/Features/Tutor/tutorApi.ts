@@ -107,6 +107,14 @@ const tutorApi = baseApi.injectEndpoints({
       invalidatesTags: ["users"],
     }),
 
+    deleteIdentityInfo: builder.mutation({
+      query: (id) => ({
+        url: `/tutor/identity-info/delete/${id}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: ["users"],
+    }),
+
     setTutorOfTheMonth: builder.mutation({
       query: (id) => ({
         url: `/tutor/tutor-of-the-month/${id}`,
@@ -126,5 +134,6 @@ export const {
   useUpdateEducationMutation,
   useDeleteEducationMutation,
   useUpdateIdentityInfoMutation,
+  useDeleteIdentityInfoMutation,
   useSetTutorOfTheMonthMutation,
 } = tutorApi;

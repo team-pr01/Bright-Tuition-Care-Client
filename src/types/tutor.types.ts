@@ -34,14 +34,15 @@ export type TIdentityFile = {
 
 // Identity Information
 export type TIdentityInformation = {
+  _id: string;
   fileType:
-    | "SSC/Marksheet/Certificate"
-    | "HSC/Marksheet/Certificate"
-    | "NID/Passport/BirthCertificate"
-    | "AdmissionSlip/UniversityId/Certificate"
+    | "SSC / Dakhil / O Level - Mark Sheet / Certificate"
+    | "HSC / Alim / A Level - Mark Sheet / Certificate"
+    | "NID / Passport / Birth Certificate"
+    | "Admission Pay Slip / University ID Card / Certificate"
     | "Others";
 
-  file: TIdentityFile;
+  file: string;
 };
 
 // Personal Information

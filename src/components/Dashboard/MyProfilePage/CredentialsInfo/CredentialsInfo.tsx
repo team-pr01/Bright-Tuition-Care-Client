@@ -5,8 +5,12 @@ import UpdateCredentialsInfoModal from "./UpdateEducationalInfoModal";
 import { FaFile, FaTimes } from "react-icons/fa";
 import NoData from "../../../Reusable/NoData/NoData";
 import ProgressBars from "../EducationalInfo/ProgrerssBar";
+import { useDeleteIdentityInfoMutation } from "../../../../redux/Features/Tutor/tutorApi";
+import toast from "react-hot-toast";
+import { AiOutlineDelete } from "react-icons/ai";
 
 type TCredential = {
+  _id: string;
   documentType: string;
   file: string;
   fileType?: string;
@@ -25,6 +29,19 @@ const CredentialsInfo: React.FC<TCredentialsInfoProps> = ({
   const [selectedDocument, setSelectedDocument] = useState<TCredential | null>(
     null
   );
+  const [deleteIdentityInfo, {isLoading:isDeletingFile}] = useDeleteIdentityInfoMutation();
+
+  const handleDeleteIdentityInfo = async (id: string) => {
+    try {
+      await toast.promise(deleteIdentityInfo(id).unwrap(), {
+        loading: "Loading...",
+        success: "Deleted successfully!",
+        error: "Failed to delete. Please try again.",
+      });
+    } catch (err) {
+      console.error("Error deleting file:", err);
+    }
+  };
 
   const handleViewClick = (info: TCredential) => {
     setSelectedDocument(info);
@@ -89,12 +106,23 @@ const CredentialsInfo: React.FC<TCredentialsInfoProps> = ({
                       </p>
                     </div>
                   </div>
-                  <button
+                  <div className="flex items-center gap-2">
+                    <button
                     onClick={() => handleViewClick(info)}
                     className="flex items-center space-x-1 bg-blue-50 hover:bg-blue-100 text-blue-600 px-3 py-1 rounded-lg transition-colors duration-200 text-sm font-medium cursor-pointer"
                   >
                     <span>View</span>
                   </button>
+                  <button
+                    onClick={() => {
+                      handleDeleteIdentityInfo(info?._id || "");
+                    }}
+                    disabled={isDeletingFile}
+                    className="flex items-center space-x-1 bg-red-50 hover:bg-red-100 text-red-600 px-3 py-[7px] rounded-lg transition-colors duration-200 text-sm font-medium cursor-pointer"
+                  >
+                    <AiOutlineDelete />
+                  </button>
+                  </div>
                 </div>
               </div>
             </div>
