@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import { ICONS, IMAGES } from "../../../../assets";
 import { useLocation, useParams, useSearchParams } from "react-router-dom";
 import { useGetSingleTutorByIdQuery } from "../../../../redux/Features/Tutor/tutorApi";
@@ -40,7 +40,15 @@ const TutorsResume = () => {
   const tuitionPreference = profile?.tuitionPreference;
   const personalInfo = profile?.personalInformation || {};
 
+  const hasNotifiedRef = useRef(false);
+
   useEffect(() => {
+    if (!jobId || !tutorId) return;
+    if (hasNotifiedRef.current) return;
+    if (status !== "applied") return;
+
+    hasNotifiedRef.current = true;
+
     const sendNotification = async () => {
       try {
         const payload = { jobId };

@@ -110,19 +110,6 @@ const AdminControls = ({
           />
 
           <Button
-            label={isRejecting ? "Please wait..." : "Reject"}
-            variant={"tertiary"}
-            className={`${buttonStyle} ${
-              status === "rejected" ? "text-white bg-red-500" : "text-red-500"
-            } border-red-500 hover:bg-red-500 hover:text-white`}
-            onClick={() => {
-              handleResetStatus("rejected");
-              handleRejectTutor();
-            }}
-            isDisabled={isShortlisting || isRejecting || isConfirming}
-          />
-
-          <Button
             label={isConfirming ? "Please wait..." : "Confirm"}
             variant={status === "confirmed" ? "primary" : "tertiary"}
             className={`${buttonStyle} ${
@@ -135,6 +122,19 @@ const AdminControls = ({
             isDisabled={
               isShortlisting || isAppointing || isConfirming || isRejecting
             }
+          />
+
+          <Button
+            label={isRejecting ? "Please wait..." : "Reject"}
+            variant={"tertiary"}
+            className={`${buttonStyle} ${
+              status === "rejected" ? "text-white bg-red-500" : "text-red-500"
+            } border-red-500 hover:bg-red-500 hover:text-white`}
+            onClick={() => {
+              handleResetStatus("rejected");
+              handleRejectTutor();
+            }}
+            isDisabled={isShortlisting || isRejecting || isConfirming}
           />
         </div>
       )}

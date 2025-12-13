@@ -26,6 +26,23 @@ const NotificationCard = ({
       console.error("Failed to mark notification as read:", error);
     }
   };
+
+  const title = notification?.title;
+
+  const titleTextColor =
+    title === "Viewed Your CV!"
+      ? "#6B21A8"
+      : title === "Shortlisted!"
+      ? "#C2410C"
+      : title === "Rejected!"
+      ? "#fb2c36"
+      : title === "Tuition Job Confirmed!"
+      ? "#15803D"
+      : title === "Cancelled!"
+      ? "#fb2c36"
+      : title === "Application Update"
+      ? "#fb2c36"
+      : "#364153";
   return (
     <div
       onClick={() => handleNotificationClick(notification?._id)}
@@ -43,7 +60,10 @@ const NotificationCard = ({
       )}
 
       <div className="flex justify-between items-start">
-        <p className="font-semibold text-gray-700 text-sm">
+        <p
+          className={`font-semibold text-sm`}
+          style={{ color: titleTextColor }}
+        >
           {notification?.title}
         </p>
         {!notification.isRead && !isMarkingAsRead && (
