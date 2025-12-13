@@ -21,7 +21,7 @@ const Counter = () => {
     {
       icon: ICONS.briefcase,
       value: allStats?.availableJobs ?? 0,
-      label: "Available Tuition Job",
+      label: `Live Job${allStats?.availableJobs === 1 ? "" : "s"}`,
     },
     {
       icon: ICONS.user,

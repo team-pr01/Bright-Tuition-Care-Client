@@ -259,7 +259,7 @@ const EducationalInfo: React.FC<TEducationalInfoProps> = ({
         heading="Add New Education"
         isModalOpen={isAddEducationFormModalOpen}
         setIsModalOpen={setIsAddEducationFormModalOpen}
-        width="w-[90%] xl:w-[35%] max-h-[600px] overflow-y-auto"
+        width="w-[95%] md:w-[80%] lg:w-[60%] xl:w-[40%] 2xl:w-[30%] max-h-[600px] overflow-y-auto"
       >
         <AddEducationalInfoModal
           setIsAddEducationFormModalOpen={setIsAddEducationFormModalOpen}
@@ -271,7 +271,7 @@ const EducationalInfo: React.FC<TEducationalInfoProps> = ({
         heading="Update Educational Information"
         isModalOpen={isFormModalOpen}
         setIsModalOpen={setIsFormModalOpen}
-        width="w-[90%] xl:w-[35%] max-h-[600px] overflow-y-auto"
+        width="w-[95%] md:w-[80%] lg:w-[60%] xl:w-[40%] 2xl:w-[30%] max-h-[600px] overflow-y-auto"
       >
         <UpdateEducationalInfoModal
           setIsFormModalOpen={setIsFormModalOpen}
@@ -283,7 +283,7 @@ const EducationalInfo: React.FC<TEducationalInfoProps> = ({
       <Modal
         isModalOpen={isConfirmDeleteEducationModalOpen}
         setIsModalOpen={setIsConfirmDeleteEducationModalOpen}
-        width="w-[90%] xl:w-[35%] max-h-[600px] overflow-y-auto"
+        width="w-[95%] md:w-[80%] lg:w-[60%] xl:w-[40%] 2xl:w-[30%] max-h-[600px] overflow-y-auto"
       >
         <DeleteEducationConfirmationModal
           setIsConfirmDeleteModalOpen={setIsConfirmDeleteEducationModalOpen}

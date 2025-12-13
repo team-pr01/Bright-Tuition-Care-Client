@@ -58,12 +58,12 @@ const LeadManagement = () => {
     tutorId: lead?.tutorId?.tutorId || "N/A",
     class: lead?.class || "N/A",
     address: lead?.address || "N/A",
-    details: lead?.details || "N/A",
+    details: lead?.details || "",
     addedBy: (
       <p>
         {lead?.userId?.name ? lead?.userId?.name : "N/A"}
         <span className="block">
-          {lead?.userId?.phoneNumber ? lead?.userId?.phoneNumber : "N/A"}
+          {lead?.userId?.phoneNumber ? lead?.userId?.phoneNumber : ""}
         </span>
       </p>
     ),
@@ -71,7 +71,7 @@ const LeadManagement = () => {
       <p>
         {lead?.paymentMethod ? lead?.paymentMethod : "N/A"}
         <span className="block">
-          {lead?.paymentAccountNumber ? lead?.paymentAccountNumber : "N/A"}
+          {lead?.paymentAccountNumber ? lead?.paymentAccountNumber : ""}
         </span>
       </p>
     ),

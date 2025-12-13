@@ -14,13 +14,12 @@ import toast from "react-hot-toast";
 const ConfirmationLetterPreview = ({ letterId }: { letterId: string }) => {
   const { data, isLoading, isFetching } =
     useGetSingleConfirmationLetterByIdQuery(letterId);
-  const [signOnLetterForTutor] =
-    useSignOnLetterForTutorMutation();
-  const [
-    signOnLetterForGuardian
-  ] = useSignOnLetterForGuardianMutation();
+  const [signOnLetterForTutor] = useSignOnLetterForTutorMutation();
+  const [signOnLetterForGuardian] = useSignOnLetterForGuardianMutation();
   const handleDownloadConfirmationLetterPdf = async () => {
-    const blob = await pdf(<ConfirmationLetterPdf data={data?.data} />).toBlob();
+    const blob = await pdf(
+      <ConfirmationLetterPdf data={data?.data} />
+    ).toBlob();
     const url = URL.createObjectURL(blob);
     const link = document.createElement("a");
     link.href = url;
@@ -79,19 +78,32 @@ const ConfirmationLetterPreview = ({ letterId }: { letterId: string }) => {
         <span className="font-bold">Guardian/Student</span>,
       </p>
 
-      <p className="text-neutral-10 mb-6">
+      <p className="text-neutral-10 mb-2">
         Congratulations! We are pleased to let you know that{" "}
         <span className="font-bold">Bright Tuition Care</span> has successfully
-        connected both of you for this tuition. (Job ID:{" "}
-        {data?.data?.jobId?.jobId})
+        connected both of you for this tuition Job ID:{" "}
+        {data?.data?.jobId?.jobId}.
+      </p>
+      <p className="text-neutral-10 mb-2">
+        Below is a summary of the key requirements and agreed-upon details for
+        this tuition engagement.
+      </p>
+      <p className="text-neutral-10 mb-2">
+        To ensure clarity and prevent any future misunderstandings, we kindly
+        request both the Tutor and the Guardian/Student to review and sign the
+        confirmation letter.
+      </p>
+      <p className="text-neutral-10 font-bold mb-6">
+        Thank you for your cooperation.
       </p>
 
       {/* Tuition Details */}
       <div className="mb-6">
         <h3 className="font-semibold text-neutral-5 mb-2">Tuition Details</h3>
         <div className="border border-neutral-55/50 rounded-md p-3 text-sm text-neutral-10">
-          <p>Subject: {data?.data?.jobId?.subjects}</p>
+          <p>Subject: {data?.data?.jobId?.subjects?.join(", ")}</p>
           <p>Class: {data?.data?.jobId?.class}</p>
+          <p>Salary: {data?.data?.jobId?.salary} BDT</p>
           <p>
             Schedule: {data?.data?.jobId?.tutoringDays},{" "}
             {data?.data?.jobId?.tutoringTime}
@@ -108,9 +120,17 @@ const ConfirmationLetterPreview = ({ letterId }: { letterId: string }) => {
           <h4 className="font-semibold text-neutral-5 mb-1">
             Guardian/Student
           </h4>
-          <p className="capitalize">Name: {data?.data?.guardianId?.name || "N/A"}</p>
+          <p className="capitalize">
+            Name:{" "}
+            {data?.data?.guardianId?.name || data?.data?.jobId?.guardianName || "N/A"}
+          </p>
           <p>Email: {data?.data?.guardianId?.email || "N/A"}</p>
-          <p>Phone: {data?.data?.guardianId?.phoneNumber || "N/A"}</p>
+          <p>
+            Phone:{" "}
+            {data?.data?.guardianId?.phoneNumber ||
+              data?.data?.jobId?.guardianPhoneNumber ||
+              "N/A"}
+          </p>
         </div>
         <div className="border border-neutral-55/50 rounded-md p-3 text-sm">
           <h4 className="font-semibold text-neutral-5 mb-1">Tutor</h4>

@@ -34,7 +34,7 @@ const SendConfirmationLetterForm = ({
 
   const [sendConfirmationLetter, { isLoading: isSending }] =
     useSendConfirmationLetterMutation();
-
+  console.log(jobData);
   const handleSendConfirmationLetter = async () => {
     try {
       const payload: TFormData = {
@@ -93,8 +93,9 @@ const SendConfirmationLetterForm = ({
         <div className="my-6">
           <h3 className="font-semibold text-neutral-5 mb-2">Tuition Details</h3>
           <div className="border border-neutral-55/50 rounded-md p-3 text-sm text-neutral-10">
-            <p>Subject: {jobData?.data?.job?.subjects}</p>
+            <p>Subject: {jobData?.data?.job?.subjects?.join(", ")}</p>
             <p>Class: {jobData?.data?.job?.class}</p>
+            <p>Salary: {jobData?.data?.job?.salary} BDT</p>
             <p>Location: {jobData?.data?.job?.address}</p>
           </div>
         </div>
@@ -107,17 +108,17 @@ const SendConfirmationLetterForm = ({
             <h4 className="font-semibold text-neutral-5 mb-1">
               Guardian/Student
             </h4>
-            <p>Name: {jobData?.data?.guardian?.name}</p>
-            <p>ID: {jobData?.data?.guardian?.guardianId}</p>
-            <p>Phone: {jobData?.data?.guardian?.phoneNumber}</p>
+            <p>Name: {jobData?.data?.guardian?.name || "N/A"}</p>
+            <p>ID: {jobData?.data?.guardian?.guardianId || "N/A"}</p>
+            <p>Phone: {jobData?.data?.guardian?.phoneNumber || "N/A"}</p>
           </div>
 
           {/* Tutor */}
           <div className="border border-neutral-55/50 rounded-md p-3 text-sm text-neutral-10">
             <h4 className="font-semibold text-neutral-5 mb-1">Tutor</h4>
-            <p>Name: {jobData?.data?.tutor?.name}</p>
-            <p>ID: {jobData?.data?.tutor?.tutorId}</p>
-            <p>Phone: {jobData?.data?.tutor?.phoneNumber}</p>
+            <p>Name: {jobData?.data?.tutor?.name || "N/A"}</p>
+            <p>ID: {jobData?.data?.tutor?.tutorId || "N/A"}</p>
+            <p>Phone: {jobData?.data?.tutor?.phoneNumber || "N/A"}</p>
           </div>
         </div>
       )}

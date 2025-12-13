@@ -77,7 +77,7 @@ const ConfirmationLetterManagement = () => {
       <Modal
         isModalOpen={isLetterPreviewOpen}
         setIsModalOpen={setIsLetterPreviewOpen}
-        width="w-[60%] md:w-[40%] max-h-[600px] overflow-y-auto"
+        width="w-[95%] md:w-[80%] lg:w-[60%] xl:w-[40%] 2xl:w-[30%] max-h-[600px] overflow-y-auto"
       >
         <ConfirmationLetterPreview letterId={selectedLetterId as string} />
       </Modal>
@@ -85,7 +85,7 @@ const ConfirmationLetterManagement = () => {
         heading="Send Confirmation Letter"
         isModalOpen={isConfirmationLetterModalOpen}
         setIsModalOpen={setIsConfirmationLetterModalOpen}
-        width="w-[60%] md:w-[30%] max-h-[600px] overflow-y-auto"
+        width="w-[95%] md:w-[80%] lg:w-[60%] xl:w-[40%] 2xl:w-[30%] max-h-[600px] overflow-y-auto"
       >
         <SendConfirmationLetterForm
           setIsConfirmationLetterModalOpen={setIsConfirmationLetterModalOpen}
