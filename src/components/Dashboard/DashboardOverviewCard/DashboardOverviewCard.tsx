@@ -7,7 +7,7 @@ type TDashboardOverviewCardProps = {
   value: string;
   icon?: any;
   textColor: string;
-  iconColor: string;
+  iconColor?: string;
   path: string;
 };
 const DashboardOverviewCard: React.FC<TDashboardOverviewCardProps> = ({
