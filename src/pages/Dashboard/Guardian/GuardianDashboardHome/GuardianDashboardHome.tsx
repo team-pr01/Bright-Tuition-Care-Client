@@ -83,8 +83,8 @@ const GuardianDashboardHome = () => {
         <NoticeBoard notices={guardianStats?.notices} />
         <div className="mt-2 bg-white border-l-4 border-blue-400 p-3 rounded text-gray-800 w-full">
           Need support with submitting your tutor request? Please call us at{" "}
-          <a href="tel:0160785588" className="text-primary-10 underline">
-            0160785588
+          <a href="tel:01610-785588" className="text-primary-10 underline">
+            01610-785588
           </a>{" "}
           (9:00 AM - 10:00 PM)
         </div>

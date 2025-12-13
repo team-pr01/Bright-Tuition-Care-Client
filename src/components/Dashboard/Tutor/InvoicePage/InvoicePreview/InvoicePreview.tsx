@@ -57,7 +57,6 @@ const InvoicePreview = ({
       {/* Bill To Section */}
       <div className="border border-neutral-55/50 rounded p-4">
         <h3 className="text-center font-semibold mb-4">Bill To</h3>
-
         <p>
           <span className="font-semibold">Name:</span> {invoice?.userId?.name}
         </p>
@@ -112,7 +111,7 @@ const InvoicePreview = ({
             </p>
           )}
           <p>
-            <span className="font-semibold">Invoice ID:</span> {invoice?._id}
+            <span className="font-semibold">Invoice ID:</span> {invoice?.invoiceId}
           </p>
           <p className="font-bold mt-2">
             <span className="font-semibold">Amount:</span> ৳{invoice?.amount}

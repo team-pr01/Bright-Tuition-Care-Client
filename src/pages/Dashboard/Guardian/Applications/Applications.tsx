@@ -30,7 +30,7 @@ const applicationTheads: TableHead[] = [
   { key: "location", label: "Location" },
   { key: "appliedDate", label: "Applied Date" },
   { key: "status", label: "Status" },
-  { key: "jobTitle", label: "Job Title" },
+  { key: "jobId", label: "Job Id" },
   { key: "cv", label: "View CV" },
 ];
 
@@ -58,7 +58,7 @@ const Applications = () => {
     applications?.data?.applications?.map((application: any) => {
       return {
         id: application._id,
-        jobTitle: application.jobTitle || "N/A",
+        jobId: application.jobId || "N/A",
         name: (
           <div>
             <span className="block font-medium">{application.userName}</span>
@@ -82,7 +82,7 @@ const Applications = () => {
               }
 
               navigate(
-                `/dashboard/${path}/application/${application._id}/resume/${application.tutorId}?status=${application.status}`
+                `/dashboard/${path}/application/${application._id}/resume/${application.tutorId}?status=${application.status}&jobId=${application.jobId}`
               );
             }}
             className="text-primary-10 cursor-pointer flex items-center gap-1 hover:underline"

@@ -16,7 +16,8 @@ const DashboardLayout = () => {
     "/dashboard/admin/lead-management",
     "/dashboard/admin/guardian/jobs/",
     "/dashboard/staff/guardian/",
-    "/dashboard/admin/tutor/applications/"
+    "/dashboard/admin/tutor/applications/",
+    "/dashboard/tutor/my-applications/"
   ];
 
   const shouldAvoidPadding = pagesToAvoidForPadding.some((path) =>

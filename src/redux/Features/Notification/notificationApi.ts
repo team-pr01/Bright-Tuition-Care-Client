@@ -41,6 +41,16 @@ const notificationApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ["notification"],
     }),
+
+    notifyTutorViewedCV: builder.mutation<any, any>({
+      query: ({data, id}) => ({
+        url: `/application/viewed-cv/${id}`,
+        method: "POST",
+        body: data,
+        credentials: "include",
+      }),
+      invalidatesTags: ["notification"],
+    }),
   }),
 });
 
@@ -49,4 +59,5 @@ export const {
   useGetAllNotificationQuery,
   useSendNotificationMutation,
   useMarkAsReadMutation,
+  useNotifyTutorViewedCVMutation,
 } = notificationApi;

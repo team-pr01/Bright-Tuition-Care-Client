@@ -6,9 +6,10 @@ import type { FetchArgs } from "@reduxjs/toolkit/query/react";
 import { setUser } from "../Features/Auth/authSlice";
 import type { RootState } from "../store";
 
+export const backendBaseUrl = "http://localhost:5000";
+// backendBaseUrl = "https://bright-tuition-care-server.onrender.com/api/v1";
 const baseQuery = fetchBaseQuery({
-  // baseUrl: 'https://bright-tuition-care-server.onrender.com/api/v1',
-  baseUrl: "http://localhost:5000/api/v1",
+  baseUrl: `${backendBaseUrl}/api/v1`,
   credentials: "include",
   prepareHeaders: (headers, { getState }) => {
     const token = (getState() as RootState).auth.token;
@@ -28,13 +29,10 @@ const baseQueryWithRefreshToken: BaseQueryFn<
   let result = await baseQuery(args, api, extraOptions);
 
   if (result.error?.status === 401) {
-    const res = await fetch(
-      "https://bright-tuition-care-server.onrender.com/api/v1/auth/refresh-token",
-      {
-        credentials: "include",
-        method: "POST",
-      }
-    );
+    const res = await fetch(`${backendBaseUrl}/api/v1/auth/refresh-token`, {
+      credentials: "include",
+      method: "POST",
+    });
 
     const data = await res.json();
     const user = (api.getState() as RootState).auth.user;

@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React from "react";
+import React, { useEffect } from "react";
 import { ICONS, IMAGES } from "../../../../assets";
 import { useLocation, useParams, useSearchParams } from "react-router-dom";
 import { useGetSingleTutorByIdQuery } from "../../../../redux/Features/Tutor/tutorApi";
@@ -18,6 +18,7 @@ import type { TLoggedInUser } from "../../../../types/loggedinUser.types";
 import LogoLoader from "../../../../components/Reusable/LogoLoader/LogoLoader";
 import TutorsIdentityInfo from "../../../../components/Shared/TutorsIdentityInfo/TutorsIdentityInfo";
 import AdminControls from "./AdminControls";
+import { useNotifyTutorViewedCVMutation } from "../../../../redux/Features/Notification/notificationApi";
 
 const TutorsResume = () => {
   const user = useSelector(useCurrentUser) as TLoggedInUser;
@@ -31,11 +32,26 @@ const TutorsResume = () => {
   const { tutorId, applicationId } = useParams();
   const [searchParams] = useSearchParams();
   const status = searchParams.get("status");
+  const jobId = searchParams.get("jobId");
   const { data, isLoading } = useGetSingleTutorByIdQuery(tutorId);
+  const [notifyTutorViewedCV] = useNotifyTutorViewedCVMutation();
   const profile = data?.data;
   const educationDetails = data?.data?.educationalInformation || [];
   const tuitionPreference = profile?.tuitionPreference;
   const personalInfo = profile?.personalInformation || {};
+
+  useEffect(() => {
+    const sendNotification = async () => {
+      try {
+        const payload = { jobId };
+        await notifyTutorViewedCV({ data: payload, id: tutorId }).unwrap();
+      } catch (error: any) {
+        console.log(error?.data?.message);
+      }
+    };
+
+    sendNotification();
+  }, [jobId, tutorId, notifyTutorViewedCV]);
 
   const { data: applicationData, isLoading: isApplicationLoading } =
     useGetSingleApplicationByIdQuery(applicationId);

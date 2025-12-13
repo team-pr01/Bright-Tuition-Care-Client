@@ -1,9 +1,8 @@
 import { io } from 'socket.io-client';
+import { backendBaseUrl } from '../redux/API/baseApi';
 
 // http://192.168.0.102:5000    Local ip
-// https://bright-tuition-care-server.onrender.com
-// http://localhost:5000
-export const socket = io('https://bright-tuition-care-server.onrender.com', {
+export const socket = io(backendBaseUrl, {
   transports: ['websocket'],
   reconnectionAttempts: 5,
   reconnectionDelay: 1000,
