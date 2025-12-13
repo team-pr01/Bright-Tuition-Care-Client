@@ -1,7 +1,21 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Document, Page, Text, View, StyleSheet } from "@react-pdf/renderer";
+import {
+  Document,
+  Page,
+  Text,
+  View,
+  StyleSheet,
+  Font,
+} from "@react-pdf/renderer";
 import logo from "../../../../../assets/Icons/logo.png";
 import { Image } from "@react-pdf/renderer";
+import alexBrush from "../../../../../assets/Fonts/AlexBrush-Regular.ttf";
+import { formatDate } from "../../../../../utils/formatDate";
+
+Font.register({
+  family: "AlexBrush",
+  src: alexBrush,
+});
 
 // PDF styles
 const styles = StyleSheet.create({
@@ -39,6 +53,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     gap: 12,
+    marginTop: 10,
   },
   signatureBox: {
     marginTop: 40,
@@ -46,6 +61,10 @@ const styles = StyleSheet.create({
     width: "45%",
     textAlign: "center",
     paddingTop: 4,
+  },
+  signatureLine: {
+    width: "100%",
+    borderTop: "1pt solid #000",
   },
 });
 
@@ -100,6 +119,7 @@ const ConfirmationLetterPdf = ({ data }: any) => (
       </View>
 
       {/* User Details */}
+      <Text style={{ fontWeight: "bold" }}>User Information</Text>
       <View style={[styles.section, styles.row]}>
         <View style={styles.box}>
           <Text style={{ fontWeight: "bold" }}>Guardian/Student</Text>
@@ -117,20 +137,66 @@ const ConfirmationLetterPdf = ({ data }: any) => (
         <View style={styles.box}>
           <Text style={{ fontWeight: "bold" }}>Tutor</Text>
           <Text>Name: {data?.tutorId?.name}</Text>
-          <Text>ID: {data?.tutorId?.email}</Text>
+          <Text>Email: {data?.tutorId?.email}</Text>
           <Text>Phone: {data?.tutorId?.phoneNumber}</Text>
         </View>
       </View>
 
       {/* Signatures */}
       <View style={[styles.section, styles.row]}>
-        <View style={styles.signatureBox}>
-          <Text>Guardian/Student Signature</Text>
-          <Text>(with Date)</Text>
+        {/* Guardian / Student */}
+        <View style={{ width: "45%", alignItems: "center" }}>
+          {/* Name ABOVE line */}
+          <Text
+            style={{
+              marginBottom: 6,
+              fontFamily: "AlexBrush",
+              fontWeight: "bold",
+              color: "#000",
+              fontSize: 18,
+              height: 18,
+            }}
+          >
+            {data?.tutorSinnedDate ? data?.guardianSignature : ""}
+          </Text>
+
+          {/* Signature line */}
+          <View style={styles.signatureLine} />
+
+          {/* Label BELOW line */}
+          <Text style={{ marginTop: 6 }}>Guardian/Student Signature</Text>
+          <Text>
+            {data?.guardianSinnedDate
+              ? formatDate(data?.guardianSinnedDate)
+              : "(with Date)"}
+          </Text>
         </View>
-        <View style={styles.signatureBox}>
-          <Text>Tutor Signature</Text>
-          <Text>(with Date)</Text>
+
+        {/* Tutor */}
+        <View style={{ width: "45%", alignItems: "center" }}>
+          {/* Name ABOVE line */}
+          <Text
+            style={{
+              marginBottom: 6,
+              fontFamily: "AlexBrush",
+              fontWeight: "bold",
+              color: "#000",
+              fontSize: 18,
+            }}
+          >
+            {data?.tutorSignature ? data?.tutorSignature : ""}
+          </Text>
+
+          {/* Signature line */}
+          <View style={styles.signatureLine} />
+
+          {/* Label BELOW line */}
+          <Text style={{ marginTop: 6 }}>Tutor Signature</Text>
+          <Text>
+            {data?.tutorSinnedDate
+              ? formatDate(data?.tutorSinnedDate)
+              : "(with Date)"}
+          </Text>
         </View>
       </View>
     </Page>

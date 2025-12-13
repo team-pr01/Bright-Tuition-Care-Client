@@ -14,6 +14,7 @@ import toast from "react-hot-toast";
 const ConfirmationLetterPreview = ({ letterId }: { letterId: string }) => {
   const { data, isLoading, isFetching } =
     useGetSingleConfirmationLetterByIdQuery(letterId);
+  console.log(data);
   const [signOnLetterForTutor] = useSignOnLetterForTutorMutation();
   const [signOnLetterForGuardian] = useSignOnLetterForGuardianMutation();
   const handleDownloadConfirmationLetterPdf = async () => {
@@ -109,7 +110,8 @@ const ConfirmationLetterPreview = ({ letterId }: { letterId: string }) => {
       </div>
 
       {/* User Details */}
-      <div className="grid grid-cols-2 gap-4 mb-6">
+      <h3 className="font-semibold text-neutral-5 mb-2">User Information</h3>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
         <div className="border border-neutral-55/50 rounded-md p-3 text-sm text-neutral-10">
           <h4 className="font-semibold text-neutral-5 mb-1">
             Guardian/Student
