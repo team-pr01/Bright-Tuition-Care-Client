@@ -8,7 +8,7 @@ interface NoDataProps {
 
 const NoData: React.FC<NoDataProps> = ({
   title = "No Data Found",
-  description = "Start creating your documents",
+  description,
   className = "",
 }) => {
   return (

@@ -1,8 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React from "react";
 import { ICONS, IMAGES } from "../../../../assets";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
-import Button from "../../../../components/Reusable/Button/Button";
+import { useLocation, useParams } from "react-router-dom";
 import { useGetSingleTutorByIdQuery } from "../../../../redux/Features/Tutor/tutorApi";
 import type { TEducation } from "../../../../types/tutor.types";
 import toast from "react-hot-toast";
@@ -17,10 +16,11 @@ import { useSelector } from "react-redux";
 import { useCurrentUser } from "../../../../redux/Features/Auth/authSlice";
 import type { TLoggedInUser } from "../../../../types/loggedinUser.types";
 import LogoLoader from "../../../../components/Reusable/LogoLoader/LogoLoader";
+import TutorsIdentityInfo from "../../../../components/Shared/TutorsIdentityInfo/TutorsIdentityInfo";
+import AdminControls from "./AdminControls";
 
 const TutorsResume = () => {
   const user = useSelector(useCurrentUser) as TLoggedInUser;
-  const navigate = useNavigate();
   const [shortlistTutor, { isLoading: isShortlisting }] =
     useShortlistTutorMutation();
   const [appointTutor, { isLoading: isAppointing }] = useAppointTutorMutation();
@@ -30,7 +30,6 @@ const TutorsResume = () => {
   const location = useLocation();
   const { tutorId, applicationId } = useParams();
   const { data, isLoading } = useGetSingleTutorByIdQuery(tutorId);
-  console.log(data);
   const profile = data?.data;
   const educationDetails = data?.data?.educationalInformation || [];
   const tuitionPreference = profile?.tuitionPreference;
@@ -82,7 +81,9 @@ const TutorsResume = () => {
     },
     {
       label: "Preferred Subjects",
-      value: tuitionPreference?.preferredSubjects,
+      value: Array.isArray(tuitionPreference?.preferredSubjects)
+        ? tuitionPreference?.preferredSubjects.join(", ")
+        : tuitionPreference?.preferredSubjects,
     },
     {
       label: "Tutoring Method",
@@ -243,259 +244,160 @@ const TutorsResume = () => {
   }
 
   return (
-    <div className="bg-white shadow rounded-xl max-w-[1000px] mx-auto p-5 font-Nunito">
-      {/* profile and overview */}
-      <div className="flex flex-col lg:flex-row gap-2 lg:gap-5">
-        <div className="flex gap-5 w-full">
-          <div className="relative">
-            <img
-              src={profile?.imageUrl || IMAGES.dummyAvatar}
-              alt=""
-              className="size-20 lg:size-56 object-cover rounded-xl"
-            />
-            {profile?.isVerified && (
-              <div className="size-10 rounded-full flex items-center justify-center absolute -right-5 -bottom-4">
-                <img src={ICONS.blueVerifiedBlue} alt="verified" />
-              </div>
-            )}
-          </div>
-          <div className="w-full">
-            <div className="flex items-start justify-between">
-              <div>
-                <h1 className="text-xl lg:text-2xl font-semibold text-neutral-10">
-                  {profile?.userId?.name}
-                </h1>
-                <p className="text-neutral-10 mt-1 text-sm md:text-base">
-                  <strong>Tutor Id:</strong> {profile?.tutorId} |{" "}
-                  <strong>Rating:</strong> {profile?.rating}/5
-                </p>
-                {!isContactDetailsHidden && (
+    <>
+      <div className="bg-white shadow rounded-xl max-w-[1000px] mx-auto p-5 font-Nunito">
+        {/* profile and overview */}
+        <div className="flex flex-col lg:flex-row gap-2 lg:gap-5">
+          <div className="flex gap-5 w-full">
+            <div className="relative">
+              <img
+                src={profile?.imageUrl || IMAGES.dummyAvatar}
+                alt=""
+                className="size-20 lg:size-56 object-cover rounded-xl"
+              />
+              {profile?.isVerified && (
+                <div className="size-10 rounded-full flex items-center justify-center absolute -right-5 -bottom-4">
+                  <img src={ICONS.blueVerifiedBlue} alt="verified" />
+                </div>
+              )}
+            </div>
+            <div className="w-full">
+              <div className="flex items-start justify-between">
+                <div>
+                  <h1 className="text-xl lg:text-2xl font-semibold text-neutral-10">
+                    {profile?.userId?.name}
+                  </h1>
                   <p className="text-neutral-10 mt-1 text-sm md:text-base">
-                    <strong>Phone Number:</strong>{" "}
-                    {profile?.userId?.phoneNumber}
+                    <strong>Tutor Id:</strong> {profile?.tutorId} |{" "}
+                    <strong>Rating:</strong> {profile?.rating}/5
                   </p>
-                )}
-              </div>
+                  {!isContactDetailsHidden && (
+                    <p className="text-neutral-10 mt-1 text-sm md:text-base">
+                      <strong>Phone Number:</strong>{" "}
+                      {profile?.userId?.phoneNumber}
+                    </p>
+                  )}
+                </div>
 
-              {/* Admin controlls */}
-              <div className="flex items-center gap-3">
-                <Button
-                  label={"Go Back"}
-                  variant="tertiary"
-                  className={`${buttonStyle}`}
-                  onClick={() => navigate(-1)}
-                />
-                {/* To see all applications for a tutor */}
-                {(location?.pathname?.startsWith("/dashboard/admin/tutor") ||
-                  location?.pathname?.startsWith("/dashboard/staff/tutor")) && (
-                  <Button
-                    label="View Applications"
-                    variant="primary"
-                    className={buttonStyle}
-                    onClick={() =>
-                      navigate(
-                        `/dashboard/${
-                          user?.role === "admin" ? "admin" : "staff"
-                        }/tutor/applications/${profile?.userId?._id}`
-                      )
-                    }
+                {/* Admin controlls */}
+                <div className="hidden lg:flex">
+                  <AdminControls
+                    location={location}
+                    user={user}
+                    profile={profile}
+                    isShortlisting={isShortlisting}
+                    isAppointing={isAppointing}
+                    isConfirming={isConfirming}
+                    isRejecting={isRejecting}
+                    handleShortlistTutor={handleShortlistTutor}
+                    handleAppointTutor={handleAppointTutor}
+                    handleRejectTutor={handleRejectTutor}
+                    handleConfirmTutor={handleConfirmTutor}
+                    buttonStyle={buttonStyle}
                   />
-                )}
-
-                {location.pathname.startsWith(
-                  "/dashboard/admin/application"
-                ) && (
-                  <div className="flex items-center gap-3">
-                    <Button
-                      label={isShortlisting ? "Please wait..." : "Shortlist"}
-                      variant="tertiary"
-                      className={`${buttonStyle}`}
-                      onClick={handleShortlistTutor}
-                      isDisabled={
-                        isShortlisting ||
-                        isAppointing ||
-                        isConfirming ||
-                        isRejecting
-                      }
-                    />
-
-                    <Button
-                      label={isAppointing ? "Please wait..." : "Appoint"}
-                      variant="tertiary"
-                      className={`${buttonStyle} border-[#9C9700] hover:bg-[#9C9700] text-[#9C9700] hover:text-white`}
-                      onClick={handleAppointTutor}
-                      isDisabled={
-                        isShortlisting ||
-                        isAppointing ||
-                        isConfirming ||
-                        isRejecting
-                      }
-                    />
-
-                    <Button
-                      label={isRejecting ? "Please wait..." : "Reject"}
-                      variant="tertiary"
-                      className={`${buttonStyle} border-red-500 hover:bg-red-500 text-red-500 hover:text-white`}
-                      onClick={handleRejectTutor}
-                      isDisabled={isShortlisting || isRejecting || isConfirming}
-                    />
-
-                    <Button
-                      label={isConfirming ? "Please wait..." : "Confirm"}
-                      variant="tertiary"
-                      className={`${buttonStyle} border-green-600 hover:bg-green-600 text-green-600 hover:text-white`}
-                      onClick={handleConfirmTutor}
-                      isDisabled={
-                        isShortlisting ||
-                        isAppointing ||
-                        isConfirming ||
-                        isRejecting
-                      }
-                    />
-                    {/* <Button
-                      label={isCancelling ? "Please wait..." : "Cancel"}
-                      variant="tertiary"
-                      className={`${buttonStyle} border-red-600 hover:bg-red-600 text-red-600 hover:text-white`}
-                      onClick={handleCancelTutor}
-                      isDisabled={
-                        isShortlisting ||
-                        isAppointing ||
-                        isConfirming ||
-                        isRejecting ||
-                        isCancelling
-                      }
-                    /> */}
-                  </div>
-                )}
-              </div>
-            </div>
-            <p className="text-neutral-20 mt-3 hidden lg:block">
-              {profile?.personalInformation?.overview}
-            </p>
-          </div>
-        </div>
-        <p className="text-neutral-20 mt-3 block lg:hidden">
-          {profile?.personalInformation?.overview}
-        </p>
-      </div>
-
-      {/* Education Section */}
-      <div>
-        <h2 className="text-xl lg:text-2xl font-semibold text-neutral-10 mt-5 pb-2 border-b border-neutral-55/50">
-          Education
-        </h2>
-
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-0">
-          {educationData.map((edu: TEducation[], eduIndex: number) => (
-            <div key={eduIndex}>
-              <h2 className="font-bold text-neutral-10 mt-4">
-                • {educationDetails[eduIndex]?.degree || "Education"}
-              </h2>
-
-              <div className="text-neutral-20 grid grid-cols-[150px_20px_1fr] gap-y-2 mt-3">
-                {edu?.map((item: any, index: number) => (
-                  <React.Fragment key={index}>
-                    <span className="font-medium">{item.label}</span>
-                    <span className="text-neutral-10">:</span>
-                    <span>{item.value}</span>
-                  </React.Fragment>
-                ))}
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      {/* Tuition Related Information Section */}
-      <div>
-        <h2 className="text-xl lg:text-2xl font-semibold text-neutral-10 mt-8 pb-2 border-b border-neutral-55/50">
-          Tuition Related Information
-        </h2>
-
-        <div className="text-neutral-20 grid grid-cols-[180px_20px_1fr] gap-y-2 mt-4">
-          {filteredTuitionData?.map((item, index) => (
-            <React.Fragment key={index}>
-              <span className="font-medium">{item.label}</span>
-              <span className="text-neutral-10">:</span>
-              <span>{item.value}</span>
-            </React.Fragment>
-          ))}
-        </div>
-      </div>
-
-      {/* Personal Information Section */}
-      <div>
-        <h2 className="text-xl lg:text-2xl font-semibold text-neutral-10 mt-8 pb-2 border-b border-neutral-55/50">
-          Personal Information
-        </h2>
-
-        <div className="text-neutral-20 grid grid-cols-[180px_20px_1fr] gap-y-2 mt-4">
-          {filteredPersonalData?.map((item, index) => (
-            <React.Fragment key={index}>
-              <span className="font-medium">{item.label}</span>
-              <span className="text-neutral-10">:</span>
-              <span>{item.value}</span>
-            </React.Fragment>
-          ))}
-        </div>
-      </div>
-
-      {/* Identity Info */}
-      {/* <div>
-        <h2 className="text-xl lg:text-2xl font-semibold text-neutral-10 mt-8 pb-2 border-b border-neutral-55/50">
-          Credentials Information
-        </h2>
-
-        {identityInformation?.length === 0 ? (
-        <NoData
-          title="No identity information submitted."
-          description="Add your identity details to complete your profile."
-        />
-      ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {identityInformation?.map((info: any) => (
-            <div
-              key={info?.documentType}
-              className="bg-white rounded-xl border border-gray-200 hover:shadow-xl transition-all duration-300 hover:border-blue-300 overflow-hidden"
-            >
-              <div className="p-4 border-b border-gray-100 bg-gradient-to-r from-gray-50 to-white">
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center space-x-3">
-                    <FaFile className="text-gray-400 text-xl" />
-                    <div>
-                      <h3 className="font-semibold text-gray-800 text-sm md:text-base line-clamp-1">
-                        {info?.documentType}
-                      </h3>
-                      <p className="text-xs text-gray-500 capitalize">
-                        {info?.fileType || "Document"}
-                      </p>
-                    </div>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <button
-                    onClick={() => handleViewClick(info)}
-                    className="flex items-center space-x-1 bg-blue-50 hover:bg-blue-100 text-blue-600 px-3 py-1 rounded-lg transition-colors duration-200 text-sm font-medium cursor-pointer"
-                  >
-                    <span>View</span>
-                  </button>
-                  <button
-                    onClick={() => {
-                      handleDeleteIdentityInfo(info?._id || "");
-                    }}
-                    disabled={isDeletingFile}
-                    className="flex items-center space-x-1 bg-red-50 hover:bg-red-100 text-red-600 px-3 py-[7px] rounded-lg transition-colors duration-200 text-sm font-medium cursor-pointer"
-                  >
-                    <AiOutlineDelete />
-                  </button>
-                  </div>
                 </div>
               </div>
+              <p className="text-neutral-20 mt-3 hidden lg:block">
+                {profile?.personalInformation?.overview}
+              </p>
             </div>
-          ))}
+          </div>
+          <p className="text-neutral-20 mt-3 block lg:hidden">
+            {profile?.personalInformation?.overview}
+          </p>
+          {/* Admin controlls */}
+          <div className="flex lg:hidden mt-4">
+            <AdminControls
+              location={location}
+              user={user}
+              profile={profile}
+              isShortlisting={isShortlisting}
+              isAppointing={isAppointing}
+              isConfirming={isConfirming}
+              isRejecting={isRejecting}
+              handleShortlistTutor={handleShortlistTutor}
+              handleAppointTutor={handleAppointTutor}
+              handleRejectTutor={handleRejectTutor}
+              handleConfirmTutor={handleConfirmTutor}
+              buttonStyle={buttonStyle}
+            />
+          </div>
         </div>
-      )}
-      </div> */}
-    </div>
+
+        {/* Education Section */}
+        <div>
+          <h2 className="text-xl lg:text-2xl font-semibold text-neutral-10 mt-5 pb-2 border-b border-neutral-55/50">
+            Education
+          </h2>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-0">
+            {educationData.map((edu: TEducation[], eduIndex: number) => (
+              <div key={eduIndex}>
+                <h2 className="font-bold text-neutral-10 mt-4">
+                  • {educationDetails[eduIndex]?.degree || "Education"}
+                </h2>
+
+                <div className="text-neutral-20 grid grid-cols-[150px_20px_1fr] gap-y-2 mt-3">
+                  {edu?.map((item: any, index: number) => (
+                    <React.Fragment key={index}>
+                      <span className="font-medium">{item.label}</span>
+                      <span className="text-neutral-10">:</span>
+                      <span>{item.value}</span>
+                    </React.Fragment>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Tuition Related Information Section */}
+        <div>
+          <h2 className="text-xl lg:text-2xl font-semibold text-neutral-10 mt-8 pb-2 border-b border-neutral-55/50">
+            Tuition Related Information
+          </h2>
+
+          <div className="text-neutral-20 grid grid-cols-[140px_20px_1fr] md:grid-cols-[180px_20px_1fr] gap-y-2 mt-4">
+            {filteredTuitionData?.map((item, index) => (
+              <React.Fragment key={index}>
+                <span className="font-medium">{item.label}</span>
+                <span className="text-neutral-10">:</span>
+                <span>{item.value}</span>
+              </React.Fragment>
+            ))}
+          </div>
+        </div>
+
+        {/* Personal Information Section */}
+        <div>
+          <h2 className="text-xl lg:text-2xl font-semibold text-neutral-10 mt-8 pb-2 border-b border-neutral-55/50">
+            Personal Information
+          </h2>
+
+          <div className="text-neutral-20 grid grid-cols-[180px_20px_1fr] gap-y-2 mt-4">
+            {filteredPersonalData?.map((item, index) => (
+              <React.Fragment key={index}>
+                <span className="font-medium">{item.label}</span>
+                <span className="text-neutral-10">:</span>
+                <span>{item.value}</span>
+              </React.Fragment>
+            ))}
+          </div>
+        </div>
+
+        {/* Identity Info */}
+        <div>
+          <h2 className="text-xl lg:text-2xl font-semibold text-neutral-10 mt-8 pb-2 border-b border-neutral-55/50 mb-4">
+            Credentials Information
+          </h2>
+
+          <TutorsIdentityInfo
+            identityInformation={profile?.identityInformation}
+            variant="admin"
+          />
+        </div>
+      </div>
+    </>
   );
 };
 
