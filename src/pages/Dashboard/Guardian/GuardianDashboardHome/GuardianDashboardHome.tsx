@@ -34,12 +34,13 @@ const GuardianDashboardHome = () => {
   }
   return (
     <div className="flex flex-col gap-5 md:gap-0 font-Nunito">
-      <div className="flex items-center overflow-x-auto w-full gap-3 md:gap-6 bg-primary-10 md:bg-[#F2F5FC] py-5 px-3 lg:px-6 rounded-b-3xl md:rounded-b-none">
+      <div className="flex items-center overflow-x-auto w-full gap-3 md:gap-6 bg-[#e6f4ff] md:bg-[#F2F5FC] py-5 px-3 lg:px-6 rounded-b-3xl md:rounded-b-none">
         <DashboardOverviewCard
           title="All"
           additionalTitle="Jobs"
           value={formatCount(applications?.total)}
-          textColor="text-white md:text-neutral-10"
+          textColor="text-neutral-5 md:text-neutral-10"
+          iconColor="text-white md:text-neutral-10"
           path="/dashboard/guardian/posted-jobs"
           icon={<FaLayerGroup />}
         />
@@ -48,7 +49,8 @@ const GuardianDashboardHome = () => {
           title="Pending"
           additionalTitle="Jobs"
           value={formatCount(applications?.pending)}
-          textColor="text-white md:text-neutral-10"
+          textColor="text-neutral-5 md:text-neutral-10"
+          iconColor="text-white md:text-neutral-10"
           path="/dashboard/guardian/posted-jobs?jobStatus=pending"
           icon={<FaHourglassHalf />}
         />
@@ -57,7 +59,8 @@ const GuardianDashboardHome = () => {
           title="Live"
           additionalTitle="Jobs"
           value={formatCount(applications?.live)}
-          textColor="text-white md:text-primary-10"
+          textColor="text-neutral-5 md:text-primary-10"
+          iconColor="text-white md:text-primary-10"
           path="/dashboard/guardian/posted-jobs?jobStatus=live"
           icon={<FaRegDotCircle />}
         />
@@ -65,7 +68,8 @@ const GuardianDashboardHome = () => {
         <DashboardOverviewCard
           title="Confirmed"
           value={formatCount(applications?.closed)}
-          textColor="text-white md:text-green-500"
+          textColor="text-neutral-5 md:text-green-500"
+          iconColor="text-white md:text-green-500"
           path="/dashboard/guardian/posted-jobs?jobStatus=confirmed"
           icon={<FaCheckCircle />}
         />
@@ -73,7 +77,8 @@ const GuardianDashboardHome = () => {
         <DashboardOverviewCard
           title="Cancelled"
           value={formatCount(applications?.cancelled)}
-          textColor="text-white md:text-rose-500"
+          textColor="text-neutral-5 md:text-rose-500"
+          iconColor="text-white md:text-rose-500"
           path="/dashboard/guardian/posted-jobs?jobStatus=cancelled"
           icon={<FaTimesCircle />}
         />

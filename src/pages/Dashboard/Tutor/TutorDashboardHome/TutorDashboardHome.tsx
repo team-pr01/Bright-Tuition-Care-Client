@@ -59,6 +59,7 @@ const TutorDashboardHome = () => {
           additionalTitle="Jobs"
           value={formatCount(applications?.applied)}
           textColor="text-neutral-5 md:text-neutral-10"
+          iconColor="text-white md:text-neutral-10"
           path="/dashboard/tutor/my-applications/applied"
           icon={<FaBriefcase />}
         />
@@ -68,6 +69,7 @@ const TutorDashboardHome = () => {
           additionalTitle="Jobs"
           value={formatCount(applications?.shortlisted)}
           textColor="text-neutral-5 md:text-primary-10"
+          iconColor="text-white md:text-primary-10"
           path="/dashboard/tutor/my-applications/shortlisted"
           icon={<FaClipboardCheck />}
         />
@@ -76,6 +78,7 @@ const TutorDashboardHome = () => {
           title="Appointed"
           value={formatCount(applications?.appointed)}
           textColor="text-neutral-5 md:text-[#9C9700]"
+          iconColor="text-white md:text-[#9C9700]"
           path="/dashboard/tutor/my-applications/appointed"
           icon={<FaUserCheck />}
         />
@@ -84,6 +87,7 @@ const TutorDashboardHome = () => {
           title="Confirmed"
           value={formatCount(applications?.confirmed)}
           textColor="text-neutral-5 md:text-green-500"
+          iconColor="text-white md:text-green-500"
           path="/dashboard/tutor/my-applications/confirmed"
           icon={<FaCheckCircle />}
         />
@@ -92,6 +96,7 @@ const TutorDashboardHome = () => {
           title="Cancelled"
           value={formatCount(applications?.cancelled)}
           textColor="text-neutral-5 md:text-rose-500"
+          iconColor="text-white md:text-rose-500"
           path="/dashboard/tutor/my-applications/cancelled"
           icon={<FaTimesCircle />}
         />
