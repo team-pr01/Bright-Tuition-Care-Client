@@ -39,13 +39,24 @@ const applicationApi = baseApi.injectEndpoints({
 
     getAllApplicationsByJobId: builder.query<
       any,
-      { jobId: string; keyword?: string; page?: number; limit?: number }
+      {
+        jobId: string;
+        keyword?: string;
+        status?: string;
+        page?: number;
+        limit?: number;
+      }
     >({
-      query: ({ jobId, keyword, page = 1, limit = 10 }) => {
+      query: ({ jobId, keyword, status = "", page = 1, limit = 10 }) => {
         let url = `/application/job/${jobId}?page=${page}&limit=${limit}`;
+
+        // always pass status (empty string if not provided)
+        url += `&status=${encodeURIComponent(status)}`;
+
         if (keyword) {
           url += `&keyword=${encodeURIComponent(keyword)}`;
         }
+
         return {
           url,
           method: "GET",
@@ -57,7 +68,7 @@ const applicationApi = baseApi.injectEndpoints({
 
     getAllApplicationOfATutor: builder.query<
       any,
-      { userId: string; skip?: number; limit?: number, status?: string }
+      { userId: string; skip?: number; limit?: number; status?: string }
     >({
       query: ({ userId, skip = 0, limit = 10, status }) => {
         const url = `/application/tutor/${userId}?skip=${skip}&limit=${limit}&status=${status}`;

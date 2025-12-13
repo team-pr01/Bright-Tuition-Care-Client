@@ -25,8 +25,6 @@ type Application = {
 // Table headers
 const applicationTheads: TableHead[] = [
   { key: "name", label: "Applicant Name" },
-  // { key: "email", label: "Email" },
-  // { key: "phoneNumber", label: "Phone Number" },
   { key: "location", label: "Location" },
   { key: "appliedDate", label: "Applied Date" },
   { key: "status", label: "Status" },
@@ -41,6 +39,7 @@ const Applications = () => {
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [page, setPage] = useState<number>(1);
   const [limit, setLimit] = useState<number>(10);
+  const [statusFilter, setStatusFilter] = useState<string>("");
   const navigate = useNavigate();
 
   const {
@@ -51,6 +50,7 @@ const Applications = () => {
     jobId: jobId as string,
     page,
     limit,
+    status: statusFilter,
     keyword: searchQuery,
   });
 
@@ -61,9 +61,14 @@ const Applications = () => {
         jobId: application.jobId || "N/A",
         name: (
           <div>
-            <span className="block font-medium">{application.userName}</span>
+            <span className="block font-medium">
+              {application.userName}{" "}
+              <span className="text-primary-10">
+                (Tutor Id : {application.tutorCustomId})
+              </span>
+            </span>
             <span className="block text-sm text-gray-500">
-              {application.tutorCustomId}
+              {application.userPhoneNumber}
             </span>
           </div>
         ),
@@ -71,7 +76,11 @@ const Applications = () => {
         // phoneNumber: application.userPhoneNumber,
         location: `${application.userArea}, ${application.userCity}`,
         appliedDate: formatDate(application.createdAt),
-        status: <span className="capitalize bg-primary-10/10 text-primary-10 px-3 py-1 rounded-full text-xs font-bold font-Nunito">{application.status}</span>,
+        status: (
+          <span className="capitalize bg-primary-10/10 text-primary-10 px-3 py-1 rounded-full text-xs font-bold font-Nunito">
+            {application.status}
+          </span>
+        ),
         appliedOn: new Date(application.appliedOn).toLocaleDateString(),
         cv: (
           <button
@@ -97,6 +106,22 @@ const Applications = () => {
     setSearchQuery(q);
   };
 
+  const statusFilterDropdown = (
+    <select
+      value={statusFilter}
+      onChange={(e) => setStatusFilter(e.target.value)}
+      className="input input-sm px-3 py-2 border border-neutral-55/60 focus:border-primary-10 transition duration-300 focus:outline-none rounded-md text-sm shadow-sm cursor-pointer"
+    >
+      <option value="">All</option>
+      <option value="applied">Applied</option>
+      <option value="withdrawn">Withdrawn</option>
+      <option value="shortlisted">Shortlisted</option>
+      <option value="appointed">Appointed</option>
+      <option value="confirmed">Confirmed</option>
+      <option value="rejected">Rejected</option>
+    </select>
+  );
+
   return (
     <div>
       <Table<Application>
@@ -113,6 +138,7 @@ const Applications = () => {
         setLimit={setLimit}
         selectedCity={null}
         selectedArea={null}
+        children={statusFilterDropdown}
       />
     </div>
   );
