@@ -30,6 +30,14 @@ const GuardianProfile = () => {
     nationality: guardianInfo?.personalInformation?.nationality || "",
   };
 
+  const emergencyInformation = {
+    emergencyContactPersonName: guardianInfo?.emergencyInformation?.emergencyContactPersonName || "",
+    relation: guardianInfo?.emergencyInformation?.relation || "",
+    phoneNumber:
+      guardianInfo?.personalInformation?.additionalPhoneNumber || "",
+    address: guardianInfo?.emergencyInformation?.address || "",
+  };
+
   const details = [
     { label: "Email", value: personalInfo?.email },
     { label: "Gender", value: personalInfo?.gender },
@@ -40,6 +48,16 @@ const GuardianProfile = () => {
     { label: "Date of Birth", value: formatDate(personalInfo?.dateOfBirth) },
     { label: "Religion", value: personalInfo?.religion },
     { label: "Nationality", value: personalInfo?.nationality },
+  ];
+
+  const emergencyDetails = [
+    {
+      label: "Emergency Contact Person Name",
+      value: emergencyInformation?.emergencyContactPersonName,
+    },
+    { label: "relation", value: emergencyInformation?.relation },
+    { label: "Phone Number", value: emergencyInformation?.phoneNumber },
+    { label: "address", value: emergencyInformation?.address },
   ];
 
   const isProvided = (val: unknown): boolean => {
@@ -57,6 +75,8 @@ const GuardianProfile = () => {
     );
   }
 
+  console.log(guardianInfo);
+
   return (
     <div className="font-Nunito">
       <div className="flex flex-col lg:flex-row gap-3 lg:gap-0 items-start lg:items-center justify-between pb-5">
@@ -66,7 +86,7 @@ const GuardianProfile = () => {
               <img
                 src={guardianInfo?.imageUrl || IMAGES.dummyAvatar}
                 alt=""
-                className="size-full object-cover rounded-full"
+                className="size-full rounded-full"
               />
             </div>
             <div className="bg-primary-10 shadow-2xl size-5 rounded-full flex items-center justify-center absolute right-4 bottom-1">
@@ -77,12 +97,15 @@ const GuardianProfile = () => {
             <h1 className="text-neutral-5 font-semibold text-2xl mt-2">
               {guardianInfo?.userId?.name}
             </h1>
-            <h2 className="text-neutral-5e text-sm mt-2">Guardian Id : {id}</h2>
-            <h2 className="text-neutral-5e text-sm mt-2 flex gap-2">
-              Phone Number :{" "}
+            <h2 className="text-neutral-5e text-sm mt-2">
+              <strong>Guardian Id:</strong> {id} | <strong>Rating:</strong>{" "}
+              {guardianInfo?.rating}/5
+            </h2>
+            <h2 className="text-neutral-5e text-sm mt-2 flex">
+              <strong>Phone Number</strong>:{" "}
               <a
                 href={`tel:${guardianInfo?.userId?.phoneNumber}`}
-                className="text-neutral-20 hidden lg:block underline"
+                className="text-neutral-20 hidden lg:block underline ml-2"
               >
                 {guardianInfo?.userId?.phoneNumber}
               </a>
@@ -115,37 +138,66 @@ const GuardianProfile = () => {
       </div>
 
       <p className="text-neutral-10 text-lg font-medium border-b pb-2 border-primary-10 mt-2">
-        Personal and Posted Jobs
+        Personal and Emergency Information
       </p>
 
-        <div className="flex flex-col gap-3 bg-white p-5 rounded-2xl shadow-sm w-full h-fit mt-6">
-          {details.map((item, index) => {
-            const provided = isProvided(item.value);
+      <div className="flex flex-col gap-3 bg-white p-5 rounded-2xl shadow-sm w-full h-fit mt-6">
+        {details.map((item, index) => {
+          const provided = isProvided(item.value);
 
-            return (
-              <div
-                key={index}
-                className="flex text-[13px] md:text-sm lg:text-base"
+          return (
+            <div
+              key={index}
+              className="flex text-[13px] md:text-sm lg:text-base"
+            >
+              <span className="text-neutral-5 font-medium min-w-[140px] lg:min-w-[200px] xl:min-w-fit">
+                {item.label}
+              </span>
+              <span className="text-neutral-5 font-medium">:</span>
+              <span
+                className={`ml-2 ${
+                  provided ? "text-neutral-45" : "text-red-500"
+                }`}
               >
-                <span className="text-neutral-5 font-medium min-w-[140px] lg:min-w-[200px] xl:min-w-fit">
-                  {item.label}
-                </span>
-                <span className="text-neutral-5 font-medium">:</span>
-                <span
-                  className={`ml-2 ${
-                    provided ? "text-neutral-45" : "text-red-500"
-                  }`}
-                >
-                  {provided
-                    ? Array.isArray(item.value)
-                      ? (item.value as string[]).join(", ")
-                      : item.value
-                    : "Not Provided"}
-                </span>
-              </div>
-            );
-          })}
-        </div>
+                {provided
+                  ? Array.isArray(item.value)
+                    ? (item.value as string[]).join(", ")
+                    : item.value
+                  : "Not Provided"}
+              </span>
+            </div>
+          );
+        })}
+      </div>
+
+      <div className="flex flex-col gap-3 bg-white p-5 rounded-2xl shadow-sm w-full h-fit mt-6">
+        {emergencyDetails?.map((item, index) => {
+          const provided = isProvided(item.value);
+
+          return (
+            <div
+              key={index}
+              className="flex text-[13px] md:text-sm lg:text-base"
+            >
+              <span className="text-neutral-5 font-medium min-w-[140px] lg:min-w-[200px] xl:min-w-fit">
+                {item.label}
+              </span>
+              <span className="text-neutral-5 font-medium">:</span>
+              <span
+                className={`ml-2 ${
+                  provided ? "text-neutral-45" : "text-red-500"
+                }`}
+              >
+                {provided
+                  ? Array.isArray(item.value)
+                    ? (item.value as string[]).join(", ")
+                    : item.value
+                  : "Not Provided"}
+              </span>
+            </div>
+          );
+        })}
+      </div>
     </div>
   );
 };
