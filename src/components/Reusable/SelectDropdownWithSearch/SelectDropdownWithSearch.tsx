@@ -89,7 +89,7 @@ const SelectDropdownWithSearch = forwardRef<
             type="button"
             className={`w-full px-4 py-[14px] rounded-lg bg-white border leading-[18px] focus:outline-none focus:border-primary-10 transition duration-300 text-left flex items-center justify-between cursor-pointer ${
               error ? "border-red-500" : "border-neutral-45/20"
-            } ${!selectedValue ? "text-neutral-65" : "text-neutral-10"}`}
+            } ${!selectedValue ? "text-neutral-55" : "text-neutral-10"}`}
             onClick={() => setIsOpen((prev) => !prev)}
           >
             <span className="truncate capitalize">

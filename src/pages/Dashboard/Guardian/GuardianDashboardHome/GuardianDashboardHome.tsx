@@ -109,7 +109,7 @@ const GuardianDashboardHome = () => {
             tips="To hire best tutor please share as much details as possible while posting the job."
           />
           <DashboardDataCard
-            title={"Profile Status"}
+            title="Profile"
             description={
               guardianStats?.isVerified
                 ? "Your profile is verified."
@@ -121,15 +121,20 @@ const GuardianDashboardHome = () => {
                 : ICONS.profileUnverified
             }
             value={guardianStats?.isVerified ? "Verified" : "Not Verified"}
-            titleColor={"text-primary-10"}
-            valueColor={"text-primary-10"}
+            titleColor="text-primary-10"
+            valueColor="text-primary-10"
             btnLabel={guardianStats?.isVerified ? "Verified" : "Verify Now"}
             badgeText={
               guardianStats?.hasPostedAnyJob && !guardianStats?.isVerified
                 ? "Recommended"
                 : null
             }
-            path={"/dashboard/guardian/settings"}
+            path="/dashboard/guardian/settings"
+            tips={
+              guardianStats?.isVerified
+                ? "Your account is verified and trusted by tutors."
+                : "Verified profiles get faster responses and higher trust."
+            }
           />
         </div>
 

@@ -77,7 +77,10 @@ const MultiSelectDropdown = forwardRef<
       selectedValues?.length > 0 ? selectedValues?.join(", ") : placeholder;
 
     return (
-      <div className="flex flex-col gap-2 font-Nunito capitalize" ref={dropdownRef}>
+      <div
+        className="flex flex-col gap-2 font-Nunito capitalize"
+        ref={dropdownRef}
+      >
         {label && (
           <label
             htmlFor={name}
@@ -102,12 +105,12 @@ const MultiSelectDropdown = forwardRef<
                 : "bg-white cursor-pointer"
             } ${
               selectedValues?.length === 0
-                ? "text-neutral-65"
+                ? "text-neutral-55"
                 : "text-neutral-10"
             }`}
             onClick={() => setIsOpen(!isOpen)}
           >
-            <span className="truncate capitalize">{displayText}</span>
+            <span className={`truncate capitalize`}>{displayText}</span>
             <FiChevronDown
               className={`transition-transform duration-200 ${
                 isOpen ? "transform rotate-180" : ""

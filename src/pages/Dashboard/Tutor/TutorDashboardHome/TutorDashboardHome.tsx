@@ -101,7 +101,11 @@ const TutorDashboardHome = () => {
         <NoticeBoard notices={tutorStats?.notices} />
         {/* bg-gradient-to-r from-slate-50 to-sky-50 */}
         <div className="grid grid-cols-1 lg:grid-cols-2 2xl:grid-cols-3 gap-6">
-          <TutorOrGuardianOfTheMonth variant="tutor" user={tutorStats?.tutorOfTheMonth || {}} userId={tutorStats?.tutorOfTheMonth?.tutorId || ""} />
+          <TutorOrGuardianOfTheMonth
+            variant="tutor"
+            user={tutorStats?.tutorOfTheMonth || {}}
+            userId={tutorStats?.tutorOfTheMonth?.tutorId || ""}
+          />
 
           {/* Profile Completed card */}
           <div className="bg-white rounded-2xl border border-primary-40/10 p-5 flex flex-col justify-between">
@@ -185,8 +189,10 @@ const TutorDashboardHome = () => {
             </div>
 
             <div className="bg-[#F2F5FC] border-l-4 border-neutral-45 p-3 rounded text-neutral-45 w-full mt-5">
-              <span className="font-bold text-primary-10">Pro Tip :</span> To
-              get more responses, complete your profile.
+              <span className="font-bold text-primary-10">Pro Tip :</span>{" "}
+              {tutorStats?.profileCompleted === 100
+                ? "Your profile is completed. Keep applying to get noticed."
+                : "To get more responses, complete your profile."}
             </div>
           </div>
 
@@ -204,8 +210,14 @@ const TutorDashboardHome = () => {
           />
 
           <DashboardDataCard
-            title={"Status"}
-            description={"Get better response by verifying your profile."}
+            title={"Profile"}
+            description={
+              !tutorStats?.hasConfirmedAnyJob
+                ? "You need to confirm at least one tuition job before submitting a request."
+                : !tutorStats?.isVerified
+                ? "Get exclusive benefits by verifying your profile verification."
+                : "Your profile is verified."
+            }
             icon={
               tutorStats?.isVerified
                 ? ICONS.profileVerified
@@ -227,10 +239,10 @@ const TutorDashboardHome = () => {
             title={"Confirmation Letters"}
             description={
               tutorStats?.confirmationLetterCount === 0
-                ? "You have not confirmed any tutors yet."
-                : `You have successfully confirmed ${
+                ? "You have not confirmed any tuition jobs yet."
+                : `You have ${
                     tutorStats?.confirmationLetterCount
-                  } tutor${
+                  } confirmed tuition job${
                     tutorStats?.confirmationLetterCount > 1 ? "s" : ""
                   }. Please click here to view and sign your confirmation letters to avoid any future complications.`
             }
@@ -251,7 +263,11 @@ const TutorDashboardHome = () => {
             description={
               tutorStats?.invoiceCount === 0
                 ? "No invoice is available because you have not confirmed any tuition jobs yet."
-                : `You have ${tutorStats?.invoiceCount} invoices for your confirmed tuition jobs. Please visit the Payment section to view and complete the payments.`
+                : `You have ${tutorStats?.invoiceCount} pending invoice${
+                    tutorStats?.invoiceCount > 1 ? "s" : ""
+                  } for your confirmed tuition job${
+                    tutorStats?.invoiceCount > 1 ? "s" : ""
+                  }. Please visit the Payment section to view and complete the payment.`
             }
             icon={ICONS.invoice}
             value={
