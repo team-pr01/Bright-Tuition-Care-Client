@@ -61,10 +61,8 @@ const AdminControls = ({
           onClick={() => navigate(-1)}
         />
 
-        {/* {(location.pathname.startsWith("/dashboard/admin/tutor") ||
+        {(location.pathname.startsWith("/dashboard/admin/tutor") ||
         location.pathname.startsWith("/dashboard/staff/tutor")) && (
-        
-      )} */}
         <Button
           label="View Applications"
           variant="primary"
@@ -77,6 +75,8 @@ const AdminControls = ({
             )
           }
         />
+      )}
+        
       </div>
 
       {location.pathname.startsWith("/dashboard/admin/application") && (
