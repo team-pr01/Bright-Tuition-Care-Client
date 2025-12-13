@@ -83,14 +83,13 @@ const ShareThisApp = () => {
           <h1
             className={`text-2xl lg:text-3xl font-Nunito font-semibold lg:font-bold text-neutral-10 text-center`}
           >
-            Share with your Friends and Family
+            Share with your Friends and Relatives
           </h1>
 
           <p
-            className={`mt-4 text-neutral-20 text-lg leading-[24px] max-w-[749px] mx-auto`}
+            className={`mt-4 text-neutral-20 text-lg leading-[24px] max-w-[749px] mx-auto text-center`}
           >
-            Help your friends and family find the perfect tutor. Share our
-            platform and earn rewards!
+            Help your friends and relatives to find the right tutor for their children by sharing our platform — and earn exclusive rewards!
           </p>
         </div>
 

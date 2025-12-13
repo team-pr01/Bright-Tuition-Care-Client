@@ -8,7 +8,7 @@ const Tutorial = () => {
       <div className="mt-10 mb-72">
         <Heading
           titleParts={[{ text: "Explore Our Tutorials" }]}
-          description="Learn from the best with our comprehensive video tutorials, designed to help you master new skills at your own paced"
+          description="Watch simple step-by-step video guides made for both Guardians and Tutors.These tutorials will help you how to use our platform—like submitting tutor requests, updating profiles and applying for tuition jobs—quickly and easily."
           align="center"
           headingClassName="text-center"
         />

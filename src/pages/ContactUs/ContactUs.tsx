@@ -22,7 +22,7 @@ const ContactUs = () => {
       <div className="mt-10 mb-72 lg:mb-96 flex flex-col gap-5 lg:gap-10">
         <Heading
           titleParts={[{ text: "Contact Us" }]}
-          description="Have a question, feedback, or need help? Our team is here to assist you."
+          description="Have any question, feedback or need help? Our dedicated support team is always ready to help you."
           align="center"
           headingClassName="text-center"
         />

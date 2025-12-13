@@ -43,8 +43,8 @@ const ReferAndEarn = () => {
   return (
     <div className="flex flex-col items-center justify-center gap-5 lg:gap-10 font-Nunito">
       <Heading
-        titleParts={[{ text: "Earn Money by Referring Tutors" }]}
-        description="Share your unique referral link with students or guardians. When a tutor is hired and completes enrollment, you earn 10% commission — simple, fast, and rewarding!"
+        titleParts={[{ text: "Earn Money by Referring Students" }]}
+        description="Share your referral link with students or guardians and earn money every time they enroll with a tutor through our platform."
         align="center"
       />
 

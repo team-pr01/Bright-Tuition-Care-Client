@@ -25,8 +25,8 @@ const JoinCommunity = () => {
         ]}
         description={
           location.pathname === "/dashboard/tutor/community"
-            ? "Join our active Tutor Community to connect with fellow tutors, share teaching strategies, get resources, and stay updated with valuable insights on tutoring and education."
-            : "Join our active Guardian Community to connect with other parents, share experiences, get recommendations, and stay updated with valuable tips and news about tutoring and child education."
+            ? "Join our tutor community to exchange teaching strategies, gain valuable insights, stay informed on the latest trends and access resources that support your professional growth."
+            : "Join the Guardian Community to share your feedback, stay connected with our team and receive important updates and expert guidance to support your child’s learning."
         }
         align="center"
       />

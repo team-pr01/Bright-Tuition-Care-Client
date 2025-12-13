@@ -4,115 +4,114 @@ import { motion } from "framer-motion";
 
 const Tutorials = () => {
   const tutorialVideos = [
-  // ✅ For Students / Guardians
-  {
-    _id: 1,
-    title: "How to submit a tutor request",
-    videoUrl: "https://www.youtube.com/embed/FzOGKQK-1PU",
-    forUser: "For Students/Guardians",
-  },
-  {
-    _id: 2,
-    title: "How to sign in to an account",
-    videoUrl: "https://www.youtube.com/embed/FzOGKQK-1PU",
-    forUser: "For Students/Guardians",
-  },
-  {
-    _id: 3,
-    title: "How to update your profile",
-    videoUrl: "https://www.youtube.com/embed/FzOGKQK-1PU",
-    forUser: "For Students/Guardians",
-  },
-  {
-    _id: 4,
-    title: "How to reset your account password",
-    videoUrl: "https://www.youtube.com/embed/FzOGKQK-1PU",
-    forUser: "For Students/Guardians",
-  },
-  {
-    _id: 5,
-    title: "How to check your confirmation letter",
-    videoUrl: "https://www.youtube.com/embed/FzOGKQK-1PU",
-    forUser: "For Students/Guardians",
-  },
-  {
-    _id: 6,
-    title: "How to send profile unlock request",
-    videoUrl: "https://www.youtube.com/embed/FzOGKQK-1PU",
-    forUser: "For Students/Guardians",
-  },
+    // ✅ For Students / Guardians
+    {
+      _id: 1,
+      title: "How to submit a tutor request",
+      videoUrl: "https://www.youtube.com/embed/FzOGKQK-1PU",
+      forUser: "For Students/Guardians",
+    },
+    {
+      _id: 2,
+      title: "How to sign in to an account",
+      videoUrl: "https://www.youtube.com/embed/FzOGKQK-1PU",
+      forUser: "For Students/Guardians",
+    },
+    {
+      _id: 3,
+      title: "How to update your profile",
+      videoUrl: "https://www.youtube.com/embed/FzOGKQK-1PU",
+      forUser: "For Students/Guardians",
+    },
+    {
+      _id: 4,
+      title: "How to reset your account password",
+      videoUrl: "https://www.youtube.com/embed/FzOGKQK-1PU",
+      forUser: "For Students/Guardians",
+    },
+    {
+      _id: 5,
+      title: "How to check your confirmation letter",
+      videoUrl: "https://www.youtube.com/embed/FzOGKQK-1PU",
+      forUser: "For Students/Guardians",
+    },
+    {
+      _id: 6,
+      title: "How to send profile unlock request",
+      videoUrl: "https://www.youtube.com/embed/FzOGKQK-1PU",
+      forUser: "For Students/Guardians",
+    },
 
-  // ✅ For Tutors
-  {
-    _id: 7,
-    title: "How to sign in to an account",
-    videoUrl: "https://www.youtube.com/embed/FzOGKQK-1PU",
-    forUser: "For Tutors",
-  },
-  {
-    _id: 8,
-    title: "How to update your profile",
-    videoUrl: "https://www.youtube.com/embed/FzOGKQK-1PU",
-    forUser: "For Tutors",
-  },
-  {
-    _id: 9,
-    title: "How to reset your account password",
-    videoUrl: "https://www.youtube.com/embed/FzOGKQK-1PU",
-    forUser: "For Tutors",
-  },
-  {
-    _id: 10,
-    title: "How to check your confirmation letter",
-    videoUrl: "https://www.youtube.com/embed/FzOGKQK-1PU",
-    forUser: "For Tutors",
-  },
-  {
-    _id: 11,
-    title: "Payment methods for tutors",
-    videoUrl: "https://www.youtube.com/embed/FzOGKQK-1PU",
-    forUser: "For Tutors",
-  },
-  {
-    _id: 12,
-    title: "How to submit a profile unlock request",
-    videoUrl: "https://www.youtube.com/embed/FzOGKQK-1PU",
-    forUser: "For Tutors",
-  },
-  {
-    _id: 13,
-    title: "How to send a profile verification request",
-    videoUrl: "https://www.youtube.com/embed/FzOGKQK-1PU",
-    forUser: "For Tutors",
-  },
-  {
-    _id: 14,
-    title: "How to apply for a tuition job",
-    videoUrl: "https://www.youtube.com/embed/FzOGKQK-1PU",
-    forUser: "For Tutors",
-  },
+    // ✅ For Tutors
+    {
+      _id: 7,
+      title: "How to sign in to an account",
+      videoUrl: "https://www.youtube.com/embed/FzOGKQK-1PU",
+      forUser: "For Tutors",
+    },
+    {
+      _id: 8,
+      title: "How to update your profile",
+      videoUrl: "https://www.youtube.com/embed/FzOGKQK-1PU",
+      forUser: "For Tutors",
+    },
+    {
+      _id: 9,
+      title: "How to reset your account password",
+      videoUrl: "https://www.youtube.com/embed/FzOGKQK-1PU",
+      forUser: "For Tutors",
+    },
+    {
+      _id: 10,
+      title: "How to check your confirmation letter",
+      videoUrl: "https://www.youtube.com/embed/FzOGKQK-1PU",
+      forUser: "For Tutors",
+    },
+    {
+      _id: 11,
+      title: "Payment methods for tutors",
+      videoUrl: "https://www.youtube.com/embed/FzOGKQK-1PU",
+      forUser: "For Tutors",
+    },
+    {
+      _id: 12,
+      title: "How to submit a profile unlock request",
+      videoUrl: "https://www.youtube.com/embed/FzOGKQK-1PU",
+      forUser: "For Tutors",
+    },
+    {
+      _id: 13,
+      title: "How to send a profile verification request",
+      videoUrl: "https://www.youtube.com/embed/FzOGKQK-1PU",
+      forUser: "For Tutors",
+    },
+    {
+      _id: 14,
+      title: "How to apply for a tuition job",
+      videoUrl: "https://www.youtube.com/embed/FzOGKQK-1PU",
+      forUser: "For Tutors",
+    },
 
-  // ✅ For All
-  {
-    _id: 15,
-    title: "How to sign in to an account",
-    videoUrl: "https://www.youtube.com/embed/FzOGKQK-1PU",
-    forUser: "For All",
-  },
-  {
-    _id: 16,
-    title: "How to update your profile",
-    videoUrl: "https://www.youtube.com/embed/FzOGKQK-1PU",
-    forUser: "For All",
-  },
-  {
-    _id: 17,
-    title: "How to reset your account password",
-    videoUrl: "https://www.youtube.com/embed/FzOGKQK-1PU",
-    forUser: "For All",
-  },
-];
-
+    // ✅ For All
+    {
+      _id: 15,
+      title: "How to sign in to an account",
+      videoUrl: "https://www.youtube.com/embed/FzOGKQK-1PU",
+      forUser: "For All",
+    },
+    {
+      _id: 16,
+      title: "How to update your profile",
+      videoUrl: "https://www.youtube.com/embed/FzOGKQK-1PU",
+      forUser: "For All",
+    },
+    {
+      _id: 17,
+      title: "How to reset your account password",
+      videoUrl: "https://www.youtube.com/embed/FzOGKQK-1PU",
+      forUser: "For All",
+    },
+  ];
 
   const [activeTab, setActiveTab] = useState("For All");
   const tabButtons = ["For All", "For Tutors", "For Students/Guardians"];
