@@ -32,13 +32,10 @@ const ConfirmationLetterPreview = ({ letterId }: { letterId: string }) => {
       const payload = {
         signature,
       };
-      const response = await signOnLetterForTutor({
+      await signOnLetterForTutor({
         id: letterId as string,
         data: payload,
       }).unwrap();
-      if (response?.success) {
-        toast.success("Thanks for signing the letter!");
-      }
     } catch (error: any) {
       toast.error(error?.data?.message || "Failed to sign on letter");
     }
@@ -49,13 +46,10 @@ const ConfirmationLetterPreview = ({ letterId }: { letterId: string }) => {
       const payload = {
         signature,
       };
-      const response = await signOnLetterForGuardian({
+      await signOnLetterForGuardian({
         id: letterId as string,
         data: payload,
       }).unwrap();
-      if (response?.success) {
-        toast.success("Thanks for signing the letter!");
-      }
     } catch (error: any) {
       toast.error(error?.data?.message || "Failed to sign on letter");
     }
@@ -122,7 +116,9 @@ const ConfirmationLetterPreview = ({ letterId }: { letterId: string }) => {
           </h4>
           <p className="capitalize">
             Name:{" "}
-            {data?.data?.guardianId?.name || data?.data?.jobId?.guardianName || "N/A"}
+            {data?.data?.guardianId?.name ||
+              data?.data?.jobId?.guardianName ||
+              "N/A"}
           </p>
           <p>Email: {data?.data?.guardianId?.email || "N/A"}</p>
           <p>
@@ -143,25 +139,25 @@ const ConfirmationLetterPreview = ({ letterId }: { letterId: string }) => {
       <div className="grid grid-cols-2 gap-6 mt-10">
         <SignatureField
           label="Guardian/Student Signature"
-          onClick={handleSignOnLetterForTutor}
+          onClick={handleSignOnLetterForGuardian}
           signature={
             data?.data?.guardianSignature ? data?.data?.guardianSignature : ""
           }
           signatureDate={
             data?.data?.guardianSinnedDate ? data?.data?.guardianSinnedDate : ""
           }
-          role={"tutor"}
+          role={"guardian"}
         />
         <SignatureField
           label="Tutor Signature"
-          onClick={handleSignOnLetterForGuardian}
+          onClick={handleSignOnLetterForTutor}
           signature={
             data?.data?.tutorSignature ? data?.data?.tutorSignature : ""
           }
           signatureDate={
             data?.data?.tutorSinnedDate ? data?.data?.tutorSinnedDate : ""
           }
-          role={"guardian"}
+          role={"tutor"}
         />
       </div>
 

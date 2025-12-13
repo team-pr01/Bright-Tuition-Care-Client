@@ -23,7 +23,11 @@ const SignatureField: React.FC<SignatureFieldProps> = ({
   const user = useSelector(useCurrentUser) as TLoggedInUser;
   const [signature, setSignature] = useState(defaultSignature || "");
   const [submitted, setSubmitted] = useState(!!defaultSignature);
-  const isDisabled = submitted || user?.role === "admin" || role;
+  const isDisabled =
+    submitted ||
+    user?.role === "admin" ||
+    user?.role === "staff" ||
+    role !== user?.role;
 
   const handleSubmit = () => {
     if (signature.trim()) {
@@ -43,8 +47,12 @@ const SignatureField: React.FC<SignatureFieldProps> = ({
             value={signature}
             onChange={(e) => setSignature(e.target.value)}
             disabled={isDisabled}
+            style={{
+              width: `${Math.max(signature.length, 10)}ch`,
+            }}
             className="font-Alex-Brush text-2xl font-semibold text-neutral-5 bg-transparent border-none outline-none text-center disabled:opacity-50 disabled:cursor-not-allowed"
           />
+
           {!isDisabled && signature && (
             <button
               onClick={handleSubmit}
