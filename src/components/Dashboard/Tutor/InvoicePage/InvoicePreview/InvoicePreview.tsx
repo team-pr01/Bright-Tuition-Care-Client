@@ -26,6 +26,7 @@ const InvoicePreview = ({
   const [selectedPaymentMethod, setSelectedPaymentMethod] = useState<
     "bankTransfer" | "bKash" | "nagad" | string
   >("");
+  console.log(invoice);
   return (
     <div className="bg-white shadow-md border border-primary-10/30 rounded-2xl p-5 lg:p-7 max-w-[600px] mx-auto font-Nunito">
       {/* Back Button */}

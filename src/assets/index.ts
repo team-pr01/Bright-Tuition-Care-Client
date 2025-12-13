@@ -45,6 +45,8 @@ import tutorOfTheMonthLabel from "../assets/Images/tutor-of-the-month-label.png"
 import tutorOfTheMonthBadge from "../assets/Images/tutor-of-the-month-badge.png";
 import guardianOfTheMonthLabel from "../assets/Images/guardian-of-the-month-label.png";
 import userProfilePlaceholder from "../assets/Images/user-profile-placeholder.webp";
+import bkashQrCode from "../assets/Images/bkash-qr-code.webp";
+import rocketQrCode from "../assets/Images/rocket-qr-code.webp";
 
 // students steps
 import send from "../assets/Icons/StudentSteps/send.svg";
@@ -180,6 +182,8 @@ export const IMAGES = {
   tutorOfTheMonthBadge,
   guardianOfTheMonthLabel,
   userProfilePlaceholder,
+  bkashQrCode,
+  rocketQrCode,
 
 };
 

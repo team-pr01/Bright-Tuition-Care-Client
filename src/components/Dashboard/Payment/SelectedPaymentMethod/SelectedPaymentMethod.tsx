@@ -1,5 +1,4 @@
-import { LiaQrcodeSolid } from "react-icons/lia";
-import { ICONS } from "../../../../assets";
+import { ICONS, IMAGES } from "../../../../assets";
 import SubmitProofForm from "../SubmitProofForm/SubmitProofForm";
 import { useState } from "react";
 import { FaChevronDown } from "react-icons/fa";
@@ -54,29 +53,45 @@ const SelectedPaymentMethod: React.FC<TSelectedPaymentMethodProps> = ({
           <div>
             <h1 className="text-sm md:text-lg font-medium">
               {selectedPaymentMethod === "bankTransfer"
-                ? "MTB"
+                ? "DBBL Bank Account"
                 : selectedPaymentMethod === "nagad"
-                ? "Nagad"
+                ? "Nagad Personal"
                 : selectedPaymentMethod === "rocket"
-                ? "Rocket"
-                : "bKash"}
+                ? "Rocket Personal"
+                : "bKash Personal"}
             </h1>
             <h1 className="text-lg md:text-xl font-semibold ">
-              {selectedPaymentMethod === "bankTransfer"
-                ? "Account number"
-                : selectedPaymentMethod === "nagad"
-                ? "+880 17200000000"
-                : "+880 17200000000"}
+              {
+                selectedPaymentMethod === "bankTransfer"
+                  ? "Shorif Mia" // bank account name
+                  : selectedPaymentMethod === "nagad"
+                  ? "01610785588" // nagad
+                  : selectedPaymentMethod === "rocket"
+                  ? "019886038203" // rocket
+                  : "01988603820" //bkash
+              }
             </h1>
-            <h2 className="text-neutral-20 mt-1">Bright Tuition Care</h2>
+            <h2 className="text-neutral-20 mt-1">
+              {selectedPaymentMethod === "bankTransfer"
+                ? "1481050208725" // bank account number
+                : "Bright Tuition Care"}
+            </h2>
           </div>
         </div>
 
-        {selectedPaymentMethod !== "bankTransfer" && (
-          <div className="border border-primary-40/10 rounded-2xl flex items-center justify-center w-full md:w-28 size-36 md:size-28">
-            <LiaQrcodeSolid className="text-[150px]" />
-          </div>
-        )}
+        {selectedPaymentMethod !== "bankTransfer" &&
+          selectedPaymentMethod !== "nagad" && (
+            <div className="border border-primary-40/10 rounded-2xl flex items-center justify-center w-full md:w-28 size-36 md:size-28">
+              <img
+                src={
+                  selectedPaymentMethod === "bKash"
+                    ? IMAGES.bkashQrCode
+                    : IMAGES.rocketQrCode
+                }
+                alt=""
+              />
+            </div>
+          )}
       </div>
 
       <div className="bg-white border-primary-40/10 p-5 rounded-2xl">
