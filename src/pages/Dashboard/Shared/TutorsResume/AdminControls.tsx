@@ -1,4 +1,4 @@
-import { useNavigate, type Location } from "react-router-dom";
+import { useNavigate, useSearchParams, type Location } from "react-router-dom";
 import Button from "../../../../components/Reusable/Button/Button";
 import type { TLoggedInUser } from "../../../../types/loggedinUser.types";
 
@@ -24,6 +24,7 @@ type AdminControlsProps = {
   handleConfirmTutor: () => void;
 
   buttonStyle: string;
+  status?: string;
 };
 
 const AdminControls = ({
@@ -39,8 +40,16 @@ const AdminControls = ({
   handleRejectTutor,
   handleConfirmTutor,
   buttonStyle,
+  status,
 }: AdminControlsProps) => {
   const navigate = useNavigate();
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const handleResetStatus = (applicationStatus: string) => {
+    const params = new URLSearchParams(searchParams);
+    params.set("status", applicationStatus);
+    setSearchParams(params);
+  };
 
   return (
     <div className="flex flex-col gap-3">
@@ -74,9 +83,12 @@ const AdminControls = ({
         <div className="flex flex-wrap items-center gap-3">
           <Button
             label={isShortlisting ? "Please wait..." : "Shortlist"}
-            variant="tertiary"
+            variant={status === "shortlisted" ? "primary" : "tertiary"}
             className={buttonStyle}
-            onClick={handleShortlistTutor}
+            onClick={() => {
+              handleResetStatus("shortlisted");
+              handleShortlistTutor();
+            }}
             isDisabled={
               isShortlisting || isAppointing || isConfirming || isRejecting
             }
@@ -84,9 +96,14 @@ const AdminControls = ({
 
           <Button
             label={isAppointing ? "Please wait..." : "Appoint"}
-            variant="tertiary"
-            className={`${buttonStyle} border-[#9C9700] hover:bg-[#9C9700] text-[#9C9700] hover:text-white`}
-            onClick={handleAppointTutor}
+            variant={status === "appointed" ? "primary" : "tertiary"}
+            className={`${buttonStyle} ${
+              status === "appointed" ? "text-white" : "text-[#9C9700]"
+            } border-[#9C9700] hover:bg-[#9C9700] hover:text-white`}
+            onClick={() => {
+              handleResetStatus("appointed");
+              handleAppointTutor();
+            }}
             isDisabled={
               isShortlisting || isAppointing || isConfirming || isRejecting
             }
@@ -94,17 +111,27 @@ const AdminControls = ({
 
           <Button
             label={isRejecting ? "Please wait..." : "Reject"}
-            variant="tertiary"
-            className={`${buttonStyle} border-red-500 hover:bg-red-500 text-red-500 hover:text-white`}
-            onClick={handleRejectTutor}
+            variant={"tertiary"}
+            className={`${buttonStyle} ${
+              status === "rejected" ? "text-white bg-red-500" : "text-red-500"
+            } border-red-500 hover:bg-red-500 hover:text-white`}
+            onClick={() => {
+              handleResetStatus("rejected");
+              handleRejectTutor();
+            }}
             isDisabled={isShortlisting || isRejecting || isConfirming}
           />
 
           <Button
             label={isConfirming ? "Please wait..." : "Confirm"}
-            variant="tertiary"
-            className={`${buttonStyle} border-green-600 hover:bg-green-600 text-green-600 hover:text-white`}
-            onClick={handleConfirmTutor}
+            variant={status === "confirmed" ? "primary" : "tertiary"}
+            className={`${buttonStyle} ${
+              status === "confirmed" ? "text-white" : "text-green-600"
+            } border-green-600 hover:bg-green-600 hover:text-white`}
+            onClick={() => {
+              handleResetStatus("confirmed");
+              handleConfirmTutor();
+            }}
             isDisabled={
               isShortlisting || isAppointing || isConfirming || isRejecting
             }

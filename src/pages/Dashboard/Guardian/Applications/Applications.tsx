@@ -82,7 +82,7 @@ const Applications = () => {
               }
 
               navigate(
-                `/dashboard/${path}/application/${application._id}/resume/${application.tutorId}`
+                `/dashboard/${path}/application/${application._id}/resume/${application.tutorId}?status=${application.status}`
               );
             }}
             className="text-primary-10 cursor-pointer flex items-center gap-1 hover:underline"

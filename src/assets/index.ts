@@ -44,6 +44,7 @@ import tutorOfTheMonthBg from "../assets/Images/tutor-of-the-month-bg.png";
 import tutorOfTheMonthLabel from "../assets/Images/tutor-of-the-month-label.png";
 import tutorOfTheMonthBadge from "../assets/Images/tutor-of-the-month-badge.png";
 import guardianOfTheMonthLabel from "../assets/Images/guardian-of-the-month-label.png";
+import userProfilePlaceholder from "../assets/Images/user-profile-placeholder.webp";
 
 // students steps
 import send from "../assets/Icons/StudentSteps/send.svg";
@@ -178,6 +179,7 @@ export const IMAGES = {
   tutorOfTheMonthLabel,
   tutorOfTheMonthBadge,
   guardianOfTheMonthLabel,
+  userProfilePlaceholder,
 
 };
 

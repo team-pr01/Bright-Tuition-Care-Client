@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React from "react";
 import { ICONS, IMAGES } from "../../../../assets";
-import { useLocation, useParams } from "react-router-dom";
+import { useLocation, useParams, useSearchParams } from "react-router-dom";
 import { useGetSingleTutorByIdQuery } from "../../../../redux/Features/Tutor/tutorApi";
 import type { TEducation } from "../../../../types/tutor.types";
 import toast from "react-hot-toast";
@@ -29,6 +29,8 @@ const TutorsResume = () => {
   // const [cancelTutor, { isLoading: isCancelling }] = useCancelTutorMutation();
   const location = useLocation();
   const { tutorId, applicationId } = useParams();
+  const [searchParams] = useSearchParams();
+  const status = searchParams.get("status");
   const { data, isLoading } = useGetSingleTutorByIdQuery(tutorId);
   const profile = data?.data;
   const educationDetails = data?.data?.educationalInformation || [];
@@ -251,7 +253,7 @@ const TutorsResume = () => {
           <div className="flex gap-5 w-full">
             <div className="relative">
               <img
-                src={profile?.imageUrl || IMAGES.dummyAvatar}
+                src={profile?.imageUrl || IMAGES.userProfilePlaceholder}
                 alt=""
                 className="size-20 lg:size-56 object-cover rounded-xl"
               />
@@ -294,6 +296,7 @@ const TutorsResume = () => {
                     handleRejectTutor={handleRejectTutor}
                     handleConfirmTutor={handleConfirmTutor}
                     buttonStyle={buttonStyle}
+                    status={status as string}
                   />
                 </div>
               </div>
@@ -320,6 +323,7 @@ const TutorsResume = () => {
               handleRejectTutor={handleRejectTutor}
               handleConfirmTutor={handleConfirmTutor}
               buttonStyle={buttonStyle}
+              status={status as string}
             />
           </div>
         </div>
