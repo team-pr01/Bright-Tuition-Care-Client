@@ -30,14 +30,6 @@ const GuardianProfile = () => {
     nationality: guardianInfo?.personalInformation?.nationality || "",
   };
 
-  const emergencyInformation = {
-    emergencyContactPersonName: guardianInfo?.emergencyInformation?.emergencyContactPersonName || "",
-    relation: guardianInfo?.emergencyInformation?.relation || "",
-    phoneNumber:
-      guardianInfo?.personalInformation?.additionalPhoneNumber || "",
-    address: guardianInfo?.emergencyInformation?.address || "",
-  };
-
   const details = [
     { label: "Email", value: personalInfo?.email },
     { label: "Gender", value: personalInfo?.gender },
@@ -50,14 +42,22 @@ const GuardianProfile = () => {
     { label: "Nationality", value: personalInfo?.nationality },
   ];
 
+  const emergencyInformation = {
+    emergencyContactPersonName:
+      guardianInfo?.emergencyInformation?.emergencyContactPersonName || "",
+    relation: guardianInfo?.emergencyInformation?.relation || "",
+    phoneNumber: guardianInfo?.personalInformation?.phoneNumber || "",
+    address: guardianInfo?.emergencyInformation?.address || "",
+  };
+
   const emergencyDetails = [
     {
       label: "Emergency Contact Person Name",
       value: emergencyInformation?.emergencyContactPersonName,
     },
-    { label: "relation", value: emergencyInformation?.relation },
+    { label: "Relation", value: emergencyInformation?.relation },
     { label: "Phone Number", value: emergencyInformation?.phoneNumber },
-    { label: "address", value: emergencyInformation?.address },
+    { label: "Address", value: emergencyInformation?.address },
   ];
 
   const isProvided = (val: unknown): boolean => {

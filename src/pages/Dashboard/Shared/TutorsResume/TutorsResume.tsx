@@ -39,6 +39,7 @@ const TutorsResume = () => {
   const educationDetails = data?.data?.educationalInformation || [];
   const tuitionPreference = profile?.tuitionPreference;
   const personalInfo = profile?.personalInformation || {};
+  const emergencyInfo = profile?.emergencyInformation || {};
 
   const hasNotifiedRef = useRef(false);
 
@@ -181,6 +182,23 @@ const TutorsResume = () => {
   const filteredPersonalData = personalData?.filter(
     (item) => item?.value && item?.value !== "N/A"
   );
+
+  const emergencyInformation = {
+    emergencyContactPersonName: emergencyInfo?.emergencyContactPersonName || "",
+    relation: emergencyInfo?.relation || "",
+    phoneNumber: emergencyInfo?.phoneNumber || "",
+    address: emergencyInfo?.address || "",
+  };
+
+  const emergencyDetails = [
+    {
+      label: "Emergency Contact Person Name",
+      value: emergencyInformation?.emergencyContactPersonName,
+    },
+    { label: "Relation", value: emergencyInformation?.relation },
+    { label: "Phone Number", value: emergencyInformation?.phoneNumber },
+    { label: "Address", value: emergencyInformation?.address },
+  ];
 
   // Handle Shortlist
   const handleShortlistTutor = async () => {
@@ -359,9 +377,9 @@ const TutorsResume = () => {
           </h2>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-0">
-            {educationData.map((edu: TEducation[], eduIndex: number) => (
+            {educationData?.map((edu: TEducation[], eduIndex: number) => (
               <div key={eduIndex}>
-                <h2 className="font-bold text-neutral-10 mt-4">
+                <h2 className="font-bold text-neutral-10 mt-4 capitalize">
                   • {educationDetails[eduIndex]?.degree || "Education"}
                 </h2>
 
@@ -412,6 +430,25 @@ const TutorsResume = () => {
             ))}
           </div>
         </div>
+
+        {/* Personal Information Section */}
+        {(user?.role === "admin" || user?.role === "staff") && (
+          <div>
+            <h2 className="text-xl lg:text-2xl font-semibold text-neutral-10 mt-8 pb-2 border-b border-neutral-55/50">
+              Emergency Information
+            </h2>
+
+            <div className="text-neutral-20 grid grid-cols-[180px_20px_1fr] gap-y-2 mt-4">
+              {emergencyDetails?.map((item, index) => (
+                <React.Fragment key={index}>
+                  <span className="font-medium">{item.label}</span>
+                  <span className="text-neutral-10">:</span>
+                  <span>{item.value}</span>
+                </React.Fragment>
+              ))}
+            </div>
+          </div>
+        )}
 
         {/* Identity Info */}
         <div>
